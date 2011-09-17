@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ "test" ]; then
+  echo ADSL
+  exit 0
+fi
+
+GW=$( route -n | grep "^0.0.0.0" | tail -n 1 | sed -e "s/[0. ]*\([^ ]*\).*/\1/" )
+
+case "$GW" in
+192.168.2.1)
+  echo ADSL
+  ;;
+192.168.0.1)
+  echo Prestabist
+  ;;
+*)
+  echo Error
+  ;;
+esac

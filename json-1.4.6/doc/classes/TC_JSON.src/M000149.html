@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_comments (TC_JSON)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tests/test_json.rb, line 244</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_comments</span>
+    <span class="ruby-identifier">json</span> = <span class="ruby-value str">&quot;{\n  \&quot;key1\&quot;:\&quot;value1\&quot;, // eol comment\n  \&quot;key2\&quot;:\&quot;value2\&quot;  /* multi line\n                    *  comment */,\n  \&quot;key3\&quot;:\&quot;value3\&quot;  /* multi line\n                    // nested eol comment\n                    *  comment */\n}\n&quot;</span>
+    <span class="ruby-identifier">assert_equal</span>(
+      { <span class="ruby-value str">&quot;key1&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;value1&quot;</span>, <span class="ruby-value str">&quot;key2&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;value2&quot;</span>, <span class="ruby-value str">&quot;key3&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;value3&quot;</span> },
+      <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json</span>))
+    <span class="ruby-identifier">json</span> = <span class="ruby-value str">&quot;{\n  \&quot;key1\&quot;:\&quot;value1\&quot;  /* multi line\n                    // nested eol comment\n                    /* illegal nested multi line comment */\n                    *  comment */\n}\n&quot;</span>
+    <span class="ruby-identifier">assert_raises</span>(<span class="ruby-constant">ParserError</span>) { <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json</span>) }
+    <span class="ruby-identifier">json</span> = <span class="ruby-value str">&quot;{\n  \&quot;key1\&quot;:\&quot;value1\&quot;  /* multi line\n                   // nested eol comment\n                   closed multi comment */\n                   and again, throw an Error */\n}\n&quot;</span>
+    <span class="ruby-identifier">assert_raises</span>(<span class="ruby-constant">ParserError</span>) { <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json</span>) }
+    <span class="ruby-identifier">json</span> = <span class="ruby-value str">&quot;{\n  \&quot;key1\&quot;:\&quot;value1\&quot;  /*/*/\n}\n&quot;</span>
+    <span class="ruby-identifier">assert_equal</span>({ <span class="ruby-value str">&quot;key1&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;value1&quot;</span> }, <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json</span>))
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

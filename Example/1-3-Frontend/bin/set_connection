@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ "test" ]; then
+  echo none
+  exit 0
+elif ! which iptables; then
+  # Just in case we're not on a Linux-system
+  echo none
+  exit 0
+fi
+
+echo $( date ): param is $1 >> /tmp/set_connection
+
+exit 0
+
+iptables -t nat -F OUTPUT
+route del default
+case "$1" in
+ADSL)
+  echo $( date ): ADSL
+  iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j ACCEPT
+  iptables -t nat -A OUTPUT -p tcp -m tcp --dport 80 -j DNAT --to-destination 10.9.0.1:3128 
+  route add default gw adsl
+  ;;
+Prestabist)
+  echo $( date ): Prestabist
+  route add default gw prestabist
+  ;;
+esac
+service openvpn restart

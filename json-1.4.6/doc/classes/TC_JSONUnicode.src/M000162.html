@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_chars (TC_JSONUnicode)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tests/test_json_unicode.rb, line 55</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_chars</span>
+    (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0x7f</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">json</span> = <span class="ruby-value str">'[&quot;\u%04x&quot;]'</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">i</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">&quot;1.9.&quot;</span>
+        <span class="ruby-identifier">i</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">chr</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">i</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json</span>).<span class="ruby-identifier">first</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">==</span> <span class="ruby-value">?\b</span>
+        <span class="ruby-identifier">generated</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>])
+        <span class="ruby-identifier">assert</span> <span class="ruby-value str">'[&quot;\b&quot;]'</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">generated</span> <span class="ruby-operator">||</span> <span class="ruby-value str">'[&quot;\10&quot;]'</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">generated</span>
+      <span class="ruby-keyword kw">elsif</span> [<span class="ruby-value">?\n</span>, <span class="ruby-value">?\r</span>, <span class="ruby-value">?\t</span>, <span class="ruby-value">?\f</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">i</span>)
+        <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'['</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-value str">''</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>).<span class="ruby-identifier">dump</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">']'</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>])
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0x20</span>.<span class="ruby-identifier">chr</span>
+        <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">json</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>])
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">GeneratorError</span>) <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-value str">&quot;\x80&quot;</span>], <span class="ruby-identifier">:ascii_only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;\302\200&quot;</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-value str">'[&quot;\u0080&quot;]'</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

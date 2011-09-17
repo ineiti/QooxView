@@ -1,0 +1,8 @@
+Frontend
+========
+
+A simple frontend for a server, using the QooxView-library
+and qooxdoo as the AJAX-backend. It proposes to switch the 
+internet-provider (a common thing to do here in Chad) upon
+the availability, and shows a Ntop-graph of the two connections
+updated at regular intervals.

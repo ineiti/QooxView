@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setup (TC_JSONGenerate)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tests/test_json_generate.rb, line 14</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+    <span class="ruby-ivar">@hash</span> = {
+      <span class="ruby-value str">'a'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>,
+      <span class="ruby-value str">'b'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.141</span>,
+      <span class="ruby-value str">'c'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'c'</span>,
+      <span class="ruby-value str">'d'</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-value">1</span>, <span class="ruby-value str">&quot;b&quot;</span>, <span class="ruby-value">3.14</span> ],
+      <span class="ruby-value str">'e'</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value str">'foo'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span> },
+      <span class="ruby-value str">'g'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;\&quot;\0\037&quot;</span>,
+      <span class="ruby-value str">'h'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1000.0</span>,
+      <span class="ruby-value str">'i'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.001</span>
+    }
+    <span class="ruby-ivar">@json2</span> = <span class="ruby-value str">'{&quot;a&quot;:2,&quot;b&quot;:3.141,&quot;c&quot;:&quot;c&quot;,&quot;d&quot;:[1,&quot;b&quot;,3.14],&quot;e&quot;:{&quot;foo&quot;:&quot;bar&quot;},'</span> <span class="ruby-operator">+</span>
+      <span class="ruby-value str">'&quot;g&quot;:&quot;\\&quot;\\u0000\\u001f&quot;,&quot;h&quot;:1000.0,&quot;i&quot;:0.001}'</span>
+    <span class="ruby-ivar">@json3</span> = <span class="ruby-value str">&quot;{\n  \&quot;a\&quot;: 2,\n  \&quot;b\&quot;: 3.141,\n  \&quot;c\&quot;: \&quot;c\&quot;,\n  \&quot;d\&quot;: [\n    1,\n    \&quot;b\&quot;,\n    3.14\n  ],\n  \&quot;e\&quot;: {\n    \&quot;foo\&quot;: \&quot;bar\&quot;\n  },\n  \&quot;g\&quot;: \&quot;\\\&quot;\\u0000\\u001f\&quot;,\n  \&quot;h\&quot;: 1000.0,\n  \&quot;i\&quot;: 0.001\n}\n&quot;</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

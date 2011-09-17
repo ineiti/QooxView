@@ -1,0 +1,8 @@
+views:
+ Welcome:
+  need_pass: true
+  hide_pass: false
+
+StorageType:
+  STdummy1:
+    conf: passit

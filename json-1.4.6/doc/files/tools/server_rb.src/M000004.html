@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_server (tools/server.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tools/server.rb, line 33</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_server</span>(<span class="ruby-identifier">err</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)
+  <span class="ruby-identifier">err</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Surf to:&quot;</span>, <span class="ruby-node">&quot;http://#{Socket.gethostname}:#{port}&quot;</span>
+
+  <span class="ruby-identifier">s</span> = <span class="ruby-constant">HTTPServer</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">:Port</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">port</span>,
+    <span class="ruby-identifier">:DocumentRoot</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dir</span>,
+    <span class="ruby-identifier">:Logger</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">err</span>),
+    <span class="ruby-identifier">:AccessLog</span>    =<span class="ruby-operator">&gt;</span> [
+      [ <span class="ruby-identifier">err</span>, <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">AccessLog</span><span class="ruby-operator">::</span><span class="ruby-constant">COMMON_LOG_FORMAT</span>  ],
+      [ <span class="ruby-identifier">err</span>, <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">AccessLog</span><span class="ruby-operator">::</span><span class="ruby-constant">REFERER_LOG_FORMAT</span> ],
+      [ <span class="ruby-identifier">err</span>, <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">AccessLog</span><span class="ruby-operator">::</span><span class="ruby-constant">AGENT_LOG_FORMAT</span>   ]
+    ]
+  )
+  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">mount</span>(<span class="ruby-value str">&quot;/json&quot;</span>, <span class="ruby-constant">JSONServlet</span>)
+  <span class="ruby-identifier">s</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
