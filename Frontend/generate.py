@@ -6,7 +6,7 @@
 #  http://qooxdoo.org
 #
 #  Copyright:
-#    2008 - 2009 1&1 Internet AG, Germany, http://www.1und1.de
+#    2008 - 2010 1&1 Internet AG, Germany, http://www.1und1.de
 #
 #  License:
 #    LGPL: http://www.gnu.org/licenses/lgpl.html
@@ -24,8 +24,8 @@
 
 import sys, os, re, subprocess
 
-CMD_PYTHON = 'python'
-QOOXDOO_PATH = 'source/qooxdoo-1.3-sdk'
+CMD_PYTHON = sys.executable
+QOOXDOO_PATH = 'source/qooxdoo-1.4-sdk'
 
 def getQxPath():
     path = QOOXDOO_PATH
