@@ -32,18 +32,12 @@ The following buttons are defined:
 module VTListPane
   def vtlp_list( field, method )
     @vtlp_field = field.to_s
-    @vtlp_method_list = "list_#{method}"
-    @vtlp_method_find = "find_#{method}"
-    show_list_single field, "Entities.#{@data_class.class.to_s}.list_#{method}", :callback => true
+    @vtlp_method_list = "listp_#{method}"
+    show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", :callback => true
   end
   
-  def vtlp_get_entity( data )
-    field_data = @data_class.send( @vtlp_method_find, data[@vtlp_field][0] )
-    if field_data
-      @data_class.find_by( @data_class.data_field_id, field_data[@data_class.data_field_id] )
-    else
-      nil
-    end
+  def vtlp_get_entity( d )
+    @data_class.get_data_instance( d[@vtlp_field][0] )
   end
   
   def vtlp_update_list( empty = true )
@@ -55,7 +49,7 @@ module VTListPane
   end
   
   def rpc_button_new( sid, data )
-    reply( "empty" )
+    vtlp_update_list
   end
   
   def rpc_button_delete( sid, data )
@@ -72,6 +66,7 @@ module VTListPane
   
   def rpc_button_save( sid, data )
     field = vtlp_get_entity( data )
+    dputs 2, "Field is #{field}"
     if field
       field.set_data( data.to_sym )
     else
@@ -85,9 +80,9 @@ module VTListPane
     dputs 3, "rpc_list_choice with #{name} - #{args.inspect}"
     if name == @vtlp_field
       field_value = args[0][name][0]
-      dputs 3, "replying"
+      dputs 3, "replying with field_value of #{field_value}"
       ret = reply( "empty" )
-      item = @data_class.send( @vtlp_method_find, field_value )
+      item = vtlp_get_entity(args[0])
       if item
         ret += reply("update", item.to_hash )
       end
