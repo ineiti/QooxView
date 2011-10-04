@@ -66,6 +66,7 @@ class View < RPCQooxdooService
       @layout = [[]]
       @actual = []
       @update = false
+      @update_layout = true
       @auto_update = 0
       @auto_update_send_values = true
       
@@ -337,6 +338,21 @@ class View < RPCQooxdooService
     rpc_update_view( session_id )
   end
   
+  def update_layout
+    return [] if not @layout
+    dputs 3, "Updating layout"
+    ret = []
+    layout_recurse(@layout).each{|l|
+      if l.list.size > 0
+        dputs 3, "Here comes element #{l.inspect} with new list-value #{eval( l.list )}"
+        ret += reply( 'empty', [ l.name ] )
+        ret += reply( 'update', { l.name => eval( l.list ) } )
+      end
+    }
+    dputs 3, "Reply is #{ret.inspect}"
+    ret
+  end
+  
   # Updates the layout of the form, especially the lists
   def rpc_update_view( sid )
     #    reply( 'empty', '*' ) +
@@ -344,8 +360,11 @@ class View < RPCQooxdooService
     ret = []
     if @update
       update = rpc_update( sid )
-      dputs 4, "updating #{update.inspect}"
+      dputs 3, "updating #{update.inspect}"
       ret += update
+    end
+    if @update_layout
+      ret += update_layout
     end
     if @auto_update > 0
       dputs 4, "auto-updating"
@@ -355,7 +374,7 @@ class View < RPCQooxdooService
       dputs 4, "debugging"
       ret += reply( "debug", 1 )
     end
-    dputs 5, "showing: #{ret.inspect}"
+    dputs 3, "showing: #{ret.inspect}"
     ret
   end
   
@@ -387,12 +406,13 @@ class View < RPCQooxdooService
   
   # Send the current values that are displayed
   def rpc_update( sid )
-    dputs 4, "update"
+    dputs 4, "rpc_update"
     reply( "update", update( sid ) )
   end
   
   # Returns the data for the fields as a hash
   def update( sid )
+    dputs 4, "update"
     get_form_data( get_entity( sid ) )
   end
   
@@ -424,7 +444,7 @@ class View < RPCQooxdooService
   def get_form_data( d ) # :nodoc:
     reply = {}
     return reply if not d
-    dputs 5, "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}"
+    dputs 3, "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}"
     layout_recurse(@layout).each{|l|
       #      field = l.split(":")[1].to_sym
       if d.data.has_key?( l.name ) and d.data[l.name]
