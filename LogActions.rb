@@ -7,7 +7,7 @@
 
 class LogActions < Entities
   def setup_data
-#    add_new_storage :CSV, :add_only => true
+    add_new_storage :CSV, :add_only => true
 
     value_date :date_stamp
     value_str :data_class
