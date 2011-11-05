@@ -38,6 +38,7 @@ class Entities < RPCQooxdooService
       @default_type = :CSV
       
       # Check for config of this special class
+#      dputs 2, "Class is: #{self.class.name.to_sym.inspect}"
       if $config and $config[:entities] and $config[:entities][self.class.name.to_sym]
         @config = $config[:entities][self.class.name.to_sym]
         dputs 3, "Writing config #{@config.inspect} for #{self.class.name}"
@@ -47,6 +48,7 @@ class Entities < RPCQooxdooService
           rescue Exception => e
             instance_variable_set( "@#{k.to_s}", v )            
           end
+          self.class.send( :attr_reader, k )
           dputs 3, "Setting #{k} = #{v}"
         }
       else

@@ -80,6 +80,7 @@ class View < RPCQooxdooService
           rescue Exception => e
             instance_variable_set( "@#{k.to_s}", v )            
           end
+          self.class.send( :attr_reader, k )
           dputs 3, "Setting #{k} = #{v}}"
         }
       else
