@@ -142,6 +142,7 @@ qx.Class.define("frontend.Views.Layout", {
                         }, time, this, null, time);
                         break;
                     case "window_show":
+                    	enable = false;
                         aform.fields.window_show(res.data);
                         break;
                     case "window_hide":
@@ -218,11 +219,7 @@ qx.Class.define("frontend.Views.Layout", {
             if (!container.hasChildren()) {
                 dbg(4, "Adding container " + this.viewClass);
                 container.add(this.field = new frontend.Views.Form(cback, this.layoutView, this.dataClass, this.viewClass));
-                if (this.field.fields.first_field &&
-                this.field.fields.first_field.isFocusable()) {
-                    dbg(4, "Focusing on " + this.field.fields.first_field);
-                    this.field.fields.first_field.focus();
-                }
+                this.field.fields.focus_if_ok( this.field.fields.first_field);
             }
             else {
                 dbg(4, "Layout " + this.viewClass + " already here - doing nothing");

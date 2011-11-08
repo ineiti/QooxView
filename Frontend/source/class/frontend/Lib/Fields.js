@@ -246,6 +246,7 @@ qx.Class.define("frontend.Lib.Fields", {
         windows: null,
         first_field: null,
         first_button: null,
+        first_button_window: null,
         updating: null,
         index: null,
         timer: null,
@@ -535,7 +536,7 @@ qx.Class.define("frontend.Lib.Fields", {
                 }
                 field_element.addListener("keypress", function(e){
                     if (e.getKeyIdentifier() == "Enter" && enter_klicks) {
-                        dbg(5, "This is Enter...");
+                        dbg(5, "This is Enter for " + e + ":" + name + ":" + label);
                         if (this.first_button) {
                             this.first_button.execute();
                         }
@@ -658,9 +659,13 @@ qx.Class.define("frontend.Lib.Fields", {
                         });
                         break;
                     case "window":
-                        dbg(5, "Adding a window");
+                        dbg(5, "Adding a window with layout " + view_str[1] );
+                        var old_field = this.first_field;
+                        var old_button = this.first_button;
+                        this.first_field = null;
+                        this.first_button = null;
                         var l = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
-                        this.calcView(view_str[1], l)
+                        this.calcView(view_str[1], l);
                         var win = new qx.ui.window.Window("Window").set({
                             modal: true,
                             allowClose: false,
@@ -669,6 +674,10 @@ qx.Class.define("frontend.Lib.Fields", {
                         win.setLayout(new qx.ui.layout.HBox());
                         win.add(l);
                         win.center();
+                        win.first_button = this.first_button;
+                        win.first_field = this.first_field;
+                        this.first_button = old_button;
+                        this.first_field = old_field;
                         this.windows[args[1]] = win;
                         break
                 }
@@ -694,10 +703,24 @@ qx.Class.define("frontend.Lib.Fields", {
             return lyt;
         },
         
-        // Put a window into visibility 
+        // Gives focus but tests first
+        focus_if_ok: function( field ){
+            if (field && field.isFocusable()) {
+            	dbg(4, "Focusing on " + field);
+            	field.focus();
+            }        	
+        },
+        
+        // Put a window into visibility, hiding the background
         window_show: function(name){
             dbg(2, "Showing window " + name);
-            this.windows[name].setVisibility("visible");
+            win = this.windows[name];
+            win.setVisibility("visible");
+            win.focus();
+            win.activate();
+            this.focus_if_ok( win.first_field )
+            this.first_button_window = this.first_button;
+            this.first_button = win.first_button;
         },
         
         window_hide: function(name){
@@ -711,6 +734,11 @@ qx.Class.define("frontend.Lib.Fields", {
             else {
                 this.windows[name].setVisibility("hidden");
             }
+            if ( this.first_button_window ){
+            	this.first_button = this.first_button_window;
+            	this.first_button_window = null;
+            }
+            this.focus_if_ok( this.first_field );
         },
         
         createHours: function(){
