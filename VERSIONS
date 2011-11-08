@@ -1,3 +1,8 @@
+0.8.2 - 111108
+	- Based on Qooxdoo 1.4
+	- All tests are working
+	- More widgets and automatic updates
+
 0.8.1 - 110826
 	- Fixed error in simple views
 
