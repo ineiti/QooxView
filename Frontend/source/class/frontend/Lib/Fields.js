@@ -527,7 +527,7 @@ qx.Class.define("frontend.Lib.Fields", {
             }
             
             // Get the field_element in place, adding the listener if necessary
-            if (field_element) {
+            if ( field_element && ! params.hidden ) {
                 dbg(5, "Adding: " + type + ":" + name + ":" + label + " to " + layout.getLayout());
                 this.fields[name] = field_element;
                 field_element.setTabIndex(this.index++);
