@@ -13,4 +13,8 @@ class AView < View
     
     @order = 60
   end
+  
+  def test_sub
+    return 2
+  end
 end

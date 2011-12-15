@@ -95,4 +95,8 @@ class TC_View < Test::Unit::TestCase
     data.delete( 'l_b' )
     assert_equal Hash.new, View.AView.filter_from_entity( Hash.new )
   end
+  
+  def test_view_subclass
+    assert_equal 2, View.AView.test_sub
+  end
 end

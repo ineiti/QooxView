@@ -157,6 +157,15 @@ qx.Class.define("frontend.Views.Layout", {
 							this.callBackend("button", res.data, this.fields.getFieldsData());
                         }, null, aform, null, 1000 );
                         break;
+                    case "switch_tab":
+                    	for (var v = 0; v < this.views.length; v++) {
+                    		if (this.views[v].getLabel() == res.data) {
+                    			this.tabs.setSelection([this.views[v]]);
+                    			dbg( 3, "Found new tab: " + res.data);
+                    			dbg( 3, "New tab is: " + this.tabs.getSelection()[0].getLabel() );
+                    		}
+                    	}
+                    	break;
                 }
             }
             
@@ -206,7 +215,7 @@ qx.Class.define("frontend.Views.Layout", {
                     this.tabs.getSelection()[0].getLabel());
                     for (var v = 0; v < this.views.length; v++) {
                         if (this.views[v].getLabel() == this.viewClass) {
-                            this.tabs.setSelection(this.views[v]);
+                            this.tabs.setSelection([this.views[v]]);
                         }
                     }
                 }
@@ -272,6 +281,7 @@ qx.Class.define("frontend.Views.Layout", {
         changeView: function(e){
             this.checkTimer();
             var newView = e.getData()[0].getLabel();//.getSelection()[0];
+            dbg(3, "New view is: " + newView)
             this.field = this.getActiveForm();
             var container = this.getRootContainer();
             this.tabs.setEnabled(false);

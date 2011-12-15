@@ -527,6 +527,6 @@ class View < RPCQooxdooService
   # Used to access subclasses defined in RPCQooxdoo
   def self.method_missing(m,*args)
     dputs 3, "Searching #{m} with #{args.inspect}"
-    RPCQooxdooService::services["View.#{m}"]
+    @@services_hash["View.#{m}"]
   end
 end
