@@ -48,12 +48,12 @@ module VTListPane
     rep += reply( "update", { @vtlp_field.to_sym => @data_class.send( @vtlp_method_list ) } )
   end
   
-  def rpc_button_new( sid, data )
+  def rpc_button_new( session, data )
     vtlp_update_list
   end
   
-  def rpc_button_delete( sid, data )
-    dputs 3, "sid, data: #{[sid, data.inspect].join(':')}"
+  def rpc_button_delete( session, data )
+    dputs 3, "session, data: #{[session, data.inspect].join(':')}"
     id = vtlp_get_entity( data )
     dputs 3, "Got #{id.inspect}"
     if id
@@ -64,7 +64,7 @@ module VTListPane
     vtlp_update_list
   end
   
-  def rpc_button_save( sid, data )
+  def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
     dputs 2, "Field is #{field}"
     if field
@@ -75,7 +75,7 @@ module VTListPane
     vtlp_update_list
   end
   
-  def rpc_list_choice( sid, name, *args )
+  def rpc_list_choice( session, name, *args )
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
     dputs 3, "rpc_list_choice with #{name} - #{args.inspect}"
     if name == @vtlp_field

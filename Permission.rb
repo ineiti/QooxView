@@ -26,13 +26,13 @@ class Permission
     @@parent[ name.to_s ] = parent.split(',')
   end
 
-  def self.session_add( sid, perm )
-    dputs 4, "Adding permission for session #{sid}: #{perm}"
-    @@sessions[sid.to_s] = perm
+  def self.session_add( session, perm )
+    dputs 4, "Adding permission for session #{session}: #{perm}"
+    @@sessions[session.to_s] = perm
   end
 
-  def self.session_remove( sid )
-    @@sessions[sid.to_s] = nil
+  def self.session_remove( session )
+    @@sessions[session.to_s] = nil
   end
 
   def self.getViewParent( view )
@@ -40,14 +40,14 @@ class Permission
     @@parent[view].to_a.collect{|c| "name:#{c}"}
   end
 
-  def self.can( sid, act )
+  def self.can( session, act )
     # If the list is not initialized, then everybody can do everything!
     if list.size == 0
       return true
     end
 
     dputs 4, "@@sessions is #{@@sessions.inspect}"
-    permission = @@sessions[sid.to_s]
+    permission = @@sessions[session.to_s]
     if not permission or permission.length == 0
       permission = "default"
     end
@@ -77,8 +77,8 @@ class Permission
     return false
   end
 
-  # Get sid
-  def self.get_sid( data )
+  # Get session
+  def self.get_session( data )
     if data[0] =~ /^session_id:/
       return data[0].gsub(/^session_id:/, '' )
     else

@@ -40,14 +40,14 @@ class Welcome < View
       </tr></table>"
   end
   
-  def update( sid )
+  def update( session )
     #   {:Actual_Provider => `bin/get_connection`, :ntop => ntop_table }
   end
   
-  def rpc_button( sid, name, *args )
+  def rpc_button( session, name, *args )
     dputs 0, "switching to #{name}"
     system "bin/set_connection #{name}"
-    update( sid )
+    update( session )
   end
   
 end

@@ -16,7 +16,7 @@ class Welcome < View
     @visible = false
   end
   
-  def rpc_show( sid )
+  def rpc_show( session )
     dputs 3, self.inspect
     if @no_login
       dputs 2, "No login is enabled"
@@ -24,7 +24,7 @@ class Welcome < View
       reply( "list", View.list_views )
     else
       dputs 2, "Login is enabled"
-      super( sid )
+      super( session )
     end
   end
   
@@ -33,7 +33,7 @@ class Welcome < View
     $config.merge!( {:views=>{:Welcome=>{:no_login=>true}}} )
   end
   
-  def rpc_button_try_again( sid, data )
+  def rpc_button_try_again( session, data )
     reply( "window_hide" )
   end
 end

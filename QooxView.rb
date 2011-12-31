@@ -38,10 +38,10 @@ and act upon pressing them:
      show_info :welcome, "hello world"
      show_button :welt, :world
    end
-   def rpc_button_welt( sid, args* )
+   def rpc_button_welt( session, args* )
      reply( 'update', { :welcome => "Hallo Welt" } )
    end
-   def rpc_button_world( sid, args* )
+   def rpc_button_world( session, args* )
      reply( 'update', { :welcome => "Hello world" } )
    end
  end

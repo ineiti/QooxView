@@ -291,8 +291,8 @@ class View < RPCQooxdooService
     self.list( session_id )
   end
   
-  def list( sid )
-    View.list( sid )
+  def list( session )
+    View.list( session )
   end
   
   def self.list( session_id ) # :nodoc:
@@ -355,12 +355,12 @@ class View < RPCQooxdooService
   end
   
   # Updates the layout of the form, especially the lists
-  def rpc_update_view( sid )
+  def rpc_update_view( session )
     #    reply( 'empty', '*' ) +
     #    reply( 'update', layout_recurse( @layout ))
     ret = []
     if @update
-      update = rpc_update( sid )
+      update = rpc_update( session )
       dputs 3, "updating #{update.inspect}"
       ret += update
     end
@@ -379,42 +379,42 @@ class View < RPCQooxdooService
     ret
   end
   
-  def call_named( type, sid, name, *args )
+  def call_named( type, session, name, *args )
     rpc_name = "rpc_#{type}_#{name}"
     dputs 3, "Searching for #{rpc_name}"
     if self.respond_to? rpc_name
       dputs 3, "Found #{rpc_name} and calling it with #{args.inspect}"
-      return self.send( rpc_name, sid, args[0] )
+      return self.send( rpc_name, session, args[0] )
     else
       return []
     end    
   end
   
   # Call the children's rpc_button_name, if present
-  def rpc_button( sid, name, *args )
-    call_named( "button", sid, name, *args )
+  def rpc_button( session, name, *args )
+    call_named( "button", session, name, *args )
   end
   
   # Call the children's rpc_callback_name, if present
-  def rpc_callback( sid, name, *args )
-    call_named( "callback", sid, name, *args )
+  def rpc_callback( session, name, *args )
+    call_named( "callback", session, name, *args )
   end
   
   # Upon choice of an entry in the list
-  def rpc_list_choice( sid, name, *args )
+  def rpc_list_choice( session, name, *args )
     dputs 3, "Got a new choice of list: #{name.inspect} - #{args.inspect}"
   end
   
   # Send the current values that are displayed
-  def rpc_update( sid )
+  def rpc_update( session )
     dputs 4, "rpc_update"
-    reply( "update", update( sid ) )
+    reply( "update", update( session ) )
   end
   
   # Returns the data for the fields as a hash
-  def update( sid )
+  def update( session )
     dputs 4, "update"
-    get_form_data( get_entity( sid ) )
+    get_form_data( get_entity( session ) )
   end
   
   # Make a flat array containing the elements of the layout
@@ -457,8 +457,8 @@ class View < RPCQooxdooService
   end
   
   # Helper function
-  def get_entity( sid )
-    @data_class.find_by_session_id( sid )
+  def get_entity( session )
+    @data_class.find_by_session_id( session )
   end
   
   # Packs a command and a data in a hash. Multiple commands can be put together:
@@ -469,22 +469,22 @@ class View < RPCQooxdooService
   end
   
   # Standard button which just saves the entered data
-  def rpc_button_save( sid, data )
+  def rpc_button_save( session, data )
     reply( 'update', @data_class.save_data( data ) )
   end
   
   # Standard button that cleans all fields
-  def rpc_button_new( sid, data )
+  def rpc_button_new( session, data )
     reply( 'empty' )
   end
   
   # Standard search-field action to take
-  def rpc_find( sid, field, data )
+  def rpc_find( session, field, data )
     rep = @data_class.find( field, data )
     if not rep
       rep = { "#{field}" => data }
     end
-    reply( 'update', rep ) + rpc_update( sid )
+    reply( 'update', rep ) + rpc_update( session )
   end
   
   # Filters data from own Entity, so that these fields are not

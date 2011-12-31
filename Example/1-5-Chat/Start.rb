@@ -16,13 +16,13 @@ class Welcome < View
   end
 
   # Sending a message
-  def rpc_button_talk( sid, *args )
+  def rpc_button_talk( session, *args )
     @conv.push "#{args[0]['name']}: #{args[0]['msg']}"
     reply( 'update', { :msg => "" } ) +
-    rpc_update_with_values( sid, "" )
+    rpc_update_with_values( session, "" )
   end
 
-  def rpc_update_with_values( sid, args )
+  def rpc_update_with_values( session, args )
     reply( 'update', { :conversation => @conv.last(10).reverse.join("\n") } )
   end
 end

@@ -90,11 +90,11 @@ class RPCQooxdooHandler
   
   # Replies to a request
   def self.request( id, service, method, params )
-    sid = params[0].shift
-    dputs 3, "SID is #{sid}"
+    session = params[0].shift
+    dputs 3, "session is #{session}"
     
     if service =~ /^View/
-      if not Permission.can( sid, service )
+      if not Permission.can( session, service )
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
     end
@@ -108,7 +108,7 @@ class RPCQooxdooHandler
       if s.respond_to?( method )
         dputs 3, "Calling #{method} with #{params.inspect}"
         begin
-          return self.answer( s.send( method, sid, *params[0] ), id )
+          return self.answer( s.send( method, session, *params[0] ), id )
         rescue Exception => e  
           dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
           dputs 0, "#{e.inspect}"
