@@ -9,6 +9,7 @@ module DPuts
   def dputs(n, s, call = nil)
     if self.class.const_get( :DEBUG_LVL ) >= n
       DebugLock.instance.synchronize do
+        s = s.to_s
         width = $config[:terminal_width] ? $config[:terminal_width] : 160
         width -= 30.0
         call or call = caller(0)[3]

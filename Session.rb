@@ -18,12 +18,13 @@ class Session
   end
   
   def add_entity( e )
-    instance_variable_set( "@#{e.name.to_s}", e )
-    self.class.send( :attr_reader, e.name.to_s )
+    dputs 2, "Adding #{e.class.name.to_s} to instance variables"
+    instance_variable_set( "@#{e.class.name.to_s}", e )
+    self.class.send( :attr_reader, e.class.name.to_s )
   end
   
   def self.find_by_id( id )
-    if @@sessions.has_key id
+    if @@sessions.has_key? id
       return @@sessions[id]
     else
       dputs 0, "Can't find session #{id}!"
