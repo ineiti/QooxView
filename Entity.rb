@@ -58,7 +58,6 @@ class Entities < RPCQooxdooService
       # Stuff for the StorageHandler
       @storage = {}
       @data = {}
-      dputs 0, "Setting name"
       @name = singular( self.class.name )
       @data_field_id = "#{@name}_id".downcase.to_sym
       

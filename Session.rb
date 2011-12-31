@@ -37,11 +37,8 @@ class Session
   # - permission - which holds the permissions available
   # - session_id - which will get the new id
   def self.add( p )
-    dputs 2, "Adding new session for #{p.name}"
     ns = Session.new( p.permissions )
-    dputs 2, "Adding entity"
     ns.add_entity( p )
-    dputs 2, "Setting sid to #{ns.id}"
     p.session_id = ns.id
     ns
   end

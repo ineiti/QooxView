@@ -3,7 +3,6 @@ require 'test/unit'
 class TC_Session < Test::Unit::TestCase
   def setup
     Entities.delete_all_data
-    dputs 0, "Doing admin"
     @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
     :address => "cdlf 24", :credit => 10000 )
     Entities.Courses.create( :first_name => "base_1010", :start => "1.10.2010")
