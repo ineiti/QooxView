@@ -3,7 +3,7 @@ class Dummies < Entities
     @default_type = :STdummy1
     add_new_storage :STdummy2, :conf => "hello"
     
-    value_str :name
+    value_str :first_name
     value_str_STdummy2 :phone, :length => 20
     value_list_array_STdummy2 :address, "[]", :size => 40
     

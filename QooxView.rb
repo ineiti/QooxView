@@ -126,6 +126,7 @@ require 'Value'
 require 'Entity'
 require 'View'
 require 'Permission'
+require 'Session'
 require 'LogActions'
 require 'Welcome'
 

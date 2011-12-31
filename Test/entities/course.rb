@@ -1,7 +1,7 @@
 class Courses < Entities
   def setup_data
-    value_block :name
-    value_str :name
+    value_block :first_name
+    value_str :first_name
     value_date :start
     value_date :end
     

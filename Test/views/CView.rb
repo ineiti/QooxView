@@ -9,7 +9,7 @@ class CView < View
       end
       gui_hbox do
         show_block :block_one
-        show_arg :name, :callback => "yes"
+        show_arg :first_name, :callback => "yes"
       end
       gui_window :cview do
         show_int :counter, :min => 10, :max => 20

@@ -3,11 +3,11 @@ require 'test/unit'
 class TC_Entity < Test::Unit::TestCase
   def setup
     Entities.delete_all_data
-    @admin = Entities.Persons.create( :name => "admin", :pass => "super123",
+    @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
     :address => "cdlf 24", :credit => 10000 )
-    Entities.Courses.create( :name => "base_1010", :start => "1.10.2010")
-    Entities.Courses.create( :name => "base_1011", :start => "1.11.2010")
-    @dummies_one = Entities.Dummies.create( :name => "one", :phone => "111", 
+    Entities.Courses.create( :first_name => "base_1010", :start => "1.10.2010")
+    Entities.Courses.create( :first_name => "base_1011", :start => "1.11.2010")
+    @dummies_one = Entities.Dummies.create( :first_name => "one", :phone => "111", 
     :no_cache => "123" )
   end
   
@@ -16,28 +16,28 @@ class TC_Entity < Test::Unit::TestCase
   
   def test_create_with_new_id
     student_id = 2
-    Entities.Persons.create( :person_id => student_id, :name => "student" )
+    Entities.Persons.create( :person_id => student_id, :first_name => "student" )
     guest_id = Entities.Persons.new_id[:person_id]
-    guest = Entities.Persons.create( :person_id => guest_id, :name => "guest",
+    guest = Entities.Persons.create( :person_id => guest_id, :first_name => "guest",
     :credit => 1000 )
     assert_equal guest_id, guest.person_id
-    assert_equal "guest", guest.name
+    assert_equal "guest", guest.first_name
     assert_equal 1000, guest.credit
     
     guest = Entities.Persons.find_by_person_id( guest_id )
     student = Entities.Persons.find_by_person_id( student_id )
-    assert_equal "guest", guest.name
-    assert_equal "student", student.name
+    assert_equal "guest", guest.first_name
+    assert_equal "student", student.first_name
   end
   
   def test_create_with_double_id
-    admin = Entities.Persons.find_by_name( "admin")
-    student = Entities.Persons.create( :person_id => admin.person_id, :name => "duplicate" )
+    admin = Entities.Persons.find_by_first_name( "admin")
+    student = Entities.Persons.create( :person_id => admin.person_id, :first_name => "duplicate" )
     assert_equal nil, student
   end
   
   def test_find_admin
-    admin = Entities.Persons.find_by_name( "admin" )
+    admin = Entities.Persons.find_by_first_name( "admin" )
     assert_nothing_raised do
       assert_equal 0, admin.person_id
       assert_equal 'super123', admin.pass
@@ -54,7 +54,7 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_logactions
-    admin = Entities.Persons.find_by_name( "admin" )
+    admin = Entities.Persons.find_by_first_name( "admin" )
     admin.set_entry( :credit, 100 )
     admin.set_entry( :pass, "hello123" )
     # Take out the date_stamps, as they change all the time...
@@ -76,10 +76,10 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_logactions_filter
-    admin = Entities.Persons.find_by_name( "admin" )
+    admin = Entities.Persons.find_by_first_name( "admin" )
     admin.set_entry( :credit, 100 )
     admin.set_entry( :pass, "hello123" )
-    course = Entities.Courses.find_by_name( "base_1010" )
+    course = Entities.Courses.find_by_first_name( "base_1010" )
     course.set_entry( :end, "1.3.2011" )
     
     log_list = Entities.LogActions.log_list
@@ -96,12 +96,12 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_logactions_filter_multi
-    admin = Entities.Persons.find_by_name( "admin" )
+    admin = Entities.Persons.find_by_first_name( "admin" )
     admin.set_entry( :credit, 100, "charger:linus" )
     admin.set_entry( :credit, 200, "charger:viviane" )
     admin.set_entry( :credit, 300, "charger:linuss" )
     admin.set_entry( :pass, "hello123" )
-    course = Entities.Courses.find_by_name( "base_1010" )
+    course = Entities.Courses.find_by_first_name( "base_1010" )
     course.set_entry( :end, "1.3.2011" )
     
     log_list = Entities.LogActions.log_list
@@ -118,17 +118,17 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_getfields
-    assert_equal %w( course_id name start end street plz tel ).sort.to_s, 
+    assert_equal %w( course_id first_name start end street plz tel ).sort.to_s, 
     Entities.Courses.get_field_names.sortk.to_s
   end
   
   def test_list
     assert_equal %w( base_1010 base_1011 ),
-    Entities.Courses.list_name
+    Entities.Courses.list_first_name
   end
   
   def test_value_add_new
-    assert_equal %w( address credit name pass person_id l_a l_c l_d l_s l ).sort.to_s, 
+    assert_equal %w( session_id address credit first_name pass person_id l_a l_c l_d l_s l ).sort.to_s, 
     Entities.Persons.get_field_names.sortk.to_s
     
     assert_equal ["list", :l_a, :l_a, {:list_type=>"array", :list_values=>[]}],
@@ -144,12 +144,12 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_cache_data
-    assert_equal "one", @dummies_one.name
+    assert_equal "one", @dummies_one.first_name
     assert_equal "111", @dummies_one.phone
     assert_equal "no_cache", @dummies_one.no_cache
   end
   
   def test_data_get
-    assert_equal [ "admin", "super123" ], @admin.data_get( %w( name pass ) ) 
+    assert_equal [ "admin", "super123" ], @admin.data_get( %w( first_name pass ) ) 
   end
 end

@@ -3,8 +3,8 @@ require 'test/unit'
 class TC_View < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
-    Entities.Persons.create( :name => "admin", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
-    Entities.Persons.create( :name => "surf", :pass => "surf", :session_id => '0.2', :permission => 'internet' )
+    Entities.Persons.create( :first_name => "admin", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
+    Entities.Persons.create( :first_name => "surf", :pass => "surf", :session_id => '0.2', :permission => 'internet' )
     Permission.session_add( '0.1', 'admin')
     Permission.session_add( '0.2', 'internet')
   end
@@ -24,7 +24,7 @@ class TC_View < Test::Unit::TestCase
   def test_update
     reply = request( 'View.AView', 'update', [['0.1']] )
     result = reply['result'][0][:data]
-    assert result[:name] == "admin", result.inspect
+    assert result[:first_name] == "admin", result.inspect
     assert result[:permission] == nil
   end
 
@@ -46,7 +46,7 @@ class TC_View < Test::Unit::TestCase
           [["hbox",
             [["group",
               [["fields",
-                [["str", :name, :name, {:callback=>"yes"}], ["str", :pass, :pass, {}]]]]]]]]],
+                [["str", :first_name, :first_name, {:callback=>"yes"}], ["str", :pass, :pass, {}]]]]]]]]],
          ["window:cview",
           [["group",
             [["fields",
@@ -65,10 +65,11 @@ class TC_View < Test::Unit::TestCase
     assert_equal ["group",
  [["fields",
    [["int", :person_id, :person_id, {:id=>true}],
-    ["str", :name, :name, {}],
+    ["str", :first_name, :first_name, {}],
     ["str", :pass, :pass, {}],
     ["str", :address, :address, {}],
     ["int", :credit, :credit, {}],
+    ["int", :session_id, :session_id, {}],
     ["int", :ro_int, :ro_int, {:ro=>true}],
     ["list", :ro_list, :ro_list, {:ro=>true, :list_values=>[1,2,3]}],
     ["list", :ro_list2, :ro_list2, {:ro=>true}],
@@ -79,12 +80,12 @@ class TC_View < Test::Unit::TestCase
 
   def test_list_update
     assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf"]}], 
-      View.AView.layout_eval[1][0][1][9],
+      View.AView.layout_eval[1][0][1][10],
       View.AView.layout_eval.inspect
-    Entities.Persons.create( :name => "foo", :pass => "foo", 
+    Entities.Persons.create( :first_name => "foo", :pass => "foo", 
       :session_id => '0.3', :permission => 'internet' )
     assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf","foo"]}], 
-      View.AView.layout_eval[1][0][1][9]
+      View.AView.layout_eval[1][0][1][10]
   end
   
   def test_filter_from_entity

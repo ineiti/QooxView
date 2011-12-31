@@ -1,7 +1,7 @@
 class Persons < Entities
   def setup_data
     value_block :block_one
-    value_str :name
+    value_str :first_name
     value_str :pass
     
 #    value_block :array
@@ -17,6 +17,8 @@ class Persons < Entities
     value_block :block_two
     value_str :address
     value_int :credit
+    
+    value_int :session_id
     
 #    value_block :add_new
 #    value_bogus :name_bogus

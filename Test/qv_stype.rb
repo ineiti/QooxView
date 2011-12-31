@@ -3,8 +3,8 @@ require 'test/unit'
 class TC_SType < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
-    @one = Entities.Dummies.create( :name => "one", :phone => "111" )
-    @two = Entities.Dummies.create( :name => "two", :phone => "222" )
+    @one = Entities.Dummies.create( :first_name => "one", :phone => "111" )
+    @two = Entities.Dummies.create( :first_name => "two", :phone => "222" )
   end
   
   def teardown
@@ -14,10 +14,10 @@ class TC_SType < Test::Unit::TestCase
     assert_equal "111", @one.phone
     assert_equal "222", @two.phone
     
-    assert_equal [ :dummy_id, :name ], @one.get_storage[:STdummy1].fields.keys.sortk
+    assert_equal [ :dummy_id, :first_name ], @one.get_storage[:STdummy1].fields.keys.sortk
     assert_equal [ :address, :dummy_id, :phone ], @one.get_storage[:STdummy2].fields.keys.sortk
     
-    assert_equal [ :address, :dummy_id, :name, :no_cache, :phone ],
+    assert_equal [ :address, :dummy_id, :first_name, :no_cache, :phone ],
       Entities.Dummies.get_field_names.sortk
   end
   
