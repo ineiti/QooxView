@@ -27,12 +27,16 @@ class Permission
   end
 
   def self.session_add( session, perm )
-    dputs 4, "Adding permission for session #{session}: #{perm}"
-    @@sessions[session.to_s] = perm
+    dputs 0, "Deprecated - #{caller.inspect}"
+    exit
+#    dputs 4, "Adding permission for session #{session}: #{perm}"
+#    @@sessions[session.to_s] = perm
   end
 
   def self.session_remove( session )
-    @@sessions[session.to_s] = nil
+    dputs 0, "Deprecated - #{caller.inspect}"
+    exit
+#    @@sessions[session.to_s] = nil
   end
 
   def self.getViewParent( view )
@@ -40,10 +44,12 @@ class Permission
     @@parent[view].to_a.collect{|c| "name:#{c}"}
   end
 
-  def self.can( session, act )
+  def self.can( session, view )
+    dputs 0, "Deprecated - #{caller.inspect}"
+    exit
     # If the list is not initialized, then everybody can do everything!
     if list.size == 0
-      return true
+    return true
     end
 
     dputs 4, "@@sessions is #{@@sessions.inspect}"
@@ -51,9 +57,13 @@ class Permission
     if not permission or permission.length == 0
       permission = "default"
     end
+    
+    self.can_view( permission, view )
+  end
 
-    action = act.gsub( /^View\./, '' )
-    dputs 4, "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}"
+  def self.can_view( permission, view )
+    action = view.gsub( /^View\./, '' )
+    dputs 3, "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}"
     permission.each{|p|
       perm_list = self.getViewParent( p )
       dputs 5, "p is #{p} and perm_list is #{perm_list.inspect}"
@@ -68,17 +78,20 @@ class Permission
           dputs 5, "Searching for #{data}"
           if action =~ /^#{data}$/
             dputs 3, "#{action} is allowed"
-            return true
+          return true
           end
         end
       }
     }
-    dputs 3, "is NOT allowed"
+    dputs 3, "#{action} is NOT allowed"
     return false
   end
 
   # Get session
   def self.get_session( data )
+    dputs 0, "Deprecated - #{caller.inspect}"
+    exit
+    
     if data[0] =~ /^session_id:/
       return data[0].gsub(/^session_id:/, '' )
     else

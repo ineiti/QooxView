@@ -3,10 +3,10 @@ require 'test/unit'
 class TC_View < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
-    Entities.Persons.create( :first_name => "admin", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
-    Entities.Persons.create( :first_name => "surf", :pass => "surf", :session_id => '0.2', :permission => 'internet' )
-    Permission.session_add( '0.1', 'admin')
-    Permission.session_add( '0.2', 'internet')
+    @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123", :permissions => 'admin' )
+    @surf = Entities.Persons.create( :first_name => "surf", :pass => "surf", :permissions => 'internet' )
+    Session.new( @admin, '0.1' )
+    Session.new( @surf, '0.2' )
   end
 
   def teardown
@@ -18,13 +18,14 @@ class TC_View < Test::Unit::TestCase
 
   def test_order
     reply = request( "View", 'list', [['0.1']] )
-    assert reply['result'][:views] == ["BView", "CView", "AView"]
+    dputs 0, reply['result'].inspect
+    assert_equal ["BView", "CView", "AView"], reply['result'][:views]
   end
 
   def test_update
     reply = request( 'View.AView', 'update', [['0.1']] )
     result = reply['result'][0][:data]
-    assert result[:first_name] == "admin", result.inspect
+    assert_equal "admin", result[:first_name], result.inspect
     assert result[:permission] == nil
   end
 

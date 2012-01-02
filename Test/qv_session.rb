@@ -15,7 +15,7 @@ class TC_Session < Test::Unit::TestCase
   end
 
   def test_new_session
-    session = Session.add( @admin )
+    session = Session.new( @admin )
     dputs 0, @session.inspect
     assert_equal @admin.session_id, session.id
     assert_equal "admin", session.Person.first_name

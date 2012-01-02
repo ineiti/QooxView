@@ -1,6 +1,6 @@
 #!/usr/bin/ruby -I..
 require 'test/unit'
-DEBUG_LVL = 5
+DEBUG_LVL = 4
 CONFIG_FILE='config.yaml'
 require 'QooxView'
 require 'st_dummy'

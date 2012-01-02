@@ -285,28 +285,26 @@ class View < RPCQooxdooService
     }
   end
   
-  
   # Returns a list of the available views for a given user
-  def rpc_list( session_id )
-    self.list( session_id )
+  def rpc_list( session )
+    self.list( session )
   end
   
   def list( session )
     View.list( session )
   end
   
-  def self.list( session_id ) # :nodoc:
-    user = Entities.Persons.find_by_session_id( session_id )
-    if not user
-      dputs 2, "Didn't find user for session-id #{session_id}"
+  def self.list( session ) # :nodoc:
+    if not session
+      dputs 2, "No session given, returning empty"
       return { :views => [] }
     end
-    dputs 4, "Found user #{user.login_name} for session_id #{session_id}"
+    dputs 4, "Found user #{session.Person.login_name} for session_id #{session_id}"
     views = []
     dputs 5, @@list.inspect
     @@list.each{|l|
       dputs 5, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
-      if l.visible and Permission.can( session_id, l.class.name )
+      if l.visible and session.can_view( l.class.name )
         views.push( l )
       end
     }
@@ -327,7 +325,7 @@ class View < RPCQooxdooService
   end
   
   # Gives the GUI-elements for the active view
-  def rpc_show( session_id )
+  def rpc_show( session )
     # user = Entities.Persons.find_by_session_id( session_id )
     # TODO: test for permission
     
@@ -336,7 +334,7 @@ class View < RPCQooxdooService
     { :layout => layout_eval, 
         :data_class => @data_class.class.to_s, 
         :view_class => self.class.to_s } ) +
-    rpc_update_view( session_id )
+    rpc_update_view( session )
   end
   
   def update_layout
@@ -458,7 +456,7 @@ class View < RPCQooxdooService
   
   # Helper function
   def get_entity( session )
-    @data_class.find_by_session_id( session )
+    @data_class.find_by_session_id( session.id )
   end
   
   # Packs a command and a data in a hash. Multiple commands can be put together:

@@ -90,11 +90,11 @@ class RPCQooxdooHandler
   
   # Replies to a request
   def self.request( id, service, method, params )
-    session = params[0].shift
+    session = Session.find_by_id( params[0].shift )
     dputs 3, "session is #{session}"
     
-    if service =~ /^View/
-      if not Permission.can( session, service )
+    if service =~ /^View/ and session
+      if not session.can_view( service )
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
     end
