@@ -18,7 +18,7 @@ class TC_Session < Test::Unit::TestCase
     session = Session.new( @admin )
     dputs 0, @session.inspect
     assert_equal @admin.session_id, session.id
-    assert_equal "admin", session.Person.first_name
+    assert_equal "admin", session.owner.first_name
     
     search = Session.find_by_id( session.id )
     assert_equal session.id, search.id

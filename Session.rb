@@ -5,28 +5,29 @@
  - "entity_name" - chosen entities
  - "id" - the actual id of the session
  - "permissions" - instance of Permission
+ - "owner" - who called the session
 =end
 
 class Session
-  attr_reader :id, :permissions
+  attr_reader :id, :permissions, :owner
   @@sessions = {}
   
-  # Adds a person with a session. Holds on to the belief that "person"
+  # Adds a person with a session. Holds on to the belief that "owner"
   # has the following attributes:
   # - permission - which holds the permissions available
   # - session_id - which will get the new id
-  def initialize( p, id = nil )
-    if p.session_id and @@sessions.has_key? p.session_id
-      @@sessions.delete( p.session_id )
+  def initialize( owner, id = nil )
+    if owner.session_id and @@sessions.has_key? owner.session_id
+      @@sessions.delete( owner.session_id )
     end
     
     if ! id
       id = rand
     end
-    p.session_id = @id = id.to_s
-    @permissions = p.permissions
+    owner.session_id = @id = id.to_s
+    @permissions = owner.permissions
     @@sessions[@id] = self
-    add_entity( p )
+    @owner = owner
   end
   
   def add_entity( e )

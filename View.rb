@@ -299,7 +299,7 @@ class View < RPCQooxdooService
       dputs 2, "No session given, returning empty"
       return { :views => [] }
     end
-    dputs 4, "Found user #{session.Person.login_name} for session_id #{session_id}"
+    dputs 4, "Found user #{session.owner.login_name} for session_id #{session_id}"
     views = []
     dputs 5, @@list.inspect
     @@list.each{|l|
@@ -412,7 +412,7 @@ class View < RPCQooxdooService
   # Returns the data for the fields as a hash
   def update( session )
     dputs 4, "update"
-    get_form_data( get_entity( session ) )
+    get_form_data( session.owner )
   end
   
   # Make a flat array containing the elements of the layout
@@ -452,11 +452,6 @@ class View < RPCQooxdooService
     }
     dputs 4, "rpc_update #{reply.inspect}"
     reply
-  end
-  
-  # Helper function
-  def get_entity( session )
-    @data_class.find_by_session_id( session.id )
   end
   
   # Packs a command and a data in a hash. Multiple commands can be put together:
