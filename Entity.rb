@@ -235,7 +235,7 @@ class Entities < RPCQooxdooService
       end
     else
     # We're in a subclass, so we first have to fetch the instance
-      return Entities.service( self.name ).send( m, args )
+      return Entities.service( self.name ).send( m, *args )
     end
   end
 
