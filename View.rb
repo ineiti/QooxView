@@ -95,6 +95,10 @@ class View < RPCQooxdooService
         gui_container_end
       end
       dputs 5, "Layout is #{@layout.inspect}"
+      
+      #if @name.gsub(/[a-z_-]/, '').length > 1
+      #  set_data_class( @name.gsub )
+      #end
     end
   end
   
