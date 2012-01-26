@@ -10,7 +10,7 @@ require 'StorageHandler'
 require 'Storages/AfriCompta.rb'
 require 'Storages/CSV.rb'
 require 'Storages/LDAP.rb'
-
+require 'Storages/SQLite.rb'
 
 
 class Array

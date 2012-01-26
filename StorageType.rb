@@ -37,6 +37,7 @@ class StorageType
   end
   
   def add_field( name, args )
+    dputs 3, "Adding field #{name}"
     if not has_field name
       @fields[name.to_sym] = args
     else

@@ -85,11 +85,16 @@ The Log-class can do logging and supports an undo-function very easily
 =end
 
 require 'yaml'
+require 'rubygems'
 
 # I think the rubygems way is just really not useful, sorry
-%w( parseconfig-0.5.2 json-1.4.6 net-ldap-0.1.1 ).each{|lib|
+%w( parseconfig-0.5.2 json-1.4.6 net-ldap-0.1.1 activerecord-3.1.1
+ activesupport-3.1.1 i18n-0.6.0 activemodel-3.1.1 arel-2.2.1 
+ multi_json-1.0.3 ).each{|lib|
   $: << File.expand_path(File.dirname(__FILE__)+"/#{lib}/lib")
 }
+
+require 'active_record'
 
 require 'json'
 require 'DPuts'
