@@ -23,16 +23,17 @@ module StorageHandler
   # Adds a new value to the storages to hold the appropriate values.
   def add_value_to_storage( value )
     return if ! value.st
+    args = value.args.merge( :dtype => value.dtype )
     if value.st != "ALL"
       st = replace_st( value.st )
       if not @storage.has_key? st
         # A request for another type
         add_new_storage( st )
       end
-    @storage[st].add_field( value.name, value.args )
+    @storage[st].add_field( value.name, args )
     else
       @storage.each{|k,v|
-        v.add_field( value.name, value.args )
+        v.add_field( value.name, args )
       }
     end
   end
@@ -246,7 +247,7 @@ module StorageHandler
   def load
     @data = {}
     @storage.each{|k,di|
-      dputs 2, "Loading #{k} at #{di.name} with #{di.inspect}"
+      dputs 4, "Loading #{k} at #{di.name} with #{di.inspect}"
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
     # dputs 2, @data[10021].inspect
     }

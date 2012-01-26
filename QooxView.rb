@@ -63,9 +63,7 @@ of both:
 
 === LDAP storage
 
-=== MySQL storage
-
-Not yet, sorry...
+=== SQLite storage
 
 = Other goodies
 
