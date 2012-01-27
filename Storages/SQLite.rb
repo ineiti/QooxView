@@ -16,6 +16,7 @@ class SQLite < StorageType
     @db_table = "stsql_#{@name.downcase}s"
     @db_class_name = "Stsql_#{@name.downcase}"
     @db_class = nil
+    %x[ mkdir -p data ]
     ActiveRecord::Base.establish_connection(
     :adapter => "sqlite3", :database => "data/sql.db" )
 

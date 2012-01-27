@@ -141,7 +141,7 @@ class RPCQooxdooHandler
     # And put it in a nice qx-compatible reply
     dputs 3, "Answer is #{answer.inspect}"
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
-    "#{JSON.generate answer, :max_nesting => 0 } );"
+    "#{MultiJson.encode( answer ) } );"
   end
   
   # A more easy handler for a query-hash, e.g. camping or webrick
@@ -169,7 +169,7 @@ class RPCQooxdooHandler
       res.body = self.parse_query( req.query )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs 2, "Reply is #{res.body}"
+      dputs 2, "RPC-Reply is #{res.body}"
       raise HTTPStatus::OK
     }
     server.mount_proc('/info') {|req, res|
@@ -186,7 +186,7 @@ class RPCQooxdooHandler
       end
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs 2, "Reply is #{res.body}"
+      dputs 2, "Info-Reply is #{res.body}"
       raise HTTPStatus::OK
     }
     server.mount( '/', HTTPServlet::FileHandler, dir )

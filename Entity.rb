@@ -153,11 +153,11 @@ class Entities < RPCQooxdooService
       ret
     when /^listp_/
       field = cmd_str.sub( /^listp_/, "" )
-      dputs 0, "Using listpairs for field #{field.inspect}, #{@data.inspect}"
+      dputs 5, "Using listpairs for field #{field.inspect}, #{@data.inspect}"
       ret = @data.keys.collect{|k|
-        dputs 0, "k is #{k.inspect} - data is #{@data[k].inspect}"
+        dputs 4, "k is #{k.inspect} - data is #{@data[k].inspect}"
         [k, @data[k][field.to_sym] ] }
-      dputs 0, "Returning #{ret.inspect}"
+      dputs 3, "Returning #{ret.inspect}"
       ret
     when /^value_/
       cmds = cmd_str.split("_")[1..-1]
