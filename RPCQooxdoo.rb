@@ -141,7 +141,7 @@ class RPCQooxdooHandler
     # And put it in a nice qx-compatible reply
     dputs 3, "Answer is #{answer.inspect}"
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
-    "#{MultiJson.encode( answer ) } );"
+    "#{ActiveSupport::JSON.encode(answer) } );"
   end
   
   # A more easy handler for a query-hash, e.g. camping or webrick
