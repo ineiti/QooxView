@@ -38,7 +38,7 @@ class OpenPrint
 
     Docsplit.extract_pdf tmp_file, :output => "/tmp"
     dputs 5, "Finished docsplit"
-    FileUtils::rm( tmp_file )
+#    FileUtils::rm( tmp_file )
     dputs 0, cmd
     `#{cmd}`
   end
