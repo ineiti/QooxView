@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'benchmark'
 
-class TC_Entity < Test::Unit::TestCase
+class TC_SQLite < Test::Unit::TestCase
   def setup
     Entities.delete_all_data
     @m1 = Entities.Movements.create( :desc => "salaire", :money => 100 )

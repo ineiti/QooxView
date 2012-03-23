@@ -9,6 +9,8 @@ class Courses < Entities
     value_str :street
     value_str :plz
     value_str :tel
+    
+#    value_entity :Person
   end
 end
 

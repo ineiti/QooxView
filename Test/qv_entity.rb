@@ -1,6 +1,5 @@
 require 'test/unit'
-
-
+require 'benchmark'
 
 class TC_Entity < Test::Unit::TestCase
   def setup
@@ -154,5 +153,9 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_data_get
     assert_equal [ "admin", "super123" ], @admin.data_get( %w( first_name pass ) )
+  end
+  
+  def test_value_entity
+    
   end
 end
