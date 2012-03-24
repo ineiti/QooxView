@@ -111,11 +111,11 @@ class TC_View < Test::Unit::TestCase
 
   def test_view_entities
     assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
-      {:list_values=>["surf"], :list_type=>:drop}]]]]],
+      {:list_values=>[[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
     assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
-      {:list_values=>["admin","surf"], :list_type=>:drop}]]]]],
+      {:list_values=>[[0,"admin"],[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
   end
 end

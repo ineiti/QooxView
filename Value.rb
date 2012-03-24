@@ -83,7 +83,8 @@ class Value
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/
       fe_type = "list"
-      e_all = Entities.send( @entity_class ).search_all
+      eclass = Entities.send( @entity_class )
+      e_all = eclass.search_all
       values = e_all.select{|e|
         begin
           @condition.call(e) and e.respond_to? @show_method
@@ -91,7 +92,7 @@ class Value
         false
         end
       }.collect{|e|
-        e.send( @show_method )
+        [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
       }
       args.merge! :list_values => values
       dputs 3, "Args for entities is #{args}"
