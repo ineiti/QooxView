@@ -7,7 +7,8 @@ class TC_Entity < Test::Unit::TestCase
     @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
     :address => "cdlf 24", :credit => 10000 )
     Entities.Courses.create( :first_name => "base_1010", :start => "1.10.2010")
-    Entities.Courses.create( :first_name => "base_1011", :start => "1.11.2010")
+    @base_1011 = Entities.Courses.create( :first_name => "base_1011", :start => "1.11.2010",
+    :teacher => @admin )
     @dummies_one = Entities.Dummies.create( :first_name => "one", :phone => "111",
     :no_cache => "123" )
   end
@@ -61,12 +62,12 @@ class TC_Entity < Test::Unit::TestCase
     # Take out the date_stamps, as they change all the time...
     log_list = Entities.LogActions.log_list.each{|l| l.delete( :date_stamp )}
     assert_equal [
-    {:data_class_id=>0, :data_field=>:no_cache, :undo_function=>:undo_set_entry,
-      :data_value=>"123", :data_old=>"\"no_cache\"", :logaction_id=>0,
-      :data_class=>Dummy, :msg=>nil},
-    {:data_class_id=>0, :data_field=>:dummy_id, :undo_function=>:undo_set_entry,
-      :data_value=>0, :data_old=>"\"dummy_id\"", :logaction_id=>1, :data_class=>Dummy,
-      :msg=>nil},
+    {:logaction_id=>0, :data_field=>:dummy_id, :undo_function=>:undo_set_entry,
+      :data_value=>0, :data_old=>"\"dummy_id\"", :data_class=>Dummy,
+      :data_class_id=>0, :msg=>nil},
+    {:logaction_id=>1, :data_field=>:no_cache, :undo_function=>:undo_set_entry,
+      :data_value=>"123", :data_old=>"\"no_cache\"", 
+      :data_class=>Dummy, :data_class_id=>0, :msg=>nil},
     {:logaction_id=>2, :undo_function=>:undo_set_entry, :msg => nil,
       :data_field=>:credit, :data_value=>100, :data_old=>"10000", :data_class => Person,
       :data_class_id=>0 },
@@ -120,7 +121,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_getfields
-    assert_equal %w( course_id first_name start end street plz tel ).sort.to_s,
+    assert_equal %w( course_id first_name start end street plz teacher tel ).sort.to_s,
     Entities.Courses.get_field_names.sortk.to_s
   end
 
@@ -156,6 +157,11 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_value_entity
-    
+    assert_equal "super123", @base_1011.teacher.pass
+    @admin.pass = "super321"
+    assert_equal "super321", @base_1011.teacher.pass
+    @base_1011.teacher.pass = "super111" 
+    assert_equal "super111", @base_1011.teacher.pass
+    assert_equal "super111", @admin.pass
   end
 end

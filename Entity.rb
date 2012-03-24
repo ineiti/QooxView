@@ -13,6 +13,7 @@ require 'Storages/LDAP.rb'
 require 'Storages/SQLite.rb'
 
 
+
 class Array
   def sortk
     sort{|a,b| a.to_s <=> b.to_s }
@@ -312,7 +313,13 @@ class Entity
   end
 
   def respond_to?(cmd)
-    super
+    field = cmd.to_s
+    case field
+    when /=$/
+      return true
+    else
+    return ( data_get( field ) or super )
+    end
   end
 
   def to_hash

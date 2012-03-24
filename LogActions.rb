@@ -40,16 +40,7 @@ class LogActions < Entities
   # default filter just returns everything
   def log_list( filter = { :logactions_id => ".*" } )
     dputs 3, "Searching for #{filter.inspect}"
-    keys = filter.keys
-    key = keys.shift
-    res = search_by( key, filter[key] ).collect{|r| r.data}
-    # Refine the search
-    keys.each{|k|
-      res = res.select{|r|
-        dputs 5, "Searching results for #{[r, k, filter[k]].inspect}"
-        r.has_key? k and r[k].to_s =~ /#{filter[k].to_s}/i
-      }
-    }
+    res = filter_by( filter )
     res.sort!{|a,b| a[:logaction_id].to_i <=> b[:logaction_id].to_i}
     dputs 3, "And found #{res.inspect}"
     return res

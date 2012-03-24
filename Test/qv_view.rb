@@ -1,10 +1,17 @@
 require 'test/unit'
 
+
+
 class TC_View < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
-    @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123", :permissions => 'admin' )
-    @surf = Entities.Persons.create( :first_name => "surf", :pass => "surf", :permissions => 'internet' )
+    @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
+    :permissions => 'admin' )
+    @surf = Entities.Persons.create( :first_name => "surf", :pass => "surf",
+    :permissions => 'internet', :credit => 5000 )
+    @autre = Entities.Persons.create( :pass => "surf",
+    :permissions => 'internet', :credit => 5000 )
+    @base = Entities.Courses.create( :first_name => "base_10", :teacher => @surf )
     Session.new( @admin, '0.1' )
     Session.new( @surf, '0.2' )
   end
@@ -19,7 +26,7 @@ class TC_View < Test::Unit::TestCase
   def test_order
     reply = request( "View", 'list', [['0.1']] )
     dputs 0, reply['result'].inspect
-    assert_equal ["BView", "CView", "AView"], reply['result'][:views]
+    assert_equal ["BView", "CView", "CourseShow", "AView"], reply['result'][:views]
   end
 
   def test_update
@@ -80,15 +87,15 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_list_update
-    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf"]}], 
+    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf"]}],
       View.AView.layout_eval[1][0][1][10],
       View.AView.layout_eval.inspect
-    Entities.Persons.create( :first_name => "foo", :pass => "foo", 
-      :session_id => '0.3', :permission => 'internet' )
-    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf","foo"]}], 
+    Entities.Persons.create( :first_name => "foo", :pass => "foo",
+    :session_id => '0.3', :permission => 'internet' )
+    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf","foo"]}],
       View.AView.layout_eval[1][0][1][10]
   end
-  
+
   def test_filter_from_entity
     data = Hash[*%w( l_a 1 l_b 2 l_c 3 l_d 4 )]
     assert_equal Hash[*%w( l_b 2 )], View.AView.filter_from_entity( data )
@@ -97,8 +104,18 @@ class TC_View < Test::Unit::TestCase
     data.delete( 'l_b' )
     assert_equal Hash.new, View.AView.filter_from_entity( Hash.new )
   end
-  
+
   def test_view_subclass
     assert_equal 2, View.AView.test_sub
+  end
+
+  def test_view_entities
+    assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
+      {:list_values=>["surf"], :list_type=>:drop}]]]]],
+      View.CourseShow.layout_eval
+    @admin.credit = 2000
+    assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
+      {:list_values=>["admin","surf"], :list_type=>:drop}]]]]],
+      View.CourseShow.layout_eval
   end
 end

@@ -108,7 +108,7 @@ module StorageHandler
   end
 
   # Similar to find_by, but searches multiple instances that are similar to the
-  # value, returns only the indexes
+  # value, returns the instances
   def search_by( field, value )
     result = []
     field = field.to_sym
@@ -124,6 +124,21 @@ module StorageHandler
       end
     }
     return result
+  end
+  
+  # filter is a hash with field/value-pairs to be searched.
+  def filter_by( filter )
+    keys = filter.keys
+    key = keys.shift
+    res = search_by( key, filter[key] ).collect{|r| r.data}
+    # Refine the search
+    keys.each{|k|
+      res = res.select{|r|
+        dputs 5, "Searching results for #{[r, k, filter[k]].inspect}"
+        r.has_key? k and r[k].to_s =~ /#{filter[k].to_s}/i
+      }
+    }
+    res
   end
 
   def set_data( data )
