@@ -82,17 +82,17 @@ class TC_View < Test::Unit::TestCase
     ["list", :ro_list, :ro_list, {:ro=>true, :list_values=>[1,2,3]}],
     ["list", :ro_list2, :ro_list2, {:ro=>true}],
     ["fromto", :duration, :duration, {}],
-    ["list", :worker, :worker, {:list_values=>["admin","surf"]}]]]]],
+    ["list", :worker, :worker, {:list_values=>["admin","surf",nil]}]]]]],
      View.AView.layout_eval
   end
 
   def test_list_update
-    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf"]}],
+    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf",nil]}],
       View.AView.layout_eval[1][0][1][10],
       View.AView.layout_eval.inspect
     Entities.Persons.create( :first_name => "foo", :pass => "foo",
     :session_id => '0.3', :permission => 'internet' )
-    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf","foo"]}],
+    assert_equal ["list", :worker, :worker, {:list_values=>["admin","surf",nil,"foo"]}],
       View.AView.layout_eval[1][0][1][10]
   end
 
@@ -110,12 +110,18 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_view_entities
-    assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
-      {:list_values=>[[1,"surf"]], :list_type=>:drop}]]]]],
+    assert_equal ["group", [["fields", [["list", :teacher, :teacher,
+      {:list_values=>[["1","surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
-    assert_equal ["group", [["fields", [["list", :teacher, :teacher, 
-      {:list_values=>[[0,"admin"],[1,"surf"]], :list_type=>:drop}]]]]],
+    assert_equal ["group", [["fields", [["list", :teacher, :teacher,
+      {:list_values=>[["0","admin"],["1","surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
+  end
+  
+  def test_parse_reply
+    params = View.CourseShow.rpc_parse_reply( 0, 0, ["test", { "one" => 2,
+      "teacher" => @surf.id } ] )
+    assert_equal "surf", params[1][:teacher].first_name 
   end
 end

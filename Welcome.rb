@@ -7,7 +7,7 @@ class Welcome < View
       show_button :login
       
       gui_window :login_failed do
-        show_str :reason
+        show_html :reason
         show_button :try_again
       end
     end

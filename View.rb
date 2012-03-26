@@ -424,7 +424,8 @@ class View < RPCQooxdooService
   end
 
   # Make a flat array containing the elements of the layout
-  def layout_recurse( lay ) # :nodoc:
+  def layout_recurse( lay = @layout ) # :nodoc:
+    return [] if not lay
     ret = []
     lay.each{|l|
       if l.class == Array
@@ -529,5 +530,20 @@ class View < RPCQooxdooService
   def self.method_missing(m,*args)
     dputs 3, "Searching #{m} with #{args.inspect}"
     @@services_hash["View.#{m}"]
+  end
+
+  def rpc_parse_reply( method, session, params )
+    dputs 3, "Parsing #{params.inspect}"
+    layout_recurse.each{ |l|
+      if l.class == Value and l.dtype == "entity"
+        if params[1] and params[1].has_key? l.name.to_s
+          id_value = params[1][l.name.to_s]
+          ent = Entities.send( l.entity_class )
+          params[1][l.name.to_sym] = ent.find_by( ent.data_field_id, id_value )
+          dputs 3, "Converted #{id_value} to #{params[1][l.name.to_sym].to_s}"
+        end
+      end
+    }
+    return params
   end
 end

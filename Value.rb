@@ -20,7 +20,7 @@ where string_on_screen is taken of an eventual translation-file
 =end
 
 class Value
-  attr_accessor :dtype, :name, :st, :args, :list
+  attr_accessor :dtype, :name, :st, :args, :list, :entity_class
   def initialize( cmds, arguments, dt = nil )
     dputs 3, "Added new: #{cmds.inspect}, #{arguments.inspect}"
 
@@ -92,10 +92,10 @@ class Value
         false
         end
       }.collect{|e|
-        [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
+        [ e.send( eclass.data_field_id ).to_s, e.send( @show_method ) ]
       }
       args.merge! :list_values => values
-      dputs 3, "Args for entities is #{args}"
+      dputs 3, "Args for entities is #{args.inspect}"
     end
     [ fe_type, fe_name, fe_name, args ]
   end

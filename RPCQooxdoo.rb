@@ -108,7 +108,8 @@ class RPCQooxdooHandler
       if s.respond_to?( method )
         dputs 3, "Calling #{method} with #{params.inspect}"
         begin
-          return self.answer( s.send( method, session, *params[0] ), id )
+          parsed = s.rpc_parse_reply( method, session, params[0] )
+          return self.answer( s.send( method, session, *parsed ), id )
         rescue Exception => e  
           dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
           dputs 0, "#{e.inspect}"

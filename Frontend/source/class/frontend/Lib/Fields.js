@@ -88,7 +88,9 @@ function setValueListCommon(values, list){
                 item = list.getSelectables()[list.valueIds.indexOf(val)];
             }
             else {
-                item = list.findItem(val);
+            	if ( list.findItem ){
+                	item = list.findItem(val);
+               }
             }
         }
         if (item) {
@@ -125,9 +127,7 @@ function setValueDrop(val){
         }
     }
     else {
-        for (var v = 0; v < val.length; v++) {
-            this.add(new qx.ui.form.ListItem("" + val[v]));
-        }
+       setValueListCommon( val, this );
     }
 };
 
