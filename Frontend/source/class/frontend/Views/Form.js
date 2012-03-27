@@ -80,6 +80,7 @@ qx.Class.define("frontend.Views.Form", {
             this.effect = new qx.fx.effect.core.Fade(this.fields.getContainerElement().getDomElement());
 			this.effect.set( { from: 1, to: 0.5 });
             this.effect.start();
+            this.fields.windows_fade_to( 0.5 );
 		},
         
         // Adds all data in the arguments and calls the server

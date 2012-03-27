@@ -54,7 +54,7 @@ class Value
     when "entity"
       #dputs 0, "Not supported yet!"
       #exit
-      @entity_class = cmds.shift
+      @entity_class = cmds.shift.pluralize.capitalize
       @args.merge! :list_type => arguments.shift
       @show_method, @condition = arguments
     when "array"

@@ -723,6 +723,18 @@ qx.Class.define("frontend.Lib.Fields", {
             this.first_button = win.first_button;
         },
         
+        windows_fade_to: function( target ){
+        	for ( var w in this.windows ){
+        		dbg(2, "fading windows " + w + " to " + target );
+            	var effect = new qx.fx.effect.core.Fade(this.windows[w].getContainerElement().getDomElement());
+            	effect.set({
+               		from: 1.5 - target,
+               		to: target
+            	});
+            	effect.start();
+            }
+        },
+        
         window_hide: function(name){
             dbg(2, "Hiding window " + name + " of " + this.windows.length);
             if (name == "*" || !name) {

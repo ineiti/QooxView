@@ -180,6 +180,7 @@ qx.Class.define("frontend.Views.Layout", {
                     aform.effect.cancel();
                 }
                 effect.start();
+                aform.fields.windows_fade_to(1);
             }
             if (this.tabs && enable) {
                 this.tabs.setEnabled(true);

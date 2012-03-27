@@ -96,6 +96,7 @@ require 'json'
 require 'DPuts'
 
 
+
 include DPuts
 extend DPuts
 if not Module.constants.index "DEBUG_LVL"
@@ -118,6 +119,21 @@ class Hash
 end
 
 
+
+class String
+  def pluralize
+    case self
+    when /us$/
+      return self.sub(/us$/, 'i' )
+    when /s$/
+      return self
+    when /man$/
+      return self.sub(/an$/, 'men' )
+    else
+    return "#{self}s"
+    end
+  end
+end
 
 $config = {} if not defined? $config
 if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
