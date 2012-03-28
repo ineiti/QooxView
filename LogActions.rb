@@ -30,7 +30,7 @@ class LogActions < Entities
   def log_action( data_class, data_id, data, msg = nil, undo_function = nil, data_old = nil )
     dputs 3, "Creating log-entry: #{[data, undo_function, data_old].inspect}"
     create( { :data_field => data.keys[0], :data_value => data[data.keys[0]], 
-      :data_class => data_class, :data_class_id => data_id, 
+      :data_class => data_class.to_s, :data_class_id => data_id, 
       :msg => msg,
       :undo_function => undo_function, :data_old => data_old.to_json,
       :date_stamp => Time.now.strftime("%Y:%m:%d %H:%M:%S")} )
