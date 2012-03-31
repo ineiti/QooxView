@@ -166,6 +166,12 @@ qx.Class.define("frontend.Views.Layout", {
                     		}
                     	}
                     	break;
+                    case "hide":
+                      this.setVisibility( res.data, 'excluded' );
+                      break;
+                    case "unhide":
+                      this.setVisibility( res.data, 'visible' );
+                      break;
                 }
             }
             
@@ -190,6 +196,15 @@ qx.Class.define("frontend.Views.Layout", {
                 this.field.fields.updating = false;
             }
             dbg(5, "finished dispatcher");
+        },
+        
+        setVisibility: function( el, vi ){
+        	aform = this.getActiveForm();
+            if ( aform.fields.fields[el] ){
+                aform.fields.fields[ el ].setVisibility(vi);
+            } else {
+               	dbg( 3, "Didn't find field " + el );
+            }
         },
         
         checkTimer: function(){

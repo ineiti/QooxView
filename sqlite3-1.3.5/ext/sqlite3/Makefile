@@ -4,7 +4,7 @@ SHELL = /bin/sh
 #### Start of system configuration section. ####
 
 srcdir = /var/www/QooxView/sqlite3-1.3.5/ext/sqlite3
-topdir = /usr/lib/ruby/1.8/i486-linux
+topdir = /usr/lib/ruby/1.8/arm-linux-eabi
 hdrdir = $(topdir)
 VPATH = $(srcdir):$(topdir):$(hdrdir)
 exec_prefix = $(prefix)
@@ -45,11 +45,11 @@ LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static
 
 RUBY_EXTCONF_H = 
 CFLAGS   =  -fPIC -fno-strict-aliasing -g -g -O2  -fPIC $(cflags) 
-INCFLAGS = -I. -I. -I/usr/lib/ruby/1.8/i486-linux -I/var/www/QooxView/sqlite3-1.3.5/ext/sqlite3
+INCFLAGS = -I. -I. -I/usr/lib/ruby/1.8/arm-linux-eabi -I/var/www/QooxView/sqlite3-1.3.5/ext/sqlite3
 DEFS     = -D_FILE_OFFSET_BITS=64
 CPPFLAGS = -DHAVE_SQLITE3_INITIALIZE -DHAVE_SQLITE3_BACKUP_INIT -DHAVE_SQLITE3_COLUMN_DATABASE_NAME -DHAVE_SQLITE3_ENABLE_LOAD_EXTENSION -DHAVE_SQLITE3_LOAD_EXTENSION  -D_FILE_OFFSET_BITS=64 
 CXXFLAGS = $(CFLAGS) 
-ldflags  = -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic
+ldflags  = -L.  -rdynamic -Wl,-export-dynamic
 dldflags = 
 archflag = 
 DLDFLAGS = $(ldflags) $(dldflags) $(archflag)
@@ -59,8 +59,8 @@ EXEEXT =
 
 RUBY_INSTALL_NAME = ruby1.8
 RUBY_SO_NAME = ruby1.8
-arch = i486-linux
-sitearch = i486-linux
+arch = arm-linux-eabi
+sitearch = arm-linux-eabi
 ruby_version = 1.8
 ruby = /usr/bin/ruby1.8
 RUBY = $(ruby)
@@ -87,8 +87,8 @@ extout_prefix =
 target_prefix = /sqlite3
 LOCAL_LIBS = 
 LIBS = $(LIBRUBYARG_SHARED) -lsqlite3  -lpthread -lrt -ldl -lcrypt -lm   -lc
-SRCS = statement.c backup.c database.c sqlite3.c exception.c
-OBJS = statement.o backup.o database.o sqlite3.o exception.o
+SRCS = statement.c sqlite3.c exception.c backup.c database.c
+OBJS = statement.o sqlite3.o exception.o backup.o database.o
 TARGET = sqlite3_native
 DLLIB = $(TARGET).so
 EXTSTATIC = 

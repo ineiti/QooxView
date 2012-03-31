@@ -365,21 +365,22 @@ class View < RPCQooxdooService
     #    reply( 'empty', '*' ) +
     #    reply( 'update', layout_recurse( @layout ))
     ret = []
-    if @update
-      update = rpc_update( session )
-      dputs 3, "updating #{update.inspect}"
-    ret += update
-    end
     if @update_layout
+      dputs 3, "updating layout"
       ret += update_layout
     end
     if @auto_update > 0
-      dputs 4, "auto-updating"
+      dputs 3, "auto-updating"
       ret += reply( "auto_update", @auto_update * ( @auto_update_send_values ? -1 : 1 ) )
     end
     if @debug
       dputs 4, "debugging"
       ret += reply( "debug", 1 )
+    end
+    if @update
+      update = rpc_update( session )
+      dputs 3, "updating #{update.inspect}"
+    ret += update
     end
     dputs 3, "showing: #{ret.inspect}"
     ret
