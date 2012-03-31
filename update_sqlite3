@@ -1,0 +1,7 @@
+#!/bin/sh
+cd $( dirname $0 )/sqlite3-1.3.5
+rm ext/sqlite3/*.o
+ruby setup.rb config
+ruby setup.rb setup
+ruby setup.rb install
+
