@@ -724,6 +724,7 @@ qx.Class.define("frontend.Lib.Fields", {
         },
         
         windows_fade_to: function( target ){
+        	return;
         	for ( var w in this.windows ){
         		dbg(2, "fading windows " + w + " to " + target );
             	var effect = new qx.fx.effect.core.Fade(this.windows[w].getContainerElement().getDomElement());
