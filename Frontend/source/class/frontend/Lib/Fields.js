@@ -530,6 +530,7 @@ qx.Class.define("frontend.Lib.Fields", {
             if ( field_element && ! params.hidden ) {
                 dbg(5, "Adding: " + type + ":" + name + ":" + label + " to " + layout.getLayout());
                 this.fields[name] = field_element;
+                this.fields[name].field_name = name; 
                 field_element.setTabIndex(this.index++);
                 if (!this.first_field) {
                     this.first_field = field_element;
