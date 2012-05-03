@@ -53,17 +53,25 @@ end
 
 
 class View < RPCQooxdooService
-  attr_reader :visible, :order, :name
+  attr_reader :visible, :order, :name, :is_group, :name_group
 
   @@list = []
+  @@groups = []
   def initialize
     @visible = true
     @order = 50
     @name = self.class.name
     @debug = false
+    @is_group = false
+    @name_group = nil
 
     if @name != "View"
       @@list.push self
+      if @name =~ /.*Group$/
+        @name_group = @name.sub(/Group$/, '')
+      @is_group = true
+      @@groups.push @name_group
+      end
       dputs 4, "Initializing #{self.class.name}"
       dputs 5, "Total list of view-classes: #{@@list.join('::')}"
       @data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
@@ -92,7 +100,18 @@ class View < RPCQooxdooService
       end
 
       # Fetch the layout of the view
-      layout
+      if @is_group
+        gui_hbox do
+          gui_vbox :nogroup do
+            layout
+          end
+          gui_vbox do
+            show_group @name_group.to_sym
+          end
+        end
+      else
+        layout
+      end
       # Clean up eventual left-overs from a simple (or very complicated) layout
       while @layout.size > 1
         dputs 5, "Cleaning up"
@@ -312,9 +331,11 @@ class View < RPCQooxdooService
     views = []
     dputs 5, @@list.inspect
     @@list.each{|l|
-      dputs 5, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
+      dputs 2, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
       if l.visible and session.can_view( l.class.name )
-      views.push( l )
+        if l.is_group or not @@groups.index( l.name.sub( /([A-Z][a-z]*).*/, '\1' ))
+        views.push( l )
+        end
       end
     }
     self.list_views( views )
@@ -547,5 +568,14 @@ class View < RPCQooxdooService
       end
     }
     return params
+  end
+
+  def self.get_group_members( g )
+    dputs 2, "Getting group members of #{g} with #{@@list.inspect}"
+    @@list.select{|l|
+      l.name =~ /^#{g}/
+    }.collect{|l|
+      l.name
+    }
   end
 end

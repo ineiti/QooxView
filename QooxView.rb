@@ -172,7 +172,7 @@ module QooxView
       when "--i18n"
         %x[ mkdir -p po; rm -f po/#{$name}.pot ]
         cmd = "rgettext -r #{File.dirname(__FILE__) + '/QooxParser.rb'} -o po/#{$name}.pot" +
-        " #{dir_entities}/* #{dir_views}/*"
+        " #{dir_entities}/*.rb #{dir_views}/*.rb #{dir_views}/*/*.rb"
         %x[ #{cmd} ]
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
@@ -189,7 +189,7 @@ module QooxView
         dputs 2, "Making mo-files"
         Dir.glob( "po/#{$name}-*.po").each{|po|
           lang = po.match(/.*#{$name}-(.*).po/)[1]
-          dputs 2, "Doint po-file #{po} for language #{lang}" 
+          dputs 2, "Doint po-file #{po} for language #{lang}"
           path = "po/#{lang}/LC_MESSAGES"
           %x[ mkdir -p #{path}]
           %x[ rmsgfmt #{po} -o #{path}/#{$name}.mo]
@@ -205,9 +205,28 @@ module QooxView
     dputs 0, "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}"
     [ dir_entities, dir_views ].each{|d|
       if d
-        Dir[d+"/*.rb"].each{|f| require(f)}
+        Dir[d+"/**/*.rb"].each{|f| require(f)}
       end
     }
+
+=begin    
+    # Sub-directories should hold Group-files, which will have to be included first
+    Dir[dir_views + "/*/"].each{|d|
+      dputs 3, "Found Views-directory #{d}"
+      group = d + "Group.rb"
+      if File.exists?( group )
+        dputs 3, "Found #{group}"
+        require( group )
+        to_req = Dir[d + "*.rb"]
+        to_req.delete( group )
+        to_req.each{|dr|
+          dputs 3, "Including #{dr}"
+          require( dr )
+        }
+        View.group = nil
+      end
+    }
+=end
 
     if not Permission.list.index( "default" )
       Permission.add( 'default', '.*' )

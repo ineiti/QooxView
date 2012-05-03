@@ -35,6 +35,12 @@ module QooxParser
           po.add_comment( "Comes from file #{file} and line is #{l}" )
           ary << po
           end
+        elsif l =~ /<\s*View\s*$/
+          po = PoMessage.new(:normal)
+          po.msgid = l.sub( /^\s*class\s*/, '' ).sub( /\s*<.*$/, '' ).chop
+          po.sources = "#{file}:#{line}"
+          po.add_comment( "Comes from file #{file} and line is #{l}" )
+          ary << po            
         end
       }
     }
