@@ -87,7 +87,7 @@ require 'yaml'
 # I think the rubygems way is just really not useful, sorry
 %w( parseconfig-0.5.2 json-1.4.6 net-ldap-0.1.1 activerecord-3.1.1
 activesupport-3.1.1 i18n-0.6.0 activemodel-3.1.1 arel-2.2.1
-multi_json-1.0.3 sqlite3-1.3.5 rubyzip-0.9.4 docsplit-0.6.0-1 
+multi_json-1.0.3 sqlite3-1.3.5 rubyzip-0.9.4 docsplit-0.6.0-1
 gettext-2.2.0 locale-2.0.5 ).each{|lib|
   $: << File.expand_path(File.dirname(__FILE__)+"/#{lib}/lib")
 }
@@ -96,6 +96,7 @@ require 'active_record'
 require 'json'
 require 'DPuts'
 require 'gettext'
+
 
 
 include DPuts
@@ -141,6 +142,7 @@ if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
   File.open( CONFIG_FILE ) { |f| $config = YAML::load( f ).to_sym }
 end
 dputs 1, "config is #{$config.inspect}"
+$name = $0.match( /.*\/(.*).rb/ )[1]
 
 require 'RPCQooxdoo'
 require 'Value'
@@ -150,9 +152,54 @@ require 'Permission'
 require 'Session'
 require 'LogActions'
 require 'Welcome'
+require 'getoptlong'
 
 module QooxView
   def self.init( dir_entities = nil, dir_views = nil )
+    opts = GetoptLong.new(
+    [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
+    [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
+    [ "--po", "-p", GetoptLong::NO_ARGUMENT ]
+    )
+    opts.each{|o,a|
+      case o
+      when "--help"
+        puts "Usage: #{$0} [-t] [--help]"
+        puts "\t-t [lang]\tUpdate translations - takes an optional language-argument"
+        puts "\t-p\tCreate .mo-files"
+        puts "\t--help\tShow this help"
+        exit
+      when "--i18n"
+        %x[ mkdir -p po; rm -f po/#{$name}.pot ]
+        cmd = "rgettext -r #{File.dirname(__FILE__) + '/QooxParser.rb'} -o po/#{$name}.pot" +
+        " #{dir_entities}/* #{dir_views}/*"
+        %x[ #{cmd} ]
+        if a.length > 0
+          pofile = "po/#{$name}-#{a}.po"
+          potfile = "po/#{$name}.pot"
+          if File.exists? pofile
+            %x[ mv #{pofile} #{pofile}.tmp ]
+            %x[ msgmerge #{pofile}.old #{potfile} -o #{pofile} ]
+          else
+            %x[ cp #{potfile} #{pofile} ]
+          end
+        end
+        exit
+      when "--po"
+        dputs 2, "Making mo-files"
+        Dir.glob( "po/#{$name}-*.po").each{|po|
+          lang = po.match(/.*#{$name}-(.*).po/)[1]
+          dputs 2, "Doint po-file #{po} for language #{lang}" 
+          path = "po/#{lang}/LC_MESSAGES"
+          %x[ mkdir -p #{path}]
+          %x[ rmsgfmt #{po} -o #{path}/#{$name}.mo]
+        }
+      end
+    }
+
+    GetText.bindtextdomain( $name, :path => "po" )
+    GetText.locale = "fr"
+
     # Include all modules in the dir_entities and dir_views
     # directories
     dputs 0, "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}"
@@ -193,9 +240,7 @@ module QooxView
     log_msg( "main", "Starting up" )
     RPCQooxdooHandler.webrick( port, File.dirname( __FILE__ ) + "/Frontend/#{dir_html}/" )
   end
-  
+
   def self.bindtext( dn, path )
-    GetText.bindtextdomain( dn, :path => path )
-    GetText.locale = "fr"
   end
 end
