@@ -53,24 +53,24 @@ end
 
 
 class View < RPCQooxdooService
-  attr_reader :visible, :order, :name, :is_group, :name_group
+  attr_reader :visible, :order, :name, :is_tabs, :name_tab
 
   @@list = []
-  @@groups = []
+  @@tabs = []
   def initialize
     @visible = true
     @order = 50
     @name = self.class.name
     @debug = false
-    @is_group = false
-    @name_group = nil
+    @is_tabs = false
+    @name_tab = nil
 
     if @name != "View"
       @@list.push self
-      if @name =~ /.*Group$/
-        @name_group = @name.sub(/Group$/, '')
-      @is_group = true
-      @@groups.push @name_group
+      if @name =~ /.*Tabs$/
+        @name_tab = @name.sub(/Tabs$/, '')
+      @is_tabs = true
+      @@tabs.push @name_tab
       end
       dputs 4, "Initializing #{self.class.name}"
       dputs 5, "Total list of view-classes: #{@@list.join('::')}"
@@ -100,14 +100,12 @@ class View < RPCQooxdooService
       end
 
       # Fetch the layout of the view
-      if @is_group
+      if @is_tabs
         gui_hbox do
           gui_vbox :nogroup do
             layout
           end
-          gui_vbox do
-            show_group @name_group.to_sym
-          end
+          gui_tabs @name
         end
       else
         layout
@@ -115,7 +113,7 @@ class View < RPCQooxdooService
       # Clean up eventual left-overs from a simple (or very complicated) layout
       while @layout.size > 1
         dputs 5, "Cleaning up"
-        gui_container_end
+        do_container_end
       end
       dputs 5, "Layout is #{@layout.inspect}"
 
@@ -138,7 +136,7 @@ class View < RPCQooxdooService
   end
 
   # Helper for the containers
-  def gui_container_start( tags )
+  def do_container_start( tags )
     [*tags].each{ |t|
       @layout.push []
       @actual.push t
@@ -146,7 +144,7 @@ class View < RPCQooxdooService
   end
 
   # Finish a GUI-container
-  def gui_container_end
+  def do_container_end
     @layout[-2].push [ @actual.pop, @layout.pop ]
   end
 
@@ -155,58 +153,69 @@ class View < RPCQooxdooService
   # - hbox - starts a horizontal box
   # - fields - starts a group of elements like buttons, labels and input-boxes
   # - group - draws a gray line around the container
-  def gui_container( tags, b )
+  # - tabs - start a tabs-in-tab
+  def do_container( tags, b )
     # The actual depth has to be kept, because the "b.call" might add additional depths,
     # for example a "fields, group" in case of an element.
     depth = @actual.length
-    gui_container_start( tags )
+    do_container_start( tags )
     b.call
     # Now we can undo all elements, even those perhaps added by "b.call" - close nicely
     dputs 4, "Undoing #{@actual.length - depth} levels"
-    ( @actual.length - depth ).times{ gui_container_end }
+    ( @actual.length - depth ).times{ do_container_end }
   end
 
-  def gui_box( btype, arg, b )
+  def do_box( btype, arg, b )
     if @actual[-1] == "fields"
       dputs 0, "Can't put a VBox or a HBox in a field!"
       exit
     end
-    gui_container( arg == :nogroup ? [btype] : ['group', btype], b )
+    do_container( arg == :nogroup ? [btype] : ['group', btype], b )
   end
 
   # A vertical box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_vbox( arg = nil, &b )
-    gui_box( 'vbox', arg, b )
+    do_box( 'vbox', arg, b )
   end
 
   # A horizontal box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_hbox( arg = nil, &b )
-    gui_box( 'hbox', arg, b )
+    do_box( 'hbox', arg, b )
+  end
+
+  def gui_grow( &b )
+    do_container( 'grow', b )
   end
 
   def gui_window( arg = nil, &b )
-    gui_container( ["window:#{arg.to_s}"], b )
+    do_container( ["window:#{arg.to_s}"], b )
   end
 
   # Contains fields of same kind
   def gui_fields( arg = nil, &b )
     if arg == :noflex
-      gui_container( 'fields_noflex', b )
+      do_container( 'fields_noflex', b )
     else
-      gui_container( 'fields', b )
+      do_container( 'fields', b )
     end
   end
 
   # Draws a gray border around
   def gui_group( &b )
-    gui_container( 'group', b )
+    do_container( 'group', b )
+  end
+
+  # Presents a tabs-in-tab
+  def gui_tabs( parent )
+    do_container_start( [ 'tabs', parent ] )
+    do_container_end
   end
 
   def show_in_field( a ) # :nodoc:
     if not @actual.last =~ /^fields/
-      gui_container_start( %w( group fields ) )
+      do_container_start( %w( group fields ) )
     end
     dputs 5, "we'll show: #{a.inspect}"
     [a].flatten.each{ |v|
@@ -261,15 +270,15 @@ class View < RPCQooxdooService
   # Shows a button, takes care about placing it correctly. Takes also
   # multiple buttons as arguments
   def show_button( *buttons )
-    gui_container_end if @actual.last == "fields"
-    gui_container( buttons.length > 1 ? "hbox" : "vbox", proc {
+    do_container_end if @actual.last == "fields"
+    do_container( buttons.length > 1 ? "hbox" : "vbox", proc {
       buttons.each{|b|
 #        @layout.last.push [ :button, b, b, nil ]
          @layout.last.push Value.simple( :button, b )
       }
     }
     )
-    gui_container_end if @actual.last == "group"
+    do_container_end if @actual.last == "group"
   end
 
   # Adds a new, general item
@@ -289,9 +298,9 @@ class View < RPCQooxdooService
 
     when 'html'
       # HTML-fields aren't under a "field", but a "group" is enough
-      gui_container_start "group"
+      do_container_start "group"
       @layout.last.push value
-      gui_container_end
+      do_container_end
 
     else
     # Simple types that pass directly
@@ -322,7 +331,7 @@ class View < RPCQooxdooService
     View.list( session )
   end
 
-  def self.list( session ) # :nodoc:
+  def self.list( session, tabs = nil ) # :nodoc:
     if not session
       dputs 2, "No session given, returning empty"
       return { :views => [] }
@@ -331,9 +340,17 @@ class View < RPCQooxdooService
     views = []
     dputs 5, @@list.inspect
     @@list.each{|l|
+      tab_name = l.name.sub( /([A-Z][a-z]*).*/, '\1' )
+      is_tabs_or_tab = @@tabs.index( tab_name )
       dputs 2, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
+      dputs 2, "tabs: #{tabs.inspect} - tab_name: #{tab_name}"
       if l.visible and session.can_view( l.class.name )
-        if l.is_group or not @@groups.index( l.name.sub( /([A-Z][a-z]*).*/, '\1' ))
+        # Either we ask specifically for all sub-tabs, but then we don't show the main-tab
+        # or we don't ask for tabs and
+        #  are the main-tab or
+        #  are not tabs or tab at all
+        if ( tab_name == tabs and not l.is_tabs ) or
+        ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) )
         views.push( l )
         end
       end
@@ -365,6 +382,11 @@ class View < RPCQooxdooService
         :data_class => @data_class.class.to_s,
         :view_class => self.class.to_s } ) +
     rpc_update_view( session )
+  end
+
+  def rpc_show_tabs( session )
+    dputs 3, "Showing tabs for @name"
+    reply( 'list', View.list( session, @name_tab ) )
   end
 
   def update_layout
@@ -570,11 +592,12 @@ class View < RPCQooxdooService
     return params
   end
 
-  def self.get_group_members( g )
-    dputs 2, "Getting group members of #{g} with #{@@list.inspect}"
+  def get_tab_members
+    dputs 2, "Getting tab members of #{@name} with #{@@list.inspect}"
     @@list.select{|l|
-      l.name =~ /^#{g}/
+      l.name =~ /^#{@name}/
     }.collect{|l|
+      dputs 2, "Collected " + l.name
       l.name
     }
   end

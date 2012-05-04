@@ -17,16 +17,14 @@ qx.Class.define("frontend.Views.Form", {
      *
      */
     construct: function(cback, layout, dataClass, viewClass){
-        this.base(arguments, new qx.ui.layout.HBox(), {
-            flex: 1
-        });
+        this.base(arguments, new qx.ui.layout.HBox());
         this.dataClass = dataClass;
         this.viewClass = viewClass;
         this.callback = cback;
         dbg(3, "cback is: " + print_a(cback));
         this.add(this.fields = new frontend.Lib.Fields({
             callback: [this, this.changeId]
-        }, layout));
+        }, layout), {width: "100%"} );
     },
     
     members: {

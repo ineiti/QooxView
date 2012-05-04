@@ -100,7 +100,7 @@ function setValueListCommon(values, list){
         else 
             if (val != "") {
                 dbg(5, "Adding new item " + val)
-                var item = new qx.ui.form.ListItem(val);
+                var item = new qx.ui.form.ListItem("" + val);
                 list.add(item);
                 if (list.vaueIds && list.indexOf(item) != list.valueIds.length - 1) {
                     alert("Different number of items in list and valueIds!");
@@ -421,6 +421,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     field_element = new qx.ui.form.Button(label);
                     field_element.getData = function(){
                     };
+                    field_element.setAllowGrowY( false );
                     show_label = false;
                     if (!this.first_button || params.def) {
                         this.first_button = field_element;
@@ -560,7 +561,7 @@ qx.Class.define("frontend.Lib.Fields", {
                 }
                 else {
                     dbg(5, "Adding without VBox: " + field_element + " to " + layout.getLayout().toString());
-                    layout.add(field_element);
+                    layout.add(field_element, {flex: 1});
                 }
                 // Add a handler for automatically reporting changing values
                 if (listener/* && this.rpc */ && this.callback && do_callback) {
@@ -607,11 +608,15 @@ qx.Class.define("frontend.Lib.Fields", {
         
         // Creates the view for the layout-array provided. The
         // array consists of
-        // strings readable by the Lib.Fields-class, plus three
+        // strings readable by the Lib.Fields-class, plus these
         // extensions:
         // - vbox - creates a vertical box
         // - hbox - creates a horizontal box
-        // - fields - prepares for a common block
+        // - fields_layout - prepares for a common block
+        // - fields_noflex - prepares for a common block
+        // - group - a group-box
+        // - window - a popup-window, hidden by default
+        // - tab - a tab-in-tab presentation
         //
         // The format is
         // [ 'extension', [ fields-string, [ 'extension', [
@@ -632,7 +637,9 @@ qx.Class.define("frontend.Lib.Fields", {
                         break;
                     case "hbox":
                         dbg(5, "Adding a hbox to " + lyt);
-                        lyt.add(this.calcView(view_str[1], new qx.ui.container.Composite(new qx.ui.layout.HBox(10))));
+                        var hbox = new qx.ui.layout.HBox(10);
+                        var container = new qx.ui.container.Composite( hbox );
+                        lyt.add(this.calcView(view_str[1], container), {flex:1});
                         break;
                     case "fields_layout":
                         dbg(5, "Adding a fields_layout to " + lyt + " - " + print_a(view_str[1]));
@@ -680,7 +687,19 @@ qx.Class.define("frontend.Lib.Fields", {
                         this.first_button = old_button;
                         this.first_field = old_field;
                         this.windows[args[1]] = win;
-                        break
+                        break;
+                    case "tabs":
+                        var tabsName = view_str[1][0][0];
+                        dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
+                        var newLayout = new frontend.Views.Layout;
+                        newLayout.align_tabs = "top";
+                        var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
+                        container.add( newLayout, {width: "100%", height: "100%"} );
+                        newLayout.resizeTab();
+                        lyt.add( container, {flex: 5} );
+
+                        rpc.callRPC("View." + tabsName, "show_tabs", newLayout, newLayout.dispatch)
+                        break;
                 }
             }
             else {

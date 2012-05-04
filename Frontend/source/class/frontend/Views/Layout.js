@@ -17,7 +17,8 @@ qx.Class.define("frontend.Views.Layout", {
      * Constructor of Views.Chooser Takes:
      *
      */
-    construct: function(){
+    construct: function( ){
+  		this.align_tabs = "left"
         this.base(arguments);
         this.setLayout(this.layout = new qx.ui.layout.Canvas());
         this.timer = qx.util.TimerManager.getInstance();
@@ -27,7 +28,7 @@ qx.Class.define("frontend.Views.Layout", {
         this.root = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
         this.root.setPadding(10);
         
-        this.add(this.root);
+        this.add(this.root, {width: "100%", height: "100%"});
         
         this.addListener("resize", function(e){
             root.fireDataEvent("resize", new qx.event.type.Data());
@@ -47,6 +48,7 @@ qx.Class.define("frontend.Views.Layout", {
         timer: null,
         effect: null,
         timerUpdate: null,
+        align_tabs: null,
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
@@ -243,7 +245,13 @@ qx.Class.define("frontend.Views.Layout", {
             // dbg(5, "cback in showView is " + print_a(cback))
             if (!container.hasChildren()) {
                 dbg(4, "Adding container " + this.viewClass);
-                container.add(this.field = new frontend.Views.Form(cback, this.layoutView, this.dataClass, this.viewClass));
+                this.field = new frontend.Views.Form(cback, this.layoutView, this.dataClass, this.viewClass);
+                if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
+                	// Sub-tabbed tabs get all the width
+                  container.add( this.field, {width: "100%", height: "100%"} );
+                } else {
+                  container.add( this.field );
+                }
                 this.field.fields.focus_if_ok( this.field.fields.first_field);
             }
             else {
@@ -262,7 +270,7 @@ qx.Class.define("frontend.Views.Layout", {
             
             this.root.removeAll();
             
-            this.tabs = new qx.ui.tabview.TabView("left").set("Enabled", false);
+            this.tabs = new qx.ui.tabview.TabView(this.align_tabs).set("Enabled", false);
             // alert( "Enabled is false");
             
             this.views = [];

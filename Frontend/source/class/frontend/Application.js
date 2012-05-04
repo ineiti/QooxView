@@ -35,7 +35,9 @@ qx.Class.define("frontend.Application", {
             root = this.getRoot();
             root.add(this.layout = new frontend.Views.Layout(), {
                 left: "50%",
-                top: "25%"
+                top: "25%",
+                width: "100%",
+                height: "100%"
             });
 			if (false) {
 				this.layout.dispatch([{
