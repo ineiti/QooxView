@@ -49,6 +49,7 @@ qx.Class.define("frontend.Views.Layout", {
         effect: null,
         timerUpdate: null,
         align_tabs: null,
+        tabs_field: null,
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
@@ -174,6 +175,10 @@ qx.Class.define("frontend.Views.Layout", {
                     case "unhide":
                       this.setVisibility( res.data, 'visible' );
                       break;
+                    case "pass_tabs":
+                      aform.fields.layout.getActiveForm().callBackend( res.data[0],
+                        res.data[1], res.data[2]);
+                      break;
                 }
             }
             
@@ -247,10 +252,16 @@ qx.Class.define("frontend.Views.Layout", {
                 dbg(4, "Adding container " + this.viewClass);
                 this.field = new frontend.Views.Form(cback, this.layoutView, this.dataClass, this.viewClass);
                 if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
-                	// Sub-tabbed tabs get all the width
+                  // Sub-tabbed tabs get all the width
                   container.add( this.field, {width: "100%", height: "100%"} );
+                  // Allow access to the main-tab
+                  this.field.fields.layout.tabsField = this.field.fields;
                 } else {
                   container.add( this.field );
+                  if ( this.tabsField ){
+                  	dbg( 3, "We're in a sub-layout, adding tabsField" );
+                  	this.field.fields.tabsField = this.tabsField;
+                  }
                 }
                 this.field.fields.focus_if_ok( this.field.fields.first_field);
             }

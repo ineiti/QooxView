@@ -251,6 +251,8 @@ qx.Class.define("frontend.Lib.Fields", {
         index: null,
         timer: null,
         delayTimer: null,
+        layout: null,
+        tabsField: null,
         
         // Returns a map of all data in the Field
         getFieldsData: function(){
@@ -274,6 +276,12 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
             }
             dbg(4, "getFieldsData: " + print_a(result));
+            if ( this.tabsField ){
+            	var otherData = this.tabsField.getFieldsData();
+            	for ( var res in otherData ){
+            		result[res] = otherData[res];
+            	}
+            }
             return result;
         },
         
@@ -691,14 +699,14 @@ qx.Class.define("frontend.Lib.Fields", {
                     case "tabs":
                         var tabsName = view_str[1][0][0];
                         dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
-                        var newLayout = new frontend.Views.Layout;
-                        newLayout.align_tabs = "top";
+                        this.layout = new frontend.Views.Layout;
+                        this.layout.align_tabs = "top";
                         var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-                        container.add( newLayout, {width: "100%", height: "100%"} );
-                        newLayout.resizeTab();
+                        container.add( this.layout, {width: "100%", height: "100%"} );
+                        //this.layout.resizeTab();
                         lyt.add( container, {flex: 5} );
 
-                        rpc.callRPC("View." + tabsName, "show_tabs", newLayout, newLayout.dispatch)
+                        rpc.callRPC("View." + tabsName, "show_tabs", this.layout, this.layout.dispatch)
                         break;
                 }
             }
