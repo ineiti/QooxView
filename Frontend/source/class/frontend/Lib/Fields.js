@@ -215,7 +215,7 @@ qx.Class.define("frontend.Lib.Fields", {
      *  value for that field.
      *
      */
-    construct: function(params, fields){
+    construct: function(params, fields, pLayout){
         this.base(arguments, this.layout = new qx.ui.layout.VBox(1));
         var ps = ["rpc", "write", "callback"];
         for (var p = 0; p < ps.length; p++) {
@@ -227,6 +227,7 @@ qx.Class.define("frontend.Lib.Fields", {
         this.windows = {};
         this.updating = false;
         this.field_id = null;
+        this.parentLayout = pLayout;
         dbg(5, "Writing is " + this.write + " our id is " + this);
         this.index = 1;
         this.timer = qx.util.TimerManager.getInstance();
@@ -253,6 +254,7 @@ qx.Class.define("frontend.Lib.Fields", {
         delayTimer: null,
         layout: null,
         tabsField: null,
+        parentLayout: null,
         
         // Returns a map of all data in the Field
         getFieldsData: function(){
@@ -700,13 +702,12 @@ qx.Class.define("frontend.Lib.Fields", {
                         var tabsName = view_str[1][0][0];
                         dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
                         this.layout = new frontend.Views.Layout;
-                        this.layout.align_tabs = "top";
+                        this.layout.alignTabs = "top";
+                        this.layout.parentLayout = this.parentLayout;
                         var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
                         container.add( this.layout, {width: "100%", height: "100%"} );
-                        //this.layout.resizeTab();
                         lyt.add( container, {flex: 5} );
-
-                        rpc.callRPC("View." + tabsName, "show_tabs", this.layout, this.layout.dispatch)
+                        rpc.callRPC("View." + tabsName, "list_tabs", this.layout, this.layout.dispatch)
                         break;
                 }
             }

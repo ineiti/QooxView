@@ -16,7 +16,7 @@ qx.Class.define("frontend.Views.Form", {
      * Constructor of Views.Create Takes:
      *
      */
-    construct: function(cback, layout, dataClass, viewClass){
+    construct: function(cback, layout, dataClass, viewClass, pLayout){
         this.base(arguments, new qx.ui.layout.HBox());
         this.dataClass = dataClass;
         this.viewClass = viewClass;
@@ -24,7 +24,7 @@ qx.Class.define("frontend.Views.Form", {
         dbg(3, "cback is: " + print_a(cback));
         this.add(this.fields = new frontend.Lib.Fields({
             callback: [this, this.changeId]
-        }, layout), {width: "100%"} );
+        }, layout, pLayout), {width: "100%", flex: 1} );
     },
     
     members: {
@@ -34,6 +34,7 @@ qx.Class.define("frontend.Views.Form", {
         callback: null,
         fields: null,
 		effect: null,
+		callback: null,
         
         /*
          * This is called whenever something changes. Appropriate actions are taken

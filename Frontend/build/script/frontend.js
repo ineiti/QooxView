@@ -29,7 +29,7 @@ qx.$$loader = {
   parts : {"boot":[0]},
   uris : [["__out__:frontend.js"]],
   urisBefore : [],
-  packageHashes : {"0":"46c37b988a4d"},
+  packageHashes : {"0":"1a5b06e32a44"},
   boot : "boot",
   closureParts : {},
   bootIsInline : true,
@@ -172,7 +172,7 @@ qx.$$loader.initUris = function(){
 }
 })();
 
-qx.$$packageData['46c37b988a4d']={"locales":{"C":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"},"en":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"}},"resources":{"qx/decoration/Modern/app-header.png":[110,20,"png","qx"],"qx/decoration/Modern/arrows-combined.png":[87,8,"png","qx"],"qx/decoration/Modern/arrows/down-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-74,0],"qx/decoration/Modern/arrows/down-small-invert.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-69,0],"qx/decoration/Modern/arrows/down-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-49,0],"qx/decoration/Modern/arrows/down.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-20,0],"qx/decoration/Modern/arrows/forward.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-59,0],"qx/decoration/Modern/arrows/left-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",0,0],"qx/decoration/Modern/arrows/left.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-44,0],"qx/decoration/Modern/arrows/rewind.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-10,0],"qx/decoration/Modern/arrows/right-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-5,0],"qx/decoration/Modern/arrows/right.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-54,0],"qx/decoration/Modern/arrows/up-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-28,0],"qx/decoration/Modern/arrows/up-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-82,0],"qx/decoration/Modern/arrows/up.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-36,0],"qx/decoration/Modern/button-lr-combined.png":[72,52,"png","qx"],"qx/decoration/Modern/button-tb-combined.png":[4,216,"png","qx"],"qx/decoration/Modern/checkradio-combined.png":[504,14,"png","qx"],"qx/decoration/Modern/colorselector-combined.gif":[46,11,"gif","qx"],"qx/decoration/Modern/colorselector/brightness-field.png":[19,256,"png","qx"],"qx/decoration/Modern/colorselector/brightness-handle.gif":[35,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",0,0],"qx/decoration/Modern/colorselector/huesaturation-field.jpg":[256,256,"jpeg","qx"],"qx/decoration/Modern/colorselector/huesaturation-handle.gif":[11,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",-35,0],"qx/decoration/Modern/cursors-combined.gif":[71,20,"gif","qx"],"qx/decoration/Modern/cursors/alias.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-52,0],"qx/decoration/Modern/cursors/copy.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-33,0],"qx/decoration/Modern/cursors/move.gif":[13,9,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-20,0],"qx/decoration/Modern/cursors/nodrop.gif":[20,20,"gif","qx","qx/decoration/Modern/cursors-combined.gif",0,0],"qx/decoration/Modern/form/button-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-72],"qx/decoration/Modern/form/button-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-204],"qx/decoration/Modern/form/button-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-188],"qx/decoration/Modern/form/button-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-36],"qx/decoration/Modern/form/button-checked-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-84],"qx/decoration/Modern/form/button-checked-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-184],"qx/decoration/Modern/form/button-checked-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-156],"qx/decoration/Modern/form/button-checked-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-208],"qx/decoration/Modern/form/button-checked-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-160],"qx/decoration/Modern/form/button-checked-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-40,0],"qx/decoration/Modern/form/button-checked-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-32,0],"qx/decoration/Modern/form/button-checked-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-28],"qx/decoration/Modern/form/button-checked-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-24],"qx/decoration/Modern/form/button-checked-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-48],"qx/decoration/Modern/form/button-checked-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-checked-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-16,0],"qx/decoration/Modern/form/button-checked-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-60,0],"qx/decoration/Modern/form/button-checked-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-140],"qx/decoration/Modern/form/button-checked-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-56],"qx/decoration/Modern/form/button-checked-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-112],"qx/decoration/Modern/form/button-checked.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-disabled-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-40],"qx/decoration/Modern/form/button-disabled-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-136],"qx/decoration/Modern/form/button-disabled-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-16],"qx/decoration/Modern/form/button-disabled-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-disabled-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-68,0],"qx/decoration/Modern/form/button-disabled-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-4,0],"qx/decoration/Modern/form/button-disabled-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-116],"qx/decoration/Modern/form/button-disabled-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-168],"qx/decoration/Modern/form/button-disabled-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-60],"qx/decoration/Modern/form/button-disabled.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-68],"qx/decoration/Modern/form/button-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-144],"qx/decoration/Modern/form/button-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-8],"qx/decoration/Modern/form/button-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-24,0],"qx/decoration/Modern/form/button-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-44,0],"qx/decoration/Modern/form/button-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-192],"qx/decoration/Modern/form/button-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-148],"qx/decoration/Modern/form/button-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-104],"qx/decoration/Modern/form/button-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-hovered-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-108],"qx/decoration/Modern/form/button-hovered-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-32],"qx/decoration/Modern/form/button-hovered-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-128],"qx/decoration/Modern/form/button-hovered-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-hovered-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-20,0],"qx/decoration/Modern/form/button-hovered-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-48,0],"qx/decoration/Modern/form/button-hovered-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-44],"qx/decoration/Modern/form/button-hovered-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-76],"qx/decoration/Modern/form/button-hovered-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-88],"qx/decoration/Modern/form/button-hovered.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-56,0],"qx/decoration/Modern/form/button-preselected-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-124],"qx/decoration/Modern/form/button-preselected-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-176],"qx/decoration/Modern/form/button-preselected-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-200],"qx/decoration/Modern/form/button-preselected-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,0],"qx/decoration/Modern/form/button-preselected-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-4],"qx/decoration/Modern/form/button-preselected-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-152],"qx/decoration/Modern/form/button-preselected-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-28,0],"qx/decoration/Modern/form/button-preselected-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-36,0],"qx/decoration/Modern/form/button-preselected-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-196],"qx/decoration/Modern/form/button-preselected-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-164],"qx/decoration/Modern/form/button-preselected-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-212],"qx/decoration/Modern/form/button-preselected-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-preselected-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-8,0],"qx/decoration/Modern/form/button-preselected-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-64,0],"qx/decoration/Modern/form/button-preselected-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-96],"qx/decoration/Modern/form/button-preselected-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-80],"qx/decoration/Modern/form/button-preselected-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-132],"qx/decoration/Modern/form/button-preselected.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-pressed-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-12],"qx/decoration/Modern/form/button-pressed-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-52],"qx/decoration/Modern/form/button-pressed-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-20],"qx/decoration/Modern/form/button-pressed-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-pressed-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-52,0],"qx/decoration/Modern/form/button-pressed-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-12,0],"qx/decoration/Modern/form/button-pressed-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-100],"qx/decoration/Modern/form/button-pressed-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-172],"qx/decoration/Modern/form/button-pressed-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-64],"qx/decoration/Modern/form/button-pressed.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",0,0],"qx/decoration/Modern/form/button-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-92],"qx/decoration/Modern/form/button-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-120],"qx/decoration/Modern/form/button-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-180],"qx/decoration/Modern/form/button.png":[80,60,"png","qx"],"qx/decoration/Modern/form/checkbox-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-126,0],"qx/decoration/Modern/form/checkbox-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-322,0],"qx/decoration/Modern/form/checkbox-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-294,0],"qx/decoration/Modern/form/checkbox-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-364,0],"qx/decoration/Modern/form/checkbox-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-490,0],"qx/decoration/Modern/form/checkbox-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-224,0],"qx/decoration/Modern/form/checkbox-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-378,0],"qx/decoration/Modern/form/checkbox-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-84,0],"qx/decoration/Modern/form/checkbox-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-182,0],"qx/decoration/Modern/form/checkbox-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-42,0],"qx/decoration/Modern/form/checkbox-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-392,0],"qx/decoration/Modern/form/checkbox-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-210,0],"qx/decoration/Modern/form/checkbox-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-14,0],"qx/decoration/Modern/form/checkbox-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-238,0],"qx/decoration/Modern/form/checkbox-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-462,0],"qx/decoration/Modern/form/checkbox-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-112,0],"qx/decoration/Modern/form/checkbox-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-448,0],"qx/decoration/Modern/form/checkbox-undetermined-disabled.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-140,0],"qx/decoration/Modern/form/checked-disabled.png":[6,6,"png","qx"],"qx/decoration/Modern/form/checked.png":[6,6,"png","qx"],"qx/decoration/Modern/form/input-focused.png":[40,12,"png","qx"],"qx/decoration/Modern/form/input.png":[84,12,"png","qx"],"qx/decoration/Modern/form/radiobutton-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-196,0],"qx/decoration/Modern/form/radiobutton-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-168,0],"qx/decoration/Modern/form/radiobutton-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-98,0],"qx/decoration/Modern/form/radiobutton-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-308,0],"qx/decoration/Modern/form/radiobutton-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-406,0],"qx/decoration/Modern/form/radiobutton-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-28,0],"qx/decoration/Modern/form/radiobutton-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-350,0],"qx/decoration/Modern/form/radiobutton-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-266,0],"qx/decoration/Modern/form/radiobutton-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-252,0],"qx/decoration/Modern/form/radiobutton-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-336,0],"qx/decoration/Modern/form/radiobutton-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-476,0],"qx/decoration/Modern/form/radiobutton-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-420,0],"qx/decoration/Modern/form/radiobutton-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-56,0],"qx/decoration/Modern/form/radiobutton-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",0,0],"qx/decoration/Modern/form/radiobutton-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-154,0],"qx/decoration/Modern/form/radiobutton-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-434,0],"qx/decoration/Modern/form/radiobutton-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-280,0],"qx/decoration/Modern/form/radiobutton.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-70,0],"qx/decoration/Modern/form/tooltip-error-arrow.png":[11,14,"png","qx"],"qx/decoration/Modern/form/tooltip-error-b.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-30],"qx/decoration/Modern/form/tooltip-error-bl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-24],"qx/decoration/Modern/form/tooltip-error-br.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-c.png":[40,18,"png","qx"],"qx/decoration/Modern/form/tooltip-error-l.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",-6,0],"qx/decoration/Modern/form/tooltip-error-r.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-t.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-6],"qx/decoration/Modern/form/tooltip-error-tl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-18],"qx/decoration/Modern/form/tooltip-error-tr.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-12],"qx/decoration/Modern/form/tooltip-error.png":[127,30,"png","qx"],"qx/decoration/Modern/form/undetermined-disabled.png":[6,2,"png","qx"],"qx/decoration/Modern/form/undetermined.png":[6,2,"png","qx"],"qx/decoration/Modern/group-item.png":[110,20,"png","qx"],"qx/decoration/Modern/groupbox-lr-combined.png":[8,51,"png","qx"],"qx/decoration/Modern/groupbox-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-b.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-12],"qx/decoration/Modern/groupbox/groupbox-bl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-16],"qx/decoration/Modern/groupbox/groupbox-br.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-8],"qx/decoration/Modern/groupbox/groupbox-c.png":[40,51,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-l.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",-4,0],"qx/decoration/Modern/groupbox/groupbox-r.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-t.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-4],"qx/decoration/Modern/groupbox/groupbox-tl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-tr.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-20],"qx/decoration/Modern/groupbox/groupbox.png":[255,59,"png","qx"],"qx/decoration/Modern/menu-background-combined.png":[80,49,"png","qx"],"qx/decoration/Modern/menu-checkradio-combined.gif":[64,7,"gif","qx"],"qx/decoration/Modern/menu/background.png":[40,49,"png","qx","qx/decoration/Modern/menu-background-combined.png",-40,0],"qx/decoration/Modern/menu/bar-background.png":[40,20,"png","qx","qx/decoration/Modern/menu-background-combined.png",0,0],"qx/decoration/Modern/menu/checkbox-invert.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-16,0],"qx/decoration/Modern/menu/checkbox.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-48,0],"qx/decoration/Modern/menu/radiobutton-invert.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-32,0],"qx/decoration/Modern/menu/radiobutton.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",0,0],"qx/decoration/Modern/pane-lr-combined.png":[12,238,"png","qx"],"qx/decoration/Modern/pane-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/pane/pane-b.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-30],"qx/decoration/Modern/pane/pane-bl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-18],"qx/decoration/Modern/pane/pane-br.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-12],"qx/decoration/Modern/pane/pane-c.png":[40,238,"png","qx"],"qx/decoration/Modern/pane/pane-l.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",0,0],"qx/decoration/Modern/pane/pane-r.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",-6,0],"qx/decoration/Modern/pane/pane-t.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,0],"qx/decoration/Modern/pane/pane-tl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-24],"qx/decoration/Modern/pane/pane-tr.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-6],"qx/decoration/Modern/pane/pane.png":[185,250,"png","qx"],"qx/decoration/Modern/scrollbar-combined.png":[54,12,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-horizontal.png":[76,15,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-horizontal.png":[19,10,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-vertical.png":[10,19,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-vertical.png":[15,76,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-horizontal.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-34,0],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-vertical.png":[10,12,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-6,0],"qx/decoration/Modern/scrollbar/scrollbar-down.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-28,0],"qx/decoration/Modern/scrollbar/scrollbar-left.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-50,0],"qx/decoration/Modern/scrollbar/scrollbar-right.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-46,0],"qx/decoration/Modern/scrollbar/scrollbar-up.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",0,0],"qx/decoration/Modern/scrollbar/slider-knob-background.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-16,0],"qx/decoration/Modern/selection.png":[110,20,"png","qx"],"qx/decoration/Modern/shadow-lr-combined.png":[30,382,"png","qx"],"qx/decoration/Modern/shadow-small-lr-combined.png":[10,136,"png","qx"],"qx/decoration/Modern/shadow-small-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/shadow-tb-combined.png":[15,90,"png","qx"],"qx/decoration/Modern/shadow/shadow-b.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-30],"qx/decoration/Modern/shadow/shadow-bl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-br.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-45],"qx/decoration/Modern/shadow/shadow-c.png":[40,382,"png","qx"],"qx/decoration/Modern/shadow/shadow-l.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-r.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",-15,0],"qx/decoration/Modern/shadow/shadow-small-b.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-20],"qx/decoration/Modern/shadow/shadow-small-bl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-small-br.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-10],"qx/decoration/Modern/shadow/shadow-small-c.png":[40,136,"png","qx"],"qx/decoration/Modern/shadow/shadow-small-l.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-r.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",-5,0],"qx/decoration/Modern/shadow/shadow-small-t.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-5],"qx/decoration/Modern/shadow/shadow-small-tl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-tr.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-25],"qx/decoration/Modern/shadow/shadow-small.png":[114,146,"png","qx"],"qx/decoration/Modern/shadow/shadow-t.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-60],"qx/decoration/Modern/shadow/shadow-tl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-75],"qx/decoration/Modern/shadow/shadow-tr.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow.png":[381,412,"png","qx"],"qx/decoration/Modern/splitpane-knobs-combined.png":[8,9,"png","qx"],"qx/decoration/Modern/splitpane/knob-horizontal.png":[1,8,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,-1],"qx/decoration/Modern/splitpane/knob-vertical.png":[8,1,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,0],"qx/decoration/Modern/table-combined.png":[94,18,"png","qx"],"qx/decoration/Modern/table/ascending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",0,0],"qx/decoration/Modern/table/boolean-false.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-80,0],"qx/decoration/Modern/table/boolean-true.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-26,0],"qx/decoration/Modern/table/descending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",-18,0],"qx/decoration/Modern/table/header-cell.png":[40,18,"png","qx","qx/decoration/Modern/table-combined.png",-40,0],"qx/decoration/Modern/table/select-column-order.png":[10,9,"png","qx","qx/decoration/Modern/table-combined.png",-8,0],"qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png":[10,14,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-lr-combined.png":[10,12,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-pane-lr-combined.png":[60,2,"png","qx"],"qx/decoration/Modern/tabview-pane-tb-combined.png":[30,180,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-bottom-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-bottom-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-bottom-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-l.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-r.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-bottom-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-bottom-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active.png":[49,24,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-left-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-left-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-left-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-left-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-left-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-left-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-right-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-right-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-right-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-right-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-right-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-right-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-top-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-top-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-top-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-l.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-r.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-top-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-top-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-top-active.png":[48,22,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-b.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-60],"qx/decoration/Modern/tabview/tabview-pane-bl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-br.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-120],"qx/decoration/Modern/tabview/tabview-pane-c.png":[40,120,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-l.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-r.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",-30,0],"qx/decoration/Modern/tabview/tabview-pane-t.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-150],"qx/decoration/Modern/tabview/tabview-pane-tl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-30],"qx/decoration/Modern/tabview/tabview-pane-tr.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-90],"qx/decoration/Modern/tabview/tabview-pane.png":[185,250,"png","qx"],"qx/decoration/Modern/toolbar-combined.png":[80,130,"png","qx"],"qx/decoration/Modern/toolbar/toolbar-gradient-blue.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",-40,0],"qx/decoration/Modern/toolbar/toolbar-gradient.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",0,0],"qx/decoration/Modern/toolbar/toolbar-handle-knob.gif":[1,8,"gif","qx"],"qx/decoration/Modern/toolbar/toolbar-part.gif":[7,1,"gif","qx"],"qx/decoration/Modern/tooltip-error-lr-combined.png":[12,18,"png","qx"],"qx/decoration/Modern/tooltip-error-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/tree-combined.png":[32,8,"png","qx"],"qx/decoration/Modern/tree/closed-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-24,0],"qx/decoration/Modern/tree/closed.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-16,0],"qx/decoration/Modern/tree/open-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-8,0],"qx/decoration/Modern/tree/open.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",0,0],"qx/decoration/Modern/window-captionbar-buttons-combined.png":[108,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-active-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-inactive-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-active-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-inactive-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-statusbar-lr-combined.png":[8,7,"png","qx"],"qx/decoration/Modern/window-statusbar-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/window/captionbar-active-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-active-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-active-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-active-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-active-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-active-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-active-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-active.png":[69,21,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-inactive-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-inactive-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-inactive-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-inactive-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-inactive-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-inactive.png":[69,21,"png","qx"],"qx/decoration/Modern/window/close-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-27,0],"qx/decoration/Modern/window/close-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-9,0],"qx/decoration/Modern/window/close-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-90,0],"qx/decoration/Modern/window/maximize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-18,0],"qx/decoration/Modern/window/maximize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-81,0],"qx/decoration/Modern/window/maximize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-54,0],"qx/decoration/Modern/window/minimize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-63,0],"qx/decoration/Modern/window/minimize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-72,0],"qx/decoration/Modern/window/minimize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-36,0],"qx/decoration/Modern/window/restore-active-hovered.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",0,0],"qx/decoration/Modern/window/restore-active.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-99,0],"qx/decoration/Modern/window/restore-inactive.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-45,0],"qx/decoration/Modern/window/statusbar-b.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-16],"qx/decoration/Modern/window/statusbar-bl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-20],"qx/decoration/Modern/window/statusbar-br.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-4],"qx/decoration/Modern/window/statusbar-c.png":[40,7,"png","qx"],"qx/decoration/Modern/window/statusbar-l.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",-4,0],"qx/decoration/Modern/window/statusbar-r.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",0,0],"qx/decoration/Modern/window/statusbar-t.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,0],"qx/decoration/Modern/window/statusbar-tl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-8],"qx/decoration/Modern/window/statusbar-tr.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-12],"qx/decoration/Modern/window/statusbar.png":[369,15,"png","qx"],"qx/icon/Tango/16/actions/dialog-cancel.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/dialog-ok.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/view-refresh.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/window-close.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/office-calendar.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/utilities-color-chooser.png":[16,16,"png","qx"],"qx/icon/Tango/16/mimetypes/office-document.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder-open.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder.png":[16,16,"png","qx"],"qx/icon/Tango/22/mimetypes/office-document.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder-open.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder.png":[22,22,"png","qx"],"qx/icon/Tango/32/mimetypes/office-document.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder-open.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder.png":[32,32,"png","qx"],"qx/static/blank.gif":[1,1,"gif","qx"]},"translations":{"C":{},"en":{}}};
+qx.$$packageData['1a5b06e32a44']={"locales":{"C":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"},"en":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"}},"resources":{"qx/decoration/Modern/app-header.png":[110,20,"png","qx"],"qx/decoration/Modern/arrows-combined.png":[87,8,"png","qx"],"qx/decoration/Modern/arrows/down-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-74,0],"qx/decoration/Modern/arrows/down-small-invert.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-69,0],"qx/decoration/Modern/arrows/down-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-49,0],"qx/decoration/Modern/arrows/down.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-20,0],"qx/decoration/Modern/arrows/forward.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-59,0],"qx/decoration/Modern/arrows/left-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",0,0],"qx/decoration/Modern/arrows/left.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-44,0],"qx/decoration/Modern/arrows/rewind.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-10,0],"qx/decoration/Modern/arrows/right-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-5,0],"qx/decoration/Modern/arrows/right.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-54,0],"qx/decoration/Modern/arrows/up-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-28,0],"qx/decoration/Modern/arrows/up-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-82,0],"qx/decoration/Modern/arrows/up.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-36,0],"qx/decoration/Modern/button-lr-combined.png":[72,52,"png","qx"],"qx/decoration/Modern/button-tb-combined.png":[4,216,"png","qx"],"qx/decoration/Modern/checkradio-combined.png":[504,14,"png","qx"],"qx/decoration/Modern/colorselector-combined.gif":[46,11,"gif","qx"],"qx/decoration/Modern/colorselector/brightness-field.png":[19,256,"png","qx"],"qx/decoration/Modern/colorselector/brightness-handle.gif":[35,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",0,0],"qx/decoration/Modern/colorselector/huesaturation-field.jpg":[256,256,"jpeg","qx"],"qx/decoration/Modern/colorselector/huesaturation-handle.gif":[11,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",-35,0],"qx/decoration/Modern/cursors-combined.gif":[71,20,"gif","qx"],"qx/decoration/Modern/cursors/alias.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-52,0],"qx/decoration/Modern/cursors/copy.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-33,0],"qx/decoration/Modern/cursors/move.gif":[13,9,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-20,0],"qx/decoration/Modern/cursors/nodrop.gif":[20,20,"gif","qx","qx/decoration/Modern/cursors-combined.gif",0,0],"qx/decoration/Modern/form/button-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-72],"qx/decoration/Modern/form/button-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-204],"qx/decoration/Modern/form/button-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-188],"qx/decoration/Modern/form/button-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-36],"qx/decoration/Modern/form/button-checked-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-84],"qx/decoration/Modern/form/button-checked-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-184],"qx/decoration/Modern/form/button-checked-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-156],"qx/decoration/Modern/form/button-checked-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-208],"qx/decoration/Modern/form/button-checked-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-160],"qx/decoration/Modern/form/button-checked-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-40,0],"qx/decoration/Modern/form/button-checked-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-32,0],"qx/decoration/Modern/form/button-checked-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-28],"qx/decoration/Modern/form/button-checked-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-24],"qx/decoration/Modern/form/button-checked-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-48],"qx/decoration/Modern/form/button-checked-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-checked-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-16,0],"qx/decoration/Modern/form/button-checked-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-60,0],"qx/decoration/Modern/form/button-checked-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-140],"qx/decoration/Modern/form/button-checked-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-56],"qx/decoration/Modern/form/button-checked-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-112],"qx/decoration/Modern/form/button-checked.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-disabled-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-40],"qx/decoration/Modern/form/button-disabled-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-136],"qx/decoration/Modern/form/button-disabled-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-16],"qx/decoration/Modern/form/button-disabled-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-disabled-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-68,0],"qx/decoration/Modern/form/button-disabled-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-4,0],"qx/decoration/Modern/form/button-disabled-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-116],"qx/decoration/Modern/form/button-disabled-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-168],"qx/decoration/Modern/form/button-disabled-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-60],"qx/decoration/Modern/form/button-disabled.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-68],"qx/decoration/Modern/form/button-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-144],"qx/decoration/Modern/form/button-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-8],"qx/decoration/Modern/form/button-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-24,0],"qx/decoration/Modern/form/button-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-44,0],"qx/decoration/Modern/form/button-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-192],"qx/decoration/Modern/form/button-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-148],"qx/decoration/Modern/form/button-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-104],"qx/decoration/Modern/form/button-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-hovered-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-108],"qx/decoration/Modern/form/button-hovered-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-32],"qx/decoration/Modern/form/button-hovered-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-128],"qx/decoration/Modern/form/button-hovered-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-hovered-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-20,0],"qx/decoration/Modern/form/button-hovered-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-48,0],"qx/decoration/Modern/form/button-hovered-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-44],"qx/decoration/Modern/form/button-hovered-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-76],"qx/decoration/Modern/form/button-hovered-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-88],"qx/decoration/Modern/form/button-hovered.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-56,0],"qx/decoration/Modern/form/button-preselected-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-124],"qx/decoration/Modern/form/button-preselected-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-176],"qx/decoration/Modern/form/button-preselected-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-200],"qx/decoration/Modern/form/button-preselected-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,0],"qx/decoration/Modern/form/button-preselected-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-4],"qx/decoration/Modern/form/button-preselected-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-152],"qx/decoration/Modern/form/button-preselected-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-28,0],"qx/decoration/Modern/form/button-preselected-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-36,0],"qx/decoration/Modern/form/button-preselected-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-196],"qx/decoration/Modern/form/button-preselected-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-164],"qx/decoration/Modern/form/button-preselected-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-212],"qx/decoration/Modern/form/button-preselected-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-preselected-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-8,0],"qx/decoration/Modern/form/button-preselected-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-64,0],"qx/decoration/Modern/form/button-preselected-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-96],"qx/decoration/Modern/form/button-preselected-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-80],"qx/decoration/Modern/form/button-preselected-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-132],"qx/decoration/Modern/form/button-preselected.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-pressed-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-12],"qx/decoration/Modern/form/button-pressed-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-52],"qx/decoration/Modern/form/button-pressed-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-20],"qx/decoration/Modern/form/button-pressed-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-pressed-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-52,0],"qx/decoration/Modern/form/button-pressed-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-12,0],"qx/decoration/Modern/form/button-pressed-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-100],"qx/decoration/Modern/form/button-pressed-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-172],"qx/decoration/Modern/form/button-pressed-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-64],"qx/decoration/Modern/form/button-pressed.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",0,0],"qx/decoration/Modern/form/button-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-92],"qx/decoration/Modern/form/button-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-120],"qx/decoration/Modern/form/button-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-180],"qx/decoration/Modern/form/button.png":[80,60,"png","qx"],"qx/decoration/Modern/form/checkbox-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-126,0],"qx/decoration/Modern/form/checkbox-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-322,0],"qx/decoration/Modern/form/checkbox-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-294,0],"qx/decoration/Modern/form/checkbox-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-364,0],"qx/decoration/Modern/form/checkbox-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-490,0],"qx/decoration/Modern/form/checkbox-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-224,0],"qx/decoration/Modern/form/checkbox-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-378,0],"qx/decoration/Modern/form/checkbox-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-84,0],"qx/decoration/Modern/form/checkbox-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-182,0],"qx/decoration/Modern/form/checkbox-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-42,0],"qx/decoration/Modern/form/checkbox-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-392,0],"qx/decoration/Modern/form/checkbox-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-210,0],"qx/decoration/Modern/form/checkbox-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-14,0],"qx/decoration/Modern/form/checkbox-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-238,0],"qx/decoration/Modern/form/checkbox-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-462,0],"qx/decoration/Modern/form/checkbox-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-112,0],"qx/decoration/Modern/form/checkbox-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-448,0],"qx/decoration/Modern/form/checkbox-undetermined-disabled.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-140,0],"qx/decoration/Modern/form/checked-disabled.png":[6,6,"png","qx"],"qx/decoration/Modern/form/checked.png":[6,6,"png","qx"],"qx/decoration/Modern/form/input-focused.png":[40,12,"png","qx"],"qx/decoration/Modern/form/input.png":[84,12,"png","qx"],"qx/decoration/Modern/form/radiobutton-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-196,0],"qx/decoration/Modern/form/radiobutton-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-168,0],"qx/decoration/Modern/form/radiobutton-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-98,0],"qx/decoration/Modern/form/radiobutton-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-308,0],"qx/decoration/Modern/form/radiobutton-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-406,0],"qx/decoration/Modern/form/radiobutton-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-28,0],"qx/decoration/Modern/form/radiobutton-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-350,0],"qx/decoration/Modern/form/radiobutton-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-266,0],"qx/decoration/Modern/form/radiobutton-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-252,0],"qx/decoration/Modern/form/radiobutton-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-336,0],"qx/decoration/Modern/form/radiobutton-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-476,0],"qx/decoration/Modern/form/radiobutton-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-420,0],"qx/decoration/Modern/form/radiobutton-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-56,0],"qx/decoration/Modern/form/radiobutton-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",0,0],"qx/decoration/Modern/form/radiobutton-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-154,0],"qx/decoration/Modern/form/radiobutton-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-434,0],"qx/decoration/Modern/form/radiobutton-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-280,0],"qx/decoration/Modern/form/radiobutton.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-70,0],"qx/decoration/Modern/form/tooltip-error-arrow.png":[11,14,"png","qx"],"qx/decoration/Modern/form/tooltip-error-b.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-30],"qx/decoration/Modern/form/tooltip-error-bl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-24],"qx/decoration/Modern/form/tooltip-error-br.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-c.png":[40,18,"png","qx"],"qx/decoration/Modern/form/tooltip-error-l.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",-6,0],"qx/decoration/Modern/form/tooltip-error-r.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-t.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-6],"qx/decoration/Modern/form/tooltip-error-tl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-18],"qx/decoration/Modern/form/tooltip-error-tr.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-12],"qx/decoration/Modern/form/tooltip-error.png":[127,30,"png","qx"],"qx/decoration/Modern/form/undetermined-disabled.png":[6,2,"png","qx"],"qx/decoration/Modern/form/undetermined.png":[6,2,"png","qx"],"qx/decoration/Modern/group-item.png":[110,20,"png","qx"],"qx/decoration/Modern/groupbox-lr-combined.png":[8,51,"png","qx"],"qx/decoration/Modern/groupbox-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-b.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-12],"qx/decoration/Modern/groupbox/groupbox-bl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-16],"qx/decoration/Modern/groupbox/groupbox-br.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-8],"qx/decoration/Modern/groupbox/groupbox-c.png":[40,51,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-l.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",-4,0],"qx/decoration/Modern/groupbox/groupbox-r.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-t.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-4],"qx/decoration/Modern/groupbox/groupbox-tl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-tr.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-20],"qx/decoration/Modern/groupbox/groupbox.png":[255,59,"png","qx"],"qx/decoration/Modern/menu-background-combined.png":[80,49,"png","qx"],"qx/decoration/Modern/menu-checkradio-combined.gif":[64,7,"gif","qx"],"qx/decoration/Modern/menu/background.png":[40,49,"png","qx","qx/decoration/Modern/menu-background-combined.png",-40,0],"qx/decoration/Modern/menu/bar-background.png":[40,20,"png","qx","qx/decoration/Modern/menu-background-combined.png",0,0],"qx/decoration/Modern/menu/checkbox-invert.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-16,0],"qx/decoration/Modern/menu/checkbox.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-48,0],"qx/decoration/Modern/menu/radiobutton-invert.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-32,0],"qx/decoration/Modern/menu/radiobutton.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",0,0],"qx/decoration/Modern/pane-lr-combined.png":[12,238,"png","qx"],"qx/decoration/Modern/pane-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/pane/pane-b.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-30],"qx/decoration/Modern/pane/pane-bl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-18],"qx/decoration/Modern/pane/pane-br.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-12],"qx/decoration/Modern/pane/pane-c.png":[40,238,"png","qx"],"qx/decoration/Modern/pane/pane-l.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",0,0],"qx/decoration/Modern/pane/pane-r.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",-6,0],"qx/decoration/Modern/pane/pane-t.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,0],"qx/decoration/Modern/pane/pane-tl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-24],"qx/decoration/Modern/pane/pane-tr.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-6],"qx/decoration/Modern/pane/pane.png":[185,250,"png","qx"],"qx/decoration/Modern/scrollbar-combined.png":[54,12,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-horizontal.png":[76,15,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-horizontal.png":[19,10,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-vertical.png":[10,19,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-vertical.png":[15,76,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-horizontal.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-34,0],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-vertical.png":[10,12,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-6,0],"qx/decoration/Modern/scrollbar/scrollbar-down.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-28,0],"qx/decoration/Modern/scrollbar/scrollbar-left.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-50,0],"qx/decoration/Modern/scrollbar/scrollbar-right.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-46,0],"qx/decoration/Modern/scrollbar/scrollbar-up.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",0,0],"qx/decoration/Modern/scrollbar/slider-knob-background.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-16,0],"qx/decoration/Modern/selection.png":[110,20,"png","qx"],"qx/decoration/Modern/shadow-lr-combined.png":[30,382,"png","qx"],"qx/decoration/Modern/shadow-small-lr-combined.png":[10,136,"png","qx"],"qx/decoration/Modern/shadow-small-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/shadow-tb-combined.png":[15,90,"png","qx"],"qx/decoration/Modern/shadow/shadow-b.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-30],"qx/decoration/Modern/shadow/shadow-bl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-br.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-45],"qx/decoration/Modern/shadow/shadow-c.png":[40,382,"png","qx"],"qx/decoration/Modern/shadow/shadow-l.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-r.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",-15,0],"qx/decoration/Modern/shadow/shadow-small-b.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-20],"qx/decoration/Modern/shadow/shadow-small-bl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-small-br.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-10],"qx/decoration/Modern/shadow/shadow-small-c.png":[40,136,"png","qx"],"qx/decoration/Modern/shadow/shadow-small-l.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-r.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",-5,0],"qx/decoration/Modern/shadow/shadow-small-t.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-5],"qx/decoration/Modern/shadow/shadow-small-tl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-tr.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-25],"qx/decoration/Modern/shadow/shadow-small.png":[114,146,"png","qx"],"qx/decoration/Modern/shadow/shadow-t.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-60],"qx/decoration/Modern/shadow/shadow-tl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-75],"qx/decoration/Modern/shadow/shadow-tr.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow.png":[381,412,"png","qx"],"qx/decoration/Modern/splitpane-knobs-combined.png":[8,9,"png","qx"],"qx/decoration/Modern/splitpane/knob-horizontal.png":[1,8,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,-1],"qx/decoration/Modern/splitpane/knob-vertical.png":[8,1,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,0],"qx/decoration/Modern/table-combined.png":[94,18,"png","qx"],"qx/decoration/Modern/table/ascending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",0,0],"qx/decoration/Modern/table/boolean-false.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-80,0],"qx/decoration/Modern/table/boolean-true.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-26,0],"qx/decoration/Modern/table/descending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",-18,0],"qx/decoration/Modern/table/header-cell.png":[40,18,"png","qx","qx/decoration/Modern/table-combined.png",-40,0],"qx/decoration/Modern/table/select-column-order.png":[10,9,"png","qx","qx/decoration/Modern/table-combined.png",-8,0],"qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png":[10,14,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-lr-combined.png":[10,12,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-pane-lr-combined.png":[60,2,"png","qx"],"qx/decoration/Modern/tabview-pane-tb-combined.png":[30,180,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-bottom-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-bottom-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-bottom-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-l.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-r.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-bottom-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-bottom-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active.png":[49,24,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-left-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-left-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-left-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-left-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-left-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-left-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-right-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-right-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-right-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-right-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-right-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-right-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-top-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-top-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-top-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-l.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-r.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-top-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-top-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-top-active.png":[48,22,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-b.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-60],"qx/decoration/Modern/tabview/tabview-pane-bl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-br.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-120],"qx/decoration/Modern/tabview/tabview-pane-c.png":[40,120,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-l.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-r.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",-30,0],"qx/decoration/Modern/tabview/tabview-pane-t.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-150],"qx/decoration/Modern/tabview/tabview-pane-tl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-30],"qx/decoration/Modern/tabview/tabview-pane-tr.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-90],"qx/decoration/Modern/tabview/tabview-pane.png":[185,250,"png","qx"],"qx/decoration/Modern/toolbar-combined.png":[80,130,"png","qx"],"qx/decoration/Modern/toolbar/toolbar-gradient-blue.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",-40,0],"qx/decoration/Modern/toolbar/toolbar-gradient.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",0,0],"qx/decoration/Modern/toolbar/toolbar-handle-knob.gif":[1,8,"gif","qx"],"qx/decoration/Modern/toolbar/toolbar-part.gif":[7,1,"gif","qx"],"qx/decoration/Modern/tooltip-error-lr-combined.png":[12,18,"png","qx"],"qx/decoration/Modern/tooltip-error-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/tree-combined.png":[32,8,"png","qx"],"qx/decoration/Modern/tree/closed-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-24,0],"qx/decoration/Modern/tree/closed.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-16,0],"qx/decoration/Modern/tree/open-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-8,0],"qx/decoration/Modern/tree/open.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",0,0],"qx/decoration/Modern/window-captionbar-buttons-combined.png":[108,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-active-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-inactive-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-active-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-inactive-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-statusbar-lr-combined.png":[8,7,"png","qx"],"qx/decoration/Modern/window-statusbar-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/window/captionbar-active-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-active-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-active-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-active-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-active-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-active-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-active-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-active.png":[69,21,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-inactive-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-inactive-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-inactive-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-inactive-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-inactive-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-inactive.png":[69,21,"png","qx"],"qx/decoration/Modern/window/close-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-27,0],"qx/decoration/Modern/window/close-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-9,0],"qx/decoration/Modern/window/close-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-90,0],"qx/decoration/Modern/window/maximize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-18,0],"qx/decoration/Modern/window/maximize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-81,0],"qx/decoration/Modern/window/maximize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-54,0],"qx/decoration/Modern/window/minimize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-63,0],"qx/decoration/Modern/window/minimize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-72,0],"qx/decoration/Modern/window/minimize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-36,0],"qx/decoration/Modern/window/restore-active-hovered.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",0,0],"qx/decoration/Modern/window/restore-active.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-99,0],"qx/decoration/Modern/window/restore-inactive.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-45,0],"qx/decoration/Modern/window/statusbar-b.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-16],"qx/decoration/Modern/window/statusbar-bl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-20],"qx/decoration/Modern/window/statusbar-br.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-4],"qx/decoration/Modern/window/statusbar-c.png":[40,7,"png","qx"],"qx/decoration/Modern/window/statusbar-l.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",-4,0],"qx/decoration/Modern/window/statusbar-r.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",0,0],"qx/decoration/Modern/window/statusbar-t.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,0],"qx/decoration/Modern/window/statusbar-tl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-8],"qx/decoration/Modern/window/statusbar-tr.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-12],"qx/decoration/Modern/window/statusbar.png":[369,15,"png","qx"],"qx/icon/Tango/16/actions/dialog-cancel.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/dialog-ok.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/view-refresh.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/window-close.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/office-calendar.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/utilities-color-chooser.png":[16,16,"png","qx"],"qx/icon/Tango/16/mimetypes/office-document.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder-open.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder.png":[16,16,"png","qx"],"qx/icon/Tango/22/mimetypes/office-document.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder-open.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder.png":[22,22,"png","qx"],"qx/icon/Tango/32/mimetypes/office-document.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder-open.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder.png":[32,32,"png","qx"],"qx/static/blank.gif":[1,1,"gif","qx"]},"translations":{"C":{},"en":{}}};
 (function(){var m="toString",k=".",j="default",h="Object",g='"',f="Array",e="()",d="String",c="Function",b=".prototype",L="function",K="Boolean",J="Error",I="constructor",H="warn",G="hasOwnProperty",F="string",E="toLocaleString",D="RegExp",C='\", "',t="info",u="BROKEN_IE",r="isPrototypeOf",s="Date",p="",q="qx.Bootstrap",n="]",o="Class",v="error",w="[Class ",y="valueOf",x="Number",A="count",z="debug",B="ES5";
 if(!window.qx){window.qx={};
 }qx.Bootstrap={genericToString:function(){return w+this.classname+n;
@@ -301,69 +301,6 @@ while(cb){if(cb.$$includes){cc.push.apply(cc,cb.$$flatIncludes);
 },error:function(cj,ck){qx.Bootstrap.$$logs.push([v,arguments]);
 },trace:function(cl){}}});
 })();
-(function(){var g="qx.Mixin",f=".prototype",e="constructor",d="[Mixin ",c="]",b="destruct",a="Mixin";
-qx.Bootstrap.define(g,{statics:{define:function(name,h){if(h){if(h.include&&!(h.include instanceof Array)){h.include=[h.include];
-}var k=h.statics?h.statics:{};
-qx.Bootstrap.setDisplayNames(k,name);
-
-for(var j in k){if(k[j] instanceof Function){k[j].$$mixin=k;
-}}if(h.construct){k.$$constructor=h.construct;
-qx.Bootstrap.setDisplayName(h.construct,name,e);
-}
-if(h.include){k.$$includes=h.include;
-}
-if(h.properties){k.$$properties=h.properties;
-}
-if(h.members){k.$$members=h.members;
-qx.Bootstrap.setDisplayNames(h.members,name+f);
-}
-for(var j in k.$$members){if(k.$$members[j] instanceof Function){k.$$members[j].$$mixin=k;
-}}
-if(h.events){k.$$events=h.events;
-}
-if(h.destruct){k.$$destructor=h.destruct;
-qx.Bootstrap.setDisplayName(h.destruct,name,b);
-}}else{var k={};
-}k.$$type=a;
-k.name=name;
-k.toString=this.genericToString;
-k.basename=qx.Bootstrap.createNamespace(name,k);
-this.$$registry[name]=k;
-return k;
-},checkCompatibility:function(m){var p=this.flatten(m);
-var q=p.length;
-
-if(q<2){return true;
-}var t={};
-var s={};
-var r={};
-var o;
-
-for(var i=0;i<q;i++){o=p[i];
-
-for(var n in o.events){if(r[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+r[n]+'" in member "'+n+'"!');
-}r[n]=o.name;
-}
-for(var n in o.properties){if(t[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+t[n]+'" in property "'+n+'"!');
-}t[n]=o.name;
-}
-for(var n in o.members){if(s[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+s[n]+'" in member "'+n+'"!');
-}s[n]=o.name;
-}}return true;
-},isCompatible:function(u,v){var w=qx.Bootstrap.getMixins(v);
-w.push(u);
-return qx.Mixin.checkCompatibility(w);
-},getByName:function(name){return this.$$registry[name];
-},isDefined:function(name){return this.getByName(name)!==undefined;
-},getTotalNumber:function(){return qx.Bootstrap.objectGetLength(this.$$registry);
-},flatten:function(x){if(!x){return [];
-}var y=x.concat();
-
-for(var i=0,l=x.length;i<l;i++){if(x[i].$$includes){y.push.apply(y,this.flatten(x[i].$$includes));
-}}return y;
-},genericToString:function(){return d+this.name+c;
-},$$registry:{},__c:null,__d:function(){}}});
-})();
 (function(){var j="",i="10.1",h="10.3",g="10.7",f="10.5",e="95",d="10.2",c="98",b="2000",a="10.6",T="10.0",S="10.4",R="2003",Q=")",P="iPhone",O="android",N="unix",M="ce",L="7",K="SymbianOS",q="MacPPC",r="iPod",o="\.",p="Win64",m="linux",n="me",k="Macintosh",l="Android",s="Windows",t="ios",A="vista",y="(",E="win",C="Linux",G="BSD",F="iPad",v="X11",J="xp",I="symbian",H="qx.bom.client.OperatingSystem",u="g",w="Win32",x="osx",z="|",B="nt4",D="MacIntel";
 qx.Bootstrap.define(H,{statics:{getName:function(){var U=navigator&&navigator.platform;
 
@@ -377,29 +314,29 @@ if(U.indexOf(s)!=-1||U.indexOf(w)!=-1||U.indexOf(p)!=-1){return E;
 }else if(U.indexOf(l)!=-1){return O;
 }else if(U.indexOf(K)!=-1){return I;
 }return j;
-},__e:{"Windows NT 6.1":L,"Windows NT 6.0":A,"Windows NT 5.2":R,"Windows NT 5.1":J,"Windows NT 5.0":b,"Windows 2000":b,"Windows NT 4.0":B,"Win 9x 4.90":n,"Windows CE":M,"Windows 98":c,"Win98":c,"Windows 95":e,"Win95":e,"Mac OS X 10_7":g,"Mac OS X 10.7":g,"Mac OS X 10_6":a,"Mac OS X 10.6":a,"Mac OS X 10_5":f,"Mac OS X 10.5":f,"Mac OS X 10_4":S,"Mac OS X 10.4":S,"Mac OS X 10_3":h,"Mac OS X 10.3":h,"Mac OS X 10_2":d,"Mac OS X 10.2":d,"Mac OS X 10_1":i,"Mac OS X 10.1":i,"Mac OS X 10_0":T,"Mac OS X 10.0":T},getVersion:function(){var X=[];
+},__c:{"Windows NT 6.1":L,"Windows NT 6.0":A,"Windows NT 5.2":R,"Windows NT 5.1":J,"Windows NT 5.0":b,"Windows 2000":b,"Windows NT 4.0":B,"Win 9x 4.90":n,"Windows CE":M,"Windows 98":c,"Win98":c,"Windows 95":e,"Win95":e,"Mac OS X 10_7":g,"Mac OS X 10.7":g,"Mac OS X 10_6":a,"Mac OS X 10.6":a,"Mac OS X 10_5":f,"Mac OS X 10.5":f,"Mac OS X 10_4":S,"Mac OS X 10.4":S,"Mac OS X 10_3":h,"Mac OS X 10.3":h,"Mac OS X 10_2":d,"Mac OS X 10.2":d,"Mac OS X 10_1":i,"Mac OS X 10.1":i,"Mac OS X 10_0":T,"Mac OS X 10.0":T},getVersion:function(){var X=[];
 
-for(var W in this.__e){X.push(W);
+for(var W in this.__c){X.push(W);
 }var Y=new RegExp(y+X.join(z).replace(/\./g,o)+Q,u);
 var V=Y.exec(navigator.userAgent);
 
-if(V&&V[1]){return qx.bom.client.OperatingSystem.__e[V[1]];
+if(V&&V[1]){return qx.bom.client.OperatingSystem.__c[V[1]];
 }return j;
 }}});
 })();
 (function(){var n="-",m="",l="qx.bom.client.Locale",k="LOCALE",j="\n",h="VARIANT",g="Please check the API documentation of qx.core.Environment.",f="android",e="\nTrace:",d="' of '",a="'is deprecated: ",b="The constant '";
-qx.Bootstrap.define(l,{statics:{LOCALE:"",VARIANT:"",getLocale:function(){var o=qx.bom.client.Locale.__f();
+qx.Bootstrap.define(l,{statics:{LOCALE:"",VARIANT:"",getLocale:function(){var o=qx.bom.client.Locale.__d();
 var p=o.indexOf(n);
 
 if(p!=-1){o=o.substr(0,p);
 }return o;
-},getVariant:function(){var q=qx.bom.client.Locale.__f();
+},getVariant:function(){var q=qx.bom.client.Locale.__d();
 var s=m;
 var r=q.indexOf(n);
 
 if(r!=-1){s=q.substr(r+1);
 }return s;
-},__f:function(){var t=(navigator.userLanguage||navigator.language||m);
+},__d:function(){var t=(navigator.userLanguage||navigator.language||m);
 if(qx.bom.client.OperatingSystem.getName()==f){var u=/(\w{2})-(\w{2})/i.exec(navigator.userAgent);
 
 if(u){t=u[0];
@@ -496,23 +433,23 @@ return q||i;
 })();
 (function(){var p="",o="silverlight",n="wmv",m="mshtml",l="quicktime",k="divx",j="Windows Media",h="qx.bom.client.Plugin",g="WMPlayer.OCX.7",f="Silverlight",c="QuickTimeCheckObject.QuickTimeCheck.1",e="QuickTime",d="npdivx.DivXBrowserPlugin.1",b="DivX Web Player",a="AgControl.AgControl";
 qx.Bootstrap.define(h,{statics:{getGears:function(){return !!(window.google&&window.google.gears);
-},__g:{quicktime:{plugin:e,control:c},wmv:{plugin:j,control:g},divx:{plugin:b,control:d},silverlight:{plugin:f,control:a}},getQuicktimeVersion:function(){var q=qx.bom.client.Plugin.__g[l];
-return qx.bom.client.Plugin.__h(q.control,q.plugin);
-},getWindowsMediaVersion:function(){var r=qx.bom.client.Plugin.__g[n];
-return qx.bom.client.Plugin.__h(r.control,r.plugin);
-},getDivXVersion:function(){var s=qx.bom.client.Plugin.__g[k];
-return qx.bom.client.Plugin.__h(s.control,s.plugin);
-},getSilverlightVersion:function(){var t=qx.bom.client.Plugin.__g[o];
-return qx.bom.client.Plugin.__h(t.control,t.plugin);
-},getQuicktime:function(){var u=qx.bom.client.Plugin.__g[l];
-return qx.bom.client.Plugin.__i(u.control,u.plugin);
-},getWindowsMedia:function(){var v=qx.bom.client.Plugin.__g[n];
-return qx.bom.client.Plugin.__i(v.control,v.plugin);
-},getDivX:function(){var w=qx.bom.client.Plugin.__g[k];
-return qx.bom.client.Plugin.__i(w.control,w.plugin);
-},getSilverlight:function(){var x=qx.bom.client.Plugin.__g[o];
-return qx.bom.client.Plugin.__i(x.control,x.plugin);
-},__h:function(y,z){var A=qx.bom.client.Plugin.__i(y,z);
+},__e:{quicktime:{plugin:e,control:c},wmv:{plugin:j,control:g},divx:{plugin:b,control:d},silverlight:{plugin:f,control:a}},getQuicktimeVersion:function(){var q=qx.bom.client.Plugin.__e[l];
+return qx.bom.client.Plugin.__f(q.control,q.plugin);
+},getWindowsMediaVersion:function(){var r=qx.bom.client.Plugin.__e[n];
+return qx.bom.client.Plugin.__f(r.control,r.plugin);
+},getDivXVersion:function(){var s=qx.bom.client.Plugin.__e[k];
+return qx.bom.client.Plugin.__f(s.control,s.plugin);
+},getSilverlightVersion:function(){var t=qx.bom.client.Plugin.__e[o];
+return qx.bom.client.Plugin.__f(t.control,t.plugin);
+},getQuicktime:function(){var u=qx.bom.client.Plugin.__e[l];
+return qx.bom.client.Plugin.__g(u.control,u.plugin);
+},getWindowsMedia:function(){var v=qx.bom.client.Plugin.__e[n];
+return qx.bom.client.Plugin.__g(v.control,v.plugin);
+},getDivX:function(){var w=qx.bom.client.Plugin.__e[k];
+return qx.bom.client.Plugin.__g(w.control,w.plugin);
+},getSilverlight:function(){var x=qx.bom.client.Plugin.__e[o];
+return qx.bom.client.Plugin.__g(x.control,x.plugin);
+},__f:function(y,z){var A=qx.bom.client.Plugin.__g(y,z);
 if(!A){return p;
 }if(qx.bom.client.Engine.getName()==m){var B=new ActiveXObject(y);
 
@@ -535,7 +472,7 @@ for(var i=0;i<F.length;i++){var C=F[i];
 if(C.name.indexOf(z)!==-1){if(D.test(C.name)||D.test(C.description)){return RegExp.$1;
 }else{return p;
 }return p;
-}}}},__i:function(H,I){if(qx.bom.client.Engine.getName()==m){var J=window.ActiveXObject;
+}}}},__g:function(H,I){if(qx.bom.client.Engine.getName()==m){var J=window.ActiveXObject;
 
 if(!J){return false;
 }
@@ -557,15 +494,15 @@ if(name.indexOf(I)!==-1){return true;
 qx.Bootstrap.define(y,{statics:{NAME:"",FULLVERSION:"0.0.0",VERSION:0.0,OPERA:false,WEBKIT:false,GECKO:false,MSHTML:false,UNKNOWN_ENGINE:false,UNKNOWN_VERSION:false,DOCUMENT_MODE:null,getVersion:function(){var M=window.navigator.userAgent;
 var K=l;
 
-if(qx.bom.client.Engine.__j()){if(/Opera[\s\/]([0-9]+)\.([0-9])([0-9]*)/.test(M)){K=RegExp.$1+h+RegExp.$2;
+if(qx.bom.client.Engine.__h()){if(/Opera[\s\/]([0-9]+)\.([0-9])([0-9]*)/.test(M)){K=RegExp.$1+h+RegExp.$2;
 
 if(RegExp.$3!=l){K+=h+RegExp.$3;
-}}}else if(qx.bom.client.Engine.__k()){if(/AppleWebKit\/([^ ]+)/.test(M)){K=RegExp.$1;
+}}}else if(qx.bom.client.Engine.__i()){if(/AppleWebKit\/([^ ]+)/.test(M)){K=RegExp.$1;
 var L=RegExp(f).exec(K);
 
 if(L){K=K.slice(0,L.index);
-}}}else if(qx.bom.client.Engine.__l()){if(/rv\:([^\);]+)(\)|;)/.test(M)){K=RegExp.$1;
-}}else if(qx.bom.client.Engine.__m()){if(/MSIE\s+([^\);]+)(\)|;)/.test(M)){K=RegExp.$1;
+}}}else if(qx.bom.client.Engine.__j()){if(/rv\:([^\);]+)(\)|;)/.test(M)){K=RegExp.$1;
+}}else if(qx.bom.client.Engine.__k()){if(/MSIE\s+([^\);]+)(\)|;)/.test(M)){K=RegExp.$1;
 if(K<8&&/Trident\/([^\);]+)(\)|;)/.test(M)){if(RegExp.$1==e){K=E;
 }else if(RegExp.$1==w){K=H;
 }}}}else{var J=window.qxFail;
@@ -576,35 +513,35 @@ qx.Bootstrap.warn("Unsupported client: "+M+"! Assumed gecko version 1.9.0.0 (Fir
 }}return K;
 },getName:function(){var name;
 
-if(qx.bom.client.Engine.__j()){name=m;
-}else if(qx.bom.client.Engine.__k()){name=x;
-}else if(qx.bom.client.Engine.__l()){name=j;
-}else if(qx.bom.client.Engine.__m()){name=n;
+if(qx.bom.client.Engine.__h()){name=m;
+}else if(qx.bom.client.Engine.__i()){name=x;
+}else if(qx.bom.client.Engine.__j()){name=j;
+}else if(qx.bom.client.Engine.__k()){name=n;
 }else{var N=window.qxFail;
 
 if(N&&typeof N===k){name=N().NAME;
 }else{name=j;
 qx.Bootstrap.warn("Unsupported client: "+window.navigator.userAgent+"! Assumed gecko version 1.9.0.0 (Firefox 3.0).");
 }}return name;
-},__j:function(){return window.opera&&Object.prototype.toString.call(window.opera)==g;
-},__k:function(){return window.navigator.userAgent.indexOf(A)!=-1;
-},__l:function(){return window.controllers&&window.navigator.product===C;
-},__m:function(){return window.navigator.cpuClass&&/MSIE\s+([^\);]+)(\)|;)/.test(window.navigator.userAgent);
+},__h:function(){return window.opera&&Object.prototype.toString.call(window.opera)==g;
+},__i:function(){return window.navigator.userAgent.indexOf(A)!=-1;
+},__j:function(){return window.controllers&&window.navigator.product===C;
+},__k:function(){return window.navigator.cpuClass&&/MSIE\s+([^\);]+)(\)|;)/.test(window.navigator.userAgent);
 }},defer:function(O){O.NAME=O.getName();
 O.FULLVERSION=O.getVersion();
 
 if(O.FULLVERSION==l){O.UNKNOWN_VERSION=true;
 }
-if(O.__j()){O.OPERA=true;
+if(O.__h()){O.OPERA=true;
 
 if(O.FULLVERSION==l){O.FULLVERSION="9.6.0";
-}}else if(O.__k()){O.WEBKIT=true;
+}}else if(O.__i()){O.WEBKIT=true;
 
 if(O.FULLVERSION==l){O.FULLVERSION="525.26";
-}}else if(O.__l()){O.GECKO=true;
+}}else if(O.__j()){O.GECKO=true;
 
 if(O.FULLVERSION==l){O.FULLVERSION="1.9.0.0";
-}}else if(O.__m()){O.MSHTML=true;
+}}else if(O.__k()){O.MSHTML=true;
 
 if(document.documentMode){O.DOCUMENT_MODE=document.documentMode;
 }}else{var P=window.qxFail;
@@ -627,7 +564,7 @@ return c;
 })();
 (function(){var l="",k="mshtml",j="msie",h=")(/| )([0-9]+\.[0-9])",g="(",f="ce",e="CSS1Compat",d="android",b="operamini",a="\nTrace:",M="'is deprecated: ",L="Please check the API documentation of qx.core.Environment.",K="mobile chrome",J="iemobile",I="FULLVERSION",H="opera mobi",G="Mobile Safari",F="UNKNOWN",E="operamobile",D="ie",s="mobile safari",t="IEMobile|Maxthon|MSIE",q="NAME",r="qx.bom.client.Browser",o="opera mini",p="VERSION",m="' of '",n="opera",u="TITLE",v="\n",y="Opera Mini|Opera Mobi|Opera",x="AdobeAIR|Titanium|Fluid|Chrome|Android|Epiphany|Konqueror|iCab|OmniWeb|Maxthon|Pre|Mobile Safari|Safari",A="The constant '",z="webkit",C="5.0",B="prism|Fennec|Camino|Kmeleon|Galeon|Netscape|SeaMonkey|Firefox",w="Mobile/";
 qx.Bootstrap.define(r,{statics:{UNKNOWN:true,NAME:"unknown",TITLE:"unknown 0.0",VERSION:0.0,FULLVERSION:"0.0.0",getName:function(){var Q=navigator.userAgent;
-var P=new RegExp(g+qx.bom.client.Browser.__n+h);
+var P=new RegExp(g+qx.bom.client.Browser.__l+h);
 var O=Q.match(P);
 
 if(!O){return l;
@@ -642,7 +579,7 @@ if(qx.bom.client.OperatingSystem.getVersion()===f){name=J;
 }else if(name===o){name=b;
 }}return name;
 },getVersion:function(){var U=navigator.userAgent;
-var T=new RegExp(g+qx.bom.client.Browser.__n+h);
+var T=new RegExp(g+qx.bom.client.Browser.__l+h);
 var S=U.match(T);
 
 if(!S){return l;
@@ -658,7 +595,7 @@ if(name===j&&qx.bom.client.OperatingSystem.getVersion()==f){R=C;
 }return 0;
 },getQuirksMode:function(){if(qx.bom.client.Engine.getName()==k&&parseFloat(qx.bom.client.Engine.getVersion())>=8){return qx.bom.client.Engine.DOCUMENT_MODE===5;
 }else{return document.compatMode!==e;
-}},__n:{"webkit":x,"gecko":B,"mshtml":t,"opera":y}[qx.bom.client.Engine.getName()]},defer:function(V){V.NAME=V.getName();
+}},__l:{"webkit":x,"gecko":B,"mshtml":t,"opera":y}[qx.bom.client.Engine.getName()]},defer:function(V){V.NAME=V.getName();
 V.FULLVERSION=V.getVersion();
 V.VERSION=parseFloat(V.FULLVERSION);
 V.TITLE=V.NAME+" "+V.VERSION;
@@ -735,14 +672,14 @@ K[2]=/r/.test(M)?parseInt(M.replace(/^.*r(.*)$/,k),10):0;
 
 if(R==j){return false;
 }var Q=qx.bom.client.OperatingSystem.getName();
-return (Q==C||Q==G)&&qx.bom.client.Flash.__o(t,R);
+return (Q==C||Q==G)&&qx.bom.client.Flash.__m(t,R);
 },getStrictSecurityModel:function(){var S=qx.bom.client.Flash.getVersion();
 
 if(S==j){return false;
 }var T=S.split(l);
 
-if(T[0]<10){return qx.bom.client.Flash.__o(u,S);
-}else{return qx.bom.client.Flash.__o(E,S);
+if(T[0]<10){return qx.bom.client.Flash.__m(u,S);
+}else{return qx.bom.client.Flash.__m(E,S);
 }},_cachedSupportsVersion:{},supportsVersion:function(U){if(typeof this._cachedSupportsVersion[U]===o){return this._cachedSupportsVersion[U];
 }else{var X=U.split(l);
 var W=this.FULLVERSION.split(l);
@@ -752,7 +689,7 @@ for(var i=0;i<X.length;i++){var V=parseInt(W[i],10)-parseInt(X[i],10);
 if(V>0){return (this._cachedSupportsVersion[U]=true);
 }else if(V<0){return (this._cachedSupportsVersion[U]=false);
 }}return (this._cachedSupportsVersion[U]=true);
-}},__o:function(Y,ba){var bd=Y.split(l);
+}},__m:function(Y,ba){var bd=Y.split(l);
 var bc=ba||qx.bom.client.Flash.getVersion();
 bc=bc.split(l);
 
@@ -784,13 +721,13 @@ qx.Bootstrap.define(a,{statics:{getObjectCount:function(){return (({}).__count__
 }}});
 })();
 (function(){var m="ipod",l="g",k="xbox",j="pc",i="\.",h="(",g=")",f="iPhone",e="|",d="qx.bom.client.Device",a="wii",c="ipad",b="ds";
-qx.Bootstrap.define(d,{statics:{__p:{"iPod":m,"iPad":c,"iPhone":f,"PSP":"psp","PLAYSTATION 3":"ps3","Nintendo Wii":a,"Nintendo DS":b,"XBOX":"xbox","Xbox":k},getName:function(){var p=[];
+qx.Bootstrap.define(d,{statics:{__n:{"iPod":m,"iPad":c,"iPhone":f,"PSP":"psp","PLAYSTATION 3":"ps3","Nintendo Wii":a,"Nintendo DS":b,"XBOX":"xbox","Xbox":k},getName:function(){var p=[];
 
-for(var o in this.__p){p.push(o);
+for(var o in this.__n){p.push(o);
 }var q=new RegExp(h+p.join(e).replace(/\./g,i)+g,l);
 var n=q.exec(navigator.userAgent);
 
-if(n&&n[1]){return qx.bom.client.Device.__p[n[1]];
+if(n&&n[1]){return qx.bom.client.Device.__n[n[1]];
 }return j;
 }}});
 })();
@@ -802,32 +739,32 @@ return f!=b&&f!=c;
 }}});
 })();
 (function(){var o="on",n="off",m="os.name",l="html.storage.local",k="plugin.silverlight.version",j="os.version",h="html.xul",g="plugin.windowsmedia.version",f="html.video.ogg",e="default",bF="html.xpath",bE="plugin.flash.express",bD="plugin.windowsmedia",bC="html.webworker",bB="phonegap",bA="browser.quirksmode",bz="browser.name",by="plugin.silverlight",bx="event.pointer",bw="qx.aspects",v="plugin.gears",w="io.ssl",t="css.translate3d",u="html.classlist",r="locale.variant",s="css.textoverflow",p="qx.debug",q="html.video",D="plugin.flash",E="css.boxshadow",W="event.touch",S="html.storage.session",bf="plugin.divx",ba="css.boxmodel",br="plugin.flash.version",bl="qx.allowUrlSettings",L="css.gradients",bv="browser.documentmode",bt="html.vml",bs="html.canvas",J="html.audio",O="html.audio.mp3",Q="css.borderradius",U="ecmascript.objectcount",X="locale",bb="html.audio.au",bh="html.geolocation",bn="qx.mobile.emulatetouch",x="qx.dynlocale",y="plugin.quicktime",N="engine.version",be="io.maxrequests",bd="engine.name",bc="html.audio.aif",bj="html.audio.ogg",bi="qx.mobile.nativescroll",Y="plugin.divx.version",bg="html.video.h264",a="css.placeholder",bm="plugin.quicktime.version",z="|",A="browser.version",T="io.xhr",b="html.audio.wav",d="device.name",I="phonegap.notification",B="html.svg",C="html.dataurl",G="html.video.webm",V="plugin.flash.strictsecurity",bp="qx.core.Environment",bo="qx.debug.databinding",P="true",bq="qxenv",K="qx.propertyDebugLevel",bk="qx.dynamicmousewheel",F=":",H="false",c="&",R="qx.allowUrlVariants",M="qx.bom.htmlarea.HtmlArea.debug",bu="qx.globalErrorHandling";
-qx.Bootstrap.define(bp,{statics:{_checks:{},_asyncChecks:{},__q:{},get:function(bG){if(this.__q[bG]!=undefined){return this.__q[bG];
+qx.Bootstrap.define(bp,{statics:{_checks:{},_asyncChecks:{},__o:{},get:function(bG){if(this.__o[bG]!=undefined){return this.__o[bG];
 }var bH=this._checks[bG];
 
 if(bH){var bI=bH();
-this.__q[bG]=bI;
+this.__o[bG]=bI;
 return bI;
 }if(qx.Bootstrap.DEBUG){qx.Bootstrap.warn(bG+" is not a valid key. Please see the API-doc of "+"qx.core.Environment for a list of predefined keys.");
 qx.Bootstrap.trace(this);
 }},getAsync:function(bJ,bK,self){var bM=this;
 
-if(this.__q[bJ]!=undefined){window.setTimeout(function(){bK.call(self,bM.__q[bJ]);
+if(this.__o[bJ]!=undefined){window.setTimeout(function(){bK.call(self,bM.__o[bJ]);
 },0);
 return;
 }var bL=this._asyncChecks[bJ];
 
-if(bL){bL(function(bN){bM.__q[bJ]=bN;
+if(bL){bL(function(bN){bM.__o[bJ]=bN;
 bK.call(self,bN);
 });
 return;
 }if(qx.Bootstrap.DEBUG){qx.Bootstrap.warn(bJ+" is not a valid key. Please see the API-doc of "+"qx.core.Environment for a list of predefined keys.");
 qx.Bootstrap.trace(this);
-}},select:function(bO,bP){return this.__r(this.get(bO),bP);
-},selectAsync:function(bQ,bR,self){this.getAsync(bQ,function(bS){var bT=this.__r(bQ,bR);
+}},select:function(bO,bP){return this.__p(this.get(bO),bP);
+},selectAsync:function(bQ,bR,self){this.getAsync(bQ,function(bS){var bT=this.__p(bQ,bR);
 bT.call(self,bS);
 },this);
-},__r:function(bU,bV){var bX=bV[bU];
+},__p:function(bU,bV){var bX=bV[bU];
 
 if(bV.hasOwnProperty(bU)){return bX;
 }for(var bW in bV){if(bW.indexOf(z)!=-1){var bY=bW.split(z);
@@ -843,9 +780,9 @@ qx.Bootstrap.trace(this);
 if(bV[e]!==undefined){return bV[e];
 }
 if(qx.Bootstrap.DEBUG){throw new Error('No match for variant "'+bU+'" ('+(typeof bU)+' type)'+' in variants ['+qx.Bootstrap.getKeysAsString(bV)+'] found, and no default ("default") given');
-}},invalidateCacheKey:function(ca){delete this.__q[ca];
+}},invalidateCacheKey:function(ca){delete this.__o[ca];
 },add:function(cb,cc){if(this._checks[cb]==undefined){if(cc instanceof Function){this._checks[cb]=cc;
-}else{this._checks[cb]=this.__u(cc);
+}else{this._checks[cb]=this.__s(cc);
 }}},addAsync:function(cd,ce){if(this._checks[cd]==undefined){this._asyncChecks[cd]=ce;
 }},_initDefaultQxValues:function(){this.add(bl,function(){return false;
 });
@@ -867,19 +804,19 @@ this.add(bk,function(){return true;
 });
 this.add(bo,function(){return false;
 });
-},__s:function(){if(window.qxsettings){for(var cg in window.qxsettings){var cf=window.qxsettings[cg];
+},__q:function(){if(window.qxsettings){for(var cg in window.qxsettings){var cf=window.qxsettings[cg];
 
 if(cg==M||cg==bu){if(cf==o){cf=true;
 }else if(cf==n){cf=false;
-}}this._checks[cg]=this.__u(cf);
+}}this._checks[cg]=this.__s(cf);
 }}if(window.qxvariants){for(var cg in window.qxvariants){var cf=window.qxvariants[cg];
 
 if(cg==bw||cg==p||cg==x||cg==bn||cg==bi){if(cf==o){cf=true;
 }else if(cf==n){cf=false;
-}}this._checks[cg]=this.__u(cf);
+}}this._checks[cg]=this.__s(cf);
 }}if(qx&&qx.$$environment){for(var cg in qx.$$environment){var cf=qx.$$environment[cg];
-this._checks[cg]=this.__u(cf);
-}}},__t:function(){if(window.document&&window.document.location){var ch=window.document.location.search.slice(1).split(c);
+this._checks[cg]=this.__s(cf);
+}}},__r:function(){if(window.document&&window.document.location){var ch=window.document.location.search.slice(1).split(c);
 
 for(var i=0;i<ch.length;i++){var cj=ch[i].split(F);
 
@@ -889,8 +826,8 @@ var ci=decodeURIComponent(cj[2]);
 if(ci==P){ci=true;
 }else if(ci==H){ci=false;
 }else if(/^(\d|\.)+$/.test(ci)){ci=parseFloat(ci);
-}this._checks[ck]=this.__u(ci);
-}}},__u:function(cl){return qx.Bootstrap.bind(function(cm){return cm;
+}this._checks[ck]=this.__s(ci);
+}}},__s:function(cl){return qx.Bootstrap.bind(function(cm){return cm;
 },null,cl);
 },useCheck:function(cn){return true;
 },_initChecksMap:function(){if(this.useCheck(N)){this._checks[N]=qx.bom.client.Engine.getVersion;
@@ -1003,9 +940,72 @@ if(this.useCheck(t)){this._checks[t]=qx.bom.client.Css.getTranslate3d;
 if(this.useCheck(I)){this._checks[I]=qx.bom.client.PhoneGap.getNotification;
 }}},defer:function(co){co._initDefaultQxValues();
 co._initChecksMap();
-co.__s();
-if(co.get(bl)!=true){co.__t();
+co.__q();
+if(co.get(bl)!=true){co.__r();
 }}});
+})();
+(function(){var g="qx.Mixin",f=".prototype",e="constructor",d="[Mixin ",c="]",b="destruct",a="Mixin";
+qx.Bootstrap.define(g,{statics:{define:function(name,h){if(h){if(h.include&&!(h.include instanceof Array)){h.include=[h.include];
+}var k=h.statics?h.statics:{};
+qx.Bootstrap.setDisplayNames(k,name);
+
+for(var j in k){if(k[j] instanceof Function){k[j].$$mixin=k;
+}}if(h.construct){k.$$constructor=h.construct;
+qx.Bootstrap.setDisplayName(h.construct,name,e);
+}
+if(h.include){k.$$includes=h.include;
+}
+if(h.properties){k.$$properties=h.properties;
+}
+if(h.members){k.$$members=h.members;
+qx.Bootstrap.setDisplayNames(h.members,name+f);
+}
+for(var j in k.$$members){if(k.$$members[j] instanceof Function){k.$$members[j].$$mixin=k;
+}}
+if(h.events){k.$$events=h.events;
+}
+if(h.destruct){k.$$destructor=h.destruct;
+qx.Bootstrap.setDisplayName(h.destruct,name,b);
+}}else{var k={};
+}k.$$type=a;
+k.name=name;
+k.toString=this.genericToString;
+k.basename=qx.Bootstrap.createNamespace(name,k);
+this.$$registry[name]=k;
+return k;
+},checkCompatibility:function(m){var p=this.flatten(m);
+var q=p.length;
+
+if(q<2){return true;
+}var t={};
+var s={};
+var r={};
+var o;
+
+for(var i=0;i<q;i++){o=p[i];
+
+for(var n in o.events){if(r[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+r[n]+'" in member "'+n+'"!');
+}r[n]=o.name;
+}
+for(var n in o.properties){if(t[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+t[n]+'" in property "'+n+'"!');
+}t[n]=o.name;
+}
+for(var n in o.members){if(s[n]){throw new Error('Conflict between mixin "'+o.name+'" and "'+s[n]+'" in member "'+n+'"!');
+}s[n]=o.name;
+}}return true;
+},isCompatible:function(u,v){var w=qx.Bootstrap.getMixins(v);
+w.push(u);
+return qx.Mixin.checkCompatibility(w);
+},getByName:function(name){return this.$$registry[name];
+},isDefined:function(name){return this.getByName(name)!==undefined;
+},getTotalNumber:function(){return qx.Bootstrap.objectGetLength(this.$$registry);
+},flatten:function(x){if(!x){return [];
+}var y=x.concat();
+
+for(var i=0,l=x.length;i<l;i++){if(x[i].$$includes){y.push.apply(y,this.flatten(x[i].$$includes));
+}}return y;
+},genericToString:function(){return d+this.name+c;
+},$$registry:{},__t:null,__u:function(){}}});
 })();
 (function(){var h="qx.allowUrlSettings",g="&",f="qx.core.Setting",e="qx.allowUrlVariants",d="qx.propertyDebugLevel",c="qxsetting",b=":",a=".";
 qx.Bootstrap.define(f,{statics:{__v:{},define:function(j,k){this.defineDeprecated(j,k);
@@ -3683,10 +3683,6 @@ qx.Class.define(a,{extend:qx.core.Object,implement:qx.event.IEventHandler,static
 },registerEvent:function(d,e,f){},unregisterEvent:function(g,h,i){}},defer:function(j){qx.event.Registration.addHandler(j);
 }});
 })();
-(function(){var a="qx.lang.Date";
-qx.Class.define(a,{statics:{now:function(){return +new Date;
-}}});
-})();
 (function(){var k="indexOf",j="lastIndexOf",h="slice",g="concat",f="join",e="toLocaleUpperCase",d="shift",c="substr",b="filter",a="unshift",I="match",H="quote",G="qx.lang.Generics",F="localeCompare",E="sort",D="some",C="charAt",B="split",A="substring",z="pop",t="toUpperCase",u="replace",q="push",r="charCodeAt",o="every",p="reverse",m="search",n="forEach",v="map",w="toLowerCase",y="splice",x="toLocaleLowerCase";
 qx.Class.define(G,{statics:{__dn:{"Array":[f,p,E,q,z,d,a,y,g,h,k,j,n,v,b,D,o],"String":[H,A,w,t,C,r,k,j,x,e,F,I,m,u,B,c,g,h]},__do:function(J,K){return function(s){return J.prototype[K].apply(s,Array.prototype.slice.call(arguments,1));
 };
@@ -3700,6 +3696,10 @@ for(var i=0,l=M.length;i<l;i++){var O=M[i];
 if(!N[O]){N[O]=qx.lang.Generics.__do(N,O);
 }}}}},defer:function(Q){Q.__dp();
 }});
+})();
+(function(){var a="qx.lang.Date";
+qx.Class.define(a,{statics:{now:function(){return +new Date;
+}}});
 })();
 (function(){var f="_applyTheme",e="qx.theme",d="qx.theme.manager.Meta",c="qx.theme.Modern",b="Theme",a="singleton";
 qx.Class.define(d,{type:a,extend:qx.core.Object,properties:{theme:{check:b,nullable:true,apply:f}},members:{_applyTheme:function(g,h){var k=null;
@@ -10766,177 +10766,183 @@ this.setRoot(true);
 qx.html.Element._modified[this.$$hash]=this;
 }}});
 })();
-(function(){var l="100%",k="View.",j="show",i="resize",h="update",g="update_with_values",f="Values are: ",d="hide",c="switch_tab",b="button",bo="getActiveForm",bn="We have to show the following: ",bm="updateView: ",bl="update_view",bk="Adding container ",bj="changeView with data ",bi="Enabled",bh="in dispatcher for ",bg="Didn't find field ",bf="Found new tab: ",t=" / ",u="New tab is: ",q="emtpy_all",s=" and field ",o="unhide",p="empty_only",m="New Width is ",n="The following views are allowed: ",A="getRootContainer gives: ",B="empty",K='visible',H="pass_tabs",S="changeSelection",N="finished dispatcher",bb="View is: ",X="showView - container is: ",D="auto_update",be="list",bd="Timer for callback_button",bc='excluded',C="Layout ",F="** UNdoing effects",G="reload",J="clear",L="update-method is: ",O="setting updating on false in ",U=" already here - doing nothing",ba="*****===== Dispatcher ",w="session_id",x="Killing running timer",E="We're in a sub-layout, adding tabsField",R="timer for update",Q="Turning debugging on",P="adding view-tab: ",W="callback_button",V="window_hide",M="Tab already created - updating only",T="frontend.Views.Layout",a="debug",Y="left",y="New view is: ",z="checkTimer",I="window_show";
-qx.Class.define(T,{extend:qx.ui.container.Composite,construct:function(){this.align_tabs=Y;
+(function(){var n="100%",m="View.",l="show",k="resize",j="update",i="update_with_values",h="Values are: ",g="hide",f="switch_tab",d="button",br="getActiveForm",bq="We have to show the following: ",bp="updateView: ",bo="update_view",bn="Adding container ",bm="changeView with data ",bl="Enabled",bk="in dispatcher for ",bj="Didn't find field ",bi="Found new tab: ",w=" / ",x="New tab is: ",t="emtpy_all",u=" and field ",q="unhide",s="empty_only",o="New Width is ",p="The following views are allowed: ",C="getRootContainer gives: ",D="empty",N='visible',K="pass_tabs",V="changeSelection",Q="finished dispatcher",be="View is: ",bb="showView - container is: ",G="tabs_",bh="auto_update",bg="list",bf="Timer for callback_button",F='excluded',I="Layout ",J="** UNdoing effects",M="reload",O="clear",R="update-method is: ",X="setting updating on false in ",bd=" already here - doing nothing",y="*****===== Dispatcher ",z="session_id",H="Killing running timer",U="Adding something to the show - update_view",T="We're in a sub-layout, adding tabsField",S="timer for update",ba="Turning debugging on",Y="adding view-tab: ",P="",W="callback_button",a="window_hide",bc="Tab already created - updating only",A="frontend.Views.Layout",B="debug",L="left",b="New view is: ",c="checkTimer",E="window_show";
+qx.Class.define(A,{extend:qx.ui.container.Composite,construct:function(){this.alignTabs=L;
 qx.ui.container.Composite.call(this);
 this.setLayout(this.layout=new qx.ui.layout.Canvas());
 this.timer=qx.util.TimerManager.getInstance();
 this.effect=false;
 this.root=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
 this.root.setPadding(10);
-this.add(this.root,{width:l,height:l});
-this.addListener(i,function(e){root.fireDataEvent(i,new qx.event.type.Data());
+this.add(this.root,{width:n,height:n});
+this.addListener(k,function(e){root.fireDataEvent(k,new qx.event.type.Data());
 },this);
-},members:{layoutView:null,dataClass:null,viewClass:null,root:null,views:null,layout:null,list:null,views:null,field:null,tabs:null,timer:null,effect:null,timerUpdate:null,align_tabs:null,tabs_field:null,resizeTab:function(){if(this.tabs){dbg(0,m+qx.bom.Viewport.getWidth());
+},members:{layoutView:null,dataClass:null,viewClass:null,root:null,views:null,layout:null,list:null,views:null,field:null,tabs:null,timer:null,effect:null,timerUpdate:null,alignTabs:null,parentTab:null,resizeTab:function(){if(this.tabs){dbg(0,o+qx.bom.Viewport.getWidth());
 this.root.setWidth(qx.bom.Viewport.getWidth());
 this.root.setHeight(qx.bom.Viewport.getHeight());
-}},dispatch:function(bp){dbg(5,bh+this.viewClass);
-var bq=true;
-var bv=this.getActiveForm();
+}},dispatch:function(bs){dbg(5,bk+this.viewClass);
+var bt=true;
+var by=this.getActiveForm();
 
-if(bv&&!bv.fields.isEnabled()){bv.fields.setEnabled(true);
+if(by&&!by.fields.isEnabled()){by.fields.setEnabled(true);
 }
-for(var r=0;r<bp.length;r++){var br=bp[r];
-dbg(0,ba+(r+1)+t+bp.length);
-dbg(0,print_a(br));
-dbg(0,print_a(br.data));
-dbg(0,br.data);
+for(var r=0;r<bs.length;r++){var bu=bs[r];
+dbg(0,y+(r+1)+w+bs.length);
+dbg(0,print_a(bu));
+dbg(0,print_a(bu.data));
+dbg(0,bu.data);
 
-switch(br.cmd){case w:rpc.session_id=br.data;
+switch(bu.cmd){case z:rpc.session_id=bu.data;
 break;
-case j:this.showView(br.data);
+case l:this.showView(bu.data);
 break;
-case h:if(this.tabs){this.tabs.setEnabled(true);
-}this.updateView(br.data);
+case j:if(this.tabs){this.tabs.setEnabled(true);
+}this.updateView(bu.data);
 break;
-case be:this.createViews(br.data);
+case bg:this.createViews(bu.data);
 break;
-case J:this.root.removeAll();
+case O:this.root.removeAll();
 break;
-case G:window.location.reload();
+case M:window.location.reload();
 break;
-case B:this.getActiveForm().fields.clearData(br.data);
+case D:this.getActiveForm().fields.clearData(bu.data);
 break;
-case p:this.getActiveForm().fields.clearDataOnly(br.data);
+case s:this.getActiveForm().fields.clearDataOnly(bu.data);
 break;
-case q:this.getActiveForm().fields.clearDataAll();
+case t:this.getActiveForm().fields.clearDataAll();
 break;
-case a:dbg(0,Q);
+case B:dbg(0,ba);
 {qx.log.appender.Native;
 qx.log.appender.Console.show();
 };
 break;
-case D:this.checkTimer();
-var bt=Math.abs(br.data)*1000;
-var bu=h;
+case bh:this.checkTimer();
+var bw=Math.abs(bu.data)*1000;
+var bx=j;
 
-if(br.data<0){bu=g;
-}dbg(3,L+bu);
-dbg(3,bb+this.viewClass);
-this.timerUpdate=this.timer.start(function(bw,bx){dbg(3,R);
-var by=[];
+if(bu.data<0){bx=i;
+}dbg(3,R+bx);
+dbg(3,be+this.viewClass);
+this.timerUpdate=this.timer.start(function(bz,bA){dbg(3,S);
+var bB=[];
 
-if(bu==g){by=[this.field.fields.getFieldsData()];
-dbg(3,f+print_a(by));
-}rpc.callRPCarray(k+this.viewClass,bu,this,this.dispatch,by);
-},bt,this,null,bt);
+if(bx==i){bB=[this.field.fields.getFieldsData()];
+dbg(3,h+print_a(bB));
+}rpc.callRPCarray(m+this.viewClass,bx,this,this.dispatch,bB);
+},bw,this,null,bw);
 break;
-case I:bq=false;
-bv.fields.window_show(br.data);
+case E:bt=false;
+by.fields.window_show(bu.data);
 break;
-case V:bv.fields.window_hide(br.data);
+case a:by.fields.window_hide(bu.data);
 break;
-case W:bq=false;
+case W:bt=false;
 unfade=false;
-qx.util.TimerManager.getInstance().start(function(bz,bA){dbg(3,bd);
-this.callBackend(b,br.data,this.fields.getFieldsData());
-},null,bv,null,1000);
+qx.util.TimerManager.getInstance().start(function(bC,bD){dbg(3,bf);
+this.callBackend(d,bu.data,this.fields.getFieldsData());
+},null,by,null,1000);
 break;
-case c:for(var v=0;v<this.views.length;v++){if(this.views[v].getLabel()==br.data){this.tabs.setSelection([this.views[v]]);
-dbg(3,bf+br.data);
-dbg(3,u+this.tabs.getSelection()[0].getLabel());
+case f:for(var v=0;v<this.views.length;v++){if(this.views[v].getLabel()==bu.data){this.tabs.setSelection([this.views[v]]);
+dbg(3,bi+bu.data);
+dbg(3,x+this.tabs.getSelection()[0].getLabel());
 }}break;
-case d:this.setVisibility(br.data,bc);
+case g:this.setVisibility(bu.data,F);
 break;
-case o:this.setVisibility(br.data,K);
+case q:this.setVisibility(bu.data,N);
 break;
-case H:bv.fields.layout.getActiveForm().callBackend(br.data[0],br.data[1],br.data[2]);
+case K:by.fields.layout.getActiveForm().callBackend(bu.data[0],bu.data[1],bu.data[2]);
 break;
 }}
-if(bq&&bv){dbg(5,F);
-var bs=new qx.fx.effect.core.Fade(bv.fields.getContainerElement().getDomElement());
-bs.set({from:0.5,to:1});
+if(bt&&by){dbg(5,J);
+var bv=new qx.fx.effect.core.Fade(by.fields.getContainerElement().getDomElement());
+bv.set({from:0.5,to:1});
 
-if(bv.effect){bv.effect.cancel();
-}bs.start();
-bv.fields.windows_fade_to(1);
+if(by.effect){by.effect.cancel();
+}bv.start();
+by.fields.windows_fade_to(1);
 }
-if(this.tabs&&bq){this.tabs.setEnabled(true);
+if(this.tabs&&bt){this.tabs.setEnabled(true);
 }
-if(this.field){dbg(5,O+this.field);
+if(this.field){dbg(5,X+this.field);
 this.field.fields.updating=false;
-}dbg(5,N);
-},setVisibility:function(bB,bC){aform=this.getActiveForm();
+}dbg(5,Q);
+},setVisibility:function(bE,bF){aform=this.getActiveForm();
 
-if(aform.fields.fields[bB]){aform.fields.fields[bB].setVisibility(bC);
-}else{dbg(3,bg+bB);
-}},checkTimer:function(){dbg(3,z);
+if(aform.fields.fields[bE]){aform.fields.fields[bE].setVisibility(bF);
+}else{dbg(3,bj+bE);
+}},checkTimer:function(){dbg(3,c);
 
-if(this.timerUpdate){dbg(2,x);
+if(this.timerUpdate){dbg(2,H);
 this.timer.stop(this.timerUpdate);
 this.timerUpdate=null;
-}},showView:function(bD){this.layoutView=bD.layout;
-this.dataClass=bD.data_class;
-this.viewClass=bD.view_class;
-dbg(5,bn+this.layoutView);
+}},showView:function(bG){this.layoutView=bG.layout;
+this.dataClass=bG.data_class;
+this.viewClass=bG.view_class;
+dbg(5,bq+this.layoutView);
 this.checkTimer();
 if(this.tabs){if(this.tabs.getSelection()[0].getLabel()!=this.viewClass){alert("Changed tabs in the meantime: "+this.tabs.getSelection()[0].getLabel());
 
 for(var v=0;v<this.views.length;v++){if(this.views[v].getLabel()==this.viewClass){this.tabs.setSelection([this.views[v]]);
-}}}}var bF=this.getRootContainer();
-dbg(5,X+bF);
-var bE=[this,this.dispatch];
-if(!bF.hasChildren()){dbg(4,bk+this.viewClass);
-this.field=new frontend.Views.Form(bE,this.layoutView,this.dataClass,this.viewClass);
+}}}}var bI=this.getRootContainer();
+dbg(5,bb+bI);
+var bH=[this,this.dispatch];
+if(!bI.hasChildren()){dbg(4,bn+this.viewClass);
+this.field=new frontend.Views.Form(bH,this.layoutView,this.dataClass,this.viewClass,this);
 
-if(this.viewClass.search(/Tabs$/)>=0){bF.add(this.field,{width:l,height:l});
+if(this.viewClass.search(/Tabs$/)>=0){bI.add(this.field,{width:n,height:n});
 this.field.fields.layout.tabsField=this.field.fields;
-}else{bF.add(this.field);
+}else{bI.add(this.field);
 
-if(this.tabsField){dbg(3,E);
+if(this.tabsField){dbg(3,T);
 this.field.fields.tabsField=this.tabsField;
 }}this.field.fields.focus_if_ok(this.field.fields.first_field);
-}else{dbg(4,C+this.viewClass+U);
-}},updateView:function(bG){dbg(4,bm+bG);
+}else{dbg(4,I+this.viewClass+bd);
+}},updateView:function(bJ){dbg(4,bp+bJ);
 
-if(bG){this.field.fields.fill(bG);
-}},createViews:function(bH){var bK=bH.views;
-dbg(5,n+bK);
+if(bJ){this.field.fields.fill(bJ);
+}},createViews:function(bK){var bN=bK.views;
+dbg(5,p+bN);
 this.root.removeAll();
-this.tabs=new qx.ui.tabview.TabView(this.align_tabs).set(bi,false);
+this.tabs=new qx.ui.tabview.TabView(this.alignTabs).set(bl,false);
 this.views=[];
 
-for(var v=0;v<bK.length;v++){dbg(2,P+bK[v]);
-this.views[v]=new qx.ui.tabview.Page(bK[v]);
+for(var v=0;v<bN.length;v++){dbg(2,Y+bN[v]);
+this.views[v]=new qx.ui.tabview.Page(bN[v]);
 this.views[v].setLayout(new qx.ui.layout.Canvas());
-var bJ=new qx.ui.container.Scroll();
-var bI=new qx.ui.container.Composite();
-bI.setLayout(new qx.ui.layout.Canvas());
-bJ.add(bI);
-this.views[v].add(bJ,{width:l,height:l});
+var bM=new qx.ui.container.Scroll();
+var bL=new qx.ui.container.Composite();
+bL.setLayout(new qx.ui.layout.Canvas());
+bM.add(bL);
+this.views[v].add(bM,{width:n,height:n});
 this.tabs.add(this.views[v]);
-}this.root.add(this.tabs,{width:l,height:l});
-dbg(3,A+this.getRootContainer());
-qx.event.Registration.addListener(this.tabs,S,this.changeView,this);
-rpc.callRPC(k+bK[0],j,this,this.dispatch);
+}this.root.add(this.tabs,{width:n,height:n});
+dbg(3,C+this.getRootContainer());
+qx.event.Registration.addListener(this.tabs,V,this.changeView,this);
+rpc.callRPC(m+bN[0],l,this,this.dispatch);
 this.tabs.setSelection([this.views[0]]);
 },changeView:function(e){this.checkTimer();
-var bL=e.getData()[0].getLabel();
-dbg(3,y+bL);
+var bP=e.getData()[0].getLabel();
+dbg(3,b+bP);
 this.field=this.getActiveForm();
-var bM=this.getRootContainer();
+var bR=this.getRootContainer();
 this.tabs.setEnabled(false);
+var bQ=P;
+var bO=null;
 
-if(!bM.hasChildren()){dbg(3,bj+bL+s+this.field);
-rpc.callRPC(k+bL,j,this,this.dispatch);
-}else{dbg(3,M);
-this.viewClass=bL;
-rpc.callRPC(k+bL,bl,this,this.dispatch);
-}},getActiveForm:function(){var bN=this.getRootContainer();
+if(this.parentLayout){dbg(3,U);
+bQ=G;
+bO=this.parentLayout.field.fields.getFieldsData();
+}
+if(!bR.hasChildren()){dbg(3,bm+bP+u+this.field);
+rpc.callRPC(m+bP,bQ+l,this,this.dispatch,bO);
+}else{dbg(3,bc);
+this.viewClass=bP;
+rpc.callRPC(m+bP,bQ+bo,this,this.dispatch,bO);
+}},getActiveForm:function(){var bS=this.getRootContainer();
 
-if(bN.getChildren){return bN.getChildren()[0];
+if(bS.getChildren){return bS.getChildren()[0];
 }else{return null;
-}},getRootContainer:function(){dbg(5,bo);
+}},getRootContainer:function(){dbg(5,br);
 return this.tabs?this.tabs.getSelection()[0].getChildren()[0].getChildren()[0]:this.root;
 }}});
 })();
@@ -11235,23 +11241,23 @@ return (Math.round((l%(1/m))*m)==0?Math.floor((l*m*2)-(l*m*2)):1-Math.floor((l*m
 }}});
 })();
 (function(){var v="button",u="save",t="callback",s="new_id",r="Got changeId with ",q="cback is: ",p="callBackend arguments are: ",o="list",n="new",m="View.",e="dataClass is ",l="int",h="frontend.Views.Form",c="callback is: ",b="find",g="OK",f="handleButton for ",j="list_choice",a="100%",k="str",d=":";
-qx.Class.define(h,{extend:qx.ui.container.Composite,construct:function(w,x,y,z){qx.ui.container.Composite.call(this,new qx.ui.layout.HBox());
+qx.Class.define(h,{extend:qx.ui.container.Composite,construct:function(w,x,y,z,A){qx.ui.container.Composite.call(this,new qx.ui.layout.HBox());
 this.dataClass=y;
 this.viewClass=z;
 this.callback=w;
 dbg(3,q+print_a(w));
-this.add(this.fields=new frontend.Lib.Fields({callback:[this,this.changeId]},x),{width:a});
-},members:{dataClass:null,viewClass:null,callback:null,fields:null,effect:null,changeId:function(A){dbg(3,r+print_a(A));
+this.add(this.fields=new frontend.Lib.Fields({callback:[this,this.changeId]},x,A),{width:a,flex:1});
+},members:{dataClass:null,viewClass:null,callback:null,fields:null,effect:null,callback:null,changeId:function(B){dbg(3,r+print_a(B));
 dbg(5,e+this.dataClass);
-var D=A[0];
-var name=A[1];
-var C=A[2];
-var E=A[3];
-var B=A[4];
+var E=B[0];
+var name=B[1];
+var D=B[2];
+var F=B[3];
+var C=B[4];
 
-switch(C){case k:case l:this.fadeOut();
-if(B.callback){this.callBackend(t,B.callback,this.fields.getFieldsData());
-}else{this.callBackend(b,name,E);
+switch(D){case k:case l:this.fadeOut();
+if(C.callback){this.callBackend(t,C.callback,this.fields.getFieldsData());
+}else{this.callBackend(b,name,F);
 }break;
 case v:this.fadeOut();
 this.callBackend(v,name,this.fields.getFieldsData());
@@ -11266,17 +11272,17 @@ this.effect=new qx.fx.effect.core.Fade(this.fields.getContainerElement().getDomE
 this.effect.set({from:1,to:0.5});
 this.effect.start();
 this.fields.windows_fade_to(0.5);
-},callBackend:function(F){var G=[];
+},callBackend:function(G){var H=[];
 
-for(var i=1;i<arguments.length;i++){G.push(arguments[i]);
-}dbg(5,p+G.join(d));
+for(var i=1;i<arguments.length;i++){H.push(arguments[i]);
+}dbg(5,p+H.join(d));
 dbg(5,c+print_a(this.callback));
-rpc.callRPCarray(m+this.viewClass,F,this.callback[0],this.callback[1],G);
-},newData:function(H){if(H){this.fields.fill(H);
+rpc.callRPCarray(m+this.viewClass,G,this.callback[0],this.callback[1],H);
+},newData:function(I){if(I){this.fields.fill(I);
 }else{alert("This ID doesn't exist!");
 }this.fields.updating=false;
-},deleteData:function(I){if(I.answer==g){alert("Deleted succesfully!");
-}else{alert("Couldn't delete because of "+I.reason);
+},deleteData:function(J){if(J.answer==g){alert("Deleted succesfully!");
+}else{alert("Couldn't delete because of "+J.reason);
 }this.fields.updating=false;
 },handleButton:function(name){dbg(5,f+name);
 
@@ -11399,7 +11405,7 @@ if(bi){var be=bc.computeHorizontalSeparatorGaps(bk,bf,bi);
 }},destruct:function(){this.__lU=this.__lV=this.__lX=null;
 }});
 })();
-(function(){var cx=":",cw="",cv="hidden",cu=" to field ",ct=" - ",cs="right",cr=" to ",cq="Hiding window ",cp="changeSelection",co="Clearing fields: ",bJ="100%",bI="drop",bH="Field ",bG="array",bF="fields_noflex",bE="int",bD="-",bC="Adding a fields_layout to ",bB="setValueList ",bA="addElement ",cE="Setting normal value of ",cF="Window",cC="pass",cD="changeValue",cA="hi",cB="Adding new timer",cy=" to elements ",cz="getValueList",cG="hbox",cH="returning from calcView, string is: ",cg="dd.MM.yyyy",cf="visible",ci="*",ch="list",ck="Writing is ",cj="additive",cm="getValueFromTo",cl="Can't call listener while he's working!",ce="Adding elements to ",cd="Setting str value of ",b="fields_layout",c="Deleting fields ",g="text",j="Filling with data ",k="Setting array value of ",m="write",n="Looking for data of field ",o="execute",q="callback",r='ma:je:sa',cO="timer for delay",cN="input",cM="Adding without VBox: ",cL="addElement called with ",cS="clearData",cR="middle",cQ="Adding a hbox to ",cP="group",cU=" on layout ",cT="html",Y="Adding new item ",ba="fading windows ",W="setValueDrop: ",X="composite",bd="View.",be="Adding new tabs ",bb=" with ",bc="keypress",U='lu:me:ve',V="Adding value ",D="Clearing field/list ",C="Finished adding listener",F="Adding: ",E='lu-ve',z="Listener: ",y="Adding a vbox to ",B="clearDataAll",A="getFieldsData",u="Adding a group to ",t="Creating element with fields ",bj="button",bk="Adding some fields to ",bl="Looking at field ",bm="0",bf="top",bg="dataEdited",bh="Adding listener: ",bi="select",bn="str",bo='lu-di',P="info",O="Found a selection: ",N=" of ",M="date",L="Adding composite: ",K="Focusing on ",J="vbox",I="window",S="all",R="Showing window ",bp="clearDataOnly",bq="Enter",br="fields",bs="Found element ",bt="This is Enter for ",bu="tel",bv="getValueListArray",bw=" is of value ",bx="show_tabs",by="::",bN="Adding a window with layout ",bM="table",bL=" our id is ",bK="single",bR="getFieldsData: ",bQ="Value is an array!",bP=" is of special-value ",bO="Stopping timer",bT="rpc",bS="frontend.Lib.Fields",bX="tabs",bY="Setting value of ",bW="fromto";
+(function(){var cx=":",cw="",cv="hidden",cu=" to field ",ct=" - ",cs="right",cr=" to ",cq="Hiding window ",cp="changeSelection",co="Clearing fields: ",bJ="100%",bI="drop",bH="Field ",bG="array",bF="fields_noflex",bE="int",bD="-",bC="Adding a fields_layout to ",bB="setValueList ",bA="addElement ",cE="Setting normal value of ",cF="Window",cC="pass",cD="changeValue",cA="hi",cB="Adding new timer",cy=" to elements ",cz="getValueList",cG="hbox",cH="list_tabs",cg="dd.MM.yyyy",cf="visible",ci="*",ch="list",ck="Writing is ",cj="additive",cm="getValueFromTo",cl="Can't call listener while he's working!",ce="Adding elements to ",cd="Setting str value of ",b="fields_layout",c="Deleting fields ",g="text",j="Filling with data ",k="Setting array value of ",m="write",n="Looking for data of field ",o="execute",q="callback",r='ma:je:sa',cO="timer for delay",cN="input",cM="Adding without VBox: ",cL="addElement called with ",cS="clearData",cR="middle",cQ="Adding a hbox to ",cP="group",cU=" on layout ",cT="html",Y="Adding new item ",ba="fading windows ",W="setValueDrop: ",X="composite",bd="View.",be="Adding new tabs ",bb=" with ",bc="keypress",U='lu:me:ve',V="Adding value ",D="Clearing field/list ",C="Finished adding listener",F="Adding: ",E='lu-ve',z="Listener: ",y="Adding a vbox to ",B="clearDataAll",A="getFieldsData",u="Adding a group to ",t="Creating element with fields ",bj="button",bk="Adding some fields to ",bl="Looking at field ",bm="0",bf="top",bg="dataEdited",bh="Adding listener: ",bi="select",bn="str",bo='lu-di',P="returning from calcView, string is: ",O="info",N="Found a selection: ",M=" of ",L="date",K="Adding composite: ",J="Focusing on ",I="vbox",S="window",R="all",bp="Showing window ",bq="clearDataOnly",br="Enter",bs="fields",bt="Found element ",bu="This is Enter for ",bv="tel",bw="getValueListArray",bx=" is of value ",by="::",bN="Adding a window with layout ",bM="table",bL=" our id is ",bK="single",bR="getFieldsData: ",bQ="Value is an array!",bP=" is of special-value ",bO="Stopping timer",bT="rpc",bS="frontend.Lib.Fields",bX="tabs",bY="Setting value of ",bW="fromto";
 function H(name){var cV=this.getSelectables();
 
 for(var s=0;s<cV.length;s++){var cW=cV[s];
@@ -11423,7 +11429,7 @@ for(var s=0;s<dc.length;s++){var dd=dc[s];
 if(this.valueIds){de.push(this.valueIds[this.indexOf(dd)]);
 }else{de.push(dd.getLabel());
 }}return de;
-}function cJ(){dbg(5,bv);
+}function cJ(){dbg(5,bw);
 var dg=[];
 var df=this.getSelectables();
 
@@ -11447,7 +11453,7 @@ dl=dl[1];
 }else{if(di.findItem){dj=di.findItem(dl);
 }}}
 if(dj){dk.push(dj);
-dbg(5,O+dl);
+dbg(5,N+dl);
 }else if(dl!=cw){dbg(5,Y+dl);
 var dj=new qx.ui.form.ListItem(cw+dl);
 di.add(dj);
@@ -11460,7 +11466,7 @@ if(di.vaueIds&&di.indexOf(dj)!=di.valueIds.length-1){alert("Different number of 
 if(dn.length==1&&this.getChildren().length>0){var dp=this.getChildren();
 dbg(5,bY+dn+cy+dp);
 
-for(var e=0;e<dp.length;e++){if(dp[e].getLabel()==dn){dbg(5,bs+dp[e]);
+for(var e=0;e<dp.length;e++){if(dp[e].getLabel()==dn){dbg(5,bt+dp[e]);
 this.setSelection([dp[e]]);
 }}}else{cK(dn,this);
 }}function bV(dq){this.removeAll();
@@ -11474,286 +11480,288 @@ return dr;
 }function cI(){}function bz(){return this.getDateFormat().format(this.getValue());
 }function G(v){this.setValue(this.getDateFormat().parse(v));
 }function ca(x){return x<10?bm+x:x;
-}qx.Class.define(bS,{extend:qx.ui.container.Composite,construct:function(ds,dt){qx.ui.container.Composite.call(this,this.layout=new qx.ui.layout.VBox(1));
-var du=[bT,m,q];
+}qx.Class.define(bS,{extend:qx.ui.container.Composite,construct:function(ds,dt,du){qx.ui.container.Composite.call(this,this.layout=new qx.ui.layout.VBox(1));
+var dv=[bT,m,q];
 
-for(var p=0;p<du.length;p++){var dv=du[p];
-this[dv]=ds[dv];
-}this.write=this.write?this.write:S;
+for(var p=0;p<dv.length;p++){var dw=dv[p];
+this[dw]=ds[dw];
+}this.write=this.write?this.write:R;
 this.fields=[];
 this.windows={};
 this.updating=false;
 this.field_id=null;
+this.parentLayout=du;
 dbg(5,ck+this.write+bL+this);
 this.index=1;
 this.timer=qx.util.TimerManager.getInstance();
 
 if(dt){this.calcView(dt,this);
-}},members:{rpc:null,write:null,callback:null,field_id:null,fields:null,windows:null,first_field:null,first_button:null,first_button_window:null,updating:null,index:null,timer:null,delayTimer:null,layout:null,tabsField:null,getFieldsData:function(){dbg(5,A);
-var dz={};
+}},members:{rpc:null,write:null,callback:null,field_id:null,fields:null,windows:null,first_field:null,first_button:null,first_button_window:null,updating:null,index:null,timer:null,delayTimer:null,layout:null,tabsField:null,parentLayout:null,getFieldsData:function(){dbg(5,A);
+var dA={};
 
 for(var f in this.fields){dbg(5,bl+f);
-var dw=this.fields[f];
+var dx=this.fields[f];
 
-if(dw.getValueSpecial){if(dw.getValueSpecial()){dz[f]=dw.getValueSpecial();
-dbg(5,bH+f+bP+dz[f]);
-}}else if(dw.getValue){if(dw.getValue()){dz[f]=dw.getValue();
-dbg(5,bH+f+bw+dz[f]);
-}}}dbg(4,bR+print_a(dz));
+if(dx.getValueSpecial){if(dx.getValueSpecial()){dA[f]=dx.getValueSpecial();
+dbg(5,bH+f+bP+dA[f]);
+}}else if(dx.getValue){if(dx.getValue()){dA[f]=dx.getValue();
+dbg(5,bH+f+bx+dA[f]);
+}}}dbg(4,bR+print_a(dA));
 
-if(this.tabsField){var dx=this.tabsField.getFieldsData();
+if(this.tabsField){var dy=this.tabsField.getFieldsData();
 
-for(var dy in dx){dz[dy]=dx[dy];
-}}return dz;
-},clearDataOnly:function(dA){dbg(5,bp);
+for(var dz in dy){dA[dz]=dy[dz];
+}}return dA;
+},clearDataOnly:function(dB){dbg(5,bq);
 
-if(dA){dbg(5,c+print_a(dA));
+if(dB){dbg(5,c+print_a(dB));
 
-for(var f=0;f<dA.length;f++){var dB=this.fields[dA[f]];
-dbg(5,D+dB);
+for(var f=0;f<dB.length;f++){var dC=this.fields[dB[f]];
+dbg(5,D+dC);
 
-if(dB.valueIds){dB.valueIds=[];
+if(dC.valueIds){dC.valueIds=[];
 }
-if(dB.removeAll&&!dB.getDateFormat){dB.removeAll();
-}else if(dB.resetValue){dB.resetValue();
-}else if(dB.setValueStr){dB.setValueStr(cw);
-}else if(dB.setValueArray){dB.setValueArray([]);
-}else if(dB.setValue){dB.setValue(cw);
-}}}},clearData:function(dC){dbg(5,cS);
-var dD=[];
-
-for(var f in this.fields){if(!this.fields[f].removeAll||this.fields[f].getDateFormat){dD.push(f);
-}}dbg(5,co+print_a(dD));
-this.clearDataOnly(dD);
-this.clearDataOnly(dC);
-},clearDataAll:function(){dbg(5,B);
+if(dC.removeAll&&!dC.getDateFormat){dC.removeAll();
+}else if(dC.resetValue){dC.resetValue();
+}else if(dC.setValueStr){dC.setValueStr(cw);
+}else if(dC.setValueArray){dC.setValueArray([]);
+}else if(dC.setValue){dC.setValue(cw);
+}}}},clearData:function(dD){dbg(5,cS);
 var dE=[];
 
-for(var f in this.fields){dE.push(f);
-}dbg(5,co+print_a(dE));
+for(var f in this.fields){if(!this.fields[f].removeAll||this.fields[f].getDateFormat){dE.push(f);
+}}dbg(5,co+print_a(dE));
 this.clearDataOnly(dE);
-},fill:function(dF){dbg(3,j+print_a(dF));
+this.clearDataOnly(dD);
+},clearDataAll:function(){dbg(5,B);
+var dF=[];
+
+for(var f in this.fields){dF.push(f);
+}dbg(5,co+print_a(dF));
+this.clearDataOnly(dF);
+},fill:function(dG){dbg(3,j+print_a(dG));
 
 for(var f in this.fields){dbg(5,n+f);
-var dG=this.fields[f];
+var dH=this.fields[f];
 
-if(dF[f]!=null){if(dG.setValueStr){dbg(4,cd+dF[f]+cu+f);
-dG.setValueStr(dF[f].toString());
-}else if(dG.setValueArray){dbg(4,k+dF[f]+cu+f);
-dG.setValueArray(dF[f]);
-}else if(dG.setValue){dbg(4,cE+dF[f]+cu+f);
-dG.setValue(dF[f].toString());
-}}}},addElement:function(dH,dI,dJ){dbg(5,cL+[print_a(dH),dI,dJ].join(cx));
-var dW=dH.shift();
-var name=dH.shift();
-var dP=dH.shift();
-var dS=dH[0]?dH.shift():[];
-var dU=null;
-var dL=true;
-var dQ=cD;
-var dN=false;
-var dV=true;
-var dK=0;
-dbg(5,bA+dW+ct+dP+ct+print_a(dS));
+if(dG[f]!=null){if(dH.setValueStr){dbg(4,cd+dG[f]+cu+f);
+dH.setValueStr(dG[f].toString());
+}else if(dH.setValueArray){dbg(4,k+dG[f]+cu+f);
+dH.setValueArray(dG[f]);
+}else if(dH.setValue){dbg(4,cE+dG[f]+cu+f);
+dH.setValue(dG[f].toString());
+}}}},addElement:function(dI,dJ,dK){dbg(5,cL+[print_a(dI),dJ,dK].join(cx));
+var dX=dI.shift();
+var name=dI.shift();
+var dQ=dI.shift();
+var dT=dI[0]?dI.shift():[];
+var dV=null;
+var dM=true;
+var dR=cD;
+var dO=false;
+var dW=true;
+var dL=0;
+dbg(5,bA+dX+ct+dQ+ct+print_a(dT));
 
-switch(dW){case bn:case bu:case bG:case bE:dU=new qx.ui.form.TextField(cw);
+switch(dX){case bn:case bv:case bG:case bE:dV=new qx.ui.form.TextField(cw);
 
-if(dS.id||dS.callback){dN=true;
-dQ=cN;
+if(dT.id||dT.callback){dO=true;
+dR=cN;
 
-if(dS.id){this.field_id=name;
-}dK=1500;
+if(dT.id){this.field_id=name;
+}dL=1500;
 }
-if(dS.ro){dU.setReadOnly(true);
+if(dT.ro){dV.setReadOnly(true);
 }
-if(dW==bE){dU.setTextAlign(cs);
+if(dX==bE){dV.setTextAlign(cs);
 }break;
-case g:dU=new qx.ui.form.TextArea(cw);
-dU.setAutoSize(true);
-dU.setWidth(300);
-dV=false;
+case g:dV=new qx.ui.form.TextArea(cw);
+dV.setAutoSize(true);
+dV.setWidth(300);
+dW=false;
 break;
-case M:dU=new qx.ui.form.DateField();
-dU.setDateFormat(new qx.util.format.DateFormat(cg));
-dU.getValueSpecial=bz;
-dU.setValueStr=G;
+case L:dV=new qx.ui.form.DateField();
+dV.setDateFormat(new qx.util.format.DateFormat(cg));
+dV.getValueSpecial=bz;
+dV.setValueStr=G;
 break;
-case P:dU=new qx.ui.form.TextField(dS.text);
-dU.setReadOnly(true);
+case O:dV=new qx.ui.form.TextField(dT.text);
+dV.setReadOnly(true);
 break;
-case cC:dU=new qx.ui.form.PasswordField(cw);
+case cC:dV=new qx.ui.form.PasswordField(cw);
 break;
-case bj:dN=true;
-dQ=o;
-dU=new qx.ui.form.Button(dP);
-dU.getData=function(){};
-dU.setAllowGrowY(false);
-dL=false;
+case bj:dO=true;
+dR=o;
+dV=new qx.ui.form.Button(dQ);
+dV.getData=function(){};
+dV.setAllowGrowY(false);
+dM=false;
 
-if(!this.first_button||dS.def){this.first_button=dU;
+if(!this.first_button||dT.def){this.first_button=dV;
 }break;
-case cT:dU=new qx.ui.basic.Label().set({value:dS.text,rich:true,allowGrowX:true});
-dL=false;
+case cT:dV=new qx.ui.basic.Label().set({value:dT.text,rich:true,allowGrowX:true});
+dM=false;
 break;
-case bi:dU=new qx.ui.form.SelectBox();
-if(dS.list_values){while(dS.list_values.length>0){dU.add(new qx.ui.form.ListItem(dS.list_values.shift()));
-}}dU.searchLabel=H;
-dU.searchIndex=a;
-dU.selectedIndex=bU;
-dQ=cp;
+case bi:dV=new qx.ui.form.SelectBox();
+if(dT.list_values){while(dT.list_values.length>0){dV.add(new qx.ui.form.ListItem(dT.list_values.shift()));
+}}dV.searchLabel=H;
+dV.searchIndex=a;
+dV.selectedIndex=bU;
+dR=cp;
 break;
-case ch:if(dS.list_type!=bI){dU=new qx.ui.form.List();
-dU.setSelectionMode(dS.list_type?bK:cj);
-dU.setMaxHeight(250);
-dU.setMinWidth(150);
-dU.setAllowGrowX(true);
-dU.setAllowStretchX(true);
-}else{dU=new qx.ui.form.SelectBox();
-}dU.searchLabel=H;
-dU.searchIndex=a;
-dU.selectedIndex=bU;
+case ch:if(dT.list_type!=bI){dV=new qx.ui.form.List();
+dV.setSelectionMode(dT.list_type?bK:cj);
+dV.setMaxHeight(250);
+dV.setMinWidth(150);
+dV.setAllowGrowX(true);
+dV.setAllowStretchX(true);
+}else{dV=new qx.ui.form.SelectBox();
+}dV.searchLabel=H;
+dV.searchIndex=a;
+dV.selectedIndex=bU;
 
-if(dS.list_type==bG){dU.setValueArray=bV;
-dU.getValue=cJ;
-}else if(dS.list_type!=bI){dU.setValueArray=cn;
-dU.getValue=cb;
-}else{dU.setValueArray=T;
-dU.getValue=cb;
+if(dT.list_type==bG){dV.setValueArray=bV;
+dV.getValue=cJ;
+}else if(dT.list_type!=bI){dV.setValueArray=cn;
+dV.getValue=cb;
+}else{dV.setValueArray=T;
+dV.getValue=cb;
 }
-if(dS.ro){dU.setEnabled(false);
-}dU.setValueArray(dS.list_values);
-dU.setHeight(null);
-dQ=cp;
+if(dT.ro){dV.setEnabled(false);
+}dV.setValueArray(dT.list_values);
+dV.setHeight(null);
+dR=cp;
 
-if(dS.callback){dN=true;
+if(dT.callback){dO=true;
 }break;
-case X:dU=new qx.ui.container.Composite();
-dL=false;
-dQ=null;
+case X:dV=new qx.ui.container.Composite();
+dM=false;
+dR=null;
 break;
-case bM:var dT=dS.headings;
-var dR=new qx.ui.table.model.Simple();
-dR.setColumns(dT);
-dU=new qx.ui.table.Table(dR).set({decorator:null});
-dL=false;
-dQ=bg;
+case bM:var dU=dT.headings;
+var dS=new qx.ui.table.model.Simple();
+dS.setColumns(dU);
+dV=new qx.ui.table.Table(dS).set({decorator:null});
+dM=false;
+dR=bg;
 break;
-case cv:this.fields[name]=new qx.ui.basic.Label(dS);
+case cv:this.fields[name]=new qx.ui.basic.Label(dT);
 
-if(dS.id){this.field_id=name;
+if(dT.id){this.field_id=name;
 }break;
-case bW:dU=new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
-dU.add(this.createDoW());
-var dO=new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
-dO.add(this.createHours());
-dO.add(new qx.ui.basic.Label(bD));
-dO.add(this.createHours());
-dU.add(dO);
-dU.getValue=Q;
-dU.setValueStr=cI;
+case bW:dV=new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
+dV.add(this.createDoW());
+var dP=new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
+dP.add(this.createHours());
+dP.add(new qx.ui.basic.Label(bD));
+dP.add(this.createHours());
+dV.add(dP);
+dV.getValue=Q;
+dV.setValueStr=cI;
 break;
-default:alert("This shouldn't happen! Asked for element "+dW);
+default:alert("This shouldn't happen! Asked for element "+dX);
 break;
-}if(dU&&!dS.hidden){dbg(5,F+dW+cx+name+cx+dP+cr+dI.getLayout());
-this.fields[name]=dU;
+}if(dV&&!dT.hidden){dbg(5,F+dX+cx+name+cx+dQ+cr+dJ.getLayout());
+this.fields[name]=dV;
 this.fields[name].field_name=name;
-dU.setTabIndex(this.index++);
+dV.setTabIndex(this.index++);
 
-if(!this.first_field){this.first_field=dU;
-}dU.addListener(bc,function(e){if(e.getKeyIdentifier()==bq&&dV){dbg(5,bt+e+cx+name+cx+dP);
+if(!this.first_field){this.first_field=dV;
+}dV.addListener(bc,function(e){if(e.getKeyIdentifier()==br&&dW){dbg(5,bu+e+cx+name+cx+dQ);
 
 if(this.first_button){this.first_button.execute();
 }}},this);
 
-if(dL){var dM=new qx.ui.basic.Label(dP);
-dM.setBuddy(dU);
-dI.add(dM,{row:dJ,column:0});
+if(dM){var dN=new qx.ui.basic.Label(dQ);
+dN.setBuddy(dV);
+dJ.add(dN,{row:dK,column:0});
 }
-if(/Grid/.test(dI.getLayout().toString())){dI.add(dU,{row:dJ,column:1});
-}else{dbg(5,cM+dU+cr+dI.getLayout().toString());
-dI.add(dU,{flex:1});
-}if(dQ&&this.callback&&dN){dbg(4,bh+dW+cx+name+cx);
-dU.addListener(dQ,function(e){if(!this.updating||(dK>0&&this.delayTimer)){dbg(5,z+dW+cx+name+cx+this.field_id);
+if(/Grid/.test(dJ.getLayout().toString())){dJ.add(dV,{row:dK,column:1});
+}else{dbg(5,cM+dV+cr+dJ.getLayout().toString());
+dJ.add(dV,{flex:1});
+}if(dR&&this.callback&&dO){dbg(4,bh+dX+cx+name+cx);
+dV.addListener(dR,function(e){if(!this.updating||(dL>0&&this.delayTimer)){dbg(5,z+dX+cx+name+cx+this.field_id);
 this.updating=true;
-var dY=null;
+var ea=null;
 
 if(this.field_id){this.fields[this.field_id].getValue();
-}var dX=e.getData?e.getData():cw;
-if(dK==0){this.callback[1].call(this.callback[0],[dY,name,dW,dX,dS]);
+}var dY=e.getData?e.getData():cw;
+if(dL==0){this.callback[1].call(this.callback[0],[ea,name,dX,dY,dT]);
 }else{if(this.delayTimer){dbg(4,bO);
 this.timer.stop(this.delayTimer);
 this.delayTimer=null;
 }dbg(4,cB);
-this.delayTimer=this.timer.start(function(ea,eb){dbg(3,cO);
-this.callback[1].call(this.callback[0],[dY,name,dW,dX,dS]);
-},0,this,null,dK);
+this.delayTimer=this.timer.start(function(eb,ec){dbg(3,cO);
+this.callback[1].call(this.callback[0],[ea,name,dX,dY,dT]);
+},0,this,null,dL);
 }}else{dbg(3,cl);
 }},this);
 dbg(5,C);
-}}return dU;
-},calcView:function(ec,ed){var ee=1;
+}}return dV;
+},calcView:function(ed,ee){var ef=1;
 
-if(ec[0].split){var ei=ec[0].split(cx);
+if(ed[0].split){var ej=ed[0].split(cx);
 
-switch(ei[0]){case J:dbg(5,y+ed);
-ed.add(this.calcView(ec[1],new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cs}))),{flex:1});
+switch(ej[0]){case I:dbg(5,y+ee);
+ee.add(this.calcView(ed[1],new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cs}))),{flex:1});
 break;
-case cG:dbg(5,cQ+ed);
-var ep=new qx.ui.layout.HBox(10);
-var en=new qx.ui.container.Composite(ep);
-ed.add(this.calcView(ec[1],en),{flex:1});
+case cG:dbg(5,cQ+ee);
+var eq=new qx.ui.layout.HBox(10);
+var eo=new qx.ui.container.Composite(eq);
+ee.add(this.calcView(ed[1],eo),{flex:1});
 break;
-case b:dbg(5,bC+ed+ct+print_a(ec[1]));
-this.calcView(ec[1],new qx.ui.container.Composite(new qx.ui.layout.HBox(10)));
+case b:dbg(5,bC+ee+ct+print_a(ed[1]));
+this.calcView(ed[1],new qx.ui.container.Composite(new qx.ui.layout.HBox(10)));
 break;
 case bF:dbg(4,bF);
-ee=0;
-case br:dbg(5,bk+ed);
-var eg=ed.add(this.calcView(ec[1],new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0,cs,cR).setSpacing(5).setColumnFlex(0,ee).setColumnFlex(1,1))),{flex:1});
+ef=0;
+case bs:dbg(5,bk+ee);
+var eh=ee.add(this.calcView(ed[1],new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0,cs,cR).setSpacing(5).setColumnFlex(0,ef).setColumnFlex(1,1))),{flex:1});
 break;
-case cP:dbg(5,u+ed);
-var el=new qx.ui.groupbox.GroupBox();
-el.setLayout(new qx.ui.layout.VBox(10));
-ed.add(this.calcView(ec[1],el),{flex:1});
+case cP:dbg(5,u+ee);
+var em=new qx.ui.groupbox.GroupBox();
+em.setLayout(new qx.ui.layout.VBox(10));
+ee.add(this.calcView(ed[1],em),{flex:1});
 break;
-case I:dbg(5,bN+ec[1]);
-var em=this.first_field;
-var ek=this.first_button;
+case S:dbg(5,bN+ed[1]);
+var en=this.first_field;
+var el=this.first_button;
 this.first_field=null;
 this.first_button=null;
 var l=new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
-this.calcView(ec[1],l);
-var eh=new qx.ui.window.Window(cF).set({modal:true,allowClose:false,visibility:cv});
-eh.setLayout(new qx.ui.layout.HBox());
-eh.add(l);
-eh.center();
-eh.first_button=this.first_button;
-eh.first_field=this.first_field;
-this.first_button=ek;
-this.first_field=em;
-this.windows[ei[1]]=eh;
+this.calcView(ed[1],l);
+var ei=new qx.ui.window.Window(cF).set({modal:true,allowClose:false,visibility:cv});
+ei.setLayout(new qx.ui.layout.HBox());
+ei.add(l);
+ei.center();
+ei.first_button=this.first_button;
+ei.first_field=this.first_field;
+this.first_button=el;
+this.first_field=en;
+this.windows[ej[1]]=ei;
 break;
-case bX:var eo=ec[1][0][0];
-dbg(3,be+print_a(ec)+by+eo);
+case bX:var ep=ed[1][0][0];
+dbg(3,be+print_a(ed)+by+ep);
 this.layout=new frontend.Views.Layout;
-this.layout.align_tabs=bf;
-var en=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-en.add(this.layout,{width:bJ,height:bJ});
-ed.add(en,{flex:5});
-rpc.callRPC(bd+eo,bx,this.layout,this.layout.dispatch);
+this.layout.alignTabs=bf;
+this.layout.parentLayout=this.parentLayout;
+var eo=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
+eo.add(this.layout,{width:bJ,height:bJ});
+ee.add(eo,{flex:5});
+rpc.callRPC(bd+ep,cH,this.layout,this.layout.dispatch);
 break;
-}}else{dbg(5,ce+ed);
-var ef=ec;
+}}else{dbg(5,ce+ee);
+var eg=ed;
 
-for(var l=0;l<ef.length;l++){if(ef[l].push&&ef[l].length<4){dbg(5,L+ef[l]+bb+ed);
-var ej=this.calcView(ef[l],ed);
-}else{dbg(5,t+ef[l]+cU+ed);
-this.addElement(ef[l],ed,parseInt(l),{flex:1});
-}}}dbg(5,cH+ec[0]);
-return ed;
-},focus_if_ok:function(eq){if(eq&&eq.isFocusable()){dbg(4,K+eq);
-eq.focus();
-}},window_show:function(name){dbg(2,R+name);
+for(var l=0;l<eg.length;l++){if(eg[l].push&&eg[l].length<4){dbg(5,K+eg[l]+bb+ee);
+var ek=this.calcView(eg[l],ee);
+}else{dbg(5,t+eg[l]+cU+ee);
+this.addElement(eg[l],ee,parseInt(l),{flex:1});
+}}}dbg(5,P+ed[0]);
+return ee;
+},focus_if_ok:function(er){if(er&&er.isFocusable()){dbg(4,J+er);
+er.focus();
+}},window_show:function(name){dbg(2,bp+name);
 win=this.windows[name];
 win.setVisibility(cf);
 win.focus();
@@ -11761,13 +11769,13 @@ win.activate();
 this.focus_if_ok(win.first_field);
 this.first_button_window=this.first_button;
 this.first_button=win.first_button;
-},windows_fade_to:function(er){return;
+},windows_fade_to:function(es){return;
 
-for(var w in this.windows){dbg(2,ba+w+cr+er);
-var es=new qx.fx.effect.core.Fade(this.windows[w].getContainerElement().getDomElement());
-es.set({from:1.5-er,to:er});
-es.start();
-}},window_hide:function(name){dbg(2,cq+name+N+this.windows.length);
+for(var w in this.windows){dbg(2,ba+w+cr+es);
+var et=new qx.fx.effect.core.Fade(this.windows[w].getContainerElement().getDomElement());
+et.set({from:1.5-es,to:es});
+et.start();
+}},window_hide:function(name){dbg(2,cq+name+M+this.windows.length);
 
 if(name==ci||!name){for(var i in this.windows){dbg(2,cq+i);
 this.windows[i].setVisibility(cv);
@@ -11776,19 +11784,19 @@ this.windows[i].setVisibility(cv);
 if(this.first_button_window){this.first_button=this.first_button_window;
 this.first_button_window=null;
 }this.focus_if_ok(this.first_field);
-},createHours:function(){var et=new qx.ui.form.SelectBox();
+},createHours:function(){var eu=new qx.ui.form.SelectBox();
 
-for(var i=0;i<48;i++){var eu=new qx.ui.form.ListItem(cw+ca(Math.floor(i/2))+cx+ca((i%2)*30));
-et.add(eu);
-}et.setWidth(null);
-return et;
-},createDoW:function(){var ew=new qx.ui.form.SelectBox();
-var ev=[E,bo,U,r];
+for(var i=0;i<48;i++){var ev=new qx.ui.form.ListItem(cw+ca(Math.floor(i/2))+cx+ca((i%2)*30));
+eu.add(ev);
+}eu.setWidth(null);
+return eu;
+},createDoW:function(){var ex=new qx.ui.form.SelectBox();
+var ew=[E,bo,U,r];
 
-for(var i=0;i<ev.length;i++){var ex=new qx.ui.form.ListItem(ev[i]);
-ew.add(ex);
-}ew.setWidth(null);
-return ew;
+for(var i=0;i<ew.length;i++){var ey=new qx.ui.form.ListItem(ew[i]);
+ex.add(ey);
+}ex.setWidth(null);
+return ex;
 }}});
 })();
 (function(){var b="qx.ui.form.IModel",a="qx.event.type.Data";
@@ -20095,8 +20103,8 @@ if(s==null){event.call(o,r);
 }},n,p);
 },callRPC:function(u,v,w,event){var x=[];
 
-for(var i=4;i<arguments.length;i++){x.push(arguments[i]);
-}this.callRPCarray(u,v,w,event,x);
+for(var i=4;i<arguments.length;i++){if(arguments[i]!=null){x.push(arguments[i]);
+}}this.callRPCarray(u,v,w,event,x);
 }}});
 })();
 (function(){var k=": ",j="failed",h="String",g="qx.event.type.Event",f="Boolean",e="application/json",d="aborted",c="refreshSession",b="completed",a="Content-Type",G="timeout",F=")",E="application/x-www-form-urlencoded",D="?instanceId=",C="Integer",B="Object",A="qx.io.remote.Rpc",z="error",y=" error ",x="Local time-out expired for ",r="Local error ",s="Application error ",p="",q="Transport error ",n="(",o="/.qxrpc",l="POST",m="result",t="UNEXPECTED origin ",u="Aborted ",w="Server error ",v="id";

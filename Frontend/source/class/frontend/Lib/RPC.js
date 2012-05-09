@@ -65,7 +65,9 @@ qx.Class.define("frontend.Lib.RPC", {
 		callRPC : function(service, method, obj, event) {
 			var args = [];
 			for ( var i = 4; i < arguments.length; i++) {
-				args.push(arguments[i]);
+				if ( arguments[i] != null ){
+				  args.push(arguments[i]);
+				}
 			}
 
 			this.callRPCarray(service, method, obj, event, args);

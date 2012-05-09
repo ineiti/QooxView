@@ -1,0 +1,1 @@
+ln -s /Users/ineiti/Downloads/qooxdoo-1.4-sdk/ $(dirname $0)/source/qooxdoo-1.4-sdk

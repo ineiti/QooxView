@@ -370,6 +370,22 @@ class View < RPCQooxdooService
       }.collect{|c| c.name}
     }
   end
+  
+  def rpc_tabs_show( session, args )
+    ret = rpc_show( session )
+    if args.class == Hash
+      ret += rpc_list_choice( session, args.keys[0].to_s, args )
+    end
+    ret
+  end
+  
+  def rpc_tabs_update_view( session, args )
+    ret = rpc_update_view( session )
+    if args.class == Hash
+      ret += rpc_list_choice( session, args.keys[0].to_s, args )
+    end
+    ret
+  end
 
   # Gives the GUI-elements for the active view
   def rpc_show( session )
@@ -384,7 +400,7 @@ class View < RPCQooxdooService
     rpc_update_view( session )
   end
 
-  def rpc_show_tabs( session )
+  def rpc_list_tabs( session )
     dputs 3, "Showing tabs for @name"
     reply( 'list', View.list( session, @name_tab ) )
   end

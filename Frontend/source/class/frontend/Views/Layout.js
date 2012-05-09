@@ -18,7 +18,7 @@ qx.Class.define("frontend.Views.Layout", {
      *
      */
     construct: function( ){
-  		this.align_tabs = "left"
+  		this.alignTabs = "left"
         this.base(arguments);
         this.setLayout(this.layout = new qx.ui.layout.Canvas());
         this.timer = qx.util.TimerManager.getInstance();
@@ -48,8 +48,8 @@ qx.Class.define("frontend.Views.Layout", {
         timer: null,
         effect: null,
         timerUpdate: null,
-        align_tabs: null,
-        tabs_field: null,
+        alignTabs: null,
+        parentTab: null,
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
@@ -250,7 +250,8 @@ qx.Class.define("frontend.Views.Layout", {
             // dbg(5, "cback in showView is " + print_a(cback))
             if (!container.hasChildren()) {
                 dbg(4, "Adding container " + this.viewClass);
-                this.field = new frontend.Views.Form(cback, this.layoutView, this.dataClass, this.viewClass);
+                this.field = new frontend.Views.Form(cback, this.layoutView, 
+                	this.dataClass, this.viewClass, this);
                 if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
                   // Sub-tabbed tabs get all the width
                   container.add( this.field, {width: "100%", height: "100%"} );
@@ -281,7 +282,7 @@ qx.Class.define("frontend.Views.Layout", {
             
             this.root.removeAll();
             
-            this.tabs = new qx.ui.tabview.TabView(this.align_tabs).set("Enabled", false);
+            this.tabs = new qx.ui.tabview.TabView(this.alignTabs).set("Enabled", false);
             // alert( "Enabled is false");
             
             this.views = [];
@@ -320,14 +321,25 @@ qx.Class.define("frontend.Views.Layout", {
             this.field = this.getActiveForm();
             var container = this.getRootContainer();
             this.tabs.setEnabled(false);
+            var inTabs = "";
+            var parentFields = null;
+            if ( this.parentLayout ){
+            	// We're in one of the sub-tabs, so let's send along the parent-
+            	// stuff
+            	dbg(3, "Adding something to the show - update_view");
+            	inTabs = "tabs_";
+            	parentFields = this.parentLayout.field.fields.getFieldsData();
+            } 
             if (!container.hasChildren()) {
                 dbg(3, "changeView with data " + newView + " and field " + this.field);
-                rpc.callRPC("View." + newView, "show", this, this.dispatch);
+                rpc.callRPC("View." + newView, inTabs + "show", 
+                this, this.dispatch, parentFields );
             }
             else {
                 dbg(3, "Tab already created - updating only");
                 this.viewClass = newView;
-                rpc.callRPC("View." + newView, "update_view", this, this.dispatch);
+                rpc.callRPC("View." + newView, inTabs + "update_view", 
+                this, this.dispatch, parentFields);
             }
         },
         // Helper function to get to the active form

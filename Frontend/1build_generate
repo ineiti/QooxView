@@ -1,2 +1,3 @@
+./mklink
 ./generate.py clean
 ./generate.py build
