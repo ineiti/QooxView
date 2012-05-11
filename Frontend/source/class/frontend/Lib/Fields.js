@@ -480,8 +480,8 @@ qx.Class.define("frontend.Lib.Fields", {
                     if (params.list_type != "drop") {
                         field_element = new qx.ui.form.List();
                         field_element.setSelectionMode(params.list_type ? "single" : "additive");
-                        field_element.setMaxHeight(250);
-                        field_element.setMinWidth(150);
+//                        field_element.setMaxHeight(250);
+                        field_element.setMinWidth(200);
                         field_element.setAllowGrowX(true);
                         field_element.setAllowStretchX(true);
                     }
