@@ -23,13 +23,13 @@ qx.Class.define("frontend.Views.Layout", {
         this.setLayout(this.layout = new qx.ui.layout.Canvas());
         this.timer = qx.util.TimerManager.getInstance();
         this.effect = false;
-        
+
         // this adds the container manager in one go
         this.root = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
         this.root.setPadding(10);
         
         this.add(this.root, {width: "100%", height: "100%"});
-        
+
         this.addListener("resize", function(e){
             root.fireDataEvent("resize", new qx.event.type.Data());
         }, this);
@@ -49,14 +49,22 @@ qx.Class.define("frontend.Views.Layout", {
         effect: null,
         timerUpdate: null,
         alignTabs: null,
-        parentTab: null,
+        parentLayout: null,
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
             if (this.tabs) {
-                dbg(0, "New Width is " + qx.bom.Viewport.getWidth());
-                this.root.setWidth(qx.bom.Viewport.getWidth());
-                this.root.setHeight(qx.bom.Viewport.getHeight());
+                var bounds = this.getBounds();
+                dbg( 0, "Bounds is: " + print_a( bounds ));
+         		width = bounds['width'];
+           		height = bounds['height'];
+                dbg(0, "New dimension is " + width + " x " + height );
+                this.getRootContainer().setWidth(width);
+                this.getRootContainer().setHeight(height);
+            }
+            if ( this.field && this.field.fields && this.field.fields.childLayout ){
+            	dbg( 0, "Also resizing child-tab" )
+            	this.field.fields.childLayout.resizeTab();
             }
         },
         // This is called upon return from the server, and dispatches to the
@@ -107,7 +115,7 @@ qx.Class.define("frontend.Views.Layout", {
                         // Only empties the given fields (usually lists)
                         this.getActiveForm().fields.clearDataOnly(res.data);
                         break;
-                    case "emtpy_all":
+                    case "empty_all":
                         // Let's empty everything
                         this.getActiveForm().fields.clearDataAll();
                         break;
@@ -176,8 +184,20 @@ qx.Class.define("frontend.Views.Layout", {
                       this.setVisibility( res.data, 'visible' );
                       break;
                     case "pass_tabs":
-                      aform.fields.layout.getActiveForm().callBackend( res.data[0],
+                      aform.fields.childLayout.getActiveForm().callBackend( res.data[0],
                         res.data[1], res.data[2]);
+                      break;
+                    case "focus":
+                      var f = res.data;
+                      if ( aform && aform.fields && aform.fields.fields ){
+                      	if ( aform.fields.fields[f] ){
+                      	  dbg( 2, "Focusing on " + f)
+                      	  aform.fields.focus_if_ok( aform.fields.fields[f] );
+                      	} else {
+                          dbg( 2, "Not found " + f + " in " +
+                            print_a( aform.fields.fields ) );
+                      	}
+                      }
                       break;
                 }
             }
@@ -187,7 +207,8 @@ qx.Class.define("frontend.Views.Layout", {
                 var effect = new qx.fx.effect.core.Fade(aform.fields.getContainerElement().getDomElement());
                 effect.set({
                     from: 0.5,
-                    to: 1
+                    to: 1,
+                    duration: 0.25
                 });
                 if (aform.effect) {
                     aform.effect.cancel();
@@ -255,13 +276,11 @@ qx.Class.define("frontend.Views.Layout", {
                 if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
                   // Sub-tabbed tabs get all the width
                   container.add( this.field, {width: "100%", height: "100%"} );
-                  // Allow access to the main-tab
-                  this.field.fields.layout.tabsField = this.field.fields;
                 } else {
                   container.add( this.field );
-                  if ( this.tabsField ){
-                  	dbg( 3, "We're in a sub-layout, adding tabsField" );
-                  	this.field.fields.tabsField = this.tabsField;
+                  if ( this.parentLayout ){
+                  	dbg( 3, "We're in a sub-layout, adding parentLayout to fields" );
+                    this.field.fields.parentLayout = this.parentLayout;
                   }
                 }
                 this.field.fields.focus_if_ok( this.field.fields.first_field);
@@ -283,7 +302,6 @@ qx.Class.define("frontend.Views.Layout", {
             this.root.removeAll();
             
             this.tabs = new qx.ui.tabview.TabView(this.alignTabs).set("Enabled", false);
-            // alert( "Enabled is false");
             
             this.views = [];
             for (var v = 0; v < views.length; v++) {
@@ -306,11 +324,8 @@ qx.Class.define("frontend.Views.Layout", {
             });
             dbg(3, "getRootContainer gives: " + this.getRootContainer());
             
-            // alert( "Registering");
             qx.event.Registration.addListener(this.tabs, "changeSelection", this.changeView, this);
-            // alert( "calling rpc");
             rpc.callRPC("View." + views[0], "show", this, this.dispatch);
-            // alert( "finished");
             this.tabs.setSelection([this.views[0]]);
         },
         // Every time the view changes, this is called, which calls the Backend, which will call showView
@@ -328,7 +343,7 @@ qx.Class.define("frontend.Views.Layout", {
             	// stuff
             	dbg(3, "Adding something to the show - update_view");
             	inTabs = "tabs_";
-            	parentFields = this.parentLayout.field.fields.getFieldsData();
+            	parentFields = this.parentLayout.field.fields.getOwnFieldsData();
             } 
             if (!container.hasChildren()) {
                 dbg(3, "changeView with data " + newView + " and field " + this.field);

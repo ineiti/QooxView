@@ -16,7 +16,7 @@ qx.Class.define("frontend.Views.Form", {
      * Constructor of Views.Create Takes:
      *
      */
-    construct: function(cback, layout, dataClass, viewClass, pLayout){
+    construct: function(cback, layout, dataClass, viewClass, rLayout){
         this.base(arguments, new qx.ui.layout.HBox());
         this.dataClass = dataClass;
         this.viewClass = viewClass;
@@ -24,7 +24,7 @@ qx.Class.define("frontend.Views.Form", {
         dbg(3, "cback is: " + print_a(cback));
         this.add(this.fields = new frontend.Lib.Fields({
             callback: [this, this.changeId]
-        }, layout, pLayout), {width: "100%", flex: 1} );
+        }, layout, rLayout), {width: "100%", flex: 1} );
     },
     
     members: {
@@ -77,7 +77,7 @@ qx.Class.define("frontend.Views.Form", {
 		fadeOut: function(){
 			this.fields.setEnabled( false );
             this.effect = new qx.fx.effect.core.Fade(this.fields.getContainerElement().getDomElement());
-			this.effect.set( { from: 1, to: 0.5 });
+			this.effect.set( { from: 1, to: 0.5, duration: 0.25 });
             this.effect.start();
             this.fields.windows_fade_to( 0.5 );
 		},

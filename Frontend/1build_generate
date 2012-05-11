@@ -1,3 +1,4 @@
+cd $( dirname $0 )
 ./mklink
 ./generate.py clean
 ./generate.py build

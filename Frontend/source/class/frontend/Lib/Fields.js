@@ -85,7 +85,7 @@ function setValueListCommon(values, list){
 //        else if ( val != null && val != "" ){
         else {
             if (list.valueIds) {
-                item = list.getSelectables()[list.valueIds.indexOf(val)];
+                item = list.getSelectables(true)[list.valueIds.indexOf(val)];
             }
             else {
             	if ( list.findItem ){
@@ -215,7 +215,7 @@ qx.Class.define("frontend.Lib.Fields", {
      *  value for that field.
      *
      */
-    construct: function(params, fields, pLayout){
+    construct: function(params, fields, rLayout){
         this.base(arguments, this.layout = new qx.ui.layout.VBox(1));
         var ps = ["rpc", "write", "callback"];
         for (var p = 0; p < ps.length; p++) {
@@ -227,7 +227,7 @@ qx.Class.define("frontend.Lib.Fields", {
         this.windows = {};
         this.updating = false;
         this.field_id = null;
-        this.parentLayout = pLayout;
+        this.rotLayout = rLayout;
         dbg(5, "Writing is " + this.write + " our id is " + this);
         this.index = 1;
         this.timer = qx.util.TimerManager.getInstance();
@@ -253,11 +253,12 @@ qx.Class.define("frontend.Lib.Fields", {
         timer: null,
         delayTimer: null,
         layout: null,
-        tabsField: null,
-        parentLayout: null,
+        childLayout: null, // an eventual sub-tab in our layout - only one possible
+        rotLayout: null, // this is where we're attached to
+        parentLayout: null, // in case of tab-in-tab, the layout of the layout
         
         // Returns a map of all data in the Field
-        getFieldsData: function(){
+        getOwnFieldsData: function(){
             dbg(5, "getFieldsData");
             var result = {};
             for (var f in this.fields) {
@@ -278,8 +279,20 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
             }
             dbg(4, "getFieldsData: " + print_a(result));
-            if ( this.tabsField ){
-            	var otherData = this.tabsField.getFieldsData();
+            return result;
+         },
+         
+         // Gets also parent and child data, if available 
+         getFieldsData: function(){
+         	var result = this.getOwnFieldsData();
+            if ( this.childLayout && this.childLayout.field && this.childLayout.field.fields ){
+            	var otherData = this.childLayout.field.fields.getOwnFieldsData();
+            	for ( var res in otherData ){
+            		result[res] = otherData[res];
+            	}
+            }
+            if ( this.parentLayout ){
+            	var otherData = this.parentLayout.field.fields.getOwnFieldsData();
             	for ( var res in otherData ){
             		result[res] = otherData[res];
             	}
@@ -290,6 +303,7 @@ qx.Class.define("frontend.Lib.Fields", {
         // Deletes all data given in "fields"
         clearDataOnly: function(fields){
             dbg(5, "clearDataOnly");
+            this.updating = true;
             if (fields) {
                 dbg(5, "Deleting fields " + print_a(fields));
                 for (var f = 0; f < fields.length; f++) {
@@ -299,6 +313,7 @@ qx.Class.define("frontend.Lib.Fields", {
 						field.valueIds = [];
 					}
                     if (field.removeAll && !field.getDateFormat) {
+                    	field.resetSelection();
                         field.removeAll();
                     }
                     else 
@@ -319,6 +334,7 @@ qx.Class.define("frontend.Lib.Fields", {
                                     }
                 }
             }
+            this.updating = false;
         },
         
         // Deletes all data in the fields
@@ -639,17 +655,29 @@ qx.Class.define("frontend.Lib.Fields", {
                 switch (args[0]) {
                     case "vbox":
                         dbg(5, "Adding a vbox to " + lyt);
-                        lyt.add(this.calcView(view_str[1], new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
+                        var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
                             alignX: "right"
-                        }))), {
-                            flex: 1
-                        });
+                        }));
+                        lyt.add(this.calcView(view_str[1], layout ));
+                        break;
+                    case "vboxg":
+                        dbg(5, "Adding a vbox to " + lyt);
+                        var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
+                            alignX: "right"
+                        }));
+                        lyt.add(this.calcView(view_str[1], layout ), { flex: 1 });
                         break;
                     case "hbox":
                         dbg(5, "Adding a hbox to " + lyt);
                         var hbox = new qx.ui.layout.HBox(10);
                         var container = new qx.ui.container.Composite( hbox );
-                        lyt.add(this.calcView(view_str[1], container), {flex:1});
+                        lyt.add(this.calcView(view_str[1], container));
+                        break;
+                    case "hboxg":
+                        dbg(5, "Adding a hbox to " + lyt);
+                        var hbox = new qx.ui.layout.HBox(10);
+                        var container = new qx.ui.container.Composite( hbox );
+                        lyt.add(this.calcView(view_str[1], container), { flex: 1 });
                         break;
                     case "fields_layout":
                         dbg(5, "Adding a fields_layout to " + lyt + " - " + print_a(view_str[1]));
@@ -701,13 +729,13 @@ qx.Class.define("frontend.Lib.Fields", {
                     case "tabs":
                         var tabsName = view_str[1][0][0];
                         dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
-                        this.layout = new frontend.Views.Layout;
-                        this.layout.alignTabs = "top";
-                        this.layout.parentLayout = this.parentLayout;
+                        this.childLayout = new frontend.Views.Layout;
+                        this.childLayout.alignTabs = "top";
+                        this.childLayout.parentLayout = this.rotLayout;
                         var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-                        container.add( this.layout, {width: "100%", height: "100%"} );
+                        container.add( this.childLayout, {width: "100%", height: "100%"} );
                         lyt.add( container, {flex: 5} );
-                        rpc.callRPC("View." + tabsName, "list_tabs", this.layout, this.layout.dispatch)
+                        rpc.callRPC("View." + tabsName, "list_tabs", this.childLayout, this.childLayout.dispatch);
                         break;
                 }
             }
@@ -759,7 +787,8 @@ qx.Class.define("frontend.Lib.Fields", {
             	var effect = new qx.fx.effect.core.Fade(this.windows[w].getContainerElement().getDomElement());
             	effect.set({
                		from: 1.5 - target,
-               		to: target
+               		to: target,
+               		duration: 0.25
             	});
             	effect.start();
             }

@@ -101,7 +101,7 @@ class View < RPCQooxdooService
 
       # Fetch the layout of the view
       if @is_tabs
-        gui_hbox do
+        gui_hboxg do
           gui_vbox :nogroup do
             layout
           end
@@ -179,10 +179,24 @@ class View < RPCQooxdooService
     do_box( 'vbox', arg, b )
   end
 
+  # A vertical box, takes :nogroup as an argument, so it doesn't do
+  # a "group" around it, and as such doesn't draw a gray line
+  # Different that vbox, it grows
+  def gui_vboxg( arg = nil, &b )
+    do_box( 'vboxg', arg, b )
+  end
+
   # A horizontal box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_hbox( arg = nil, &b )
     do_box( 'hbox', arg, b )
+  end
+
+  # A horizontal box, takes :nogroup as an argument, so it doesn't do
+  # a "group" around it, and as such doesn't draw a gray line
+  # Different that hbox, it grows
+  def gui_hboxg( arg = nil, &b )
+    do_box( 'hboxg', arg, b )
   end
 
   def gui_grow( &b )
