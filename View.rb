@@ -388,7 +388,7 @@ class View < RPCQooxdooService
   def rpc_tabs_show( session, args )
     ret = rpc_show( session )
     if args.class == Hash
-      ret += rpc_list_choice( session, args.keys[0].to_s, args )
+      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
     end
     ret
   end
@@ -396,7 +396,7 @@ class View < RPCQooxdooService
   def rpc_tabs_update_view( session, args )
     ret = rpc_update_view( session )
     if args.class == Hash
-      ret += rpc_list_choice( session, args.keys[0].to_s, args )
+      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
     end
     ret
   end

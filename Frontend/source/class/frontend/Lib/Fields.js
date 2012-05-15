@@ -480,7 +480,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     if (params.list_type != "drop") {
                         field_element = new qx.ui.form.List();
                         field_element.setSelectionMode(params.list_type ? "single" : "additive");
-//                        field_element.setMaxHeight(250);
+                        field_element.setMaxHeight(250);
                         field_element.setMinWidth(200);
                         field_element.setAllowGrowX(true);
                         field_element.setAllowStretchX(true);
@@ -650,7 +650,7 @@ qx.Class.define("frontend.Lib.Fields", {
         calcView: function(view_str, lyt){
             // dbg(5, "calcView: " + print_a(view_str) + ":" + lyt);
             var flexit = 1;
-            if (view_str[0].split) {
+            if (view_str[0] && view_str[0].split) {
                 var args = view_str[0].split(":");
                 switch (args[0]) {
                     case "vbox":
