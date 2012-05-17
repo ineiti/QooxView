@@ -234,6 +234,10 @@ qx.Class.define("frontend.Lib.Fields", {
         if (fields) {
             this.calcView(fields, this);
         }
+        
+        this.addListener("appear", function(e) {
+       		root.fireDataEvent("resize", new qx.event.type.Data());
+		} )
     },
     
     members: {

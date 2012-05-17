@@ -53,34 +53,6 @@ qx.Class.define("frontend.Views.Layout", {
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
-            if ( this.tabs ) {
-                var bounds = this.getBounds();
-            	if ( ! this.parentLayout ){
-            		bounds = root.getBounds();
-            	}
-                dbg( 0, "Bounds is: " + print_a( bounds ));
-         		var width = bounds['width'];
-           		var height = bounds['height'];
-                dbg(0, "New dimension is " + width + " x " + height );
-           		//this.getRootContainer().setUserBounds( 0, 0, width, height );
-                this.getRootContainer().setWidth(width);
-                this.getRootContainer().setHeight(height);
-            } else if ( ! this.parentLayout ){
-                var bounds = this.getBounds();
-                var layout = this.getRootContainer().getBounds();
-                dbg( 0, "Bounds is: " + print_a( bounds ));
-                dbg( 0, "Layout is: " + print_a( layout ));
-                var width = 300;
-                var height = 200;
-         		var left = Math.floor( ( bounds['width'] - width ) / 2 );
-           		var right = Math.floor( ( bounds['height'] - height ) / 4 );
-           		dbg( 5, "RootContainer is " + this.getRootContainer() );
-           		dbg( 5, "Children are " + this.getRootContainer().getChildren());
-           		//this.getRootContainer().setUserBounds( left, right, width, height );
-           		//this.getRootContainer().setUserBounds( 100,100,100,100 );
-//                this.getRootContainer().setMarginLeft(( width - layout['width'] ) / 2 );
-//                this.getRootContainer().setTop((height - layout['height'] ) / 4 );            	
-            }
             if ( this.field && this.field.fields && this.field.fields.childLayout ){
             	dbg( 0, "Also resizing child-tab" )
             	this.field.fields.childLayout.resizeTab();
@@ -303,8 +275,6 @@ qx.Class.define("frontend.Views.Layout", {
                     this.field.fields.parentLayout = this.parentLayout;
                   }
                 }
-                root.fireDataEvent("resize", new qx.event.type.Data());
-
                 this.field.fields.focus_if_ok( this.field.fields.first_field);
             }
             else {

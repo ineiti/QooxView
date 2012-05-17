@@ -456,6 +456,9 @@ class View < RPCQooxdooService
       dputs 3, "updating #{update.inspect}"
     ret += update
     end
+    if args.class == Hash
+      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
+    end
     dputs 3, "showing: #{ret.inspect}"
     ret
   end
