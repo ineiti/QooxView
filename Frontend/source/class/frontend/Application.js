@@ -31,6 +31,7 @@ qx.Class.define("frontend.Application", {
 		main : function() {
 			// Call super class
 			this.base(arguments);
+			app = this;
 			root = this.getRoot();
 			root.add(this.layout = new frontend.Views.Layout(), {
 				width : "100%",
@@ -44,7 +45,6 @@ qx.Class.define("frontend.Application", {
 			rpc = new frontend.Lib.RPC;
 
 			root.addListener("resize", function(e) {
-				this.layout.resizeTab();
 				var bounds = this.layout.getBounds();
 				if(this.layout.getChildren()) {
 					var layout = this.layout.getChildren()[0];

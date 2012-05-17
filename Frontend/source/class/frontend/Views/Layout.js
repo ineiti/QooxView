@@ -51,14 +51,6 @@ qx.Class.define("frontend.Views.Layout", {
         alignTabs: null,
         parentLayout: null,
         
-        // Resizes the root-widget to maximum size in case of a tab-widget
-        resizeTab: function(){
-            if ( this.field && this.field.fields && this.field.fields.childLayout ){
-            	dbg( 0, "Also resizing child-tab" )
-            	this.field.fields.childLayout.resizeTab();
-            }
-        },
-        
         // This is called upon return from the server, and dispatches to the
         // appropriate functions. The result is an array of commands.
         dispatch: function(results){

@@ -236,7 +236,18 @@ qx.Class.define("frontend.Lib.Fields", {
         }
         
         this.addListener("appear", function(e) {
-       		root.fireDataEvent("resize", new qx.event.type.Data());
+        	root.fireDataEvent("resize", new qx.event.type.Data());
+        	/*
+			var bounds = root.getBounds();
+			var size = this.getInnerSize();
+			var top = Math.round( ( bounds.height - size.height ) / 4);
+			var left = Math.round( ( bounds.width - size.width ) / 2);
+			dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
+			app.layout.set({
+				marginTop : top,
+				marginLeft : left
+			});
+			*/
 		} )
     },
     
