@@ -53,20 +53,40 @@ qx.Class.define("frontend.Views.Layout", {
         
         // Resizes the root-widget to maximum size in case of a tab-widget
         resizeTab: function(){
-            if (this.tabs) {
+            if ( this.tabs ) {
                 var bounds = this.getBounds();
+            	if ( ! this.parentLayout ){
+            		bounds = root.getBounds();
+            	}
                 dbg( 0, "Bounds is: " + print_a( bounds ));
-         		width = bounds['width'];
-           		height = bounds['height'];
+         		var width = bounds['width'];
+           		var height = bounds['height'];
                 dbg(0, "New dimension is " + width + " x " + height );
+           		//this.getRootContainer().setUserBounds( 0, 0, width, height );
                 this.getRootContainer().setWidth(width);
                 this.getRootContainer().setHeight(height);
+            } else if ( ! this.parentLayout ){
+                var bounds = this.getBounds();
+                var layout = this.getRootContainer().getBounds();
+                dbg( 0, "Bounds is: " + print_a( bounds ));
+                dbg( 0, "Layout is: " + print_a( layout ));
+                var width = 300;
+                var height = 200;
+         		var left = Math.floor( ( bounds['width'] - width ) / 2 );
+           		var right = Math.floor( ( bounds['height'] - height ) / 4 );
+           		dbg( 5, "RootContainer is " + this.getRootContainer() );
+           		dbg( 5, "Children are " + this.getRootContainer().getChildren());
+           		//this.getRootContainer().setUserBounds( left, right, width, height );
+           		//this.getRootContainer().setUserBounds( 100,100,100,100 );
+//                this.getRootContainer().setMarginLeft(( width - layout['width'] ) / 2 );
+//                this.getRootContainer().setTop((height - layout['height'] ) / 4 );            	
             }
             if ( this.field && this.field.fields && this.field.fields.childLayout ){
             	dbg( 0, "Also resizing child-tab" )
             	this.field.fields.childLayout.resizeTab();
             }
         },
+        
         // This is called upon return from the server, and dispatches to the
         // appropriate functions. The result is an array of commands.
         dispatch: function(results){
@@ -170,10 +190,10 @@ qx.Class.define("frontend.Views.Layout", {
                         break;
                     case "switch_tab":
                     	for (var v = 0; v < this.views.length; v++) {
-                    		if (this.views[v].getLabel() == res.data) {
+                    		if (this.views[v].qv_id == res.data) {
                     			this.tabs.setSelection([this.views[v]]);
                     			dbg( 3, "Found new tab: " + res.data);
-                    			dbg( 3, "New tab is: " + this.tabs.getSelection()[0].getLabel() );
+                    			dbg( 3, "New tab is: " + this.tabs.getSelection()[0].qv_id );
                     		}
                     	}
                     	break;
@@ -254,11 +274,11 @@ qx.Class.define("frontend.Views.Layout", {
             
             // Assure we're in the right tab
             if (this.tabs) {
-                if (this.tabs.getSelection()[0].getLabel() != this.viewClass) {
+                if (this.tabs.getSelection()[0].qv_id != this.viewClass) {
                     alert("Changed tabs in the meantime: " +
-                    this.tabs.getSelection()[0].getLabel());
+                    this.tabs.getSelection()[0].qv_id);
                     for (var v = 0; v < this.views.length; v++) {
-                        if (this.views[v].getLabel() == this.viewClass) {
+                        if (this.views[v].qv_id == this.viewClass) {
                             this.tabs.setSelection([this.views[v]]);
                         }
                     }
@@ -283,6 +303,8 @@ qx.Class.define("frontend.Views.Layout", {
                     this.field.fields.parentLayout = this.parentLayout;
                   }
                 }
+                root.fireDataEvent("resize", new qx.event.type.Data());
+
                 this.field.fields.focus_if_ok( this.field.fields.first_field);
             }
             else {
@@ -305,8 +327,9 @@ qx.Class.define("frontend.Views.Layout", {
             
             this.views = [];
             for (var v = 0; v < views.length; v++) {
-                dbg(2, "adding view-tab: " + views[v]);
-                this.views[v] = new qx.ui.tabview.Page(views[v]);
+                dbg(2, "adding view-tab: " + views[v][0] + " - " + views[v][1]);
+                this.views[v] = new qx.ui.tabview.Page(views[v][1]);
+                this.views[v].qv_id = views[v][0]
                 this.views[v].setLayout(new qx.ui.layout.Canvas());
                 var scroller = new qx.ui.container.Scroll();
                 var composite = new qx.ui.container.Composite();
@@ -325,13 +348,13 @@ qx.Class.define("frontend.Views.Layout", {
             dbg(3, "getRootContainer gives: " + this.getRootContainer());
             
             qx.event.Registration.addListener(this.tabs, "changeSelection", this.changeView, this);
-            rpc.callRPC("View." + views[0], "show", this, this.dispatch);
+            rpc.callRPC("View." + views[0][0], "show", this, this.dispatch);
             this.tabs.setSelection([this.views[0]]);
         },
         // Every time the view changes, this is called, which calls the Backend, which will call showView
         changeView: function(e){
             this.checkTimer();
-            var newView = e.getData()[0].getLabel();//.getSelection()[0];
+            var newView = e.getData()[0].qv_id;//.getSelection()[0];
             dbg(3, "New view is: " + newView)
             this.field = this.getActiveForm();
             var container = this.getRootContainer();
@@ -344,7 +367,9 @@ qx.Class.define("frontend.Views.Layout", {
             	dbg(3, "Adding something to the show - update_view");
             	inTabs = "tabs_";
             	parentFields = this.parentLayout.field.fields.getOwnFieldsData();
-            } 
+            } else if ( this.field && this.field.fields ) {
+            	parentFields = this.field.fields.getOwnFieldsData();
+            }
             if (!container.hasChildren()) {
                 dbg(3, "changeView with data " + newView + " and field " + this.field);
                 rpc.callRPC("View." + newView, inTabs + "show", 

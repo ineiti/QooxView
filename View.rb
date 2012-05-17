@@ -381,7 +381,7 @@ class View < RPCQooxdooService
         order = s.name <=> t.name
         end
         order
-      }.collect{|c| c.name}
+      }.collect{|c| [ c.name, GetText._( c.name ) ] }
     }
   end
   
@@ -435,7 +435,7 @@ class View < RPCQooxdooService
   end
 
   # Updates the layout of the form, especially the lists
-  def rpc_update_view( session )
+  def rpc_update_view( session, args = nil )
     #    reply( 'empty', '*' ) +
     #    reply( 'update', layout_recurse( @layout ))
     ret = []

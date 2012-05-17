@@ -179,7 +179,7 @@ module QooxView
           potfile = "po/#{$name}.pot"
           if File.exists? pofile
             %x[ mv #{pofile} #{pofile}.tmp ]
-            %x[ msgmerge #{pofile}.old #{potfile} -o #{pofile} ]
+            %x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
           else
             %x[ cp #{potfile} #{pofile} ]
           end
