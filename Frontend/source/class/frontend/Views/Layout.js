@@ -50,6 +50,7 @@ qx.Class.define("frontend.Views.Layout", {
         timerUpdate: null,
         alignTabs: null,
         parentLayout: null,
+        initValues: null,
         
         // This is called upon return from the server, and dispatches to the
         // appropriate functions. The result is an array of commands.
@@ -69,51 +70,6 @@ qx.Class.define("frontend.Views.Layout", {
                 dbg(0, print_a(res.data));
                 dbg(0, res.data);
                 switch (res.cmd) {
-                    case "session_id":
-                        rpc.session_id = res.data;
-                        break;
-                    case "show":
-                        this.showView(res.data);
-                        break;
-                    case "update":
-                        if (this.tabs) {
-                            this.tabs.setEnabled(true);
-                        }
-                        this.updateView(res.data)
-                        break;
-                    case "list":
-                        this.createViews(res.data);
-                        break;
-                    case "clear":
-                        this.root.removeAll();
-                        break;
-                    case "reload":
-                        window.location.reload();
-                        break;
-                    case "empty":
-                        // By default empties only normal fields. If given a list of
-                        // names, clears also these lists
-                        this.getActiveForm().fields.clearData(res.data);
-                        break;
-                    case "empty_only":
-                        // Only empties the given fields (usually lists)
-                        this.getActiveForm().fields.clearDataOnly(res.data);
-                        break;
-                    case "empty_all":
-                        // Let's empty everything
-                        this.getActiveForm().fields.clearDataAll();
-                        break;
-                    case "debug":
-                        // Enable logging in debug variant
-                        dbg(0, "Turning debugging on")
-                        if (qx.core.Environment.get('qx.debug') != "on") {
-                            // support native logging capabilities, e.g. Firebug for Firefox
-                            qx.log.appender.Native;
-                            // support additional cross-browser console. Press F7 to toggle
-                            // visibility
-                            qx.log.appender.Console.show();
-                        }
-                        break;
                     case "auto_update":
                         // Enable an automatic update every n seconds
                         this.checkTimer();
@@ -136,13 +92,6 @@ qx.Class.define("frontend.Views.Layout", {
                             rpc.callRPCarray("View." + this.viewClass, method, this, this.dispatch, values);
                         }, time, this, null, time);
                         break;
-                    case "window_show":
-                    	enable = false;
-                        aform.fields.window_show(res.data);
-                        break;
-                    case "window_hide":
-                        aform.fields.window_hide(res.data);
-                        break;
                     case "callback_button":
 //						aform.fadeOut();
 						enable = false;
@@ -151,6 +100,87 @@ qx.Class.define("frontend.Views.Layout", {
                             dbg(3, "Timer for callback_button");
 							this.callBackend("button", res.data, this.fields.getFieldsData());
                         }, null, aform, null, 1000 );
+                        break;
+                    case "child":
+                    	if ( aform.fields.childLayout ){
+                    		aform.fields.childLayout.dispatch( res.data );
+                    	}
+                    	break;
+                    case "clear":
+                        this.root.removeAll();
+                        break;
+                    case "debug":
+                        // Enable logging in debug variant
+                        dbg(0, "Turning debugging on")
+                        if (qx.core.Environment.get('qx.debug') != "on") {
+                            // support native logging capabilities, e.g. Firebug for Firefox
+                            qx.log.appender.Native;
+                            // support additional cross-browser console. Press F7 to toggle
+                            // visibility
+                            qx.log.appender.Console.show();
+                        }
+                        break;
+                    case "empty":
+                        // By default empties only normal fields. If given a list of
+                        // names, clears also these lists
+                        this.getActiveForm().fields.clearData(res.data);
+                        break;
+                    case "empty_all":
+                        // Let's empty everything
+                        this.getActiveForm().fields.clearDataAll();
+                        break;
+                    case "empty_only":
+                        // Only empties the given fields (usually lists)
+                        this.getActiveForm().fields.clearDataOnly(res.data);
+                        break;
+                    case "focus":
+                        var f = res.data;
+                        if ( aform && aform.fields && aform.fields.fields ){
+                            if ( aform.fields.fields[f] ){
+                      	        dbg( 2, "Focusing on " + f)
+                      	        aform.fields.focus_if_ok( aform.fields.fields[f] );
+                     		} else {
+                        		dbg( 2, "Not found " + f + " in " +
+                            	print_a( aform.fields.fields ) );
+                      		}
+                      	}
+                     	break;
+                    case "hide":
+                    	this.setVisibility( res.data, 'excluded' );
+                    	break;
+                    case "init_values":
+                    	var tab = res.data[0];
+                    	var values = res.data[1];
+                    	dbg( 2, "init_values for " + tab + " - " + print_a( values ) );
+                    	var f = null;
+                    	for (var v = 0; v < this.views.length; v++){
+                    		dbg( 2, "Looking for " + this.views[v].qv_id )
+                    		if ( this.views[v].qv_id == tab ){
+		                    	dbg( 2, "Found " + this.views[v] );
+		                    	this.views[v].initValues = values;
+                    		}
+                    	}
+                    	break;
+                    case "list":
+                        this.createViews(res.data);
+                        break;
+                    case "parent":
+                    	if ( this.parentLayout ){
+                    		this.parentLayout.dispatch( res.data );
+                    	}
+                        break;
+                    case "pass_tabs":
+                    	aform.fields.childLayout.getActiveForm().callBackend( res.data[0],
+                          res.data[1], res.data[2]);
+                      	break;
+                    case "reload":
+                        window.location.reload();
+                        break;
+                    case "session_id":
+                        rpc.session_id = res.data;
+                        break;
+                    case "show":
+                        this.showView(res.data);
                         break;
                     case "switch_tab":
                     	for (var v = 0; v < this.views.length; v++) {
@@ -161,28 +191,22 @@ qx.Class.define("frontend.Views.Layout", {
                     		}
                     	}
                     	break;
-                    case "hide":
-                      this.setVisibility( res.data, 'excluded' );
-                      break;
                     case "unhide":
                       this.setVisibility( res.data, 'visible' );
                       break;
-                    case "pass_tabs":
-                      aform.fields.childLayout.getActiveForm().callBackend( res.data[0],
-                        res.data[1], res.data[2]);
-                      break;
-                    case "focus":
-                      var f = res.data;
-                      if ( aform && aform.fields && aform.fields.fields ){
-                      	if ( aform.fields.fields[f] ){
-                      	  dbg( 2, "Focusing on " + f)
-                      	  aform.fields.focus_if_ok( aform.fields.fields[f] );
-                      	} else {
-                          dbg( 2, "Not found " + f + " in " +
-                            print_a( aform.fields.fields ) );
-                      	}
-                      }
-                      break;
+                    case "update":
+                        if (this.tabs) {
+                            this.tabs.setEnabled(true);
+                        }
+                        this.updateView(res.data)
+                        break;
+                    case "window_hide":
+                        aform.fields.window_hide(res.data);
+                        break;
+                    case "window_show":
+                    	enable = false;
+                        aform.fields.window_show(res.data);
+                        break;
                 }
             }
             
@@ -240,7 +264,7 @@ qx.Class.define("frontend.Views.Layout", {
             if (this.tabs) {
                 if (this.tabs.getSelection()[0].qv_id != this.viewClass) {
                     alert("Changed tabs in the meantime: " +
-                    this.tabs.getSelection()[0].qv_id);
+                    this.tabs.getSelection()[0].qv_id );
                     for (var v = 0; v < this.views.length; v++) {
                         if (this.views[v].qv_id == this.viewClass) {
                             this.tabs.setSelection([this.views[v]]);
@@ -320,6 +344,7 @@ qx.Class.define("frontend.Views.Layout", {
             dbg(3, "New view is: " + newView)
             this.field = this.getActiveForm();
             var container = this.getRootContainer();
+            var tabSel = this.tabs.getSelection()[0];
             this.tabs.setEnabled(false);
             var inTabs = "";
             var parentFields = null;
@@ -332,13 +357,21 @@ qx.Class.define("frontend.Views.Layout", {
             } else if ( this.field && this.field.fields ) {
             	parentFields = this.field.fields.getOwnFieldsData();
             }
+            if ( tabSel.initValues ){
+            	dbg( 2, "initValue for " + tabSel );
+            	for ( var i in tabSel.initValues ){
+            		parentFields[i] = tabSel.initValues[i];
+            	}
+            	dbg( 2, "parentFields is " + print_a( parentFields ) );
+            	tabSel.initValues = null;
+            }
             if (!container.hasChildren()) {
                 dbg(3, "changeView with data " + newView + " and field " + this.field);
                 rpc.callRPC("View." + newView, inTabs + "show", 
                 this, this.dispatch, parentFields );
             }
             else {
-                dbg(3, "Tab already created - updating only");
+                dbg(3, "Tab already created - updating only - " + print_a( parentFields ));
                 this.viewClass = newView;
                 rpc.callRPC("View." + newView, inTabs + "update_view", 
                 this, this.dispatch, parentFields);

@@ -52,6 +52,23 @@ end
 
 
 
+class String
+  def tab_parts
+    res = self.match( /^([A-Z][a-z]*)([A-Z]*[a-z]*)/ )
+    return res ? res[1,2] : ["", ""]
+  end
+
+  def tab_name
+    self.tab_parts[0]
+  end
+
+  def sub_name
+    self.tab_parts[1]
+  end
+end
+
+
+
 class View < RPCQooxdooService
   attr_reader :visible, :order, :name, :is_tabs, :name_tab
 
@@ -68,13 +85,14 @@ class View < RPCQooxdooService
     if @name != "View"
       @@list.push self
       if @name =~ /.*Tabs$/
-        @name_tab = @name.sub(/Tabs$/, '')
+      @name_tab = @name.tab_name
       @is_tabs = true
       @@tabs.push @name_tab
       end
       dputs 4, "Initializing #{self.class.name}"
       dputs 5, "Total list of view-classes: #{@@list.join('::')}"
-      @data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
+      #@data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
+      @data_class = Entities.service( @name.tab_name.pluralize )
       @layout = [[]]
       @actual = []
       @update = false
@@ -354,21 +372,39 @@ class View < RPCQooxdooService
     views = []
     dputs 5, @@list.inspect
     @@list.each{|l|
-      tab_name = l.name.sub( /([A-Z][a-z]*).*/, '\1' )
-      is_tabs_or_tab = @@tabs.index( tab_name )
-      dputs 2, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
-      dputs 2, "tabs: #{tabs.inspect} - tab_name: #{tab_name}"
       if l.visible and session.can_view( l.class.name )
+      views.push( l )
+      end
+    }
+
+    sub_tabs_only = false
+    if not tabs
+      # First test if we only have sub-tabs (they'll be shown seperatly)
+      main_tabs = views.collect{|v|
+        v.name.tab_name
+      }.uniq
+      if main_tabs.length == 1
+        # There is only one main_tab, we have to clean it
+        views.delete_if{|v| v.name == "#{main_tabs[0]}Tabs" }
+      sub_tabs_only = true
+      end
+    end
+    if not sub_tabs_only
+      dputs 2, "Views before: #{views.each{|v| v.name }}"
+      views.delete_if{|l|
+        tab_name = l.name.tab_name
+        is_tabs_or_tab = @@tabs.index( tab_name )
+        dputs 3, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
+        #dputs 3, "tabs: #{tabs.inspect} - tab_name: #{tab_name}"
         # Either we ask specifically for all sub-tabs, but then we don't show the main-tab
         # or we don't ask for tabs and
         #  are the main-tab or
         #  are not tabs or tab at all
-        if ( tab_name == tabs and not l.is_tabs ) or
-        ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) )
-        views.push( l )
-        end
-      end
-    }
+        not ( ( tab_name == tabs and not l.is_tabs ) or
+        ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) ) )
+      }
+      dputs 2, "Views after: #{views.each{|v| v.name }}"
+    end
     self.list_views( views )
   end
 
@@ -384,7 +420,7 @@ class View < RPCQooxdooService
       }.collect{|c| [ c.name, GetText._( c.name ) ] }
     }
   end
-  
+
   def rpc_tabs_show( session, args )
     ret = rpc_show( session )
     if args.class == Hash
@@ -392,7 +428,7 @@ class View < RPCQooxdooService
     end
     ret
   end
-  
+
   def rpc_tabs_update_view( session, args )
     ret = rpc_update_view( session )
     if args.class == Hash
@@ -456,10 +492,26 @@ class View < RPCQooxdooService
       dputs 3, "updating #{update.inspect}"
     ret += update
     end
-    if args.class == Hash
-      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
+    if args
+      dputs 3, "Args: #{args.inspect}"
+      if args.class == Array
+        args.flatten!(1)        
+      end
+      ret += rpc_autofill( session, args )
     end
     dputs 3, "showing: #{ret.inspect}"
+    ret
+  end
+  
+  def rpc_autofill( session, args )
+    dputs 3, "args is #{args.inspect}"
+    ret = []
+    args.keys.each{|a|
+      if l = layout_find( a )
+        dputs 3, "found layout for #{a}"
+        ret += reply( :update, a => args[a] )
+      end
+    }
     ret
   end
 
@@ -513,6 +565,10 @@ class View < RPCQooxdooService
       end
     }
     ret
+  end
+  
+  def layout_find( name )
+    layout_recurse.find{|l| l.name.to_s == name.to_s }
   end
 
   def layout_eval( lay = @layout[0][0].dup )
