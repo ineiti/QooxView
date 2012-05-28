@@ -29,6 +29,7 @@ class CSV < StorageType
     else
       dputs 3, "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}"
       system "mkdir -p #{@csv_dir}"
+      dputs 5, "Data is #{data.inspect}"
       File.open( "#{@csv_file}.tmp", "w"){|f|
         data_each(data){|d|
           write_line( f, d )

@@ -156,11 +156,14 @@ require 'getoptlong'
 
 module QooxView
   def self.init( dir_entities = nil, dir_views = nil )
-    opts = GetoptLong.new(
+    opts = []
+=begin
+    GetoptLong.new(
     [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
     [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
     [ "--po", "-p", GetoptLong::NO_ARGUMENT ]
     )
+=end
     opts.each{|o,a|
       case o
       when "--help"

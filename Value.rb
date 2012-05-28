@@ -20,7 +20,7 @@ where string_on_screen is taken of an eventual translation-file
 =end
 
 class Value
-  attr_accessor :dtype, :name, :st, :args, :list, :entity_class
+  attr_accessor :dtype, :name, :st, :args, :list, :entity_class, :eclass
   def initialize( cmds, arguments, dt = nil )
     dputs 3, "Added new: #{cmds.inspect}, #{arguments.inspect}"
 
@@ -87,12 +87,20 @@ class Value
       e_all = eclass.search_all
       values = e_all.select{|e|
         begin
-          @condition.call(e) and e.respond_to? @show_method
+          dputs 3, "Searching whether to show #{e.inspect}"
+          #cond = e.send( @condition, e )
+          cond = true
+          dputs 3, "cond: #{cond}"
+          method = e.respond_to? @show_method
+          dputs 3, "method: #{method}"
+          cond and method
         rescue
         false
         end
       }.collect{|e|
         [ e.send( eclass.data_field_id ).to_s, e.send( @show_method ) ]
+      }.sort{|a,b|
+        a[1] <=> b[1]
       }
       args.merge! :list_values => values
       dputs 3, "Args for entities is #{args.inspect}"
@@ -104,6 +112,13 @@ class Value
 
   def self.simple( dtype, name, flags = [] )
     return Value.new( [dtype] + flags.to_a, [name])
+  end
+  
+  def add_eclass
+    if @dtype == "entity"
+      @eclass = Entities.send( @entity_class )
+    end
+    return self
   end
 
   # TODO: implement this cloning instead of deep_clone from object

@@ -172,8 +172,8 @@ module StorageHandler
     @storage.each{|k, di| di.data_create( args ) }
     key = args[@data_field_id]
     if not @data[ key ]
-      @data[key] = args
-      #dputs 5, "@data is now #{@data.inspect}"
+      @data[key] = { @data_field_id => key }
+      dputs 5, "@data is now #{@data.inspect}"
       dputs 5, "data_class is now #{@data_class.to_s}"
       save_data( args )
       return get_data_instance( key )
@@ -196,13 +196,13 @@ module StorageHandler
         dputs 0, "Didn't find key #{data_id.inspect}"
         exit 1
       else
-      e.set_data( data )
+      e.set_data( data, true )
       end
     else
       e = create( data )
     end
 
-    dputs 4, "Saving data #{data_id}"
+    dputs 3, "Saving data #{data_id}"
     @storage.each{|k,c|
       c.save( @data )
     }

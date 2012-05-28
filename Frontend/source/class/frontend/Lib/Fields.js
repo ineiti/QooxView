@@ -64,9 +64,10 @@ function getValueListArray(){
 }
 
 function setValueListCommon(values, list){
-    dbg(5, "setValueList " + values);
+    dbg(5, "setValueList " + print_a( values ) );
     var selection = [];
-    if (!values) {
+    if (!values || !values.length ) {
+    	dbg( 5, "aborting setValueList");
         return;
     }
     for (var v = 0; v < values.length; v++) {
@@ -104,9 +105,9 @@ function setValueListCommon(values, list){
                 list.add(item);
                 if (list.vaueIds && list.indexOf(item) != list.valueIds.length - 1) {
                     alert("Different number of items in list and valueIds!");
-                }
             }
-    }
+	    }
+	}
     list.setSelection(selection);
 }
 
@@ -116,6 +117,10 @@ function setValueList(val){
 
 function setValueDrop(val){
     dbg(5, "setValueDrop: " + print_a(val))
+    if ( this.valueIds ){
+    	dbg( 3, "Having valueIds " + print_a( this.valueIds ) )
+       setValueListCommon( val, this );
+    } else 
     if (val.length == 1 && this.getChildren().length > 0) {
         var elements = this.getChildren();
         dbg(5, "Setting value of " + val + " to elements " + elements);

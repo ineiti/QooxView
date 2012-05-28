@@ -675,6 +675,7 @@ class View < RPCQooxdooService
           ent = Entities.send( l.entity_class )
           params[1][l.name.to_sym] = ent.find_by( ent.data_field_id, id_value )
           dputs 3, "Converted #{id_value} to #{params[1][l.name.to_sym].to_s}"
+          params[1].delete( l.name.to_s )
         end
       end
     }

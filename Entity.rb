@@ -157,7 +157,9 @@ class Entities < RPCQooxdooService
       dputs 5, "Using listpairs for field #{field.inspect}, #{@data.inspect}"
       ret = @data.keys.collect{|k|
         dputs 4, "k is #{k.inspect} - data is #{@data[k].inspect}"
-        [k, @data[k][field.to_sym] ] }
+        [k, @data[k][field.to_sym] ] }.sort{|a,b|
+        a[1] <=> b[1]
+        }
       dputs 3, "Returning #{ret.inspect}"
       ret
     when /^value_/
@@ -171,7 +173,7 @@ class Entities < RPCQooxdooService
 
   def respond_to?( cmd )
     dputs 5, cmd
-    if cmd =~ /^find_by_/
+    if cmd =~ /^(find_by_|search_by_|list_|listp_|value_)/
     return true
     end
     super cmd
@@ -215,6 +217,22 @@ class Entities < RPCQooxdooService
     }
     ret = ret.select{|s| s }
     ret.flatten.collect{|c| c.to_sym }
+  end
+
+  # Returns the value for an entry
+  def get_value( n, b = @blocks )
+    n = n.to_sym
+    b.each{|c|
+      if c.class == Array
+        v = get_value( n, c )
+      v and return v.add_eclass
+      elsif c.class == Value
+        if c.name.to_sym == n
+        return c.add_eclass
+        end
+      end
+    }
+    return nil
   end
 
   def self.service( s )
@@ -282,15 +300,17 @@ class Entity
   end
 
   # Sets the value of a single entry and attaches an UNDO
-  def set_entry( field, value, msg = nil, undo = true )
+  def set_entry( field, value, msg = nil, undo = true, logging = true )
     dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
     old_value = data_get( field )
     new_value = data_set( field, value )
     if old_value.to_s != new_value.to_s
-      if undo
-        @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )
-      else
-        @proxy.log_action( @id, { field => new_value }, msg )
+      if logging
+        if undo
+          @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )
+        else
+          @proxy.log_action( @id, { field => new_value }, msg )
+        end
       end
       dputs 3, "Setting field #{field} to value #{new_value.inspect}"
       data_set( field, new_value )
@@ -322,14 +342,22 @@ class Entity
     end
   end
 
-  def to_hash
+  def to_hash( frontend = false )
     ret = @proxy.data[@id].dup
     dputs 5, "Will return #{ret.to_a.join("-")}"
+    if frontend
+      ret.each{|f,v|
+        if data_get(f).is_a? Entity
+          ret[f] = [v.to_s]
+        end
+      }
+    end
     ret
   end
 
   # Save all data in the hash for which we have an entry
-  def set_data( data )
+  # if create == true, it won't call LogActions for every field
+  def set_data( data, create = false )
     dputs 4, "set_data( #{data.inspect} )"
     fields = @proxy.get_field_names
     data.each{|k,v|
@@ -338,8 +366,8 @@ class Entity
       if fields.index( ks )
         # Only set data if it's different from original
         if v != data_get(ks)
-          dputs 5, "Setting @data[#{k.inspect}] = #{v.inspect}"
-          set_entry( ks, v )
+          dputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
+          set_entry( ks, v, nil, true, ( not create ) )
         end
       end
     }
@@ -368,12 +396,27 @@ class Entity
 
   def data_get( field )
     ret = [field].flatten.collect{|f|
-      @proxy.get_entry( @id, f.to_s )
+      e = @proxy.get_entry( @id, f.to_s )
+      v = @proxy.get_value( f )
+      if e and v and v.dtype == "entity"
+        dputs 3, "Getting instance for #{v.inspect}"
+      e = v.eclass.get_data_instance( e )
+      end
+      e
     }
     ret.length == 1 ? ret[0] : ret
   end
 
   def data_set( field, value )
+    if value.is_a? Entity
+      dputs 3, "Converting #{value} to #{value.id}"
+    @proxy.set_entry( @id, field, value.id )
+    else
     @proxy.set_entry( @id, field, value )
+    end
+  end
+
+  def true( *args )
+    return true
   end
 end
