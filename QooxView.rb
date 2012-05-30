@@ -155,7 +155,7 @@ require 'Welcome'
 require 'getoptlong'
 
 module QooxView
-  def self.do_opts
+  def self.do_opts( dir_entities, dir_views )
     opts = GetoptLong.new(
     [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
     [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
@@ -201,7 +201,7 @@ module QooxView
   def self.init( dir_entities = nil, dir_views = nil )
     if not ( Module.constants.index( 'Test' ) )
       dputs 0, "Doing options"
-      self.do_opts
+      self.do_opts( dir_entities, dir_views )
     end
 
     GetText.bindtextdomain( $name, :path => "po" )

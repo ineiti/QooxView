@@ -21,7 +21,7 @@ qx.Class.define("frontend.Views.Form", {
         this.dataClass = dataClass;
         this.viewClass = viewClass;
         this.callback = cback;
-        dbg(3, "cback is: " + print_a(cback));
+        //dbg(3, "cback is: " + print_a(cback));
         this.add(this.fields = new frontend.Lib.Fields({
             callback: [this, this.changeId]
         }, layout, rLayout), {width: "100%", flex: 1} );
@@ -76,10 +76,13 @@ qx.Class.define("frontend.Views.Form", {
 		
 		fadeOut: function(){
 			this.fields.setEnabled( false );
-            this.effect = new qx.fx.effect.core.Fade(this.fields.getContainerElement().getDomElement());
-			this.effect.set( { from: 1, to: 0.5, duration: 0.25 });
-            this.effect.start();
-            this.fields.windows_fade_to( 0.5 );
+			if ( this.fields && this.fields.getContainerElement() &&
+			this.fields.getContainerElement().getDomElement() ){
+				this.effect = new qx.fx.effect.core.Fade(this.fields.getContainerElement().getDomElement());
+				this.effect.set( { from: 1, to: 0.5, duration: 0.25 });
+				this.effect.start();
+				this.fields.windows_fade_to( 0.5 );
+	        }
 		},
         
         // Adds all data in the arguments and calls the server
@@ -89,7 +92,7 @@ qx.Class.define("frontend.Views.Form", {
                 args.push(arguments[i]);
             }
             dbg(5, "callBackend arguments are: " + args.join(":"));
-            dbg(5, "callback is: " + print_a(this.callback));
+            //dbg(5, "callback is: " + print_a(this.callback));
             rpc.callRPCarray("View." + this.viewClass, method, this.callback[0], this.callback[1], args);
         },
         

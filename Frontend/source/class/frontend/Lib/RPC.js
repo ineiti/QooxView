@@ -39,8 +39,10 @@ qx.Class.define("frontend.Lib.RPC", {
 
 		callRPCarray : function(service, method, obj, event, params) {
 			if ( this.RpcRunning ){
+				var args = [service, method, obj, event, params];
 				//alert( "Oops, RPC is running - queueing" );
-				this.RpcQueue.unshift( [service, method, obj, event, params] );
+				dbg( 4, "Queuing RPC call " + print_a( args ) );
+				this.RpcQueue.unshift( args );
 				return;
 			}
 			
@@ -57,6 +59,7 @@ qx.Class.define("frontend.Lib.RPC", {
 				dbg( 3, "RpcRunning = null" );
 				if (ex == null) {
 					//            alert( result.length + " - " + event );
+					dbg( 3, "Going to call " + obj + " - " + print_a( result ) );
 					event.call(obj, result);
 					rpc.RpcRunning = null;
 					if ( rpc.RpcQueue.length > 0 ){

@@ -54,11 +54,13 @@ qx.Class.define("frontend.Application", {
 						if(size) {
 							var top = Math.round( ( bounds.height - size.height ) / 4);
 							var left = Math.round( ( bounds.width - size.width ) / 2);
+							/*
 							dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
 							this.layout.set({
 								marginTop : top,
 								marginLeft : left
 							});
+							*/
 						}
 					}
 				}

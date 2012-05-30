@@ -627,6 +627,7 @@ qx.Class.define("frontend.Lib.Fields", {
                             var data = e.getData ? e.getData() : "";
                             // Have a delay for some actions that might take time
                             if (delay == 0) {
+                            	dbg( 3, "Callback is " + print_a( this.callback ) )
                                 this.callback[1].call(this.callback[0], [id, name, type, data, params])
                             }
                             else {

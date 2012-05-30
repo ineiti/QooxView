@@ -143,6 +143,8 @@ qx.Class.define("frontend.Views.Layout", {
                         		dbg( 2, "Not found " + f + " in " +
                             	print_a( aform.fields.fields ) );
                       		}
+                      	} else {
+                      		dbg( 3, "No form -" + aform + "- or fields found");
                       	}
                      	break;
                     case "hide":
@@ -181,6 +183,8 @@ qx.Class.define("frontend.Views.Layout", {
                         break;
                     case "show":
                         this.showView(res.data);
+                        aform = this.getActiveForm();
+                        //enable = false;
                         break;
                     case "switch_tab":
                     	for (var v = 0; v < this.views.length; v++) {
@@ -211,18 +215,20 @@ qx.Class.define("frontend.Views.Layout", {
             }
             
             if (enable && aform) {
-                dbg(5, "** UNdoing effects");
-                var effect = new qx.fx.effect.core.Fade(aform.fields.getContainerElement().getDomElement());
-                effect.set({
-                    from: 0.5,
-                    to: 1,
-                    duration: 0.25
-                });
-                if (aform.effect) {
-                    aform.effect.cancel();
-                }
-                effect.start();
-                aform.fields.windows_fade_to(1);
+            	if ( aform.fields.getContainerElement().getDomElement() ){
+                	dbg(5, "** UNdoing effects");
+	                var effect = new qx.fx.effect.core.Fade(aform.fields.getContainerElement().getDomElement());
+	                effect.set({
+	                    from: 0.5,
+	                    to: 1,
+	                    duration: 0.25
+	                });
+	                if (aform.effect) {
+	                    aform.effect.cancel();
+	                }
+	                effect.start();
+	                aform.fields.windows_fade_to(1);
+	            }
             }
             if (this.tabs && enable) {
                 this.tabs.setEnabled(true);
