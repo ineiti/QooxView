@@ -130,6 +130,9 @@ class Entities < RPCQooxdooService
     @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
     return @data_instances[k]
   end
+  def find_by_id( k )
+    get_data_instance( k )
+  end
 
   # We can
   # - find_by_field - where the data is searched for the "field"

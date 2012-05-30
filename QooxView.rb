@@ -155,15 +155,12 @@ require 'Welcome'
 require 'getoptlong'
 
 module QooxView
-  def self.init( dir_entities = nil, dir_views = nil )
-    opts = []
-=begin
-    GetoptLong.new(
+  def self.do_opts
+    opts = GetoptLong.new(
     [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
     [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
     [ "--po", "-p", GetoptLong::NO_ARGUMENT ]
     )
-=end
     opts.each{|o,a|
       case o
       when "--help"
@@ -199,6 +196,13 @@ module QooxView
         }
       end
     }
+  end
+
+  def self.init( dir_entities = nil, dir_views = nil )
+    if not ( Module.constants.index( 'Test' ) )
+      dputs 0, "Doing options"
+      self.do_opts
+    end
 
     GetText.bindtextdomain( $name, :path => "po" )
     GetText.locale = "fr"
@@ -211,25 +215,6 @@ module QooxView
         Dir[d+"/**/*.rb"].each{|f| require(f)}
       end
     }
-
-=begin    
-    # Sub-directories should hold Group-files, which will have to be included first
-    Dir[dir_views + "/*/"].each{|d|
-      dputs 3, "Found Views-directory #{d}"
-      group = d + "Group.rb"
-      if File.exists?( group )
-        dputs 3, "Found #{group}"
-        require( group )
-        to_req = Dir[d + "*.rb"]
-        to_req.delete( group )
-        to_req.each{|dr|
-          dputs 3, "Including #{dr}"
-          require( dr )
-        }
-        View.group = nil
-      end
-    }
-=end
 
     if not Permission.list.index( "default" )
       Permission.add( 'default', '.*' )
