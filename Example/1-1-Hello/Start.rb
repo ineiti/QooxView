@@ -4,8 +4,7 @@ require 'QooxView'
 
 class Welcome < View
   def layout
-    show_info :welcome, "hello"
-    show_info :there, "world"
+    show_html :hi, "<h1>Hello world</h1>"
   end
 end
 

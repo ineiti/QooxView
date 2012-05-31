@@ -14,7 +14,7 @@ Data-handling available in QooxView.
 
 == 1-1 Hello
 
-The most simple Frontend to be used - only a textbox without anything.
+The most simple Frontend to be used - only a html-textbox
 
 == 1-2 Button
 
