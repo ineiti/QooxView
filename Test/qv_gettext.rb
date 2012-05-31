@@ -2,7 +2,7 @@ require 'test/unit'
 
 class TC_Gettext < Test::Unit::TestCase
   def setup
-    QooxView::bindtext( 'gettext', 'po' )
+    GetText.bindtextdomain( 'gettext', 'po' )
     @a = GetText._("one")
     @b = GetText._("two")
   end

@@ -247,7 +247,4 @@ module QooxView
     log_msg( "main", "Starting up" )
     RPCQooxdooHandler.webrick( port, File.dirname( __FILE__ ) + "/Frontend/#{dir_html}/" )
   end
-
-  def self.bindtext( dn, path )
-  end
 end

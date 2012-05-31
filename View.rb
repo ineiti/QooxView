@@ -245,7 +245,7 @@ class View < RPCQooxdooService
     do_container_end
   end
 
-  def show_in_field( a ) # :nodoc:
+  def show_in_field( a, args={} ) # :nodoc:
     if not @actual.last =~ /^fields/
       do_container_start( %w( group fields ) )
     end
@@ -255,7 +255,9 @@ class View < RPCQooxdooService
       when v.dtype == "entity"
         show_entity( *e.split(',') )
       else
-      @layout.last.push v.deep_clone
+      value = v.deep_clone
+      value.args.merge!( args )
+      @layout.last.push value
       end
     }
   end
@@ -321,7 +323,7 @@ class View < RPCQooxdooService
     when 'block'
       # Shows a block as defined in an Entities - useful if the same
       # values will be shown in different views
-      show_in_field @data_class.blocks[ value.name ]
+      show_in_field( @data_class.blocks[ value.name ], value.args )
 
     when 'find_text'
       # Shows an input-box for any data needed, calling "find_by_" if something is
@@ -495,14 +497,14 @@ class View < RPCQooxdooService
     if args
       dputs 3, "Args: #{args.inspect}"
       if args.class == Array
-        args.flatten!(1)        
+      args.flatten!(1)
       end
       ret += rpc_autofill( session, args )
     end
     dputs 3, "showing: #{ret.inspect}"
     ret
   end
-  
+
   def rpc_autofill( session, args )
     dputs 3, "args is #{args.inspect}"
     ret = []
@@ -566,7 +568,7 @@ class View < RPCQooxdooService
     }
     ret
   end
-  
+
   def layout_find( name )
     layout_recurse.find{|l| l.name.to_s == name.to_s }
   end
@@ -675,7 +677,7 @@ class View < RPCQooxdooService
           ent = Entities.send( l.entity_class )
           params[1][l.name.to_sym] = ent.find_by( ent.data_field_id, id_value )
           dputs 3, "Converted #{id_value} to #{params[1][l.name.to_sym].to_s}"
-          params[1].delete( l.name.to_s )
+        params[1].delete( l.name.to_s )
         end
       end
     }

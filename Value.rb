@@ -88,13 +88,13 @@ class Value
       values = e_all.select{|e|
         begin
           dputs 3, "Searching whether to show #{e.inspect}"
-          #cond = e.send( @condition, e )
-          cond = true
+          cond = @condition ? @condition.call( e ) : true
           dputs 3, "cond: #{cond}"
           method = e.respond_to? @show_method
           dputs 3, "method: #{method}"
           cond and method
-        rescue
+        rescue Exception => e
+          dputs 0, "Couldn't get value: #{e.inspect}"
         false
         end
       }.collect{|e|

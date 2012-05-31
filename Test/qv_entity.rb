@@ -134,7 +134,8 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_value_add_new
-    assert_equal %w( session_id address credit first_name pass person_id l_a l_c l_d l_s l ).sort.to_s,
+    assert_equal %w( session_id address credit first_name pass person_id permissions
+     l_a l_c l_d l_s l ).sort.to_s,
     Entities.Persons.get_field_names.sortk.to_s
 
     assert_equal ["list", :l_a, "l_a", {:list_type=>"array", :list_values=>[]}],
@@ -165,7 +166,7 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "Persons", val.entity_class
     assert_equal Entities.Persons, val.eclass
     val_hash = @base_1011.to_hash( true )
-    assert_equal [0], val_hash[:teacher]
+    assert_equal ["0"], val_hash[:teacher]
     assert_equal "super123", @base_1011.teacher.pass
     @admin.pass = "super321"
     assert_equal "super321", @base_1011.teacher.pass

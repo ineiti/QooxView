@@ -16,7 +16,8 @@ module QooxParser
       line = 0
       f.readlines.each{|l|
         line += 1
-        if l =~ /^\s*value_[^\s]+\s+[^=]/ or l =~ /^\s*show_[^\s]+\s+[^=]/
+        if l =~ /^\s*value_[^\s]+\s+[^=]/ or l =~ /^\s*show_[^\s]+\s+[^=]/ or
+          l =~ /^\s*vtlp_list\s+[^=]/
           case l
           when /(value_block|show_block)/
           when /show_button/

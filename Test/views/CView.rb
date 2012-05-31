@@ -8,7 +8,7 @@ class CView < View
         show_button :new
       end
       gui_hbox do
-        show_block :block_one
+        show_block :block_one, :width => 300
         show_arg :first_name, :callback => "yes"
       end
       gui_window :cview do

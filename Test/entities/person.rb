@@ -18,7 +18,9 @@ class Persons < Entities
     value_str :address
     value_int :credit
     
+    value_block :rest
     value_int :session_id
+    value_list :permissions
     
 #    value_block :add_new
 #    value_bogus :name_bogus

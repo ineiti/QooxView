@@ -501,9 +501,11 @@ qx.Class.define("frontend.Lib.Fields", {
                         field_element = new qx.ui.form.List();
                         field_element.setSelectionMode(params.list_type ? "single" : "additive");
                         field_element.setMaxHeight(250);
-                        field_element.setMinWidth(200);
+                      	field_element.setMinWidth(200);
                         field_element.setAllowGrowX(true);
                         field_element.setAllowStretchX(true);
+                        field_element.setAllowGrowY(true);
+                        field_element.setAllowStretchY(true);
                     }
                     else {
                         field_element = new qx.ui.form.SelectBox();
@@ -590,6 +592,9 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                 }, this);
+                if ( params.width ){
+                   	field_element.setMinWidth(params.width);
+                }
                 
                 if (show_label) {
                     var widget_label = new qx.ui.basic.Label(label);

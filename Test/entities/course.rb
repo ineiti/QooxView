@@ -11,7 +11,7 @@ class Courses < Entities
     value_str :tel
     
     value_block :names
-    value_entity_Persons :teacher, :drop, :first_name, proc { |p| p.credit > 1000 }
+    value_entity_Persons :teacher, :drop, :first_name, proc { |p| p.credit and p.credit > 1000 }
   end
 end
 
