@@ -135,12 +135,12 @@ class RPCQooxdooHandler
       answer = self.error( 2,0, "Didn't receive request", -1 )
     else
       data = JSON.parse( d )
-      dputs 3, "Data is: #{data.inspect}"
+      dputs 2, "Request-data is: #{data.inspect}"
       answer = self.request( data['id'], data['service'], data['method'], data['params'] )
     end
     
     # And put it in a nice qx-compatible reply
-    dputs 3, "Answer is #{answer.inspect}"
+    dputs 3, "Answer is #{answer}"
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
     "#{ActiveSupport::JSON.encode(answer) } );"
   end

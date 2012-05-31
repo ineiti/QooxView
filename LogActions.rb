@@ -42,7 +42,8 @@ class LogActions < Entities
     dputs 3, "Searching for #{filter.inspect}"
     res = filter_by( filter )
     res.sort!{|a,b| a[:logaction_id].to_i <=> b[:logaction_id].to_i}
-    dputs 3, "And found #{res.inspect}"
+    dputs 3, "And found #{res}"
+    dputs 5, "Inspected result: #{res.inspect}"
     return res
   end
 
