@@ -57,8 +57,8 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_logactions
     admin = Entities.Persons.find_by_first_name( "admin" )
-    admin.set_entry( :credit, 100 )
-    admin.set_entry( :pass, "hello123" )
+    admin.data_set_log( :credit, 100 )
+    admin.data_set_log( :pass, "hello123" )
     # Take out the date_stamps, as they change all the time...
     log_list = Entities.LogActions.log_list.each{|l| l.delete( :date_stamp )}
     assert_equal [
@@ -71,22 +71,22 @@ class TC_Entity < Test::Unit::TestCase
       :data_class_id=>0, :msg=>nil},
 =end
     {:logaction_id=>0, :undo_function=>:undo_set_entry,
-      :data_field=>:credit, :data_value=>100, :data_old=>"10000", 
+      :data_field=>:credit, :data_value=>100, :data_old=>10000, 
       :data_class => "Person",
       :data_class_id=>0 },
     {:logaction_id=>1, :undo_function=>:undo_set_entry,
       :data_field=>:pass, :data_value=>"hello123",
-      :data_old=>"\"super123\"", :data_class => "Person",
+      :data_old=>"super123", :data_class => "Person",
       :data_class_id=>0} ],
     log_list
   end
 
   def test_logactions_filter
     admin = Entities.Persons.find_by_first_name( "admin" )
-    admin.set_entry( :credit, 100 )
-    admin.set_entry( :pass, "hello123" )
+    admin.data_set_log( :credit, 100 )
+    admin.data_set_log( :pass, "hello123" )
     course = Entities.Courses.find_by_first_name( "base_1010" )
-    course.set_entry( :end, "1.3.2011" )
+    course.data_set_log( :end, "1.3.2011" )
 
     log_list = Entities.LogActions.log_list
     assert_equal 3, log_list.size
@@ -103,12 +103,12 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_logactions_filter_multi
     admin = Entities.Persons.find_by_first_name( "admin" )
-    admin.set_entry( :credit, 100, "charger:linus" )
-    admin.set_entry( :credit, 200, "charger:viviane" )
-    admin.set_entry( :credit, 300, "charger:linuss" )
-    admin.set_entry( :pass, "hello123" )
+    admin.data_set_log( :credit, 100, "charger:linus" )
+    admin.data_set_log( :credit, 200, "charger:viviane" )
+    admin.data_set_log( :credit, 300, "charger:linuss" )
+    admin.data_set_log( :pass, "hello123" )
     course = Entities.Courses.find_by_first_name( "base_1010" )
-    course.set_entry( :end, "1.3.2011" )
+    course.data_set_log( :end, "1.3.2011" )
 
     log_list = Entities.LogActions.log_list
     assert_equal 5, log_list.size

@@ -141,15 +141,6 @@ module StorageHandler
     res
   end
 
-  def set_data( data )
-    dputs 0, "Deprecated call!"
-    exit
-    key = data[ @data_field_id ]
-    if @data[ key ]
-    @data[ key ] = data.to_sym
-    end
-  end
-
   def new_id
     last_id = 0
     if @data.keys.length > 0
@@ -196,7 +187,7 @@ module StorageHandler
         dputs 0, "Didn't find key #{data_id.inspect}"
         exit 1
       else
-      e.set_data( data, true )
+      e.data_set_hash( data, true )
       end
     else
       e = create( data )

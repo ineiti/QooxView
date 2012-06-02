@@ -32,7 +32,7 @@ class LogActions < Entities
     create( { :data_field => data.keys[0], :data_value => data[data.keys[0]], 
       :data_class => data_class.to_s, :data_class_id => data_id, 
       :msg => msg,
-      :undo_function => undo_function, :data_old => data_old.to_json,
+      :undo_function => undo_function, :data_old => data_old,
       :date_stamp => Time.now.strftime("%Y:%m:%d %H:%M:%S")} )
   end
 

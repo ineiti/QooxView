@@ -302,24 +302,6 @@ class Entity
   def setup_instance
   end
 
-  # Sets the value of a single entry and attaches an UNDO
-  def set_entry( field, value, msg = nil, undo = true, logging = true )
-    dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
-    old_value = data_get( field )
-    new_value = data_set( field, value )
-    if old_value.to_s != new_value.to_s
-      if logging
-        if undo
-          @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )
-        else
-          @proxy.log_action( @id, { field => new_value }, msg )
-        end
-      end
-      dputs 3, "Setting field #{field} to value #{new_value.inspect}"
-      data_set( field, new_value )
-    end
-  end
-
   def method_missing( cmd, *args )
     dputs 5, "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}"
     field = cmd.to_s
@@ -327,7 +309,7 @@ class Entity
     when /=$/
       # Setting the value
       field = field.chop.to_sym
-      set_entry( field, args[0] )
+      data_set_log( field, args[0] )
     else
     # Getting the value
     dputs 5, "get_value #{field}"
@@ -356,24 +338,6 @@ class Entity
       }
     end
     ret
-  end
-
-  # Save all data in the hash for which we have an entry
-  # if create == true, it won't call LogActions for every field
-  def set_data( data, create = false )
-    dputs 4, "set_data( #{data.inspect} )"
-    fields = @proxy.get_field_names
-    data.each{|k,v|
-      ks = k.to_sym
-      # Only set data for which there is a field
-      if fields.index( ks )
-        # Only set data if it's different from original
-        if v != data_get(ks)
-          dputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
-          set_entry( ks, v, nil, true, ( not create ) )
-        end
-      end
-    }
   end
 
   # Show all logs for this entity
@@ -416,6 +380,41 @@ class Entity
     @proxy.set_entry( @id, field, value.id )
     else
     @proxy.set_entry( @id, field, value )
+    end
+  end
+
+  # Save all data in the hash for which we have an entry
+  # if create == true, it won't call LogActions for every field
+  def data_set_hash( data, create = false )
+    dputs 4, "#{data.inspect} - #{create}"
+    fields = @proxy.get_field_names
+    data.each{|k,v|
+      ks = k.to_sym
+      # Only set data for which there is a field
+      if fields.index( ks )
+        # Only set data if it's different from original
+        if v != data_get(ks)
+          dputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
+          data_set_log( ks, v, nil, true, ( not create ) )
+        end
+      end
+    }
+  end
+
+  # Sets the value of a single entry and attaches an UNDO
+  def data_set_log( field, value, msg = nil, undo = true, logging = true )
+    dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
+    old_value = data_get( field )
+    new_value = data_set( field, value )
+    if old_value.to_s != new_value.to_s
+      dputs 3, "Set field #{field} to value #{new_value.inspect}"
+      if logging
+        if undo
+          @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )
+        else
+          @proxy.log_action( @id, { field => new_value }, msg )
+        end
+      end
     end
   end
 

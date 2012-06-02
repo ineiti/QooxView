@@ -68,7 +68,7 @@ module VTListPane
     field = vtlp_get_entity( data )
     dputs 2, "Field is #{field}"
     if field
-      field.set_data( data.to_sym )
+      field.data_set_hash( data.to_sym )
     else
       @data_class.create( data.to_sym )
     end
