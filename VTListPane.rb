@@ -86,7 +86,7 @@ module VTListPane
       item = vtlp_get_entity(args[0])
       dputs 4, "item is #{item.inspect}"
       if item
-        ret += reply("update", item.to_hash )
+        ret += reply("update", item.to_hash( true ) )
       end
       ret += reply("update", {@vtlp_field.to_sym => [field_value] } )
     end
