@@ -668,20 +668,26 @@ class View < RPCQooxdooService
     @@services_hash["View.#{m}"]
   end
 
-  def rpc_parse_reply( method, session, params )
+  def parse_request( method, session, params )
     dputs 3, "Parsing #{params.inspect}"
-    layout_recurse.each{ |l|
-      if l.class == Value and l.dtype == "entity"
-        if params[1] and params[1].has_key? l.name.to_s
-          id_value = params[1][l.name.to_s]
-          ent = Entities.send( l.entity_class )
-          params[1][l.name.to_sym] = ent.find_by( ent.data_field_id, id_value )
-          dputs 3, "Converted #{id_value} to #{params[1][l.name.to_sym].to_s}"
-        params[1].delete( l.name.to_s )
+    if params[1]
+      layout_recurse.each{ |l|
+        if params[1].has_key? l.name.to_s
+          value = params[1][l.name.to_s]
+          rep = l.parse( value )
+          if rep
+            dputs 3, "Converted #{value} to #{rep.to_s}"
+            params[1][l.name.to_s] = rep
+          end
         end
-      end
-    }
+      }
+    end
     return params
+  end
+  
+  def parse_reply( method, session, request )
+    rep = self.send( method, session, *request )
+    rep
   end
 
   def get_tab_members

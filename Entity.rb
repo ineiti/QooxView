@@ -130,6 +130,7 @@ class Entities < RPCQooxdooService
     @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
     return @data_instances[k]
   end
+
   def find_by_id( k )
     get_data_instance( k )
   end
@@ -162,7 +163,7 @@ class Entities < RPCQooxdooService
         dputs 4, "k is #{k.inspect} - data is #{@data[k].inspect}"
         [k, @data[k][field.to_sym] ] }.sort{|a,b|
         a[1] <=> b[1]
-        }
+      }
       dputs 3, "Returning #{ret.inspect}"
       ret
     when /^value_/
@@ -228,10 +229,10 @@ class Entities < RPCQooxdooService
     b.each{|c|
       if c.class == Array
         v = get_value( n, c )
-      v and return v.add_eclass
+      v and return v
       elsif c.class == Value
         if c.name.to_sym == n
-        return c.add_eclass
+        return c
         end
       end
     }
@@ -312,7 +313,7 @@ class Entity
       data_set_log( field, args[0] )
     else
     # Getting the value
-    dputs 5, "get_value #{field}"
+    dputs 5, "data_get #{field}"
     data_get( field )
     end
   end
@@ -333,7 +334,7 @@ class Entity
     if frontend
       ret.each{|f,v|
         if data_get(f).is_a? Entity
-          ret[f] = [v.to_s]
+          ret[f] = [v]
         end
       }
     end
@@ -366,8 +367,8 @@ class Entity
       e = @proxy.get_entry( @id, f.to_s )
       v = @proxy.get_value( f )
       if e and v and v.dtype == "entity"
-        dputs 3, "Getting instance for #{v.inspect}"
-      e = v.eclass.get_data_instance( e )
+        dputs 3, "Getting instance for #{v.inspect} with #{e.inspect}"
+        e = v.eclass.get_data_instance( e )
       end
       e
     }
@@ -420,5 +421,9 @@ class Entity
 
   def true( *args )
     return true
+  end
+
+  def inspect
+    @id
   end
 end

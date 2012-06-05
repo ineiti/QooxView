@@ -20,7 +20,7 @@ where string_on_screen is taken of an eventual translation-file
 =end
 
 class Value
-  attr_accessor :dtype, :name, :st, :args, :list, :entity_class, :eclass
+  attr_accessor :dtype, :name, :st, :args, :list, :entity_class
   def initialize( cmds, arguments, dt = nil )
     dputs 3, "Added new: #{cmds.inspect}, #{arguments.inspect}"
 
@@ -33,6 +33,8 @@ class Value
     @dtype = cmds.shift
     @args = {}
     @list = ""
+    @eclass_proxy = nil
+    @list_type = nil
 
     if arguments[-1].class == Hash
       dputs 5, "Merging Hash #{arguments[-1].inspect} into #{@args.inspect}"
@@ -44,7 +46,7 @@ class Value
     when "list"
       case cmds[0]
       when /(array|choice|drop|single)/
-        @args.merge! :list_type => cmds.shift
+        @args.merge! :list_type => ( @list_type = cmds.shift )
       end
       if arguments[0]
       @list = arguments.shift
@@ -55,7 +57,7 @@ class Value
       #dputs 0, "Not supported yet!"
       #exit
       @entity_class = cmds.shift.pluralize.capitalize
-      @args.merge! :list_type => arguments.shift
+      @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments
     when "array"
       dputs 0, "Not yet supported!"
@@ -82,8 +84,8 @@ class Value
     when /list|select/
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/
+      dputs 3, "Converting -#{@name}- to array"
       fe_type = "list"
-      eclass = Entities.send( @entity_class )
       e_all = eclass.search_all
       values = e_all.select{|e|
         begin
@@ -98,7 +100,7 @@ class Value
         false
         end
       }.collect{|e|
-        [ e.send( eclass.data_field_id ).to_s, e.send( @show_method ) ]
+        [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
       }.sort{|a,b|
         a[1] <=> b[1]
       }
@@ -113,12 +115,31 @@ class Value
   def self.simple( dtype, name, flags = [] )
     return Value.new( [dtype] + flags.to_a, [name])
   end
-  
-  def add_eclass
-    if @dtype == "entity"
-      @eclass = Entities.send( @entity_class )
+
+  def eclass
+    if @dtype == "entity" and not @eclass_proxy
+      @eclass_proxy = Entities.send( @entity_class )
     end
-    return self
+    return @eclass_proxy
+  end
+
+  def parse(p)
+    case @dtype
+    when /entity/
+      dputs 3, "parsing #{@name}: #{p.inspect}"
+      case @list_type
+      when :drop
+        ret = eclass.find_by( eclass.data_field_id, p[0] )
+        dputs 3, "And found #{ret.inspect}"
+        return ret
+      else
+      dputs 0, "List-type #{@list_type} not supported yet!"
+      #        ent_value = id_value.collect{|i|
+      #          ent.find_by( ent.data_field_id, i )
+      #        }
+      return nil
+      end
+    end
   end
 
   # TODO: implement this cloning instead of deep_clone from object

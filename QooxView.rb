@@ -118,6 +118,10 @@ class Hash
   def to_sym!
     self.replace( to_sym() )
   end
+  
+#  def to_s
+#    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
+#  end
 end
 
 
@@ -136,6 +140,14 @@ class String
     end
   end
 end
+
+
+class Array
+  def to_s
+    "[#{join(",")}]"
+  end
+end
+
 
 $config = {} if not defined? $config
 if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
