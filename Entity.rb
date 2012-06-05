@@ -328,16 +328,15 @@ class Entity
     end
   end
 
-  def to_hash( frontend = false )
+  def to_hash
     ret = @proxy.data[@id].dup
     dputs 5, "Will return #{ret.to_a.join("-")}"
-    if frontend
-      ret.each{|f,v|
-        if data_get(f).is_a? Entity
-          ret[f] = [v]
-        end
-      }
-    end
+    ret.each{|f,v|
+      dputs 0, "Working on #{f.inspect} - #{v}"
+      if data_get(f).is_a? Entity
+        ret[f] = [v]
+      end
+    }
     ret
   end
 

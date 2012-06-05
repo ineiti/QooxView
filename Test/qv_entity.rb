@@ -165,7 +165,7 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "entity", val.dtype
     assert_equal "Persons", val.entity_class
     assert_equal Entities.Persons, val.eclass
-    val_hash = @base_1011.to_hash( true )
+    val_hash = @base_1011.to_hash
     assert_equal ["0"], val_hash[:teacher]
     assert_equal "super123", @base_1011.teacher.pass
     @admin.pass = "super321"
