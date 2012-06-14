@@ -54,8 +54,6 @@ class Value
     when "select"
       @list = arguments.shift
     when "entity"
-      #dputs 0, "Not supported yet!"
-      #exit
       @entity_class = cmds.shift.pluralize.capitalize
       @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments

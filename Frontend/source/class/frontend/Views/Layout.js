@@ -381,6 +381,17 @@ qx.Class.define("frontend.Views.Layout", {
                 this.viewClass = newView;
                 rpc.callRPC("View." + newView, inTabs + "update_view", 
                 this, this.dispatch, parentFields);
+                // If there are kids, update them
+	            if ( this.field.fields.childLayout ){
+    	          	dbg(3, "Updating children" );
+        	      	if ( this.field.fields.childLayout.field ){
+               			var child = this.field.fields.childLayout;
+               			var newView = child.tabs.getSelection()[0].qv_id;
+	            		var parentFields = this.field.fields.getOwnFieldsData();
+		                rpc.callRPC("View." + newView, "tabs_update_view", 
+    		            child, child.dispatch, parentFields);
+            	  	}
+	            }
             }
         },
         // Helper function to get to the active form

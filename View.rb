@@ -433,6 +433,7 @@ class View < RPCQooxdooService
 
   def rpc_tabs_update_view( session, args )
     ret = rpc_update_view( session )
+    dputs 3, "Args is: #{args.inspect}"
     if args.class == Hash
       ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
     end
@@ -462,10 +463,12 @@ class View < RPCQooxdooService
     dputs 3, "Updating layout"
     ret = []
     layout_recurse(@layout).each{|l|
-      if l.list.size > 0
-        dputs 3, "Here comes element #{l.inspect} with new list-value #{eval( l.list )}"
-        ret += reply( 'empty', [ l.name ] )
-        ret += reply( 'update', { l.name => eval( l.list ) } )
+      case l.dtype
+      when /list|select|entity/
+        values = l.to_a[3][:list_values]
+        dputs 3, "Here comes element #{l.name} with new list-value #{values.inspect}"
+        ret += reply( :empty, [ l.name ] ) +
+        reply( :update, { l.name => values } )
       end
     }
     dputs 3, "Reply is #{ret.inspect}"
@@ -491,7 +494,7 @@ class View < RPCQooxdooService
     end
     if @update
       update = rpc_update( session )
-      dputs 3, "updating #{update.inspect}"
+      dputs 3, "@update #{update.inspect}"
     ret += update
     end
     if args
@@ -677,14 +680,14 @@ class View < RPCQooxdooService
           rep = l.parse( value )
           if rep
             dputs 3, "Converted #{value} to #{rep.to_s}"
-            params[1][l.name.to_s] = rep
+          params[1][l.name.to_s] = rep
           end
         end
       }
     end
     return params
   end
-  
+
   def parse_reply( method, session, request )
     rep = self.send( method, session, *request )
     rep

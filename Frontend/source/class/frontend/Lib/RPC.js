@@ -41,7 +41,7 @@ qx.Class.define("frontend.Lib.RPC", {
 			if ( this.RpcRunning ){
 				var args = [service, method, obj, event, params];
 				//alert( "Oops, RPC is running - queueing" );
-				dbg( 4, "Queuing RPC call " + print_a( args ) );
+				//dbg( 4, "Queuing RPC call " + print_a( args ) );
 				this.RpcQueue.unshift( args );
 				return;
 			}
