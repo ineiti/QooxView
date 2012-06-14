@@ -83,16 +83,24 @@ The Log-class can do logging and supports an undo-function very easily
 =end
 
 QOOXVIEW_DIR=File.dirname(__FILE__)
-SQLITE3="sqlite3-1.3.5"
+SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.5/ext/sqlite3/sqlite3.o"
 
 # Test for compilation of sqlite3
-if not File.exists? QOOXVIEW_DIR + "/libs/#{SQLITE3}/ext/sqlite3/sqlite3.o"
+if not File.exists? SQLITE3_OBJ
   puts "We'll have to compile the sqlite3-library, else it probably won't work."
   puts "Try to compile sqlite3? (Y/n)"
   if gets.chomp.downcase != "n"
     puts "Path is #{ QOOXVIEW_DIR }/update_sqlite3"
     %x[ #{ QOOXVIEW_DIR }/update_sqlite3 ]
-    exit
+    puts "Finished"
+    if File.exists? SQLITE3_OBJ
+      puts "Seems to be successful - press <ENTER> to continue"
+      gets
+    else
+      puts "Compilation failed - if you want to try anyway, enter the following command:"
+      puts "touch #{ SQLITE3_OBJ }"
+      exit
+    end
   end
 end
 
