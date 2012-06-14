@@ -88,13 +88,13 @@ SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.5/ext/sqlite3/sqlite3.o"
 # Test for compilation of sqlite3
 if not File.exists? SQLITE3_OBJ
   puts "We'll have to compile the sqlite3-library, else it probably won't work."
-  puts "Try to compile sqlite3? (Y/n)"
+  print "Try to compile sqlite3? [Y/n] "
   if gets.chomp.downcase != "n"
     puts "Path is #{ QOOXVIEW_DIR }/update_sqlite3"
     %x[ #{ QOOXVIEW_DIR }/update_sqlite3 ]
     puts "Finished"
     if File.exists? SQLITE3_OBJ
-      puts "Seems to be successful - press <ENTER> to continue"
+      print "Seems to be successful - press <ENTER> to continue "
       gets
     else
       puts "Compilation failed - if you want to try anyway, enter the following command:"
