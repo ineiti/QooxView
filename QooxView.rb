@@ -82,14 +82,28 @@ A simple YAML-configuration style is supported by default.
 The Log-class can do logging and supports an undo-function very easily
 =end
 
+QOOXVIEW_DIR=File.dirname(__FILE__)
+SQLITE3="sqlite3-1.3.5"
+
+# Test for compilation of sqlite3
+if not File.exists? QOOXVIEW_DIR + "/libs/#{SQLITE3}/ext/sqlite3/sqlite3.o"
+  puts "We'll have to compile the sqlite3-library, else it probably won't work."
+  puts "Try to compile sqlite3? (Y/n)"
+  if gets.chomp.downcase != "n"
+    puts "Path is #{ QOOXVIEW_DIR }/update_sqlite3"
+    %x[ #{ QOOXVIEW_DIR }/update_sqlite3 ]
+    exit
+  end
+end
+
 require 'yaml'
 
+GETTEXT_DIR=QOOXVIEW_DIR+"/gettext-2.2.0/bin"
 # I think the rubygems way is just really not useful, sorry
-%w( parseconfig-0.5.2 json-1.4.6 net-ldap-0.1.1 activerecord-3.1.1
-activesupport-3.1.1 i18n-0.6.0 activemodel-3.1.1 arel-2.2.1
-multi_json-1.0.3 sqlite3-1.3.5 rubyzip-0.9.4 docsplit-0.6.0-1
-gettext-2.2.0 locale-2.0.5 ).each{|lib|
-  $: << File.expand_path(File.dirname(__FILE__)+"/#{lib}/lib")
+Dir[ QOOXVIEW_DIR + "/libs/*" ].each{ |lib|
+  library = File.expand_path( QOOXVIEW_DIR+"/#{lib}/lib" )
+  #puts "Loading #{library}"
+  $: << library
 }
 
 require 'active_record'
@@ -165,6 +179,10 @@ require 'Session'
 require 'LogActions'
 require 'Welcome'
 require 'getoptlong'
+require 'gettext/tools/rmsgfmt'
+require 'gettext/tools/rmsgmerge'
+require 'gettext/tools/rgettext'
+require 'QooxParser'
 
 module QooxView
   def self.do_opts( dir_entities, dir_views )
@@ -182,16 +200,19 @@ module QooxView
         puts "\t--help\tShow this help"
         exit
       when "--i18n"
-        %x[ mkdir -p po; rm -f po/#{$name}.pot ]
-        cmd = "rgettext -r #{File.dirname(__FILE__) + '/QooxParser.rb'} -o po/#{$name}.pot" +
-        " #{dir_entities}/*.rb #{dir_views}/*.rb #{dir_views}/*/*.rb"
-        %x[ #{cmd} ]
+        potfile = "po/#{$name}.pot"
+        %x[ mkdir -p po; rm -f #{potfile} ]
+        paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
+        dputs 0, "paths is #{paths.collect{|p| Dir[p] }}"
+        GetText.rgettext( paths.collect{|p| Dir[p] }.flatten, potfile )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
-          potfile = "po/#{$name}.pot"
           if File.exists? pofile
             %x[ mv #{pofile} #{pofile}.tmp ]
             %x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
+            # Should be possible with rmsgmerge, but it didn't work :(
+            # GetText.rmsgmerge( "#{pofile}.tmp", potfile, pofile )
+            %x[ rm #{pofile}.tmp ]
           else
             %x[ cp #{potfile} #{pofile} ]
           end
@@ -201,10 +222,12 @@ module QooxView
         dputs 2, "Making mo-files"
         Dir.glob( "po/#{$name}-*.po").each{|po|
           lang = po.match(/.*#{$name}-(.*).po/)[1]
-          dputs 2, "Doint po-file #{po} for language #{lang}"
           path = "po/#{lang}/LC_MESSAGES"
-          %x[ mkdir -p #{path}]
-          %x[ rmsgfmt #{po} -o #{path}/#{$name}.mo]
+          dputs 2, "Doing po-file #{po} for language #{lang} with path #{path}"
+          if not %x[ mkdir -p #{path}] or not GetText.rmsgfmt( po, "#{path}/#{$name}.mo" )
+            dputs 0, "Error while making mo-files, exiting"
+            exit
+          end
         }
       end
     }
@@ -253,10 +276,10 @@ module QooxView
 
     # And start the webrick-server
     # First check whether QooxDoo is running in source- or buid-mode
-    dir_html = File.exist?( File.dirname( __FILE__ ) + "/Frontend/build/script/frontend.js" ) ?
+    dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
       "build" : "source"
     dputs 3, "Directory for Frontend is: #{dir_html}"
     log_msg( "main", "Starting up" )
-    RPCQooxdooHandler.webrick( port, File.dirname( __FILE__ ) + "/Frontend/#{dir_html}/" )
+    RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
   end
 end

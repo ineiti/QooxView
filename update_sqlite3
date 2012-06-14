@@ -1,7 +1,21 @@
 #!/bin/sh
-cd $( dirname $0 )/sqlite3-1.3.5
-rm ext/sqlite3/*.o
-ruby setup.rb config
-ruby setup.rb setup
-ruby setup.rb install
+SQL_DIR=$( echo $( dirname $0 )/libs/sqlite3-* )
+if echo $SQL_DIR | grep -qv "^/"; then
+  SQL_DIR="$( pwd )/$SQL_DIR"
+fi
+cd "$SQL_DIR"
+echo $SQL_DIR - $( pwd )
 
+# This is in case we have spaces in the pathname...
+cp -a . /tmp/sqlite3
+cd /tmp/sqlite3
+
+rm -f ext/sqlite3/*.o
+ruby setup.rb config &&
+ruby setup.rb setup &&
+sudo ruby setup.rb install
+
+# Again, if we had spaces
+cp ext/sqlite3/*.o "$SQL_DIR/ext/sqlite3"
+cd "$SQL_DIR"
+rm -rf /tmp/sqlite3
