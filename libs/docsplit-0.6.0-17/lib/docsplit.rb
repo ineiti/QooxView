@@ -1,13 +1,21 @@
 # The Docsplit module delegates to the Java PDF extractors.
+require 'tmpdir'
+require 'fileutils'
+require 'shellwords'
+
 module Docsplit
 
   VERSION       = '0.6.3' # Keep in sync with gemspec.
 
   ROOT          = File.expand_path(File.dirname(__FILE__) + '/..')
 
-  CLASSPATH     = "#{ROOT}/build#{File::PATH_SEPARATOR}#{ROOT}/vendor/'*'"
+  ESCAPE        = lambda {|x| Shellwords.shellescape(x) }
+   
+  ROOT_E        = ROOT.map(&ESCAPE).join('')
 
-  LOGGING       = "-Djava.util.logging.config.file=#{ROOT}/vendor/logging.properties"
+  CLASSPATH     = "#{ROOT_E}/build#{File::PATH_SEPARATOR}#{ROOT_E}/vendor/'*'"
+
+  LOGGING       = "-Djava.util.logging.config.file=#{ROOT_E}/vendor/logging.properties"
 
   HEADLESS      = "-Djava.awt.headless=true"
 
@@ -21,8 +29,6 @@ module Docsplit
   GM_FORMATS    = ["image/gif", "image/jpeg", "image/png", "image/x-ms-bmp", "image/svg+xml", "image/tiff", "image/x-portable-bitmap", "application/postscript", "image/x-portable-pixmap"]
 
   DEPENDENCIES  = {:java => false, :gm => false, :pdftotext => false, :pdftk => false, :tesseract => false}
-
-  ESCAPE        = lambda {|x| Shellwords.shellescape(x) }
 
   # Check for all dependencies, and note their absence.
   dirs = ENV['PATH'].split(File::PATH_SEPARATOR)
@@ -71,7 +77,8 @@ module Docsplit
       if GM_FORMATS.include?(`file -b --mime #{ESCAPE[doc]}`.strip.split(/[:;]\s+/)[0])
         `gm convert #{escaped_doc} #{escaped_out}/#{escaped_basename}.pdf`
       else
-        options = "-jar #{ROOT}/vendor/jodconverter/jodconverter-core-3.0-beta-4.jar -r #{ROOT}/vendor/conf/document-formats.js"
+        options = "-jar #{ROOT_E}/vendor/jodconverter/jodconverter-core-3.0-beta-4.jar -r #{ROOT_E}/vendor/conf/document-formats.js"
+        puts "ROOT_E is #{ROOT_E}"
         run "#{options} #{escaped_doc} #{escaped_out}/#{escaped_basename}.pdf", [], {}
       end
     end
@@ -100,6 +107,7 @@ module Docsplit
   def self.run(command, pdfs, opts, return_output=false)
     pdfs    = [pdfs].flatten.map{|pdf| "\"#{pdf}\""}.join(' ')
     cmd     = "java #{HEADLESS} #{LOGGING} #{OFFICE} -cp #{CLASSPATH} #{command} #{pdfs} 2>&1"
+    puts "Command is: #{cmd}"
     result  = `#{cmd}`.chomp
     raise ExtractionFailed, result if $? != 0
     return return_output ? (result.empty? ? nil : result) : true
@@ -117,9 +125,6 @@ module Docsplit
 
 end
 
-require 'tmpdir'
-require 'fileutils'
-require 'shellwords'
 require "#{Docsplit::ROOT}/lib/docsplit/image_extractor"
 require "#{Docsplit::ROOT}/lib/docsplit/transparent_pdfs"
 require "#{Docsplit::ROOT}/lib/docsplit/text_extractor"

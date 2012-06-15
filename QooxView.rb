@@ -82,6 +82,7 @@ A simple YAML-configuration style is supported by default.
 The Log-class can do logging and supports an undo-function very easily
 =end
 
+#QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
 SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.5/ext/sqlite3/sqlite3.o"
 
@@ -109,7 +110,7 @@ require 'yaml'
 GETTEXT_DIR=QOOXVIEW_DIR+"/gettext-2.2.0/bin"
 # I think the rubygems way is just really not useful, sorry
 Dir[ QOOXVIEW_DIR + "/libs/*" ].each{ |lib|
-  library = File.expand_path( QOOXVIEW_DIR+"/#{lib}/lib" )
+  library = File.expand_path( "#{lib}/lib" )
   #puts "Loading #{library}"
   $: << library
 }

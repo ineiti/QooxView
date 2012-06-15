@@ -10,19 +10,21 @@ class OpenPrint
   def initialize( file )
     @file = file
     @base = `basename #{file}`
-    if $config
+    if $config[:default_printer]
       @default_printer = "-P #{$config[:default_printer]}"
     else
-      @default_printer = ""
+      @default_printer = nil
     end
     @counter = 0
   end
-
-  def print( fields )
+  
+  def print( fields, counter = nil )
     dputs 3, "New print for #{@file}"
-    tmp_file = "/tmp/#{@counter}-#{@base}"
+    counter ||= @counter
+    tmp_file = "/tmp/#{counter}-#{@base}"
+    @counter += 1
     pdf_file = tmp_file.sub(/[^\.]*$/, 'pdf')
-    cmd = "lpr #{@default_printer} #{pdf_file}"
+    cmd = @default_printer ? "lpr #{@default_printer} #{pdf_file}" : nil
 
     FileUtils::cp( @file, tmp_file )
     ZipFile.open( tmp_file ){ |z|
@@ -39,7 +41,13 @@ class OpenPrint
     Docsplit.extract_pdf tmp_file, :output => "/tmp"
     dputs 5, "Finished docsplit"
 #    FileUtils::rm( tmp_file )
-    dputs 0, cmd
-    `#{cmd}`
+    if cmd
+      dputs 0, cmd
+      `#{cmd}`
+      return true
+    else
+      # Download PDF
+      return "#{pdf_file}"
+    end
   end
 end

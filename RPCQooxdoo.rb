@@ -190,6 +190,7 @@ class RPCQooxdooHandler
       dputs 2, "Info-Reply is #{res.body}"
       raise HTTPStatus::OK
     }
+    server.mount( '/tmp', HTTPServlet::FileHandler, "/tmp" )
     server.mount( '/', HTTPServlet::FileHandler, dir )
     
     server.start
