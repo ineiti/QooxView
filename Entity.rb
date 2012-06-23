@@ -31,9 +31,13 @@ class Entities < RPCQooxdooService
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id, :storage, :data, :name
 
   def initialize
-    # Just in case the data-class is not created yet
-    eval( "class #{singular( self.class.name )} < Entity\nend" )
-    @data_class = eval( singular( self.class.name ) )
+    begin
+      @data_class = eval( singular( self.class.name ) )
+    rescue Exception => e
+      # Just in case the data-class is not created yet
+      eval( "class #{singular( self.class.name )} < Entity\nend" )
+      @data_class = eval( singular( self.class.name ) )
+    end
     @storage = nil
 
     if @data_class != "Entity"

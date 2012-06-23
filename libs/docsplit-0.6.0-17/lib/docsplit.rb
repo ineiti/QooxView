@@ -78,7 +78,6 @@ module Docsplit
         `gm convert #{escaped_doc} #{escaped_out}/#{escaped_basename}.pdf`
       else
         options = "-jar #{ROOT_E}/vendor/jodconverter/jodconverter-core-3.0-beta-4.jar -r #{ROOT_E}/vendor/conf/document-formats.js"
-        puts "ROOT_E is #{ROOT_E}"
         run "#{options} #{escaped_doc} #{escaped_out}/#{escaped_basename}.pdf", [], {}
       end
     end
@@ -107,7 +106,6 @@ module Docsplit
   def self.run(command, pdfs, opts, return_output=false)
     pdfs    = [pdfs].flatten.map{|pdf| "\"#{pdf}\""}.join(' ')
     cmd     = "java #{HEADLESS} #{LOGGING} #{OFFICE} -cp #{CLASSPATH} #{command} #{pdfs} 2>&1"
-    puts "Command is: #{cmd}"
     result  = `#{cmd}`.chomp
     raise ExtractionFailed, result if $? != 0
     return return_output ? (result.empty? ? nil : result) : true
