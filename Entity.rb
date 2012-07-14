@@ -121,8 +121,8 @@ class Entities < RPCQooxdooService
     value = Value.new( cmds, args, @default_type )
 
     if not get_field_names.index value.name.to_sym
-    # Prepare the entry in the blocks
-    @blocks[ @block_now ].push( value )
+      # Prepare the entry in the blocks
+      @blocks[ @block_now ].push( value )
     end
 
     # And add the entry in the DataHandler
@@ -176,15 +176,15 @@ class Entities < RPCQooxdooService
       cmds = cmd_str.split("_")[1..-1]
       value_add( cmds, args )
     else
-    dputs 0, "Method is missing: #{cmd} in Entities"
-    super cmd, *args
+      dputs 0, "Method is missing: #{cmd} in Entities"
+      super cmd, *args
     end
   end
 
   def respond_to?( cmd )
     dputs 5, cmd
     if cmd =~ /^(find_by_|search_by_|list_|listp_|value_)/
-    return true
+      return true
     end
     super cmd
   end
@@ -220,7 +220,7 @@ class Entities < RPCQooxdooService
       if c.class == Array
         get_field_names( c )
       elsif c.class == Value
-      c.name
+        c.name
       else
         nil
       end
@@ -235,10 +235,10 @@ class Entities < RPCQooxdooService
     b.each{|c|
       if c.class == Array
         v = get_value( n, c )
-      v and return v
+        v and return v
       elsif c.class == Value
         if c.name.to_sym == n
-        return c
+          return c
         end
       end
     }
@@ -257,13 +257,13 @@ class Entities < RPCQooxdooService
     if self.name == "Entities"
       # This is for the Entities-class
       if ret = Entities.service( m )
-      return ret
+        return ret
       else
         dputs 0, "Method is missing: #{m} in Entries"
-      return super( m, *args )
+        return super( m, *args )
       end
     else
-    # We're in a subclass, so we first have to fetch the instance
+      # We're in a subclass, so we first have to fetch the instance
       return Entities.service( self.name ).send( m, *args )
     end
   end
@@ -318,9 +318,9 @@ class Entity
       field = field.chop.to_sym
       data_set_log( field, args[0] )
     else
-    # Getting the value
-    dputs 5, "data_get #{field}"
-    data_get( field )
+      # Getting the value
+      dputs 5, "data_get #{field}"
+      data_get( field )
     end
   end
 
@@ -330,20 +330,18 @@ class Entity
     when /=$/
       return true
     else
-    return ( data_get( field ) or super )
+      return ( data_get( field ) or super )
     end
   end
 
-  def to_hash( frontend = false )
+  def to_hash
     ret = @proxy.data[@id].dup
     dputs 5, "Will return #{ret.to_a.join("-")}"
-    if frontend
-      ret.each{|f,v|
-        if data_get(f).is_a? Entity
-          ret[f] = [v]
-        end
-      }
-    end
+    ret.each{|f,v|
+      if data_get(f).is_a? Entity
+        ret[f] = [v]
+      end
+    }
     ret
   end
 
@@ -361,7 +359,7 @@ class Entity
     if defined? @storage
       @storage.each{|k, di|
         if not di.data_cache
-        @proxy.data_update( @id )
+          @proxy.data_update( @id )
         end
       }
     end
@@ -384,10 +382,11 @@ class Entity
   def data_set( field, value )
     if value.is_a? Entity
       dputs 3, "Converting #{value} to #{value.id}"
-    @proxy.set_entry( @id, field, value.id )
+      @proxy.set_entry( @id, field, value.id )
     else
-    @proxy.set_entry( @id, field, value )
+      @proxy.set_entry( @id, field, value )
     end
+    self
   end
 
   # Save all data in the hash for which we have an entry
@@ -406,6 +405,7 @@ class Entity
         end
       end
     }
+    self
   end
 
   # Sets the value of a single entry and attaches an UNDO
@@ -423,6 +423,7 @@ class Entity
         end
       end
     end
+    self
   end
 
   def true( *args )

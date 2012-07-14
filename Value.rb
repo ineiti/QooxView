@@ -25,7 +25,7 @@ class Value
     dputs 3, "Added new: #{cmds.inspect}, #{arguments.inspect}"
 
     if cmds[-1] == "ALL"
-    @st = cmds.pop
+      @st = cmds.pop
     else
       @st = ( StorageType.has? cmds[-1] ) ? cmds.pop : dt
     end
@@ -38,7 +38,7 @@ class Value
 
     if arguments[-1].class == Hash
       dputs 5, "Merging Hash #{arguments[-1].inspect} into #{@args.inspect}"
-    @args.merge! arguments.pop
+      @args.merge! arguments.pop
     end
 
     # Do some special cases
@@ -49,12 +49,15 @@ class Value
         @args.merge! :list_type => ( @list_type = cmds.shift )
       end
       if arguments[0]
-      @list = arguments.shift
+        @list = arguments.shift
       end
     when "select"
       @list = arguments.shift
     when "entity"
-      @entity_class = cmds.shift.pluralize.capitalize
+      # So that "courseType" gets correctly translated to
+      # "CourseTypes" (mind the capital in the middle)
+      @entity_class = cmds.shift.pluralize.gsub( /([A-Z])/, " \\1" ).
+        split.collect{ |s| s.capitalize }.join
       @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments
     when "array"
@@ -65,10 +68,10 @@ class Value
     when "html"
       @args.merge! :text => arguments.pop
     else
-    if arguments.size > 0
-    dputs 0, "Arguments should be empty by now, but are #{arguments.inspect}!"
-    exit
-    end
+      if arguments.size > 0
+        dputs 0, "Arguments should be empty by now, but are #{arguments.inspect}!"
+        exit
+      end
     end
 
     cmds.each{|c|
@@ -95,7 +98,7 @@ class Value
           cond and method
         rescue Exception => e
           dputs 0, "Couldn't get value: #{e.inspect}"
-        false
+          false
         end
       }.collect{|e|
         [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
@@ -131,11 +134,11 @@ class Value
         dputs 3, "And found #{ret.inspect}"
         return ret
       else
-      dputs 0, "List-type #{@list_type} not supported yet!"
-      #        ent_value = id_value.collect{|i|
-      #          ent.find_by( ent.data_field_id, i )
-      #        }
-      return nil
+        dputs 0, "List-type #{@list_type} not supported yet!"
+        #        ent_value = id_value.collect{|i|
+        #          ent.find_by( ent.data_field_id, i )
+        #        }
+        return nil
       end
     end
   end
