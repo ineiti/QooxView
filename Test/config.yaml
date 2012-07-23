@@ -6,3 +6,9 @@ views:
 StorageType:
   STdummy1:
     conf: passit
+    
+TestConfig:
+  One: true
+  Two: "hello"
+  Three:
+    Thirty: 30

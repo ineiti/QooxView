@@ -11,14 +11,14 @@ require 'logger'
 
 
 class SQLite < StorageType
-  def configure( config )
+  def configure( config, name_base = "stsql", name_file = "sql.db" )
     dputs 2, "Configuring SQLite with #{@name}"
-    @db_table = "stsql_#{@name.downcase}s"
-    @db_class_name = "Stsql_#{@name.downcase}"
+    @db_table = "#{name_base}_#{@name.downcase}s"
+    @db_class_name = "#{name_base.capitalize}_#{@name.downcase}"
     @db_class = nil
     %x[ mkdir -p data ]
     ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3", :database => "data/sql.db" )
+    :adapter => "sqlite3", :database => "data/name_file" )
 
     init_table
     eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
