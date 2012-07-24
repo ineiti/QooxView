@@ -18,7 +18,7 @@ class SQLite < StorageType
     @db_class = nil
     %x[ mkdir -p data ]
     ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3", :database => "data/name_file" )
+			:adapter => "sqlite3", :database => "data/#{name_file}" )
 
     init_table
     eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
@@ -38,8 +38,8 @@ class SQLite < StorageType
     entry = @db_class.first( :conditions => { 'movement_id' => data } )
     if entry
       entry.send( "#{field}=", value )
-    entry.save!
-    return value
+			entry.save!
+			return value
     else
       dputs 2, "Didn't find id #{data.inspect}"
       return nil
@@ -64,13 +64,13 @@ class SQLite < StorageType
       fields.each_key{|f|
         dputs 3, "Checking for field #{f} in table #{db_table}"
         if not columns( db_table ).index{|c|
-        c.name.to_s == f.to_s }
+						c.name.to_s == f.to_s }
           dputs 5, "Adding column #{f}"
           case fields[f][:dtype]
           when "int"
             add_column( db_table, f, :integer )
           else
-          add_column( db_table, f, :string )
+						add_column( db_table, f, :string )
           end
         end
       }
@@ -81,8 +81,10 @@ class SQLite < StorageType
   # loads the data
   def load
     res = Hash[ *@db_class.all.collect{|s|
-      [ s[@data_field_id].to_i, s.attributes.symbolize_keys ] }.flatten(1) ]
-    dputs 5, "Result is: #{res.inspect}"
+				[ s[@data_field_id].to_i, s.attributes.symbolize_keys ]
+			}.flatten(1)
+		]
+    dputs 4, "Result is: #{res.inspect}"
     return res
   end
 

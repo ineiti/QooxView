@@ -253,8 +253,9 @@ module StorageHandler
   def load
     @data = {}
     @storage.each{|k,di|
-      dputs 4, "Loading #{k} at #{di.name} with #{di.inspect}"
+      dputs 5, "Loading #{k} at #{di.name} with #{di.inspect}"
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
+			dputs 4, "Loaded #{@data.inspect}"
     # dputs 2, @data[10021].inspect
     }
   end
