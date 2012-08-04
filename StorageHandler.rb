@@ -154,7 +154,9 @@ module StorageHandler
       dputs 0, "Entities.create takes a hash! You gave a #{args.class}"
       exit
     end
+		ddputs 5, "Data_field_id is #{@data_field_id}"
     if not args[ @data_field_id ]
+			ddputs 5, "Adding data_field_id"
       args.merge!( { @data_field_id => new_id[@data_field_id] } )
     end
 
@@ -256,7 +258,6 @@ module StorageHandler
       dputs 5, "Loading #{k} at #{di.name} with #{di.inspect}"
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
 			dputs 4, "Loaded #{@data.inspect}"
-    # dputs 2, @data[10021].inspect
     }
   end
 

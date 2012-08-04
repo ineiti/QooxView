@@ -371,7 +371,7 @@ class Entity
       e = @proxy.get_entry( @id, f.to_s )
       v = @proxy.get_value( f )
       if e and v and v.dtype == "entity"
-        dputs 3, "Getting instance for #{v.inspect} with #{e.inspect}"
+        dputs 4, "Getting instance for #{v.inspect} with #{e.inspect}"
         e = v.eclass.get_data_instance( e )
       end
       e
@@ -410,10 +410,11 @@ class Entity
 
   # Sets the value of a single entry and attaches an UNDO
   def data_set_log( field, value, msg = nil, undo = true, logging = true )
-    dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
+    ddputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
     old_value = data_get( field )
     new_value = data_set( field, value )
-    if old_value.to_s != new_value.to_s
+		ddputs 5, "new_value is #{new_value.class}"
+    if old_value.to_s != new_value.data_get( field ).to_s
       dputs 3, "Set field #{field} to value #{new_value.inspect}"
       if logging
         if undo

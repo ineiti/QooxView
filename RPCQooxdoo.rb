@@ -154,6 +154,10 @@ class RPCQooxdooHandler
     dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
   end
   
+  def self.parse_acaccess( p, q )
+    dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
+  end
+  
   # And a no-worry with Webrick
   def self.webrick( port, dir = "." )
     access_log_stream = File.open('webrick.access.log', 'w')
@@ -188,6 +192,23 @@ class RPCQooxdooHandler
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
       dputs 2, "Info-Reply is #{res.body}"
+      raise HTTPStatus::OK
+    }
+    server.mount_proc('/acaccess') {|req, res|
+      $webrick_request = req
+      dputs 4, "ACaccess-Request is #{req.path}"
+      begin
+        res.body = self.parse_acaccess( req.path, req.query )
+      rescue Exception => e  
+        dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
+        dputs 0, "#{e.inspect}"
+        dputs 0, "#{e.to_s}"
+        puts e.backtrace
+        res.body = "Error in handling method"
+      end
+      res['content-type'] = "text/html"
+      res['content-length'] = res.body.length
+      dputs 2, "ACaccess-Reply is #{res.body}"
       raise HTTPStatus::OK
     }
     server.mount( '/tmp', HTTPServlet::FileHandler, "/tmp" )
