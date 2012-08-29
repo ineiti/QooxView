@@ -92,7 +92,7 @@ module StorageHandler
     }
     return nil
   end
-
+ 
   def find( field, value )
     result = find_by( field, value )
     return result ? result.data : nil
