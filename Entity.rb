@@ -410,10 +410,10 @@ class Entity
 
   # Sets the value of a single entry and attaches an UNDO
   def data_set_log( field, value, msg = nil, undo = true, logging = true )
-    ddputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
+    dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
     old_value = data_get( field )
     new_value = data_set( field, value )
-		ddputs 5, "new_value is #{new_value.class}"
+		dputs 5, "new_value is #{new_value.class}"
     if old_value.to_s != new_value.data_get( field ).to_s
       dputs 3, "Set field #{field} to value #{new_value.inspect}"
       if logging

@@ -154,9 +154,9 @@ module StorageHandler
       dputs 0, "Entities.create takes a hash! You gave a #{args.class}"
       exit
     end
-		ddputs 5, "Data_field_id is #{@data_field_id}"
+		dputs 5, "Data_field_id is #{@data_field_id}"
     if not args[ @data_field_id ]
-			ddputs 5, "Adding data_field_id"
+			dputs 5, "Adding data_field_id"
       args.merge!( { @data_field_id => new_id[@data_field_id] } )
     end
 

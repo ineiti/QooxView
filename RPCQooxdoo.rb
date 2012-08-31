@@ -196,8 +196,8 @@ class RPCQooxdooHandler
     }
     server.mount_proc('/acaccess') {|req, res|
       $webrick_request = req
-			ddputs 5, "Webrick_request is #{$webrick_request.inspect}"
-      ddputs 4, "ACaccess-Request is #{req.path} and " + 
+			dputs 5, "Webrick_request is #{$webrick_request.inspect}"
+      dputs 4, "ACaccess-Request is #{req.path} and " + 
 				"method is #{req.request_method}"
       begin
         res.body = self.parse_acaccess( req.request_method, req.path, req.query )

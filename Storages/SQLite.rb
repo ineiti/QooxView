@@ -34,7 +34,7 @@ class SQLite < StorageType
   end
 
   def set_entry( data, field, value )
-    ddputs 5, "Searching id #{data.inspect}"
+    dputs 5, "Searching id #{data.inspect}"
     entry = @db_class.first( :conditions => { @data_field_id => data } )
     if entry
       entry.send( "#{field}=", value )
@@ -49,7 +49,7 @@ class SQLite < StorageType
   # Each new entry is directly stored, helping somewhat if the program or the
   # computer crashes
   def data_create( data )
-		ddputs 5, "Creating early data #{data.inspect} with #{data.class}"
+		dputs 5, "Creating early data #{data.inspect} with #{data.class}"
     e = @db_class.create( data )
     dputs 5, "Creating data: #{e.inspect}"
   end
