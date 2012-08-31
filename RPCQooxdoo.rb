@@ -154,7 +154,7 @@ class RPCQooxdooHandler
     dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
   end
   
-  def self.parse_acaccess( p, q )
+  def self.parse_acaccess( r, p, q )
     dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
   end
   
@@ -196,9 +196,11 @@ class RPCQooxdooHandler
     }
     server.mount_proc('/acaccess') {|req, res|
       $webrick_request = req
-      dputs 4, "ACaccess-Request is #{req.path}"
+			ddputs 5, "Webrick_request is #{$webrick_request.inspect}"
+      ddputs 4, "ACaccess-Request is #{req.path} and " + 
+				"method is #{req.request_method}"
       begin
-        res.body = self.parse_acaccess( req.path, req.query )
+        res.body = self.parse_acaccess( req.request_method, req.path, req.query )
       rescue Exception => e  
         dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
         dputs 0, "#{e.inspect}"
