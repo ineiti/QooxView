@@ -151,9 +151,9 @@ class Entities < RPCQooxdooService
     cmd_str = cmd.to_s
     dputs 5, "Method missing: #{cmd}"
     case cmd_str
-    when /^(find|search)(_by|)_/
+    when /^(find|search|match)(_by|)_/
       action = "#{$~[1]}#{$~[2]}"
-      field = cmd_str.sub( /^(find|search)(_by|)_/, "" )
+      field = cmd_str.sub( /^(find|search|match)(_by|)_/, "" )
       dputs 4, "Using #{action} for field #{field}"
       self.send( action, field, args[0] )
     when /^list_/

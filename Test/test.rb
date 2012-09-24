@@ -14,7 +14,6 @@ Permission.add( 'secretary', 'PersonModify', 'professor' )
 
 qooxView = QooxView.init( 'entities', 'views' )
 
-#require 'qv_africompta'
 require 'qv_entity'
 require 'qv_permission'
 require 'qv_view'

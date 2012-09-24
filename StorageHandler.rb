@@ -125,6 +125,11 @@ module StorageHandler
     }
     return result
   end
+	
+	# Like search_by, but only exact matches
+	def match_by( field, value )
+		search_by( field, "^#{value}$" )
+	end
   
   # filter is a hash with field/value-pairs to be searched.
   def filter_by( filter )

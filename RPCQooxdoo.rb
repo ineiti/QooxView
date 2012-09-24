@@ -77,6 +77,8 @@ class RPCQooxdooService
 end
 
 class RPCQooxdooHandler
+	@@paths = {}
+	
   # self.answer and self.error return a hash, which will be converted later
   def self.answer( result, id, error = nil )
     not result and result = []
@@ -85,7 +87,7 @@ class RPCQooxdooHandler
   
   def self.error( origin, code, message, id )
     self.answer( nil, id,
-                { "origin" => origin, "code" => code, "message" => message }.to_json )
+			{ "origin" => origin, "code" => code, "message" => message }.to_json )
   end
   
   # Replies to a request
@@ -142,20 +144,12 @@ class RPCQooxdooHandler
     # And put it in a nice qx-compatible reply
     dputs 3, "Answer is #{answer}"
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
-    "#{ActiveSupport::JSON.encode(answer) } );"
+			"#{ActiveSupport::JSON.encode(answer) } );"
   end
   
   # A more easy handler for a query-hash, e.g. camping or webrick
   def self.parse_query( q )
     self.parse( q['_ScriptTransport_id'], q['_ScriptTransport_data'] )
-  end
-  
-  def self.parse_info( p, q )
-    dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
-  end
-  
-  def self.parse_acaccess( r, p, q )
-    dputs 0, "Path is: #{p.inspect} - Query is: #{q.inspect}"
   end
   
   # And a no-worry with Webrick
@@ -168,6 +162,7 @@ class RPCQooxdooHandler
       trap(signal){ server.shutdown }
     }
     
+		# This is the remote-procedure-handling from the Frontend
     server.mount_proc('/rpc') {|req, res|
       $webrick_request = req
       dputs 5, "Request is #{req.path}"
@@ -177,46 +172,48 @@ class RPCQooxdooHandler
       dputs 2, "RPC-Reply is #{res.body}"
       raise HTTPStatus::OK
     }
-    server.mount_proc('/info') {|req, res|
-      $webrick_request = req
-      dputs 4, "Info-Request is #{req.path}"
-      begin
-        res.body = self.parse_info( req.path, req.query )
-      rescue Exception => e  
-        dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
-        dputs 0, "#{e.inspect}"
-        dputs 0, "#{e.to_s}"
-        puts e.backtrace
-        res.body = "Error in handling method"
-      end
-      res['content-type'] = "text/html"
-      res['content-length'] = res.body.length
-      dputs 2, "Info-Reply is #{res.body}"
-      raise HTTPStatus::OK
-    }
-    server.mount_proc('/acaccess') {|req, res|
-      $webrick_request = req
-			dputs 5, "Webrick_request is #{$webrick_request.inspect}"
-      dputs 4, "ACaccess-Request is #{req.path} and " + 
-				"method is #{req.request_method}"
-      begin
-        res.body = self.parse_acaccess( req.request_method, req.path, req.query )
-      rescue Exception => e  
-        dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
-        dputs 0, "#{e.inspect}"
-        dputs 0, "#{e.to_s}"
-        puts e.backtrace
-        res.body = "Error in handling method"
-      end
-      res['content-type'] = "text/html"
-      res['content-length'] = res.body.length
-      dputs 2, "ACaccess-Reply is #{res.body}"
-      raise HTTPStatus::OK
-    }
+		
+		# And any other handling required by modules
+		@@paths.each{|path,cl|
+			dputs 1, "Mouting path /#{path} to class #{cl.name}"
+			server.mount_proc("/#{path.to_s}") {|req, res|
+				$webrick_request = req
+				dputs 5, "Webrick_request is #{$webrick_request.inspect}"
+				dputs 4, "ACaccess-Request is #{req.path} and " + 
+					"method is #{req.request_method}"
+				begin
+					res.body = cl.parse( req.request_method, req.path, req.query )
+				rescue Exception => e  
+					dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
+					dputs 0, "#{e.inspect}"
+					dputs 0, "#{e.to_s}"
+					puts e.backtrace
+					res.body = "Error in handling method"
+				end
+				res['content-type'] = "text/html"
+				res['content-length'] = res.body.length
+				dputs 2, "ACaccess-Reply is #{res.body}"
+				raise HTTPStatus::OK
+			}
+		}
+
     server.mount( '/tmp', HTTPServlet::FileHandler, "/tmp" )
     server.mount( '/', HTTPServlet::FileHandler, dir )
     
     server.start
+		exit
   end
+	
+	def self.add_path( path, cl )
+		@@paths[path.to_sym] = cl
+	end
   
+end
+
+class RPCQooxdooPath
+	def self.inherited( subclass )
+		name = subclass.name.downcase
+    dputs 0, "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}"
+		RPCQooxdooHandler.add_path( name, subclass )
+  end
 end
