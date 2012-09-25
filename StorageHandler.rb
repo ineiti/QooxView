@@ -12,7 +12,7 @@ module StorageHandler
         conf[:Replace].each{|k,v|
           if st.to_sym == k.to_sym
             dputs 2, "Replacing #{k.inspect} with #{v.inspect}"
-          st = v.to_sym
+						st = v.to_sym
           end
         }
       end
@@ -30,7 +30,7 @@ module StorageHandler
         # A request for another type
         add_new_storage( st )
       end
-    @storage[st].add_field( value.name, args )
+			@storage[st].add_field( value.name, args )
     else
       @storage.each{|k,v|
         v.add_field( value.name, args )
@@ -41,7 +41,7 @@ module StorageHandler
   def field_args( name )
     @storage.each{|k,v|
       if v.has_field name
-      return v.field_args name
+				return v.field_args name
       end
     }
     nil
@@ -74,7 +74,7 @@ module StorageHandler
   def has_field?(f)
     @storage.each{|k,v|
       if v.has_field f
-      return true
+				return true
       end
     }
     return false
@@ -85,9 +85,9 @@ module StorageHandler
   def find_key_by( field, value )
     #dputs 5, "( #{field}, #{value} ) with #{@data.inspect}"
     @data.each_key{|k|
-    # dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
+			# dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
       if @data[k] and @data[k][field.to_sym].to_s.downcase == value.to_s.downcase
-      return k
+				return k
       end
     }
     return nil
@@ -113,7 +113,7 @@ module StorageHandler
     result = []
     field = field.to_sym
     @data.each_key{|k|
-    #dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
+			#dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
       if @data[k]
         [@data[k][field]].flatten.each{|d|
           if d.to_s =~ /#{value.to_s}/i
@@ -194,7 +194,7 @@ module StorageHandler
         dputs 0, "Didn't find key #{data_id.inspect}"
         exit 1
       else
-      e.data_set_hash( data, true )
+				e.data_set_hash( data, true )
       end
     else
       e = create( data )
@@ -220,9 +220,9 @@ module StorageHandler
         if value.to_s != @data[id.to_i][field]
           val = di.set_entry( id, field, value )
           dputs 4, "#{id} - #{field} - #{value.inspect}"
-        @data[ id.to_i ][ field ] = val
+					@data[ id.to_i ][ field ] = val
         end
-      return val
+				return val
       end
     }
     nil
@@ -237,14 +237,14 @@ module StorageHandler
         dputs 4, "#{di} doesn't have data_cache for #{id} - #{field}"
         val = di.get_entry( id, field )
         dputs 4, "#{id} - #{field} - #{val.inspect}"
-      @data[id][field] = val
-      return val
+				@data[id][field] = val
+				return val
       end
     }
 
     # Else get the things out of the cache
     if @data[id] and @data[id][field]
-    @data[id][field]
+			@data[id][field]
     else
       nil
     end

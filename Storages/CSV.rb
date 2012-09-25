@@ -25,7 +25,7 @@ class CSV < StorageType
   # which data needs to be saved
   def save( data )
     if @add_only
-      dputs 1, "Not saving data for #{@name}"
+      dputs 5, "Not saving data for #{@name}"
     else
       dputs 3, "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}"
       system "mkdir -p #{@csv_dir}"

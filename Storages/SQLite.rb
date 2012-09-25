@@ -30,7 +30,7 @@ class SQLite < StorageType
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save( data )
-    dputs 0, "Not implemented!"
+    dputs 5, "Not implemented!"
   end
 
   def set_entry( data, field, value )
@@ -51,6 +51,9 @@ class SQLite < StorageType
   def data_create( data )
 		dputs 5, "Creating early data #{data.inspect} with #{data.class}"
     e = @db_class.create( data )
+		new_id = e.attributes[@data_field_id.to_s]
+		dputs 5, "New id is #{new_id}"
+		data[@data_field_id] = new_id
     dputs 5, "Creating data: #{e.inspect}"
   end
 
