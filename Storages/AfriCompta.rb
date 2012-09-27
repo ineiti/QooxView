@@ -55,7 +55,7 @@ class AfriCompta
     if @src == nil or @dst == nil
       dputs 0, "Couldn't get either source or destination-account: " +
 				"#{[src, dst].inspect}"
-      exit 1
+      return 0
     end
 
 		if acc.total
