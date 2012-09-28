@@ -11,7 +11,7 @@ cp -a . /tmp/sqlite3
 cd /tmp/sqlite3
 
 rm -f ext/sqlite3/*.o
-ruby setup.rb config &&
+ruby setup.rb config --prefix=/usr &&
 ruby setup.rb setup &&
 sudo ruby setup.rb install
 

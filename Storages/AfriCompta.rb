@@ -22,6 +22,7 @@ class AfriCompta
     end
     
 		dputs 2, "Searching for #{src} - #{dst}"
+    if Kernel.constants.index :ACQooxView
     @src = Accounts.get_by_path( src )
     @dst = Accounts.get_by_path( dst )
 		
@@ -33,6 +34,9 @@ class AfriCompta
 			dputs 1, "Creating Account in path #{src} for destination"
 			@dst = Accounts.create_path( dst, "destination" )
 		end
+    else
+      @src = @dst = nil
+    end
   end
   
   # Adds a movement with an optional message. ATTENTION:

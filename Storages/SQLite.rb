@@ -49,7 +49,7 @@ class SQLite < StorageType
   # Each new entry is directly stored, helping somewhat if the program or the
   # computer crashes
   def data_create( data )
-		dputs 5, "Creating early data #{data.inspect} with #{data.class}"
+		ddputs 5, "Creating early data #{data.inspect} with #{data.class}"
     e = @db_class.create( data )
 		new_id = e.attributes[@data_field_id.to_s]
 		dputs 5, "New id is #{new_id}"
