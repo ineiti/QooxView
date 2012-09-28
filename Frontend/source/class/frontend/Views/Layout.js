@@ -269,8 +269,8 @@ qx.Class.define("frontend.Views.Layout", {
             // Assure we're in the right tab
             if (this.tabs) {
                 if (this.tabs.getSelection()[0].qv_id != this.viewClass) {
-                    alert("Changed tabs in the meantime: " +
-                    this.tabs.getSelection()[0].qv_id );
+//                    alert("Changed tabs in the meantime: " +
+//                    this.tabs.getSelection()[0].qv_id );
                     for (var v = 0; v < this.views.length; v++) {
                         if (this.views[v].qv_id == this.viewClass) {
                             this.tabs.setSelection([this.views[v]]);
