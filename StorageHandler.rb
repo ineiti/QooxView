@@ -217,11 +217,11 @@ module StorageHandler
   def set_entry( id, field, value )
     @storage.each{|k, di|
       if di.has_field field
-        if value.to_s != @data[id.to_i][field]
-          val = di.set_entry( id, field, value )
-          dputs 4, "#{id} - #{field} - #{value.inspect}"
-					@data[ id.to_i ][ field ] = val
-        end
+				#        if value.to_s != @data[id.to_i][field].to_s
+				val = di.set_entry( id, field, value )
+				dputs 4, "#{id} - #{field} - #{value.inspect}"
+				@data[ id.to_i ][ field ] = val
+				#        end
 				return val
       end
     }

@@ -186,7 +186,7 @@ def get_config_rec( path, default, config = $config )
 		return config
 	else
 		key = path.shift.to_sym
-		if config.has_key? key
+		if config and config.has_key? key
 			return get_config_rec( path, default, config[key])
 		else
 			return default

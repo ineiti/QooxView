@@ -28,7 +28,8 @@ class Entities < RPCQooxdooService
 
   include StorageHandler
 
-  attr_accessor :data_class, :data_instances, :blocks, :data_field_id, :storage, :data, :name
+  attr_accessor :data_class, :data_instances, :blocks, :data_field_id, 
+		:storage, :data, :name, :msg, :undo, :logging
 
   def initialize
     begin
@@ -39,6 +40,8 @@ class Entities < RPCQooxdooService
       @data_class = eval( singular( self.class.name ) )
     end
     @storage = nil
+		@msg = nil
+		@undo = @logging = true
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
@@ -199,19 +202,19 @@ class Entities < RPCQooxdooService
   # [data_old] - eventual old data interesting to "undo_function"
   # It will return the index of the action
   def log_action( id, data, msg = nil, undo_function = nil, data_old = nil )
-    Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
+    #Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
   end
 
   # Checks for a list of it's own type, enhanced by filter
   def log_list( f = {} )
     filter = {:data_class => @data_class}.merge( f )
     dputs 3, "filter is #{filter}"
-    Entities.LogActions.log_list( filter )
+    #Entities.LogActions.log_list( filter )
   end
 
   # Undoes a given action
   def log_undo( action_id )
-    Entities.LogActions.log_undo( self, action_id )
+    #Entities.LogActions.log_undo( self, action_id )
   end
 
   # Return an array of all available field-names as symbols
@@ -316,7 +319,11 @@ class Entity
     when /=$/
       # Setting the value
       field = field.chop.to_sym
-      data_set_log( field, args[0] )
+			if @proxy.undo or @proxy.logging
+				data_set_log( field, args[0], @proxy.msg, @proxy.undo, @proxy.logging )
+			else
+				data_set( field, args[0] )
+			end
     else
       # Getting the value
       dputs 5, "data_get #{field}"
@@ -386,22 +393,23 @@ class Entity
     else
       @proxy.set_entry( @id, field, value )
     end
-    self
+		self
   end
 
   # Save all data in the hash for which we have an entry
   # if create == true, it won't call LogActions for every field
   def data_set_hash( data, create = false )
-    dputs 4, "#{data.inspect} - #{create}"
+    ddputs 4, "#{data.inspect} - #{create}"
     fields = @proxy.get_field_names
     data.each{|k,v|
       ks = k.to_sym
       # Only set data for which there is a field
       if fields.index( ks )
-        # Only set data if it's different from original
-        if v != data_get(ks)
-          dputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
-          data_set_log( ks, v, nil, true, ( not create ) )
+				if create
+					data_set( ks, v )
+				else
+          ddputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
+          data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
       end
     }
@@ -412,9 +420,9 @@ class Entity
   def data_set_log( field, value, msg = nil, undo = true, logging = true )
     dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
     old_value = data_get( field )
-    new_value = data_set( field, value )
+    new_value = data_set( field, value ).data_get( field )
 		dputs 5, "new_value is #{new_value.class}"
-    if old_value.to_s != new_value.data_get( field ).to_s
+    if old_value.to_s != new_value.to_s
       dputs 3, "Set field #{field} to value #{new_value.inspect}"
       if logging
         if undo

@@ -31,7 +31,7 @@ module DPuts
           lines.push s.slice( pos, len )
           pos += len
         end
-        puts who + " " + lines.shift
+        puts who + " " + lines.shift.to_s
         lines.each{|l|
           puts " " * ( 32 ) + l
         }

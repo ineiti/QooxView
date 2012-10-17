@@ -1,3 +1,7 @@
+StorageType:
+  CSV:
+    csv_dir: ./data2/
+
 views:
  Welcome:
   need_pass: true
