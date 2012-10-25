@@ -45,7 +45,7 @@ class RPCQooxdooService
     [ "Entities", "View" ].each{|e|
       @@services_hash.each_pair{|k,v|
         if k =~ /^#{e}/
-          dputs 3, "RPC: making an instance of #{k} with #{v}"
+          dputs( 3 ){ "RPC: making an instance of #{k} with #{v}" }
           @@services_hash[k] = v.new
         end
       }
@@ -61,7 +61,7 @@ class RPCQooxdooService
     if super_name != "RPCQooxdooService"
       name = "#{super_name}.#{name}"
     end
-    dputs 5, "A new handler -#{subclass} is created for the class: #{super_name} with path #{name}"
+    dputs( 5 ){ "A new handler -#{subclass} is created for the class: #{super_name} with path #{name}" }
     @@services_hash[ name ] = subclass
   end
   
@@ -71,7 +71,7 @@ class RPCQooxdooService
   
   # Adds a new service of type "subclass" and stores it under "name"
   def self.add_new_service( subclass, name )
-    dputs 5, "Add a new service: #{subclass} as #{name}"
+    dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = @@is_instance ? subclass.new : subclass
   end
 end
@@ -93,7 +93,7 @@ class RPCQooxdooHandler
   # Replies to a request
   def self.request( id, service, method, params )
     session = Session.find_by_id( params[0].shift )
-    dputs 3, "session is #{session}"
+    dputs( 3 ){ "session is #{session}" }
     
     if service =~ /^View/ and session
       if not session.can_view( service )
@@ -101,21 +101,21 @@ class RPCQooxdooHandler
       end
     end
     
-    dputs 3, "Going to call #{service}, #{method}"
+    dputs( 3 ){ "Going to call #{service}, #{method}" }
     # Get an answer with some error-checking
 
     if RPCQooxdooService::services.has_key?( service )
       s = RPCQooxdooService::services[ service ]
       method = "rpc_#{method}"
       if s.respond_to?( method )
-        dputs 3, "Calling #{method} with #{params.inspect}"
+        dputs( 3 ){ "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request( method, session, params[0] )
           return self.answer( s.parse_reply( method, session, parsed ), id )
         rescue Exception => e  
-          dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
-          dputs 0, "#{e.inspect}"
-          dputs 0, "#{e.to_s}"
+          dputs( 0 ){ "Error while handling #{method} with #{params.inspect}: #{e.message}" }
+          dputs( 0 ){ "#{e.inspect}" }
+          dputs( 0 ){ "#{e.to_s}" }
           puts e.backtrace
           return self.error( 2, 2, "Error in handling method", id )
         end
@@ -137,12 +137,12 @@ class RPCQooxdooHandler
       answer = self.error( 2,0, "Didn't receive request", -1 )
     else
       data = JSON.parse( d )
-      dputs 2, "Request-data is: #{data.inspect}"
+      dputs( 2 ){ "Request-data is: #{data.inspect}" }
       answer = self.request( data['id'], data['service'], data['method'], data['params'] )
     end
     
     # And put it in a nice qx-compatible reply
-    dputs 3, "Answer is #{answer}"
+    dputs( 3 ){ "Answer is #{answer}" }
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
 			"#{ActiveSupport::JSON.encode(answer) } );"
   end
@@ -165,34 +165,34 @@ class RPCQooxdooHandler
 		# This is the remote-procedure-handling from the Frontend
     server.mount_proc('/rpc') {|req, res|
       $webrick_request = req
-      dputs 5, "Request is #{req.path}"
+      dputs( 5 ){ "Request is #{req.path}" }
       res.body = self.parse_query( req.query )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs 2, "RPC-Reply is #{res.body}"
+      dputs( 2 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		
 		# And any other handling required by modules
 		@@paths.each{|path,cl|
-			dputs 1, "Mouting path /#{path} to class #{cl.name}"
+			dputs( 1 ){ "Mouting path /#{path} to class #{cl.name}" }
 			server.mount_proc("/#{path.to_s}") {|req, res|
 				$webrick_request = req
-				dputs 5, "Webrick_request is #{$webrick_request.inspect}"
-				dputs 4, "ACaccess-Request is #{req.path} and " + 
-					"method is #{req.request_method}"
+				dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }
+				dputs( 4 ){ "ACaccess-Request is #{req.path} and " +
+					"method is #{req.request_method}" }
 				begin
 					res.body = cl.parse( req.request_method, req.path, req.query )
 				rescue Exception => e  
-					dputs 0, "Error while handling #{method} with #{params.inspect}: #{e.message}"
-					dputs 0, "#{e.inspect}"
-					dputs 0, "#{e.to_s}"
+					dputs( 0 ){ "Error while handling #{method} with #{params.inspect}: #{e.message}" }
+					dputs( 0 ){ "#{e.inspect}" }
+					dputs( 0 ){ "#{e.to_s}" }
 					puts e.backtrace
 					res.body = "Error in handling method"
 				end
 				res['content-type'] = "text/html"
 				res['content-length'] = res.body.length
-				dputs 2, "ACaccess-Reply is #{res.body}"
+				dputs( 2 ){ "ACaccess-Reply is #{res.body}" }
 				raise HTTPStatus::OK
 			}
 		}
@@ -213,7 +213,7 @@ end
 class RPCQooxdooPath
 	def self.inherited( subclass )
 		name = subclass.name.downcase
-    dputs 0, "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}"
+    dputs( 0 ){ "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
 		RPCQooxdooHandler.add_path( name, subclass )
   end
 end

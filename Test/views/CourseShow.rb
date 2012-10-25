@@ -6,6 +6,6 @@ class CourseShow < View
   end
   
   def rpc_test( m, s, p )
-    dputs 0, p.inspect
+    dputs( 0 ){ p.inspect }
   end
 end

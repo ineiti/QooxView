@@ -45,7 +45,7 @@ class Entities < RPCQooxdooService
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
-      dputs 4, "Initializing #{self.class.name} with data_class = #{@data_class}"
+      dputs( 4 ){ "Initializing #{self.class.name} with data_class = #{@data_class}" }
 
       # Initialize the basic variables
       @blocks = {}
@@ -53,10 +53,10 @@ class Entities < RPCQooxdooService
       @default_type = :CSV
 
       # Check for config of this special class
-      #      dputs 2, "Class is: #{self.class.name.to_sym.inspect}"
+      #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
       if $config and $config[:entities] and $config[:entities][self.class.name.to_sym]
         @config = $config[:entities][self.class.name.to_sym]
-        dputs 3, "Writing config #{@config.inspect} for #{self.class.name}"
+        dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
           begin
             instance_variable_set( "@#{k.to_s}", eval( v ) )
@@ -64,7 +64,7 @@ class Entities < RPCQooxdooService
             instance_variable_set( "@#{k.to_s}", v )
           end
           self.class.send( :attr_reader, k )
-          dputs 3, "Setting #{k} = #{v}"
+          dputs( 3 ){ "Setting #{k} = #{v}" }
         }
       else
         @config = nil
@@ -81,11 +81,11 @@ class Entities < RPCQooxdooService
       autoload = setup_data()
 
       # Finally adding @data_field_id to all storage-types
-      dputs 4, "Adding #{@data_field_id} to block"
+      dputs( 4 ){ "Adding #{@data_field_id} to block" }
       value_block @data_field_id
       value_int_ALL @data_field_id
 
-      dputs 4, "Block is now: #{@blocks.inspect}"
+      dputs( 4 ){ "Block is now: #{@blocks.inspect}" }
       autoload and load
     end
   end
@@ -152,40 +152,40 @@ class Entities < RPCQooxdooService
   # - value_type - adds an entry for a value of "type"
   def method_missing( cmd, *args )
     cmd_str = cmd.to_s
-    dputs 5, "Method missing: #{cmd}"
+    dputs( 5 ){ "Method missing: #{cmd}" }
     case cmd_str
     when /^(find|search|match)(_by|)_/
       action = "#{$~[1]}#{$~[2]}"
       field = cmd_str.sub( /^(find|search|match)(_by|)_/, "" )
-      dputs 4, "Using #{action} for field #{field}"
+      dputs( 4 ){ "Using #{action} for field #{field}" }
       self.send( action, field, args[0] )
     when /^list_/
       field = cmd_str.sub( /^list_/, "" )
-      dputs 5, "Using list for field #{field}"
+      dputs( 5 ){ "Using list for field #{field}" }
       ret = @data.values.collect{|v| v[field.to_sym]}
-      dputs 4, "Returning #{ret.inspect}"
+      dputs( 4 ){ "Returning #{ret.inspect}" }
       ret
     when /^listp_/
       field = cmd_str.sub( /^listp_/, "" )
-      dputs 5, "Using listpairs for field #{field.inspect}, #{@data.inspect}"
+      dputs( 5 ){ "Using listpairs for field #{field.inspect}, #{@data.inspect}" }
       ret = @data.keys.collect{|k|
-        dputs 4, "k is #{k.inspect} - data is #{@data[k].inspect}"
+        dputs( 4 ){ "k is #{k.inspect} - data is #{@data[k].inspect}" }
         [k, @data[k][field.to_sym] ] }.sort{|a,b|
         a[1] <=> b[1]
       }
-      dputs 3, "Returning #{ret.inspect}"
+      dputs( 3 ){ "Returning #{ret.inspect}" }
       ret
     when /^value_/
       cmds = cmd_str.split("_")[1..-1]
       value_add( cmds, args )
     else
-      dputs 0, "Method is missing: #{cmd} in Entities"
+      dputs( 0 ){ "Method is missing: #{cmd} in Entities" }
       super cmd, *args
     end
   end
 
   def respond_to?( cmd )
-    dputs 5, cmd
+    dputs( 5 ){ cmd }
     if cmd =~ /^(find_by_|search_by_|list_|listp_|value_)/
       return true
     end
@@ -193,7 +193,7 @@ class Entities < RPCQooxdooService
   end
 
   def whoami
-    dputs 0, "I'm !*2@#"
+    dputs( 0 ){ "I'm !*2@#" }
   end
 
   # Log one action, with data, which is supposed to be a
@@ -208,7 +208,7 @@ class Entities < RPCQooxdooService
   # Checks for a list of it's own type, enhanced by filter
   def log_list( f = {} )
     filter = {:data_class => @data_class}.merge( f )
-    dputs 3, "filter is #{filter}"
+    dputs( 3 ){ "filter is #{filter}" }
     #Entities.LogActions.log_list( filter )
   end
 
@@ -256,13 +256,13 @@ class Entities < RPCQooxdooService
   # Might also be used by subclasses to directly acces the instance stored
   # in @@services_hash
   def self.method_missing(m,*args)
-    dputs 5, "I think I got a class: #{m}"
+    dputs( 5 ){ "I think I got a class: #{m}" }
     if self.name == "Entities"
       # This is for the Entities-class
       if ret = Entities.service( m )
         return ret
       else
-        dputs 0, "Method is missing: #{m} in Entries"
+        dputs( 0 ){ "Method is missing: #{m} in Entries" }
         return super( m, *args )
       end
     else
@@ -273,21 +273,21 @@ class Entities < RPCQooxdooService
 
   def self.delete_all_data( local_only = false )
     @@all.each_pair{|k,v|
-      dputs 4, "Erasing data of #{k}"
+      dputs( 4 ){ "Erasing data of #{k}" }
       v.delete_all( local_only )
     }
   end
 
   def self.save_all
     @@all.each{|k,v|
-      dputs 3, "Saving #{v.class.name}"
+      dputs( 0 ){ "Saving #{v.class.name}" }
       v.save
     }
   end
 
   def self.load_all
     @@all.each{|k,v|
-      dputs 3, "Loading #{v.class.name}"
+      dputs( 3 ){ "Loading #{v.class.name}" }
       v.load
     }
   end
@@ -301,7 +301,7 @@ end
 class Entity
   attr_reader :id
   def initialize( id, proxy )
-    dputs 5, "Creating entity -#{proxy}- with id #{id}"
+    dputs( 5 ){ "Creating entity -#{proxy}- with id #{id}" }
     @id = id.to_i
     @proxy = proxy
 
@@ -313,7 +313,7 @@ class Entity
   end
 
   def method_missing( cmd, *args )
-    dputs 5, "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}"
+    dputs( 5 ){ "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}" }
     field = cmd.to_s
     case field
     when /=$/
@@ -326,7 +326,7 @@ class Entity
 			end
     else
       # Getting the value
-      dputs 5, "data_get #{field}"
+      dputs( 5 ){ "data_get #{field}" }
       data_get( field )
     end
   end
@@ -343,7 +343,7 @@ class Entity
 
   def to_hash
     ret = @proxy.data[@id].dup
-    dputs 5, "Will return #{ret.to_a.join("-")}"
+    dputs( 5 ){ "Will return #{ret.to_a.join("-")}" }
     ret.each{|f,v|
       if data_get(f).is_a? Entity
         ret[f] = [v]
@@ -378,7 +378,7 @@ class Entity
       e = @proxy.get_entry( @id, f.to_s )
       v = @proxy.get_value( f )
       if e and v and v.dtype == "entity"
-        dputs 4, "Getting instance for #{v.inspect} with #{e.inspect}"
+        dputs( 4 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
         e = v.eclass.get_data_instance( e )
       end
       e
@@ -388,7 +388,7 @@ class Entity
 
   def data_set( field, value )
     if value.is_a? Entity
-      dputs 3, "Converting #{value} to #{value.id}"
+      dputs( 3 ){ "Converting #{value} to #{value.id}" }
       @proxy.set_entry( @id, field, value.id )
     else
       @proxy.set_entry( @id, field, value )
@@ -399,7 +399,7 @@ class Entity
   # Save all data in the hash for which we have an entry
   # if create == true, it won't call LogActions for every field
   def data_set_hash( data, create = false )
-    ddputs 4, "#{data.inspect} - #{create}"
+    dputs( 4 ){ "#{data.inspect} - #{create}" }
     fields = @proxy.get_field_names
     data.each{|k,v|
       ks = k.to_sym
@@ -408,7 +408,7 @@ class Entity
 				if create
 					data_set( ks, v )
 				else
-          ddputs 3, "Setting @data[#{k.inspect}] = #{v.inspect}"
+          dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
           data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
       end
@@ -418,12 +418,12 @@ class Entity
 
   # Sets the value of a single entry and attaches an UNDO
   def data_set_log( field, value, msg = nil, undo = true, logging = true )
-    dputs 5, "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}"
+    dputs( 5 ){ "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}" }
     old_value = data_get( field )
     new_value = data_set( field, value ).data_get( field )
-		dputs 5, "new_value is #{new_value.class}"
+		dputs( 5 ){ "new_value is #{new_value.class}" }
     if old_value.to_s != new_value.to_s
-      dputs 3, "Set field #{field} to value #{new_value.inspect}"
+      dputs( 3 ){ "Set field #{field} to value #{new_value.inspect}" }
       if logging
         if undo
           @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )

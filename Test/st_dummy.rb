@@ -14,7 +14,7 @@ end
 class STdummy2 < STdummy1
   
   def configure( config )
-    dputs 3, "Configuration of STdummy2 is: #{config.inspect}"
+    dputs( 3 ){ "Configuration of STdummy2 is: #{config.inspect}" }
     @conf = config[:conf] + "_"
   end
 end

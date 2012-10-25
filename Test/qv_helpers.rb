@@ -2,11 +2,11 @@ require 'test/unit'
 
 class TC_Helpers < Test::Unit::TestCase
   def setup
-#    Entities.delete_all_data()
-#    Entities.Persons.create( :first_name => "admin", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
-#    Entities.Persons.create( :first_name => "surf", :pass => "surf", :session_id => '0.2', :permission => 'internet' )
-#    Permission.session_add( '0.1', 'admin')
-#    Permission.session_add( '0.2', 'internet')
+    Entities.delete_all_data()
+		#    Entities.Persons.create( :first_name => "admin", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
+		#    Entities.Persons.create( :first_name => "surf", :pass => "surf", :session_id => '0.2', :permission => 'internet' )
+		#    Permission.session_add( '0.1', 'admin')
+		#    Permission.session_add( '0.2', 'internet')
   end
 
   def teardown
@@ -22,4 +22,31 @@ class TC_Helpers < Test::Unit::TestCase
 		assert_equal "hello", get_config( nil, :TestConfig, :Two )
 		assert_equal 30, get_config( nil, :TestConfig, :Three, :Thirty )
   end
+	
+	def show_me
+		@inside += 1
+		return "hello"
+	end
+	
+	def test_dputs
+		@inside = 1
+		dputs( 0 ){ "Calling for show_me #{show_me}" }
+		assert_equal 2, @inside
+		
+		dputs( 6 ){ "This shouldn't be called #{show_me}" }
+		assert_equal 2, @inside
+	end
+	
+	def test_speed_dputs
+		Benchmark.bm{|x|
+			
+			(0..4).each{|b|
+				x.report( "Users #{(b*50).to_s.rjust(3)}" ){
+					(1..50).each{|i|
+						Entities.Persons.create( :first_name => "admin#{b*50+i}", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
+					}
+				}
+			}
+		}
+	end
 end

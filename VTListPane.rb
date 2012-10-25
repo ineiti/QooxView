@@ -53,11 +53,11 @@ module VTListPane
   end
   
   def rpc_button_delete( session, data )
-    dputs 3, "session, data: #{[session, data.inspect].join(':')}"
+    dputs( 3 ){ "session, data: #{[session, data.inspect].join(':')}" }
     id = vtlp_get_entity( data )
-    dputs 3, "Got #{id.inspect}"
+    dputs( 3 ){ "Got #{id.inspect}" }
     if id
-      dputs 2, "Deleting entry #{id}"
+      dputs( 2 ){ "Deleting entry #{id}" }
       id.delete
     end
     
@@ -66,7 +66,7 @@ module VTListPane
   
   def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
-    dputs 2, "Field is #{field}"
+    dputs( 2 ){ "Field is #{field}" }
     if field
       field.data_set_hash( data.to_sym )
     else
@@ -79,18 +79,18 @@ module VTListPane
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
     ret = reply( "empty" )
 
-    dputs 3, "rpc_list_choice with #{name} - #{args.inspect}"
+    dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
     if name == @vtlp_field
       field_value = args[0][name][0]
-      dputs 4, "replying with field_value of #{field_value}"
+      dputs( 4 ){ "replying with field_value of #{field_value}" }
       item = vtlp_get_entity(args[0])
-      dputs 4, "item is #{item.inspect}"
+      dputs( 4 ){ "item is #{item.inspect}" }
       if item
         ret += reply("update", item.to_hash )
       end
       ret += reply("update", {@vtlp_field.to_sym => [field_value] } )
     end
-    dputs 3, "reply is #{ret.inspect}"
+    dputs( 3 ){ "reply is #{ret.inspect}" }
     ret
   end
 end

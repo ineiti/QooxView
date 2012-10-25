@@ -17,23 +17,30 @@ class AfriCompta
     @disabled = false
     if ( get_config( false, :AfriCompta, :disabled ) )
       @disabled = true
-      dputs 2, "AfriCompta is disabled"
+      dputs( 2 ){ "AfriCompta is disabled" }
       return
     end
     
-		dputs 2, "Searching for #{src} - #{dst}"
-    if Kernel.constants.index :ACQooxView
+		dputs( 2 ){ "Searching for #{src} - #{dst}" }
+                if not get_config( false, :AfriCompta, :disabled ) and src and dst
+      dputs( 2 ){ "Getting accounts" }
     @src = Accounts.get_by_path( src )
     @dst = Accounts.get_by_path( dst )
 		
-		if src and not @src
-			dputs 1, "Creating Account in path #{src} for source"
+		if not @src
+			dputs( 1 ){ "Creating Account in path #{src} for source" }
 			@src = Accounts.create_path( src, "source" )
+                else
+                  #@src.movements.each{|m|
+                  #  ddputs( 5 ){ m.to_json }
+                  #}
+                  #@src.update_total
 		end
-		if dst and not @dst
-			dputs 1, "Creating Account in path #{src} for destination"
+		if not @dst
+			dputs( 1 ){ "Creating Account in path #{src} for destination" }
 			@dst = Accounts.create_path( dst, "destination" )
 		end
+      dputs( 2 ){ "Got accounts #{@src.path}-#{@src.total}, #{@dst.path}-#{@dst.total}" }
     else
       @src = @dst = nil
     end
@@ -43,8 +50,8 @@ class AfriCompta
   # "credit" and "debit" are in kCFA!!
   def add_movement( value, msg = "" )
     if @src == nil or @dst == nil
-      dputs 0, "Couldn't get either source or destination-account: " +
-				"#{[src, dst].inspect}"
+      dputs( 0 ){ "Couldn't get either source or destination-account: " +
+				"#{[src, dst].inspect}" }
       exit 1
     end
 
@@ -57,8 +64,8 @@ class AfriCompta
   # the credit is in kCFA!
   def get_credit( acc = @src )
     if @src == nil or @dst == nil
-      dputs 0, "Couldn't get either source or destination-account: " +
-				"#{[src, dst].inspect}"
+      dputs( 0 ){ "Couldn't get either source or destination-account: " +
+				"#{[src, dst].inspect}" }
       return 0
     end
 

@@ -89,8 +89,8 @@ class View < RPCQooxdooService
       @is_tabs = true
       @@tabs.push @name_tab
       end
-      dputs 4, "Initializing #{self.class.name}"
-      dputs 5, "Total list of view-classes: #{@@list.join('::')}"
+      dputs( 4 ){ "Initializing #{self.class.name}" }
+      dputs( 5 ){ "Total list of view-classes: #{@@list.join('::')}" }
       #@data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
       @data_class = Entities.service( @name.tab_name.pluralize )
       @layout = [[]]
@@ -103,7 +103,7 @@ class View < RPCQooxdooService
       # Check for config of this special class
       if $config and $config[:views] and $config[:views][self.class.name.to_sym]
         @config = $config[:views][self.class.name.to_sym]
-        dputs 3, "Writing config #{@config.inspect} for #{self.class.name}"
+        dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
           begin
             instance_variable_set( "@#{k.to_s}", eval( v ) )
@@ -111,7 +111,7 @@ class View < RPCQooxdooService
             instance_variable_set( "@#{k.to_s}", v )
           end
           self.class.send( :attr_reader, k )
-          dputs 3, "Setting #{k} = #{v}}"
+          dputs( 3 ){ "Setting #{k} = #{v}}" }
         }
       else
         @config = nil
@@ -130,10 +130,10 @@ class View < RPCQooxdooService
       end
       # Clean up eventual left-overs from a simple (or very complicated) layout
       while @layout.size > 1
-        dputs 5, "Cleaning up"
+        dputs( 5 ){ "Cleaning up" }
         do_container_end
       end
-      dputs 5, "Layout is #{@layout.inspect}"
+      dputs( 5 ){ "Layout is #{@layout.inspect}" }
 
     #if @name.gsub(/[a-z_-]/, '').length > 1
     #  set_data_class( @name.gsub )
@@ -149,7 +149,7 @@ class View < RPCQooxdooService
   # This method lets you set the data_class of your view. Later on this
   # will be automated by taking the first part of the view
   def set_data_class( d_c )
-    dputs 3, "Getting pointer for class #{@data_class}"
+    dputs( 3 ){ "Getting pointer for class #{@data_class}" }
     @data_class = Entities.send( d_c )
   end
 
@@ -179,13 +179,13 @@ class View < RPCQooxdooService
     do_container_start( tags )
     b.call
     # Now we can undo all elements, even those perhaps added by "b.call" - close nicely
-    dputs 4, "Undoing #{@actual.length - depth} levels"
+    dputs( 4 ){ "Undoing #{@actual.length - depth} levels" }
     ( @actual.length - depth ).times{ do_container_end }
   end
 
   def do_box( btype, arg, b )
     if @actual[-1] == "fields"
-      dputs 0, "Can't put a VBox or a HBox in a field!"
+      dputs( 0 ){ "Can't put a VBox or a HBox in a field!" }
       exit
     end
     do_container( arg == :nogroup ? [btype] : ['group', btype], b )
@@ -249,7 +249,7 @@ class View < RPCQooxdooService
     if not @actual.last =~ /^fields/
       do_container_start( %w( group fields ) )
     end
-    dputs 5, "we'll show: #{a.inspect}"
+    dputs( 5 ){ "we'll show: #{a.inspect}" }
     [a].flatten.each{ |v|
       case v
       when v.dtype == "entity"
@@ -280,10 +280,10 @@ class View < RPCQooxdooService
   # Shows an existing field
   def show_field( name )
     @data_class.blocks.each{ |k,v|
-      dputs 4, "#{k}:#{v}"
+      dputs( 4 ){ "#{k}:#{v}" }
       fields = v.select{ |f| f.name == name }
       if fields.length > 0
-        dputs 4, fields.inspect
+        dputs( 4 ){ fields.inspect }
         show_in_field fields
       end
     }
@@ -367,12 +367,12 @@ class View < RPCQooxdooService
 
   def self.list( session, tabs = nil ) # :nodoc:
     if not session
-      dputs 2, "No session given, returning empty"
+      dputs( 2 ){ "No session given, returning empty" }
       return { :views => [] }
     end
-    dputs 4, "Found user #{session.owner.login_name} for session_id #{session_id}"
+    dputs( 4 ){ "Found user #{session.owner.login_name} for session_id #{session_id}" }
     views = []
-    dputs 5, @@list.inspect
+    dputs( 5 ){ @@list.inspect }
     @@list.each{|l|
       if l.visible and session.can_view( l.class.name )
       views.push( l )
@@ -392,12 +392,12 @@ class View < RPCQooxdooService
       end
     end
     if not sub_tabs_only
-      dputs 2, "Views before: #{views.each{|v| v.name }}"
+      dputs( 2 ){ "Views before: #{views.each{|v| v.name }}" }
       views.delete_if{|l|
         tab_name = l.name.tab_name
         is_tabs_or_tab = @@tabs.index( tab_name )
-        dputs 3, "#{l.class} is visible? #{l.visible} - order is #{l.order}"
-        #dputs 3, "tabs: #{tabs.inspect} - tab_name: #{tab_name}"
+        dputs( 3 ){ "#{l.class} is visible? #{l.visible} - order is #{l.order}" }
+        #dputs( 3 ){ "tabs: #{tabs.inspect} - tab_name: #{tab_name}" }
         # Either we ask specifically for all sub-tabs, but then we don't show the main-tab
         # or we don't ask for tabs and
         #  are the main-tab or
@@ -405,15 +405,15 @@ class View < RPCQooxdooService
         not ( ( tab_name == tabs and not l.is_tabs ) or
         ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) ) )
       }
-      dputs 2, "Views after: #{views.each{|v| v.name }}"
+      dputs( 2 ){ "Views after: #{views.each{|v| v.name }}" }
     end
     self.list_views( views )
   end
 
   def self.list_views( list = @@list )
     { :views => list.select{|l| l.name != "Welcome" }.sort{|s,t|
-      #dputs 3, "#{s.order} - #{t.order}"
-      #dputs 4, "#{s.name} - #{t.name}"
+      #dputs( 3 ){ "#{s.order} - #{t.order}" }
+      #dputs( 4 ){ "#{s.name} - #{t.name}" }
         order = s.order.to_i <=> t.order.to_i
         if order == 0
         order = s.name <=> t.name
@@ -433,7 +433,7 @@ class View < RPCQooxdooService
 
   def rpc_tabs_update_view( session, args )
     ret = rpc_update_view( session )
-    dputs 3, "Args is: #{args.inspect}"
+    dputs( 3 ){ "Args is: #{args.inspect}" }
     if args.class == Hash
       ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
     end
@@ -445,7 +445,7 @@ class View < RPCQooxdooService
     # user = Entities.Persons.find_by_session_id( session_id )
     # TODO: test for permission
 
-    dputs 5, "entered rpc_show"
+    dputs( 5 ){ "entered rpc_show" }
     reply( "show",
     { :layout => layout_eval,
         :data_class => @data_class.class.to_s,
@@ -454,24 +454,24 @@ class View < RPCQooxdooService
   end
 
   def rpc_list_tabs( session )
-    dputs 3, "Showing tabs for @name"
+    dputs( 3 ){ "Showing tabs for @name" }
     reply( 'list', View.list( session, @name_tab ) )
   end
 
   def update_layout
     return [] if not @layout
-    dputs 3, "Updating layout"
+    dputs( 3 ){ "Updating layout" }
     ret = []
     layout_recurse(@layout).each{|l|
       case l.dtype
       when /list|select|entity/
         values = l.to_a[3][:list_values]
-        dputs 3, "Here comes element #{l.name} with new list-value #{values.inspect}"
+        dputs( 3 ){ "Here comes element #{l.name} with new list-value #{values.inspect}" }
         ret += reply( :empty, [ l.name ] ) +
         reply( :update, { l.name => values } )
       end
     }
-    dputs 3, "Reply is #{ret.inspect}"
+    dputs( 3 ){ "Reply is #{ret.inspect}" }
     ret
   end
 
@@ -481,39 +481,39 @@ class View < RPCQooxdooService
     #    reply( 'update', layout_recurse( @layout ))
     ret = []
     if @update_layout
-      dputs 3, "updating layout"
+      dputs( 3 ){ "updating layout" }
       ret += update_layout
     end
     if @auto_update > 0
-      dputs 3, "auto-updating"
+      dputs( 3 ){ "auto-updating" }
       ret += reply( "auto_update", @auto_update * ( @auto_update_send_values ? -1 : 1 ) )
     end
     if @debug
-      dputs 4, "debugging"
+      dputs( 4 ){ "debugging" }
       ret += reply( "debug", 1 )
     end
     if @update
       update = rpc_update( session )
-      dputs 3, "@update #{update.inspect}"
+      dputs( 3 ){ "@update #{update.inspect}" }
     ret += update
     end
     if args
-      dputs 3, "Args: #{args.inspect}"
+      dputs( 3 ){ "Args: #{args.inspect}" }
       if args.class == Array
       args.flatten!(1)
       end
       ret += rpc_autofill( session, args )
     end
-    dputs 3, "showing: #{ret.inspect}"
+    dputs( 3 ){ "showing: #{ret.inspect}" }
     ret
   end
 
   def rpc_autofill( session, args )
-    dputs 3, "args is #{args.inspect}"
+    dputs( 3 ){ "args is #{args.inspect}" }
     ret = []
     args.keys.each{|a|
       if l = layout_find( a )
-        dputs 3, "found layout for #{a}"
+        dputs( 3 ){ "found layout for #{a}" }
         ret += reply( :update, a => args[a] )
       end
     }
@@ -522,9 +522,9 @@ class View < RPCQooxdooService
 
   def call_named( type, session, name, *args )
     rpc_name = "rpc_#{type}_#{name}"
-    dputs 3, "Searching for #{rpc_name}"
+    dputs( 3 ){ "Searching for #{rpc_name}" }
     if self.respond_to? rpc_name
-      dputs 3, "Found #{rpc_name} and calling it with #{args.inspect}"
+      dputs( 3 ){ "Found #{rpc_name} and calling it with #{args.inspect}" }
     return self.send( rpc_name, session, args[0] )
     else
     return []
@@ -543,18 +543,18 @@ class View < RPCQooxdooService
 
   # Upon choice of an entry in the list
   def rpc_list_choice( session, name, *args )
-    dputs 3, "Got a new choice of list: #{name.inspect} - #{args.inspect}"
+    dputs( 3 ){ "Got a new choice of list: #{name.inspect} - #{args.inspect}" }
   end
 
   # Send the current values that are displayed
   def rpc_update( session )
-    dputs 4, "rpc_update"
+    dputs( 4 ){ "rpc_update" }
     reply( "update", update( session ) )
   end
 
   # Returns the data for the fields as a hash
   def update( session )
-    dputs 4, "update"
+    dputs( 4 ){ "update" }
     get_form_data( session.owner )
   end
 
@@ -591,14 +591,14 @@ class View < RPCQooxdooService
   def get_form_data( d ) # :nodoc:
     reply = {}
     return reply if not d
-    dputs 3, "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}"
+    dputs( 3 ){ "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}" }
     layout_recurse(@layout).each{|l|
     #      field = l.split(":")[1].to_sym
       if d.data.has_key?( l.name ) and d.data[l.name]
       reply[l.name] = d.data[l.name]
       end
     }
-    dputs 4, "rpc_update #{reply.inspect}"
+    dputs( 4 ){ "rpc_update #{reply.inspect}" }
     reply
   end
 
@@ -631,7 +631,7 @@ class View < RPCQooxdooService
   # Filters data from own Entity, so that these fields are not
   # overwritten
   def filter_from_entity( data )
-    dputs 3, data.inspect
+    dputs( 3 ){ data.inspect }
     if data and data.keys.length > 0
       data_only_keys = data.keys.select{|k|
         ! @data_class.has_field? k
@@ -651,7 +651,7 @@ class View < RPCQooxdooService
 
   def method_missing( cmd, *args )
     cmd_str = cmd.to_s
-    dputs 5, "Method missing: #{cmd}"
+    dputs( 5 ){ "Method missing: #{cmd}" }
     case cmd_str
     when /^show_/
       cmds = cmd_str.split("_")[1..-1]
@@ -667,19 +667,19 @@ class View < RPCQooxdooService
 
   # Used to access subclasses defined in RPCQooxdoo
   def self.method_missing(m,*args)
-    dputs 3, "Searching #{m} with #{args.inspect}"
+    dputs( 3 ){ "Searching #{m} with #{args.inspect}" }
     @@services_hash["View.#{m}"]
   end
 
   def parse_request( method, session, params )
-    dputs 3, "Parsing #{params.inspect}"
+    dputs( 3 ){ "Parsing #{params.inspect}" }
     if params[1]
       layout_recurse.each{ |l|
         if params[1].has_key? l.name.to_s
           value = params[1][l.name.to_s]
           rep = l.parse( value )
           if rep
-            dputs 3, "Converted #{value} to #{rep.to_s}"
+            dputs( 3 ){ "Converted #{value} to #{rep.to_s}" }
           params[1][l.name.to_s] = rep
           end
         end
@@ -694,11 +694,11 @@ class View < RPCQooxdooService
   end
 
   def get_tab_members
-    dputs 2, "Getting tab members of #{@name} with #{@@list.inspect}"
+    dputs( 2 ){ "Getting tab members of #{@name} with #{@@list.inspect}" }
     @@list.select{|l|
       l.name =~ /^#{@name}/
     }.collect{|l|
-      dputs 2, "Collected " + l.name
+      dputs( 2 ){ "Collected " + l.name }
       l.name
     }
   end

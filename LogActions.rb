@@ -29,7 +29,7 @@ class LogActions < Entities
   # [data_old] - eventual old data interesting to "undo_function"
   # It will return the index of the action
   def log_action( data_class, data_id, data, msg = nil, undo_function = nil, data_old = nil )
-    dputs 3, "Creating log-entry: #{[data, undo_function, data_old].inspect}"
+    dputs( 3 ){ "Creating log-entry: #{[data, undo_function, data_old].inspect}" }
     create( { :data_field => data.keys[0], :data_value => data[data.keys[0]], 
       :data_class => data_class.to_s, :data_class_id => data_id, 
       :msg => msg,
@@ -40,21 +40,21 @@ class LogActions < Entities
   # Returns a list of action_ids that match "filter". The
   # default filter just returns everything
   def log_list( filter = { :logactions_id => ".*" } )
-    dputs 3, "Searching for #{filter.inspect}"
+    dputs( 3 ){ "Searching for #{filter.inspect}" }
     res = filter_by( filter )
     res.sort!{|a,b| a[:logaction_id].to_i <=> b[:logaction_id].to_i}
-    dputs 3, "And found #{res}"
-    dputs 5, "Inspected result: #{res.inspect}"
+    dputs( 3 ){ "And found #{res}" }
+    dputs( 5 ){ "Inspected result: #{res.inspect}" }
     return res
   end
 
   # Undoes a given action
   def log_undo( target, action_id )
-    dputs 3, "Trying to undo #{action_id} with #{target.class}"
+    dputs( 3 ){ "Trying to undo #{action_id} with #{target.class}" }
     e = find_by( :logactions_id, action_id )
     if e[:undo_function]
-      dputs 3, "Going to call undo-function " +
-      "#{[e[:undo_function], e[:data], e[:data_old]].inspect}"
+      dputs( 3 ){ "Going to call undo-function " +
+      "#{[e[:undo_function], e[:data], e[:data_old]].inspect}" }
       target.send( e[:undo_function], e[:data], e[:data_old] )
     end
   end

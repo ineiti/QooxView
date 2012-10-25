@@ -45,7 +45,7 @@ class Welcome < View
   end
   
   def rpc_button( session, name, *args )
-    dputs 0, "switching to #{name}"
+    dputs( 0 ){ "switching to #{name}" }
     system "bin/set_connection #{name}"
     update( session )
   end

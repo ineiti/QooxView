@@ -22,7 +22,7 @@ where string_on_screen is taken of an eventual translation-file
 class Value
   attr_accessor :dtype, :name, :st, :args, :list, :entity_class
   def initialize( cmds, arguments, dt = nil )
-    dputs 3, "Added new: #{cmds.inspect}, #{arguments.inspect}"
+    dputs( 3 ){ "Added new: #{cmds.inspect}, #{arguments.inspect}" }
 
     if cmds[-1] == "ALL"
       @st = cmds.pop
@@ -37,7 +37,7 @@ class Value
     @list_type = nil
 
     if arguments[-1].class == Hash
-      dputs 5, "Merging Hash #{arguments[-1].inspect} into #{@args.inspect}"
+      dputs( 5 ){ "Merging Hash #{arguments[-1].inspect} into #{@args.inspect}" }
       @args.merge! arguments.pop
     end
 
@@ -61,7 +61,7 @@ class Value
       @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments
     when "array"
-      dputs 0, "Not yet supported!"
+      dputs( 0 ){ "Not yet supported!" }
       exit
     when "info"
       @args.merge! :text => arguments.pop
@@ -69,7 +69,7 @@ class Value
       @args.merge! :text => arguments.pop
     else
       if arguments.size > 0
-        dputs 0, "Arguments should be empty by now, but are #{arguments.inspect}!"
+        dputs( 0 ){ "Arguments should be empty by now, but are #{arguments.inspect}!" }
         exit
       end
     end
@@ -83,22 +83,22 @@ class Value
     fe_type, fe_name, args = @dtype, @name, @args.dup
     case @dtype
     when /list|select/
-      dputs 3, "List is #{@list}"
+      dputs( 3 ){ "List is #{@list}" }
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/
-      dputs 3, "Converting -#{@name}- to array"
+      dputs( 3 ){ "Converting -#{@name}- to array" }
       fe_type = "list"
       e_all = eclass.search_all
       values = e_all.select{|e|
         begin
-          dputs 3, "Searching whether to show #{e.inspect}"
+          dputs( 3 ){ "Searching whether to show #{e.inspect}" }
           cond = @condition ? @condition.call( e ) : true
-          dputs 3, "cond: #{cond}"
+          dputs( 3 ){ "cond: #{cond}" }
           method = e.respond_to? @show_method
-          dputs 3, "method: #{method}"
+          dputs( 3 ){ "method: #{method}" }
           cond and method
         rescue Exception => e
-          dputs 0, "Couldn't get value: #{e.inspect}"
+          dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
           false
         end
       }.collect{|e|
@@ -107,10 +107,10 @@ class Value
         a[1] <=> b[1]
       }
       args.merge! :list_values => values
-      dputs 3, "Args for entities is #{args.inspect}"
+      dputs( 3 ){ "Args for entities is #{args.inspect}" }
     end
     GetText.locale = 'fr'
-    dputs 3, "Going to name #{fe_name} to #{GetText._(fe_name.to_s)}"
+    dputs( 3 ){ "Going to name #{fe_name} to #{GetText._(fe_name.to_s)}" }
     [ fe_type, fe_name, GetText._( fe_name.to_s ), args ]
   end
 
@@ -128,14 +128,14 @@ class Value
   def parse(p)
     case @dtype
     when /entity/
-      dputs 3, "parsing #{@name}: #{p.inspect}"
+      dputs( 3 ){ "parsing #{@name}: #{p.inspect}" }
       case @list_type
       when :drop
         ret = eclass.find_by( eclass.data_field_id, p[0] )
-        dputs 3, "And found #{ret.inspect}"
+        dputs( 3 ){ "And found #{ret.inspect}" }
         return ret
       else
-        dputs 0, "List-type #{@list_type} not supported yet!"
+        dputs( 0 ){ "List-type #{@list_type} not supported yet!" }
         #        ent_value = id_value.collect{|i|
         #          ent.find_by( ent.data_field_id, i )
         #        }
@@ -146,7 +146,7 @@ class Value
 
   # TODO: implement this cloning instead of deep_clone from object
   def clone_later
-    dputs 0, "Cloning Value!"
+    dputs( 0 ){ "Cloning Value!" }
     v = Value.new( [@dtype], [@name] )
     v.st = @st
     v.args = @args

@@ -31,13 +31,13 @@ class StorageType
   # By default use configuration-options to overwrite class-variables
   def configure( config )
     config.each{|k,v|
-      dputs 3, "Putting configuration #{v.inspect} for #{k.inspect}"
+      dputs( 3 ){ "Putting configuration #{v.inspect} for #{k.inspect}" }
       eval "@#{k} = v"
     }
   end
   
   def add_field( name, args )
-    dputs 3, "Adding field #{name}"
+    dputs( 3 ){ "Adding field #{name}" }
     if not has_field name
       @fields[name.to_sym] = args
     else
@@ -66,11 +66,11 @@ class StorageType
   
   # Calls the block for each data that has more than one key in it
   def data_each( data )
-    dputs 5, data.inspect
-    dputs 5, data.values.inspect
+    dputs( 5 ){ data.inspect }
+    dputs( 5 ){ data.values.inspect }
     data.values.sort{|s, t|
-      #dputs 3, s.inspect
-      #dputs 4, t.inspect
+      #dputs( 3 ){ s.inspect }
+      #dputs( 4 ){ t.inspect }
       s[@data_field_id] <=> t[@data_field_id]
     }.each{|d|
       dw = extract_data( d )
@@ -87,7 +87,7 @@ class StorageType
   def method_missing( name, *arg )
     case name
       when /^(init|addField|setField|getField|save|load|search)$/
-      dputs 0, "Must provide #{name}!"
+      dputs( 0 ){ "Must provide #{name}!" }
       exit 0
     else
       super( name, arg )
@@ -114,7 +114,7 @@ class StorageType
   end
   
   def self.inherited( subclass )
-    dputs 2, "Added #{subclass} to StorageTypes"
+    dputs( 2 ){ "Added #{subclass} to StorageTypes" }
     @@types[subclass.name.to_sym] = subclass
     super( subclass )
   end

@@ -27,14 +27,14 @@ class Permission
   end
 
   def self.session_add( session, perm )
-    dputs 0, "Deprecated - #{caller.inspect}"
+    dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
-  #    dputs 4, "Adding permission for session #{session}: #{perm}"
+  #    dputs( 4 ){ "Adding permission for session #{session}: #{perm}" }
   #    @@sessions[session.to_s] = perm
   end
 
   def self.session_remove( session )
-    dputs 0, "Deprecated - #{caller.inspect}"
+    dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
   #    @@sessions[session.to_s] = nil
   end
@@ -45,14 +45,14 @@ class Permission
   end
 
   def self.can( session, view )
-    dputs 0, "Deprecated - #{caller.inspect}"
+    dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
     # If the list is not initialized, then everybody can do everything!
     if list.size == 0
     return true
     end
 
-    dputs 4, "@@sessions is #{@@sessions.inspect}"
+    dputs( 4 ){ "@@sessions is #{@@sessions.inspect}" }
     permission = @@sessions[session.to_s]
     if not permission or permission.length == 0
       permission = "default"
@@ -63,38 +63,38 @@ class Permission
 
   def self.can_view( permission, view )
     action = view.gsub( /^View\./, '' )
-    dputs 3, "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}"
+    dputs( 3 ){ "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}" }
     if not permission or permission.length == 0
       permission = %w( default )
     end
     permission.each{|p|
       perm_list = self.getViewParent( p )
-      dputs 5, "p is #{p} and perm_list is #{perm_list.inspect}"
+      dputs( 5 ){ "p is #{p} and perm_list is #{perm_list.inspect}" }
       perm_list.each{|pl|
         type, data = pl.split(':')
-        dputs 5, "view = #{type} and data = #{data}"
+        dputs( 5 ){ "view = #{type} and data = #{data}" }
         case type
         when "name"
-          dputs 5, "Pushing #{self.getViewParent(data)}"
+          dputs( 5 ){ "Pushing #{self.getViewParent(data)}" }
           perm_list.push( *self.getViewParent( data ) )
         when "view"
           if data
-            dputs 5, "Searching #{action} - #{data.tab_name} for #{data} - #{action.class}"
+            dputs( 5 ){ "Searching #{action} - #{data.tab_name} for #{data} - #{action.class}" }
             if action =~ /^#{data}$/ or action =~ /^#{data.tab_name}Tabs$/
-              dputs 3, "#{action} is allowed"
+              dputs( 3 ){ "#{action} is allowed" }
             return true
             end
           end
         end
       }
     }
-    dputs 3, "#{action} is NOT allowed"
+    dputs( 3 ){ "#{action} is NOT allowed" }
     return false
   end
 
   # Get session
   def self.get_session( data )
-    dputs 0, "Deprecated - #{caller.inspect}"
+    dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
 
     if data[0] =~ /^session_id:/

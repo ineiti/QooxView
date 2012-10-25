@@ -11,7 +11,7 @@ module StorageHandler
       if conf[:Replace]
         conf[:Replace].each{|k,v|
           if st.to_sym == k.to_sym
-            dputs 2, "Replacing #{k.inspect} with #{v.inspect}"
+            dputs( 2 ){ "Replacing #{k.inspect} with #{v.inspect}" }
 						st = v.to_sym
           end
         }
@@ -52,16 +52,16 @@ module StorageHandler
     st = replace_st( st )
 
     if ! StorageType.has? st
-      dputs 0, "Can't find StorageType of -#{st.inspect}-"
+      dputs( 0 ){ "Can't find StorageType of -#{st.inspect}-" }
       exit 1
     end
 
     if has_storage? st
-      dputs 3, "Storage-type -#{st}- already exists"
+      dputs( 3 ){ "Storage-type -#{st}- already exists" }
     else
-      dputs 3, "Adding storage-type -#{st}-"
+      dputs( 3 ){ "Adding storage-type -#{st}-" }
       @storage[ st ] = StorageType.new_st( st, self, config )
-      dputs 3, "@storage is #{@storage.inspect}"
+      dputs( 3 ){ "@storage is #{@storage.inspect}" }
     end
 
     @storage[st]
@@ -83,9 +83,9 @@ module StorageHandler
   # Have a handler for the ActiveRecord-type find_by_ and the name
   # of the field to search for
   def find_key_by( field, value )
-    #dputs 5, "( #{field}, #{value} ) with #{@data.inspect}"
+    #dputs( 5 ){ "( #{field}, #{value} ) with #{@data.inspect}" }
     @data.each_key{|k|
-			# dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
+			# dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
       if @data[k] and @data[k][field.to_sym].to_s.downcase == value.to_s.downcase
 				return k
       end
@@ -113,11 +113,11 @@ module StorageHandler
     result = []
     field = field.to_sym
     @data.each_key{|k|
-			#dputs 5, "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:"
+			#dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
       if @data[k]
         [@data[k][field]].flatten.each{|d|
           if d.to_s =~ /#{value.to_s}/i
-            dputs 4, "Found data-entry #{k}: #{@data[k].inspect}"
+            dputs( 4 ){ "Found data-entry #{k}: #{@data[k].inspect}" }
             result.push get_data_instance( k )
           end
         }
@@ -139,7 +139,7 @@ module StorageHandler
     # Refine the search
     keys.each{|k|
       res = res.select{|r|
-        dputs 5, "Searching results for #{[r, k, filter[k]].inspect}"
+        dputs( 5 ){ "Searching results for #{[r, k, filter[k]].inspect}" }
         r.has_key? k and r[k].to_s =~ /#{filter[k].to_s}/i
       }
     }
@@ -156,12 +156,12 @@ module StorageHandler
 
   def create( args )
     if args.class != Hash
-      dputs 0, "Entities.create takes a hash! You gave a #{args.class}"
+      dputs( 0 ){ "Entities.create takes a hash! You gave a #{args.class}" }
       exit
     end
-		dputs 5, "Data_field_id is #{@data_field_id}"
+		dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
     if not args[ @data_field_id ]
-			dputs 5, "Adding data_field_id"
+			dputs( 5 ){ "Adding data_field_id" }
       args.merge!( { @data_field_id => new_id[@data_field_id] } )
     end
 
@@ -171,19 +171,19 @@ module StorageHandler
     key = args[@data_field_id]
     if not @data[ key ]
       @data[key] = { @data_field_id => key }
-      dputs 5, "@data is now #{@data.inspect}"
-      dputs 5, "data_class is now #{@data_class.to_s}"
+      dputs( 5 ){ "@data is now #{@data.inspect}" }
+      dputs( 5 ){ "data_class is now #{@data_class.to_s}" }
       save_data( args )
       return get_data_instance( key )
     else
       @storage.each{|k, di| di.data_double( args ) }
-      dputs 2, "Trying to create a double entry!"
+      dputs( 2 ){ "Trying to create a double entry!" }
       return nil
     end
   end
 
   def save_data( data )
-    dputs 5, "Saving #{data.inspect}"
+    dputs( 5 ){ "Saving #{data.inspect}" }
     data.to_sym!
     if data.has_key? @data_field_id
       data_id = data[ @data_field_id ].to_i
@@ -191,7 +191,7 @@ module StorageHandler
       data[ @data_field_id ] = data_id
       e = get_data_instance( data_id )
       if not e
-        dputs 0, "Didn't find key #{data_id.inspect}"
+        dputs( 0 ){ "Didn't find key #{data_id.inspect}" }
         exit 1
       else
 				e.data_set_hash( data, true )
@@ -200,7 +200,7 @@ module StorageHandler
       e = create( data )
     end
 
-    dputs 3, "Saving data #{data_id}"
+    dputs( 3 ){ "Saving data #{data_id}" }
     @storage.each{|k,c|
       c.save( @data )
     }
@@ -209,7 +209,7 @@ module StorageHandler
 
   def delete_id( id )
     id = id.to_i
-    dputs 3, "Deleting id #{id}"
+    dputs( 3 ){ "Deleting id #{id}" }
     @data.delete( id )
     @data_instances.delete( id )
   end
@@ -219,7 +219,7 @@ module StorageHandler
       if di.has_field field
 				#        if value.to_s != @data[id.to_i][field].to_s
 				val = di.set_entry( id, field, value )
-				dputs 4, "#{id} - #{field} - #{value.inspect}"
+				dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
 				@data[ id.to_i ][ field ] = val
 				#        end
 				return val
@@ -234,9 +234,9 @@ module StorageHandler
     # First look if there is a non-caching DataStorage
     @storage.each{|k, di|
       if di.has_field field and not di.data_cache
-        dputs 4, "#{di} doesn't have data_cache for #{id} - #{field}"
+        dputs( 4 ){ "#{di} doesn't have data_cache for #{id} - #{field}" }
         val = di.get_entry( id, field )
-        dputs 4, "#{id} - #{field} - #{val.inspect}"
+        dputs( 4 ){ "#{id} - #{field} - #{val.inspect}" }
 				@data[id][field] = val
 				return val
       end
@@ -252,7 +252,7 @@ module StorageHandler
 
   def data_update( id )
     @data[id.to_i].each{|f,v|
-      dputs 5, "Updating data for #{id} - #{f}"
+      dputs( 5 ){ "Updating data for #{id} - #{f}" }
       get_entry( id, f )
     }
   end
@@ -260,15 +260,15 @@ module StorageHandler
   def load
     @data = {}
     @storage.each{|k,di|
-      dputs 5, "Loading #{k} at #{di.name} with #{di.inspect}"
+      dputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
-			dputs 4, "Loaded #{@data.inspect}"
+			dputs( 5 ){ "Loaded #{@data.inspect}" }
     }
   end
 
   def save
     @storage.each{|k,di|
-      dputs 5, "Saving #{k} at #{di.inspect}"
+      dputs( 5 ){ "Saving #{k} at #{di.inspect}" }
       di.save( @data )
     }
   end

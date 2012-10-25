@@ -31,7 +31,7 @@ class Session
   end
   
   def add_entity( e )
-    dputs 2, "Adding #{e.class.name.to_s} to instance variables"
+    dputs( 2 ){ "Adding #{e.class.name.to_s} to instance variables" }
     instance_variable_set( "@#{e.class.name.to_s}", e )
     self.class.send( :attr_reader, e.class.name.to_s )
   end
@@ -48,7 +48,7 @@ class Session
     if @@sessions.has_key? id.to_s
       return @@sessions[id.to_s]
     else
-      dputs 0, "Can't find session #{id}!"
+      dputs( 0 ){ "Can't find session #{id}!" }
       return nil
     end
   end

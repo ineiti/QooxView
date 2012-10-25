@@ -19,7 +19,7 @@ class OpenPrint
   end
   
   def print( fields, counter = nil )
-    dputs 3, "New print for #{@file}"
+    dputs( 3 ){ "New print for #{@file}" }
     counter ||= @counter
     tmp_file = "/tmp/#{counter}-#{@base}"
     @counter += 1
@@ -39,10 +39,10 @@ class OpenPrint
     }
 
     Docsplit.extract_pdf tmp_file, :output => "/tmp"
-    dputs 5, "Finished docsplit"
+    dputs( 5 ){ "Finished docsplit" }
 #    FileUtils::rm( tmp_file )
     if cmd
-      dputs 0, cmd
+      dputs( 0 ){ cmd }
       `#{cmd}`
       return true
     else

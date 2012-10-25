@@ -25,7 +25,7 @@ class TC_View < Test::Unit::TestCase
 
   def test_order
     reply = request( "View", 'list', [['0.1']] )
-    dputs 0, reply['result'].inspect
+    dputs( 0 ){ reply['result'].inspect }
     assert_equal [["BView", "BView"], ["CView", "CView"], 
     ["CourseShow","CourseShow"], ["AView","AView"]], reply['result'][:views]
   end
@@ -112,17 +112,17 @@ class TC_View < Test::Unit::TestCase
 
   def test_view_entities
     assert_equal ["group", [["fields", [["list", :teacher, "teacher",
-      {:list_values=>[["1","surf"]], :list_type=>:drop}]]]]],
+      {:list_values=>[[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
     assert_equal ["group", [["fields", [["list", :teacher, "teacher",
-      {:list_values=>[["0","admin"],["1","surf"]], :list_type=>:drop}]]]]],
+      {:list_values=>[[0,"admin"],[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
   end
   
-  def test_parse_reply
-    params = View.CourseShow.rpc_parse_reply( 0, 0, ["test", { "one" => 2,
+  def test_parse_request
+    params = View.CourseShow.parse_request( 0, 0, ["test", { "one" => 2,
       "teacher" => @surf.id } ] )
-    assert_equal "surf", params[1][:teacher].first_name 
+    assert_equal "surf", params[1]["teacher"].first_name 
   end
 end

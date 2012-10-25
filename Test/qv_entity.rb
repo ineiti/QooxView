@@ -166,8 +166,8 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "entity", val.dtype
     assert_equal "Persons", val.entity_class
     assert_equal Entities.Persons, val.eclass
-    val_hash = @base_1011.to_hash( true )
-    assert_equal ["0"], val_hash[:teacher]
+    val_hash = @base_1011.to_hash
+    assert_equal [0], val_hash[:teacher]
     assert_equal "super123", @base_1011.teacher.pass
     @admin.pass = "super321"
     assert_equal "super321", @base_1011.teacher.pass
@@ -176,12 +176,12 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "super111", @admin.pass
   end
 	
-	def test_speed
+	def test_speed_persons
 		require 'rubygems'
 		require 'perftools'
 		PerfTools::CpuProfiler.start("/tmp/profile") do
-			(1..1000).each{|p|
-				dputs 0, "Creating person #{p}"
+			(1..200).each{|p|
+				dputs( 0 ){ "Creating person #{p}" }
 				Courses.create( :first_name => "#{p}", :last_name => "#{p}" )
 			}
 		end

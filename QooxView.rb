@@ -111,7 +111,6 @@ GETTEXT_DIR=QOOXVIEW_DIR+"/gettext-2.2.0/bin"
 # I think the rubygems way is just really not useful, sorry
 Dir[ QOOXVIEW_DIR + "/libs/*" ].each{ |lib|
   library = File.expand_path( "#{lib}/lib" )
-  #puts "Loading #{library}"
   $: << library
 }
 
@@ -176,7 +175,7 @@ $config = {} if not defined? $config
 if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
   File.open( CONFIG_FILE ) { |f| $config = YAML::load( f ).to_sym }
 end
-dputs 1, "config is #{$config.inspect}"
+dputs( 1 ){ "config is #{$config.inspect}" }
 $name = $0.match( /.*\/(.*).rb/ )[1]
 def get_config( default, *path )
 	get_config_rec( path, default )
@@ -227,7 +226,7 @@ module QooxView
 				potfile = "po/#{$name}.pot"
 				%x[ mkdir -p po; rm -f #{potfile} ]
 				paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
-				dputs 0, "paths is #{paths.collect{|p| Dir[p] }}"
+				dputs( 0 ){ "paths is #{paths.collect{|p| Dir[p] }}" }
 				GetText.rgettext( paths.collect{|p| Dir[p] }.flatten, potfile )
 				if a.length > 0
 					pofile = "po/#{$name}-#{a}.po"
@@ -243,13 +242,13 @@ module QooxView
 				end
 				exit
 			when "--po"
-				dputs 2, "Making mo-files"
+				dputs( 2 ){ "Making mo-files" }
 				Dir.glob( "po/#{$name}-*.po").each{|po|
 					lang = po.match(/.*#{$name}-(.*).po/)[1]
 					path = "po/#{lang}/LC_MESSAGES"
-					dputs 2, "Doing po-file #{po} for language #{lang} with path #{path}"
+					dputs( 2 ){ "Doing po-file #{po} for language #{lang} with path #{path}" }
 					if not %x[ mkdir -p #{path}] or not GetText.rmsgfmt( po, "#{path}/#{$name}.mo" )
-						dputs 0, "Error while making mo-files, exiting"
+						dputs( 0 ){ "Error while making mo-files, exiting" }
 						exit
 					end
 				}
@@ -259,7 +258,7 @@ module QooxView
 
 	def self.init( dir_entities = nil, dir_views = nil )
 		if not ( Module.constants.index( 'Test' ) )
-			dputs 0, "Doing options"
+			dputs( 0 ){ "Doing options" }
 			self.do_opts( dir_entities, dir_views )
 		end
 
@@ -268,7 +267,7 @@ module QooxView
 
 		# Include all modules in the dir_entities and dir_views
 		# directories
-		dputs 0, "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}"
+		dputs( 0 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
 		[ dir_entities, dir_views ].each{|d|
 			if d
 				Dir[d+"/**/*.rb"].each{|f| require(f)}
@@ -279,7 +278,7 @@ module QooxView
 			Permission.add( 'default', '.*' )
 		end
 
-		dputs 0, "Starting RPCQooxdooServices"
+		dputs( 0 ){ "Starting RPCQooxdooServices" }
 		# Get an instance of all Qooxdoo-services
 		rpcqooxdoo = RPCQooxdooService.new
 	end
@@ -294,7 +293,7 @@ module QooxView
 		if webrick = $config[:webrick]
 			if webrick[:port]
 				port = webrick[:port]
-				dputs 0, "Configuring port for #{port}"
+				dputs( 0 ){ "Configuring port for #{port}" }
 			end
 		end
 
@@ -302,7 +301,7 @@ module QooxView
 		# First check whether QooxDoo is running in source- or buid-mode
 		dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
 			"build" : "source"
-		dputs 3, "Directory for Frontend is: #{dir_html}"
+		dputs( 3 ){ "Directory for Frontend is: #{dir_html}" }
 		log_msg( "main", "Starting up" )
 		RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
 	end

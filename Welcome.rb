@@ -12,24 +12,24 @@ class Welcome < View
       end
     end
     
-    dputs 5, "#{@layout.inspect}"
+    dputs( 5 ){ "#{@layout.inspect}" }
     @visible = false
   end
   
   def rpc_show( session )
-    dputs 3, self.inspect
+    dputs( 3 ){ self.inspect }
     if @no_login
-      dputs 2, "No login is enabled"
+      dputs( 2 ){ "No login is enabled" }
       return reply( "session_id", "1" ) + 
       reply( "list", View.list_views )
     else
-      dputs 2, "Login is enabled"
+      dputs( 2 ){ "Login is enabled" }
       super( session )
     end
   end
   
   def self.nologin
-    dputs 2, "Going for no login"
+    dputs( 2 ){ "Going for no login" }
     $config.merge!( {:views=>{:Welcome=>{:no_login=>true}}} )
   end
   
