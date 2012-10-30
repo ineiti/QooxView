@@ -36,8 +36,8 @@ module DPuts
 	end
 	
   def dputs(n, &s)
-  		s = yield s
     if self.class.const_get( :DEBUG_LVL ) >= n
+  		s = yield s
 			dputs_out( n, s, caller(0)[1] )
     end
   end

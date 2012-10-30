@@ -378,7 +378,7 @@ class Entity
       e = @proxy.get_entry( @id, f.to_s )
       v = @proxy.get_value( f )
       if e and v and v.dtype == "entity"
-        dputs( 4 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
+        dputs( 5 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
         e = v.eclass.get_data_instance( e )
       end
       e

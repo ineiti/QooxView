@@ -82,7 +82,7 @@ class LDAP < StorageType
         if entry.respond_to? :dn
           fiv = field_id_value.gsub(/[\[\]]/,'').to_i
           @dns[fiv] = entry[:dn][0]
-          ddputs( 4 ){ "Adding dn-entry #{entry[:dn][0]} with id #{fiv.inspect}" }
+          dputs( 4 ){ "Adding dn-entry #{entry[:dn][0]} with id #{fiv.inspect}" }
         end
       else
         dputs( 4 ){ "Field-id #{@field_id_ldap} not found. List of ids: #{entry.attribute_names.inspect}" }

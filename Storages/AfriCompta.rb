@@ -32,9 +32,10 @@ class AfriCompta
 			@src = Accounts.create_path( src, "source" )
                 else
                   #@src.movements.each{|m|
-                  #  ddputs( 5 ){ m.to_json }
+                  #  dputs( 5 ){ m.to_json }
                   #}
-                  #@src.update_total
+                  dputs( 2 ){ "Updating account-total for #{@src.get_path}" }
+                  @src.update_total
 		end
 		if not @dst
 			dputs( 1 ){ "Creating Account in path #{src} for destination" }
