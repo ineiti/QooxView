@@ -301,7 +301,7 @@ module QooxView
 		# First check whether QooxDoo is running in source- or buid-mode
 		dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
 			"build" : "source"
-		dputs( 3 ){ "Directory for Frontend is: #{dir_html}" }
+		dputs( 1 ){ "Directory for Frontend is: #{dir_html}" }
 		log_msg( "main", "Starting up" )
 		RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
 	end

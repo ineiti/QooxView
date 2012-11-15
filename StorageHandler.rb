@@ -161,8 +161,9 @@ module StorageHandler
     end
 		dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
     if not args[ @data_field_id ]
-			dputs( 5 ){ "Adding data_field_id" }
-      args.merge!( { @data_field_id => new_id[@data_field_id] } )
+      nid = new_id[@data_field_id]
+			dputs( 3 ){ "Adding data_field_id of #{nid}" }
+      args.merge!( { @data_field_id => nid } )
     end
 
     # Ask every storage-type whether he wants to change something in the
@@ -177,7 +178,7 @@ module StorageHandler
       return get_data_instance( key )
     else
       @storage.each{|k, di| di.data_double( args ) }
-      dputs( 2 ){ "Trying to create a double entry!" }
+      dputs( 2 ){ "Trying to create a double entry with key #{args[@data_field_id]}!" }
       return nil
     end
   end

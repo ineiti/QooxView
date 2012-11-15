@@ -91,14 +91,16 @@ class RPCQooxdooHandler
   end
   
   # Replies to a request
-  def self.request( id, service, method, params )
+  def self.request( id, service, method, params, web_req = nil )
     session = Session.find_by_id( params[0].shift )
-    dputs( 3 ){ "session is #{session}" }
+    dputs( 3 ){ "session is #{session.inspect}" }
     
     if service =~ /^View/ and session
+      dputs( 3 ){ "Going to test if we can view #{service}" }
       if not session.can_view( service )
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
+      session.web_req = web_req
     end
     
     dputs( 3 ){ "Going to call #{service}, #{method}" }
@@ -129,7 +131,7 @@ class RPCQooxdooHandler
   
   # Parsing of an incoming RPC-request - returns a string to be sent
   # to the client
-  def self.parse( stid, d )
+  def self.parse( stid, d, web_req = nil )
     answer = nil
     
     # Prepare all variables
@@ -138,7 +140,7 @@ class RPCQooxdooHandler
     else
       data = JSON.parse( d )
       dputs( 2 ){ "Request-data is: #{data.inspect}" }
-      answer = self.request( data['id'], data['service'], data['method'], data['params'] )
+      answer = self.request( data['id'], data['service'], data['method'], data['params'], web_req )
     end
     
     # And put it in a nice qx-compatible reply
@@ -149,7 +151,7 @@ class RPCQooxdooHandler
   
   # A more easy handler for a query-hash, e.g. camping or webrick
   def self.parse_query( q )
-    self.parse( q['_ScriptTransport_id'], q['_ScriptTransport_data'] )
+    self.parse( q.query['_ScriptTransport_id'], q.query['_ScriptTransport_data'], q )
   end
   
   # And a no-worry with Webrick
@@ -165,8 +167,9 @@ class RPCQooxdooHandler
 		# This is the remote-procedure-handling from the Frontend
     server.mount_proc('/rpc') {|req, res|
       $webrick_request = req
-      dputs( 5 ){ "Request is #{req.path}" }
-      res.body = self.parse_query( req.query )
+      dputs( 5 ){ "Request is #{req.inspect}" }
+      dputs( 4 ){ "Request-path is #{req.path}" }
+      res.body = self.parse_query( req )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
       dputs( 2 ){ "RPC-Reply is #{res.body}" }

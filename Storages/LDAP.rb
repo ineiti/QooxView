@@ -170,7 +170,7 @@ class LDAP < StorageType
     dputs( 5 ){ ret.inspect }
     return ret
   end
-  
+
   # If our @entity has a "data_create"-method, it is called, and then the
   # object is extracted from the LDAP-tree.
   def data_create( data )
@@ -186,8 +186,10 @@ class LDAP < StorageType
       @data_ldap.search( :base => @data_ldap_base, :filter => filter ) do |entry|
         dputs( 4 ){ "DN: #{entry.dn}" }
         if entry.respond_to? @field_id_ldap
-          dputs( 2 ){ "Found #{@field_id_ldap}, getting real value" }
-          id = entry[@field_id_ldap].to_s.to_i
+					ldap_id = entry[@field_id_ldap].to_s.gsub( /[^0-9]/, '' )
+          dputs( 2 ){ "Found #{@field_id_ldap}, getting real value of " +
+						"#{ldap_id}"}
+          id = ldap_id.to_i
           data[@data_field_id] = id
           @dns[id] = entry.dn.to_s
           dputs( 2 ){ "Found id=#{id} and dn=#{entry.dn.to_s}" }

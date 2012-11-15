@@ -29,13 +29,14 @@ class AfriCompta
 		
 		if not @src
 			dputs( 1 ){ "Creating Account in path #{src} for source" }
-			@src = Accounts.create_path( src, "source" )
+			@src = Accounts.create_path( src, "source", false, -1 )
                 else
                   #@src.movements.each{|m|
                   #  dputs( 5 ){ m.to_json }
                   #}
-                  dputs( 2 ){ "Updating account-total for #{@src.get_path}" }
-                  @src.update_total
+                  #dputs( 2 ){ "Updating account-total for #{@src.get_path} which has now #{@src.total}" }
+                  #@src.update_total
+                  #dputs( 2 ){ "And now it is #{@src.total}" }
 		end
 		if not @dst
 			dputs( 1 ){ "Creating Account in path #{src} for destination" }

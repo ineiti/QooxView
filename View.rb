@@ -330,7 +330,7 @@ class View < RPCQooxdooService
       # entered
       show_in_field [ Value.simple( "id_text", name ) ]
 
-    when 'html'
+    when 'htmls'
       # HTML-fields aren't under a "field", but a "group" is enough
       do_container_start "group"
       @layout.last.push value

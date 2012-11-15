@@ -10,6 +10,7 @@
 
 class Session
   attr_reader :id, :permissions, :owner
+  attr_accessor :web_req
   @@sessions = {}
   
   # Adds a person with a session. Holds on to the belief that "owner"
@@ -28,6 +29,7 @@ class Session
     @permissions = owner.permissions
     @@sessions[@id] = self
     @owner = owner
+    @web_req = nil
   end
   
   def add_entity( e )
