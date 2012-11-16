@@ -29,7 +29,7 @@ require 'VTListPane.rb'
 class Object
   def deep_clone
     if instance_variable_defined? :@deep_cloning and @deep_cloning
-    return @deep_cloning_obj
+			return @deep_cloning_obj
     end
     @deep_cloning_obj = clone
     @deep_cloning_obj.instance_variables.each do |var|
@@ -40,7 +40,7 @@ class Object
       rescue TypeError
         next
       ensure
-      @deep_cloning = false
+				@deep_cloning = false
       end
       @deep_cloning_obj.instance_variable_set(var, val)
     end
@@ -85,9 +85,9 @@ class View < RPCQooxdooService
     if @name != "View"
       @@list.push self
       if @name =~ /.*Tabs$/
-      @name_tab = @name.tab_name
-      @is_tabs = true
-      @@tabs.push @name_tab
+				@name_tab = @name.tab_name
+				@is_tabs = true
+				@@tabs.push @name_tab
       end
       dputs( 4 ){ "Initializing #{self.class.name}" }
       dputs( 5 ){ "Total list of view-classes: #{@@list.join('::')}" }
@@ -135,9 +135,9 @@ class View < RPCQooxdooService
       end
       dputs( 5 ){ "Layout is #{@layout.inspect}" }
 
-    #if @name.gsub(/[a-z_-]/, '').length > 1
-    #  set_data_class( @name.gsub )
-    #end
+			#if @name.gsub(/[a-z_-]/, '').length > 1
+			#  set_data_class( @name.gsub )
+			#end
     end
   end
 
@@ -255,9 +255,9 @@ class View < RPCQooxdooService
       when v.dtype == "entity"
         show_entity( *e.split(',') )
       else
-      value = v.deep_clone
-      value.args.merge!( args )
-      @layout.last.push value
+				value = v.deep_clone
+				value.args.merge!( args )
+				@layout.last.push value
       end
     }
   end
@@ -271,9 +271,9 @@ class View < RPCQooxdooService
     case gui
     when :drop
       show_in_field( Value.new( %w( list drop ),
-      [name, "Entities.#{entity}.list_#{field}" ] ) )
+					[name, "Entities.#{entity}.list_#{field}" ] ) )
     else
-    show_in_field( Value.simple( "text", name ) )
+			show_in_field( Value.simple( "text", name ) )
     end
   end
 
@@ -295,8 +295,8 @@ class View < RPCQooxdooService
     a = []
     @data_class.blocks.each{ |k,v|
       a.push(*v.select{|b| b.name == name }.collect{ |e|
-        Value.simple( e.dtype, e.name, 'id' )
-      })
+					Value.simple( e.dtype, e.name, 'id' )
+				})
     }
     show_in_field a
   end
@@ -306,11 +306,11 @@ class View < RPCQooxdooService
   def show_button( *buttons )
     do_container_end if @actual.last == "fields"
     do_container( buttons.length > 1 ? "hbox" : "vbox", proc {
-      buttons.each{|b|
-#        @layout.last.push [ :button, b, b, nil ]
-         @layout.last.push Value.simple( :button, b )
-      }
-    }
+				buttons.each{|b|
+					#        @layout.last.push [ :button, b, b, nil ]
+					@layout.last.push Value.simple( :button, b )
+				}
+			}
     )
     do_container_end if @actual.last == "group"
   end
@@ -337,8 +337,8 @@ class View < RPCQooxdooService
       do_container_end
 
     else
-    # Simple types that pass directly
-    show_in_field [ value ]
+			# Simple types that pass directly
+			show_in_field [ value ]
     end
   end
 
@@ -350,7 +350,7 @@ class View < RPCQooxdooService
         show_arg( val, args, l )
       when "Value"
         if l.name == val
-        l.args.merge! args
+					l.args.merge! args
         end
       end
     }
@@ -375,7 +375,7 @@ class View < RPCQooxdooService
     dputs( 5 ){ @@list.inspect }
     @@list.each{|l|
       if l.visible and session.can_view( l.class.name )
-      views.push( l )
+				views.push( l )
       end
     }
 
@@ -388,7 +388,7 @@ class View < RPCQooxdooService
       if main_tabs.length == 1
         # There is only one main_tab, we have to clean it
         views.delete_if{|v| v.name == "#{main_tabs[0]}Tabs" }
-      sub_tabs_only = true
+				sub_tabs_only = true
       end
     end
     if not sub_tabs_only
@@ -403,7 +403,7 @@ class View < RPCQooxdooService
         #  are the main-tab or
         #  are not tabs or tab at all
         not ( ( tab_name == tabs and not l.is_tabs ) or
-        ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) ) )
+						( not tabs and ( l.is_tabs or not is_tabs_or_tab ) ) )
       }
       dputs( 2 ){ "Views after: #{views.each{|v| v.name }}" }
     end
@@ -412,32 +412,37 @@ class View < RPCQooxdooService
 
   def self.list_views( list = @@list )
     { :views => list.select{|l| l.name != "Welcome" }.sort{|s,t|
-      #dputs( 3 ){ "#{s.order} - #{t.order}" }
-      #dputs( 4 ){ "#{s.name} - #{t.name}" }
+				#dputs( 3 ){ "#{s.order} - #{t.order}" }
+				#dputs( 4 ){ "#{s.name} - #{t.name}" }
         order = s.order.to_i <=> t.order.to_i
         if order == 0
-        order = s.name <=> t.name
+					order = s.name <=> t.name
         end
         order
       }.collect{|c| [ c.name, GetText._( c.name ) ] }
     }
   end
 
-  def rpc_tabs_show( session, args )
-    ret = rpc_show( session )
+	def rpc_tabs_list_choice( session, args )
     if args.class == Hash
-      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
-    end
-    ret
+			list = ""
+			args.each{|k,v|
+				if v.class == Array
+					list = k
+				end
+			}
+      return rpc_list_choice( session, list, args ).to_a
+    end		
+	end
+	
+  def rpc_tabs_show( session, args )
+    rpc_show( session ) + 
+			rpc_tabs_list_choice( session, args )
   end
 
   def rpc_tabs_update_view( session, args )
-    ret = rpc_update_view( session )
-    dputs( 3 ){ "Args is: #{args.inspect}" }
-    if args.class == Hash
-      ret += rpc_list_choice( session, args.keys[0].to_s, args ).to_a
-    end
-    ret
+    rpc_update_view( session ) +
+			rpc_tabs_list_choice( session, args )
   end
 
   # Gives the GUI-elements for the active view
@@ -447,10 +452,10 @@ class View < RPCQooxdooService
 
     dputs( 5 ){ "entered rpc_show" }
     reply( "show",
-    { :layout => layout_eval,
+			{ :layout => layout_eval,
         :data_class => @data_class.class.to_s,
         :view_class => self.class.to_s } ) +
-    rpc_update_view( session )
+			rpc_update_view( session )
   end
 
   def rpc_list_tabs( session )
@@ -468,7 +473,7 @@ class View < RPCQooxdooService
         values = l.to_a[3][:list_values]
         dputs( 3 ){ "Here comes element #{l.name} with new list-value #{values.inspect}" }
         ret += reply( :empty, [ l.name ] ) +
-        reply( :update, { l.name => values } )
+					reply( :update, { l.name => values } )
       end
     }
     dputs( 3 ){ "Reply is #{ret.inspect}" }
@@ -495,12 +500,12 @@ class View < RPCQooxdooService
     if @update
       update = rpc_update( session )
       dputs( 3 ){ "@update #{update.inspect}" }
-    ret += update
+			ret += update
     end
     if args
       dputs( 3 ){ "Args: #{args.inspect}" }
       if args.class == Array
-      args.flatten!(1)
+				args.flatten!(1)
       end
       ret += rpc_autofill( session, args )
     end
@@ -525,9 +530,9 @@ class View < RPCQooxdooService
     dputs( 3 ){ "Searching for #{rpc_name}" }
     if self.respond_to? rpc_name
       dputs( 3 ){ "Found #{rpc_name} and calling it with #{args.inspect}" }
-    return self.send( rpc_name, session, args[0] )
+			return self.send( rpc_name, session, args[0] )
     else
-    return []
+			return []
     end
   end
 
@@ -566,7 +571,7 @@ class View < RPCQooxdooService
       if l.class == Array
         ret.push( *layout_recurse( l ) )
       elsif l.class == Value
-      ret.push l
+				ret.push l
       end
     }
     ret
@@ -579,11 +584,11 @@ class View < RPCQooxdooService
   def layout_eval( lay = @layout[0][0].dup )
     lay.collect{|l|
       if l.class == Value
-      l.to_a
+				l.to_a
       elsif l.class == Array
         layout_eval( l )
       else
-      l
+				l
       end
     }
   end
@@ -593,9 +598,9 @@ class View < RPCQooxdooService
     return reply if not d
     dputs( 3 ){ "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}" }
     layout_recurse(@layout).each{|l|
-    #      field = l.split(":")[1].to_sym
+			#      field = l.split(":")[1].to_sym
       if d.data.has_key?( l.name ) and d.data[l.name]
-      reply[l.name] = d.data[l.name]
+				reply[l.name] = d.data[l.name]
       end
     }
     dputs( 4 ){ "rpc_update #{reply.inspect}" }
@@ -657,7 +662,7 @@ class View < RPCQooxdooService
       cmds = cmd_str.split("_")[1..-1]
       show_add( cmds, args )
     else
-    super( cmd, args )
+			super( cmd, args )
     end
   end
 
@@ -680,7 +685,7 @@ class View < RPCQooxdooService
           rep = l.parse( value )
           if rep
             dputs( 3 ){ "Converted #{value} to #{rep.to_s}" }
-          params[1][l.name.to_s] = rep
+						params[1][l.name.to_s] = rep
           end
         end
       }

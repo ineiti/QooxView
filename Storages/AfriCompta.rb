@@ -22,26 +22,26 @@ class AfriCompta
     end
     
 		dputs( 2 ){ "Searching for #{src} - #{dst}" }
-                if not get_config( false, :AfriCompta, :disabled ) and src and dst
+		if not get_config( false, :AfriCompta, :disabled ) and src and dst
       dputs( 2 ){ "Getting accounts" }
-    @src = Accounts.get_by_path( src )
-    @dst = Accounts.get_by_path( dst )
+			@src = Accounts.get_by_path( src )
+			@dst = Accounts.get_by_path( dst )
 		
-		if not @src
-			dputs( 1 ){ "Creating Account in path #{src} for source" }
-			@src = Accounts.create_path( src, "source", false, -1 )
-                else
-                  #@src.movements.each{|m|
-                  #  dputs( 5 ){ m.to_json }
-                  #}
-                  #dputs( 2 ){ "Updating account-total for #{@src.get_path} which has now #{@src.total}" }
-                  #@src.update_total
-                  #dputs( 2 ){ "And now it is #{@src.total}" }
-		end
-		if not @dst
-			dputs( 1 ){ "Creating Account in path #{src} for destination" }
-			@dst = Accounts.create_path( dst, "destination" )
-		end
+			if not @src
+				dputs( 1 ){ "Creating Account in path #{src} for source" }
+				@src = Accounts.create_path( src, "source", false, -1 )
+			else
+				#@src.movements.each{|m|
+				#  dputs( 5 ){ m.to_json }
+				#}
+				#dputs( 2 ){ "Updating account-total for #{@src.get_path} which has now #{@src.total}" }
+				#@src.update_total
+				#dputs( 2 ){ "And now it is #{@src.total}" }
+			end
+			if not @dst
+				dputs( 1 ){ "Creating Account in path #{src} for destination" }
+				@dst = Accounts.create_path( dst, "destination" )
+			end
       dputs( 2 ){ "Got accounts #{@src.path}-#{@src.total}, #{@dst.path}-#{@dst.total}" }
     else
       @src = @dst = nil
@@ -53,7 +53,7 @@ class AfriCompta
   def add_movement( value, msg = "" )
     if @src == nil or @dst == nil
       dputs( 0 ){ "Couldn't get either source or destination-account: " +
-				"#{[src, dst].inspect}" }
+					"#{[src, dst].inspect}" }
       exit 1
     end
 
@@ -67,7 +67,7 @@ class AfriCompta
   def get_credit( acc = @src )
     if @src == nil or @dst == nil
       dputs( 0 ){ "Couldn't get either source or destination-account: " +
-				"#{[src, dst].inspect}" }
+					"#{[src, dst].inspect}" }
       return 0
     end
 
