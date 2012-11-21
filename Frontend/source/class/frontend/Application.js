@@ -33,7 +33,7 @@ qx.Class.define("frontend.Application", {
 			this.base(arguments);
 			app = this;
 			root = this.getRoot();
-			root.add(this.layout = new frontend.Views.Layout(), {
+			root.add(this.layout = new frontend.Views.Ltab(), {
 				width : "100%",
 				height : "100%"
 			});

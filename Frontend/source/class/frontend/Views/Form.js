@@ -21,6 +21,7 @@ qx.Class.define("frontend.Views.Form", {
     this.dataClass = dataClass;
     this.viewClass = viewClass;
     this.callback = cback;
+    this.ltab = rLayout;
     //dbg(3, "cback is: " + print_a(cback));
     this.add(this.fields = new frontend.Lib.Fields({
       callback: [this, this.changeId]
@@ -36,8 +37,8 @@ qx.Class.define("frontend.Views.Form", {
     viewClass: null,
     callback: null,
     fields: null,
-    effect: null,
     callback: null,
+    ltab: null,
         
     /*
          * This is called whenever something changes. Appropriate actions are taken
@@ -55,7 +56,6 @@ qx.Class.define("frontend.Views.Form", {
       switch (type) {
         case "str":
         case "int":
-          this.parentFadeOut();
           //this.fields.clearData();
           if (params.callback) {
             this.callBackend("callback", params.callback, this.fields.getFieldsData());
@@ -64,11 +64,9 @@ qx.Class.define("frontend.Views.Form", {
           }
           break;
         case "button":
-          this.parentFadeOut();
           this.callBackend("button", name, this.fields.getFieldsData());
           break;
         case "list":
-          this.parentFadeOut();
           this.callBackend("list_choice", name, this.fields.getFieldsData());
           break;
         default:
@@ -77,41 +75,10 @@ qx.Class.define("frontend.Views.Form", {
       }
     },
     
-    parentFadeOut: function(){
-      if ( this.fields.parentLayout ){
-        this.fields.parentLayout.field.fadeOut();
-      } else {
-        this.fadeOut();
-      }
-    },
-		
-    fadeOut: function(){
-      this.fields.setEnabled( false );
-      if ( this.fields && this.fields.getContainerElement() &&
-        this.fields.getContainerElement().getDomElement() ){
-        // alert( "Doing fadout on " + this );
-        if (this.effect) {
-          this.effect.cancel();
-        }
-        this.effect = new qx.fx.effect.core.Fade(
-          this.getContainerElement().getDomElement());
-        this.effect.set( {
-          from: 1, 
-          to: 0.5, 
-          duration: 0.25
-        });
-        this.effect.start();
-        if ( this.fields.childLayout ){
-          this.fields.childLayout.field.fadeOut();
-        }
-        //		alert( "Fading windows")
-        this.fields.windows_fade_to( 0.5 );
-      }
-    },
-        
     // Adds all data in the arguments and calls the server
     callBackend: function(method){
       var args = [];
+      this.ltab.parentFadeOut();
       for (var i = 1; i < arguments.length; i++) {
         args.push(arguments[i]);
       }

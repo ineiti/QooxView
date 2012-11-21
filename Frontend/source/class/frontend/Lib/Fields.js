@@ -242,7 +242,7 @@ qx.Class.define("frontend.Lib.Fields", {
     this.windows = {};
     this.updating = false;
     this.field_id = null;
-    this.rotLayout = rLayout;
+    this.ltab = rLayout;
     dbg(5, "Writing is " + this.write + " our id is " + this);
     this.index = 1;
     this.timer = qx.util.TimerManager.getInstance();
@@ -252,17 +252,15 @@ qx.Class.define("frontend.Lib.Fields", {
         
     this.addListener("appear", function(e) {
       root.fireDataEvent("resize", new qx.event.type.Data());
-    /*
-			var bounds = root.getBounds();
-			var size = this.getInnerSize();
-			var top = Math.round( ( bounds.height - size.height ) / 4);
-			var left = Math.round( ( bounds.width - size.width ) / 2);
-			dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
-			app.layout.set({
-				marginTop : top,
-				marginLeft : left
-			});
-			*/
+    //      var bounds = root.getBounds();
+    //      var size = this.getInnerSize();
+    //      var top = Math.round( ( bounds.height - size.height ) / 4);
+    //      var left = Math.round( ( bounds.width - size.width ) / 2);
+    //      dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
+    //      app.layout.set({
+    //        marginTop : top,
+    //        marginLeft : left
+    //      });
     } )
   },
     
@@ -283,9 +281,8 @@ qx.Class.define("frontend.Lib.Fields", {
     timer: null,
     delayTimer: null,
     layout: null,
-    childLayout: null, // an eventual sub-tab in our layout - only one possible
-    rotLayout: null, // this is where we're attached to
-    parentLayout: null, // in case of tab-in-tab, the layout of the layout
+    childLtab: null, // an eventual sub-tab in our layout - only one possible
+    ltab: null, // this is where we're attached to
         
     // Returns a map of all data in the Field
     getOwnFieldsData: function(){
@@ -315,14 +312,14 @@ qx.Class.define("frontend.Lib.Fields", {
     // Gets also parent and child data, if available 
     getFieldsData: function(){
       var result = this.getOwnFieldsData();
-      if ( this.childLayout && this.childLayout.field && this.childLayout.field.fields ){
-        var otherData = this.childLayout.field.fields.getOwnFieldsData();
+      if ( this.childLtab && this.childLtab.form && this.childLtab.form.fields ){
+        var otherData = this.childLtab.form.fields.getOwnFieldsData();
         for ( var res in otherData ){
           result[res] = otherData[res];
         }
       }
-      if ( this.parentLayout ){
-        var otherData = this.parentLayout.field.fields.getOwnFieldsData();
+      if ( this.ltab.parentLtab ){
+        var otherData = this.ltab.parentLtab.form.fields.getOwnFieldsData();
         for ( var res in otherData ){
           result[res] = otherData[res];
         }
@@ -769,31 +766,32 @@ qx.Class.define("frontend.Lib.Fields", {
             win.center();
             win.created = false;
             win.dontfade = false;
+            win.isfaded = 1;
             win.first_button = this.first_button;
             win.first_field = this.first_field;
             this.first_button = old_button;
             this.first_field = old_field;
             this.windows[args[1]] = win;
             win.addListenerOnce('appear',function(){
-              win.mycreated = true;
+              win.created = true;
             } );
 
             break;
           case "tabs":
             var tabsName = view_str[1][0][0];
             dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
-            this.childLayout = new frontend.Views.Layout;
-            this.childLayout.alignTabs = "top";
-            this.childLayout.parentLayout = this.rotLayout;
+            this.childLtab = new frontend.Views.Ltab;
+            this.childLtab.alignTabs = "top";
+            this.childLtab.parentLtab = this.ltab;
             var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-            container.add( this.childLayout, {
+            container.add( this.childLtab, {
               width: "100%", 
               height: "100%"
             } );
             lyt.add( container, {
               flex: 5
             } );
-            rpc.callRPC("View." + tabsName, "list_tabs", this.childLayout, this.childLayout.dispatch);
+            rpc.callRPC("View." + tabsName, "list_tabs", this.childLtab, this.childLtab.dispatch);
             break;
         }
       }
@@ -838,11 +836,13 @@ qx.Class.define("frontend.Lib.Fields", {
       this.focus_if_ok( win.first_field )
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;
+      //this.windows_fade_to( 1 );
     },
     
     window_fade_to: function( win, target ){
-      if ( win.mycreated && ! win.dontfade ){
-        //alert( "Fading " + w + " to " + target )
+      if ( win.created && ! win.dontfade && win.isfaded != target ){
+        win.isfaded = target;
+        //alert( "Fading " + win + " to " + target )
         var effect = new qx.fx.effect.core.Fade(
           win.layout.getContainerElement().getDomElement());
         //this.windows[w].layout.getContainerElement().getDomElement());
@@ -861,8 +861,11 @@ qx.Class.define("frontend.Lib.Fields", {
     windows_fade_to: function( target ){
       //return;
       for ( var w in this.windows ){
-        dbg(2, "fading windows " + w + " to " + target );
+        //alert( "fading windows " + w + " to " + target );
         this.window_fade_to( this.windows[w], target );
+      }
+      if ( this.childLtab && this.childLtab.form && this.childLtab.form.fields ){
+        this.childLtab.form.fields.windows_fade_to( target );
       }
     },
         
