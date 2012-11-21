@@ -124,7 +124,7 @@ require 'gettext'
 include DPuts
 extend DPuts
 if not Module.constants.index "DEBUG_LVL"
-	DEBUG_LVL = 5
+  DEBUG_LVL = 5
 end
 
 # Converts all keys of a hash to syms recursively
@@ -141,9 +141,9 @@ class Hash
     self.replace( to_sym() )
   end
   
-	#  def to_s
-	#    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
-	#  end
+  #  def to_s
+  #    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
+  #  end
 end
 
 
@@ -158,7 +158,7 @@ class String
     when /man$/
       return self.sub(/an$/, 'men' )
     else
-			return "#{self}s"
+      return "#{self}s"
     end
   end
 end
@@ -178,19 +178,19 @@ end
 dputs( 1 ){ "config is #{$config.inspect}" }
 $name = $0.match( /.*\/(.*).rb/ )[1]
 def get_config( default, *path )
-	get_config_rec( path, default )
+  get_config_rec( path, default )
 end
 def get_config_rec( path, default, config = $config )
-	if path.length == 0
-		return config
-	else
-		key = path.shift.to_sym
-		if config and config.has_key? key
-			return get_config_rec( path, default, config[key])
-		else
-			return default
-		end
-	end
+  if path.length == 0
+    return config
+  else
+    key = path.shift.to_sym
+    if config and config.has_key? key
+      return get_config_rec( path, default, config[key])
+    else
+      return default
+    end
+  end
 end
 
 require 'RPCQooxdoo'
@@ -208,101 +208,101 @@ require 'gettext/tools/rgettext'
 require 'QooxParser'
 
 module QooxView
-	def self.do_opts( dir_entities, dir_views )
-		opts = GetoptLong.new(
-			[ "--help", "-h", GetoptLong::NO_ARGUMENT ],
-			[ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
-			[ "--po", "-p", GetoptLong::NO_ARGUMENT ]
-		)
-		opts.each{|o,a|
-			case o
-			when "--help"
-				puts "Usage: #{$0} [-t] [--help]"
-				puts "\t-t [lang]\tUpdate translations - takes an optional language-argument"
-				puts "\t-p\tCreate .mo-files"
-				puts "\t--help\tShow this help"
-				exit
-			when "--i18n"
-				potfile = "po/#{$name}.pot"
-				%x[ mkdir -p po; rm -f #{potfile} ]
-				paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
-				dputs( 0 ){ "paths is #{paths.collect{|p| Dir[p] }}" }
-				GetText.rgettext( paths.collect{|p| Dir[p] }.flatten, potfile )
-				if a.length > 0
-					pofile = "po/#{$name}-#{a}.po"
-					if File.exists? pofile
-						%x[ mv #{pofile} #{pofile}.tmp ]
-						%x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
-						# Should be possible with rmsgmerge, but it didn't work :(
-						# GetText.rmsgmerge( "#{pofile}.tmp", potfile, pofile )
-						%x[ rm #{pofile}.tmp ]
-					else
-						%x[ cp #{potfile} #{pofile} ]
-					end
-				end
-				exit
-			when "--po"
-				dputs( 2 ){ "Making mo-files" }
-				Dir.glob( "po/#{$name}-*.po").each{|po|
-					lang = po.match(/.*#{$name}-(.*).po/)[1]
-					path = "po/#{lang}/LC_MESSAGES"
-					dputs( 2 ){ "Doing po-file #{po} for language #{lang} with path #{path}" }
-					if not %x[ mkdir -p #{path}] or not GetText.rmsgfmt( po, "#{path}/#{$name}.mo" )
-						dputs( 0 ){ "Error while making mo-files, exiting" }
-						exit
-					end
-				}
-			end
-		}
-	end
+  def self.do_opts( dir_entities, dir_views )
+    opts = GetoptLong.new(
+      [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
+      [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
+      [ "--po", "-p", GetoptLong::NO_ARGUMENT ]
+    )
+    opts.each{|o,a|
+      case o
+      when "--help"
+        puts "Usage: #{$0} [-t] [--help]"
+        puts "\t-t [lang]\tUpdate translations - takes an optional language-argument"
+        puts "\t-p\tCreate .mo-files"
+        puts "\t--help\tShow this help"
+        exit
+      when "--i18n"
+        potfile = "po/#{$name}.pot"
+        %x[ mkdir -p po; rm -f #{potfile} ]
+        paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
+        dputs( 0 ){ "paths is #{paths.collect{|p| Dir[p] }}" }
+        GetText.rgettext( paths.collect{|p| Dir[p] }.flatten, potfile )
+        if a.length > 0
+          pofile = "po/#{$name}-#{a}.po"
+          if File.exists? pofile
+            %x[ mv #{pofile} #{pofile}.tmp ]
+            %x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
+            # Should be possible with rmsgmerge, but it didn't work :(
+            # GetText.rmsgmerge( "#{pofile}.tmp", potfile, pofile )
+            %x[ rm #{pofile}.tmp ]
+          else
+            %x[ cp #{potfile} #{pofile} ]
+          end
+        end
+        exit
+      when "--po"
+        dputs( 2 ){ "Making mo-files" }
+        Dir.glob( "po/#{$name}-*.po").each{|po|
+          lang = po.match(/.*#{$name}-(.*).po/)[1]
+          path = "po/#{lang}/LC_MESSAGES"
+          dputs( 2 ){ "Doing po-file #{po} for language #{lang} with path #{path}" }
+          if not %x[ mkdir -p #{path}] or not GetText.rmsgfmt( po, "#{path}/#{$name}.mo" )
+            dputs( 0 ){ "Error while making mo-files, exiting" }
+            exit
+          end
+        }
+      end
+    }
+  end
 
-	def self.init( dir_entities = nil, dir_views = nil )
-		if not ( Module.constants.index( 'Test' ) )
-			dputs( 0 ){ "Doing options" }
-			self.do_opts( dir_entities, dir_views )
-		end
+  def self.init( dir_entities = nil, dir_views = nil )
+    if not ( Module.constants.index( 'Test' ) )
+      dputs( 0 ){ "Doing options" }
+      self.do_opts( dir_entities, dir_views )
+    end
 
-		GetText.bindtextdomain( $name, :path => "po" )
-		GetText.locale = "fr"
+    GetText.bindtextdomain( $name, :path => "po" )
+    GetText.locale = "fr"
 
-		# Include all modules in the dir_entities and dir_views
-		# directories
-		dputs( 0 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
-		[ dir_entities, dir_views ].each{|d|
-			if d
-				Dir[d+"/**/*.rb"].each{|f| require(f)}
-			end
-		}
+    # Include all modules in the dir_entities and dir_views
+    # directories
+    dputs( 0 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
+    [ dir_entities, dir_views ].each{|d|
+      if d
+        Dir[d+"/**/*.rb"].each{|f| require(f)}
+      end
+    }
 
-		if not Permission.list.index( "default" )
-			Permission.add( 'default', '.*' )
-		end
+    if not Permission.list.index( "default" )
+      Permission.add( 'default', '.*' )
+    end
 
-		dputs( 0 ){ "Starting RPCQooxdooServices" }
-		# Get an instance of all Qooxdoo-services
-		rpcqooxdoo = RPCQooxdooService.new
-	end
+    dputs( 0 ){ "Starting RPCQooxdooServices" }
+    # Get an instance of all Qooxdoo-services
+    rpcqooxdoo = RPCQooxdooService.new
+  end
 
-	# The main function, used to start it all
-	def self.startWeb( port = 3302 )
-		# Suppose we've not being initialized when there are no permissions
-		if Permission.list.size == 0
-			self.init
-		end
+  # The main function, used to start it all
+  def self.startWeb( port = 3302 )
+    # Suppose we've not being initialized when there are no permissions
+    if Permission.list.size == 0
+      self.init
+    end
 
-		if webrick = $config[:webrick]
-			if webrick[:port]
-				port = webrick[:port]
-				dputs( 0 ){ "Configuring port for #{port}" }
-			end
-		end
+    if webrick = $config[:webrick]
+      if webrick[:port]
+        port = webrick[:port]
+        dputs( 0 ){ "Configuring port for #{port}" }
+      end
+    end
 
-		# And start the webrick-server
-		# First check whether QooxDoo is running in source- or buid-mode
-		dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
-			"build" : "source"
-		dputs( 1 ){ "Directory for Frontend is: #{dir_html}" }
-		log_msg( "main", "Starting up" )
-		RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
-	end
+    # And start the webrick-server
+    # First check whether QooxDoo is running in source- or buid-mode
+    dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
+      "build" : "source"
+    dputs( 1 ){ "Directory for Frontend is: #{dir_html}" }
+    log_msg( "main", "Starting up" )
+    RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
+  end
 end

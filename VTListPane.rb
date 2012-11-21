@@ -32,6 +32,7 @@ The following buttons are defined:
 module VTListPane
   def vtlp_list( field, method, args={} )
     @vtlp_field = field.to_s
+		@vtlp_method = method
     @vtlp_method_list = "listp_#{method}"
     show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", args.merge( :callback => true )
   end
@@ -66,11 +67,15 @@ module VTListPane
   
   def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
-    dputs( 2 ){ "Field is #{field}" }
+    dputs( 2 ){ "Field is #{field.inspect}" }
     if field
       field.data_set_hash( data.to_sym )
     else
-      @data_class.create( data.to_sym )
+			if data[ @vtlp_method ].to_s.length > 0
+        @data_class.create( data.to_sym )
+			else
+				dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
+			end
     end
     vtlp_update_list
   end

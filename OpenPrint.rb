@@ -7,8 +7,9 @@ require 'docsplit'
 require 'zip/zipfilesystem'; include Zip
 
 class OpenPrint
-  def initialize( file )
+  def initialize( file, dir = nil )
     @file = file
+		@dir = dir
     @base = `basename #{file}`
     if $config[:default_printer]
       @default_printer = "-P #{$config[:default_printer]}"
@@ -18,11 +19,15 @@ class OpenPrint
     @counter = 0
   end
   
-  def print( fields, counter = nil )
+  def print( fields, counter = nil, name = nil )
     dputs( 3 ){ "New print for #{@file}" }
-    counter ||= @counter
-    tmp_file = "/tmp/#{counter}-#{@base}"
-    @counter += 1
+		if name
+			tmp_file = "/tmp/#{name}.#{@base.sub(/.*\./,'')}"
+		else
+			counter ||= @counter
+			tmp_file = "/tmp/#{counter}-#{@base}"
+			@counter += 1
+		end
     pdf_file = tmp_file.sub(/[^\.]*$/, 'pdf')
     cmd = @default_printer ? "lpr #{@default_printer} #{pdf_file}" : nil
 
@@ -39,8 +44,10 @@ class OpenPrint
     }
 
     Docsplit.extract_pdf tmp_file, :output => "/tmp"
+		#FileUtils::cp( tmp_file, pdf_file )
     dputs( 5 ){ "Finished docsplit" }
-#    FileUtils::rm( tmp_file )
+		@dir and FileUtils::cp( pdf_file, @dir )
+		#    FileUtils::rm( tmp_file )
     if cmd
       dputs( 0 ){ cmd }
       `#{cmd}`
