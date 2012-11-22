@@ -58,6 +58,7 @@ qx.Class.define("frontend.Lib.RPC", {
       this.RpcRunning = this.rpc.callAsync(function(result, ex, id) {
         dbg( 3, "RpcRunning = null" );
         if (ex == null) {
+          //alert( "Result is " + result );
           result.push( { cmd: 'end_of_req', data: '' } );
           //alert( result.length + " - " + event );
           //alert( "Going to call " + obj + " - " + print_a( result ) );
