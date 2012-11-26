@@ -62,11 +62,7 @@ qx.Class.define("frontend.Views.Ltab", {
       dbg(5, "in dispatcher for " + this.viewClass);
       var enable = true;
       this.parentFadeOut();
-      // Cleaning up effects and disabling of stuff
       var aform = this.getActiveForm();
-      //if (aform && !aform.fields.isEnabled()) {
-      //  aform.fields.setEnabled(true);
-      //}
             
       for (var r = 0; r < results.length; r++) {
         var res = results[r];
@@ -209,10 +205,6 @@ qx.Class.define("frontend.Views.Ltab", {
             this.setVisibility( res.data, 'visible' );
             break;
           case "update":
-            // TBR - tried on 121120, should be done by this.enableAll
-            //if (this.tabs) {
-            //  this.tabs.setEnabled(true);
-            //}
             this.updateView(res.data)
             break;
           case "window_hide":
