@@ -185,6 +185,7 @@ class RPCQooxdooHandler
       dputs( 5 ){ "Request is #{req.inspect}" }
       dputs( 4 ){ "Request-path is #{req.path}" }
       res.body = self.parse_query( req )
+      sleep 1
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
       dputs( 2 ){ "RPC-Reply is #{res.body}" }
