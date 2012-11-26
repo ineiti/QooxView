@@ -22,7 +22,7 @@ qx.Class.define("frontend.Views.Ltab", {
     this.fadedin = true;
     this.base(arguments);
     this.setLayout(this.layout = new qx.ui.layout.Canvas());
-    this.timer = qx.util.TimerManager.getInstance();
+    this.timer = new frontend.Lib.TimerF();
 
     // this adds the container manager in one go
     this.root = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
@@ -51,7 +51,6 @@ qx.Class.define("frontend.Views.Ltab", {
     timer: null,
     effect: null,
     fadedin: null,
-    timerUpdate: null,
     alignTabs: null,
     parentLtab: null,
     initValues: null,
@@ -73,7 +72,7 @@ qx.Class.define("frontend.Views.Ltab", {
         switch (res.cmd) {
           case "auto_update":
             // Enable an automatic update every n seconds
-            this.checkTimer();
+            this.timer.stop();
             // The time is positive if we only ask the backend to send new data
             // The time is negative if we have to send our values first
             var time = Math.abs(res.data) * 1000;
@@ -82,17 +81,8 @@ qx.Class.define("frontend.Views.Ltab", {
               method = "update_with_values"
             }
             dbg(3, "update-method is: " + method);
-            dbg(3, "View is: " + this.viewClass)
-            this.timerUpdate = this.timer.start(function(userData, timerId){
-              dbg(3, "timer for update")
-              var values = [];
-              if (method == "update_with_values") {
-                values = [this.form.fields.getFieldsData()];
-                dbg(3, "Values are: " + print_a(values));
-              }
-              this.parentFadeOut();
-              rpc.callRPCarray("View." + this.viewClass, method, this, this.dispatch, values);
-            }, time, this, null, time);
+            dbg(3, "View is: " + this.viewClass);
+            this.timer.start(this.autoUpdate, time, this, method, time);
             break;
           case "callback_button":
             //aform.fadeOut();
@@ -232,6 +222,18 @@ qx.Class.define("frontend.Views.Ltab", {
       }
       dbg(5, "finished dispatcher");
     },
+    
+    autoUpdate: function(userData, timerId){
+      //alert( "in auto-update");
+      dbg(3, "timer for update")
+      var values = [];
+      if (userData == "update_with_values") {
+        values = [this.form.fields.getFieldsData()];
+        dbg(3, "Values are: " + print_a(values));
+      }
+      this.parentFadeOut();
+      rpc.callRPCarray("View." + this.viewClass, userData, this, this.dispatch, values);
+    },
 
     parentFadeOut: function(){
       if ( this.parentLtab ){
@@ -242,6 +244,7 @@ qx.Class.define("frontend.Views.Ltab", {
     },
 		
     fadeOut: function(){
+      this.timer.pause();
       if ( ! this.form || ! this.form.fields ){
         return
       }
@@ -293,6 +296,7 @@ qx.Class.define("frontend.Views.Ltab", {
     },
     
     fadeIn: function(){
+      this.timer.cont();
       aform = this.getActiveForm();
       aform.fields.windows_fade_to(1);
       if ( this.fadedin ){
@@ -365,15 +369,7 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg( 3, "Didn't find field " + el );
       }
     },
-        
-    checkTimer: function(){
-      dbg(3, "checkTimer");
-      if (this.timerUpdate) {
-        dbg(2, "Killing running timer");
-        this.timer.stop(this.timerUpdate);
-        this.timerUpdate = null;
-      }
-    },
+
     // Displays the chosen view of the user
     showView: function(results){
       this.layoutView = results.layout;
@@ -381,7 +377,7 @@ qx.Class.define("frontend.Views.Ltab", {
       this.viewClass = results.view_class;
       dbg(5, "We have to show the following: " + this.layoutView);
             
-      this.checkTimer();
+      this.timer.stop();
             
       // Assure we're in the right tab
       if (this.tabs) {
@@ -462,9 +458,9 @@ qx.Class.define("frontend.Views.Ltab", {
     },
     // Every time the view changes, this is called, which calls the Backend, which will call showView
     changeView: function(e){
-      this.checkTimer();
+      this.timer.stop();
       if ( this.form.fields.childLtab ){
-        this.form.fields.childLtab.checkTimer();
+        this.form.fields.childLtab.timer.stop();
       }
       var newView = e.getData()[0].qv_id;//.getSelection()[0];
       dbg(3, "New view is: " + newView)
