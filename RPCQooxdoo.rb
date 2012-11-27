@@ -197,10 +197,14 @@ class RPCQooxdooHandler
       server.mount_proc("/#{path.to_s}") {|req, res|
         $webrick_request = req
         dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }
-        dputs( 4 ){ "ACaccess-Request is #{req.path} and " +
+        dputs( 4 ){ "#{path}-Request is #{req.path} and " +
             "method is #{req.request_method}" }
         begin
-          res.body = cl.parse( req.request_method, req.path, req.query )
+          if cl.respond_to? :parse_req
+            res.body = cl.parse_req( req )
+          else
+            res.body = cl.parse( req.request_method, req.path, req.query )
+          end
         rescue Exception => e  
           dputs( 0 ){ "Error while handling #{method} with #{params.inspect}: #{e.message}" }
           dputs( 0 ){ "#{e.inspect}" }
@@ -221,7 +225,7 @@ class RPCQooxdooHandler
     server.start
     exit
   end
-	
+
   def self.add_path( path, cl )
     @@paths[path.to_sym] = cl
   end

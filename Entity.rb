@@ -29,7 +29,7 @@ class Entities < RPCQooxdooService
   include StorageHandler
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id, 
-		:storage, :data, :name, :msg, :undo, :logging
+    :storage, :data, :name, :msg, :undo, :logging
 
   def initialize
     begin
@@ -40,8 +40,8 @@ class Entities < RPCQooxdooService
       @data_class = eval( singular( self.class.name ) )
     end
     @storage = nil
-		@msg = nil
-		@undo = @logging = true
+    @msg = nil
+    @undo = @logging = true
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
@@ -319,11 +319,11 @@ class Entity
     when /=$/
       # Setting the value
       field = field.chop.to_sym
-			if @proxy.undo or @proxy.logging
-				data_set_log( field, args[0], @proxy.msg, @proxy.undo, @proxy.logging )
-			else
-				data_set( field, args[0] )
-			end
+      if @proxy.undo or @proxy.logging
+        data_set_log( field, args[0], @proxy.msg, @proxy.undo, @proxy.logging )
+      else
+        data_set( field, args[0] )
+      end
     else
       # Getting the value
       dputs( 5 ){ "data_get #{field}" }
@@ -393,7 +393,7 @@ class Entity
     else
       @proxy.set_entry( @id, field, value )
     end
-		self
+    self
   end
 
   # Save all data in the hash for which we have an entry
@@ -405,9 +405,9 @@ class Entity
       ks = k.to_sym
       # Only set data for which there is a field
       if fields.index( ks )
-				if create
-					data_set( ks, v )
-				else
+        if create
+          data_set( ks, v )
+        else
           dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
           data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
@@ -421,7 +421,7 @@ class Entity
     dputs( 5 ){ "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}" }
     old_value = data_get( field )
     new_value = data_set( field, value ).data_get( field )
-		dputs( 5 ){ "new_value is #{new_value.class}" }
+    dputs( 5 ){ "new_value is #{new_value.class}" }
     if old_value.to_s != new_value.to_s
       dputs( 3 ){ "Set field #{field} to value #{new_value.inspect}" }
       if logging

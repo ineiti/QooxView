@@ -614,6 +614,7 @@ qx.Class.define("frontend.Lib.Fields", {
             row: index,
             column: 0
           });
+          field_element.widget_label = widget_label;
         }
         if (/Grid/.test(layout.getLayout().toString())) {
           layout.add(field_element, {

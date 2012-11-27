@@ -363,8 +363,12 @@ qx.Class.define("frontend.Views.Ltab", {
         
     setVisibility: function( el, vi ){
       aform = this.getActiveForm();
-      if ( aform.fields.fields[el] ){
-        aform.fields.fields[ el ].setVisibility(vi);
+      var f;
+      if ( f = aform.fields.fields[el] ){
+        f.setVisibility(vi);
+        if ( f.widget_label ){
+          f.widget_label.setVisibility(vi);
+        }
       } else {
         dbg( 3, "Didn't find field " + el );
       }

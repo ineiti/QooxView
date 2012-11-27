@@ -8,7 +8,8 @@
 class LogActions < Entities
   def setup_data
     add_new_storage :CSV, :add_only => true
-		@undo = @logging = false
+    @undo = false
+    #@logging = false
 
     value_date :date_stamp
     value_str :data_class
@@ -29,12 +30,12 @@ class LogActions < Entities
   # [data_old] - eventual old data interesting to "undo_function"
   # It will return the index of the action
   def log_action( data_class, data_id, data, msg = nil, undo_function = nil, data_old = nil )
-    dputs( 3 ){ "Creating log-entry: #{[data, undo_function, data_old].inspect}" }
+    ddputs( 3 ){ "Creating log-entry: #{[data, undo_function, data_old].inspect}" }
     create( { :data_field => data.keys[0], :data_value => data[data.keys[0]], 
-      :data_class => data_class.to_s, :data_class_id => data_id, 
-      :msg => msg,
-      :undo_function => undo_function, :data_old => data_old,
-      :date_stamp => Time.now.strftime("%Y:%m:%d %H:%M:%S")} )
+        :data_class => data_class.to_s, :data_class_id => data_id, 
+        :msg => msg,
+        :undo_function => undo_function, :data_old => data_old,
+        :date_stamp => Time.now.strftime("%Y:%m:%d %H:%M:%S")} )
   end
 
   # Returns a list of action_ids that match "filter". The
@@ -54,7 +55,7 @@ class LogActions < Entities
     e = find_by( :logactions_id, action_id )
     if e[:undo_function]
       dputs( 3 ){ "Going to call undo-function " +
-      "#{[e[:undo_function], e[:data], e[:data_old]].inspect}" }
+          "#{[e[:undo_function], e[:data], e[:data_old]].inspect}" }
       target.send( e[:undo_function], e[:data], e[:data_old] )
     end
   end
