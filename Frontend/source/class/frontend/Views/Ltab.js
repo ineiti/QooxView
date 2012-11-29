@@ -207,7 +207,7 @@ qx.Class.define("frontend.Views.Ltab", {
           case "end_of_req":
             //alert( "eor" );
             if (enable && rpc.RpcQueue.length == 0 ){
-              //alert( "enabling")
+              //alert( "enabling" )
               dbg( 2, "Fading in" )
               this.parentFadeIn();
               this.parentEnableAll();
@@ -287,9 +287,9 @@ qx.Class.define("frontend.Views.Ltab", {
     
     parentFadeIn: function(){
       if ( this.parentLtab ){
+        //alert( "Fading in parent layout");
         this.parentLtab.fadeIn();
         this.fadeIn();
-      //alert( "Fading in parent layout");
       } else {
         this.fadeIn();
       }
@@ -300,11 +300,14 @@ qx.Class.define("frontend.Views.Ltab", {
       aform = this.getActiveForm();
       aform.fields.windows_fade_to(1);
       if ( this.fadedin ){
+        //alert( "already faded in" );
         return
       }
       this.fadedin = true;
       if ( aform && aform.fields ){
-        if ( aform.getContainerElement().getDomElement() ){
+        //alert( "Found aform" );
+        //if ( aform.getContainerElement().getDomElement() ){
+        if ( this.getContainerElement().getDomElement() ){
           //alert( "Doing fadin on layout " + aform );
           dbg(5, "** UNdoing effects");
           if (this.effect) {
@@ -527,7 +530,8 @@ qx.Class.define("frontend.Views.Ltab", {
     },
     getRootContainer: function(){
       dbg(5, "getActiveForm");
-      return this.tabs ? this.tabs.getSelection()[0].getChildren()[0].getChildren()[0] : this.root;
+      return this.tabs ? this.tabs.getSelection()[0].getChildren()[0].getChildren()[0] : 
+      this.root;
     }
   }
 });

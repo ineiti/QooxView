@@ -201,9 +201,9 @@ class RPCQooxdooHandler
             "method is #{req.request_method}" }
         begin
           if cl.respond_to? :parse_req
-            res.body = cl.parse_req( req )
+            res.body = cl.parse_req( req ).to_s
           else
-            res.body = cl.parse( req.request_method, req.path, req.query )
+            res.body = cl.parse( req.request_method, req.path, req.query ).to_s
           end
         rescue Exception => e  
           dputs( 0 ){ "Error while handling #{method} with #{params.inspect}: #{e.message}" }
