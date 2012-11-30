@@ -202,19 +202,19 @@ class Entities < RPCQooxdooService
   # [data_old] - eventual old data interesting to "undo_function"
   # It will return the index of the action
   def log_action( id, data, msg = nil, undo_function = nil, data_old = nil )
-    #Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
+    Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
   end
 
   # Checks for a list of it's own type, enhanced by filter
   def log_list( f = {} )
     filter = {:data_class => @data_class}.merge( f )
     dputs( 3 ){ "filter is #{filter}" }
-    #Entities.LogActions.log_list( filter )
+    Entities.LogActions.log_list( filter )
   end
 
   # Undoes a given action
   def log_undo( action_id )
-    #Entities.LogActions.log_undo( self, action_id )
+    Entities.LogActions.log_undo( self, action_id )
   end
 
   # Return an array of all available field-names as symbols
