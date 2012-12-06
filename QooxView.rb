@@ -116,7 +116,7 @@ Dir[ QOOXVIEW_DIR + "/libs/*" ].each{ |lib|
 
 require 'active_record'
 require 'json'
-require 'DPuts'
+require 'Helpers/DPuts'
 require 'gettext'
 
 
@@ -194,18 +194,18 @@ def get_config_rec( path, default, config = $config )
 end
 
 require 'RPCQooxdoo'
-require 'Value'
 require 'Entity'
 require 'View'
-require 'Permission'
-require 'Session'
-require 'LogActions'
-require 'Welcome'
+require 'Helpers/Permission'
+require 'Helpers/Session'
+require 'Helpers/LogActions'
+require 'Helpers/Welcome'
+require 'Helpers/OpenPrint'
 require 'getoptlong'
 require 'gettext/tools/rmsgfmt'
 require 'gettext/tools/rmsgmerge'
 require 'gettext/tools/rgettext'
-require 'QooxParser'
+require 'Helpers/QooxParser'
 
 module QooxView
   def self.do_opts( dir_entities, dir_views )

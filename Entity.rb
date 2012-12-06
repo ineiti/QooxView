@@ -5,9 +5,10 @@
 # multiple viewers can display the same part of an Entity without having
 # to copy code all over.
 
-require 'StorageType'
-require 'StorageHandler'
-require 'Storages/AfriCompta.rb'
+require 'Helpers/Value'
+require 'Helpers/StorageType'
+require 'Helpers/StorageHandler'
+require 'Helpers/AfriCompta.rb'
 require 'Storages/CSV.rb'
 require 'Storages/LDAP.rb'
 require 'Storages/SQLite.rb'

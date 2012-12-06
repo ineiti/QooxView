@@ -22,7 +22,7 @@ There are three main groups of methods:
 
 # TODO: transform all show_* to be used like the value_* from Entities
 
-require 'VTListPane.rb'
+require 'Helpers/VTListPane.rb'
 
 
 
