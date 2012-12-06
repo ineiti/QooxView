@@ -45,8 +45,10 @@ class RPCQooxdooService
     [ "Entities", "View" ].each{|e|
       @@services_hash.each_pair{|k,v|
         if k =~ /^#{e}/
-          dputs( 3 ){ "RPC: making an instance of #{k} with #{v}" }
-          @@services_hash[k] = v.new
+          if @@services_hash[k].class == Class
+            ddputs( 3 ){ "RPC: making an instance of #{k} with #{v}" }
+            @@services_hash[k] = v.new
+          end
         end
       }
     }
@@ -61,7 +63,7 @@ class RPCQooxdooService
     if super_name != "RPCQooxdooService"
       name = "#{super_name}.#{name}"
     end
-    dputs( 5 ){ "A new handler -#{subclass} is created for the class: #{super_name} with path #{name}" }
+    ddputs( 5 ){ "A new handler -#{subclass} is created for the class: #{super_name} with path #{name}" }
     @@services_hash[ name ] = subclass
   end
   
@@ -71,8 +73,14 @@ class RPCQooxdooService
   
   # Adds a new service of type "subclass" and stores it under "name"
   def self.add_new_service( subclass, name )
-    dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
+    ddputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = @@is_instance ? subclass.new : subclass
+  end
+
+  # Adds a new service of type "subclass" and stores it under "name"
+  def self.add_new_service( subclass, name )
+    ddputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
+    @@services_hash[ name ] = subclass.new
   end
 end
 

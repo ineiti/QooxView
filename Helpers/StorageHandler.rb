@@ -12,7 +12,7 @@ module StorageHandler
         conf[:Replace].each{|k,v|
           if st.to_sym == k.to_sym
             dputs( 2 ){ "Replacing #{k.inspect} with #{v.inspect}" }
-						st = v.to_sym
+            st = v.to_sym
           end
         }
       end
@@ -30,7 +30,7 @@ module StorageHandler
         # A request for another type
         add_new_storage( st )
       end
-			@storage[st].add_field( value.name, args )
+      @storage[st].add_field( value.name, args )
     else
       @storage.each{|k,v|
         v.add_field( value.name, args )
@@ -41,7 +41,7 @@ module StorageHandler
   def field_args( name )
     @storage.each{|k,v|
       if v.has_field name
-				return v.field_args name
+        return v.field_args name
       end
     }
     nil
@@ -74,7 +74,7 @@ module StorageHandler
   def has_field?(f)
     @storage.each{|k,v|
       if v.has_field f
-				return true
+        return true
       end
     }
     return false
@@ -85,9 +85,9 @@ module StorageHandler
   def find_key_by( field, value )
     #dputs( 5 ){ "( #{field}, #{value} ) with #{@data.inspect}" }
     @data.each_key{|k|
-			# dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
+      # dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
       if @data[k] and @data[k][field.to_sym].to_s.downcase == value.to_s.downcase
-				return k
+        return k
       end
     }
     return nil
@@ -113,7 +113,7 @@ module StorageHandler
     result = []
     field = field.to_sym
     @data.each_key{|k|
-			#dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
+      #dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
       if @data[k]
         [@data[k][field]].flatten.each{|d|
           if d.to_s =~ /#{value.to_s}/i
@@ -126,10 +126,15 @@ module StorageHandler
     return result
   end
 	
-	# Like search_by, but only exact matches
-	def match_by( field, value )
-		search_by( field, "^#{value}$" )
-	end
+  # Like search_by, but only exact matches
+  def match_by( field, value )
+    ret = search_by( field, "^#{value}$" )
+    if ret.length > 0
+      return ret[0]
+    else
+      return nil
+    end
+  end
   
   # filter is a hash with field/value-pairs to be searched.
   def filter_by( filter )
@@ -159,10 +164,10 @@ module StorageHandler
       dputs( 0 ){ "Entities.create takes a hash! You gave a #{args.class}" }
       exit
     end
-		dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
+    dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
     if not args[ @data_field_id ]
       nid = new_id[@data_field_id]
-			dputs( 3 ){ "Adding data_field_id of #{nid}" }
+      dputs( 3 ){ "Adding data_field_id of #{nid}" }
       args.merge!( { @data_field_id => nid } )
     end
 
@@ -195,7 +200,7 @@ module StorageHandler
         dputs( 0 ){ "Didn't find key #{data_id.inspect}" }
         exit 1
       else
-				e.data_set_hash( data, true )
+        e.data_set_hash( data, true )
       end
     else
       e = create( data )
@@ -218,12 +223,12 @@ module StorageHandler
   def set_entry( id, field, value )
     @storage.each{|k, di|
       if di.has_field field
-				#        if value.to_s != @data[id.to_i][field].to_s
-				val = di.set_entry( id, field, value )
-				dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
-				@data[ id.to_i ][ field ] = val
-				#        end
-				return val
+        #        if value.to_s != @data[id.to_i][field].to_s
+        val = di.set_entry( id, field, value )
+        dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
+        @data[ id.to_i ][ field ] = val
+        #        end
+        return val
       end
     }
     nil
@@ -238,14 +243,14 @@ module StorageHandler
         dputs( 4 ){ "#{di} doesn't have data_cache for #{id} - #{field}" }
         val = di.get_entry( id, field )
         dputs( 4 ){ "#{id} - #{field} - #{val.inspect}" }
-				@data[id][field] = val
-				return val
+        @data[id][field] = val
+        return val
       end
     }
 
     # Else get the things out of the cache
     if @data[id] and @data[id][field]
-			@data[id][field]
+      @data[id][field]
     else
       nil
     end
@@ -257,14 +262,37 @@ module StorageHandler
       get_entry( id, f )
     }
   end
+  
+  def migrate
+    if not mv = MigrationVersions.match_by( :class_name, @name )
+      dputs(2){"#{@name} has no migration yet"}
+      mv = Entities.MigrationVersions.create( :class_name => @name,
+      :version => 0 )
+    end
+    version = mv.version + 1
+    dputs(2){"Checking for migration_#{version} of #{@name}"}
+    while self.respond_to?( vers_str = "migration_#{version}".to_sym )
+      rt = self.respond_to? vers_str
+      dputs(2){"Migrating #{@name} to version #{version}, calling #{vers_str}"}
+      ddputs(4){"Working on #{data.inspect}"}
+      @data.each{|k,v|
+        inst = get_data_instance( k )
+        ddputs(4){"Sending #{inst.inspect}"}
+        send vers_str, inst
+      }
+      mv.version = version
+      version += 1
+    end
+  end
 
   def load
     @data = {}
     @storage.each{|k,di|
       dputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
-			dputs( 5 ){ "Loaded #{@data.inspect}" }
+      dputs( 5 ){ "Loaded #{@data.inspect} for #{self.name}" }
     }
+    migrate
   end
 
   def save

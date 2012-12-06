@@ -206,6 +206,7 @@ require 'gettext/tools/rmsgfmt'
 require 'gettext/tools/rmsgmerge'
 require 'gettext/tools/rgettext'
 require 'Helpers/QooxParser'
+require 'Helpers/MigrationVersion'
 
 module QooxView
   def self.do_opts( dir_entities, dir_views )
