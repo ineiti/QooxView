@@ -4,9 +4,7 @@ Cash-interface.
 =end
 
 # TODO:
-# - make some error-handling if no connection or if the account doesn't exist
-# - port this over as a StorageType
-# - make some caching for relevant attributes
+# - Move this to Gestion::Entities::Persons
 
 require 'net/http'
 

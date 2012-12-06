@@ -14,11 +14,15 @@ Permission.add( 'secretary', 'PersonModify', 'professor' )
 
 qooxView = QooxView.init( 'entities', 'views' )
 
-require 'qv_entity'
-require 'qv_permission'
-require 'qv_view'
-require 'qv_stype'
-require 'qv_session'
-require 'qv_sqlite'
-require 'qv_gettext'
-require 'qv_helpers'
+if false
+  require 'qv_entity'
+  require 'qv_permission'
+  require 'qv_view'
+  require 'qv_stype'
+  require 'qv_session'
+  require 'qv_sqlite'
+  require 'qv_gettext'
+  require 'qv_helpers'
+else
+  require 'qv_migration'
+end

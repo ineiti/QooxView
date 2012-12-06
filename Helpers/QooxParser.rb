@@ -17,7 +17,7 @@ module QooxParser
       f.readlines.each{|l|
         line += 1
         if l =~ /^\s*value_[^\s]+\s+[^=]/ or l =~ /^\s*show_[^\s]+\s+[^=]/ or
-          l =~ /^\s*vtlp_list\s+[^=]/
+            l =~ /^\s*vtlp_list\s+[^=]/
           case l
           when /(value_block|show_block)/
           when /show_button/
@@ -30,11 +30,11 @@ module QooxParser
               ary << po
             }
           else
-          po = PoMessage.new(:normal)
-          po.msgid = l.sub( /^[^:]*:/, '' ).sub( /,.*/, '' ).chop
-          po.sources = "#{file}:#{line}"
-          po.add_comment( "Comes from file #{file} and line is #{l}" )
-          ary << po
+            po = PoMessage.new(:normal)
+            po.msgid = l.sub( /^[^:]*:/, '' ).sub( /,.*/, '' ).chop
+            po.sources = "#{file}:#{line}"
+            po.add_comment( "Comes from file #{file} and line is #{l}" )
+            ary << po
           end
         elsif l =~ /<\s*View\s*$/
           po = PoMessage.new(:normal)
