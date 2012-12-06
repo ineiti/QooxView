@@ -4,6 +4,7 @@ class Welcome < View
     gui_hbox :nogroup do
       show_str :username
       show_pass :password
+      show_str_ro :version
       show_button :login
       
       gui_window :login_failed do

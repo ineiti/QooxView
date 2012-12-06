@@ -94,7 +94,7 @@ function setValueListCommon(values, list){
         }
       }
     }
-    if (item) {
+    if (item && ( ! list.nopreselect ) ) {
       selection.push(item);
       dbg(5, "Found a selection: " + val);
     }
@@ -517,6 +517,9 @@ qx.Class.define("frontend.Lib.Fields", {
             field_element.setAllowStretchX(true);
             field_element.setAllowGrowY(true);
             field_element.setAllowStretchY(true);
+            if ( params.nopreselect ){
+              field_element.nopreselect = true
+            }
           }
           else {
             field_element = new qx.ui.form.SelectBox();
