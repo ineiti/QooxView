@@ -374,13 +374,15 @@ class Entity
     @proxy.data[@id]
   end
 
-  def data_get( field )
+  def data_get( field, raw = false )
     ret = [field].flatten.collect{|f|
       e = @proxy.get_entry( @id, f.to_s )
-      v = @proxy.get_value( f )
-      if e and v and v.dtype == "entity"
-        dputs( 5 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
-        e = v.eclass.get_data_instance( e )
+      if not raw
+        v = @proxy.get_value( f )
+        if e and v and v.dtype == "entity"
+          dputs( 5 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
+          e = v.eclass.get_data_instance( e )
+        end
       end
       e
     }

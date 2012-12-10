@@ -52,6 +52,14 @@ class RPCQooxdooService
         end
       }
     }
+    # And now do eventual migrations on everybody
+    @@services_hash.each_pair{|k,v|
+      if k =~ /^Entities/
+        ddputs( 4 ){ "Migration of #{k}" }
+        v.migrate
+      end
+    }
+
     @@is_instance = true
   end
   

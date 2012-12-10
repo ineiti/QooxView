@@ -298,11 +298,10 @@ module StorageHandler
   def load
     @data = {}
     @storage.each{|k,di|
-      dputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
+      ddputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
       dputs( 5 ){ "Loaded #{@data.inspect} for #{self.name}" }
     }
-    migrate
   end
 
   def save
