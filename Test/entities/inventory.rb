@@ -1,4 +1,4 @@
-class Inventories < Entities
+class CVSInventories < Entities
   def setup_data
     value_date :date
     value_str :iname

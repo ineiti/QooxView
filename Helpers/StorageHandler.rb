@@ -125,12 +125,22 @@ module StorageHandler
     }
     return result
   end
-	
-  # Like search_by, but only exact matches
+
+  # Like search_by, but only ONE exact matche
   def match_by( field, value )
     ret = search_by( field, "^#{value}$" )
     if ret.length > 0
       return ret[0]
+    else
+      return nil
+    end
+  end
+  
+  # Like search_by, but only exact matcheS
+  def matches_by( field, value )
+    ret = search_by( field, "^#{value}$" )
+    if ret.length > 0
+      return ret
     else
       return nil
     end
