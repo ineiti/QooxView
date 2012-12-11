@@ -194,42 +194,42 @@ qx.Class.define("frontend.Lib.Fields", {
   extend: qx.ui.container.Composite,
     
   /*
-     * Constructor of Lib.Fields
-     * Takes:
-     * - p : parameters to pass to the form, may be empty
-     *  - NOTINUSE: rpc: method to call for the RPC-server whenever a request has to be made,
-     *   may also be "" to show only a local form (like login and stuff)
-     *  - write: groups that have the right to write in these fields, defaults
-     *    to "all"
-     *  - callback: function to call in case something has changed. This is an
-     *     array of [ this, this.callback_function ], so that the appropriate
-     *     environment can be recreated.
-     * - f : array of fields to offer to the user. The syntax is:
-     *     type:name:[label][:params]
-     *     where type is one of the following, name is used for the array in
-     *     "fields", label is shown where appliable, if empty is copied from
-     *     name, params is used for some special fields
-     *  - id_text: the id-field for this block, of type text
-     *  - id_dropdown: the id-field for this block, of type dropdown
-     *  - id_hidden: the id-field for this block, of type hidden
-     *  - text: a single line of text
-     *  - date: gets a date
-     *  - tel: holds a telephone-number
-     *  - select: takes a list of arguments to chose from, may include a comma-
-     *    seperated list of values
-     *  - button: shows a button
-     *  - composite: offers a Composite-widget, to be filled in later
-     *  - hidden: stores information but doesn't display
-     *
-     * Does:
-     * - id-lookup: whenever the id-field is changed, it calls the RPC-method
-     *  to get the data of the according id-field and fills the fields with that
-     *  data
-     * - changes to fields: if the user has the appropriate rights, all fields
-     *  are changeable. If changes occur, the RPC-method is called with the new
-     *  value for that field.
-     *
-     */
+   * Constructor of Lib.Fields
+   * Takes:
+   * - p : parameters to pass to the form, may be empty
+   *  - NOTINUSE: rpc: method to call for the RPC-server whenever a request has to be made,
+   *   may also be "" to show only a local form (like login and stuff)
+   *  - write: groups that have the right to write in these fields, defaults
+   *    to "all"
+   *  - callback: function to call in case something has changed. This is an
+   *     array of [ this, this.callback_function ], so that the appropriate
+   *     environment can be recreated.
+   * - f : array of fields to offer to the user. The syntax is:
+   *     type:name:[label][:params]
+   *     where type is one of the following, name is used for the array in
+   *     "fields", label is shown where appliable, if empty is copied from
+   *     name, params is used for some special fields
+   *  - id_text: the id-field for this block, of type text
+   *  - id_dropdown: the id-field for this block, of type dropdown
+   *  - id_hidden: the id-field for this block, of type hidden
+   *  - text: a single line of text
+   *  - date: gets a date
+   *  - tel: holds a telephone-number
+   *  - select: takes a list of arguments to chose from, may include a comma-
+   *    seperated list of values
+   *  - button: shows a button
+   *  - composite: offers a Composite-widget, to be filled in later
+   *  - hidden: stores information but doesn't display
+   *
+   * Does:
+   * - id-lookup: whenever the id-field is changed, it calls the RPC-method
+   *  to get the data of the according id-field and fills the fields with that
+   *  data
+   * - changes to fields: if the user has the appropriate rights, all fields
+   *  are changeable. If changes occur, the RPC-method is called with the new
+   *  value for that field.
+   *
+   */
   construct: function(params, fields, rLayout){
     this.base(arguments, this.layout = new qx.ui.layout.VBox(1));
     var ps = ["rpc", "write", "callback"];
@@ -476,8 +476,31 @@ qx.Class.define("frontend.Lib.Fields", {
           do_callback = true;
           listener = "execute";
           field_element = new qx.ui.form.Button(label);
-          field_element.getData = function(){
-          };
+          field_element.getData = function(){};
+          field_element.setAllowGrowY( false );
+          show_label = false;
+          if (!this.first_button || params.def) {
+            this.first_button = field_element;
+          }
+          break;
+        case "split_button":
+          do_callback = true;
+          listener = "execute";
+          field_element = new qx.ui.form.SplitButton(label);
+
+          var menu = new qx.ui.menu.Menu;
+          for( var i=0; i<params.menu.length; i++ ){
+            var n = params.menu[i]
+            var b = new qx.ui.menu.Button(n);
+            b.addListener("execute", function(e){
+              field_element.fireDataEvent("execute", this.getLabel() )
+            }, b )
+            menu.add( b );
+          //var m = new qx.ui.menu.Button("a:" + i);
+          //menu.add( m );
+          }
+          field_element.setMenu( menu );
+          field_element.getData = function(){};
           field_element.setAllowGrowY( false );
           show_label = false;
           if (!this.first_button || params.def) {
@@ -634,42 +657,48 @@ qx.Class.define("frontend.Lib.Fields", {
         // Add a handler for automatically reporting changing values
         if (listener/* && this.rpc */ && this.callback && do_callback) {
           dbg(4, "Adding listener: " + type + ":" + name + ":");
-          field_element.addListener(listener, function(e){
-            // Supposing Javascript has only one executable thread!
-            if (!this.updating || (delay > 0 && this.delayTimer)) {
-              dbg(5, "Listener: " + type + ":" + name + ":" + this.field_id);
-              this.updating = true;
+          if ( typeof( listener ) === "string" ){
+            listener = [listener]
+          }
+          for ( var l=0; l<listener.length; l++ ){
+            field_element.addListener(listener[l], function(e){
+              //alert( "Listener " + name + ":" + e )
+              // Supposing Javascript has only one executable thread!
+              if (!this.updating || (delay > 0 && this.delayTimer)) {
+                dbg(5, "Listener: " + type + ":" + name + ":" + this.field_id);
+                this.updating = true;
                             
-              var id = null;
-              if (this.field_id) {
-                this.fields[this.field_id].getValue();
-              }
+                var id = null;
+                if (this.field_id) {
+                  this.fields[this.field_id].getValue();
+                }
                             
-              // Some elements don't have any data (like buttons)
-              var data = e.getData ? e.getData() : "";
-              // Have a delay for some actions that might take time
-              if (delay == 0) {
-                dbg( 3, "Callback is " + print_a( this.callback ) )
-                this.callback[1].call(this.callback[0], [id, name, type, data, params])
+                // Some elements don't have any data (like buttons)
+                var data = e.getData ? e.getData() : "";
+                // Have a delay for some actions that might take time
+                if (delay == 0) {
+                  dbg( 3, "Callback is " + print_a( this.callback ) )
+                  this.callback[1].call(this.callback[0], [id, name, type, data, params])
+                }
+                else {
+                  if (this.delayTimer) {
+                    dbg(4, "Stopping timer");
+                    this.timer.stop(this.delayTimer);
+                    this.delayTimer = null;
+                  }
+                  dbg(4, "Adding new timer");
+                  this.delayTimer = this.timer.start(function(userData, timerId){
+                    dbg(3, "timer for delay")
+                    this.callback[1].call(this.callback[0], [id, name, type, data, params])
+                  }, 0, this, null, delay);
+                }
               }
               else {
-                if (this.delayTimer) {
-                  dbg(4, "Stopping timer");
-                  this.timer.stop(this.delayTimer);
-                  this.delayTimer = null;
-                }
-                dbg(4, "Adding new timer");
-                this.delayTimer = this.timer.start(function(userData, timerId){
-                  dbg(3, "timer for delay")
-                  this.callback[1].call(this.callback[0], [id, name, type, data, params])
-                }, 0, this, null, delay);
+                dbg(3, "Can't call listener while he's working!");
               }
-            }
-            else {
-              dbg(3, "Can't call listener while he's working!");
-            }
-          }, this);
-          dbg(5, "Finished adding listener")
+            }, this);
+            dbg(5, "Finished adding listener " + listener[l])
+          }
         }
       }
       return field_element;
@@ -840,7 +869,7 @@ qx.Class.define("frontend.Lib.Fields", {
       this.focus_if_ok( win.first_field )
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;
-      //this.windows_fade_to( 1 );
+    //this.windows_fade_to( 1 );
     },
     
     window_fade_to: function( win, target ){

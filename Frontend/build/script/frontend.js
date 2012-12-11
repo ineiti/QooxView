@@ -29,7 +29,7 @@ qx.$$loader = {
   parts : {"boot":[0]},
   uris : [["__out__:frontend.js"]],
   urisBefore : [],
-  packageHashes : {"0":"8a827c56bd46"},
+  packageHashes : {"0":"563f5ccb951c"},
   boot : "boot",
   closureParts : {},
   bootIsInline : true,
@@ -172,7 +172,7 @@ qx.$$loader.initUris = function(){
 }
 })();
 
-qx.$$packageData['8a827c56bd46']={"locales":{"C":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"},"en":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"}},"resources":{"qx/decoration/Modern/app-header.png":[110,20,"png","qx"],"qx/decoration/Modern/arrows-combined.png":[87,8,"png","qx"],"qx/decoration/Modern/arrows/down-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-74,0],"qx/decoration/Modern/arrows/down-small-invert.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-69,0],"qx/decoration/Modern/arrows/down-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-49,0],"qx/decoration/Modern/arrows/down.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-20,0],"qx/decoration/Modern/arrows/forward.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-59,0],"qx/decoration/Modern/arrows/left-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",0,0],"qx/decoration/Modern/arrows/left.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-44,0],"qx/decoration/Modern/arrows/rewind.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-10,0],"qx/decoration/Modern/arrows/right-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-5,0],"qx/decoration/Modern/arrows/right.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-54,0],"qx/decoration/Modern/arrows/up-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-28,0],"qx/decoration/Modern/arrows/up-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-82,0],"qx/decoration/Modern/arrows/up.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-36,0],"qx/decoration/Modern/button-lr-combined.png":[72,52,"png","qx"],"qx/decoration/Modern/button-tb-combined.png":[4,216,"png","qx"],"qx/decoration/Modern/checkradio-combined.png":[504,14,"png","qx"],"qx/decoration/Modern/colorselector-combined.gif":[46,11,"gif","qx"],"qx/decoration/Modern/colorselector/brightness-field.png":[19,256,"png","qx"],"qx/decoration/Modern/colorselector/brightness-handle.gif":[35,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",0,0],"qx/decoration/Modern/colorselector/huesaturation-field.jpg":[256,256,"jpeg","qx"],"qx/decoration/Modern/colorselector/huesaturation-handle.gif":[11,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",-35,0],"qx/decoration/Modern/cursors-combined.gif":[71,20,"gif","qx"],"qx/decoration/Modern/cursors/alias.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-52,0],"qx/decoration/Modern/cursors/copy.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-33,0],"qx/decoration/Modern/cursors/move.gif":[13,9,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-20,0],"qx/decoration/Modern/cursors/nodrop.gif":[20,20,"gif","qx","qx/decoration/Modern/cursors-combined.gif",0,0],"qx/decoration/Modern/form/button-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-72],"qx/decoration/Modern/form/button-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-204],"qx/decoration/Modern/form/button-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-188],"qx/decoration/Modern/form/button-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-36],"qx/decoration/Modern/form/button-checked-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-84],"qx/decoration/Modern/form/button-checked-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-184],"qx/decoration/Modern/form/button-checked-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-156],"qx/decoration/Modern/form/button-checked-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-208],"qx/decoration/Modern/form/button-checked-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-160],"qx/decoration/Modern/form/button-checked-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-40,0],"qx/decoration/Modern/form/button-checked-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-32,0],"qx/decoration/Modern/form/button-checked-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-28],"qx/decoration/Modern/form/button-checked-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-24],"qx/decoration/Modern/form/button-checked-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-48],"qx/decoration/Modern/form/button-checked-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-checked-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-16,0],"qx/decoration/Modern/form/button-checked-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-60,0],"qx/decoration/Modern/form/button-checked-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-140],"qx/decoration/Modern/form/button-checked-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-56],"qx/decoration/Modern/form/button-checked-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-112],"qx/decoration/Modern/form/button-checked.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-disabled-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-40],"qx/decoration/Modern/form/button-disabled-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-136],"qx/decoration/Modern/form/button-disabled-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-16],"qx/decoration/Modern/form/button-disabled-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-disabled-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-68,0],"qx/decoration/Modern/form/button-disabled-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-4,0],"qx/decoration/Modern/form/button-disabled-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-116],"qx/decoration/Modern/form/button-disabled-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-168],"qx/decoration/Modern/form/button-disabled-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-60],"qx/decoration/Modern/form/button-disabled.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-68],"qx/decoration/Modern/form/button-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-144],"qx/decoration/Modern/form/button-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-8],"qx/decoration/Modern/form/button-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-24,0],"qx/decoration/Modern/form/button-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-44,0],"qx/decoration/Modern/form/button-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-192],"qx/decoration/Modern/form/button-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-148],"qx/decoration/Modern/form/button-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-104],"qx/decoration/Modern/form/button-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-hovered-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-108],"qx/decoration/Modern/form/button-hovered-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-32],"qx/decoration/Modern/form/button-hovered-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-128],"qx/decoration/Modern/form/button-hovered-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-hovered-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-20,0],"qx/decoration/Modern/form/button-hovered-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-48,0],"qx/decoration/Modern/form/button-hovered-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-44],"qx/decoration/Modern/form/button-hovered-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-76],"qx/decoration/Modern/form/button-hovered-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-88],"qx/decoration/Modern/form/button-hovered.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-56,0],"qx/decoration/Modern/form/button-preselected-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-124],"qx/decoration/Modern/form/button-preselected-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-176],"qx/decoration/Modern/form/button-preselected-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-200],"qx/decoration/Modern/form/button-preselected-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,0],"qx/decoration/Modern/form/button-preselected-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-4],"qx/decoration/Modern/form/button-preselected-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-152],"qx/decoration/Modern/form/button-preselected-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-28,0],"qx/decoration/Modern/form/button-preselected-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-36,0],"qx/decoration/Modern/form/button-preselected-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-196],"qx/decoration/Modern/form/button-preselected-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-164],"qx/decoration/Modern/form/button-preselected-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-212],"qx/decoration/Modern/form/button-preselected-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-preselected-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-8,0],"qx/decoration/Modern/form/button-preselected-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-64,0],"qx/decoration/Modern/form/button-preselected-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-96],"qx/decoration/Modern/form/button-preselected-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-80],"qx/decoration/Modern/form/button-preselected-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-132],"qx/decoration/Modern/form/button-preselected.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-pressed-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-12],"qx/decoration/Modern/form/button-pressed-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-52],"qx/decoration/Modern/form/button-pressed-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-20],"qx/decoration/Modern/form/button-pressed-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-pressed-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-52,0],"qx/decoration/Modern/form/button-pressed-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-12,0],"qx/decoration/Modern/form/button-pressed-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-100],"qx/decoration/Modern/form/button-pressed-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-172],"qx/decoration/Modern/form/button-pressed-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-64],"qx/decoration/Modern/form/button-pressed.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",0,0],"qx/decoration/Modern/form/button-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-92],"qx/decoration/Modern/form/button-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-120],"qx/decoration/Modern/form/button-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-180],"qx/decoration/Modern/form/button.png":[80,60,"png","qx"],"qx/decoration/Modern/form/checkbox-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-126,0],"qx/decoration/Modern/form/checkbox-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-322,0],"qx/decoration/Modern/form/checkbox-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-294,0],"qx/decoration/Modern/form/checkbox-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-364,0],"qx/decoration/Modern/form/checkbox-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-490,0],"qx/decoration/Modern/form/checkbox-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-224,0],"qx/decoration/Modern/form/checkbox-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-378,0],"qx/decoration/Modern/form/checkbox-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-84,0],"qx/decoration/Modern/form/checkbox-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-182,0],"qx/decoration/Modern/form/checkbox-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-42,0],"qx/decoration/Modern/form/checkbox-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-392,0],"qx/decoration/Modern/form/checkbox-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-210,0],"qx/decoration/Modern/form/checkbox-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-14,0],"qx/decoration/Modern/form/checkbox-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-238,0],"qx/decoration/Modern/form/checkbox-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-462,0],"qx/decoration/Modern/form/checkbox-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-112,0],"qx/decoration/Modern/form/checkbox-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-448,0],"qx/decoration/Modern/form/checkbox-undetermined-disabled.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-140,0],"qx/decoration/Modern/form/checked-disabled.png":[6,6,"png","qx"],"qx/decoration/Modern/form/checked.png":[6,6,"png","qx"],"qx/decoration/Modern/form/input-focused.png":[40,12,"png","qx"],"qx/decoration/Modern/form/input.png":[84,12,"png","qx"],"qx/decoration/Modern/form/radiobutton-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-196,0],"qx/decoration/Modern/form/radiobutton-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-168,0],"qx/decoration/Modern/form/radiobutton-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-98,0],"qx/decoration/Modern/form/radiobutton-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-308,0],"qx/decoration/Modern/form/radiobutton-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-406,0],"qx/decoration/Modern/form/radiobutton-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-28,0],"qx/decoration/Modern/form/radiobutton-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-350,0],"qx/decoration/Modern/form/radiobutton-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-266,0],"qx/decoration/Modern/form/radiobutton-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-252,0],"qx/decoration/Modern/form/radiobutton-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-336,0],"qx/decoration/Modern/form/radiobutton-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-476,0],"qx/decoration/Modern/form/radiobutton-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-420,0],"qx/decoration/Modern/form/radiobutton-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-56,0],"qx/decoration/Modern/form/radiobutton-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",0,0],"qx/decoration/Modern/form/radiobutton-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-154,0],"qx/decoration/Modern/form/radiobutton-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-434,0],"qx/decoration/Modern/form/radiobutton-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-280,0],"qx/decoration/Modern/form/radiobutton.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-70,0],"qx/decoration/Modern/form/tooltip-error-arrow.png":[11,14,"png","qx"],"qx/decoration/Modern/form/tooltip-error-b.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-30],"qx/decoration/Modern/form/tooltip-error-bl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-24],"qx/decoration/Modern/form/tooltip-error-br.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-c.png":[40,18,"png","qx"],"qx/decoration/Modern/form/tooltip-error-l.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",-6,0],"qx/decoration/Modern/form/tooltip-error-r.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-t.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-6],"qx/decoration/Modern/form/tooltip-error-tl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-18],"qx/decoration/Modern/form/tooltip-error-tr.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-12],"qx/decoration/Modern/form/tooltip-error.png":[127,30,"png","qx"],"qx/decoration/Modern/form/undetermined-disabled.png":[6,2,"png","qx"],"qx/decoration/Modern/form/undetermined.png":[6,2,"png","qx"],"qx/decoration/Modern/group-item.png":[110,20,"png","qx"],"qx/decoration/Modern/groupbox-lr-combined.png":[8,51,"png","qx"],"qx/decoration/Modern/groupbox-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-b.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-12],"qx/decoration/Modern/groupbox/groupbox-bl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-16],"qx/decoration/Modern/groupbox/groupbox-br.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-8],"qx/decoration/Modern/groupbox/groupbox-c.png":[40,51,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-l.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",-4,0],"qx/decoration/Modern/groupbox/groupbox-r.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-t.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-4],"qx/decoration/Modern/groupbox/groupbox-tl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-tr.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-20],"qx/decoration/Modern/groupbox/groupbox.png":[255,59,"png","qx"],"qx/decoration/Modern/menu-background-combined.png":[80,49,"png","qx"],"qx/decoration/Modern/menu-checkradio-combined.gif":[64,7,"gif","qx"],"qx/decoration/Modern/menu/background.png":[40,49,"png","qx","qx/decoration/Modern/menu-background-combined.png",-40,0],"qx/decoration/Modern/menu/bar-background.png":[40,20,"png","qx","qx/decoration/Modern/menu-background-combined.png",0,0],"qx/decoration/Modern/menu/checkbox-invert.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-16,0],"qx/decoration/Modern/menu/checkbox.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-48,0],"qx/decoration/Modern/menu/radiobutton-invert.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-32,0],"qx/decoration/Modern/menu/radiobutton.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",0,0],"qx/decoration/Modern/pane-lr-combined.png":[12,238,"png","qx"],"qx/decoration/Modern/pane-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/pane/pane-b.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-30],"qx/decoration/Modern/pane/pane-bl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-18],"qx/decoration/Modern/pane/pane-br.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-12],"qx/decoration/Modern/pane/pane-c.png":[40,238,"png","qx"],"qx/decoration/Modern/pane/pane-l.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",0,0],"qx/decoration/Modern/pane/pane-r.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",-6,0],"qx/decoration/Modern/pane/pane-t.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,0],"qx/decoration/Modern/pane/pane-tl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-24],"qx/decoration/Modern/pane/pane-tr.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-6],"qx/decoration/Modern/pane/pane.png":[185,250,"png","qx"],"qx/decoration/Modern/scrollbar-combined.png":[54,12,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-horizontal.png":[76,15,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-horizontal.png":[19,10,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-vertical.png":[10,19,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-vertical.png":[15,76,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-horizontal.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-34,0],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-vertical.png":[10,12,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-6,0],"qx/decoration/Modern/scrollbar/scrollbar-down.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-28,0],"qx/decoration/Modern/scrollbar/scrollbar-left.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-50,0],"qx/decoration/Modern/scrollbar/scrollbar-right.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-46,0],"qx/decoration/Modern/scrollbar/scrollbar-up.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",0,0],"qx/decoration/Modern/scrollbar/slider-knob-background.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-16,0],"qx/decoration/Modern/selection.png":[110,20,"png","qx"],"qx/decoration/Modern/shadow-lr-combined.png":[30,382,"png","qx"],"qx/decoration/Modern/shadow-small-lr-combined.png":[10,136,"png","qx"],"qx/decoration/Modern/shadow-small-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/shadow-tb-combined.png":[15,90,"png","qx"],"qx/decoration/Modern/shadow/shadow-b.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-30],"qx/decoration/Modern/shadow/shadow-bl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-br.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-45],"qx/decoration/Modern/shadow/shadow-c.png":[40,382,"png","qx"],"qx/decoration/Modern/shadow/shadow-l.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-r.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",-15,0],"qx/decoration/Modern/shadow/shadow-small-b.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-20],"qx/decoration/Modern/shadow/shadow-small-bl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-small-br.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-10],"qx/decoration/Modern/shadow/shadow-small-c.png":[40,136,"png","qx"],"qx/decoration/Modern/shadow/shadow-small-l.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-r.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",-5,0],"qx/decoration/Modern/shadow/shadow-small-t.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-5],"qx/decoration/Modern/shadow/shadow-small-tl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-tr.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-25],"qx/decoration/Modern/shadow/shadow-small.png":[114,146,"png","qx"],"qx/decoration/Modern/shadow/shadow-t.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-60],"qx/decoration/Modern/shadow/shadow-tl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-75],"qx/decoration/Modern/shadow/shadow-tr.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow.png":[381,412,"png","qx"],"qx/decoration/Modern/splitpane-knobs-combined.png":[8,9,"png","qx"],"qx/decoration/Modern/splitpane/knob-horizontal.png":[1,8,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,-1],"qx/decoration/Modern/splitpane/knob-vertical.png":[8,1,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,0],"qx/decoration/Modern/table-combined.png":[94,18,"png","qx"],"qx/decoration/Modern/table/ascending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",0,0],"qx/decoration/Modern/table/boolean-false.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-80,0],"qx/decoration/Modern/table/boolean-true.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-26,0],"qx/decoration/Modern/table/descending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",-18,0],"qx/decoration/Modern/table/header-cell.png":[40,18,"png","qx","qx/decoration/Modern/table-combined.png",-40,0],"qx/decoration/Modern/table/select-column-order.png":[10,9,"png","qx","qx/decoration/Modern/table-combined.png",-8,0],"qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png":[10,14,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-lr-combined.png":[10,12,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-pane-lr-combined.png":[60,2,"png","qx"],"qx/decoration/Modern/tabview-pane-tb-combined.png":[30,180,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-bottom-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-bottom-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-bottom-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-l.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-r.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-bottom-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-bottom-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active.png":[49,24,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-left-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-left-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-left-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-left-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-left-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-left-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-right-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-right-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-right-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-right-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-right-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-right-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-top-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-top-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-top-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-l.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-r.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-top-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-top-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-top-active.png":[48,22,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-b.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-60],"qx/decoration/Modern/tabview/tabview-pane-bl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-br.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-120],"qx/decoration/Modern/tabview/tabview-pane-c.png":[40,120,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-l.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-r.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",-30,0],"qx/decoration/Modern/tabview/tabview-pane-t.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-150],"qx/decoration/Modern/tabview/tabview-pane-tl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-30],"qx/decoration/Modern/tabview/tabview-pane-tr.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-90],"qx/decoration/Modern/tabview/tabview-pane.png":[185,250,"png","qx"],"qx/decoration/Modern/toolbar-combined.png":[80,130,"png","qx"],"qx/decoration/Modern/toolbar/toolbar-gradient-blue.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",-40,0],"qx/decoration/Modern/toolbar/toolbar-gradient.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",0,0],"qx/decoration/Modern/toolbar/toolbar-handle-knob.gif":[1,8,"gif","qx"],"qx/decoration/Modern/toolbar/toolbar-part.gif":[7,1,"gif","qx"],"qx/decoration/Modern/tooltip-error-lr-combined.png":[12,18,"png","qx"],"qx/decoration/Modern/tooltip-error-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/tree-combined.png":[32,8,"png","qx"],"qx/decoration/Modern/tree/closed-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-24,0],"qx/decoration/Modern/tree/closed.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-16,0],"qx/decoration/Modern/tree/open-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-8,0],"qx/decoration/Modern/tree/open.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",0,0],"qx/decoration/Modern/window-captionbar-buttons-combined.png":[108,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-active-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-inactive-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-active-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-inactive-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-statusbar-lr-combined.png":[8,7,"png","qx"],"qx/decoration/Modern/window-statusbar-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/window/captionbar-active-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-active-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-active-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-active-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-active-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-active-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-active-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-active.png":[69,21,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-inactive-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-inactive-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-inactive-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-inactive-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-inactive-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-inactive.png":[69,21,"png","qx"],"qx/decoration/Modern/window/close-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-27,0],"qx/decoration/Modern/window/close-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-9,0],"qx/decoration/Modern/window/close-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-90,0],"qx/decoration/Modern/window/maximize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-18,0],"qx/decoration/Modern/window/maximize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-81,0],"qx/decoration/Modern/window/maximize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-54,0],"qx/decoration/Modern/window/minimize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-63,0],"qx/decoration/Modern/window/minimize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-72,0],"qx/decoration/Modern/window/minimize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-36,0],"qx/decoration/Modern/window/restore-active-hovered.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",0,0],"qx/decoration/Modern/window/restore-active.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-99,0],"qx/decoration/Modern/window/restore-inactive.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-45,0],"qx/decoration/Modern/window/statusbar-b.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-16],"qx/decoration/Modern/window/statusbar-bl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-20],"qx/decoration/Modern/window/statusbar-br.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-4],"qx/decoration/Modern/window/statusbar-c.png":[40,7,"png","qx"],"qx/decoration/Modern/window/statusbar-l.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",-4,0],"qx/decoration/Modern/window/statusbar-r.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",0,0],"qx/decoration/Modern/window/statusbar-t.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,0],"qx/decoration/Modern/window/statusbar-tl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-8],"qx/decoration/Modern/window/statusbar-tr.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-12],"qx/decoration/Modern/window/statusbar.png":[369,15,"png","qx"],"qx/icon/Tango/16/actions/dialog-cancel.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/dialog-ok.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/view-refresh.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/window-close.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/office-calendar.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/utilities-color-chooser.png":[16,16,"png","qx"],"qx/icon/Tango/16/mimetypes/office-document.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder-open.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder.png":[16,16,"png","qx"],"qx/icon/Tango/22/mimetypes/office-document.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder-open.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder.png":[22,22,"png","qx"],"qx/icon/Tango/32/mimetypes/office-document.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder-open.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder.png":[32,32,"png","qx"],"qx/static/blank.gif":[1,1,"gif","qx"]},"translations":{"C":{},"en":{}}};
+qx.$$packageData['563f5ccb951c']={"locales":{"C":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"},"en":{"alternateQuotationEnd":"’","alternateQuotationStart":"‘","cldr_am":"AM","cldr_date_format_full":"EEEE, MMMM d, y","cldr_date_format_long":"MMMM d, y","cldr_date_format_medium":"MMM d, y","cldr_date_format_short":"M/d/yy","cldr_date_time_format_EEEd":"d EEE","cldr_date_time_format_Hm":"HH:mm","cldr_date_time_format_Hms":"HH:mm:ss","cldr_date_time_format_M":"L","cldr_date_time_format_MEd":"E, M/d","cldr_date_time_format_MMM":"LLL","cldr_date_time_format_MMMEd":"E, MMM d","cldr_date_time_format_MMMd":"MMM d","cldr_date_time_format_Md":"M/d","cldr_date_time_format_d":"d","cldr_date_time_format_hm":"h:mm a","cldr_date_time_format_hms":"h:mm:ss a","cldr_date_time_format_ms":"mm:ss","cldr_date_time_format_y":"y","cldr_date_time_format_yM":"M/y","cldr_date_time_format_yMEd":"EEE, M/d/y","cldr_date_time_format_yMMM":"MMM y","cldr_date_time_format_yMMMEd":"EEE, MMM d, y","cldr_date_time_format_yQ":"Q y","cldr_date_time_format_yQQQ":"QQQ y","cldr_day_format_abbreviated_fri":"Fri","cldr_day_format_abbreviated_mon":"Mon","cldr_day_format_abbreviated_sat":"Sat","cldr_day_format_abbreviated_sun":"Sun","cldr_day_format_abbreviated_thu":"Thu","cldr_day_format_abbreviated_tue":"Tue","cldr_day_format_abbreviated_wed":"Wed","cldr_day_format_wide_fri":"Friday","cldr_day_format_wide_mon":"Monday","cldr_day_format_wide_sat":"Saturday","cldr_day_format_wide_sun":"Sunday","cldr_day_format_wide_thu":"Thursday","cldr_day_format_wide_tue":"Tuesday","cldr_day_format_wide_wed":"Wednesday","cldr_day_stand-alone_narrow_fri":"F","cldr_day_stand-alone_narrow_mon":"M","cldr_day_stand-alone_narrow_sat":"S","cldr_day_stand-alone_narrow_sun":"S","cldr_day_stand-alone_narrow_thu":"T","cldr_day_stand-alone_narrow_tue":"T","cldr_day_stand-alone_narrow_wed":"W","cldr_month_format_abbreviated_1":"Jan","cldr_month_format_abbreviated_10":"Oct","cldr_month_format_abbreviated_11":"Nov","cldr_month_format_abbreviated_12":"Dec","cldr_month_format_abbreviated_2":"Feb","cldr_month_format_abbreviated_3":"Mar","cldr_month_format_abbreviated_4":"Apr","cldr_month_format_abbreviated_5":"May","cldr_month_format_abbreviated_6":"Jun","cldr_month_format_abbreviated_7":"Jul","cldr_month_format_abbreviated_8":"Aug","cldr_month_format_abbreviated_9":"Sep","cldr_month_format_wide_1":"January","cldr_month_format_wide_10":"October","cldr_month_format_wide_11":"November","cldr_month_format_wide_12":"December","cldr_month_format_wide_2":"February","cldr_month_format_wide_3":"March","cldr_month_format_wide_4":"April","cldr_month_format_wide_5":"May","cldr_month_format_wide_6":"June","cldr_month_format_wide_7":"July","cldr_month_format_wide_8":"August","cldr_month_format_wide_9":"September","cldr_month_stand-alone_narrow_1":"J","cldr_month_stand-alone_narrow_10":"O","cldr_month_stand-alone_narrow_11":"N","cldr_month_stand-alone_narrow_12":"D","cldr_month_stand-alone_narrow_2":"F","cldr_month_stand-alone_narrow_3":"M","cldr_month_stand-alone_narrow_4":"A","cldr_month_stand-alone_narrow_5":"M","cldr_month_stand-alone_narrow_6":"J","cldr_month_stand-alone_narrow_7":"J","cldr_month_stand-alone_narrow_8":"A","cldr_month_stand-alone_narrow_9":"S","cldr_number_decimal_separator":".","cldr_number_group_separator":",","cldr_number_percent_format":"#,##0%","cldr_pm":"PM","cldr_time_format_full":"h:mm:ss a zzzz","cldr_time_format_long":"h:mm:ss a z","cldr_time_format_medium":"h:mm:ss a","cldr_time_format_short":"h:mm a","day":"Day","dayperiod":"AM/PM","era":"Era","hour":"Hour","minute":"Minute","month":"Month","quotationEnd":"”","quotationStart":"“","second":"Second","week":"Week","weekday":"Day of the Week","year":"Year","zone":"Zone"}},"resources":{"qx/decoration/Modern/app-header.png":[110,20,"png","qx"],"qx/decoration/Modern/arrows-combined.png":[87,8,"png","qx"],"qx/decoration/Modern/arrows/down-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-74,0],"qx/decoration/Modern/arrows/down-small-invert.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-69,0],"qx/decoration/Modern/arrows/down-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-49,0],"qx/decoration/Modern/arrows/down.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-20,0],"qx/decoration/Modern/arrows/forward.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-59,0],"qx/decoration/Modern/arrows/left-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",0,0],"qx/decoration/Modern/arrows/left.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-44,0],"qx/decoration/Modern/arrows/rewind.png":[10,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-10,0],"qx/decoration/Modern/arrows/right-invert.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-5,0],"qx/decoration/Modern/arrows/right.png":[5,8,"png","qx","qx/decoration/Modern/arrows-combined.png",-54,0],"qx/decoration/Modern/arrows/up-invert.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-28,0],"qx/decoration/Modern/arrows/up-small.png":[5,3,"png","qx","qx/decoration/Modern/arrows-combined.png",-82,0],"qx/decoration/Modern/arrows/up.png":[8,5,"png","qx","qx/decoration/Modern/arrows-combined.png",-36,0],"qx/decoration/Modern/button-lr-combined.png":[72,52,"png","qx"],"qx/decoration/Modern/button-tb-combined.png":[4,216,"png","qx"],"qx/decoration/Modern/checkradio-combined.png":[504,14,"png","qx"],"qx/decoration/Modern/colorselector-combined.gif":[46,11,"gif","qx"],"qx/decoration/Modern/colorselector/brightness-field.png":[19,256,"png","qx"],"qx/decoration/Modern/colorselector/brightness-handle.gif":[35,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",0,0],"qx/decoration/Modern/colorselector/huesaturation-field.jpg":[256,256,"jpeg","qx"],"qx/decoration/Modern/colorselector/huesaturation-handle.gif":[11,11,"gif","qx","qx/decoration/Modern/colorselector-combined.gif",-35,0],"qx/decoration/Modern/cursors-combined.gif":[71,20,"gif","qx"],"qx/decoration/Modern/cursors/alias.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-52,0],"qx/decoration/Modern/cursors/copy.gif":[19,15,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-33,0],"qx/decoration/Modern/cursors/move.gif":[13,9,"gif","qx","qx/decoration/Modern/cursors-combined.gif",-20,0],"qx/decoration/Modern/cursors/nodrop.gif":[20,20,"gif","qx","qx/decoration/Modern/cursors-combined.gif",0,0],"qx/decoration/Modern/form/button-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-72],"qx/decoration/Modern/form/button-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-204],"qx/decoration/Modern/form/button-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-188],"qx/decoration/Modern/form/button-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-36],"qx/decoration/Modern/form/button-checked-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-84],"qx/decoration/Modern/form/button-checked-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-184],"qx/decoration/Modern/form/button-checked-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-156],"qx/decoration/Modern/form/button-checked-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-208],"qx/decoration/Modern/form/button-checked-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-160],"qx/decoration/Modern/form/button-checked-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-checked-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-40,0],"qx/decoration/Modern/form/button-checked-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-32,0],"qx/decoration/Modern/form/button-checked-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-28],"qx/decoration/Modern/form/button-checked-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-24],"qx/decoration/Modern/form/button-checked-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-48],"qx/decoration/Modern/form/button-checked-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-checked-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-16,0],"qx/decoration/Modern/form/button-checked-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-60,0],"qx/decoration/Modern/form/button-checked-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-140],"qx/decoration/Modern/form/button-checked-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-56],"qx/decoration/Modern/form/button-checked-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-112],"qx/decoration/Modern/form/button-checked.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-disabled-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-40],"qx/decoration/Modern/form/button-disabled-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-136],"qx/decoration/Modern/form/button-disabled-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-16],"qx/decoration/Modern/form/button-disabled-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-disabled-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-68,0],"qx/decoration/Modern/form/button-disabled-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-4,0],"qx/decoration/Modern/form/button-disabled-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-116],"qx/decoration/Modern/form/button-disabled-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-168],"qx/decoration/Modern/form/button-disabled-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-60],"qx/decoration/Modern/form/button-disabled.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-68],"qx/decoration/Modern/form/button-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-144],"qx/decoration/Modern/form/button-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-8],"qx/decoration/Modern/form/button-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-24,0],"qx/decoration/Modern/form/button-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-44,0],"qx/decoration/Modern/form/button-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-192],"qx/decoration/Modern/form/button-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-148],"qx/decoration/Modern/form/button-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-104],"qx/decoration/Modern/form/button-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-hovered-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-108],"qx/decoration/Modern/form/button-hovered-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-32],"qx/decoration/Modern/form/button-hovered-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-128],"qx/decoration/Modern/form/button-hovered-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-hovered-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-20,0],"qx/decoration/Modern/form/button-hovered-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-48,0],"qx/decoration/Modern/form/button-hovered-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-44],"qx/decoration/Modern/form/button-hovered-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-76],"qx/decoration/Modern/form/button-hovered-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-88],"qx/decoration/Modern/form/button-hovered.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-56,0],"qx/decoration/Modern/form/button-preselected-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-124],"qx/decoration/Modern/form/button-preselected-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-176],"qx/decoration/Modern/form/button-preselected-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-200],"qx/decoration/Modern/form/button-preselected-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,0],"qx/decoration/Modern/form/button-preselected-focused-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-4],"qx/decoration/Modern/form/button-preselected-focused-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-152],"qx/decoration/Modern/form/button-preselected-focused-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-preselected-focused-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-28,0],"qx/decoration/Modern/form/button-preselected-focused-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-36,0],"qx/decoration/Modern/form/button-preselected-focused-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-196],"qx/decoration/Modern/form/button-preselected-focused-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-164],"qx/decoration/Modern/form/button-preselected-focused-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-212],"qx/decoration/Modern/form/button-preselected-focused.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-preselected-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-8,0],"qx/decoration/Modern/form/button-preselected-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-64,0],"qx/decoration/Modern/form/button-preselected-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-96],"qx/decoration/Modern/form/button-preselected-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-80],"qx/decoration/Modern/form/button-preselected-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-132],"qx/decoration/Modern/form/button-preselected.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-pressed-b.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-12],"qx/decoration/Modern/form/button-pressed-bl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-52],"qx/decoration/Modern/form/button-pressed-br.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-20],"qx/decoration/Modern/form/button-pressed-c.png":[40,52,"png","qx"],"qx/decoration/Modern/form/button-pressed-l.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-52,0],"qx/decoration/Modern/form/button-pressed-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",-12,0],"qx/decoration/Modern/form/button-pressed-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-100],"qx/decoration/Modern/form/button-pressed-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-172],"qx/decoration/Modern/form/button-pressed-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-64],"qx/decoration/Modern/form/button-pressed.png":[80,60,"png","qx"],"qx/decoration/Modern/form/button-r.png":[4,52,"png","qx","qx/decoration/Modern/button-lr-combined.png",0,0],"qx/decoration/Modern/form/button-t.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-92],"qx/decoration/Modern/form/button-tl.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-120],"qx/decoration/Modern/form/button-tr.png":[4,4,"png","qx","qx/decoration/Modern/button-tb-combined.png",0,-180],"qx/decoration/Modern/form/button.png":[80,60,"png","qx"],"qx/decoration/Modern/form/checkbox-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-126,0],"qx/decoration/Modern/form/checkbox-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-322,0],"qx/decoration/Modern/form/checkbox-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-294,0],"qx/decoration/Modern/form/checkbox-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-364,0],"qx/decoration/Modern/form/checkbox-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-490,0],"qx/decoration/Modern/form/checkbox-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-224,0],"qx/decoration/Modern/form/checkbox-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-378,0],"qx/decoration/Modern/form/checkbox-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-84,0],"qx/decoration/Modern/form/checkbox-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-182,0],"qx/decoration/Modern/form/checkbox-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-42,0],"qx/decoration/Modern/form/checkbox-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-392,0],"qx/decoration/Modern/form/checkbox-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-210,0],"qx/decoration/Modern/form/checkbox-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-14,0],"qx/decoration/Modern/form/checkbox-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-238,0],"qx/decoration/Modern/form/checkbox-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-462,0],"qx/decoration/Modern/form/checkbox-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-112,0],"qx/decoration/Modern/form/checkbox-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-448,0],"qx/decoration/Modern/form/checkbox-undetermined-disabled.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-focused.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-hovered.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined-invalid.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox-undetermined.png":[14,14,"png","qx"],"qx/decoration/Modern/form/checkbox.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-140,0],"qx/decoration/Modern/form/checked-disabled.png":[6,6,"png","qx"],"qx/decoration/Modern/form/checked.png":[6,6,"png","qx"],"qx/decoration/Modern/form/input-focused.png":[40,12,"png","qx"],"qx/decoration/Modern/form/input.png":[84,12,"png","qx"],"qx/decoration/Modern/form/radiobutton-checked-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-196,0],"qx/decoration/Modern/form/radiobutton-checked-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-168,0],"qx/decoration/Modern/form/radiobutton-checked-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-98,0],"qx/decoration/Modern/form/radiobutton-checked-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-308,0],"qx/decoration/Modern/form/radiobutton-checked-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-406,0],"qx/decoration/Modern/form/radiobutton-checked-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-28,0],"qx/decoration/Modern/form/radiobutton-checked-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-350,0],"qx/decoration/Modern/form/radiobutton-checked-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-266,0],"qx/decoration/Modern/form/radiobutton-checked.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-252,0],"qx/decoration/Modern/form/radiobutton-disabled.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-336,0],"qx/decoration/Modern/form/radiobutton-focused-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-476,0],"qx/decoration/Modern/form/radiobutton-focused.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-420,0],"qx/decoration/Modern/form/radiobutton-hovered-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-56,0],"qx/decoration/Modern/form/radiobutton-hovered.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",0,0],"qx/decoration/Modern/form/radiobutton-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-154,0],"qx/decoration/Modern/form/radiobutton-pressed-invalid.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-434,0],"qx/decoration/Modern/form/radiobutton-pressed.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-280,0],"qx/decoration/Modern/form/radiobutton.png":[14,14,"png","qx","qx/decoration/Modern/checkradio-combined.png",-70,0],"qx/decoration/Modern/form/tooltip-error-arrow.png":[11,14,"png","qx"],"qx/decoration/Modern/form/tooltip-error-b.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-30],"qx/decoration/Modern/form/tooltip-error-bl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-24],"qx/decoration/Modern/form/tooltip-error-br.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-c.png":[40,18,"png","qx"],"qx/decoration/Modern/form/tooltip-error-l.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",-6,0],"qx/decoration/Modern/form/tooltip-error-r.png":[6,18,"png","qx","qx/decoration/Modern/tooltip-error-lr-combined.png",0,0],"qx/decoration/Modern/form/tooltip-error-t.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-6],"qx/decoration/Modern/form/tooltip-error-tl.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-18],"qx/decoration/Modern/form/tooltip-error-tr.png":[6,6,"png","qx","qx/decoration/Modern/tooltip-error-tb-combined.png",0,-12],"qx/decoration/Modern/form/tooltip-error.png":[127,30,"png","qx"],"qx/decoration/Modern/form/undetermined-disabled.png":[6,2,"png","qx"],"qx/decoration/Modern/form/undetermined.png":[6,2,"png","qx"],"qx/decoration/Modern/group-item.png":[110,20,"png","qx"],"qx/decoration/Modern/groupbox-lr-combined.png":[8,51,"png","qx"],"qx/decoration/Modern/groupbox-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-b.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-12],"qx/decoration/Modern/groupbox/groupbox-bl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-16],"qx/decoration/Modern/groupbox/groupbox-br.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-8],"qx/decoration/Modern/groupbox/groupbox-c.png":[40,51,"png","qx"],"qx/decoration/Modern/groupbox/groupbox-l.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",-4,0],"qx/decoration/Modern/groupbox/groupbox-r.png":[4,51,"png","qx","qx/decoration/Modern/groupbox-lr-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-t.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-4],"qx/decoration/Modern/groupbox/groupbox-tl.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,0],"qx/decoration/Modern/groupbox/groupbox-tr.png":[4,4,"png","qx","qx/decoration/Modern/groupbox-tb-combined.png",0,-20],"qx/decoration/Modern/groupbox/groupbox.png":[255,59,"png","qx"],"qx/decoration/Modern/menu-background-combined.png":[80,49,"png","qx"],"qx/decoration/Modern/menu-checkradio-combined.gif":[64,7,"gif","qx"],"qx/decoration/Modern/menu/background.png":[40,49,"png","qx","qx/decoration/Modern/menu-background-combined.png",-40,0],"qx/decoration/Modern/menu/bar-background.png":[40,20,"png","qx","qx/decoration/Modern/menu-background-combined.png",0,0],"qx/decoration/Modern/menu/checkbox-invert.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-16,0],"qx/decoration/Modern/menu/checkbox.gif":[16,7,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-48,0],"qx/decoration/Modern/menu/radiobutton-invert.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",-32,0],"qx/decoration/Modern/menu/radiobutton.gif":[16,5,"gif","qx","qx/decoration/Modern/menu-checkradio-combined.gif",0,0],"qx/decoration/Modern/pane-lr-combined.png":[12,238,"png","qx"],"qx/decoration/Modern/pane-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/pane/pane-b.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-30],"qx/decoration/Modern/pane/pane-bl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-18],"qx/decoration/Modern/pane/pane-br.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-12],"qx/decoration/Modern/pane/pane-c.png":[40,238,"png","qx"],"qx/decoration/Modern/pane/pane-l.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",0,0],"qx/decoration/Modern/pane/pane-r.png":[6,238,"png","qx","qx/decoration/Modern/pane-lr-combined.png",-6,0],"qx/decoration/Modern/pane/pane-t.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,0],"qx/decoration/Modern/pane/pane-tl.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-24],"qx/decoration/Modern/pane/pane-tr.png":[6,6,"png","qx","qx/decoration/Modern/pane-tb-combined.png",0,-6],"qx/decoration/Modern/pane/pane.png":[185,250,"png","qx"],"qx/decoration/Modern/scrollbar-combined.png":[54,12,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-horizontal.png":[76,15,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-horizontal.png":[19,10,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-pressed-vertical.png":[10,19,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-bg-vertical.png":[15,76,"png","qx"],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-horizontal.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-34,0],"qx/decoration/Modern/scrollbar/scrollbar-button-bg-vertical.png":[10,12,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-6,0],"qx/decoration/Modern/scrollbar/scrollbar-down.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-28,0],"qx/decoration/Modern/scrollbar/scrollbar-left.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-50,0],"qx/decoration/Modern/scrollbar/scrollbar-right.png":[4,6,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-46,0],"qx/decoration/Modern/scrollbar/scrollbar-up.png":[6,4,"png","qx","qx/decoration/Modern/scrollbar-combined.png",0,0],"qx/decoration/Modern/scrollbar/slider-knob-background.png":[12,10,"png","qx","qx/decoration/Modern/scrollbar-combined.png",-16,0],"qx/decoration/Modern/selection.png":[110,20,"png","qx"],"qx/decoration/Modern/shadow-lr-combined.png":[30,382,"png","qx"],"qx/decoration/Modern/shadow-small-lr-combined.png":[10,136,"png","qx"],"qx/decoration/Modern/shadow-small-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/shadow-tb-combined.png":[15,90,"png","qx"],"qx/decoration/Modern/shadow/shadow-b.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-30],"qx/decoration/Modern/shadow/shadow-bl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-br.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-45],"qx/decoration/Modern/shadow/shadow-c.png":[40,382,"png","qx"],"qx/decoration/Modern/shadow/shadow-l.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-r.png":[15,382,"png","qx","qx/decoration/Modern/shadow-lr-combined.png",-15,0],"qx/decoration/Modern/shadow/shadow-small-b.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-20],"qx/decoration/Modern/shadow/shadow-small-bl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-15],"qx/decoration/Modern/shadow/shadow-small-br.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-10],"qx/decoration/Modern/shadow/shadow-small-c.png":[40,136,"png","qx"],"qx/decoration/Modern/shadow/shadow-small-l.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-r.png":[5,136,"png","qx","qx/decoration/Modern/shadow-small-lr-combined.png",-5,0],"qx/decoration/Modern/shadow/shadow-small-t.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-5],"qx/decoration/Modern/shadow/shadow-small-tl.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow-small-tr.png":[5,5,"png","qx","qx/decoration/Modern/shadow-small-tb-combined.png",0,-25],"qx/decoration/Modern/shadow/shadow-small.png":[114,146,"png","qx"],"qx/decoration/Modern/shadow/shadow-t.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-60],"qx/decoration/Modern/shadow/shadow-tl.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,-75],"qx/decoration/Modern/shadow/shadow-tr.png":[15,15,"png","qx","qx/decoration/Modern/shadow-tb-combined.png",0,0],"qx/decoration/Modern/shadow/shadow.png":[381,412,"png","qx"],"qx/decoration/Modern/splitpane-knobs-combined.png":[8,9,"png","qx"],"qx/decoration/Modern/splitpane/knob-horizontal.png":[1,8,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,-1],"qx/decoration/Modern/splitpane/knob-vertical.png":[8,1,"png","qx","qx/decoration/Modern/splitpane-knobs-combined.png",0,0],"qx/decoration/Modern/table-combined.png":[94,18,"png","qx"],"qx/decoration/Modern/table/ascending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",0,0],"qx/decoration/Modern/table/boolean-false.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-80,0],"qx/decoration/Modern/table/boolean-true.png":[14,14,"png","qx","qx/decoration/Modern/table-combined.png",-26,0],"qx/decoration/Modern/table/descending.png":[8,5,"png","qx","qx/decoration/Modern/table-combined.png",-18,0],"qx/decoration/Modern/table/header-cell.png":[40,18,"png","qx","qx/decoration/Modern/table-combined.png",-40,0],"qx/decoration/Modern/table/select-column-order.png":[10,9,"png","qx","qx/decoration/Modern/table-combined.png",-8,0],"qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png":[10,14,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-left-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-left-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-lr-combined.png":[10,37,"png","qx"],"qx/decoration/Modern/tabview-button-right-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png":[6,39,"png","qx"],"qx/decoration/Modern/tabview-button-right-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-lr-combined.png":[10,12,"png","qx"],"qx/decoration/Modern/tabview-button-top-active-tb-combined.png":[5,30,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-b-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png":[6,15,"png","qx"],"qx/decoration/Modern/tabview-button-top-inactive-t-combined.png":[3,9,"png","qx"],"qx/decoration/Modern/tabview-pane-lr-combined.png":[60,2,"png","qx"],"qx/decoration/Modern/tabview-pane-tb-combined.png":[30,180,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-bottom-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-bottom-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-bottom-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-active-l.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-r.png":[5,14,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-bottom-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-bottom-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-bottom-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-bottom-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-active.png":[49,24,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-bottom-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-bottom-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-bottom-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-left-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-left-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-left-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-left-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-left-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-left-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-left-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-left-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-left-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-left-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-left-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-left-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-left-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-right-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-right-active-c.png":[40,37,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-active-l.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-active-r.png":[5,37,"png","qx","qx/decoration/Modern/tabview-button-right-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-right-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-right-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-right-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-right-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-right-active.png":[22,47,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive-c.png":[40,39,"png","qx"],"qx/decoration/Modern/tabview/tab-button-right-inactive-l.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-r.png":[3,39,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-right-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-right-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-right-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-right-inactive.png":[20,45,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-b.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-20],"qx/decoration/Modern/tabview/tab-button-top-active-bl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-15],"qx/decoration/Modern/tabview/tab-button-top-active-br.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-10],"qx/decoration/Modern/tabview/tab-button-top-active-c.png":[40,14,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-active-l.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-r.png":[5,12,"png","qx","qx/decoration/Modern/tabview-button-top-active-lr-combined.png",-5,0],"qx/decoration/Modern/tabview/tab-button-top-active-t.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-active-tl.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-25],"qx/decoration/Modern/tabview/tab-button-top-active-tr.png":[5,5,"png","qx","qx/decoration/Modern/tabview-button-top-active-tb-combined.png",0,-5],"qx/decoration/Modern/tabview/tab-button-top-active.png":[48,22,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-b.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive-bl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-br.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-b-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-c.png":[40,15,"png","qx"],"qx/decoration/Modern/tabview/tab-button-top-inactive-l.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-r.png":[3,15,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-lr-combined.png",-3,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-t.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-3],"qx/decoration/Modern/tabview/tab-button-top-inactive-tl.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,0],"qx/decoration/Modern/tabview/tab-button-top-inactive-tr.png":[3,3,"png","qx","qx/decoration/Modern/tabview-button-top-inactive-t-combined.png",0,-6],"qx/decoration/Modern/tabview/tab-button-top-inactive.png":[45,21,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-b.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-60],"qx/decoration/Modern/tabview/tabview-pane-bl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-br.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-120],"qx/decoration/Modern/tabview/tabview-pane-c.png":[40,120,"png","qx"],"qx/decoration/Modern/tabview/tabview-pane-l.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",0,0],"qx/decoration/Modern/tabview/tabview-pane-r.png":[30,2,"png","qx","qx/decoration/Modern/tabview-pane-lr-combined.png",-30,0],"qx/decoration/Modern/tabview/tabview-pane-t.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-150],"qx/decoration/Modern/tabview/tabview-pane-tl.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-30],"qx/decoration/Modern/tabview/tabview-pane-tr.png":[30,30,"png","qx","qx/decoration/Modern/tabview-pane-tb-combined.png",0,-90],"qx/decoration/Modern/tabview/tabview-pane.png":[185,250,"png","qx"],"qx/decoration/Modern/toolbar-combined.png":[80,130,"png","qx"],"qx/decoration/Modern/toolbar/toolbar-gradient-blue.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",-40,0],"qx/decoration/Modern/toolbar/toolbar-gradient.png":[40,130,"png","qx","qx/decoration/Modern/toolbar-combined.png",0,0],"qx/decoration/Modern/toolbar/toolbar-handle-knob.gif":[1,8,"gif","qx"],"qx/decoration/Modern/toolbar/toolbar-part.gif":[7,1,"gif","qx"],"qx/decoration/Modern/tooltip-error-lr-combined.png":[12,18,"png","qx"],"qx/decoration/Modern/tooltip-error-tb-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/tree-combined.png":[32,8,"png","qx"],"qx/decoration/Modern/tree/closed-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-24,0],"qx/decoration/Modern/tree/closed.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-16,0],"qx/decoration/Modern/tree/open-selected.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",-8,0],"qx/decoration/Modern/tree/open.png":[8,8,"png","qx","qx/decoration/Modern/tree-combined.png",0,0],"qx/decoration/Modern/window-captionbar-buttons-combined.png":[108,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-active-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-lr-inactive-combined.png":[12,9,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-active-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-captionbar-tb-inactive-combined.png":[6,36,"png","qx"],"qx/decoration/Modern/window-statusbar-lr-combined.png":[8,7,"png","qx"],"qx/decoration/Modern/window-statusbar-tb-combined.png":[4,24,"png","qx"],"qx/decoration/Modern/window/captionbar-active-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-active-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-active-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-active-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-active-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-active-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-active-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,0],"qx/decoration/Modern/window/captionbar-active-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-active-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-active.png":[69,21,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-b.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-24],"qx/decoration/Modern/window/captionbar-inactive-bl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-6],"qx/decoration/Modern/window/captionbar-inactive-br.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-30],"qx/decoration/Modern/window/captionbar-inactive-c.png":[40,9,"png","qx"],"qx/decoration/Modern/window/captionbar-inactive-l.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-r.png":[6,9,"png","qx","qx/decoration/Modern/window-captionbar-lr-inactive-combined.png",-6,0],"qx/decoration/Modern/window/captionbar-inactive-t.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,0],"qx/decoration/Modern/window/captionbar-inactive-tl.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-12],"qx/decoration/Modern/window/captionbar-inactive-tr.png":[6,6,"png","qx","qx/decoration/Modern/window-captionbar-tb-inactive-combined.png",0,-18],"qx/decoration/Modern/window/captionbar-inactive.png":[69,21,"png","qx"],"qx/decoration/Modern/window/close-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-27,0],"qx/decoration/Modern/window/close-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-9,0],"qx/decoration/Modern/window/close-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-90,0],"qx/decoration/Modern/window/maximize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-18,0],"qx/decoration/Modern/window/maximize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-81,0],"qx/decoration/Modern/window/maximize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-54,0],"qx/decoration/Modern/window/minimize-active-hovered.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-63,0],"qx/decoration/Modern/window/minimize-active.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-72,0],"qx/decoration/Modern/window/minimize-inactive.png":[9,9,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-36,0],"qx/decoration/Modern/window/restore-active-hovered.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",0,0],"qx/decoration/Modern/window/restore-active.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-99,0],"qx/decoration/Modern/window/restore-inactive.png":[9,8,"png","qx","qx/decoration/Modern/window-captionbar-buttons-combined.png",-45,0],"qx/decoration/Modern/window/statusbar-b.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-16],"qx/decoration/Modern/window/statusbar-bl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-20],"qx/decoration/Modern/window/statusbar-br.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-4],"qx/decoration/Modern/window/statusbar-c.png":[40,7,"png","qx"],"qx/decoration/Modern/window/statusbar-l.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",-4,0],"qx/decoration/Modern/window/statusbar-r.png":[4,7,"png","qx","qx/decoration/Modern/window-statusbar-lr-combined.png",0,0],"qx/decoration/Modern/window/statusbar-t.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,0],"qx/decoration/Modern/window/statusbar-tl.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-8],"qx/decoration/Modern/window/statusbar-tr.png":[4,4,"png","qx","qx/decoration/Modern/window-statusbar-tb-combined.png",0,-12],"qx/decoration/Modern/window/statusbar.png":[369,15,"png","qx"],"qx/icon/Tango/16/actions/dialog-cancel.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/dialog-ok.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/view-refresh.png":[16,16,"png","qx"],"qx/icon/Tango/16/actions/window-close.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/office-calendar.png":[16,16,"png","qx"],"qx/icon/Tango/16/apps/utilities-color-chooser.png":[16,16,"png","qx"],"qx/icon/Tango/16/mimetypes/office-document.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder-open.png":[16,16,"png","qx"],"qx/icon/Tango/16/places/folder.png":[16,16,"png","qx"],"qx/icon/Tango/22/mimetypes/office-document.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder-open.png":[22,22,"png","qx"],"qx/icon/Tango/22/places/folder.png":[22,22,"png","qx"],"qx/icon/Tango/32/mimetypes/office-document.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder-open.png":[32,32,"png","qx"],"qx/icon/Tango/32/places/folder.png":[32,32,"png","qx"],"qx/static/blank.gif":[1,1,"gif","qx"]},"translations":{"C":{},"en":{}}};
 (function(){var m="toString",k=".",j="default",h="Object",g='"',f="Array",e="()",d="String",c="Function",b=".prototype",L="function",K="Boolean",J="Error",I="constructor",H="warn",G="hasOwnProperty",F="string",E="toLocaleString",D="RegExp",C='\", "',t="info",u="BROKEN_IE",r="isPrototypeOf",s="Date",p="",q="qx.Bootstrap",n="]",o="Class",v="error",w="[Class ",y="valueOf",x="Number",A="count",z="debug",B="ES5";
 if(!window.qx){window.qx={};
 }qx.Bootstrap={genericToString:function(){return w+this.classname+n;
@@ -11358,50 +11358,54 @@ for(var n in this.__lU){qx.bom.element.Style.set(o,n,this.__lU[n]);
 }}},destruct:function(){this.__lV=this.__lW=this.__lX=null;
 }});
 })();
-(function(){var t="button",s="save",r="callback",q="new_id",p="Got changeId with ",o="callBackend arguments are: ",n="list",m="new",l="View.",k="dataClass is ",d="int",j="frontend.Views.Form",g="find",c="OK",b="handleButton for ",f="list_choice",e="100%",h="str",a=":";
-qx.Class.define(j,{extend:qx.ui.container.Composite,construct:function(u,v,w,x,y){qx.ui.container.Composite.call(this,new qx.ui.layout.HBox());
-this.dataClass=w;
-this.viewClass=x;
-this.callback=u;
-this.ltab=y;
-this.add(this.fields=new frontend.Lib.Fields({callback:[this,this.changeId]},v,y),{width:e,flex:1});
-},members:{dataClass:null,viewClass:null,callback:null,fields:null,callback:null,ltab:null,changeId:function(z){dbg(3,p+print_a(z));
-dbg(5,k+this.dataClass);
-var C=z[0];
-var name=z[1];
-var B=z[2];
-var D=z[3];
-var A=z[4];
+(function(){var u="button",t="save",s="callback",r="new_id",q="Got changeId with ",p="callBackend arguments are: ",o="list",n="new",m="View.",l="dataClass is ",d="int",k="frontend.Views.Form",g="find",c="OK",b="split_button",f="handleButton for ",e="list_choice",h="100%",a="str",j=":";
+qx.Class.define(k,{extend:qx.ui.container.Composite,construct:function(v,w,x,y,z){qx.ui.container.Composite.call(this,new qx.ui.layout.HBox());
+this.dataClass=x;
+this.viewClass=y;
+this.callback=v;
+this.ltab=z;
+this.add(this.fields=new frontend.Lib.Fields({callback:[this,this.changeId]},w,z),{width:h,flex:1});
+},members:{dataClass:null,viewClass:null,callback:null,fields:null,callback:null,ltab:null,changeId:function(A){dbg(3,q+print_a(A));
+dbg(5,l+this.dataClass);
+var F=A[0];
+var name=A[1];
+var E=A[2];
+var B=A[3];
+var C=A[4];
 
-switch(B){case h:case d:if(A.callback){this.callBackend(r,A.callback,this.fields.getFieldsData());
-}else{this.callBackend(g,name,D);
+switch(E){case a:case d:if(C.callback){this.callBackend(s,C.callback,this.fields.getFieldsData());
+}else{this.callBackend(g,name,B);
 }break;
-case t:this.callBackend(t,name,this.fields.getFieldsData());
+case u:this.callBackend(u,name,this.fields.getFieldsData());
 break;
-case n:this.callBackend(f,name,this.fields.getFieldsData());
+case b:var D=this.fields.getFieldsData();
+D.menu=B;
+this.callBackend(u,name,D);
+break;
+case o:this.callBackend(e,name,this.fields.getFieldsData());
 break;
 default:this.fields.updating=false;
 break;
-}},callBackend:function(E){var F=[];
+}},callBackend:function(G){var H=[];
 this.ltab.parentFadeOut();
 
-for(var i=1;i<arguments.length;i++){F.push(arguments[i]);
-}dbg(5,o+F.join(a));
-rpc.callRPCarray(l+this.viewClass,E,this.callback[0],this.callback[1],F);
-},newData:function(G){if(G){this.fields.fill(G);
+for(var i=1;i<arguments.length;i++){H.push(arguments[i]);
+}dbg(5,p+H.join(j));
+rpc.callRPCarray(m+this.viewClass,G,this.callback[0],this.callback[1],H);
+},newData:function(I){if(I){this.fields.fill(I);
 }else{alert("This ID doesn't exist!");
 }this.fields.updating=false;
-},deleteData:function(H){if(H.answer==c){alert("Deleted succesfully!");
-}else{alert("Couldn't delete because of "+H.reason);
+},deleteData:function(J){if(J.answer==c){alert("Deleted succesfully!");
+}else{alert("Couldn't delete because of "+J.reason);
 }this.fields.updating=false;
-},handleButton:function(name){dbg(5,b+name);
+},handleButton:function(name){dbg(5,f+name);
 
-switch(name){case m:this.fields.clearData();
-this.callBackend(q,this,this.newData);
+switch(name){case n:this.fields.clearData();
+this.callBackend(r,this,this.newData);
 break;
-case s:this.callBackend(s,this,this.newData,this.fields.getFieldsData());
+case t:this.callBackend(t,this,this.newData,this.fields.getFieldsData());
 break;
-default:this.callBackend(t,this,this.newData,name,this.fields.getFieldsData());
+default:this.callBackend(u,this,this.newData,name,this.fields.getFieldsData());
 break;
 }}}});
 })();
@@ -11515,408 +11519,428 @@ if(bi){var be=bc.computeHorizontalSeparatorGaps(bk,bf,bi);
 }},destruct:function(){this.__lY=this.__ma=this.__mc=null;
 }});
 })();
-(function(){var cH=":",cG="",cF="hidden",cE="right",cD=" to field ",cC=" - ",cB="Hiding window ",cA="Field ",cz="changeSelection",cy="Clearing fields: ",bJ="100%",bI="drop",bH="Adding a hbox to ",bG="array",bF="Adding a vbox to ",bE="fields_noflex",bD="int",bC=" to ",bB="-",bA="Adding a fields_layout to ",cO="setValueList ",cP="addElement ",cM="Setting normal value of ",cN="Window",cK="pass",cL="changeValue",cI="hi",cJ=" to elements ",cQ="getValueList",cR="hbox",cn="list_tabs",cm="dd.MM.yyyy",cp="visible",co="*",cr="list",cq='appear',ct="Having valueIds ",cs="Writing is ",cl="Adding new tabs ",ck="additive",b="getValueFromTo",c="Can't call listener while he's working!",g="Adding elements to ",j="Setting str value of ",k="fields_layout",m="Adding new timer",n="text",o="Filling with data ",q="Setting array value of ",r="write",da="Looking for data of field ",cY="execute",cX="callback",cW='ma:je:sa',de="Setting value of ",dd="timer for delay",dc="input",db="Adding without VBox: ",dg="addElement called with ",df="clearData",Y="middle",ba="group",W=" on layout ",X="html",bd="resize",be="Callback is ",bb="setValueDrop: ",bc="composite",U="View.",V="vboxg",D=" with ",C="keypress",F='lu:me:ve',E="Adding value ",z=" our id is ",y="Finished adding listener",B="Adding: ",A='lu-ve',u="<table bgcolor='ffffff'><tr><td><b>",t="Listener: ",bj="clearDataAll",bk="getFieldsData",bl="Adding a group to ",bm="Creating element with fields ",bf="button",bg="Adding some fields to ",bh="Looking at field ",bi="0",bn="top",bo="dataEdited",P="Adding listener: ",O="select",N="str",M='lu-di',L="returning from calcView, string is: ",K="info",J="Found a selection: ",I="</b></td></tr></table>",S=" of ",R="date",bp="Adding new item ",bq="Focusing on ",br="vbox",bs="window",bt="all",bu="hboxg",bv="Showing window ",bw="Adding composite: ",bx="clearDataOnly",by="Enter",bN="fields",bM="tel",bL="This is Enter for ",bK="Found element ",bR="getValueListArray",bQ=" is of value ",bP="aborting setValueList",bO="::",bT="Adding a window with layout ",bS="table",cd="appear",ce="Clearing field/list ",cb="single",cc="getFieldsData: ",bY="Value is an array!",ca=" is of special-value ",bW="Stopping timer",bX="rpc",cg="frontend.Lib.Fields",ch="tabs",cv="Deleting fields ",cu="fromto";
-function H(name){var dh=this.getSelectables();
+(function(){var cL=":",cK="",cJ="execute",cI="hidden",cH="right",cG=" to field ",cF=" - ",cE="Hiding window ",cD="Field ",cC="changeSelection",bL="Clearing fields: ",bK="drop",bJ="Adding a hbox to ",bI="array",bH="Adding a vbox to ",bG="fields_noflex",bF="int",bE="100%",bD=" to ",bC="-",cS="Adding a fields_layout to ",cT="setValueList ",cQ="addElement ",cR="Setting normal value of ",cO="Window",cP="pass",cM="changeValue",cN="hi",cU=" to elements ",cV="getValueList",cp="hbox",co="list_tabs",cr="dd.MM.yyyy",cq="visible",ct="*",cs="list",cv='appear',cu="Having valueIds ",cn="Writing is ",cm="Adding new tabs ",c="additive",g="getValueFromTo",j="Can't call listener while he's working!",k="Adding elements to ",m="Setting str value of ",o="fields_layout",q="Adding new timer",r="text",t="Filling with data ",u="Setting array value of ",de="write",dd="Finished adding listener ",dc="string",db="callback",di='ma:je:sa',dh="Setting value of ",dg="timer for delay",df="input",dk="Adding without VBox: ",dj="addElement called with ",bb="clearData",bc="middle",Y="group",ba=" on layout ",bf="html",bg="resize",bd="Callback is ",be="Looking at field ",W="setValueDrop: ",X="composite",F="View.",E="split_button",H="vboxg",G=" with ",B="keypress",A='lu:me:ve',D="Adding value ",C=" our id is ",z="Adding: ",y='lu-ve',bl="<table bgcolor='ffffff'><tr><td><b>",bm="Listener: ",bn="clearDataAll",bo="getFieldsData",bh="Adding a group to ",bi="Creating element with fields ",bj="button",bk="Adding some fields to ",bp="0",bq="top",R="dataEdited",Q="Adding listener: ",P="Looking for data of field ",O="select",N="str",M='lu-di',L="returning from calcView, string is: ",K="info",U="Found a selection: ",T="</b></td></tr></table>",br=" of ",bs="date",bt="Adding new item ",bu="Focusing on ",bv="vbox",bw="window",bx="all",by="hboxg",bz="Showing window ",bA="Adding composite: ",bP="clearDataOnly",bO="Enter",bN="fields",bM="tel",bT="This is Enter for ",bS="Found element ",bR="getValueListArray",bQ=" is of value ",bV="aborting setValueList",bU="::",cf="Adding a window with layout ",cg="table",cd="appear",ce="Clearing field/list ",cb="single",cc="getFieldsData: ",bY="Value is an array!",ca=" is of special-value ",ci="Stopping timer",cj="rpc",cx="frontend.Lib.Fields",cw="tabs",cz="Deleting fields ",cy="fromto";
+function J(name){var dl=this.getSelectables();
 
-for(var s=0;s<dh.length;s++){var di=dh[s];
+for(var s=0;s<dl.length;s++){var dm=dl[s];
 
-if(di.getLabel()==name){this.setSelection([di]);
-}}}function a(dj){this.setSelection([this.getSelectables()[dj]]);
-}function bU(){var dl=0;
-var dk=this.getSelection()[0];
-var dm=this.getSelectables();
-
-for(var s=0;s<dm.length;s++){if(dm[s]==dk){return dl;
-}dl++;
-}return null;
-}function cj(){return cI;
-}function ci(){dbg(5,cQ);
-var dq=[];
-var dn=this.getSelection();
-
-for(var s=0;s<dn.length;s++){var dp=dn[s];
-
-if(this.valueIds){dq.push(this.valueIds[this.indexOf(dp)]);
-}else{dq.push(dp.getLabel());
-}}return dq;
-}function cU(){dbg(5,bR);
-var ds=[];
+if(dm.getLabel()==name){this.setSelection([dm]);
+}}}function a(dn){this.setSelection([this.getSelectables()[dn]]);
+}function bW(){var dq=0;
+var dp=this.getSelection()[0];
 var dr=this.getSelectables();
 
-for(var s=0;s<dr.length;s++){ds.push(dr[s].getLabel());
-}return ds.concat(ci());
-}function cV(dt,du){dbg(5,cO+print_a(dt));
-var dw=[];
+for(var s=0;s<dr.length;s++){if(dr[s]==dp){return dq;
+}dq++;
+}return null;
+}function cl(){return cN;
+}function ck(){dbg(5,cV);
+var du=[];
+var ds=this.getSelection();
 
-if(!dt||!dt.length){dbg(5,bP);
+for(var s=0;s<ds.length;s++){var dt=ds[s];
+
+if(this.valueIds){du.push(this.valueIds[this.indexOf(dt)]);
+}else{du.push(dt.getLabel());
+}}return du;
+}function cY(){dbg(5,bR);
+var dw=[];
+var dv=this.getSelectables();
+
+for(var s=0;s<dv.length;s++){dw.push(dv[s].getLabel());
+}return dw.concat(ck());
+}function da(dx,dy){dbg(5,cT+print_a(dx));
+var dA=[];
+
+if(!dx||!dx.length){dbg(5,bV);
 return;
 }
-for(var v=0;v<dt.length;v++){var dx=dt[v];
-var dv=null;
-dbg(5,E+print_a(dx));
+for(var v=0;v<dx.length;v++){var dB=dx[v];
+var dz=null;
+dbg(5,D+print_a(dB));
 
-if(dx instanceof Array){dbg(5,bY);
+if(dB instanceof Array){dbg(5,bY);
 
-if(!du.valueIds){du.valueIds=[];
-}du.valueIds.push(dx[0]);
-dx=dx[1];
-}else{if(du.valueIds){dv=du.getSelectables(true)[du.valueIds.indexOf(dx)];
-}else{if(du.findItem){dv=du.findItem(dx);
+if(!dy.valueIds){dy.valueIds=[];
+}dy.valueIds.push(dB[0]);
+dB=dB[1];
+}else{if(dy.valueIds){dz=dy.getSelectables(true)[dy.valueIds.indexOf(dB)];
+}else{if(dy.findItem){dz=dy.findItem(dB);
 }}}
-if(dv&&(!du.nopreselect)){dw.push(dv);
-dbg(5,J+dx);
-}else if(dx!=cG){dbg(5,bp+dx);
-var dv=new qx.ui.form.ListItem(cG+dx);
-du.add(dv);
+if(dz&&(!dy.nopreselect)){dA.push(dz);
+dbg(5,U+dB);
+}else if(dB!=cK){dbg(5,bt+dB);
+var dz=new qx.ui.form.ListItem(cK+dB);
+dy.add(dz);
 
-if(du.vaueIds&&du.indexOf(dv)!=du.valueIds.length-1){alert("Different number of items in list and valueIds!");
-}}}du.setSelection(dw);
-}function cx(dy){cV(dy,this);
-}function T(dz){dbg(5,bb+print_a(dz));
+if(dy.vaueIds&&dy.indexOf(dz)!=dy.valueIds.length-1){alert("Different number of items in list and valueIds!");
+}}}dy.setSelection(dA);
+}function cB(dC){da(dC,this);
+}function V(dD){dbg(5,W+print_a(dD));
 
-if(this.valueIds){dbg(3,ct+print_a(this.valueIds));
-cV(dz,this);
-}else if(dz.length==1&&this.getChildren().length>0){var dA=this.getChildren();
-dbg(5,de+dz+cJ+dA);
+if(this.valueIds){dbg(3,cu+print_a(this.valueIds));
+da(dD,this);
+}else if(dD.length==1&&this.getChildren().length>0){var dE=this.getChildren();
+dbg(5,dh+dD+cU+dE);
 
-for(var e=0;e<dA.length;e++){if(dA[e].getLabel()==dz){dbg(5,bK+dA[e]);
-this.setSelection([dA[e]]);
-}}}else{cV(dz,this);
-}}function bV(dB){this.removeAll();
-cV(dB,this);
-}function cw(dC){this.valueBold=dC;
-this.setValue(u+dC+I);
-}function cT(){return this.valueBold;
-}function Q(){dbg(5,b);
+for(var e=0;e<dE.length;e++){if(dE[e].getLabel()==dD){dbg(5,bS+dE[e]);
+this.setSelection([dE[e]]);
+}}}else{da(dD,this);
+}}function bX(dF){this.removeAll();
+da(dF,this);
+}function cA(dG){this.valueBold=dG;
+this.setValue(bl+dG+T);
+}function cX(){return this.valueBold;
+}function S(){dbg(5,g);
 var d=this.getChildren();
 var h=d[1].getChildren();
-var dD=[d[0].getSelection()[0].getLabel(),h[0].getSelection()[0].getLabel(),h[2].getSelection()[0].getLabel()];
-dbg(4,print_a(dD));
-return dD;
-}function cS(){}function bz(){return this.getDateFormat().format(this.getValue());
-}function G(v){this.setValue(this.getDateFormat().parse(v));
-}function cf(x){return x<10?bi+x:x;
-}qx.Class.define(cg,{extend:qx.ui.container.Composite,construct:function(dE,dF,dG){qx.ui.container.Composite.call(this,this.layout=new qx.ui.layout.VBox(1));
-var dH=[bX,r,cX];
+var dH=[d[0].getSelection()[0].getLabel(),h[0].getSelection()[0].getLabel(),h[2].getSelection()[0].getLabel()];
+dbg(4,print_a(dH));
+return dH;
+}function cW(){}function bB(){return this.getDateFormat().format(this.getValue());
+}function I(v){this.setValue(this.getDateFormat().parse(v));
+}function ch(x){return x<10?bp+x:x;
+}qx.Class.define(cx,{extend:qx.ui.container.Composite,construct:function(dI,dJ,dK){qx.ui.container.Composite.call(this,this.layout=new qx.ui.layout.VBox(1));
+var dL=[cj,de,db];
 
-for(var p=0;p<dH.length;p++){var dI=dH[p];
-this[dI]=dE[dI];
-}this.write=this.write?this.write:bt;
+for(var p=0;p<dL.length;p++){var dM=dL[p];
+this[dM]=dI[dM];
+}this.write=this.write?this.write:bx;
 this.fields=[];
 this.windows={};
 this.updating=false;
 this.field_id=null;
-this.ltab=dG;
-dbg(5,cs+this.write+z+this);
+this.ltab=dK;
+dbg(5,cn+this.write+C+this);
 this.index=1;
 this.timer=qx.util.TimerManager.getInstance();
 
-if(dF){this.calcView(dF,this);
-}this.addListener(cd,function(e){root.fireDataEvent(bd,new qx.event.type.Data());
+if(dJ){this.calcView(dJ,this);
+}this.addListener(cd,function(e){root.fireDataEvent(bg,new qx.event.type.Data());
 });
-},members:{rpc:null,write:null,callback:null,field_id:null,fields:null,windows:null,first_field:null,first_button:null,first_button_window:null,updating:null,index:null,timer:null,delayTimer:null,layout:null,childLtab:null,ltab:null,getOwnFieldsData:function(){dbg(5,bk);
-var dK={};
+},members:{rpc:null,write:null,callback:null,field_id:null,fields:null,windows:null,first_field:null,first_button:null,first_button_window:null,updating:null,index:null,timer:null,delayTimer:null,layout:null,childLtab:null,ltab:null,getOwnFieldsData:function(){dbg(5,bo);
+var dO={};
 
-for(var f in this.fields){dbg(5,bh+f);
-var dJ=this.fields[f];
+for(var f in this.fields){dbg(5,be+f);
+var dN=this.fields[f];
 
-if(dJ.getValueSpecial){if(dJ.getValueSpecial()){dK[f]=dJ.getValueSpecial();
-dbg(5,cA+f+ca+dK[f]);
-}}else if(dJ.getValue){if(dJ.getValue()){dK[f]=dJ.getValue();
-dbg(5,cA+f+bQ+dK[f]);
-}}}dbg(4,cc+print_a(dK));
-return dK;
-},getFieldsData:function(){var dM=this.getOwnFieldsData();
+if(dN.getValueSpecial){if(dN.getValueSpecial()){dO[f]=dN.getValueSpecial();
+dbg(5,cD+f+ca+dO[f]);
+}}else if(dN.getValue){if(dN.getValue()){dO[f]=dN.getValue();
+dbg(5,cD+f+bQ+dO[f]);
+}}}dbg(4,cc+print_a(dO));
+return dO;
+},getFieldsData:function(){var dQ=this.getOwnFieldsData();
 
-if(this.childLtab&&this.childLtab.form&&this.childLtab.form.fields){var dN=this.childLtab.form.fields.getOwnFieldsData();
+if(this.childLtab&&this.childLtab.form&&this.childLtab.form.fields){var dR=this.childLtab.form.fields.getOwnFieldsData();
 
-for(var dL in dN){dM[dL]=dN[dL];
+for(var dP in dR){dQ[dP]=dR[dP];
 }}
-if(this.ltab.parentLtab){var dN=this.ltab.parentLtab.form.fields.getOwnFieldsData();
+if(this.ltab.parentLtab){var dR=this.ltab.parentLtab.form.fields.getOwnFieldsData();
 
-for(var dL in dN){dM[dL]=dN[dL];
-}}return dM;
-},clearDataOnly:function(dO){dbg(5,bx);
+for(var dP in dR){dQ[dP]=dR[dP];
+}}return dQ;
+},clearDataOnly:function(dS){dbg(5,bP);
 this.updating=true;
 
-if(dO){dbg(5,cv+print_a(dO));
+if(dS){dbg(5,cz+print_a(dS));
 
-for(var f=0;f<dO.length;f++){var dP=this.fields[dO[f]];
-dbg(5,ce+dP);
+for(var f=0;f<dS.length;f++){var dT=this.fields[dS[f]];
+dbg(5,ce+dT);
 
-if(dP.valueIds){dP.valueIds=[];
+if(dT.valueIds){dT.valueIds=[];
 }
-if(dP.removeAll&&!dP.getDateFormat){dP.resetSelection();
-dP.removeAll();
-}else if(dP.resetValue){dP.resetValue();
-}else if(dP.setValueStr){dP.setValueStr(cG);
-}else if(dP.setValueArray){dP.setValueArray([]);
-}else if(dP.setValue){dP.setValue(cG);
+if(dT.removeAll&&!dT.getDateFormat){dT.resetSelection();
+dT.removeAll();
+}else if(dT.resetValue){dT.resetValue();
+}else if(dT.setValueStr){dT.setValueStr(cK);
+}else if(dT.setValueArray){dT.setValueArray([]);
+}else if(dT.setValue){dT.setValue(cK);
 }}}this.updating=false;
-},clearData:function(dQ){dbg(5,df);
-var dR=[];
+},clearData:function(dU){dbg(5,bb);
+var dV=[];
 
-for(var f in this.fields){if(!this.fields[f].removeAll||this.fields[f].getDateFormat){dR.push(f);
-}}dbg(5,cy+print_a(dR));
-this.clearDataOnly(dR);
-this.clearDataOnly(dQ);
-},clearDataAll:function(){dbg(5,bj);
-var dS=[];
+for(var f in this.fields){if(!this.fields[f].removeAll||this.fields[f].getDateFormat){dV.push(f);
+}}dbg(5,bL+print_a(dV));
+this.clearDataOnly(dV);
+this.clearDataOnly(dU);
+},clearDataAll:function(){dbg(5,bn);
+var dW=[];
 
-for(var f in this.fields){dS.push(f);
-}dbg(5,cy+print_a(dS));
-this.clearDataOnly(dS);
-},fill:function(dT){dbg(3,o+print_a(dT));
+for(var f in this.fields){dW.push(f);
+}dbg(5,bL+print_a(dW));
+this.clearDataOnly(dW);
+},fill:function(dX){dbg(3,t+print_a(dX));
 
-for(var f in this.fields){dbg(5,da+f);
-var dU=this.fields[f];
+for(var f in this.fields){dbg(5,P+f);
+var dY=this.fields[f];
 
-if(dT[f]!=null){if(dU.setValueStr){dbg(4,j+dT[f]+cD+f);
-dU.setValueStr(dT[f].toString());
-}else if(dU.setValueArray){dbg(4,q+dT[f]+cD+f);
-dU.setValueArray(dT[f]);
-}else if(dU.setValue){dbg(4,cM+dT[f]+cD+f);
-dU.setValue(dT[f].toString());
-}}}},addElement:function(dV,dW,dX){dbg(5,dg+[print_a(dV),dW,dX].join(cH));
-var el=dV.shift();
-var name=dV.shift();
-var ee=dV.shift();
-var eh=dV[0]?dV.shift():[];
-var ej=null;
-var ea=true;
-var ef=cL;
-var ec=false;
-var ek=true;
-var dY=0;
-dbg(5,cP+el+cC+ee+cC+print_a(eh));
+if(dX[f]!=null){if(dY.setValueStr){dbg(4,m+dX[f]+cG+f);
+dY.setValueStr(dX[f].toString());
+}else if(dY.setValueArray){dbg(4,u+dX[f]+cG+f);
+dY.setValueArray(dX[f]);
+}else if(dY.setValue){dbg(4,cR+dX[f]+cG+f);
+dY.setValue(dX[f].toString());
+}}}},addElement:function(ea,eb,ec){dbg(5,dj+[print_a(ea),eb,ec].join(cL));
+var eq=ea.shift();
+var name=ea.shift();
+var ei=ea.shift();
+var el=ea[0]?ea.shift():[];
+var eo=null;
+var ee=true;
+var ej=cM;
+var eg=false;
+var ep=true;
+var ed=0;
+dbg(5,cQ+eq+cF+ei+cF+print_a(el));
 
-switch(el){case N:case bM:case bG:case bD:ej=new qx.ui.form.TextField(cG);
+switch(eq){case N:case bM:case bI:case bF:eo=new qx.ui.form.TextField(cK);
 
-if(eh.id||eh.callback){ec=true;
-ef=dc;
+if(el.id||el.callback){eg=true;
+ej=df;
 
-if(eh.id){this.field_id=name;
-}dY=1500;
+if(el.id){this.field_id=name;
+}ed=1500;
 }
-if(eh.ro){ej=new qx.ui.basic.Label(cG);
-ej.setRich(true);
-ej.setValueStr=cw;
-ej.getValueSpecial=cT;
-}if(el==bD){ej.setTextAlign(cE);
+if(el.ro){eo=new qx.ui.basic.Label(cK);
+eo.setRich(true);
+eo.setValueStr=cA;
+eo.getValueSpecial=cX;
+}if(eq==bF){eo.setTextAlign(cH);
 }break;
-case n:ej=new qx.ui.form.TextArea(cG);
-ej.setAutoSize(true);
-ej.setWidth(300);
-ek=false;
+case r:eo=new qx.ui.form.TextArea(cK);
+eo.setAutoSize(true);
+eo.setWidth(300);
+ep=false;
 break;
-case R:ej=new qx.ui.form.DateField();
-ej.setDateFormat(new qx.util.format.DateFormat(cm));
-ej.getValueSpecial=bz;
-ej.setValueStr=G;
+case bs:eo=new qx.ui.form.DateField();
+eo.setDateFormat(new qx.util.format.DateFormat(cr));
+eo.getValueSpecial=bB;
+eo.setValueStr=I;
 break;
-case K:ej=new qx.ui.form.TextField(eh.text);
-ej.setReadOnly(true);
+case K:eo=new qx.ui.form.TextField(el.text);
+eo.setReadOnly(true);
 break;
-case cK:ej=new qx.ui.form.PasswordField(cG);
+case cP:eo=new qx.ui.form.PasswordField(cK);
 break;
-case bf:ec=true;
-ef=cY;
-ej=new qx.ui.form.Button(ee);
-ej.getData=function(){};
-ej.setAllowGrowY(false);
-ea=false;
+case bj:eg=true;
+ej=cJ;
+eo=new qx.ui.form.Button(ei);
+eo.getData=function(){};
+eo.setAllowGrowY(false);
+ee=false;
 
-if(!this.first_button||eh.def){this.first_button=ej;
+if(!this.first_button||el.def){this.first_button=eo;
 }break;
-case X:ej=new qx.ui.basic.Label().set({value:eh.text,rich:true,allowGrowX:true});
-ea=false;
-break;
-case O:ej=new qx.ui.form.SelectBox();
-if(eh.list_values){while(eh.list_values.length>0){ej.add(new qx.ui.form.ListItem(eh.list_values.shift()));
-}}ej.searchLabel=H;
-ej.searchIndex=a;
-ej.selectedIndex=bU;
-ef=cz;
-break;
-case cr:if(eh.list_type!=bI){ej=new qx.ui.form.List();
-ej.setSelectionMode(eh.list_type?cb:ck);
-ej.setMaxHeight(250);
-ej.setMinWidth(200);
-ej.setAllowGrowX(true);
-ej.setAllowStretchX(true);
-ej.setAllowGrowY(true);
-ej.setAllowStretchY(true);
+case E:eg=true;
+ej=cJ;
+eo=new qx.ui.form.SplitButton(ei);
+var en=new qx.ui.menu.Menu;
 
-if(eh.nopreselect){ej.nopreselect=true;
-}}else{ej=new qx.ui.form.SelectBox();
-}ej.searchLabel=H;
-ej.searchIndex=a;
-ej.selectedIndex=bU;
+for(var i=0;i<el.menu.length;i++){var n=el.menu[i];
+var b=new qx.ui.menu.Button(n);
+b.addListener(cJ,function(e){eo.fireDataEvent(cJ,this.getLabel());
+},b);
+en.add(b);
+}eo.setMenu(en);
+eo.getData=function(){};
+eo.setAllowGrowY(false);
+ee=false;
 
-if(eh.list_type==bG){ej.setValueArray=bV;
-ej.getValue=cU;
-}else if(eh.list_type!=bI){ej.setValueArray=cx;
-ej.getValue=ci;
-}else{ej.setValueArray=T;
-ej.getValue=ci;
+if(!this.first_button||el.def){this.first_button=eo;
+}break;
+case bf:eo=new qx.ui.basic.Label().set({value:el.text,rich:true,allowGrowX:true});
+ee=false;
+break;
+case O:eo=new qx.ui.form.SelectBox();
+if(el.list_values){while(el.list_values.length>0){eo.add(new qx.ui.form.ListItem(el.list_values.shift()));
+}}eo.searchLabel=J;
+eo.searchIndex=a;
+eo.selectedIndex=bW;
+ej=cC;
+break;
+case cs:if(el.list_type!=bK){eo=new qx.ui.form.List();
+eo.setSelectionMode(el.list_type?cb:c);
+eo.setMaxHeight(250);
+eo.setMinWidth(200);
+eo.setAllowGrowX(true);
+eo.setAllowStretchX(true);
+eo.setAllowGrowY(true);
+eo.setAllowStretchY(true);
+
+if(el.nopreselect){eo.nopreselect=true;
+}}else{eo=new qx.ui.form.SelectBox();
+}eo.searchLabel=J;
+eo.searchIndex=a;
+eo.selectedIndex=bW;
+
+if(el.list_type==bI){eo.setValueArray=bX;
+eo.getValue=cY;
+}else if(el.list_type!=bK){eo.setValueArray=cB;
+eo.getValue=ck;
+}else{eo.setValueArray=V;
+eo.getValue=ck;
 }
-if(eh.ro){ej.setEnabled(false);
-}ej.setValueArray(eh.list_values);
-ej.setHeight(null);
-ef=cz;
+if(el.ro){eo.setEnabled(false);
+}eo.setValueArray(el.list_values);
+eo.setHeight(null);
+ej=cC;
 
-if(eh.callback){ec=true;
+if(el.callback){eg=true;
 }break;
-case bc:ej=new qx.ui.container.Composite();
-ea=false;
-ef=null;
+case X:eo=new qx.ui.container.Composite();
+ee=false;
+ej=null;
 break;
-case bS:var ei=eh.headings;
-var eg=new qx.ui.table.model.Simple();
-eg.setColumns(ei);
-ej=new qx.ui.table.Table(eg).set({decorator:null});
-ea=false;
-ef=bo;
+case cg:var em=el.headings;
+var ek=new qx.ui.table.model.Simple();
+ek.setColumns(em);
+eo=new qx.ui.table.Table(ek).set({decorator:null});
+ee=false;
+ej=R;
 break;
-case cF:this.fields[name]=new qx.ui.basic.Label(eh);
+case cI:this.fields[name]=new qx.ui.basic.Label(el);
 
-if(eh.id){this.field_id=name;
+if(el.id){this.field_id=name;
 }break;
-case cu:ej=new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
-ej.add(this.createDoW());
-var ed=new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
-ed.add(this.createHours());
-ed.add(new qx.ui.basic.Label(bB));
-ed.add(this.createHours());
-ej.add(ed);
-ej.getValue=Q;
-ej.setValueStr=cS;
+case cy:eo=new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
+eo.add(this.createDoW());
+var eh=new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
+eh.add(this.createHours());
+eh.add(new qx.ui.basic.Label(bC));
+eh.add(this.createHours());
+eo.add(eh);
+eo.getValue=S;
+eo.setValueStr=cW;
 break;
-default:alert("This shouldn't happen! Asked for element "+el);
+default:alert("This shouldn't happen! Asked for element "+eq);
 break;
-}if(ej&&!eh.hidden){dbg(5,B+el+cH+name+cH+ee+bC+dW.getLayout());
-this.fields[name]=ej;
+}if(eo&&!el.hidden){dbg(5,z+eq+cL+name+cL+ei+bD+eb.getLayout());
+this.fields[name]=eo;
 this.fields[name].field_name=name;
-ej.setTabIndex(this.index++);
+eo.setTabIndex(this.index++);
 
-if(!this.first_field){this.first_field=ej;
-}ej.addListener(C,function(e){if(e.getKeyIdentifier()==by&&ek){dbg(5,bL+e+cH+name+cH+ee);
+if(!this.first_field){this.first_field=eo;
+}eo.addListener(B,function(e){if(e.getKeyIdentifier()==bO&&ep){dbg(5,bT+e+cL+name+cL+ei);
 
 if(this.first_button){this.first_button.execute();
 }}},this);
 
-if(eh.width){ej.setMinWidth(eh.width);
+if(el.width){eo.setMinWidth(el.width);
 }
-if(ea){var eb=new qx.ui.basic.Label(ee);
-eb.setBuddy(ej);
-dW.add(eb,{row:dX,column:0});
-ej.widget_label=eb;
+if(ee){var ef=new qx.ui.basic.Label(ei);
+ef.setBuddy(eo);
+eb.add(ef,{row:ec,column:0});
+eo.widget_label=ef;
 }
-if(/Grid/.test(dW.getLayout().toString())){dW.add(ej,{row:dX,column:1});
-}else{dbg(5,db+ej+bC+dW.getLayout().toString());
-dW.add(ej,{flex:1});
-}if(ef&&this.callback&&ec){dbg(4,P+el+cH+name+cH);
-ej.addListener(ef,function(e){if(!this.updating||(dY>0&&this.delayTimer)){dbg(5,t+el+cH+name+cH+this.field_id);
+if(/Grid/.test(eb.getLayout().toString())){eb.add(eo,{row:ec,column:1});
+}else{dbg(5,dk+eo+bD+eb.getLayout().toString());
+eb.add(eo,{flex:1});
+}if(ej&&this.callback&&eg){dbg(4,Q+eq+cL+name+cL);
+
+if(typeof (ej)===dc){ej=[ej];
+}
+for(var l=0;l<ej.length;l++){eo.addListener(ej[l],function(e){if(!this.updating||(ed>0&&this.delayTimer)){dbg(5,bm+eq+cL+name+cL+this.field_id);
 this.updating=true;
-var en=null;
+var es=null;
 
 if(this.field_id){this.fields[this.field_id].getValue();
-}var em=e.getData?e.getData():cG;
-if(dY==0){dbg(3,be+print_a(this.callback));
-this.callback[1].call(this.callback[0],[en,name,el,em,eh]);
-}else{if(this.delayTimer){dbg(4,bW);
+}var er=e.getData?e.getData():cK;
+if(ed==0){dbg(3,bd+print_a(this.callback));
+this.callback[1].call(this.callback[0],[es,name,eq,er,el]);
+}else{if(this.delayTimer){dbg(4,ci);
 this.timer.stop(this.delayTimer);
 this.delayTimer=null;
-}dbg(4,m);
-this.delayTimer=this.timer.start(function(eo,ep){dbg(3,dd);
-this.callback[1].call(this.callback[0],[en,name,el,em,eh]);
-},0,this,null,dY);
-}}else{dbg(3,c);
+}dbg(4,q);
+this.delayTimer=this.timer.start(function(et,eu){dbg(3,dg);
+this.callback[1].call(this.callback[0],[es,name,eq,er,el]);
+},0,this,null,ed);
+}}else{dbg(3,j);
 }},this);
-dbg(5,y);
-}}return ej;
-},calcView:function(eq,er){var es=1;
+dbg(5,dd+ej[l]);
+}}}return eo;
+},calcView:function(ev,ew){var ex=1;
 
-if(eq[0]&&eq[0].split){var ew=eq[0].split(cH);
+if(ev[0]&&ev[0].split){var eB=ev[0].split(cL);
 
-switch(ew[0]){case br:dbg(5,bF+er);
-var eB=new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cE}));
-er.add(this.calcView(eq[1],eB));
+switch(eB[0]){case bv:dbg(5,bH+ew);
+var eG=new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cH}));
+ew.add(this.calcView(ev[1],eG));
 break;
-case V:dbg(5,bF+er);
-var eB=new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cE}));
-er.add(this.calcView(eq[1],eB),{flex:1});
+case H:dbg(5,bH+ew);
+var eG=new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({alignX:cH}));
+ew.add(this.calcView(ev[1],eG),{flex:1});
 break;
-case cR:dbg(5,bH+er);
-var eD=new qx.ui.layout.HBox(10);
-var eu=new qx.ui.container.Composite(eD);
-er.add(this.calcView(eq[1],eu));
+case cp:dbg(5,bJ+ew);
+var eI=new qx.ui.layout.HBox(10);
+var ez=new qx.ui.container.Composite(eI);
+ew.add(this.calcView(ev[1],ez));
 break;
-case bu:dbg(5,bH+er);
-var eD=new qx.ui.layout.HBox(10);
-var eu=new qx.ui.container.Composite(eD);
-er.add(this.calcView(eq[1],eu),{flex:1});
+case by:dbg(5,bJ+ew);
+var eI=new qx.ui.layout.HBox(10);
+var ez=new qx.ui.container.Composite(eI);
+ew.add(this.calcView(ev[1],ez),{flex:1});
 break;
-case k:dbg(5,bA+er+cC+print_a(eq[1]));
-this.calcView(eq[1],new qx.ui.container.Composite(new qx.ui.layout.HBox(10)));
+case o:dbg(5,cS+ew+cF+print_a(ev[1]));
+this.calcView(ev[1],new qx.ui.container.Composite(new qx.ui.layout.HBox(10)));
 break;
-case bE:dbg(4,bE);
-es=0;
-case bN:dbg(5,bg+er);
-var eB=er.add(this.calcView(eq[1],new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0,cE,Y).setSpacing(5).setColumnFlex(0,es).setColumnFlex(1,1))),{flex:1});
+case bG:dbg(4,bG);
+ex=0;
+case bN:dbg(5,bk+ew);
+var eG=ew.add(this.calcView(ev[1],new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0,cH,bc).setSpacing(5).setColumnFlex(0,ex).setColumnFlex(1,1))),{flex:1});
 break;
-case ba:dbg(5,bl+er);
-var ez=new qx.ui.groupbox.GroupBox();
-ez.setLayout(new qx.ui.layout.VBox(10));
-er.add(this.calcView(eq[1],ez),{flex:1});
+case Y:dbg(5,bh+ew);
+var eE=new qx.ui.groupbox.GroupBox();
+eE.setLayout(new qx.ui.layout.VBox(10));
+ew.add(this.calcView(ev[1],eE),{flex:1});
 break;
-case bs:dbg(5,bT+eq[1]);
-var eA=this.first_field;
-var ey=this.first_button;
+case bw:dbg(5,cf+ev[1]);
+var eF=this.first_field;
+var eD=this.first_button;
 this.first_field=null;
 this.first_button=null;
 var l=new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
-this.calcView(eq[1],l);
-var ev=new qx.ui.window.Window(cN).set({modal:true,allowClose:false,visibility:cF});
-ev.setLayout(new qx.ui.layout.HBox());
-ev.add(l);
-ev.layout=l;
-ev.center();
-ev.created=false;
-ev.dontfade=false;
-ev.isfaded=1;
-ev.first_button=this.first_button;
-ev.first_field=this.first_field;
-this.first_button=ey;
-this.first_field=eA;
-this.windows[ew[1]]=ev;
-ev.addListenerOnce(cq,function(){ev.created=true;
+this.calcView(ev[1],l);
+var eA=new qx.ui.window.Window(cO).set({modal:true,allowClose:false,visibility:cI});
+eA.setLayout(new qx.ui.layout.HBox());
+eA.add(l);
+eA.layout=l;
+eA.center();
+eA.created=false;
+eA.dontfade=false;
+eA.isfaded=1;
+eA.first_button=this.first_button;
+eA.first_field=this.first_field;
+this.first_button=eD;
+this.first_field=eF;
+this.windows[eB[1]]=eA;
+eA.addListenerOnce(cv,function(){eA.created=true;
 });
 break;
-case ch:var eC=eq[1][0][0];
-dbg(3,cl+print_a(eq)+bO+eC);
+case cw:var eH=ev[1][0][0];
+dbg(3,cm+print_a(ev)+bU+eH);
 this.childLtab=new frontend.Views.Ltab;
-this.childLtab.alignTabs=bn;
+this.childLtab.alignTabs=bq;
 this.childLtab.parentLtab=this.ltab;
-var eu=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-eu.add(this.childLtab,{width:bJ,height:bJ});
-er.add(eu,{flex:5});
-rpc.callRPC(U+eC,cn,this.childLtab,this.childLtab.dispatch);
+var ez=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
+ez.add(this.childLtab,{width:bE,height:bE});
+ew.add(ez,{flex:5});
+rpc.callRPC(F+eH,co,this.childLtab,this.childLtab.dispatch);
 break;
-}}else{dbg(5,g+er);
-var et=eq;
+}}else{dbg(5,k+ew);
+var ey=ev;
 
-for(var l=0;l<et.length;l++){if(et[l].push&&et[l].length<4){dbg(5,bw+et[l]+D+er);
-var ex=this.calcView(et[l],er);
-}else{dbg(5,bm+et[l]+W+er);
-this.addElement(et[l],er,parseInt(l),{flex:1});
-}}}dbg(5,L+eq[0]);
-return er;
-},focus_if_ok:function(eE){if(eE&&eE.isFocusable()){dbg(4,bq+eE);
-eE.focus();
-}},window_show:function(name){dbg(2,bv+name);
+for(var l=0;l<ey.length;l++){if(ey[l].push&&ey[l].length<4){dbg(5,bA+ey[l]+G+ew);
+var eC=this.calcView(ey[l],ew);
+}else{dbg(5,bi+ey[l]+ba+ew);
+this.addElement(ey[l],ew,parseInt(l),{flex:1});
+}}}dbg(5,L+ev[0]);
+return ew;
+},focus_if_ok:function(eJ){if(eJ&&eJ.isFocusable()){dbg(4,bu+eJ);
+eJ.focus();
+}},window_show:function(name){dbg(2,bz+name);
 win=this.windows[name];
-win.setVisibility(cp);
+win.setVisibility(cq);
 win.focus();
 win.activate();
 win.dontfade=false;
@@ -11924,37 +11948,37 @@ this.window_fade_to(win,1);
 this.focus_if_ok(win.first_field);
 this.first_button_window=this.first_button;
 this.first_button=win.first_button;
-},window_fade_to:function(eF,eG){if(eF.created&&!eF.dontfade&&eF.isfaded!=eG){eF.isfaded=eG;
-var eH=new qx.fx.effect.core.Fade(eF.layout.getContainerElement().getDomElement());
-eH.set({from:1.5-eG,to:eG,duration:0.25});
-eH.start();
-eF.setEnabled(eG<1?false:true);
-}else{}},windows_fade_to:function(eI){for(var w in this.windows){this.window_fade_to(this.windows[w],eI);
+},window_fade_to:function(eK,eL){if(eK.created&&!eK.dontfade&&eK.isfaded!=eL){eK.isfaded=eL;
+var eM=new qx.fx.effect.core.Fade(eK.layout.getContainerElement().getDomElement());
+eM.set({from:1.5-eL,to:eL,duration:0.25});
+eM.start();
+eK.setEnabled(eL<1?false:true);
+}else{}},windows_fade_to:function(eN){for(var w in this.windows){this.window_fade_to(this.windows[w],eN);
 }
-if(this.childLtab&&this.childLtab.form&&this.childLtab.form.fields){this.childLtab.form.fields.windows_fade_to(eI);
-}},window_hide:function(name){dbg(2,cB+name+S+this.windows.length);
+if(this.childLtab&&this.childLtab.form&&this.childLtab.form.fields){this.childLtab.form.fields.windows_fade_to(eN);
+}},window_hide:function(name){dbg(2,cE+name+br+this.windows.length);
 
-if(name==co||!name){for(var i in this.windows){dbg(2,cB+i);
-this.windows[i].setVisibility(cF);
+if(name==ct||!name){for(var i in this.windows){dbg(2,cE+i);
+this.windows[i].setVisibility(cI);
 this.windows[i].dontfade=true;
-}}else{this.windows[name].setVisibility(cF);
+}}else{this.windows[name].setVisibility(cI);
 }
 if(this.first_button_window){this.first_button=this.first_button_window;
 this.first_button_window=null;
 }this.focus_if_ok(this.first_field);
-},createHours:function(){var eJ=new qx.ui.form.SelectBox();
+},createHours:function(){var eO=new qx.ui.form.SelectBox();
 
-for(var i=0;i<48;i++){var eK=new qx.ui.form.ListItem(cG+cf(Math.floor(i/2))+cH+cf((i%2)*30));
-eJ.add(eK);
-}eJ.setWidth(null);
-return eJ;
-},createDoW:function(){var eM=new qx.ui.form.SelectBox();
-var eL=[A,M,F,cW];
+for(var i=0;i<48;i++){var eP=new qx.ui.form.ListItem(cK+ch(Math.floor(i/2))+cL+ch((i%2)*30));
+eO.add(eP);
+}eO.setWidth(null);
+return eO;
+},createDoW:function(){var eR=new qx.ui.form.SelectBox();
+var eQ=[y,M,A,di];
 
-for(var i=0;i<eL.length;i++){var eN=new qx.ui.form.ListItem(eL[i]);
-eM.add(eN);
-}eM.setWidth(null);
-return eM;
+for(var i=0;i<eQ.length;i++){var eS=new qx.ui.form.ListItem(eQ[i]);
+eR.add(eS);
+}eR.setWidth(null);
+return eR;
 }}});
 })();
 (function(){var b="qx.ui.form.IModel",a="qx.event.type.Data";
@@ -16105,908 +16129,73 @@ d.addListener(a,this._onHtmlInput,this);
 return d;
 }}});
 })();
-(function(){var f="qx.ui.core.MSingleSelectionHandling",d="__pn",c="changeSelection",b="changeSelected",a="qx.event.type.Data";
-qx.Mixin.define(f,{events:{"changeSelection":a},members:{__pn:null,getSelection:function(){var g=this.__po().getSelected();
+(function(){var k="button",j="hovered",i="pressed",h="arrow",g="Enter",f="Space",d="abandoned",c="both",b="String",a="changeVisibility",A="splitbutton",z="changeShow",y="mouseout",x="keydown",w="execute",v="_applyMenu",u="icon",t="mouseover",s="keyup",r="qx.ui.menu.Menu",p="_applyIcon",q="label",n="_applyShow",o="changeMenu",l="_applyLabel",m="qx.ui.form.SplitButton";
+qx.Class.define(m,{extend:qx.ui.core.Widget,include:[qx.ui.core.MExecutable],implement:[qx.ui.form.IExecutable],construct:function(B,C,D,E){qx.ui.core.Widget.call(this);
+this._setLayout(new qx.ui.layout.HBox);
+this._createChildControl(h);
+this.addListener(t,this._onMouseOver,this,true);
+this.addListener(y,this._onMouseOut,this,true);
+this.addListener(x,this._onKeyDown);
+this.addListener(s,this._onKeyUp);
+if(B!=null){this.setLabel(B);
+}
+if(C!=null){this.setIcon(C);
+}
+if(D!=null){this.setMenu(D);
+}
+if(E!=null){this.setCommand(E);
+}},properties:{appearance:{refine:true,init:A},focusable:{refine:true,init:true},label:{apply:l,nullable:true,check:b},icon:{check:b,apply:p,nullable:true,themeable:true},show:{init:c,check:[c,q,u],themeable:true,inheritable:true,apply:n,event:z},menu:{check:r,nullable:true,apply:v,event:o}},members:{__tH:null,_createChildControlImpl:function(F,G){var H;
 
-if(g){return [g];
-}else{return [];
-}},setSelection:function(h){switch(h.length){case 0:this.resetSelection();
+switch(F){case k:H=new qx.ui.form.Button;
+H.addListener(w,this._onButtonExecute,this);
+H.setFocusable(false);
+this._addAt(H,0,{flex:1});
 break;
-case 1:this.__po().setSelected(h[0]);
+case h:H=new qx.ui.form.MenuButton;
+H.setFocusable(false);
+this._addAt(H,1);
 break;
-default:throw new Error("Could only select one item, but the selection"+" array contains "+h.length+" items!");
-}},resetSelection:function(){this.__po().resetSelected();
-},isSelected:function(i){return this.__po().isSelected(i);
-},isSelectionEmpty:function(){return this.__po().isSelectionEmpty();
-},getSelectables:function(j){return this.__po().getSelectables(j);
-},_onChangeSelected:function(e){var l=e.getData();
-var k=e.getOldData();
-l==null?l=[]:l=[l];
-k==null?k=[]:k=[k];
-this.fireDataEvent(c,l,k);
-},__po:function(){if(this.__pn==null){var m=this;
-this.__pn=new qx.ui.core.SingleSelectionManager({getItems:function(){return m._getItems();
-},isItemSelectable:function(n){if(m._isItemSelectable){return m._isItemSelectable(n);
-}else{return n.isVisible();
-}}});
-this.__pn.addListener(b,this._onChangeSelected,this);
-}this.__pn.setAllowEmptySelection(this._isAllowEmptySelection());
-return this.__pn;
-}},destruct:function(){this._disposeObjects(d);
-}});
-})();
-(function(){var k="list",j="atom",i="pressed",h="abandoned",g="popup",f="hovered",d="changeLabel",c="changeIcon",b="arrow",a="",z="spacer",y="Enter",x="one",w="mouseout",v="Space",u="key",t="mousewheel",s="keyinput",r="changeSelection",q="quick",o="qx.ui.form.SelectBox",p="mouseover",m="selectbox",n="click",l=" ";
-qx.Class.define(o,{extend:qx.ui.form.AbstractSelectBox,implement:[qx.ui.core.ISingleSelection,qx.ui.form.IModelSelection],include:[qx.ui.core.MSingleSelectionHandling,qx.ui.form.MModelSelection],construct:function(){qx.ui.form.AbstractSelectBox.call(this);
-this._createChildControl(j);
-this._createChildControl(z);
-this._createChildControl(b);
-this.addListener(p,this._onMouseOver,this);
-this.addListener(w,this._onMouseOut,this);
-this.addListener(n,this._onClick,this);
-this.addListener(t,this._onMouseWheel,this);
-this.addListener(s,this._onKeyInput,this);
-this.addListener(r,this.__pq,this);
-},properties:{appearance:{refine:true,init:m}},members:{__pp:null,_createChildControlImpl:function(A,B){var C;
+}return H||qx.ui.core.Widget.prototype._createChildControlImpl.call(this,F);
+},_forwardStates:{hovered:1,focused:1},_applyLabel:function(I,J){var K=this.getChildControl(k);
+I==null?K.resetLabel():K.setLabel(I);
+},_applyIcon:function(L,M){var N=this.getChildControl(k);
+L==null?N.resetIcon():N.setIcon(L);
+},_applyMenu:function(O,P){var Q=this.getChildControl(h);
 
-switch(A){case z:C=new qx.ui.core.Spacer();
-this._add(C,{flex:1});
-break;
-case j:C=new qx.ui.basic.Atom(l);
-C.setCenter(false);
-C.setAnonymous(true);
-this._add(C,{flex:1});
-break;
-case b:C=new qx.ui.basic.Image();
-C.setAnonymous(true);
-this._add(C);
-break;
-}return C||qx.ui.form.AbstractSelectBox.prototype._createChildControlImpl.call(this,A);
-},_forwardStates:{focused:true},_getItems:function(){return this.getChildrenContainer().getChildren();
-},_isAllowEmptySelection:function(){return this.getChildrenContainer().getSelectionMode()!==x;
-},__pq:function(e){var E=e.getData()[0];
-var D=this.getChildControl(k);
-
-if(D.getSelection()[0]!=E){if(E){D.setSelection([E]);
-}else{D.resetSelection();
-}}this.__pr();
-this.__ps();
-},__pr:function(){var G=this.getChildControl(k).getSelection()[0];
-var H=this.getChildControl(j);
-var F=G?G.getIcon():a;
-F==null?H.resetIcon():H.setIcon(F);
-},__ps:function(){var K=this.getChildControl(k).getSelection()[0];
-var L=this.getChildControl(j);
-var J=K?K.getLabel():a;
-var I=this.getFormat();
-
-if(I!=null){J=I.call(this,K);
-}if(J&&J.translate){J=J.translate();
-}J==null?L.resetLabel():L.setLabel(J);
-},_onMouseOver:function(e){if(!this.isEnabled()||e.getTarget()!==this){return;
+if(O){Q.resetEnabled();
+Q.setMenu(O);
+O.setOpener(this);
+O.addListener(a,this._onChangeMenuVisibility,this);
+}else{Q.setEnabled(false);
+Q.resetMenu();
 }
-if(this.hasState(h)){this.removeState(h);
-this.addState(i);
-}this.addState(f);
-},_onMouseOut:function(e){if(!this.isEnabled()||e.getTarget()!==this){return;
-}this.removeState(f);
-
-if(this.hasState(i)){this.removeState(i);
-this.addState(h);
-}},_onClick:function(e){this.toggle();
-},_onMouseWheel:function(e){if(this.getChildControl(g).isVisible()){return;
-}var N=e.getWheelDelta()>0?1:-1;
-var P=this.getSelectables();
-var O=this.getSelection()[0];
-
-if(!O){O=P[0];
-}var M=P.indexOf(O)+N;
-var Q=P.length-1;
-if(M<0){M=0;
-}else if(M>=Q){M=Q;
-}this.setSelection([P[M]]);
-e.stopPropagation();
-e.preventDefault();
-},_onKeyPress:function(e){var R=e.getKeyIdentifier();
-
-if(R==y||R==v){if(this.__pp){this.setSelection([this.__pp]);
-this.__pp=null;
-}this.toggle();
-}else{qx.ui.form.AbstractSelectBox.prototype._onKeyPress.call(this,e);
-}},_onKeyInput:function(e){var S=e.clone();
-S.setTarget(this._list);
-S.setBubbles(false);
-this.getChildControl(k).dispatchEvent(S);
-},_onListMouseDown:function(e){if(this.__pp){this.setSelection([this.__pp]);
-this.__pp=null;
-}},_onListChangeSelection:function(e){var T=e.getData();
-var W=e.getOldData();
-if(W&&W.length>0){W[0].removeListener(c,this.__pr,this);
-W[0].removeListener(d,this.__ps,this);
-}
-if(T.length>0){var V=this.getChildControl(g);
-var U=this.getChildControl(k);
-var X=U.getSelectionContext();
-
-if(V.isVisible()&&(X==q||X==u)){this.__pp=T[0];
-}else{this.setSelection([T[0]]);
-this.__pp=null;
-}T[0].addListener(c,this.__pr,this);
-T[0].addListener(d,this.__ps,this);
-}else{this.resetSelection();
-}},_onPopupChangeVisibility:function(e){var ba=this.getChildControl(g);
-
-if(!ba.isVisible()){var bc=this.getChildControl(k);
-if(bc.hasChildren()){bc.setSelection(this.getSelection());
-}}else{var Y=ba.getLayoutLocation(this);
-var be=qx.bom.Viewport.getHeight();
-var bd=Y.top;
-var bf=be-Y.bottom;
-var bb=bd>bf?bd:bf;
-var bg=this.getMaxListHeight();
-var bc=this.getChildControl(k);
-
-if(bg==null||bg>bb){bc.setMaxHeight(bb);
-}else if(bg<bb){bc.setMaxHeight(bg);
-}}}},destruct:function(){this.__pp=null;
-}});
-})();
-(function(){var g="Boolean",f="qx.ui.core.SingleSelectionManager",e="__pv",d="__pt",c="__pu",b="changeSelected",a="qx.event.type.Data";
-qx.Class.define(f,{extend:qx.core.Object,construct:function(h){qx.core.Object.call(this);
-this.__pt=h;
-},events:{"changeSelected":a},properties:{allowEmptySelection:{check:g,init:true,apply:e}},members:{__pu:null,__pt:null,getSelected:function(){return this.__pu;
-},setSelected:function(j){if(!this.__px(j)){throw new Error("Could not select "+j+", because it is not a child element!");
-}this.__pw(j);
-},resetSelected:function(){this.__pw(null);
-},isSelected:function(k){if(!this.__px(k)){throw new Error("Could not check if "+k+" is selected,"+" because it is not a child element!");
-}return this.__pu===k;
-},isSelectionEmpty:function(){return this.__pu==null;
-},getSelectables:function(l){var m=this.__pt.getItems();
-var n=[];
-
-for(var i=0;i<m.length;i++){if(this.__pt.isItemSelectable(m[i])){n.push(m[i]);
-}}if(!l){for(var i=n.length-1;i>=0;i--){if(!n[i].getEnabled()){n.splice(i,1);
-}}}return n;
-},__pv:function(o,p){if(!o){this.__pw(this.__pu);
-}},__pw:function(q){var t=this.__pu;
-var s=q;
-
-if(s!=null&&t===s){return;
-}
-if(!this.isAllowEmptySelection()&&s==null){var r=this.getSelectables(true)[0];
-
-if(r){s=r;
-}}this.__pu=s;
-this.fireDataEvent(b,s,t);
-},__px:function(u){var v=this.__pt.getItems();
-
-for(var i=0;i<v.length;i++){if(v[i]===u){return true;
-}}return false;
-}},destruct:function(){if(this.__pt.toHashCode){this._disposeObjects(d);
-}else{this.__pt=null;
-}this._disposeObjects(c);
-}});
-})();
-(function(){var a="qx.ui.core.Spacer";
-qx.Class.define(a,{extend:qx.ui.core.LayoutItem,construct:function(b,c){qx.ui.core.LayoutItem.call(this);
-this.setWidth(b!=null?b:0);
-this.setHeight(c!=null?c:0);
-},members:{checkAppearanceNeeds:function(){},addChildrenToQueue:function(d){},destroy:function(){if(this.$$disposed){return;
-}var parent=this.$$parent;
-
-if(parent){parent._remove(this);
-}qx.ui.core.queue.Dispose.add(this);
-}}});
-})();
-(function(){var c="qx.event.type.Data",b="qx.event.type.Event",a="qx.ui.table.ITableModel";
-qx.Interface.define(a,{events:{"dataChanged":c,"metaDataChanged":b,"sorted":c},members:{getRowCount:function(){},getRowData:function(d){},getColumnCount:function(){},getColumnId:function(e){},getColumnIndexById:function(f){},getColumnName:function(g){},isColumnEditable:function(h){},isColumnSortable:function(i){},sortByColumn:function(j,k){},getSortColumnIndex:function(){},isSortAscending:function(){},prefetchRows:function(l,m){},getValue:function(n,o){},getValueById:function(p,q){},setValue:function(r,s,t){},setValueById:function(u,v,w){}}});
-})();
-(function(){var e="metaDataChanged",d="qx.event.type.Data",c="qx.event.type.Event",b="abstract",a="qx.ui.table.model.Abstract";
-qx.Class.define(a,{type:b,extend:qx.core.Object,implement:qx.ui.table.ITableModel,events:{"dataChanged":d,"metaDataChanged":c,"sorted":d},construct:function(){qx.core.Object.call(this);
-this.__py=[];
-this.__pz=[];
-this.__pA={};
-},members:{__py:null,__pz:null,__pA:null,__pB:null,init:function(f){},getRowCount:function(){throw new Error("getRowCount is abstract");
-},getRowData:function(g){return null;
-},isColumnEditable:function(h){return false;
-},isColumnSortable:function(j){return false;
-},sortByColumn:function(k,l){},getSortColumnIndex:function(){return -1;
-},isSortAscending:function(){return true;
-},prefetchRows:function(m,n){},getValue:function(o,p){throw new Error("getValue is abstract");
-},getValueById:function(q,r){return this.getValue(this.getColumnIndexById(q),r);
-},setValue:function(s,t,u){throw new Error("setValue is abstract");
-},setValueById:function(v,w,x){this.setValue(this.getColumnIndexById(v),w,x);
-},getColumnCount:function(){return this.__py.length;
-},getColumnIndexById:function(y){return this.__pA[y];
-},getColumnId:function(z){return this.__py[z];
-},getColumnName:function(A){return this.__pz[A];
-},setColumnIds:function(B){this.__py=B;
-this.__pA={};
-
-for(var i=0;i<B.length;i++){this.__pA[B[i]]=i;
-}this.__pz=new Array(B.length);
-if(!this.__pB){this.fireEvent(e);
-}},setColumnNamesByIndex:function(C){if(this.__py.length!=C.length){throw new Error("this.__columnIdArr and columnNameArr have different length: "+this.__py.length+" != "+C.length);
-}this.__pz=C;
-this.fireEvent(e);
-},setColumnNamesById:function(D){this.__pz=new Array(this.__py.length);
-
-for(var i=0;i<this.__py.length;++i){this.__pz[i]=D[this.__py[i]];
-}},setColumns:function(E,F){var G=this.__py.length==0||F;
-
-if(F==null){if(this.__py.length==0){F=E;
-}else{F=this.__py;
-}}
-if(F.length!=E.length){throw new Error("columnIdArr and columnNameArr have different length: "+F.length+" != "+E.length);
-}
-if(G){this.__pB=true;
-this.setColumnIds(F);
-this.__pB=false;
-}this.setColumnNamesByIndex(E);
-}},destruct:function(){this.__py=this.__pz=this.__pA=null;
-}});
-})();
-(function(){var e="dataChanged",d="metaDataChanged",c="qx.ui.table.model.Simple",b="Boolean",a="sorted";
-qx.Class.define(c,{extend:qx.ui.table.model.Abstract,construct:function(){qx.ui.table.model.Abstract.call(this);
-this.__pC=[];
-this.__pD=-1;
-this.__pE=[];
-this.__pF=null;
-},properties:{caseSensitiveSorting:{check:b,init:true}},statics:{_defaultSortComparatorAscending:function(f,g){var h=f[arguments.callee.columnIndex];
-var k=g[arguments.callee.columnIndex];
-
-if(qx.lang.Type.isNumber(h)&&qx.lang.Type.isNumber(k)){var l=isNaN(h)?isNaN(k)?0:1:isNaN(k)?-1:null;
-
-if(l!=null){return l;
-}}return (h>k)?1:((h==k)?0:-1);
-},_defaultSortComparatorInsensitiveAscending:function(m,n){var o=(m[arguments.callee.columnIndex].toLowerCase?m[arguments.callee.columnIndex].toLowerCase():m[arguments.callee.columnIndex]);
-var p=(n[arguments.callee.columnIndex].toLowerCase?n[arguments.callee.columnIndex].toLowerCase():n[arguments.callee.columnIndex]);
-
-if(qx.lang.Type.isNumber(o)&&qx.lang.Type.isNumber(p)){var q=isNaN(o)?isNaN(p)?0:1:isNaN(p)?-1:null;
-
-if(q!=null){return q;
-}}return (o>p)?1:((o==p)?0:-1);
-},_defaultSortComparatorDescending:function(r,s){var t=r[arguments.callee.columnIndex];
-var u=s[arguments.callee.columnIndex];
-
-if(qx.lang.Type.isNumber(t)&&qx.lang.Type.isNumber(u)){var v=isNaN(t)?isNaN(u)?0:1:isNaN(u)?-1:null;
-
-if(v!=null){return v;
-}}return (t<u)?1:((t==u)?0:-1);
-},_defaultSortComparatorInsensitiveDescending:function(w,x){var y=(w[arguments.callee.columnIndex].toLowerCase?w[arguments.callee.columnIndex].toLowerCase():w[arguments.callee.columnIndex]);
-var z=(x[arguments.callee.columnIndex].toLowerCase?x[arguments.callee.columnIndex].toLowerCase():x[arguments.callee.columnIndex]);
-
-if(qx.lang.Type.isNumber(y)&&qx.lang.Type.isNumber(z)){var A=isNaN(y)?isNaN(z)?0:1:isNaN(z)?-1:null;
-
-if(A!=null){return A;
-}}return (y<z)?1:((y==z)?0:-1);
-}},members:{__pC:null,__pF:null,__pG:null,__pE:null,__pD:null,__pH:null,getRowData:function(B){var C=this.__pC[B];
-
-if(C==null||C.originalData==null){return C;
-}else{return C.originalData;
-}},getRowDataAsMap:function(D){var F=this.__pC[D];
-
-if(F!=null){var E={};
-for(var G=0;G<this.getColumnCount();G++){E[this.getColumnId(G)]=F[G];
-}
-if(F.originalData!=null){for(var H in F.originalData){if(E[H]==undefined){E[H]=F.originalData[H];
-}}}return E;
-}return (F&&F.originalData)?F.originalData:null;
-},getDataAsMapArray:function(){var J=this.getRowCount();
-var I=[];
-
-for(var i=0;i<J;i++){I.push(this.getRowDataAsMap(i));
-}return I;
-},setEditable:function(K){this.__pF=[];
-
-for(var L=0;L<this.getColumnCount();L++){this.__pF[L]=K;
-}this.fireEvent(d);
-},setColumnEditable:function(M,N){if(N!=this.isColumnEditable(M)){if(this.__pF==null){this.__pF=[];
-}this.__pF[M]=N;
-this.fireEvent(d);
-}},isColumnEditable:function(O){return this.__pF?(this.__pF[O]==true):false;
-},setColumnSortable:function(P,Q){if(Q!=this.isColumnSortable(P)){if(this.__pG==null){this.__pG=[];
-}this.__pG[P]=Q;
-this.fireEvent(d);
-}},isColumnSortable:function(R){return (this.__pG?(this.__pG[R]!==false):true);
-},sortByColumn:function(S,T){var W;
-var V=this.__pE[S];
-
-if(V){W=(T?V.ascending:V.descending);
-}else{if(this.getCaseSensitiveSorting()){W=(T?qx.ui.table.model.Simple._defaultSortComparatorAscending:qx.ui.table.model.Simple._defaultSortComparatorDescending);
-}else{W=(T?qx.ui.table.model.Simple._defaultSortComparatorInsensitiveAscending:qx.ui.table.model.Simple._defaultSortComparatorInsensitiveDescending);
-}}W.columnIndex=S;
-this.__pC.sort(W);
-this.__pD=S;
-this.__pH=T;
-var U={columnIndex:S,ascending:T};
-this.fireDataEvent(a,U);
-this.fireEvent(d);
-},setSortMethods:function(X,Y){var ba;
-
-if(qx.lang.Type.isFunction(Y)){ba={ascending:Y,descending:function(bb,bc){return Y(bc,bb);
-}};
-}else{ba=Y;
-}this.__pE[X]=ba;
-},getSortMethods:function(bd){return this.__pE[bd];
-},clearSorting:function(){if(this.__pD!=-1){this.__pD=-1;
-this.__pH=true;
-this.fireEvent(d);
-}},getSortColumnIndex:function(){return this.__pD;
-},_setSortColumnIndex:function(be){this.__pD=be;
-},isSortAscending:function(){return this.__pH;
-},_setSortAscending:function(bf){this.__pH=bf;
-},getRowCount:function(){return this.__pC.length;
-},getValue:function(bg,bh){if(bh<0||bh>=this.__pC.length){throw new Error("this.__rowArr out of bounds: "+bh+" (0.."+this.__pC.length+")");
-}return this.__pC[bh][bg];
-},setValue:function(bi,bj,bk){if(this.__pC[bj][bi]!=bk){this.__pC[bj][bi]=bk;
-if(this.hasListener(e)){var bl={firstRow:bj,lastRow:bj,firstColumn:bi,lastColumn:bi};
-this.fireDataEvent(e,bl);
-}
-if(bi==this.__pD){this.clearSorting();
-}}},setData:function(bm,bn){this.__pC=bm;
-if(this.hasListener(e)){var bo={firstRow:0,lastRow:bm.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
-this.fireDataEvent(e,bo);
-}
-if(bn!==false){this.clearSorting();
-}},getData:function(){return this.__pC;
-},setDataAsMapArray:function(bp,bq,br){this.setData(this._mapArray2RowArr(bp,bq),br);
-},addRows:function(bs,bt,bu){if(bt==null){bt=this.__pC.length;
-}bs.splice(0,0,bt,0);
-Array.prototype.splice.apply(this.__pC,bs);
-var bv={firstRow:bt,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
-this.fireDataEvent(e,bv);
-
-if(bu!==false){this.clearSorting();
-}},addRowsAsMapArray:function(bw,bx,by,bz){this.addRows(this._mapArray2RowArr(bw,by),bx,bz);
-},setRows:function(bA,bB,bC){if(bB==null){bB=0;
-}bA.splice(0,0,bB,bA.length);
-Array.prototype.splice.apply(this.__pC,bA);
-var bD={firstRow:bB,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
-this.fireDataEvent(e,bD);
-
-if(bC!==false){this.clearSorting();
-}},setRowsAsMapArray:function(bE,bF,bG,bH){this.setRows(this._mapArray2RowArr(bE,bG),bF,bH);
-},removeRows:function(bI,bJ,bK){this.__pC.splice(bI,bJ);
-var bL={firstRow:bI,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1,removeStart:bI,removeCount:bJ};
-this.fireDataEvent(e,bL);
-
-if(bK!==false){this.clearSorting();
-}},_mapArray2RowArr:function(bM,bN){var bR=bM.length;
-var bO=this.getColumnCount();
-var bQ=new Array(bR);
-var bP;
-
-for(var i=0;i<bR;++i){bP=[];
-
-if(bN){bP.originalData=bM[i];
-}
-for(var j=0;j<bO;++j){bP[j]=bM[i][this.getColumnId(j)];
-}bQ[i]=bP;
-}return bQ;
-}},destruct:function(){this.__pC=this.__pF=this.__pE=this.__pG=null;
-}});
-})();
-(function(){var q="Boolean",p="column-button",o="Function",n="qx.event.type.Data",m="statusbar",k="qx.ui.table.pane.CellEvent",h="function",g="PageUp",f="dataChanged",e="changeLocale",bH="changeSelection",bG="__pS",bF="appear",bE="qx.dynlocale",bD='"',bC="Enter",bB="metaDataChanged",bA="_applyStatusBarVisible",bz="columnVisibilityMenuCreateStart",by="blur",y="qx.ui.table.Table",z="columnVisibilityMenuCreateEnd",v="changeVisible",w="_applyResetSelectionOnHeaderClick",t="_applyMetaColumnCounts",u="__pJ",r="focus",s="changeDataRowRenderer",G="changeHeaderCellHeight",H="Escape",ba="A",V="changeSelectionModel",bi="Left",bd="__pU",bu="Down",bo="Integer",O="_applyHeaderCellHeight",bx="__pI",bw="visibilityChanged",bv="qx.ui.table.ITableModel",M="orderChanged",R="_applySelectionModel",T="menu-button",X="menu",bb="_applyAdditionalStatusBarText",be="_applyFocusCellOnMouseMove",bk="table",bq="_applyColumnVisibilityButtonVisible",A="changeTableModel",B="qx.event.type.Event",Q="tableWidthChanged",bh="_applyHeaderCellsVisible",bg="Object",bf="_applyShowCellFocusIndicator",bm="resize",bl="verticalScrollBarChanged",bc="changeScrollY",bj="_applyTableModel",a="End",bp="_applyKeepFirstVisibleRowComplete",C="widthChanged",D="one of one row",W="Home",b="_applyRowHeight",d="F2",L="Up",E="%1 rows",F="qx.ui.table.selection.Model",J="one row",Y="__pQ",bs="PageDown",br="%1 of %2 rows",S="keypress",bt="changeRowHeight",N="__pR",bn="Number",I="header",K="_applyContextMenuFromDataCellsOnly",c="qx.ui.table.IRowRenderer",U="Right",P="Space";
-qx.Class.define(y,{extend:qx.ui.core.Widget,construct:function(bI,bJ){qx.ui.core.Widget.call(this);
-if(!bJ){bJ={};
-}
-if(bJ.initiallyHiddenColumns){this.setInitiallyHiddenColumns(bJ.initiallyHiddenColumns);
-}
-if(bJ.selectionManager){this.setNewSelectionManager(bJ.selectionManager);
-}
-if(bJ.selectionModel){this.setNewSelectionModel(bJ.selectionModel);
-}
-if(bJ.tableColumnModel){this.setNewTableColumnModel(bJ.tableColumnModel);
-}
-if(bJ.tablePane){this.setNewTablePane(bJ.tablePane);
-}
-if(bJ.tablePaneHeader){this.setNewTablePaneHeader(bJ.tablePaneHeader);
-}
-if(bJ.tablePaneScroller){this.setNewTablePaneScroller(bJ.tablePaneScroller);
-}
-if(bJ.tablePaneModel){this.setNewTablePaneModel(bJ.tablePaneModel);
-}
-if(bJ.columnMenu){this.setNewColumnMenu(bJ.columnMenu);
-}this._setLayout(new qx.ui.layout.VBox());
-this.__pI=new qx.ui.container.Composite(new qx.ui.layout.HBox());
-this._add(this.__pI,{flex:1});
-this.setDataRowRenderer(new qx.ui.table.rowrenderer.Default(this));
-this.__pJ=this.getNewSelectionManager()(this);
-this.setSelectionModel(this.getNewSelectionModel()(this));
-this.setTableModel(bI||this.getEmptyTableModel());
-this.setMetaColumnCounts([-1]);
-this.setTabIndex(1);
-this.addListener(S,this._onKeyPress);
-this.addListener(r,this._onFocusChanged);
-this.addListener(by,this._onFocusChanged);
-var bK=new qx.ui.core.Widget().set({height:0});
-this._add(bK);
-bK.addListener(bm,this._onResize,this);
-this.__pK=null;
-this.__pL=null;
-if(qx.core.Environment.get(bE)){qx.locale.Manager.getInstance().addListener(e,this._onChangeLocale,this);
-}this.initStatusBarVisible();
-bI=this.getTableModel();
-
-if(bI.init&&typeof (bI.init)==h){bI.init(this);
-}},events:{"columnVisibilityMenuCreateStart":n,"columnVisibilityMenuCreateEnd":n,"tableWidthChanged":B,"verticalScrollBarChanged":n,"cellClick":k,"cellDblclick":k,"cellContextmenu":k,"dataEdited":n},statics:{__pM:{cellClick:1,cellDblclick:1,cellContextmenu:1}},properties:{appearance:{refine:true,init:bk},focusable:{refine:true,init:true},minWidth:{refine:true,init:50},initiallyHiddenColumns:{init:null},selectable:{refine:true,init:false},selectionModel:{check:F,apply:R,event:V},tableModel:{check:bv,apply:bj,event:A},rowHeight:{check:bn,init:20,apply:b,event:bt,themeable:true},forceLineHeight:{check:q,init:true},headerCellsVisible:{check:q,init:true,apply:bh,themeable:true},headerCellHeight:{check:bo,init:16,apply:O,event:G,nullable:true,themeable:true},statusBarVisible:{check:q,init:true,apply:bA},additionalStatusBarText:{nullable:true,init:null,apply:bb},columnVisibilityButtonVisible:{check:q,init:true,apply:bq,themeable:true},metaColumnCounts:{check:bg,apply:t},focusCellOnMouseMove:{check:q,init:false,apply:be},rowFocusChangeModifiesSelection:{check:q,init:true},showCellFocusIndicator:{check:q,init:true,apply:bf},contextMenuFromDataCellsOnly:{check:q,init:true,apply:K},keepFirstVisibleRowComplete:{check:q,init:true,apply:bp},alwaysUpdateCells:{check:q,init:false},resetSelectionOnHeaderClick:{check:q,init:true,apply:w},dataRowRenderer:{check:c,init:null,nullable:true,event:s},modalCellEditorPreOpenFunction:{check:o,init:null,nullable:true},newColumnMenu:{check:o,init:function(){return new qx.ui.table.columnmenu.Button();
-}},newSelectionManager:{check:o,init:function(bL){return new qx.ui.table.selection.Manager(bL);
-}},newSelectionModel:{check:o,init:function(bM){return new qx.ui.table.selection.Model(bM);
-}},newTableColumnModel:{check:o,init:function(bN){return new qx.ui.table.columnmodel.Basic(bN);
-}},newTablePane:{check:o,init:function(bO){return new qx.ui.table.pane.Pane(bO);
-}},newTablePaneHeader:{check:o,init:function(bP){return new qx.ui.table.pane.Header(bP);
-}},newTablePaneScroller:{check:o,init:function(bQ){return new qx.ui.table.pane.Scroller(bQ);
-}},newTablePaneModel:{check:o,init:function(bR){return new qx.ui.table.pane.Model(bR);
-}}},members:{__pK:null,__pL:null,__pI:null,__pJ:null,__pN:null,__pO:null,__pP:null,__pQ:null,__pR:null,__pS:null,__pT:null,__pU:null,_createChildControlImpl:function(bS,bT){var bU;
-
-switch(bS){case m:bU=new qx.ui.basic.Label();
-bU.set({allowGrowX:true});
-this._add(bU);
-break;
-case p:bU=this.getNewColumnMenu()();
-bU.set({focusable:false});
-var bV=bU.factory(X,{table:this});
-bV.addListener(bF,this._initColumnMenu,this);
-break;
-}return bU||qx.ui.core.Widget.prototype._createChildControlImpl.call(this,bS);
-},_applySelectionModel:function(bW,bX){this.__pJ.setSelectionModel(bW);
-
-if(bX!=null){bX.removeListener(bH,this._onSelectionChanged,this);
-}bW.addListener(bH,this._onSelectionChanged,this);
-},_applyRowHeight:function(bY,ca){var cb=this._getPaneScrollerArr();
-
-for(var i=0;i<cb.length;i++){cb[i].updateVerScrollBarMaximum();
-}},_applyHeaderCellsVisible:function(cc,cd){var ce=this._getPaneScrollerArr();
-
-for(var i=0;i<ce.length;i++){ce[i]._excludeChildControl(I);
-}},_applyHeaderCellHeight:function(cf,cg){var ch=this._getPaneScrollerArr();
-
-for(var i=0;i<ch.length;i++){ch[i].getHeader().setHeight(cf);
-}},getEmptyTableModel:function(){if(!this.__pS){this.__pS=new qx.ui.table.model.Simple();
-this.__pS.setColumns([]);
-this.__pS.setData([]);
-}return this.__pS;
-},_applyTableModel:function(ci,cj){this.getTableColumnModel().init(ci.getColumnCount(),this);
-
-if(cj!=null){cj.removeListener(bB,this._onTableModelMetaDataChanged,this);
-cj.removeListener(f,this._onTableModelDataChanged,this);
-}ci.addListener(bB,this._onTableModelMetaDataChanged,this);
-ci.addListener(f,this._onTableModelDataChanged,this);
-this._updateStatusBar();
-this._updateTableData(0,ci.getRowCount(),0,ci.getColumnCount());
-this._onTableModelMetaDataChanged();
-if(cj&&ci.init&&typeof (ci.init)==h){ci.init(this);
-}},getTableColumnModel:function(){if(!this.__pR){var cm=this.__pR=this.getNewTableColumnModel()(this);
-cm.addListener(bw,this._onColVisibilityChanged,this);
-cm.addListener(C,this._onColWidthChanged,this);
-cm.addListener(M,this._onColOrderChanged,this);
-var cl=this.getTableModel();
-cm.init(cl.getColumnCount(),this);
-var ck=this._getPaneScrollerArr();
-
-for(var i=0;i<ck.length;i++){var cn=ck[i];
-var co=cn.getTablePaneModel();
-co.setTableColumnModel(cm);
-}}return this.__pR;
-},_applyStatusBarVisible:function(cp,cq){if(cp){this._showChildControl(m);
-}else{this._excludeChildControl(m);
-}
-if(cp){this._updateStatusBar();
-}},_applyAdditionalStatusBarText:function(cr,cs){this.__pN=cr;
-this._updateStatusBar();
-},_applyColumnVisibilityButtonVisible:function(ct,cu){if(ct){this._showChildControl(p);
-}else{this._excludeChildControl(p);
-}},_applyMetaColumnCounts:function(cv,cw){var cD=cv;
-var cx=this._getPaneScrollerArr();
-var cB={};
-
-if(cv>cw){var cF=qx.event.Registration.getManager(cx[0]);
-
-for(var cG in qx.ui.table.Table.__pM){cB[cG]={};
-cB[cG].capture=cF.getListeners(cx[0],cG,true);
-cB[cG].bubble=cF.getListeners(cx[0],cG,false);
-}}this._cleanUpMetaColumns(cD.length);
-var cC=0;
-
-for(var i=0;i<cx.length;i++){var cH=cx[i];
-var cE=cH.getTablePaneModel();
-cE.setFirstColumnX(cC);
-cE.setMaxColumnCount(cD[i]);
-cC+=cD[i];
-}if(cD.length>cx.length){var cA=this.getTableColumnModel();
-
-for(var i=cx.length;i<cD.length;i++){var cE=this.getNewTablePaneModel()(cA);
-cE.setFirstColumnX(cC);
-cE.setMaxColumnCount(cD[i]);
-cC+=cD[i];
-var cH=this.getNewTablePaneScroller()(this);
-cH.setTablePaneModel(cE);
-cH.addListener(bc,this._onScrollY,this);
-for(cG in qx.ui.table.Table.__pM){if(!cB[cG]){break;
-}
-if(cB[cG].capture&&cB[cG].capture.length>0){var cy=cB[cG].capture;
-
-for(var j=0;j<cy.length;j++){var cz=cy[j].context;
-
-if(!cz){cz=this;
-}else if(cz==cx[0]){cz=cH;
-}cH.addListener(cG,cy[j].handler,cz,true);
-}}
-if(cB[cG].bubble&&cB[cG].bubble.length>0){var cJ=cB[cG].bubble;
-
-for(var j=0;j<cJ.length;j++){var cz=cJ[j].context;
-
-if(!cz){cz=this;
-}else if(cz==cx[0]){cz=cH;
-}cH.addListener(cG,cJ[j].handler,cz,false);
-}}}var cI=(i==cD.length-1)?1:0;
-this.__pI.add(cH,{flex:cI});
-cx=this._getPaneScrollerArr();
-}}for(var i=0;i<cx.length;i++){var cH=cx[i];
-var cK=(i==(cx.length-1));
-cH.getHeader().setHeight(this.getHeaderCellHeight());
-cH.setTopRightWidget(cK?this.getChildControl(p):null);
-}
-if(!this.isColumnVisibilityButtonVisible()){this._excludeChildControl(p);
-}this._updateScrollerWidths();
-this._updateScrollBarVisibility();
-},_applyFocusCellOnMouseMove:function(cL,cM){var cN=this._getPaneScrollerArr();
-
-for(var i=0;i<cN.length;i++){cN[i].setFocusCellOnMouseMove(cL);
-}},_applyShowCellFocusIndicator:function(cO,cP){var cQ=this._getPaneScrollerArr();
-
-for(var i=0;i<cQ.length;i++){cQ[i].setShowCellFocusIndicator(cO);
-}},_applyContextMenuFromDataCellsOnly:function(cR,cS){var cT=this._getPaneScrollerArr();
-
-for(var i=0;i<cT.length;i++){cT[i].setContextMenuFromDataCellsOnly(cR);
-}},_applyKeepFirstVisibleRowComplete:function(cU,cV){var cW=this._getPaneScrollerArr();
-
-for(var i=0;i<cW.length;i++){cW[i].onKeepFirstVisibleRowCompleteChanged();
-}},_applyResetSelectionOnHeaderClick:function(cX,cY){var da=this._getPaneScrollerArr();
-
-for(var i=0;i<da.length;i++){da[i].setResetSelectionOnHeaderClick(cX);
-}},getSelectionManager:function(){return this.__pJ;
-},_getPaneScrollerArr:function(){return this.__pI.getChildren();
-},getPaneScroller:function(db){return this._getPaneScrollerArr()[db];
-},_cleanUpMetaColumns:function(dc){var dd=this._getPaneScrollerArr();
-
-if(dd!=null){for(var i=dd.length-1;i>=dc;i--){dd[i].destroy();
-}}},_onChangeLocale:function(de){this.updateContent();
-this._updateStatusBar();
-},_onSelectionChanged:function(df){var dg=this._getPaneScrollerArr();
-
-for(var i=0;i<dg.length;i++){dg[i].onSelectionChanged();
-}this._updateStatusBar();
-},_onTableModelMetaDataChanged:function(dh){var di=this._getPaneScrollerArr();
-
-for(var i=0;i<di.length;i++){di[i].onTableModelMetaDataChanged();
-}this._updateStatusBar();
-},_onTableModelDataChanged:function(dj){var dk=dj.getData();
-this._updateTableData(dk.firstRow,dk.lastRow,dk.firstColumn,dk.lastColumn,dk.removeStart,dk.removeCount);
-},_updateTableData:function(dl,dm,dn,dp,dq,dr){var ds=this._getPaneScrollerArr();
-if(dr){this.getSelectionModel().removeSelectionInterval(dq,dq+dr);
-if(this.__pL>=dq&&this.__pL<(dq+dr)){this.setFocusedCell();
-}}
-for(var i=0;i<ds.length;i++){ds[i].onTableModelDataChanged(dl,dm,dn,dp);
-}var dt=this.getTableModel().getRowCount();
-
-if(dt!=this.__pO){this.__pO=dt;
-this._updateScrollBarVisibility();
-this._updateStatusBar();
-}},_onScrollY:function(du){if(!this.__pP){this.__pP=true;
-var dv=this._getPaneScrollerArr();
-
-for(var i=0;i<dv.length;i++){dv[i].setScrollY(du.getData());
-}this.__pP=false;
-}},_onKeyPress:function(dw){if(!this.getEnabled()){return;
-}var dD=this.__pL;
-var dA=true;
-var dE=dw.getKeyIdentifier();
-
-if(this.isEditing()){if(dw.getModifiers()==0){switch(dE){case bC:this.stopEditing();
-var dD=this.__pL;
-this.moveFocusedCell(0,1);
-
-if(this.__pL!=dD){dA=this.startEditing();
-}break;
-case H:this.cancelEditing();
-this.focus();
-break;
-default:dA=false;
-break;
-}}}else{if(dw.isCtrlPressed()){dA=true;
-
-switch(dE){case ba:var dB=this.getTableModel().getRowCount();
-
-if(dB>0){this.getSelectionModel().setSelectionInterval(0,dB-1);
-}break;
-default:dA=false;
-break;
-}}else{switch(dE){case P:this.__pJ.handleSelectKeyDown(this.__pL,dw);
-break;
-case d:case bC:this.startEditing();
-dA=true;
-break;
-case W:this.setFocusedCell(this.__pK,0,true);
-break;
-case a:var dB=this.getTableModel().getRowCount();
-this.setFocusedCell(this.__pK,dB-1,true);
-break;
-case bi:this.moveFocusedCell(-1,0);
-break;
-case U:this.moveFocusedCell(1,0);
-break;
-case L:this.moveFocusedCell(0,-1);
-break;
-case bu:this.moveFocusedCell(0,1);
-break;
-case g:case bs:var dz=this.getPaneScroller(0);
-var dC=dz.getTablePane();
-var dy=this.getRowHeight();
-var dx=(dE==g)?-1:1;
-dB=dC.getVisibleRowCount()-1;
-dz.setScrollY(dz.getScrollY()+dx*dB*dy);
-this.moveFocusedCell(0,dx*dB);
-break;
-default:dA=false;
-}}}
-if(dD!=this.__pL&&this.getRowFocusChangeModifiesSelection()){this.__pJ.handleMoveKeyDown(this.__pL,dw);
-}
-if(dA){dw.preventDefault();
-dw.stopPropagation();
-}},_onFocusChanged:function(dF){var dG=this._getPaneScrollerArr();
-
-for(var i=0;i<dG.length;i++){dG[i].onFocusChanged();
-}},_onColVisibilityChanged:function(dH){var dI=this._getPaneScrollerArr();
-
-for(var i=0;i<dI.length;i++){dI[i].onColVisibilityChanged();
-}var dJ=dH.getData();
-
-if(this.__pQ!=null&&dJ.col!=null&&dJ.visible!=null){this.__pQ[dJ.col].setVisible(dJ.visible);
-}this._updateScrollerWidths();
-this._updateScrollBarVisibility();
-},_onColWidthChanged:function(dK){var dL=this._getPaneScrollerArr();
-
-for(var i=0;i<dL.length;i++){var dM=dK.getData();
-dL[i].setColumnWidth(dM.col,dM.newWidth);
-}this._updateScrollerWidths();
-this._updateScrollBarVisibility();
-},_onColOrderChanged:function(dN){var dO=this._getPaneScrollerArr();
-
-for(var i=0;i<dO.length;i++){dO[i].onColOrderChanged();
-}this._updateScrollerWidths();
-this._updateScrollBarVisibility();
-},getTablePaneScrollerAtPageX:function(dP){var dQ=this._getMetaColumnAtPageX(dP);
-return (dQ!=-1)?this.getPaneScroller(dQ):null;
-},setFocusedCell:function(dR,dS,dT){if(!this.isEditing()&&(dR!=this.__pK||dS!=this.__pL)){if(dR===null){dR=0;
-}this.__pK=dR;
-this.__pL=dS;
-var dU=this._getPaneScrollerArr();
-
-for(var i=0;i<dU.length;i++){dU[i].setFocusedCell(dR,dS);
-}
-if(dR!==null&&dT){this.scrollCellVisible(dR,dS);
-}}},resetSelection:function(){this.getSelectionModel().resetSelection();
-},resetCellFocus:function(){this.setFocusedCell(null,null,false);
-},getFocusedColumn:function(){return this.__pK;
-},getFocusedRow:function(){return this.__pL;
-},highlightFocusedRow:function(dV){this.getDataRowRenderer().setHighlightFocusRow(dV);
-},clearFocusedRowHighlight:function(dW){if(dW){var dY=dW.getRelatedTarget();
-
-if(dY instanceof qx.ui.table.pane.Pane||dY instanceof qx.ui.table.pane.FocusIndicator){return;
-}}this.resetCellFocus();
-var dX=this._getPaneScrollerArr();
-
-for(var i=0;i<dX.length;i++){dX[i].onFocusChanged();
-}},moveFocusedCell:function(ea,eb){var ef=this.__pK;
-var eg=this.__pL;
-if(ef==null||eg==null){return;
-}
-if(ea!=0){var ee=this.getTableColumnModel();
-var x=ee.getVisibleX(ef);
-var ed=ee.getVisibleColumnCount();
-x=qx.lang.Number.limit(x+ea,0,ed-1);
-ef=ee.getVisibleColumnAtX(x);
-}
-if(eb!=0){var ec=this.getTableModel();
-eg=qx.lang.Number.limit(eg+eb,0,ec.getRowCount()-1);
-}this.setFocusedCell(ef,eg,true);
-},scrollCellVisible:function(eh,ei){var ej=this.getContentElement().getDomElement();
-if(!ej){this.addListenerOnce(bF,function(){this.scrollCellVisible(eh,ei);
-},this);
-}var ek=this.getTableColumnModel();
-var x=ek.getVisibleX(eh);
-var el=this._getMetaColumnAtColumnX(x);
-
-if(el!=-1){this.getPaneScroller(el).scrollCellVisible(eh,ei);
-}},isEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
-var em=this._getMetaColumnAtColumnX(x);
-return this.getPaneScroller(em).isEditing();
-}return false;
-},startEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
-var eo=this._getMetaColumnAtColumnX(x);
-var en=this.getPaneScroller(eo).startEditing();
-return en;
-}return false;
-},stopEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
-var ep=this._getMetaColumnAtColumnX(x);
-this.getPaneScroller(ep).stopEditing();
-}},cancelEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
-var eq=this._getMetaColumnAtColumnX(x);
-this.getPaneScroller(eq).cancelEditing();
-}},updateContent:function(){var er=this._getPaneScrollerArr();
-
-for(var i=0;i<er.length;i++){er[i].getTablePane().updateContent(true);
-}},blockHeaderElements:function(){var es=this._getPaneScrollerArr();
-
-for(var i=0;i<es.length;i++){es[i].getHeader().getBlocker().blockContent(20);
-}this.getChildControl(p).getBlocker().blockContent(20);
-},unblockHeaderElements:function(){var et=this._getPaneScrollerArr();
-
-for(var i=0;i<et.length;i++){et[i].getHeader().getBlocker().unblockContent();
-}this.getChildControl(p).getBlocker().unblockContent();
-},_getMetaColumnAtPageX:function(eu){var ev=this._getPaneScrollerArr();
-
-for(var i=0;i<ev.length;i++){var ew=ev[i].getContainerLocation();
-
-if(eu>=ew.left&&eu<=ew.right){return i;
-}}return -1;
-},_getMetaColumnAtColumnX:function(ex){var ez=this.getMetaColumnCounts();
-var eA=0;
-
-for(var i=0;i<ez.length;i++){var ey=ez[i];
-eA+=ey;
-
-if(ey==-1||ex<eA){return i;
-}}return -1;
-},_updateStatusBar:function(){var eB=this.getTableModel();
-
-if(this.getStatusBarVisible()){var eC=this.getSelectionModel().getSelectedCount();
-var eE=eB.getRowCount();
-var eD;
-
-if(eE>=0){if(eC==0){eD=this.trn(J,E,eE,eE);
-}else{eD=this.trn(D,br,eE,eC,eE);
-}}
-if(this.__pN){if(eD){eD+=this.__pN;
-}else{eD=this.__pN;
-}}
-if(eD){this.getChildControl(m).setValue(eD);
-}}},_updateScrollerWidths:function(){var eF=this._getPaneScrollerArr();
-
-for(var i=0;i<eF.length;i++){var eH=(i==(eF.length-1));
-var eI=eF[i].getTablePaneModel().getTotalWidth();
-eF[i].setPaneWidth(eI);
-var eG=eH?1:0;
-eF[i].setLayoutProperties({flex:eG});
-}},_updateScrollBarVisibility:function(){if(!this.getBounds()){return;
-}var eM=qx.ui.table.pane.Scroller.HORIZONTAL_SCROLLBAR;
-var eO=qx.ui.table.pane.Scroller.VERTICAL_SCROLLBAR;
-var eJ=this._getPaneScrollerArr();
-var eL=false;
-var eN=false;
-
-for(var i=0;i<eJ.length;i++){var eP=(i==(eJ.length-1));
-var eK=eJ[i].getNeededScrollBars(eL,!eP);
-
-if(eK&eM){eL=true;
-}
-if(eP&&(eK&eO)){eN=true;
-}}for(var i=0;i<eJ.length;i++){var eP=(i==(eJ.length-1));
-eJ[i].setHorizontalScrollBarVisible(eL);
-if(eP){if(this.__pT==null){this.__pT=eJ[i].getVerticalScrollBarVisible();
-this.__pU=qx.event.Timer.once(function(){this.__pT=null;
-this.__pU=null;
-},this,0);
-}}eJ[i].setVerticalScrollBarVisible(eP&&eN);
-if(eP&&eN!=this.__pT){this.fireDataEvent(bl,eN);
-}}},_initColumnMenu:function(){var eS=this.getTableModel();
-var eT=this.getTableColumnModel();
-var eU=this.getChildControl(p);
-eU.empty();
-var eR=eU.getMenu();
-var eV={table:this,menu:eR,columnButton:eU};
-this.fireDataEvent(bz,eV);
-this.__pQ={};
-
-for(var eW=0,l=eS.getColumnCount();eW<l;eW++){var eQ=eU.factory(T,{text:eS.getColumnName(eW),column:eW,bVisible:eT.isColumnVisible(eW)});
-qx.core.Assert.assertInterface(eQ,qx.ui.table.IColumnMenuItem);
-eQ.addListener(v,this._createColumnVisibilityCheckBoxHandler(eW),this);
-this.__pQ[eW]=eQ;
-}eV={table:this,menu:eR,columnButton:eU};
-this.fireDataEvent(z,eV);
-},_createColumnVisibilityCheckBoxHandler:function(eX){return function(eY){var fa=this.getTableColumnModel();
-fa.setColumnVisible(eX,eY.getData());
-};
-},setColumnWidth:function(fb,fc){this.getTableColumnModel().setColumnWidth(fb,fc);
-},_onResize:function(){this.fireEvent(Q);
-this._updateScrollerWidths();
-this._updateScrollBarVisibility();
-},addListener:function(fd,fe,self,ff){if(this.self(arguments).__pM[fd]){var fh=[fd];
-
-for(var i=0,fg=this._getPaneScrollerArr();i<fg.length;i++){fh.push(fg[i].addListener.apply(fg[i],arguments));
-}return fh.join(bD);
-}else{return qx.ui.core.Widget.prototype.addListener.call(this,fd,fe,self,ff);
-}},removeListener:function(fi,fj,self,fk){if(this.self(arguments).__pM[fi]){for(var i=0,fl=this._getPaneScrollerArr();i<fl.length;i++){fl[i].removeListener.apply(fl[i],arguments);
-}}else{qx.ui.core.Widget.prototype.removeListener.call(this,fi,fj,self,fk);
-}},removeListenerById:function(fm){var fq=fm.split(bD);
-var fp=fq.shift();
-
-if(this.self(arguments).__pM[fp]){var fo=true;
-
-for(var i=0,fn=this._getPaneScrollerArr();i<fn.length;i++){fo=fn[i].removeListenerById.call(fn[i],fq[i])&&fo;
-}return fo;
-}else{return qx.ui.core.Widget.prototype.removeListenerById.call(this,fm);
-}},destroy:function(){this.getChildControl(p).getMenu().destroy();
-qx.ui.core.Widget.prototype.destroy.call(this);
-}},destruct:function(){if(qx.core.Environment.get(bE)){qx.locale.Manager.getInstance().removeListener(e,this._onChangeLocale,this);
-}var fs=this.getSelectionModel();
-
-if(fs){fs.dispose();
-}var fr=this.getDataRowRenderer();
-
-if(fr){fr.dispose();
-}this._cleanUpMetaColumns(0);
-this.getTableColumnModel().dispose();
-this._disposeObjects(u,bx,bG,bG,N,bd);
-this._disposeMap(Y);
-}});
-})();
-(function(){var a="qx.ui.table.IRowRenderer";
-qx.Interface.define(a,{members:{updateDataRowElement:function(b,c){},getRowHeightStyle:function(d){},createRowStyle:function(e){},getRowClass:function(f){}}});
-})();
-(function(){var j="",i="table-row-background-even",h="Boolean",g="content",f="default",e="height:",d="'",c="table-row",b="table-row-background-focused",a="css.boxmodel",v=';color:',u="table-row-background-odd",t="1px solid ",s="table-row-line",r="table-row-background-selected",q="background-color:",p=';border-bottom: 1px solid ',o="table-row-selected",n="table-row-background-focused-selected",m="px;",k="qx.ui.table.rowrenderer.Default",l=";";
-qx.Class.define(k,{extend:qx.core.Object,implement:qx.ui.table.IRowRenderer,construct:function(){qx.core.Object.call(this);
-this.__pV=j;
-this.__pV={};
-this._colors={};
-this._renderFont(qx.theme.manager.Font.getInstance().resolve(f));
-var w=qx.theme.manager.Color.getInstance();
-this._colors.bgcolFocusedSelected=w.resolve(n);
-this._colors.bgcolFocused=w.resolve(b);
-this._colors.bgcolSelected=w.resolve(r);
-this._colors.bgcolEven=w.resolve(i);
-this._colors.bgcolOdd=w.resolve(u);
-this._colors.colSelected=w.resolve(o);
-this._colors.colNormal=w.resolve(c);
-this._colors.horLine=w.resolve(s);
-},properties:{highlightFocusRow:{check:h,init:true}},members:{_colors:null,__pW:null,__pV:null,_insetY:1,_renderFont:function(x){if(x){this.__pW=x.getStyles();
-this.__pV=qx.bom.element.Style.compile(this.__pW);
-this.__pV=this.__pV.replace(/"/g,d);
-}else{this.__pV=j;
-this.__pW=qx.bom.Font.getDefaultStyles();
-}},updateDataRowElement:function(y,z){var B=this.__pW;
-var A=z.style;
-qx.bom.element.Style.setStyles(z,B);
-
-if(y.focusedRow&&this.getHighlightFocusRow()){A.backgroundColor=y.selected?this._colors.bgcolFocusedSelected:this._colors.bgcolFocused;
-}else{if(y.selected){A.backgroundColor=this._colors.bgcolSelected;
-}else{A.backgroundColor=(y.row%2==0)?this._colors.bgcolEven:this._colors.bgcolOdd;
-}}A.color=y.selected?this._colors.colSelected:this._colors.colNormal;
-A.borderBottom=t+this._colors.horLine;
-},getRowHeightStyle:function(C){if(qx.core.Environment.get(a)==g){C-=this._insetY;
-}return e+C+m;
-},createRowStyle:function(D){var E=[];
-E.push(l);
-E.push(this.__pV);
-E.push(q);
-
-if(D.focusedRow&&this.getHighlightFocusRow()){E.push(D.selected?this._colors.bgcolFocusedSelected:this._colors.bgcolFocused);
-}else{if(D.selected){E.push(this._colors.bgcolSelected);
-}else{E.push((D.row%2==0)?this._colors.bgcolEven:this._colors.bgcolOdd);
-}}E.push(v);
-E.push(D.selected?this._colors.colSelected:this._colors.colNormal);
-E.push(p,this._colors.horLine);
-return E.join(j);
-},getRowClass:function(F){return j;
-},getRowAttributes:function(G){return j;
-}},destruct:function(){this._colors=this.__pW=this.__pV=null;
-}});
-})();
-(function(){var a="qx.ui.table.IColumnMenuButton";
-qx.Interface.define(a,{properties:{menu:{}},members:{factory:function(b,c){return true;
-},empty:function(){return true;
-}}});
+if(P){P.removeListener(a,this._onChangeMenuVisibility,this);
+P.resetOpener();
+}},_applyShow:function(R,S){},_onMouseOver:function(e){e.stopPropagation();
+this.addState(j);
+delete this.__tH;
+},_onMouseOut:function(e){e.stopPropagation();
+if(!this.hasState(j)){return;
+}var U=e.getRelatedTarget();
+
+if(qx.ui.core.Widget.contains(this,U)){return;
+}var T=this.getMenu();
+
+if(T&&T.isVisible()){this.__tH=true;
+return;
+}this.removeState(j);
+},_onKeyDown:function(e){var V=this.getChildControl(k);
+
+switch(e.getKeyIdentifier()){case g:case f:V.removeState(d);
+V.addState(i);
+}},_onKeyUp:function(e){var W=this.getChildControl(k);
+
+switch(e.getKeyIdentifier()){case g:case f:if(W.hasState(i)){W.removeState(d);
+W.removeState(i);
+W.execute();
+}}},_onButtonExecute:function(e){this.execute();
+},_onChangeMenuVisibility:function(e){if(!this.getMenu().isVisible()&&this.__tH){this.removeState(j);
+}}}});
 })();
 (function(){var l="pressed",k="hovered",j="changeVisibility",i="qx.ui.menu.Menu",h="submenu",g="Enter",f="contextmenu",d="changeMenu",c="qx.ui.form.MenuButton",b="abandoned",a="_applyMenu";
 qx.Class.define(c,{extend:qx.ui.form.Button,construct:function(m,n,o){qx.ui.form.Button.call(this,m,n);
@@ -17049,29 +16238,6 @@ if(w){if(!w.isVisible()){this.open();
 }}e.stopPropagation();
 }},_onKeyUp:function(e){}},destruct:function(){if(this.getMenu()){if(!qx.core.ObjectRegistry.inShutDown){this.getMenu().destroy();
 }}}});
-})();
-(function(){var f="menu-button",e="table-column-reset-button",d="separator",c="user-button",b="qx.ui.table.columnmenu.Button",a="menu";
-qx.Class.define(b,{extend:qx.ui.form.MenuButton,implement:qx.ui.table.IColumnMenuButton,construct:function(){qx.ui.form.MenuButton.call(this);
-this.__pX=new qx.ui.core.Blocker(this);
-},members:{__pY:null,__pX:null,factory:function(g,h){switch(g){case a:var j=new qx.ui.menu.Menu();
-this.setMenu(j);
-return j;
-case f:var m=new qx.ui.table.columnmenu.MenuItem(h.text);
-m.setVisible(h.bVisible);
-this.getMenu().add(m);
-return m;
-case c:var k=new qx.ui.menu.Button(h.text);
-k.set({appearance:e});
-return k;
-case d:return new qx.ui.menu.Separator();
-default:throw new Error("Unrecognized factory request: "+g);
-}},getBlocker:function(){return this.__pX;
-},empty:function(){var n=this.getMenu();
-var o=n.getChildren();
-
-for(var i=0,l=o.length;i<l;i++){o[0].destroy();
-}}},destruct:function(){this.__pX.dispose();
-}});
 })();
 (function(){var u="keypress",t="interval",s="keydown",r="mousedown",q="keyup",p="blur",o="Enter",n="__qc",m="__qa",l="Up",d="__qb",k="Escape",h="event.touch",c="qx.ui.menu.Manager",b="Left",g="Down",f="Right",j="singleton",a="Space";
 qx.Class.define(c,{type:j,extend:qx.core.Object,construct:function(){qx.core.Object.call(this);
@@ -17829,6 +16995,17 @@ if(bD instanceof qx.ui.menubar.Button){bB.push(bD);
 }},destruct:function(){if(this.hasListener(u)){this.removeListener(u,this._onResize,this);
 }}});
 })();
+(function(){var a="qx.ui.core.Spacer";
+qx.Class.define(a,{extend:qx.ui.core.LayoutItem,construct:function(b,c){qx.ui.core.LayoutItem.call(this);
+this.setWidth(b!=null?b:0);
+this.setHeight(c!=null?c:0);
+},members:{checkAppearanceNeeds:function(){},addChildrenToQueue:function(d){},destroy:function(){if(this.$$disposed){return;
+}var parent=this.$$parent;
+
+if(parent){parent._remove(this);
+}qx.ui.core.queue.Dispose.add(this);
+}}});
+})();
 (function(){var b="toolbar-separator",a="qx.ui.toolbar.Separator";
 qx.Class.define(a,{extend:qx.ui.core.Widget,properties:{appearance:{refine:true,init:b},anonymous:{refine:true,init:true},width:{refine:true,init:0},height:{refine:true,init:0}}});
 })();
@@ -17895,6 +17072,921 @@ if(this.getMenu()){return;
 }}qx.ui.menu.Manager.getInstance().hideAll();
 },_onKeyPress:function(e){this.execute();
 }}});
+})();
+(function(){var f="qx.ui.core.MSingleSelectionHandling",d="__pn",c="changeSelection",b="changeSelected",a="qx.event.type.Data";
+qx.Mixin.define(f,{events:{"changeSelection":a},members:{__pn:null,getSelection:function(){var g=this.__po().getSelected();
+
+if(g){return [g];
+}else{return [];
+}},setSelection:function(h){switch(h.length){case 0:this.resetSelection();
+break;
+case 1:this.__po().setSelected(h[0]);
+break;
+default:throw new Error("Could only select one item, but the selection"+" array contains "+h.length+" items!");
+}},resetSelection:function(){this.__po().resetSelected();
+},isSelected:function(i){return this.__po().isSelected(i);
+},isSelectionEmpty:function(){return this.__po().isSelectionEmpty();
+},getSelectables:function(j){return this.__po().getSelectables(j);
+},_onChangeSelected:function(e){var l=e.getData();
+var k=e.getOldData();
+l==null?l=[]:l=[l];
+k==null?k=[]:k=[k];
+this.fireDataEvent(c,l,k);
+},__po:function(){if(this.__pn==null){var m=this;
+this.__pn=new qx.ui.core.SingleSelectionManager({getItems:function(){return m._getItems();
+},isItemSelectable:function(n){if(m._isItemSelectable){return m._isItemSelectable(n);
+}else{return n.isVisible();
+}}});
+this.__pn.addListener(b,this._onChangeSelected,this);
+}this.__pn.setAllowEmptySelection(this._isAllowEmptySelection());
+return this.__pn;
+}},destruct:function(){this._disposeObjects(d);
+}});
+})();
+(function(){var k="list",j="atom",i="pressed",h="abandoned",g="popup",f="hovered",d="changeLabel",c="changeIcon",b="arrow",a="",z="spacer",y="Enter",x="one",w="mouseout",v="Space",u="key",t="mousewheel",s="keyinput",r="changeSelection",q="quick",o="qx.ui.form.SelectBox",p="mouseover",m="selectbox",n="click",l=" ";
+qx.Class.define(o,{extend:qx.ui.form.AbstractSelectBox,implement:[qx.ui.core.ISingleSelection,qx.ui.form.IModelSelection],include:[qx.ui.core.MSingleSelectionHandling,qx.ui.form.MModelSelection],construct:function(){qx.ui.form.AbstractSelectBox.call(this);
+this._createChildControl(j);
+this._createChildControl(z);
+this._createChildControl(b);
+this.addListener(p,this._onMouseOver,this);
+this.addListener(w,this._onMouseOut,this);
+this.addListener(n,this._onClick,this);
+this.addListener(t,this._onMouseWheel,this);
+this.addListener(s,this._onKeyInput,this);
+this.addListener(r,this.__pq,this);
+},properties:{appearance:{refine:true,init:m}},members:{__pp:null,_createChildControlImpl:function(A,B){var C;
+
+switch(A){case z:C=new qx.ui.core.Spacer();
+this._add(C,{flex:1});
+break;
+case j:C=new qx.ui.basic.Atom(l);
+C.setCenter(false);
+C.setAnonymous(true);
+this._add(C,{flex:1});
+break;
+case b:C=new qx.ui.basic.Image();
+C.setAnonymous(true);
+this._add(C);
+break;
+}return C||qx.ui.form.AbstractSelectBox.prototype._createChildControlImpl.call(this,A);
+},_forwardStates:{focused:true},_getItems:function(){return this.getChildrenContainer().getChildren();
+},_isAllowEmptySelection:function(){return this.getChildrenContainer().getSelectionMode()!==x;
+},__pq:function(e){var E=e.getData()[0];
+var D=this.getChildControl(k);
+
+if(D.getSelection()[0]!=E){if(E){D.setSelection([E]);
+}else{D.resetSelection();
+}}this.__pr();
+this.__ps();
+},__pr:function(){var G=this.getChildControl(k).getSelection()[0];
+var H=this.getChildControl(j);
+var F=G?G.getIcon():a;
+F==null?H.resetIcon():H.setIcon(F);
+},__ps:function(){var K=this.getChildControl(k).getSelection()[0];
+var L=this.getChildControl(j);
+var J=K?K.getLabel():a;
+var I=this.getFormat();
+
+if(I!=null){J=I.call(this,K);
+}if(J&&J.translate){J=J.translate();
+}J==null?L.resetLabel():L.setLabel(J);
+},_onMouseOver:function(e){if(!this.isEnabled()||e.getTarget()!==this){return;
+}
+if(this.hasState(h)){this.removeState(h);
+this.addState(i);
+}this.addState(f);
+},_onMouseOut:function(e){if(!this.isEnabled()||e.getTarget()!==this){return;
+}this.removeState(f);
+
+if(this.hasState(i)){this.removeState(i);
+this.addState(h);
+}},_onClick:function(e){this.toggle();
+},_onMouseWheel:function(e){if(this.getChildControl(g).isVisible()){return;
+}var N=e.getWheelDelta()>0?1:-1;
+var P=this.getSelectables();
+var O=this.getSelection()[0];
+
+if(!O){O=P[0];
+}var M=P.indexOf(O)+N;
+var Q=P.length-1;
+if(M<0){M=0;
+}else if(M>=Q){M=Q;
+}this.setSelection([P[M]]);
+e.stopPropagation();
+e.preventDefault();
+},_onKeyPress:function(e){var R=e.getKeyIdentifier();
+
+if(R==y||R==v){if(this.__pp){this.setSelection([this.__pp]);
+this.__pp=null;
+}this.toggle();
+}else{qx.ui.form.AbstractSelectBox.prototype._onKeyPress.call(this,e);
+}},_onKeyInput:function(e){var S=e.clone();
+S.setTarget(this._list);
+S.setBubbles(false);
+this.getChildControl(k).dispatchEvent(S);
+},_onListMouseDown:function(e){if(this.__pp){this.setSelection([this.__pp]);
+this.__pp=null;
+}},_onListChangeSelection:function(e){var T=e.getData();
+var W=e.getOldData();
+if(W&&W.length>0){W[0].removeListener(c,this.__pr,this);
+W[0].removeListener(d,this.__ps,this);
+}
+if(T.length>0){var V=this.getChildControl(g);
+var U=this.getChildControl(k);
+var X=U.getSelectionContext();
+
+if(V.isVisible()&&(X==q||X==u)){this.__pp=T[0];
+}else{this.setSelection([T[0]]);
+this.__pp=null;
+}T[0].addListener(c,this.__pr,this);
+T[0].addListener(d,this.__ps,this);
+}else{this.resetSelection();
+}},_onPopupChangeVisibility:function(e){var ba=this.getChildControl(g);
+
+if(!ba.isVisible()){var bc=this.getChildControl(k);
+if(bc.hasChildren()){bc.setSelection(this.getSelection());
+}}else{var Y=ba.getLayoutLocation(this);
+var be=qx.bom.Viewport.getHeight();
+var bd=Y.top;
+var bf=be-Y.bottom;
+var bb=bd>bf?bd:bf;
+var bg=this.getMaxListHeight();
+var bc=this.getChildControl(k);
+
+if(bg==null||bg>bb){bc.setMaxHeight(bb);
+}else if(bg<bb){bc.setMaxHeight(bg);
+}}}},destruct:function(){this.__pp=null;
+}});
+})();
+(function(){var g="Boolean",f="qx.ui.core.SingleSelectionManager",e="__pv",d="__pt",c="__pu",b="changeSelected",a="qx.event.type.Data";
+qx.Class.define(f,{extend:qx.core.Object,construct:function(h){qx.core.Object.call(this);
+this.__pt=h;
+},events:{"changeSelected":a},properties:{allowEmptySelection:{check:g,init:true,apply:e}},members:{__pu:null,__pt:null,getSelected:function(){return this.__pu;
+},setSelected:function(j){if(!this.__px(j)){throw new Error("Could not select "+j+", because it is not a child element!");
+}this.__pw(j);
+},resetSelected:function(){this.__pw(null);
+},isSelected:function(k){if(!this.__px(k)){throw new Error("Could not check if "+k+" is selected,"+" because it is not a child element!");
+}return this.__pu===k;
+},isSelectionEmpty:function(){return this.__pu==null;
+},getSelectables:function(l){var m=this.__pt.getItems();
+var n=[];
+
+for(var i=0;i<m.length;i++){if(this.__pt.isItemSelectable(m[i])){n.push(m[i]);
+}}if(!l){for(var i=n.length-1;i>=0;i--){if(!n[i].getEnabled()){n.splice(i,1);
+}}}return n;
+},__pv:function(o,p){if(!o){this.__pw(this.__pu);
+}},__pw:function(q){var t=this.__pu;
+var s=q;
+
+if(s!=null&&t===s){return;
+}
+if(!this.isAllowEmptySelection()&&s==null){var r=this.getSelectables(true)[0];
+
+if(r){s=r;
+}}this.__pu=s;
+this.fireDataEvent(b,s,t);
+},__px:function(u){var v=this.__pt.getItems();
+
+for(var i=0;i<v.length;i++){if(v[i]===u){return true;
+}}return false;
+}},destruct:function(){if(this.__pt.toHashCode){this._disposeObjects(d);
+}else{this.__pt=null;
+}this._disposeObjects(c);
+}});
+})();
+(function(){var c="qx.event.type.Data",b="qx.event.type.Event",a="qx.ui.table.ITableModel";
+qx.Interface.define(a,{events:{"dataChanged":c,"metaDataChanged":b,"sorted":c},members:{getRowCount:function(){},getRowData:function(d){},getColumnCount:function(){},getColumnId:function(e){},getColumnIndexById:function(f){},getColumnName:function(g){},isColumnEditable:function(h){},isColumnSortable:function(i){},sortByColumn:function(j,k){},getSortColumnIndex:function(){},isSortAscending:function(){},prefetchRows:function(l,m){},getValue:function(n,o){},getValueById:function(p,q){},setValue:function(r,s,t){},setValueById:function(u,v,w){}}});
+})();
+(function(){var e="metaDataChanged",d="qx.event.type.Data",c="qx.event.type.Event",b="abstract",a="qx.ui.table.model.Abstract";
+qx.Class.define(a,{type:b,extend:qx.core.Object,implement:qx.ui.table.ITableModel,events:{"dataChanged":d,"metaDataChanged":c,"sorted":d},construct:function(){qx.core.Object.call(this);
+this.__py=[];
+this.__pz=[];
+this.__pA={};
+},members:{__py:null,__pz:null,__pA:null,__pB:null,init:function(f){},getRowCount:function(){throw new Error("getRowCount is abstract");
+},getRowData:function(g){return null;
+},isColumnEditable:function(h){return false;
+},isColumnSortable:function(j){return false;
+},sortByColumn:function(k,l){},getSortColumnIndex:function(){return -1;
+},isSortAscending:function(){return true;
+},prefetchRows:function(m,n){},getValue:function(o,p){throw new Error("getValue is abstract");
+},getValueById:function(q,r){return this.getValue(this.getColumnIndexById(q),r);
+},setValue:function(s,t,u){throw new Error("setValue is abstract");
+},setValueById:function(v,w,x){this.setValue(this.getColumnIndexById(v),w,x);
+},getColumnCount:function(){return this.__py.length;
+},getColumnIndexById:function(y){return this.__pA[y];
+},getColumnId:function(z){return this.__py[z];
+},getColumnName:function(A){return this.__pz[A];
+},setColumnIds:function(B){this.__py=B;
+this.__pA={};
+
+for(var i=0;i<B.length;i++){this.__pA[B[i]]=i;
+}this.__pz=new Array(B.length);
+if(!this.__pB){this.fireEvent(e);
+}},setColumnNamesByIndex:function(C){if(this.__py.length!=C.length){throw new Error("this.__columnIdArr and columnNameArr have different length: "+this.__py.length+" != "+C.length);
+}this.__pz=C;
+this.fireEvent(e);
+},setColumnNamesById:function(D){this.__pz=new Array(this.__py.length);
+
+for(var i=0;i<this.__py.length;++i){this.__pz[i]=D[this.__py[i]];
+}},setColumns:function(E,F){var G=this.__py.length==0||F;
+
+if(F==null){if(this.__py.length==0){F=E;
+}else{F=this.__py;
+}}
+if(F.length!=E.length){throw new Error("columnIdArr and columnNameArr have different length: "+F.length+" != "+E.length);
+}
+if(G){this.__pB=true;
+this.setColumnIds(F);
+this.__pB=false;
+}this.setColumnNamesByIndex(E);
+}},destruct:function(){this.__py=this.__pz=this.__pA=null;
+}});
+})();
+(function(){var e="dataChanged",d="metaDataChanged",c="qx.ui.table.model.Simple",b="Boolean",a="sorted";
+qx.Class.define(c,{extend:qx.ui.table.model.Abstract,construct:function(){qx.ui.table.model.Abstract.call(this);
+this.__pC=[];
+this.__pD=-1;
+this.__pE=[];
+this.__pF=null;
+},properties:{caseSensitiveSorting:{check:b,init:true}},statics:{_defaultSortComparatorAscending:function(f,g){var h=f[arguments.callee.columnIndex];
+var k=g[arguments.callee.columnIndex];
+
+if(qx.lang.Type.isNumber(h)&&qx.lang.Type.isNumber(k)){var l=isNaN(h)?isNaN(k)?0:1:isNaN(k)?-1:null;
+
+if(l!=null){return l;
+}}return (h>k)?1:((h==k)?0:-1);
+},_defaultSortComparatorInsensitiveAscending:function(m,n){var o=(m[arguments.callee.columnIndex].toLowerCase?m[arguments.callee.columnIndex].toLowerCase():m[arguments.callee.columnIndex]);
+var p=(n[arguments.callee.columnIndex].toLowerCase?n[arguments.callee.columnIndex].toLowerCase():n[arguments.callee.columnIndex]);
+
+if(qx.lang.Type.isNumber(o)&&qx.lang.Type.isNumber(p)){var q=isNaN(o)?isNaN(p)?0:1:isNaN(p)?-1:null;
+
+if(q!=null){return q;
+}}return (o>p)?1:((o==p)?0:-1);
+},_defaultSortComparatorDescending:function(r,s){var t=r[arguments.callee.columnIndex];
+var u=s[arguments.callee.columnIndex];
+
+if(qx.lang.Type.isNumber(t)&&qx.lang.Type.isNumber(u)){var v=isNaN(t)?isNaN(u)?0:1:isNaN(u)?-1:null;
+
+if(v!=null){return v;
+}}return (t<u)?1:((t==u)?0:-1);
+},_defaultSortComparatorInsensitiveDescending:function(w,x){var y=(w[arguments.callee.columnIndex].toLowerCase?w[arguments.callee.columnIndex].toLowerCase():w[arguments.callee.columnIndex]);
+var z=(x[arguments.callee.columnIndex].toLowerCase?x[arguments.callee.columnIndex].toLowerCase():x[arguments.callee.columnIndex]);
+
+if(qx.lang.Type.isNumber(y)&&qx.lang.Type.isNumber(z)){var A=isNaN(y)?isNaN(z)?0:1:isNaN(z)?-1:null;
+
+if(A!=null){return A;
+}}return (y<z)?1:((y==z)?0:-1);
+}},members:{__pC:null,__pF:null,__pG:null,__pE:null,__pD:null,__pH:null,getRowData:function(B){var C=this.__pC[B];
+
+if(C==null||C.originalData==null){return C;
+}else{return C.originalData;
+}},getRowDataAsMap:function(D){var F=this.__pC[D];
+
+if(F!=null){var E={};
+for(var G=0;G<this.getColumnCount();G++){E[this.getColumnId(G)]=F[G];
+}
+if(F.originalData!=null){for(var H in F.originalData){if(E[H]==undefined){E[H]=F.originalData[H];
+}}}return E;
+}return (F&&F.originalData)?F.originalData:null;
+},getDataAsMapArray:function(){var J=this.getRowCount();
+var I=[];
+
+for(var i=0;i<J;i++){I.push(this.getRowDataAsMap(i));
+}return I;
+},setEditable:function(K){this.__pF=[];
+
+for(var L=0;L<this.getColumnCount();L++){this.__pF[L]=K;
+}this.fireEvent(d);
+},setColumnEditable:function(M,N){if(N!=this.isColumnEditable(M)){if(this.__pF==null){this.__pF=[];
+}this.__pF[M]=N;
+this.fireEvent(d);
+}},isColumnEditable:function(O){return this.__pF?(this.__pF[O]==true):false;
+},setColumnSortable:function(P,Q){if(Q!=this.isColumnSortable(P)){if(this.__pG==null){this.__pG=[];
+}this.__pG[P]=Q;
+this.fireEvent(d);
+}},isColumnSortable:function(R){return (this.__pG?(this.__pG[R]!==false):true);
+},sortByColumn:function(S,T){var W;
+var V=this.__pE[S];
+
+if(V){W=(T?V.ascending:V.descending);
+}else{if(this.getCaseSensitiveSorting()){W=(T?qx.ui.table.model.Simple._defaultSortComparatorAscending:qx.ui.table.model.Simple._defaultSortComparatorDescending);
+}else{W=(T?qx.ui.table.model.Simple._defaultSortComparatorInsensitiveAscending:qx.ui.table.model.Simple._defaultSortComparatorInsensitiveDescending);
+}}W.columnIndex=S;
+this.__pC.sort(W);
+this.__pD=S;
+this.__pH=T;
+var U={columnIndex:S,ascending:T};
+this.fireDataEvent(a,U);
+this.fireEvent(d);
+},setSortMethods:function(X,Y){var ba;
+
+if(qx.lang.Type.isFunction(Y)){ba={ascending:Y,descending:function(bb,bc){return Y(bc,bb);
+}};
+}else{ba=Y;
+}this.__pE[X]=ba;
+},getSortMethods:function(bd){return this.__pE[bd];
+},clearSorting:function(){if(this.__pD!=-1){this.__pD=-1;
+this.__pH=true;
+this.fireEvent(d);
+}},getSortColumnIndex:function(){return this.__pD;
+},_setSortColumnIndex:function(be){this.__pD=be;
+},isSortAscending:function(){return this.__pH;
+},_setSortAscending:function(bf){this.__pH=bf;
+},getRowCount:function(){return this.__pC.length;
+},getValue:function(bg,bh){if(bh<0||bh>=this.__pC.length){throw new Error("this.__rowArr out of bounds: "+bh+" (0.."+this.__pC.length+")");
+}return this.__pC[bh][bg];
+},setValue:function(bi,bj,bk){if(this.__pC[bj][bi]!=bk){this.__pC[bj][bi]=bk;
+if(this.hasListener(e)){var bl={firstRow:bj,lastRow:bj,firstColumn:bi,lastColumn:bi};
+this.fireDataEvent(e,bl);
+}
+if(bi==this.__pD){this.clearSorting();
+}}},setData:function(bm,bn){this.__pC=bm;
+if(this.hasListener(e)){var bo={firstRow:0,lastRow:bm.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
+this.fireDataEvent(e,bo);
+}
+if(bn!==false){this.clearSorting();
+}},getData:function(){return this.__pC;
+},setDataAsMapArray:function(bp,bq,br){this.setData(this._mapArray2RowArr(bp,bq),br);
+},addRows:function(bs,bt,bu){if(bt==null){bt=this.__pC.length;
+}bs.splice(0,0,bt,0);
+Array.prototype.splice.apply(this.__pC,bs);
+var bv={firstRow:bt,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
+this.fireDataEvent(e,bv);
+
+if(bu!==false){this.clearSorting();
+}},addRowsAsMapArray:function(bw,bx,by,bz){this.addRows(this._mapArray2RowArr(bw,by),bx,bz);
+},setRows:function(bA,bB,bC){if(bB==null){bB=0;
+}bA.splice(0,0,bB,bA.length);
+Array.prototype.splice.apply(this.__pC,bA);
+var bD={firstRow:bB,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1};
+this.fireDataEvent(e,bD);
+
+if(bC!==false){this.clearSorting();
+}},setRowsAsMapArray:function(bE,bF,bG,bH){this.setRows(this._mapArray2RowArr(bE,bG),bF,bH);
+},removeRows:function(bI,bJ,bK){this.__pC.splice(bI,bJ);
+var bL={firstRow:bI,lastRow:this.__pC.length-1,firstColumn:0,lastColumn:this.getColumnCount()-1,removeStart:bI,removeCount:bJ};
+this.fireDataEvent(e,bL);
+
+if(bK!==false){this.clearSorting();
+}},_mapArray2RowArr:function(bM,bN){var bR=bM.length;
+var bO=this.getColumnCount();
+var bQ=new Array(bR);
+var bP;
+
+for(var i=0;i<bR;++i){bP=[];
+
+if(bN){bP.originalData=bM[i];
+}
+for(var j=0;j<bO;++j){bP[j]=bM[i][this.getColumnId(j)];
+}bQ[i]=bP;
+}return bQ;
+}},destruct:function(){this.__pC=this.__pF=this.__pE=this.__pG=null;
+}});
+})();
+(function(){var q="Boolean",p="column-button",o="Function",n="qx.event.type.Data",m="statusbar",k="qx.ui.table.pane.CellEvent",h="function",g="PageUp",f="dataChanged",e="changeLocale",bH="changeSelection",bG="__pS",bF="appear",bE="qx.dynlocale",bD='"',bC="Enter",bB="metaDataChanged",bA="_applyStatusBarVisible",bz="columnVisibilityMenuCreateStart",by="blur",y="qx.ui.table.Table",z="columnVisibilityMenuCreateEnd",v="changeVisible",w="_applyResetSelectionOnHeaderClick",t="_applyMetaColumnCounts",u="__pJ",r="focus",s="changeDataRowRenderer",G="changeHeaderCellHeight",H="Escape",ba="A",V="changeSelectionModel",bi="Left",bd="__pU",bu="Down",bo="Integer",O="_applyHeaderCellHeight",bx="__pI",bw="visibilityChanged",bv="qx.ui.table.ITableModel",M="orderChanged",R="_applySelectionModel",T="menu-button",X="menu",bb="_applyAdditionalStatusBarText",be="_applyFocusCellOnMouseMove",bk="table",bq="_applyColumnVisibilityButtonVisible",A="changeTableModel",B="qx.event.type.Event",Q="tableWidthChanged",bh="_applyHeaderCellsVisible",bg="Object",bf="_applyShowCellFocusIndicator",bm="resize",bl="verticalScrollBarChanged",bc="changeScrollY",bj="_applyTableModel",a="End",bp="_applyKeepFirstVisibleRowComplete",C="widthChanged",D="one of one row",W="Home",b="_applyRowHeight",d="F2",L="Up",E="%1 rows",F="qx.ui.table.selection.Model",J="one row",Y="__pQ",bs="PageDown",br="%1 of %2 rows",S="keypress",bt="changeRowHeight",N="__pR",bn="Number",I="header",K="_applyContextMenuFromDataCellsOnly",c="qx.ui.table.IRowRenderer",U="Right",P="Space";
+qx.Class.define(y,{extend:qx.ui.core.Widget,construct:function(bI,bJ){qx.ui.core.Widget.call(this);
+if(!bJ){bJ={};
+}
+if(bJ.initiallyHiddenColumns){this.setInitiallyHiddenColumns(bJ.initiallyHiddenColumns);
+}
+if(bJ.selectionManager){this.setNewSelectionManager(bJ.selectionManager);
+}
+if(bJ.selectionModel){this.setNewSelectionModel(bJ.selectionModel);
+}
+if(bJ.tableColumnModel){this.setNewTableColumnModel(bJ.tableColumnModel);
+}
+if(bJ.tablePane){this.setNewTablePane(bJ.tablePane);
+}
+if(bJ.tablePaneHeader){this.setNewTablePaneHeader(bJ.tablePaneHeader);
+}
+if(bJ.tablePaneScroller){this.setNewTablePaneScroller(bJ.tablePaneScroller);
+}
+if(bJ.tablePaneModel){this.setNewTablePaneModel(bJ.tablePaneModel);
+}
+if(bJ.columnMenu){this.setNewColumnMenu(bJ.columnMenu);
+}this._setLayout(new qx.ui.layout.VBox());
+this.__pI=new qx.ui.container.Composite(new qx.ui.layout.HBox());
+this._add(this.__pI,{flex:1});
+this.setDataRowRenderer(new qx.ui.table.rowrenderer.Default(this));
+this.__pJ=this.getNewSelectionManager()(this);
+this.setSelectionModel(this.getNewSelectionModel()(this));
+this.setTableModel(bI||this.getEmptyTableModel());
+this.setMetaColumnCounts([-1]);
+this.setTabIndex(1);
+this.addListener(S,this._onKeyPress);
+this.addListener(r,this._onFocusChanged);
+this.addListener(by,this._onFocusChanged);
+var bK=new qx.ui.core.Widget().set({height:0});
+this._add(bK);
+bK.addListener(bm,this._onResize,this);
+this.__pK=null;
+this.__pL=null;
+if(qx.core.Environment.get(bE)){qx.locale.Manager.getInstance().addListener(e,this._onChangeLocale,this);
+}this.initStatusBarVisible();
+bI=this.getTableModel();
+
+if(bI.init&&typeof (bI.init)==h){bI.init(this);
+}},events:{"columnVisibilityMenuCreateStart":n,"columnVisibilityMenuCreateEnd":n,"tableWidthChanged":B,"verticalScrollBarChanged":n,"cellClick":k,"cellDblclick":k,"cellContextmenu":k,"dataEdited":n},statics:{__pM:{cellClick:1,cellDblclick:1,cellContextmenu:1}},properties:{appearance:{refine:true,init:bk},focusable:{refine:true,init:true},minWidth:{refine:true,init:50},initiallyHiddenColumns:{init:null},selectable:{refine:true,init:false},selectionModel:{check:F,apply:R,event:V},tableModel:{check:bv,apply:bj,event:A},rowHeight:{check:bn,init:20,apply:b,event:bt,themeable:true},forceLineHeight:{check:q,init:true},headerCellsVisible:{check:q,init:true,apply:bh,themeable:true},headerCellHeight:{check:bo,init:16,apply:O,event:G,nullable:true,themeable:true},statusBarVisible:{check:q,init:true,apply:bA},additionalStatusBarText:{nullable:true,init:null,apply:bb},columnVisibilityButtonVisible:{check:q,init:true,apply:bq,themeable:true},metaColumnCounts:{check:bg,apply:t},focusCellOnMouseMove:{check:q,init:false,apply:be},rowFocusChangeModifiesSelection:{check:q,init:true},showCellFocusIndicator:{check:q,init:true,apply:bf},contextMenuFromDataCellsOnly:{check:q,init:true,apply:K},keepFirstVisibleRowComplete:{check:q,init:true,apply:bp},alwaysUpdateCells:{check:q,init:false},resetSelectionOnHeaderClick:{check:q,init:true,apply:w},dataRowRenderer:{check:c,init:null,nullable:true,event:s},modalCellEditorPreOpenFunction:{check:o,init:null,nullable:true},newColumnMenu:{check:o,init:function(){return new qx.ui.table.columnmenu.Button();
+}},newSelectionManager:{check:o,init:function(bL){return new qx.ui.table.selection.Manager(bL);
+}},newSelectionModel:{check:o,init:function(bM){return new qx.ui.table.selection.Model(bM);
+}},newTableColumnModel:{check:o,init:function(bN){return new qx.ui.table.columnmodel.Basic(bN);
+}},newTablePane:{check:o,init:function(bO){return new qx.ui.table.pane.Pane(bO);
+}},newTablePaneHeader:{check:o,init:function(bP){return new qx.ui.table.pane.Header(bP);
+}},newTablePaneScroller:{check:o,init:function(bQ){return new qx.ui.table.pane.Scroller(bQ);
+}},newTablePaneModel:{check:o,init:function(bR){return new qx.ui.table.pane.Model(bR);
+}}},members:{__pK:null,__pL:null,__pI:null,__pJ:null,__pN:null,__pO:null,__pP:null,__pQ:null,__pR:null,__pS:null,__pT:null,__pU:null,_createChildControlImpl:function(bS,bT){var bU;
+
+switch(bS){case m:bU=new qx.ui.basic.Label();
+bU.set({allowGrowX:true});
+this._add(bU);
+break;
+case p:bU=this.getNewColumnMenu()();
+bU.set({focusable:false});
+var bV=bU.factory(X,{table:this});
+bV.addListener(bF,this._initColumnMenu,this);
+break;
+}return bU||qx.ui.core.Widget.prototype._createChildControlImpl.call(this,bS);
+},_applySelectionModel:function(bW,bX){this.__pJ.setSelectionModel(bW);
+
+if(bX!=null){bX.removeListener(bH,this._onSelectionChanged,this);
+}bW.addListener(bH,this._onSelectionChanged,this);
+},_applyRowHeight:function(bY,ca){var cb=this._getPaneScrollerArr();
+
+for(var i=0;i<cb.length;i++){cb[i].updateVerScrollBarMaximum();
+}},_applyHeaderCellsVisible:function(cc,cd){var ce=this._getPaneScrollerArr();
+
+for(var i=0;i<ce.length;i++){ce[i]._excludeChildControl(I);
+}},_applyHeaderCellHeight:function(cf,cg){var ch=this._getPaneScrollerArr();
+
+for(var i=0;i<ch.length;i++){ch[i].getHeader().setHeight(cf);
+}},getEmptyTableModel:function(){if(!this.__pS){this.__pS=new qx.ui.table.model.Simple();
+this.__pS.setColumns([]);
+this.__pS.setData([]);
+}return this.__pS;
+},_applyTableModel:function(ci,cj){this.getTableColumnModel().init(ci.getColumnCount(),this);
+
+if(cj!=null){cj.removeListener(bB,this._onTableModelMetaDataChanged,this);
+cj.removeListener(f,this._onTableModelDataChanged,this);
+}ci.addListener(bB,this._onTableModelMetaDataChanged,this);
+ci.addListener(f,this._onTableModelDataChanged,this);
+this._updateStatusBar();
+this._updateTableData(0,ci.getRowCount(),0,ci.getColumnCount());
+this._onTableModelMetaDataChanged();
+if(cj&&ci.init&&typeof (ci.init)==h){ci.init(this);
+}},getTableColumnModel:function(){if(!this.__pR){var cm=this.__pR=this.getNewTableColumnModel()(this);
+cm.addListener(bw,this._onColVisibilityChanged,this);
+cm.addListener(C,this._onColWidthChanged,this);
+cm.addListener(M,this._onColOrderChanged,this);
+var cl=this.getTableModel();
+cm.init(cl.getColumnCount(),this);
+var ck=this._getPaneScrollerArr();
+
+for(var i=0;i<ck.length;i++){var cn=ck[i];
+var co=cn.getTablePaneModel();
+co.setTableColumnModel(cm);
+}}return this.__pR;
+},_applyStatusBarVisible:function(cp,cq){if(cp){this._showChildControl(m);
+}else{this._excludeChildControl(m);
+}
+if(cp){this._updateStatusBar();
+}},_applyAdditionalStatusBarText:function(cr,cs){this.__pN=cr;
+this._updateStatusBar();
+},_applyColumnVisibilityButtonVisible:function(ct,cu){if(ct){this._showChildControl(p);
+}else{this._excludeChildControl(p);
+}},_applyMetaColumnCounts:function(cv,cw){var cD=cv;
+var cx=this._getPaneScrollerArr();
+var cB={};
+
+if(cv>cw){var cF=qx.event.Registration.getManager(cx[0]);
+
+for(var cG in qx.ui.table.Table.__pM){cB[cG]={};
+cB[cG].capture=cF.getListeners(cx[0],cG,true);
+cB[cG].bubble=cF.getListeners(cx[0],cG,false);
+}}this._cleanUpMetaColumns(cD.length);
+var cC=0;
+
+for(var i=0;i<cx.length;i++){var cH=cx[i];
+var cE=cH.getTablePaneModel();
+cE.setFirstColumnX(cC);
+cE.setMaxColumnCount(cD[i]);
+cC+=cD[i];
+}if(cD.length>cx.length){var cA=this.getTableColumnModel();
+
+for(var i=cx.length;i<cD.length;i++){var cE=this.getNewTablePaneModel()(cA);
+cE.setFirstColumnX(cC);
+cE.setMaxColumnCount(cD[i]);
+cC+=cD[i];
+var cH=this.getNewTablePaneScroller()(this);
+cH.setTablePaneModel(cE);
+cH.addListener(bc,this._onScrollY,this);
+for(cG in qx.ui.table.Table.__pM){if(!cB[cG]){break;
+}
+if(cB[cG].capture&&cB[cG].capture.length>0){var cy=cB[cG].capture;
+
+for(var j=0;j<cy.length;j++){var cz=cy[j].context;
+
+if(!cz){cz=this;
+}else if(cz==cx[0]){cz=cH;
+}cH.addListener(cG,cy[j].handler,cz,true);
+}}
+if(cB[cG].bubble&&cB[cG].bubble.length>0){var cJ=cB[cG].bubble;
+
+for(var j=0;j<cJ.length;j++){var cz=cJ[j].context;
+
+if(!cz){cz=this;
+}else if(cz==cx[0]){cz=cH;
+}cH.addListener(cG,cJ[j].handler,cz,false);
+}}}var cI=(i==cD.length-1)?1:0;
+this.__pI.add(cH,{flex:cI});
+cx=this._getPaneScrollerArr();
+}}for(var i=0;i<cx.length;i++){var cH=cx[i];
+var cK=(i==(cx.length-1));
+cH.getHeader().setHeight(this.getHeaderCellHeight());
+cH.setTopRightWidget(cK?this.getChildControl(p):null);
+}
+if(!this.isColumnVisibilityButtonVisible()){this._excludeChildControl(p);
+}this._updateScrollerWidths();
+this._updateScrollBarVisibility();
+},_applyFocusCellOnMouseMove:function(cL,cM){var cN=this._getPaneScrollerArr();
+
+for(var i=0;i<cN.length;i++){cN[i].setFocusCellOnMouseMove(cL);
+}},_applyShowCellFocusIndicator:function(cO,cP){var cQ=this._getPaneScrollerArr();
+
+for(var i=0;i<cQ.length;i++){cQ[i].setShowCellFocusIndicator(cO);
+}},_applyContextMenuFromDataCellsOnly:function(cR,cS){var cT=this._getPaneScrollerArr();
+
+for(var i=0;i<cT.length;i++){cT[i].setContextMenuFromDataCellsOnly(cR);
+}},_applyKeepFirstVisibleRowComplete:function(cU,cV){var cW=this._getPaneScrollerArr();
+
+for(var i=0;i<cW.length;i++){cW[i].onKeepFirstVisibleRowCompleteChanged();
+}},_applyResetSelectionOnHeaderClick:function(cX,cY){var da=this._getPaneScrollerArr();
+
+for(var i=0;i<da.length;i++){da[i].setResetSelectionOnHeaderClick(cX);
+}},getSelectionManager:function(){return this.__pJ;
+},_getPaneScrollerArr:function(){return this.__pI.getChildren();
+},getPaneScroller:function(db){return this._getPaneScrollerArr()[db];
+},_cleanUpMetaColumns:function(dc){var dd=this._getPaneScrollerArr();
+
+if(dd!=null){for(var i=dd.length-1;i>=dc;i--){dd[i].destroy();
+}}},_onChangeLocale:function(de){this.updateContent();
+this._updateStatusBar();
+},_onSelectionChanged:function(df){var dg=this._getPaneScrollerArr();
+
+for(var i=0;i<dg.length;i++){dg[i].onSelectionChanged();
+}this._updateStatusBar();
+},_onTableModelMetaDataChanged:function(dh){var di=this._getPaneScrollerArr();
+
+for(var i=0;i<di.length;i++){di[i].onTableModelMetaDataChanged();
+}this._updateStatusBar();
+},_onTableModelDataChanged:function(dj){var dk=dj.getData();
+this._updateTableData(dk.firstRow,dk.lastRow,dk.firstColumn,dk.lastColumn,dk.removeStart,dk.removeCount);
+},_updateTableData:function(dl,dm,dn,dp,dq,dr){var ds=this._getPaneScrollerArr();
+if(dr){this.getSelectionModel().removeSelectionInterval(dq,dq+dr);
+if(this.__pL>=dq&&this.__pL<(dq+dr)){this.setFocusedCell();
+}}
+for(var i=0;i<ds.length;i++){ds[i].onTableModelDataChanged(dl,dm,dn,dp);
+}var dt=this.getTableModel().getRowCount();
+
+if(dt!=this.__pO){this.__pO=dt;
+this._updateScrollBarVisibility();
+this._updateStatusBar();
+}},_onScrollY:function(du){if(!this.__pP){this.__pP=true;
+var dv=this._getPaneScrollerArr();
+
+for(var i=0;i<dv.length;i++){dv[i].setScrollY(du.getData());
+}this.__pP=false;
+}},_onKeyPress:function(dw){if(!this.getEnabled()){return;
+}var dD=this.__pL;
+var dA=true;
+var dE=dw.getKeyIdentifier();
+
+if(this.isEditing()){if(dw.getModifiers()==0){switch(dE){case bC:this.stopEditing();
+var dD=this.__pL;
+this.moveFocusedCell(0,1);
+
+if(this.__pL!=dD){dA=this.startEditing();
+}break;
+case H:this.cancelEditing();
+this.focus();
+break;
+default:dA=false;
+break;
+}}}else{if(dw.isCtrlPressed()){dA=true;
+
+switch(dE){case ba:var dB=this.getTableModel().getRowCount();
+
+if(dB>0){this.getSelectionModel().setSelectionInterval(0,dB-1);
+}break;
+default:dA=false;
+break;
+}}else{switch(dE){case P:this.__pJ.handleSelectKeyDown(this.__pL,dw);
+break;
+case d:case bC:this.startEditing();
+dA=true;
+break;
+case W:this.setFocusedCell(this.__pK,0,true);
+break;
+case a:var dB=this.getTableModel().getRowCount();
+this.setFocusedCell(this.__pK,dB-1,true);
+break;
+case bi:this.moveFocusedCell(-1,0);
+break;
+case U:this.moveFocusedCell(1,0);
+break;
+case L:this.moveFocusedCell(0,-1);
+break;
+case bu:this.moveFocusedCell(0,1);
+break;
+case g:case bs:var dz=this.getPaneScroller(0);
+var dC=dz.getTablePane();
+var dy=this.getRowHeight();
+var dx=(dE==g)?-1:1;
+dB=dC.getVisibleRowCount()-1;
+dz.setScrollY(dz.getScrollY()+dx*dB*dy);
+this.moveFocusedCell(0,dx*dB);
+break;
+default:dA=false;
+}}}
+if(dD!=this.__pL&&this.getRowFocusChangeModifiesSelection()){this.__pJ.handleMoveKeyDown(this.__pL,dw);
+}
+if(dA){dw.preventDefault();
+dw.stopPropagation();
+}},_onFocusChanged:function(dF){var dG=this._getPaneScrollerArr();
+
+for(var i=0;i<dG.length;i++){dG[i].onFocusChanged();
+}},_onColVisibilityChanged:function(dH){var dI=this._getPaneScrollerArr();
+
+for(var i=0;i<dI.length;i++){dI[i].onColVisibilityChanged();
+}var dJ=dH.getData();
+
+if(this.__pQ!=null&&dJ.col!=null&&dJ.visible!=null){this.__pQ[dJ.col].setVisible(dJ.visible);
+}this._updateScrollerWidths();
+this._updateScrollBarVisibility();
+},_onColWidthChanged:function(dK){var dL=this._getPaneScrollerArr();
+
+for(var i=0;i<dL.length;i++){var dM=dK.getData();
+dL[i].setColumnWidth(dM.col,dM.newWidth);
+}this._updateScrollerWidths();
+this._updateScrollBarVisibility();
+},_onColOrderChanged:function(dN){var dO=this._getPaneScrollerArr();
+
+for(var i=0;i<dO.length;i++){dO[i].onColOrderChanged();
+}this._updateScrollerWidths();
+this._updateScrollBarVisibility();
+},getTablePaneScrollerAtPageX:function(dP){var dQ=this._getMetaColumnAtPageX(dP);
+return (dQ!=-1)?this.getPaneScroller(dQ):null;
+},setFocusedCell:function(dR,dS,dT){if(!this.isEditing()&&(dR!=this.__pK||dS!=this.__pL)){if(dR===null){dR=0;
+}this.__pK=dR;
+this.__pL=dS;
+var dU=this._getPaneScrollerArr();
+
+for(var i=0;i<dU.length;i++){dU[i].setFocusedCell(dR,dS);
+}
+if(dR!==null&&dT){this.scrollCellVisible(dR,dS);
+}}},resetSelection:function(){this.getSelectionModel().resetSelection();
+},resetCellFocus:function(){this.setFocusedCell(null,null,false);
+},getFocusedColumn:function(){return this.__pK;
+},getFocusedRow:function(){return this.__pL;
+},highlightFocusedRow:function(dV){this.getDataRowRenderer().setHighlightFocusRow(dV);
+},clearFocusedRowHighlight:function(dW){if(dW){var dY=dW.getRelatedTarget();
+
+if(dY instanceof qx.ui.table.pane.Pane||dY instanceof qx.ui.table.pane.FocusIndicator){return;
+}}this.resetCellFocus();
+var dX=this._getPaneScrollerArr();
+
+for(var i=0;i<dX.length;i++){dX[i].onFocusChanged();
+}},moveFocusedCell:function(ea,eb){var ef=this.__pK;
+var eg=this.__pL;
+if(ef==null||eg==null){return;
+}
+if(ea!=0){var ee=this.getTableColumnModel();
+var x=ee.getVisibleX(ef);
+var ed=ee.getVisibleColumnCount();
+x=qx.lang.Number.limit(x+ea,0,ed-1);
+ef=ee.getVisibleColumnAtX(x);
+}
+if(eb!=0){var ec=this.getTableModel();
+eg=qx.lang.Number.limit(eg+eb,0,ec.getRowCount()-1);
+}this.setFocusedCell(ef,eg,true);
+},scrollCellVisible:function(eh,ei){var ej=this.getContentElement().getDomElement();
+if(!ej){this.addListenerOnce(bF,function(){this.scrollCellVisible(eh,ei);
+},this);
+}var ek=this.getTableColumnModel();
+var x=ek.getVisibleX(eh);
+var el=this._getMetaColumnAtColumnX(x);
+
+if(el!=-1){this.getPaneScroller(el).scrollCellVisible(eh,ei);
+}},isEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
+var em=this._getMetaColumnAtColumnX(x);
+return this.getPaneScroller(em).isEditing();
+}return false;
+},startEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
+var eo=this._getMetaColumnAtColumnX(x);
+var en=this.getPaneScroller(eo).startEditing();
+return en;
+}return false;
+},stopEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
+var ep=this._getMetaColumnAtColumnX(x);
+this.getPaneScroller(ep).stopEditing();
+}},cancelEditing:function(){if(this.__pK!=null){var x=this.getTableColumnModel().getVisibleX(this.__pK);
+var eq=this._getMetaColumnAtColumnX(x);
+this.getPaneScroller(eq).cancelEditing();
+}},updateContent:function(){var er=this._getPaneScrollerArr();
+
+for(var i=0;i<er.length;i++){er[i].getTablePane().updateContent(true);
+}},blockHeaderElements:function(){var es=this._getPaneScrollerArr();
+
+for(var i=0;i<es.length;i++){es[i].getHeader().getBlocker().blockContent(20);
+}this.getChildControl(p).getBlocker().blockContent(20);
+},unblockHeaderElements:function(){var et=this._getPaneScrollerArr();
+
+for(var i=0;i<et.length;i++){et[i].getHeader().getBlocker().unblockContent();
+}this.getChildControl(p).getBlocker().unblockContent();
+},_getMetaColumnAtPageX:function(eu){var ev=this._getPaneScrollerArr();
+
+for(var i=0;i<ev.length;i++){var ew=ev[i].getContainerLocation();
+
+if(eu>=ew.left&&eu<=ew.right){return i;
+}}return -1;
+},_getMetaColumnAtColumnX:function(ex){var ez=this.getMetaColumnCounts();
+var eA=0;
+
+for(var i=0;i<ez.length;i++){var ey=ez[i];
+eA+=ey;
+
+if(ey==-1||ex<eA){return i;
+}}return -1;
+},_updateStatusBar:function(){var eB=this.getTableModel();
+
+if(this.getStatusBarVisible()){var eC=this.getSelectionModel().getSelectedCount();
+var eE=eB.getRowCount();
+var eD;
+
+if(eE>=0){if(eC==0){eD=this.trn(J,E,eE,eE);
+}else{eD=this.trn(D,br,eE,eC,eE);
+}}
+if(this.__pN){if(eD){eD+=this.__pN;
+}else{eD=this.__pN;
+}}
+if(eD){this.getChildControl(m).setValue(eD);
+}}},_updateScrollerWidths:function(){var eF=this._getPaneScrollerArr();
+
+for(var i=0;i<eF.length;i++){var eH=(i==(eF.length-1));
+var eI=eF[i].getTablePaneModel().getTotalWidth();
+eF[i].setPaneWidth(eI);
+var eG=eH?1:0;
+eF[i].setLayoutProperties({flex:eG});
+}},_updateScrollBarVisibility:function(){if(!this.getBounds()){return;
+}var eM=qx.ui.table.pane.Scroller.HORIZONTAL_SCROLLBAR;
+var eO=qx.ui.table.pane.Scroller.VERTICAL_SCROLLBAR;
+var eJ=this._getPaneScrollerArr();
+var eL=false;
+var eN=false;
+
+for(var i=0;i<eJ.length;i++){var eP=(i==(eJ.length-1));
+var eK=eJ[i].getNeededScrollBars(eL,!eP);
+
+if(eK&eM){eL=true;
+}
+if(eP&&(eK&eO)){eN=true;
+}}for(var i=0;i<eJ.length;i++){var eP=(i==(eJ.length-1));
+eJ[i].setHorizontalScrollBarVisible(eL);
+if(eP){if(this.__pT==null){this.__pT=eJ[i].getVerticalScrollBarVisible();
+this.__pU=qx.event.Timer.once(function(){this.__pT=null;
+this.__pU=null;
+},this,0);
+}}eJ[i].setVerticalScrollBarVisible(eP&&eN);
+if(eP&&eN!=this.__pT){this.fireDataEvent(bl,eN);
+}}},_initColumnMenu:function(){var eS=this.getTableModel();
+var eT=this.getTableColumnModel();
+var eU=this.getChildControl(p);
+eU.empty();
+var eR=eU.getMenu();
+var eV={table:this,menu:eR,columnButton:eU};
+this.fireDataEvent(bz,eV);
+this.__pQ={};
+
+for(var eW=0,l=eS.getColumnCount();eW<l;eW++){var eQ=eU.factory(T,{text:eS.getColumnName(eW),column:eW,bVisible:eT.isColumnVisible(eW)});
+qx.core.Assert.assertInterface(eQ,qx.ui.table.IColumnMenuItem);
+eQ.addListener(v,this._createColumnVisibilityCheckBoxHandler(eW),this);
+this.__pQ[eW]=eQ;
+}eV={table:this,menu:eR,columnButton:eU};
+this.fireDataEvent(z,eV);
+},_createColumnVisibilityCheckBoxHandler:function(eX){return function(eY){var fa=this.getTableColumnModel();
+fa.setColumnVisible(eX,eY.getData());
+};
+},setColumnWidth:function(fb,fc){this.getTableColumnModel().setColumnWidth(fb,fc);
+},_onResize:function(){this.fireEvent(Q);
+this._updateScrollerWidths();
+this._updateScrollBarVisibility();
+},addListener:function(fd,fe,self,ff){if(this.self(arguments).__pM[fd]){var fh=[fd];
+
+for(var i=0,fg=this._getPaneScrollerArr();i<fg.length;i++){fh.push(fg[i].addListener.apply(fg[i],arguments));
+}return fh.join(bD);
+}else{return qx.ui.core.Widget.prototype.addListener.call(this,fd,fe,self,ff);
+}},removeListener:function(fi,fj,self,fk){if(this.self(arguments).__pM[fi]){for(var i=0,fl=this._getPaneScrollerArr();i<fl.length;i++){fl[i].removeListener.apply(fl[i],arguments);
+}}else{qx.ui.core.Widget.prototype.removeListener.call(this,fi,fj,self,fk);
+}},removeListenerById:function(fm){var fq=fm.split(bD);
+var fp=fq.shift();
+
+if(this.self(arguments).__pM[fp]){var fo=true;
+
+for(var i=0,fn=this._getPaneScrollerArr();i<fn.length;i++){fo=fn[i].removeListenerById.call(fn[i],fq[i])&&fo;
+}return fo;
+}else{return qx.ui.core.Widget.prototype.removeListenerById.call(this,fm);
+}},destroy:function(){this.getChildControl(p).getMenu().destroy();
+qx.ui.core.Widget.prototype.destroy.call(this);
+}},destruct:function(){if(qx.core.Environment.get(bE)){qx.locale.Manager.getInstance().removeListener(e,this._onChangeLocale,this);
+}var fs=this.getSelectionModel();
+
+if(fs){fs.dispose();
+}var fr=this.getDataRowRenderer();
+
+if(fr){fr.dispose();
+}this._cleanUpMetaColumns(0);
+this.getTableColumnModel().dispose();
+this._disposeObjects(u,bx,bG,bG,N,bd);
+this._disposeMap(Y);
+}});
+})();
+(function(){var a="qx.ui.table.IRowRenderer";
+qx.Interface.define(a,{members:{updateDataRowElement:function(b,c){},getRowHeightStyle:function(d){},createRowStyle:function(e){},getRowClass:function(f){}}});
+})();
+(function(){var j="",i="table-row-background-even",h="Boolean",g="content",f="default",e="height:",d="'",c="table-row",b="table-row-background-focused",a="css.boxmodel",v=';color:',u="table-row-background-odd",t="1px solid ",s="table-row-line",r="table-row-background-selected",q="background-color:",p=';border-bottom: 1px solid ',o="table-row-selected",n="table-row-background-focused-selected",m="px;",k="qx.ui.table.rowrenderer.Default",l=";";
+qx.Class.define(k,{extend:qx.core.Object,implement:qx.ui.table.IRowRenderer,construct:function(){qx.core.Object.call(this);
+this.__pV=j;
+this.__pV={};
+this._colors={};
+this._renderFont(qx.theme.manager.Font.getInstance().resolve(f));
+var w=qx.theme.manager.Color.getInstance();
+this._colors.bgcolFocusedSelected=w.resolve(n);
+this._colors.bgcolFocused=w.resolve(b);
+this._colors.bgcolSelected=w.resolve(r);
+this._colors.bgcolEven=w.resolve(i);
+this._colors.bgcolOdd=w.resolve(u);
+this._colors.colSelected=w.resolve(o);
+this._colors.colNormal=w.resolve(c);
+this._colors.horLine=w.resolve(s);
+},properties:{highlightFocusRow:{check:h,init:true}},members:{_colors:null,__pW:null,__pV:null,_insetY:1,_renderFont:function(x){if(x){this.__pW=x.getStyles();
+this.__pV=qx.bom.element.Style.compile(this.__pW);
+this.__pV=this.__pV.replace(/"/g,d);
+}else{this.__pV=j;
+this.__pW=qx.bom.Font.getDefaultStyles();
+}},updateDataRowElement:function(y,z){var B=this.__pW;
+var A=z.style;
+qx.bom.element.Style.setStyles(z,B);
+
+if(y.focusedRow&&this.getHighlightFocusRow()){A.backgroundColor=y.selected?this._colors.bgcolFocusedSelected:this._colors.bgcolFocused;
+}else{if(y.selected){A.backgroundColor=this._colors.bgcolSelected;
+}else{A.backgroundColor=(y.row%2==0)?this._colors.bgcolEven:this._colors.bgcolOdd;
+}}A.color=y.selected?this._colors.colSelected:this._colors.colNormal;
+A.borderBottom=t+this._colors.horLine;
+},getRowHeightStyle:function(C){if(qx.core.Environment.get(a)==g){C-=this._insetY;
+}return e+C+m;
+},createRowStyle:function(D){var E=[];
+E.push(l);
+E.push(this.__pV);
+E.push(q);
+
+if(D.focusedRow&&this.getHighlightFocusRow()){E.push(D.selected?this._colors.bgcolFocusedSelected:this._colors.bgcolFocused);
+}else{if(D.selected){E.push(this._colors.bgcolSelected);
+}else{E.push((D.row%2==0)?this._colors.bgcolEven:this._colors.bgcolOdd);
+}}E.push(v);
+E.push(D.selected?this._colors.colSelected:this._colors.colNormal);
+E.push(p,this._colors.horLine);
+return E.join(j);
+},getRowClass:function(F){return j;
+},getRowAttributes:function(G){return j;
+}},destruct:function(){this._colors=this.__pW=this.__pV=null;
+}});
+})();
+(function(){var a="qx.ui.table.IColumnMenuButton";
+qx.Interface.define(a,{properties:{menu:{}},members:{factory:function(b,c){return true;
+},empty:function(){return true;
+}}});
+})();
+(function(){var f="menu-button",e="table-column-reset-button",d="separator",c="user-button",b="qx.ui.table.columnmenu.Button",a="menu";
+qx.Class.define(b,{extend:qx.ui.form.MenuButton,implement:qx.ui.table.IColumnMenuButton,construct:function(){qx.ui.form.MenuButton.call(this);
+this.__pX=new qx.ui.core.Blocker(this);
+},members:{__pY:null,__pX:null,factory:function(g,h){switch(g){case a:var j=new qx.ui.menu.Menu();
+this.setMenu(j);
+return j;
+case f:var m=new qx.ui.table.columnmenu.MenuItem(h.text);
+m.setVisible(h.bVisible);
+this.getMenu().add(m);
+return m;
+case c:var k=new qx.ui.menu.Button(h.text);
+k.set({appearance:e});
+return k;
+case d:return new qx.ui.menu.Separator();
+default:throw new Error("Unrecognized factory request: "+g);
+}},getBlocker:function(){return this.__pX;
+},empty:function(){var n=this.getMenu();
+var o=n.getChildren();
+
+for(var i=0,l=o.length;i<l;i++){o[0].destroy();
+}}},destruct:function(){this.__pX.dispose();
+}});
 })();
 (function(){var b="qx.ui.form.IBooleanForm",a="qx.event.type.Data";
 qx.Interface.define(b,{events:{"changeValue":a},members:{setValue:function(c){return arguments.length==1;

@@ -284,10 +284,10 @@ module StorageHandler
     while self.respond_to?( vers_str = "migration_#{version}".to_sym )
       rt = self.respond_to? vers_str
       dputs(2){"Migrating #{@name} to version #{version}, calling #{vers_str}"}
-      ddputs(4){"Working on #{data.inspect}"}
+      dputs(4){"Working on #{data.inspect}"}
       @data.each{|k,v|
         inst = get_data_instance( k )
-        ddputs(4){"Sending #{inst.inspect}"}
+        dputs(4){"Sending #{inst.inspect}"}
         send vers_str, inst
       }
       mv.version = version
@@ -298,7 +298,7 @@ module StorageHandler
   def load
     @data = {}
     @storage.each{|k,di|
-      ddputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
+      dputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
       @data.merge!( di.load ){|k,o,n| o.merge(n) }
       dputs( 5 ){ "Loaded #{@data.inspect} for #{self.name}" }
     }

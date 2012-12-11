@@ -314,6 +314,17 @@ class View < RPCQooxdooService
     )
     do_container_end if @actual.last == "group"
   end
+  
+  def show_split_button( name, menu )
+    ddputs( 4 ){"Adding a split-button #{name} with menu #{menu.inspect}"}
+    do_container_end if @actual.last == "fields"
+    do_container( "vbox", proc {
+        @layout.last.push Value.new( [:split_button], 
+          [ name, { :menu => menu } ] )
+      }
+    )
+    do_container_end if @actual.last == "group"    
+  end
 
   # Adds a new, general item
   def show_add( cmds, args )
@@ -388,9 +399,9 @@ class View < RPCQooxdooService
       # Check for lonely tabs
       main_tabs.each{|t|
         vlen = views.select{|v| 
-            dputs(5){"We have #{v.name}, #{v.name.tab_name} and #{t}"}
-            v.name.tab_name == t
-          }.length
+          dputs(5){"We have #{v.name}, #{v.name.tab_name} and #{t}"}
+          v.name.tab_name == t
+        }.length
         dputs(5){"Calculating doubles for #{t}, found #{vlen}"}
         if vlen == 1
           dputs(3){"Deleting tab #{t}"}

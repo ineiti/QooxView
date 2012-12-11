@@ -66,6 +66,12 @@ qx.Class.define("frontend.Views.Form", {
         case "button":
           this.callBackend("button", name, this.fields.getFieldsData());
           break;
+        case "split_button":
+          var fd = this.fields.getFieldsData()
+          fd.menu = value;
+          //alert("cb split_button " + value + ":" + print_a( fd ) )
+          this.callBackend("button", name, fd );
+          break;
         case "list":
           this.callBackend("list_choice", name, this.fields.getFieldsData());
           break;
