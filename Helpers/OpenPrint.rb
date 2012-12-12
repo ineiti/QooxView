@@ -7,15 +7,13 @@ require 'docsplit'
 require 'zip/zipfilesystem'; include Zip
 
 class OpenPrint
+  attr_accessor :lp_cmd
+  
   def initialize( file, dir = nil )
     @file = file
     @dir = dir
     @base = `basename #{file}`
-    if $config[:default_printer]
-      @default_printer = "-P #{$config[:default_printer]}"
-    else
-      @default_printer = nil
-    end
+    @lp_cmd = nil
     @counter = 0
   end
   
@@ -29,7 +27,6 @@ class OpenPrint
       @counter += 1
     end
     pdf_file = tmp_file.sub(/[^\.]*$/, 'pdf')
-    cmd = @default_printer ? "lpr #{@default_printer} #{pdf_file}" : nil
 
     FileUtils::cp( @file, tmp_file )
     ZipFile.open( tmp_file ){ |z|
@@ -48,9 +45,9 @@ class OpenPrint
     dputs( 5 ){ "Finished docsplit" }
     @dir and FileUtils::cp( pdf_file, @dir )
     #    FileUtils::rm( tmp_file )
-    if cmd
-      dputs( 0 ){ cmd }
-      `#{cmd}`
+    if @lp_cmd
+      dputs( 0 ){ "Printing with --#{@lp_cmd} #{pdf_file}--" }
+      `#{@lp_cmd} #{pdf_file}`
       return true
     else
       # Download PDF
@@ -67,7 +64,9 @@ module PrintButton
   end
   
   def get_local_printers
-    %w( PDF ) + get_remote_printers("localhost")
+    %w( PDF ) + get_remote_printers("localhost").collect{|p|
+      "local #{p}"
+    }
   end
   
   def show_print( *buttons )
@@ -99,6 +98,22 @@ module PrintButton
       stat.data_str = get_local_printers.first
     end
     stat
+  end
+  
+  def arg_printer( session, button )
+    arg = nil
+    pn = stat_printer( session, button ).data_str
+    remote = session.web_req.peeraddr[3]
+    ddputs(3){"Found printer #{pn} with remote #{remote}"}
+    if pn != "PDF"
+      if get_local_printers.index( pn )
+        arg = "-d #{pn.sub(/^local /, '')}"
+      elsif get_remote_printers( remote ).index( pn )
+        arg = "-h #{remote}:631 -d #{pn}"
+      end
+    end
+    ddputs(3){"Argument will be #{arg}"}
+    arg
   end
 
   def reply_print(session)
