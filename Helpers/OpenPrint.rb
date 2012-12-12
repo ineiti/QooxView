@@ -100,20 +100,20 @@ module PrintButton
     stat
   end
   
-  def arg_printer( session, button )
-    arg = nil
+  def cmd_printer( session, button )
+    cmd = nil
     pn = stat_printer( session, button ).data_str
     remote = session.web_req.peeraddr[3]
     ddputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
       if get_local_printers.index( pn )
-        arg = "-d #{pn.sub(/^local /, '')}"
+        cmd = "lp -d #{pn.sub(/^local /, '')}"
       elsif get_remote_printers( remote ).index( pn )
-        arg = "-h #{remote}:631 -d #{pn}"
+        cmd = "lp -h #{remote}:631 -d #{pn}"
       end
     end
-    ddputs(3){"Argument will be #{arg}"}
-    arg
+    ddputs(3){"Command will be #{cmd}"}
+    cmd
   end
 
   def reply_print(session)
