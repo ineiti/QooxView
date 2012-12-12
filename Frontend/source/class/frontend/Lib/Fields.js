@@ -491,22 +491,22 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.getData = function(){};
           field_element.setAllowGrowY( false );
           field_element.setValueArray = function(l){
-            //alert( typeof(l) + print_a( l ))
+            var fe = this;
             if ( typeof(l) === "string" ){
-              field_element.setLabel(l)
+              fe.setLabel(l)
             } else 
             if ( l.length > 0 ){
-              field_element.setLabel(l.shift())
+              fe.setLabel(l.shift())
               var menu = new qx.ui.menu.Menu;
               for( var i=0; i<l.length; i++ ){
                 var n = l[i]
                 var b = new qx.ui.menu.Button(n);
                 b.addListener("execute", function(e){
-                  field_element.fireDataEvent("execute", this.getLabel() )
+                  fe.fireDataEvent("execute", this.getLabel() )
                 }, b )
                 menu.add( b );
               }
-              field_element.setMenu( menu );
+              fe.setMenu( menu );
             }
           }
           field_element.setValueArray([label].concat( params.menu ) )

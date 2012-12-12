@@ -75,7 +75,7 @@ module PrintButton
       @default_printer = {}
     end
     print_name = nil
-    gui_hbox :nogroup do
+    #gui_hbox :nogroup do
       buttons.to_a.each{|b|
         ddputs(4){"Doing #{b.inspect}"}
         if b.to_s =~ /^print/
@@ -94,7 +94,7 @@ module PrintButton
       if @default_printer[print_name].data_str == ""
         @default_printer[print_name].data_str = get_local_printers.first
       end
-    end
+    #end
   end
   
   def reply_print(session)
