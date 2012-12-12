@@ -488,20 +488,28 @@ qx.Class.define("frontend.Lib.Fields", {
           listener = "execute";
           field_element = new qx.ui.form.SplitButton(label);
 
-          var menu = new qx.ui.menu.Menu;
-          for( var i=0; i<params.menu.length; i++ ){
-            var n = params.menu[i]
-            var b = new qx.ui.menu.Button(n);
-            b.addListener("execute", function(e){
-              field_element.fireDataEvent("execute", this.getLabel() )
-            }, b )
-            menu.add( b );
-          //var m = new qx.ui.menu.Button("a:" + i);
-          //menu.add( m );
-          }
-          field_element.setMenu( menu );
           field_element.getData = function(){};
           field_element.setAllowGrowY( false );
+          field_element.setValueArray = function(l){
+            //alert( typeof(l) + print_a( l ))
+            if ( typeof(l) === "string" ){
+              field_element.setLabel(l)
+            } else 
+            if ( l.length > 0 ){
+              field_element.setLabel(l.shift())
+              var menu = new qx.ui.menu.Menu;
+              for( var i=0; i<l.length; i++ ){
+                var n = l[i]
+                var b = new qx.ui.menu.Button(n);
+                b.addListener("execute", function(e){
+                  field_element.fireDataEvent("execute", this.getLabel() )
+                }, b )
+                menu.add( b );
+              }
+              field_element.setMenu( menu );
+            }
+          }
+          field_element.setValueArray([label].concat( params.menu ) )
           show_label = false;
           if (!this.first_button || params.def) {
             this.first_button = field_element;
