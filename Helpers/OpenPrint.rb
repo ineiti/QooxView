@@ -60,67 +60,68 @@ class OpenPrint
 end
 
 module PrintButton
+  attr_reader :printer_buttons
   def get_remote_printers(ip)
     ddputs(4){"Getting printers for #{ip}"}
     %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
   end
   
   def get_local_printers
-    get_remote_printers("localhost")
+    %w( PDF ) + get_remote_printers("localhost")
   end
   
   def show_print( *buttons )
     ddputs(3){"show_print with #{buttons.inspect}"}
-    if not instance_variable_defined? :@default_printer
-      @default_printer = {}
+    if not instance_variable_defined? :@printer_buttons
+      @printer_buttons = []
     end
     print_name = nil
-    #gui_hbox :nogroup do
-      buttons.to_a.each{|b|
-        ddputs(4){"Doing #{b.inspect}"}
-        if b.to_s =~ /^print/
-          show_split_button b, get_local_printers
-          print_name = b.to_sym
-        else
-          show_button b
-        end
-      }
-      if not print_name
-        show_split_button :print, get_local_printers
-        print_name = :print
+    buttons.to_a.each{|b|
+      ddputs(4){"Doing #{b.inspect}"}
+      if b.to_s =~ /^print/
+        show_split_button b, get_local_printers
+        print_name = b.to_sym
+      else
+        show_button b
       end
-      @default_printer[print_name] = 
-        Entities.Statics.get(self.name.to_s + print_name.to_s)
-      if @default_printer[print_name].data_str == ""
-        @default_printer[print_name].data_str = get_local_printers.first
-      end
-    #end
+    }
+    if not print_name
+      show_split_button :print, get_local_printers
+      print_name = :print
+    end
+    @printer_buttons.push print_name
   end
   
+  def stat_printer( session, button )
+    stat_name = "#{self.name}:#{button}:#{session.owner.login_name}"
+    stat = Entities.Statics.get(stat_name)
+    if stat.data_str == ""
+      stat.data_str = get_local_printers.first
+    end
+    stat
+  end
+
   def reply_print(session)
     ret = []
-    @default_printer.each{|k,v|
-      ddputs(4){"#{k}-#{v.inspect}"}
-      value = "#{GetText._( k.to_s )} #{v.data_str}"
-      if ip = session.web_req.peeraddr[3]
+    @printer_buttons.each{|pb|
+      p = stat_printer( session, pb )
+      ddputs(4){"#{pb}-#{p.inspect}"}
+      value = "#{GetText._( pb.to_s )} #{p.data_str}"
+      if session.web_req and ip = session.web_req.peeraddr[3]
         if not ip =~ /(::1|localhost|127.0.0.1)/
           value = [ value ] + get_local_printers + get_remote_printers(ip)
         end
       end
-      ret += reply( :update, k => value )
+      ret += reply( :update, pb => value )
     }
     ddputs(4){"#{ret.inspect}"}
     ret
   end
   
-  def get_printer( name )
-    @default_printer[name.to_sym].data_str
-  end
-  
   def rpc_print( session, name, data )
     ddputs(4){"Printing button #{name} with #{data.inspect}"}
-    if data['menu'] and data['menu'].length > 0
-      @default_printer[name.to_sym].data_str = data['menu']
+    if data and data['menu'] and data['menu'].length > 0
+      stat_printer( session, name ).data_str = data['menu']
     end
     reply_print( session )
   end
