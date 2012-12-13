@@ -40,9 +40,13 @@ class OpenPrint
       z.commit
     }
 
-    Docsplit.extract_pdf tmp_file, :output => "/tmp"
-    #FileUtils::cp( tmp_file, pdf_file )
-    dputs( 5 ){ "Finished docsplit" }
+    if not get_config( :false, :OpenPrint, :simulation )
+      Docsplit.extract_pdf tmp_file, :output => "/tmp"
+      #FileUtils::cp( tmp_file, pdf_file )
+      dputs( 5 ){ "Finished docsplit" }
+    else
+      FileUtils::cp( tmp_file, pdf_file )
+    end
     @dir and FileUtils::cp( pdf_file, @dir )
     #    FileUtils::rm( tmp_file )
     if @lp_cmd
@@ -63,9 +67,9 @@ module PrintButton
     %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
   end
   
-  def get_local_printers
+  def get_server_printers
     get_remote_printers("localhost").collect{|p|
-      "local #{p}"
+      "server #{p}"
     } + %w( PDF )
   end
   
@@ -78,14 +82,14 @@ module PrintButton
     buttons.to_a.each{|b|
       ddputs(4){"Doing #{b.inspect}"}
       if b.to_s =~ /^print/
-        show_split_button b, get_local_printers
+        show_split_button b, get_server_printers
         print_name = b.to_sym
       else
         show_button b
       end
     }
     if not print_name
-      show_split_button :print, get_local_printers
+      show_split_button :print, get_server_printers
       print_name = :print
     end
     @printer_buttons.push print_name
@@ -95,7 +99,7 @@ module PrintButton
     stat_name = "#{self.name}:#{button}:#{session.owner.login_name}"
     stat = Entities.Statics.get(stat_name)
     if stat.data_str == ""
-      stat.data_str = get_local_printers.first
+      stat.data_str = get_server_printers.first
     end
     stat
   end
@@ -106,8 +110,8 @@ module PrintButton
     remote = session.web_req.peeraddr[3]
     ddputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
-      if get_local_printers.index( pn )
-        cmd = "lp -d #{pn.sub(/^local /, '')}"
+      if get_server_printers.index( pn )
+        cmd = "lp -d #{pn.sub(/^server /, '')}"
       elsif get_remote_printers( remote ).index( pn )
         cmd = "lp -h #{remote}:631 -d #{pn}"
       end
@@ -124,7 +128,7 @@ module PrintButton
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
         if not ip =~ /(::1|localhost|127.0.0.1)/
-          value = [ value ] + get_local_printers + get_remote_printers(ip)
+          value = [ value ] + get_server_printers + get_remote_printers(ip)
         end
       end
       ret += reply( :update, pb => value )

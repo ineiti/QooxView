@@ -76,7 +76,7 @@ qx.Class.define("frontend.Views.Ltab", {
             // The time is positive if we only ask the backend to send new data
             // The time is negative if we have to send our values first
             var time = Math.abs(res.data) * 1000;
-            if ( time < 1 ){
+            if ( time >= 0 ){
               var method = "update";
               if (res.data < 0) {
                 method = "update_with_values"
