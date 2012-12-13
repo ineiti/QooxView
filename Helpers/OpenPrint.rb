@@ -64,9 +64,9 @@ module PrintButton
   end
   
   def get_local_printers
-    %w( PDF ) + get_remote_printers("localhost").collect{|p|
+    get_remote_printers("localhost").collect{|p|
       "local #{p}"
-    }
+    } + %w( PDF )
   end
   
   def show_print( *buttons )
