@@ -76,13 +76,17 @@ qx.Class.define("frontend.Views.Ltab", {
             // The time is positive if we only ask the backend to send new data
             // The time is negative if we have to send our values first
             var time = Math.abs(res.data) * 1000;
-            var method = "update";
-            if (res.data < 0) {
-              method = "update_with_values"
+            if ( time < 1 ){
+              var method = "update";
+              if (res.data < 0) {
+                method = "update_with_values"
+              }
+              dbg(3, "update-method is: " + method);
+              dbg(3, "View is: " + this.viewClass);
+              this.timer.start(this.autoUpdate, time, this, method, time);
+            } else {
+              dbg(3, "auto-update is 0, not updating" )
             }
-            dbg(3, "update-method is: " + method);
-            dbg(3, "View is: " + this.viewClass);
-            this.timer.start(this.autoUpdate, time, this, method, time);
             break;
           case "callback_button":
             //aform.fadeOut();
