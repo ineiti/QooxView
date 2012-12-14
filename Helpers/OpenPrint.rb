@@ -18,7 +18,7 @@ class OpenPrint
   end
   
   def print( fields, counter = nil, name = nil )
-    dputs( 3 ){ "New print for #{@file}" }
+    dputs( 3 ){ "New print for -#{@file.inspect}-" }
     if name
       tmp_file = "/tmp/#{name}.#{@base.sub(/.*\./,'')}"
     else
@@ -27,6 +27,7 @@ class OpenPrint
       @counter += 1
     end
     pdf_file = tmp_file.sub(/[^\.]*$/, 'pdf')
+    ddputs(3){"Copying to -#{tmp_file.inspect}-"}
 
     FileUtils::cp( @file, tmp_file )
     ZipFile.open( tmp_file ){ |z|
