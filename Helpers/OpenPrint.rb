@@ -27,7 +27,7 @@ class OpenPrint
       @counter += 1
     end
     pdf_file = tmp_file.sub(/[^\.]*$/, 'pdf')
-    ddputs(3){"Copying to -#{tmp_file.inspect}-"}
+    dputs(3){"Copying to -#{tmp_file.inspect}-"}
 
     FileUtils::cp( @file, tmp_file )
     ZipFile.open( tmp_file ){ |z|
