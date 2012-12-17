@@ -139,10 +139,11 @@ module StorageHandler
   # Like search_by, but only exact matcheS
   def matches_by( field, value )
     ret = search_by( field, "^#{value}$" )
+    return ret
     if ret.length > 0
       return ret
     else
-      return nil
+      return []
     end
   end
   

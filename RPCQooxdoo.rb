@@ -222,7 +222,7 @@ class RPCQooxdooHandler
             res.body = cl.parse( req.request_method, req.path, req.query ).to_s
           end
         rescue Exception => e  
-          dputs( 0 ){ "Error while handling #{method} with #{params.inspect}: #{e.message}" }
+          dputs( 0 ){ "Error while handling #{cl.name} with #{req.inspect}: #{e.message}" }
           dputs( 0 ){ "#{e.inspect}" }
           dputs( 0 ){ "#{e.to_s}" }
           puts e.backtrace
