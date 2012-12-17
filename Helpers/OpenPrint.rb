@@ -64,7 +64,7 @@ end
 module PrintButton
   attr_reader :printer_buttons
   def get_remote_printers(ip)
-    ddputs(4){"Getting printers for #{ip}"}
+    dputs(4){"Getting printers for #{ip}"}
     %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
   end
   
@@ -75,13 +75,13 @@ module PrintButton
   end
   
   def show_print( *buttons )
-    ddputs(3){"show_print with #{buttons.inspect}"}
+    dputs(3){"show_print with #{buttons.inspect}"}
     if not instance_variable_defined? :@printer_buttons
       @printer_buttons = []
     end
     print_name = nil
     buttons.to_a.each{|b|
-      ddputs(4){"Doing #{b.inspect}"}
+      dputs(4){"Doing #{b.inspect}"}
       if b.to_s =~ /^print/
         show_split_button b, get_server_printers
         print_name = b.to_sym
@@ -109,7 +109,7 @@ module PrintButton
     cmd = nil
     pn = stat_printer( session, button ).data_str
     remote = session.web_req.peeraddr[3]
-    ddputs(3){"Found printer #{pn} with remote #{remote}"}
+    dputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
       if get_server_printers.index( pn )
         cmd = "lp -d #{pn.sub(/^server /, '')}"
@@ -117,7 +117,7 @@ module PrintButton
         cmd = "lp -h #{remote}:631 -d #{pn}"
       end
     end
-    ddputs(3){"Command will be #{cmd}"}
+    dputs(3){"Command will be #{cmd}"}
     cmd
   end
 
@@ -125,7 +125,7 @@ module PrintButton
     ret = []
     @printer_buttons.each{|pb|
       p = stat_printer( session, pb )
-      ddputs(4){"#{pb}-#{p.inspect}"}
+      dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
         if not ip =~ /(::1|localhost|127.0.0.1)/
@@ -134,12 +134,12 @@ module PrintButton
       end
       ret += reply( :update, pb => value )
     }
-    ddputs(4){"#{ret.inspect}"}
+    dputs(4){"#{ret.inspect}"}
     ret
   end
   
   def rpc_print( session, name, data )
-    ddputs(4){"Printing button #{name} with #{data.inspect}"}
+    dputs(4){"Printing button #{name} with #{data.inspect}"}
     if data and data['menu'] and data['menu'].length > 0
       stat_printer( session, name ).data_str = data['menu']
     end
