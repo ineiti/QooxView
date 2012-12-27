@@ -12,7 +12,7 @@ class OpenPrint
   def initialize( file, dir = nil )
     @file = file
     @dir = dir
-    @base = `basename #{file}`
+    @base = `basename #{file}`.chomp
     @lp_cmd = nil
     @counter = 0
   end
@@ -41,7 +41,7 @@ class OpenPrint
       z.commit
     }
 
-    if not get_config( :false, :OpenPrint, :simulation )
+    if not get_config( false, :OpenPrint, :simulation )
       Docsplit.extract_pdf tmp_file, :output => "/tmp"
       #FileUtils::cp( tmp_file, pdf_file )
       dputs( 5 ){ "Finished docsplit" }

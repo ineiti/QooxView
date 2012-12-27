@@ -1,16 +1,14 @@
 require 'test/unit'
 
-
-
 class TC_View < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
     @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
-    :permissions => 'admin' )
+      :permissions => 'admin' )
     @surf = Entities.Persons.create( :first_name => "surf", :pass => "surf",
-    :permissions => 'internet', :credit => 5000 )
+      :permissions => 'internet', :credit => 5000 )
     @autre = Entities.Persons.create( :pass => "surf",
-    :permissions => 'internet', :credit => 5000 )
+      :permissions => 'internet', :credit => 5000 )
     @base = Entities.Courses.create( :first_name => "base_10", :teacher => @surf )
     Session.new( @admin, '0.1' )
     Session.new( @surf, '0.2' )
@@ -27,7 +25,8 @@ class TC_View < Test::Unit::TestCase
     reply = request( "View", 'list', [['0.1']] )
     dputs( 0 ){ reply['result'].inspect }
     assert_equal [["BView", "BView"], ["CView", "CView"], 
-    ["CourseShow","CourseShow"], ["AView","AView"]], reply['result'][:views]
+      ["CourseShow","CourseShow"], ["AView","AView"]], 
+      reply['result'][0][:data][:views]
   end
 
   def test_update
@@ -41,29 +40,29 @@ class TC_View < Test::Unit::TestCase
     reply = request( 'View.CView', 'show', [['0.1']])
     result = reply['result']
     assert_equal [{:cmd=>"show",
-  :data=>
-   {:view_class=>"CView",
-    :layout=>
-     ["group",
-      [["vbox",
-        [["group",
-          [["hbox",
-            [["group",
-              [["fields", [["int", :person_id, "person_id", {:id=>true}]]],
-               ["vbox", [[:button, :new, "new", {}]]]]]]]]],
-         ["group",
-          [["hbox",
-            [["group",
-              [["fields",
-                [["str", :first_name, "first_name", {:callback=>"yes", :width=>300}], 
-                 ["str", :pass, "pass", {:width=>300}]]]]]]]]],
-         ["window:cview",
-          [["group",
-            [["fields",
-              [["int", :counter, "counter", {:min=>10, :max=>20}],
-               ["str", :street, "street", {:hidden=>true}]]]]]]]]]]],
-    :data_class=>"Persons"}}],
-     result
+        :data=>
+          {:view_class=>"CView",
+          :layout=>
+            ["group",
+            [["vbox",
+                [["group",
+                    [["hbox",
+                        [["group",
+                            [["fields", [["int", :person_id, "person_id", {:id=>true}]]],
+                              ["vbox", [[:button, :new, "new", {}]]]]]]]]],
+                  ["group",
+                    [["hbox",
+                        [["group",
+                            [["fields",
+                                [["str", :first_name, "first_name", {:callback=>"yes", :width=>300}], 
+                                  ["str", :pass, "pass", {:width=>300}]]]]]]]]],
+                  ["window:cview",
+                    [["group",
+                        [["fields",
+                            [["int", :counter, "counter", {:min=>10, :max=>20}],
+                              ["str", :street, "street", {:hidden=>true}]]]]]]]]]]],
+          :data_class=>"Persons"}}],
+      result
   end
 
   def test_config
@@ -73,18 +72,18 @@ class TC_View < Test::Unit::TestCase
 
   def test_layout
     assert_equal ["group",
- [["fields",
-   [["int", :person_id, "person_id", {:id=>true}],
-    ["str", :first_name, "first_name", {}],
-    ["str", :pass, "pass", {}],
-    ["str", :address, "address", {}],
-    ["int", :credit, "credit", {}],
-    ["int", :ro_int, "ro_int", {:ro=>true}],
-    ["list", :ro_list, "ro_list", {:ro=>true, :list_values=>[1,2,3]}],
-    ["list", :ro_list2, "ro_list2", {:ro=>true}],
-    ["fromto", :duration, "duration", {}],
-    ["list", :worker, "worker", {:list_values=>["admin","surf",nil]}]]]]],
-     View.AView.layout_eval
+      [["fields",
+          [["int", :person_id, "person_id", {:id=>true}],
+            ["str", :first_name, "first_name", {}],
+            ["str", :pass, "pass", {}],
+            ["str", :address, "address", {}],
+            ["int", :credit, "credit", {}],
+            ["int", :ro_int, "ro_int", {:ro=>true}],
+            ["list", :ro_list, "ro_list", {:ro=>true, :list_values=>[1,2,3]}],
+            ["list", :ro_list2, "ro_list2", {:ro=>true}],
+            ["fromto", :duration, "duration", {}],
+            ["list", :worker, "worker", {:list_values=>["admin","surf",nil]}]]]]],
+      View.AView.layout_eval
   end
 
   def test_list_update
@@ -92,7 +91,7 @@ class TC_View < Test::Unit::TestCase
       View.AView.layout_eval[1][0][1][9],
       View.AView.layout_eval.inspect
     Entities.Persons.create( :first_name => "foo", :pass => "foo",
-    :session_id => '0.3', :permission => 'internet' )
+      :session_id => '0.3', :permission => 'internet' )
     assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf",nil,"foo"]}],
       View.AView.layout_eval[1][0][1][9]
   end
@@ -112,17 +111,17 @@ class TC_View < Test::Unit::TestCase
 
   def test_view_entities
     assert_equal ["group", [["fields", [["list", :teacher, "teacher",
-      {:list_values=>[[1,"surf"]], :list_type=>:drop}]]]]],
+              {:list_values=>[[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
     assert_equal ["group", [["fields", [["list", :teacher, "teacher",
-      {:list_values=>[[0,"admin"],[1,"surf"]], :list_type=>:drop}]]]]],
+              {:list_values=>[[0,"admin"],[1,"surf"]], :list_type=>:drop}]]]]],
       View.CourseShow.layout_eval
   end
   
   def test_parse_request
     params = View.CourseShow.parse_request( 0, 0, ["test", { "one" => 2,
-      "teacher" => @surf.id } ] )
+          "teacher" => @surf.id } ] )
     assert_equal "surf", params[1]["teacher"].first_name 
   end
 end

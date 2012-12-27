@@ -55,7 +55,7 @@ class RPCQooxdooService
     # And now do eventual migrations on everybody
     @@services_hash.each_pair{|k,v|
       if k =~ /^Entities/
-        ddputs( 4 ){ "Migration of #{k}" }
+        dputs( 4 ){ "Migration of #{k}" }
         v.migrate
       end
     }
@@ -80,7 +80,7 @@ class RPCQooxdooService
   end
   
   # Adds a new service of type "subclass" and stores it under "name"
-  def self.add_new_service( subclass, name )
+  def self.add_new_service_old( subclass, name )
     dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = @@is_instance ? subclass.new : subclass
   end
@@ -89,6 +89,7 @@ class RPCQooxdooService
   def self.add_new_service( subclass, name )
     dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = subclass.new
+    @@services_hash[ name ].migrate
   end
 end
 

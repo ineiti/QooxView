@@ -316,7 +316,7 @@ class View < RPCQooxdooService
   end
   
   def show_split_button( name, menu )
-    ddputs( 4 ){"Adding a split-button #{name} with menu #{menu.inspect}"}
+    dputs( 4 ){"Adding a split-button #{name} with menu #{menu.inspect}"}
     do_container_end if @actual.last == "fields"
     do_container( "vbox", proc {
         @layout.last.push Value.new( [:split_button], 
@@ -368,8 +368,13 @@ class View < RPCQooxdooService
   end
 
   # Returns a list of the available views for a given user
+  def self.rpc_list( session )
+    View.reply( :list, View.list( session ) )
+  end
+  
   def rpc_list( session )
-    self.list( session )
+    dputs(5){"rpc_list"}
+    View.rpc_list(session)
   end
 
   def list( session )
@@ -386,6 +391,7 @@ class View < RPCQooxdooService
     dputs( 5 ){ @@list.inspect }
     @@list.each{|l|
       if l.visible and session.can_view( l.class.name )
+        dputs(5){"Found view #{l.class.name}"}
         views.push( l )
       end
     }
@@ -396,6 +402,7 @@ class View < RPCQooxdooService
       main_tabs = views.collect{|v|
         v.name.tab_name
       }.uniq
+      dputs(4){"Main_tabs are #{main_tabs.inspect}"}
       # Check for lonely tabs
       main_tabs.each{|t|
         vlen = views.select{|v| 
@@ -405,7 +412,7 @@ class View < RPCQooxdooService
         dputs(5){"Calculating doubles for #{t}, found #{vlen}"}
         if vlen == 1
           dputs(3){"Deleting tab #{t}"}
-          views.delete_if{|v| v.name.tab_name == t }
+          views.delete_if{|v| v.name.tab_name == t and v.name.sub_name == "Tabs"}
         end
       }
       if main_tabs.length == 1
@@ -634,6 +641,9 @@ class View < RPCQooxdooService
   #  reply( 'update', { :hello => "hello world" } ) +
   #  reply( 'self-update', 10 )
   def reply( cmd, data = nil )
+    View.reply( cmd, data )
+  end
+  def self.reply( cmd, data = nil )
     [{ :cmd => cmd, :data => data }]
   end
 

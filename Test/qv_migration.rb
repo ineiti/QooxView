@@ -12,6 +12,7 @@ class TC_Migration < Test::Unit::TestCase
   end
 
   def teardown
+    dputs(0){"Tearing down"}
     CVSInventories.class_eval( '
       def setup_data
         value_date :date
@@ -35,8 +36,12 @@ class TC_Migration < Test::Unit::TestCase
   end
   
   def test_cvs_init
+    assert_equal "comp 01", CVSInventories.find_by_date("121201").iname
+
+    dputs(5){"Before class_eval"}
     CVSInventories.class_eval( '
       def setup_data
+        dputs(0){"new inventories"}
         value_date :date
         value_str :iname
         value_str :typ
@@ -47,6 +52,7 @@ class TC_Migration < Test::Unit::TestCase
         inv.typ = inv.iname.split[0]
       end
 
+      dputs(0){"Adding to RPC"}
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
