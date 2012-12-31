@@ -149,7 +149,8 @@ end
 
 
 class String
-  def pluralize
+  def pluralize_simple
+    dputs(0){"Pluralizing #{self}"}
     case self
     when /us$/
       return self.sub(/us$/, 'i' )

@@ -10,8 +10,8 @@ class TC_View < Test::Unit::TestCase
     @autre = Entities.Persons.create( :pass => "surf",
       :permissions => 'internet', :credit => 5000 )
     @base = Entities.Courses.create( :first_name => "base_10", :teacher => @surf )
-    Session.new( @admin, '0.1' )
-    Session.new( @surf, '0.2' )
+    Sessions.create( @admin, '0.1' )
+    Sessions.create( @surf, '0.2' )
   end
 
   def teardown

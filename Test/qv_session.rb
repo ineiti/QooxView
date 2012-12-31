@@ -15,12 +15,15 @@ class TC_Session < Test::Unit::TestCase
   end
 
   def test_new_session
-    session = Session.new( @admin )
-    dputs( 0 ){ @session.inspect }
-    assert_equal @admin.session_id, session.id
+    session = Sessions.create( @admin )
+    dputs( 0 ){ "#{session.inspect}" }
+    assert_equal @admin.session_id, session.sid
     assert_equal "admin", session.owner.first_name
     
-    search = Session.find_by_id( session.id )
-    assert_equal session.id, search.id
+    search = Sessions.find_by_sid( session.sid )
+    assert_equal session.sid, search.sid
+    
+    search.close
+    assert_equal nil, Sessions.find_by_sid( session.sid )
   end
 end

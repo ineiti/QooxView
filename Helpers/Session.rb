@@ -8,50 +8,42 @@
  - "owner" - who called the session
 =end
 
-class Session
-  attr_reader :id, :permissions, :owner
-  attr_accessor :web_req
-  @@sessions = {}
+class Sessions < Entities
+  def setup_data
+    value_entity_person :owner, :drop, :full_name
+    value_str :sid
+  end
   
-  # Adds a person with a session. Holds on to the belief that "owner"
-  # has the following attributes:
-  # - permission - which holds the permissions available
-  # - session_id - which will get the new id
-  def initialize( owner, id = nil )
-    if owner.session_id and @@sessions.has_key? owner.session_id
-      @@sessions.delete( owner.session_id )
+  # Adds a person with a session.
+  def create( owner, sid = nil )
+    if owner.session_id and old = find_by_sid( owner.session_id )
+      old.delete
     end
     
-    if ! id
-      id = rand
+    if ! sid
+      sid = rand
     end
-    owner.session_id = @id = id.to_s
-    @permissions = owner.permissions
-    @@sessions[@id] = self
-    @owner = owner
+    owner.session_id = sid.to_s
+    
+    s = super( :owner => owner, :sid => sid.to_s )
+    s.web_req = nil
+    return s
+  end
+
+end
+
+class Session < Entity
+  attr_accessor :web_req
+  
+  def setup_instance
     @web_req = nil
   end
   
-  def add_entity( e )
-    dputs( 2 ){ "Adding #{e.class.name.to_s} to instance variables" }
-    instance_variable_set( "@#{e.class.name.to_s}", e )
-    self.class.send( :attr_reader, e.class.name.to_s )
-  end
-  
   def can_view( v )
-    return Permission.can_view( @permissions, v )
+    return Permission.can_view( owner.permissions, v )
   end
   
   def close
-    @@session.delete( id )
-  end
-  
-  def self.find_by_id( id )
-    if @@sessions.has_key? id.to_s
-      return @@sessions[id.to_s]
-    else
-      dputs( 0 ){ "Can't find session #{id}!" }
-      return nil
-    end
+    self.delete
   end
 end

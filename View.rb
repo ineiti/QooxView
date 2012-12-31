@@ -92,7 +92,7 @@ class View < RPCQooxdooService
       dputs( 4 ){ "Initializing #{self.class.name}" }
       dputs( 5 ){ "Total list of view-classes: #{@@list.join('::')}" }
       #@data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
-      @data_class = Entities.service( @name.tab_name.pluralize )
+      @data_class = Entities.service( @name.tab_name.pluralize_simple )
       @layout = [[]]
       @actual = []
       @update = false

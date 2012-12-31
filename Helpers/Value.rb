@@ -56,7 +56,7 @@ class Value
     when "entity"
       # So that "courseType" gets correctly translated to
       # "CourseTypes" (mind the capital in the middle)
-      @entity_class = cmds.shift.pluralize.gsub( /([A-Z])/, " \\1" ).
+      @entity_class = cmds.shift.pluralize_simple.gsub( /([A-Z])/, " \\1" ).
         split.collect{ |s| s.capitalize }.join
       @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments

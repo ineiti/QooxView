@@ -19,10 +19,10 @@ else
   require 'qv_entity'
   require 'qv_permission'
   require 'qv_stype'
-  require 'qv_session'
   require 'qv_sqlite'
   require 'qv_gettext'
   require 'qv_helpers'
   require 'qv_migration'
   require 'qv_view'
+  require 'qv_session'
 end

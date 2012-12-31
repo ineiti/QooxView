@@ -6,7 +6,7 @@ class Welcome < View
     person = Entities.Persons.find_by_login_name( login_name )
     dputs( 3 ){ "Found login #{person.inspect} for #{login_name}" }
     if person and password == person.password then
-      Session.new( person )
+      Sessions.create( person )
       return person.to_hash
     else
       return nil
