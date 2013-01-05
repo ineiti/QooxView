@@ -18,16 +18,27 @@ class SQLite < StorageType
     @db_class_name = "#{name_base.capitalize}_#{@name.downcase}"
     @db_class = nil
     %x[ mkdir -p data ]
+    @name_file = name_file
 #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
-    ActiveRecord::Base.establish_connection(
-      :adapter => "sqlite3", :database => "data/#{name_file}" )
-
-    init_table
-    eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
-    @db_class = eval( @db_class_name )
+    open_db
 
     super config
+  end
+  
+  # Allows for 
+  def close_db
+    ActiveRecord::Base.remove_connection
+  end
+  
+  def open_db
+    ActiveRecord::Base.establish_connection(
+      :adapter => "sqlite3", :database => "data/#{@name_file}" )
+
+    init_table
+    
+    eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
+    @db_class = eval( @db_class_name )
   end
 
   # Saves the data stored, optionally takes an index to say
@@ -67,7 +78,7 @@ class SQLite < StorageType
         dputs( 2 ){ "Creating table #{db_table}" }
         create_table db_table
       end
-      dputs( 2 ){ "Fields is #{fields.inspect}" }
+      dputs( 3 ){ "Fields is #{fields.inspect}" }
       fields.each_key{|f|
         dputs( 3 ){ "Checking for field #{f} in table #{db_table}" }
         if not columns( db_table ).index{|c|

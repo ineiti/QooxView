@@ -13,10 +13,15 @@
 # - allow: that is, add permissions to other people
 
 class Permission
-  @@view = {}
-  @@parent = {}
-  @@sessions = {}
+  
+  def self.clear
+    @@view = {}
+    @@parent = {}
+    @@sessions = {}
+  end
 
+  self.clear
+  
   def self.list
     return @@view.keys
   end
@@ -29,19 +34,19 @@ class Permission
   def self.session_add( session, perm )
     dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
-  #    dputs( 4 ){ "Adding permission for session #{session}: #{perm}" }
-  #    @@sessions[session.to_s] = perm
+    #    dputs( 4 ){ "Adding permission for session #{session}: #{perm}" }
+    #    @@sessions[session.to_s] = perm
   end
 
   def self.session_remove( session )
     dputs( 0 ){ "Deprecated - #{caller.inspect}" }
     exit
-  #    @@sessions[session.to_s] = nil
+    #    @@sessions[session.to_s] = nil
   end
 
   def self.getViewParent( view )
     @@view[view].to_a.collect{|c| "view:#{c}"} +
-    @@parent[view].to_a.collect{|c| "name:#{c}"}
+      @@parent[view].to_a.collect{|c| "name:#{c}"}
   end
 
   def self.can( session, view )
@@ -49,7 +54,7 @@ class Permission
     exit
     # If the list is not initialized, then everybody can do everything!
     if list.size == 0
-    return true
+      return true
     end
 
     dputs( 4 ){ "@@sessions is #{@@sessions.inspect}" }
@@ -82,7 +87,7 @@ class Permission
             dputs( 5 ){ "Searching #{action} - #{data.tab_name} for #{data} - #{action.class}" }
             if action =~ /^#{data}$/ or action =~ /^#{data.tab_name}Tabs$/
               dputs( 3 ){ "#{action} is allowed" }
-            return true
+              return true
             end
           end
         end

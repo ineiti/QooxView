@@ -140,11 +140,13 @@ module StorageHandler
   def matches_by( field, value )
     ret = search_by( field, "^#{value}$" )
     return ret
+=begin
     if ret.length > 0
       return ret
     else
       return []
     end
+=end
   end
   
   # filter is a hash with field/value-pairs to be searched.
