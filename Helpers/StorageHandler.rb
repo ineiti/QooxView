@@ -280,19 +280,27 @@ module StorageHandler
     if not mv = MigrationVersions.match_by( :class_name, @name )
       dputs(2){"#{@name} has no migration yet"}
       mv = Entities.MigrationVersions.create( :class_name => @name,
-      :version => 0 )
+        :version => 0 )
     end
     version = mv.version + 1
-    dputs(2){"Checking for migration_#{version} of #{@name}"}
-    while self.respond_to?( vers_str = "migration_#{version}".to_sym )
-      rt = self.respond_to? vers_str
+    dputs(3){"Checking for migration_#{version} of #{@name}"}
+    while self.respond_to?( vers_str = "migration_#{version}".to_sym ) or
+        self.respond_to?( vers_str = "migration_#{version}_raw".to_sym )
       dputs(2){"Migrating #{@name} to version #{version}, calling #{vers_str}"}
       dputs(4){"Working on #{data.inspect}"}
       @data.each{|k,v|
-        inst = get_data_instance( k )
-        dputs(4){"Sending #{inst.inspect}"}
-        send vers_str, inst
+        if vers_str.to_s =~ /_raw$/
+          dputs(4){"Sending raw data of #{v.inspect}"}
+          send vers_str, v
+          dputs(4){"raw data is now #{v.inspect}"}
+          #@data[k] = v
+        else
+          inst = get_data_instance( k )
+          dputs(4){"Sending #{inst.inspect}"}
+          send vers_str, inst
+        end
       }
+      dputs(5){"Data is now #{@data.inspect}"}
       mv.version = version
       version += 1
     end

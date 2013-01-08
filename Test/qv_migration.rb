@@ -97,5 +97,25 @@ class TC_Migration < Test::Unit::TestCase
     
     assert_equal "comp 01", CVSInventories.find_by_date("121201").i_name
   end
+  
+  def test_raw
+    CVSInventories.class_eval( '
+      def setup_data
+        value_date :date
+        value_str :i_name
+      end
+  
+      def migration_1_raw( inv )
+        dputs(0){"renaming raw: Adjusting inv #{inv.inspect}"}
+        inv[:i_name] = inv[:iname]
+        dputs(0){"Is now #{inv.inspect}"}
+      end
+
+      RPCQooxdooService.add_new_service( CVSInventories,
+        "Entities.CVSInventories" )
+      ')    
+
+    assert_equal "comp 01", CVSInventories.find_by_date("121201").i_name
+  end
 
 end

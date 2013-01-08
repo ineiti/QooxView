@@ -86,19 +86,19 @@ class Value
       dputs( 3 ){ "List is #{@list}" }
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/
-      dputs( 3 ){ "Converting -#{@name}- to array" }
+      ddputs( 3 ){ "Converting -#{@name}- to array" }
       fe_type = "list"
       e_all = eclass.search_all
       values = e_all.select{|e|
         begin
-          dputs( 3 ){ "Searching whether to show #{e.inspect}" }
+          ddputs( 3 ){ "Searching whether to show #{e.inspect}" }
           cond = @condition ? @condition.call( e ) : true
-          dputs( 3 ){ "cond: #{cond}" }
+          ddputs( 3 ){ "cond: #{cond}" }
           method = e.respond_to? @show_method
-          dputs( 3 ){ "method: #{method}" }
+          ddputs( 3 ){ "method: #{method}" }
           cond and method
         rescue Exception => e
-          dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
+          ddputs( 0 ){ "Couldn't get value: #{e.inspect}" }
           false
         end
       }.collect{|e|
@@ -106,6 +106,9 @@ class Value
       }.sort{|a,b|
         a[1] <=> b[1]
       }
+      if args.has_key? :empty
+        values.unshift( [ nil, "---" ] )
+      end
       args.merge! :list_values => values
       dputs( 3 ){ "Args for entities is #{args.inspect}" }
     end
