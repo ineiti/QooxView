@@ -274,7 +274,7 @@ class Entities < RPCQooxdooService
 
   def self.delete_all_data( local_only = false )
     @@all.each_pair{|k,v|
-      dputs( 4 ){ "Erasing data of #{k}" }
+      dputs( 1 ){ "Erasing data of #{k}" }
       v.delete_all( local_only )
     }
   end

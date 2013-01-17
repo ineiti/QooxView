@@ -12,6 +12,8 @@ require 'logger'
 
 
 class SQLite < StorageType
+  attr :db_class
+  
   def configure( config, name_base = "stsql", name_file = "sql.db" )
     dputs( 2 ){ "Configuring SQLite with #{@name}" }
     @db_table = "#{name_base}_#{@name.downcase}s"
@@ -74,19 +76,23 @@ class SQLite < StorageType
   def init_table
     db_table, fields = @db_table, @fields
     ActiveRecord::Schema.define do
+      new_table = false
       if ! table_exists? db_table
-        dputs( 2 ){ "Creating table #{db_table}" }
+        dputs( 1 ){ "Creating table #{db_table}" }
         create_table db_table
+        new_table = true
       end
       dputs( 3 ){ "Fields is #{fields.inspect}" }
       fields.each_key{|f|
         dputs( 3 ){ "Checking for field #{f} in table #{db_table}" }
         if not columns( db_table ).index{|c|
             c.name.to_s == f.to_s }
-          dputs( 5 ){ "Adding column #{f}" }
+          dputs( new_table ? 4 : 1 ){ "Adding column #{f} to table #{db_table}" }
           case fields[f][:dtype]
           when "int"
             add_column( db_table, f, :integer )
+          when "bool"
+            add_column( db_table, f, :boolean )
           else
             add_column( db_table, f, :string )
           end

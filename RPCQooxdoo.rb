@@ -52,6 +52,13 @@ class RPCQooxdooService
         end
       }
     }
+    
+    RPCQooxdooService.migrate_all
+
+    @@is_instance = true
+  end
+  
+  def self.migrate_all
     # And now do eventual migrations on everybody
     @@services_hash.each_pair{|k,v|
       if k =~ /^Entities/
@@ -59,8 +66,6 @@ class RPCQooxdooService
         v.migrate
       end
     }
-
-    @@is_instance = true
   end
   
   # Catches the name of the new class
