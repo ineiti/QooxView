@@ -41,6 +41,7 @@ class SQLite < StorageType
     
     eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
     @db_class = eval( @db_class_name )
+    dputs(4){"db_class is #{db_class.inspect}"}
   end
 
   # Saves the data stored, optionally takes an index to say
@@ -75,6 +76,7 @@ class SQLite < StorageType
 
   def init_table
     db_table, fields = @db_table, @fields
+    dputs(3){"Initializing #{@db_class_name}"}
     ActiveRecord::Schema.define do
       new_table = false
       if ! table_exists? db_table
@@ -104,7 +106,7 @@ class SQLite < StorageType
 
   # loads the data
   def load
-    dputs( 2 ){ "Loading data" }
+    dputs( 2 ){ "Loading data for #{@db_class_name}" }
     res = Hash[ *@db_class.all.collect{|s|
         [ s[@data_field_id].to_i, s.attributes.symbolize_keys ]
       }.flatten(1)

@@ -86,6 +86,11 @@ class Entities < RPCQooxdooService
       value_block @data_field_id
       value_int_ALL @data_field_id
 
+      dputs(4){"Configuring all storages"}
+      @storage.each{|k,s|
+        dputs(4){"Configuring #{k} #{s.inspect}"}
+        s.configure(s.config)
+      }
       dputs( 4 ){ "Block is now: #{@blocks.inspect}" }
       autoload and load
     end

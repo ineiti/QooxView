@@ -12,7 +12,7 @@
 
 class StorageType
   @@types = {}
-  attr_reader :data_cache, :name
+  attr_reader :data_cache, :name, :config
   
   def initialize( entity, config = {} )
     @name = entity.name
@@ -25,7 +25,8 @@ class StorageType
     if $config and $config[:StorageType] and $config[:StorageType][class_name]
       config = $config[:StorageType][class_name].merge( config )
     end
-    configure( config )
+    
+    @config = config
   end
   
   # By default use configuration-options to overwrite class-variables
