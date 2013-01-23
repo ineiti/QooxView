@@ -92,6 +92,7 @@ class Value
       values = e_all.select{|e|
         begin
           dputs( 3 ){ "Searching whether to show #{e.inspect}" }
+          dputs( 3 ){ "Condition is #{@condition.inspect}" }
           cond = @condition ? @condition.call( e ) : true
           dputs( 3 ){ "cond: #{cond}" }
           method = e.respond_to? @show_method

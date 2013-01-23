@@ -173,12 +173,17 @@ class Entities < RPCQooxdooService
       ret
     when /^listp_/
       field = cmd_str.sub( /^listp_/, "" )
+      reverse = field =~ /^rev_/
+      if reverse
+        field.sub!( /^rev_/, "" )
+      end
       dputs( 5 ){ "Using listpairs for field #{field.inspect}, #{@data.inspect}" }
       ret = @data.keys.collect{|k|
         dputs( 4 ){ "k is #{k.inspect} - data is #{@data[k].inspect}" }
         [k, @data[k][field.to_sym] ] }.sort{|a,b|
         a[1] <=> b[1]
       }
+      reverse and ret.reverse!
       dputs( 3 ){ "Returning #{ret.inspect}" }
       ret
     when /^value_/

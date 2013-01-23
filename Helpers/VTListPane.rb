@@ -32,8 +32,9 @@ The following buttons are defined:
 module VTListPane
   def vtlp_list( field, method, args={} )
     @vtlp_field = field.to_s
-		@vtlp_method = method
-    @vtlp_method_list = "listp_#{method}"
+    @vtlp_method = method.to_s
+    @vtlp_method_list = "listp_#{method.to_s}"
+    @vtlp_method.sub!( /^rev_/, "" )
     show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", args.merge( :callback => true )
   end
   
@@ -71,11 +72,11 @@ module VTListPane
     if field
       field.data_set_hash( data.to_sym )
     else
-			if data[ @vtlp_method ].to_s.length > 0
+      if data[ @vtlp_method ].to_s.length > 0
         @data_class.create( data.to_sym )
-			else
-				dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
-			end
+      else
+        dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
+      end
     end
     vtlp_update_list
   end
