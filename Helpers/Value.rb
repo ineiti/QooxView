@@ -107,7 +107,7 @@ class Value
         a[1] <=> b[1]
       }
       if args.has_key? :empty
-        values.unshift( [ nil, "---" ] )
+        values.unshift( [ 0, "---" ] )
       end
       args.merge! :list_values => values
       dputs( 3 ){ "Args for entities is #{args.inspect}" }
@@ -136,6 +136,10 @@ class Value
       when :drop
         ret = eclass.find_by( eclass.data_field_id, p[0] )
         dputs( 3 ){ "And found #{ret.inspect}" }
+        if not ret and @args.has_key? :empty
+          dputs( 3 ){"Converting nil to 0 as we're an entity_empty"}
+          ret = 0
+        end
         return ret
       else
         dputs( 0 ){ "List-type #{@list_type} not supported yet!" }

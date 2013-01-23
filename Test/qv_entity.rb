@@ -41,7 +41,7 @@ class TC_Entity < Test::Unit::TestCase
   def test_find_admin
     admin = Entities.Persons.find_by_first_name( "admin" )
     assert_nothing_raised do
-      assert_equal 0, admin.person_id
+      assert_equal 1, admin.person_id
       assert_equal 'super123', admin.pass
       assert_equal 'cdlf 24', admin.address
       assert_equal 10000, admin.credit
@@ -125,7 +125,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_getfields
-    assert_equal %w( course_id first_name start end street plz teacher tel ).sort.to_s,
+    assert_equal %w( assistant course_id first_name start end street plz teacher tel ).sort.to_s,
       Entities.Courses.get_field_names.sortk.to_s
   end
 
@@ -167,7 +167,7 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "Persons", val.entity_class
     assert_equal Entities.Persons, val.eclass
     val_hash = @base_1011.to_hash
-    assert_equal [0], val_hash[:teacher]
+    assert_equal [1], val_hash[:teacher]
     assert_equal "super123", @base_1011.teacher.pass
     @admin.pass = "super321"
     assert_equal "super321", @base_1011.teacher.pass
@@ -185,5 +185,12 @@ class TC_Entity < Test::Unit::TestCase
         Courses.create( :first_name => "#{p}", :last_name => "#{p}" )
       }
     end
+  end
+  
+  def test_entity_empty
+    assert_equal 1, @admin.person_id
+    #@base_1011.data_set_hash({:assistant => [1]})
+    empty = Courses.get_value( :assistant ).parse( [0] )
+    assert_equal 0, empty
   end
 end

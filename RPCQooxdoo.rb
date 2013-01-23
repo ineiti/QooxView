@@ -135,6 +135,7 @@ class RPCQooxdooHandler
         dputs( 3 ){ "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request( method, session, params[0] )
+          dputs( 4 ){"Parsed request is #{parsed.inspect}"}
           answer = s.parse_reply( method, session, parsed )
           dputs( 3 ){ "First answer is #{answer.inspect}" }
 

@@ -238,7 +238,7 @@ class Entities < RPCQooxdooService
     ret.flatten.collect{|c| c.to_sym }
   end
 
-  # Returns the value for an entry
+  # Returns the Value for an entry
   def get_value( n, b = @blocks )
     n = n.to_sym
     b.each{|c|
@@ -351,7 +351,10 @@ class Entity
     ret = @proxy.data[@id].dup
     dputs( 5 ){ "Will return #{ret.to_a.join("-")}" }
     ret.each{|f,v|
-      if data_get(f).is_a? Entity
+      dputs(5){"Doing field #{f} with #{v.inspect}"}
+      #if data_get(f).is_a? Entity
+      if @proxy.get_value(f).dtype == "entity"
+        dputs(5){"Is an entity"}
         ret[f] = [v]
       end
     }
@@ -385,12 +388,14 @@ class Entity
       if not raw
         v = @proxy.get_value( f )
         if e and v and v.dtype == "entity"
-          dputs( 5 ){ "Getting instance for #{v.inspect} with #{e.inspect}" }
+          dputs( 5 ){ "Getting instance for #{v.inspect}" }
+          dputs( 5 ){ "Getting instance with #{e.inspect}" }
           e = v.eclass.get_data_instance( e )
         end
       end
       e
     }
+    dputs(4){"Return is #{ret.inspect}"}
     ret.length == 1 ? ret[0] : ret
   end
 
@@ -413,7 +418,9 @@ class Entity
       ks = k.to_sym
       # Only set data for which there is a field
       if fields.index( ks )
+        dputs(4){"Setting field #{ks}"}
         if create
+          dputs(5){"Creating without log"}
           data_set( ks, v )
         else
           dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }

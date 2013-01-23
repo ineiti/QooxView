@@ -274,8 +274,10 @@ qx.Class.define("frontend.Lib.Fields", {
     fields: null,
     windows: null,
     first_field: null,
+    /*
     first_button: null,
     first_button_window: null,
+    */
     updating: null,
     index: null,
     timer: null,
@@ -426,6 +428,7 @@ qx.Class.define("frontend.Lib.Fields", {
       var do_callback = false;
       var enter_klicks = true;
       var delay = 0;
+      var button_default = null;
       dbg(5, "addElement " + type + " - " + label + " - " + print_a(params));
       switch (type) {
         // TODO: differenciate the different types
@@ -479,8 +482,13 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.getData = function(){};
           field_element.setAllowGrowY( false );
           show_label = false;
-          if (!this.first_button || params.def) {
-            this.first_button = field_element;
+          if (!button_default || params.def) {
+            button_default = field_element;
+            for ( var i in this.fields ){
+              if ( ! this.fields[i].button_default ){
+                this.fields[i].button_default = button_default;
+              }
+            }
           }
           break;
         case "split_button":
@@ -511,8 +519,13 @@ qx.Class.define("frontend.Lib.Fields", {
           }
           field_element.setValueArray([label].concat( params.menu ) )
           show_label = false;
-          if (!this.first_button || params.def) {
-            this.first_button = field_element;
+          if (!button_default || params.def) {
+            button_default = field_element;
+            for ( var i in this.fields ){
+              if ( ! this.fields[i].button_default ){
+                this.fields[i].button_default = button_default;
+              }
+            }
           }
           break;
         case "html":
@@ -629,14 +642,17 @@ qx.Class.define("frontend.Lib.Fields", {
         if (!this.first_field) {
           this.first_field = field_element;
         }
+        if ( type != "button" ){
+          button_default = null;
+        }
         field_element.addListener("keypress", function(e){
           if (e.getKeyIdentifier() == "Enter" && enter_klicks) {
             dbg(5, "This is Enter for " + e + ":" + name + ":" + label);
-            if (this.first_button) {
-              this.first_button.execute();
+            if (this.button_default) {
+              this.button_default.execute();
             }
           }
-        }, this);
+        }, field_element );
         if ( params.width ){
           field_element.setMinWidth(params.width);
         }
@@ -791,9 +807,11 @@ qx.Class.define("frontend.Lib.Fields", {
           case "window":
             dbg(5, "Adding a window with layout " + view_str[1] );
             var old_field = this.first_field;
-            var old_button = this.first_button;
             this.first_field = null;
+            /*
+            var old_button = this.first_button;
             this.first_button = null;
+            */
             var l = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
             this.calcView(view_str[1], l);
             var win = new qx.ui.window.Window("Window").set({
@@ -808,14 +826,16 @@ qx.Class.define("frontend.Lib.Fields", {
             win.created = false;
             win.dontfade = false;
             win.isfaded = 1;
-            win.first_button = this.first_button;
             win.first_field = this.first_field;
-            this.first_button = old_button;
             this.first_field = old_field;
             this.windows[args[1]] = win;
             win.addListenerOnce('appear',function(){
               win.created = true;
             } );
+            /*
+            win.first_button = this.first_button;
+            this.first_button = old_button;
+            */
 
             break;
           case "tabs":
@@ -875,8 +895,10 @@ qx.Class.define("frontend.Lib.Fields", {
       win.dontfade = false;
       this.window_fade_to( win, 1 );
       this.focus_if_ok( win.first_field )
+      /*
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;
+      */
     //this.windows_fade_to( 1 );
     },
     
@@ -922,10 +944,12 @@ qx.Class.define("frontend.Lib.Fields", {
       else {
         this.windows[name].setVisibility("hidden");
       }
+      /*
       if ( this.first_button_window ){
         this.first_button = this.first_button_window;
         this.first_button_window = null;
       }
+      */
       this.focus_if_ok( this.first_field );
     },
         
