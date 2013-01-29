@@ -40,6 +40,7 @@ class Session < Entity
   end
   
   def can_view( v )
+    ddputs(3){"Owner is #{owner.inspect}"}
     return Permission.can_view( owner.permissions, v )
   end
   

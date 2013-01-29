@@ -68,6 +68,15 @@ class RPCQooxdooService
     }
   end
   
+  def self.entities
+    RPCQooxdooService.services.each{|service_name,service_class|
+      if service_name.to_s =~ /^Entities/
+        dputs(4){"Found Entities of #{service_name.inspect}"}
+        yield service_class
+      end
+    }    
+  end
+  
   # Catches the name of the new class
   def self.inherited( subclass )
     #    name = "#{subclass}".sub( /^.*?_/, "" ).gsub( '_', '.' )

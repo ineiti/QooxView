@@ -187,42 +187,42 @@ module StorageHandler
     # Ask every storage-type whether he wants to change something in the
     # data
     @storage.each{|k, di| di.data_create( args ) }
-    key = args[@data_field_id]
-    if not @data[ key ]
-      @data[key] = { @data_field_id => key }
+    data_id = args[@data_field_id].to_i
+    if not @data[ data_id ]
+      @data[data_id] = { @data_field_id => data_id }
       dputs( 5 ){ "@data is now #{@data.inspect}" }
       dputs( 5 ){ "data_class is now #{@data_class.to_s}" }
-      save_data( args )
-      return get_data_instance( key )
+      args.each{|k,v|
+        set_entry( data_id, k, v )
+      }
+      save
+      return get_data_instance( data_id )
     else
       @storage.each{|k, di| di.data_double( args ) }
-      dputs( 2 ){ "Trying to create a double entry with key #{args[@data_field_id]}!" }
+      dputs( 2 ){ "Trying to create a double entry with data_id #{args[@data_field_id]}!" }
       return nil
     end
   end
 
-  def save_data( data )
-    dputs( 5 ){ "Saving #{data.inspect}" }
-    data.to_sym!
-    if data.has_key? @data_field_id
-      data_id = data[ @data_field_id ].to_i
+  def save_data( d )
+    dputs( 5 ){ "Saving #{d.inspect}" }
+    d.to_sym!
+    if d.has_key? @data_field_id
       # Assure that the data_field_id is an integer
-      data[ @data_field_id ] = data_id
+      data_id = d[ @data_field_id ].to_i
+      d[ @data_field_id ] = data_id
       e = get_data_instance( data_id )
       if not e
         dputs( 0 ){ "Didn't find key #{data_id.inspect}" }
         exit 1
       else
-        e.data_set_hash( data, true )
+        e.data_set_hash( d, true )
       end
     else
-      e = create( data )
+      e = create( d )
     end
 
-    dputs( 3 ){ "Saving data #{data_id}" }
-    @storage.each{|k,c|
-      c.save( @data )
-    }
+    save
     return e.data
   end
 

@@ -460,6 +460,7 @@ class Entity
   end
 
   def inspect
-    @id
+    #@id
+    to_hash.inspect
   end
 end

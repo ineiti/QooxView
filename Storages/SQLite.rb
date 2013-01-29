@@ -21,7 +21,7 @@ class SQLite < StorageType
     @db_class = nil
     %x[ mkdir -p data ]
     @name_file = name_file
-#    ActiveRecord::Base.logger = Logger.new('debug.log')
+    #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
     open_db
 
@@ -67,7 +67,7 @@ class SQLite < StorageType
   # computer crashes
   def data_create( data )
     dputs( 5 ){ "Creating early data #{data.inspect} with #{data.class}" }
-    #ddputs(5){"db_class is #{db_class.inspect}"}
+    dputs(5){"db_class is #{db_class.inspect}"}
     e = @db_class.create( data )
     new_id = e.attributes[@data_field_id.to_s]
     dputs( 5 ){ "New id is #{new_id}" }
@@ -125,5 +125,37 @@ class SQLite < StorageType
       end
     end
     init_table
+  end
+  
+  def self.with_all_sqlites
+    RPCQooxdooService.entities{|e|
+      e.storage.each{|storage_name, storage_class|
+        dputs(3){"Found storage_name of #{storage_name.inspect}"}
+        if storage_name.to_s =~ /^SQLite/
+          dputs(3){"Found #{e.name}::#{storage_name} as SQLite-something"}
+          yield storage_class
+        end
+      }
+    }
+  end
+  
+  def self.dbs_close_all
+    dputs(2){"Closing all dbs"}
+    SQLite.with_all_sqlites{|sql|
+      sql.close_db
+    }
+  end
+  
+  def self.dbs_open_load_migrate
+    dputs(2){"Opening all dbs"}
+    SQLite.with_all_sqlites{|sql|
+      sql.open_db
+    }
+    dputs(2){"Loading all dbs"}
+    RPCQooxdooService.entities{|e|
+      e.load
+    }
+    dputs(2){"Migrating all dbs"}
+    RPCQooxdooService.migrate_all    
   end
 end
