@@ -83,7 +83,7 @@ class Value
     fe_type, fe_name, args = @dtype, @name, @args.dup
     case @dtype
     when /list|select/
-      dputs( 3 ){ "List is #{@list}" }
+      ddputs( 3 ){ "List is #{@list}" }
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/
       dputs( 3 ){ "Converting -#{@name}- to array" }

@@ -19,6 +19,8 @@ class AfriCompta
       return
     end
     
+
+    
     dputs( 2 ){ "Searching for #{src} - #{dst}" }
     if not get_config( false, :AfriCompta, :disabled ) and src and dst
       dputs( 2 ){ "Getting accounts" }

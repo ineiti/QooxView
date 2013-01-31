@@ -233,7 +233,8 @@ module StorageHandler
     @data_instances.delete( id )
   end
 
-  def set_entry( id, field, value )
+  def set_entry( id, field, v )
+    value = v.is_a?( Entity ) ? v.id : v
     @storage.each{|k, di|
       if di.has_field field
         #        if value.to_s != @data[id.to_i][field].to_s
