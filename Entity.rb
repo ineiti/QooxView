@@ -354,12 +354,12 @@ class Entity
 
   def to_hash
     ret = @proxy.data[@id].dup
-    ddputs( 5 ){ "Will return #{ret.to_a.join("-")}" }
+    dputs( 5 ){ "Will return #{ret.to_a.join("-")}" }
     ret.each{|f,v|
-      ddputs(5){"Doing field #{f} with #{v.inspect}"}
+      dputs(5){"Doing field #{f} with #{v.inspect}"}
       #if data_get(f).is_a? Entity
       if value = @proxy.get_value(f) and value.dtype == "entity"
-        ddputs(5){"Is an entity"}
+        dputs(5){"Is an entity"}
         ret[f] = [v]
       end
     }
