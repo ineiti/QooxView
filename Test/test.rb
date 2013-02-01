@@ -16,7 +16,7 @@ QooxView.init( 'entities', 'views' )
 
 tests = %w( entity permission stype sqlite gettext helpers migration
   view session )
-tests = %w( permission )
+#tests = %w( permission )
 #tests = %w( view )
 tests.each{|t|
   require "qv_#{t}"

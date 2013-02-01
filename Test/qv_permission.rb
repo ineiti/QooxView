@@ -13,7 +13,4 @@ class Tc_permission < Test::Unit::TestCase
     assert Permission.can_view( 'secretary', "Internet" )
   end
   
-  def test_inherit
-    
-  end
 end

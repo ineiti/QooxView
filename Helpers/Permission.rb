@@ -67,7 +67,7 @@ class Permission
   end
 
   def self.can_view( permission, view )
-    action = view.gsub( /^View\./, '' )
+    action = view.to_s.gsub( /^View\./, '' )
     dputs( 3 ){ "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}" }
     if not permission or permission.length == 0
       permission = %w( default )
