@@ -83,7 +83,8 @@ module VTListPane
   
   def rpc_list_choice( session, name, *args )
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
-    ret = reply( "empty" )
+    #ret = reply( :empty_only, [ @vtlp_field ] )
+    ret = []
 
     dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
     if name == @vtlp_field

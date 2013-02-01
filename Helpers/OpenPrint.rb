@@ -67,6 +67,8 @@ module PrintButton
     if get_config( false, :OpenPrint, :no_remote )
       dputs(4){"Getting printers for #{ip}"}
       %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+    else
+      []
     end
   end
   
