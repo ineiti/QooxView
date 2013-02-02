@@ -64,10 +64,11 @@ end
 module PrintButton
   attr_reader :printer_buttons
   def get_remote_printers(ip)
-    if get_config( false, :OpenPrint, :no_remote )
-      dputs(4){"Getting printers for #{ip}"}
+    if get_config( true, :OpenPrint, :search_remote )
+      ddputs(4){"Getting printers for #{ip}"}
       %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
     else
+      ddputs(4){"Not getting remote"}
       []
     end
   end
