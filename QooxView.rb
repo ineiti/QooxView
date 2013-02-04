@@ -141,6 +141,17 @@ class Hash
     self.replace( to_sym() )
   end
   
+  def method_missing( s, *args )
+    ddputs(4){"Method is missing: #{s.inspect}"}
+    
+    case s.to_s
+    when /^_.*/
+      return self[s.to_s.sub(/^_/, '')]
+    else
+      super( s, args )
+    end
+  end
+  
   #  def to_s
   #    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
   #  end
