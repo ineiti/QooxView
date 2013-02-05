@@ -146,7 +146,9 @@ class Hash
     
     case s.to_s
     when /^_.*/
-      return self[s.to_s.sub(/^_/, '')]
+      key = s.to_s.sub(/^_/, '').to_sym
+      ddputs(4){"Searching for #{s.inspect} -> #{key}"}
+      return self[key]
     else
       super( s, args )
     end
@@ -297,16 +299,10 @@ module QooxView
 
   # The main function, used to start it all
   def self.startWeb( port = 3302 )
+    dputs( 0 ){ "Configuring port for #{port}" }
     # Suppose we've not being initialized when there are no permissions
     if Permission.list.size == 0
       self.init
-    end
-
-    if webrick = $config[:webrick]
-      if webrick[:port]
-        port = webrick[:port]
-        dputs( 0 ){ "Configuring port for #{port}" }
-      end
     end
 
     # And start the webrick-server
