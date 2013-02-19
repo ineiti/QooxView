@@ -17,10 +17,22 @@ class OpenPrint
     @counter = 0
   end
   
+  def replace_accents( str )
+    str = str.downcase.gsub( / /, "_" )
+    accents = Hash[ *%w( a àáâä e éèêë i ìíîï o òóôöœ u ùúûü c ç ss ß )]
+    dputs( 4 ){ "str was #{str}" }
+    accents.each{|k,v|
+      str.gsub!( /[#{v}]/, k )
+    }
+    str.gsub!( /[^a-z0-9_-]/, '_' )
+    dputs( 4 ){ "str is #{str}" }
+    str
+  end
+  
   def print( fields, counter = nil, name = nil )
     dputs( 3 ){ "New print for -#{@file.inspect}-" }
     if name
-      tmp_file = "/tmp/#{name}.#{@base.sub(/.*\./,'')}"
+      tmp_file = "/tmp/#{replace_accents(name)}.#{@base.sub(/.*\./,'')}"
     else
       counter ||= @counter
       tmp_file = "/tmp/#{counter}-#{@base}"
