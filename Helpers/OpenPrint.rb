@@ -76,17 +76,17 @@ end
 module PrintButton
   attr_reader :printer_buttons
   def get_remote_printers(ip)
-    if get_config( true, :OpenPrint, :search_remote )
-      ddputs(4){"Getting printers for #{ip}"}
+    if ip.match( get_config( ".*", :OpenPrint, :search_remote ) )
+      dputs(2){"Getting printers for #{ip}"}
       %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
     else
-      ddputs(4){"Not getting remote"}
+      dputs(2){"Not getting remote for #{ip}"}
       []
     end
   end
   
   def get_server_printers
-    get_remote_printers("localhost").collect{|p|
+    %x( lpstat -h localhost:631 -a | sed -e "s/ .*//" ).split.collect{|p|
       "server #{p}"
     } + %w( PDF )
   end
@@ -145,7 +145,12 @@ module PrintButton
       dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
-        if not ip =~ /(::1|localhost|127.0.0.1)/
+        dputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
+        # We're not looking for CUPS on the localhost, neither on Windows
+        if ip =~ /(::1|localhost|127.0.0.1)/ or
+            session.header["user_agent"] =~ /Windows/
+          dputs(2){"Not looking for cups on #{ip} - #{session.header['user_agent']}"}
+        else
           value = [ value ] + get_server_printers + get_remote_printers(ip)
         end
       end
