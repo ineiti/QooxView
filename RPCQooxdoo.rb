@@ -204,8 +204,11 @@ class RPCQooxdooHandler
   # And a no-worry with Webrick
   def self.webrick( port, dir = "." )
     access_log_stream = File.open('webrick.access.log', 'w')
+    logger = [[ access_log_stream, AccessLog::COMBINED_LOG_FORMAT ]]
+    #logger.push [$stderr, WEBrick::AccessLog::COMMON_LOG_FORMAT]
+    #logger.push [$stderr, WEBrick::AccessLog::REFERER_LOG_FORMAT]
     server = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new( "webrick.log" ),
-      :AccessLog => [ [ access_log_stream, AccessLog::COMBINED_LOG_FORMAT ] ] )
+      :AccessLog => logger )
     # server = HTTPServer.new(:Port => port )
     ['INT', 'TERM'].each { |signal|
       trap(signal){ server.shutdown }
