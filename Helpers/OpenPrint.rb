@@ -75,10 +75,15 @@ end
 
 module PrintButton
   attr_reader :printer_buttons
+  
+  def call_lpstat(ip)
+    %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+  end
+  
   def get_remote_printers(ip)
     if ip.match( get_config( ".*", :OpenPrint, :search_remote ) )
       dputs(2){"Getting printers for #{ip}"}
-      %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+      call_lpstat(ip)
     else
       dputs(2){"Not getting remote for #{ip}"}
       []
@@ -86,7 +91,7 @@ module PrintButton
   end
   
   def get_server_printers
-    %x( lpstat -h localhost:631 -a | sed -e "s/ .*//" ).split.collect{|p|
+    call_lpstat("localhost").collect{|p|
       "server #{p}"
     } + %w( PDF )
   end

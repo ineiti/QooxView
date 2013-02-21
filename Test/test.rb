@@ -10,7 +10,7 @@ Permission.add( 'admin', '.*' )
 Permission.add( 'internet', 'Internet,PersonShow', 'default' )
 Permission.add( 'student', '', 'internet' )
 Permission.add( 'professor', '', 'student' )
-Permission.add( 'secretary', 'PersonModify', 'professor' )
+Permission.add( 'secretary', 'PersonModify,FlagAddInternet', 'professor' )
 
 QooxView.init( 'entities', 'views' )
 
