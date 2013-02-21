@@ -8,7 +8,6 @@
 require 'Helpers/Value'
 require 'Helpers/StorageType'
 require 'Helpers/StorageHandler'
-require 'Helpers/AfriCompta.rb'
 require 'Storages/CSV.rb'
 require 'Storages/LDAP.rb'
 require 'Storages/SQLite.rb'
