@@ -150,11 +150,11 @@ module PrintButton
       dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
-        dputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
+        ddputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or
-            session.header["user_agent"] =~ /Windows/
-          dputs(2){"Not looking for cups on #{ip} - #{session.header['user_agent']}"}
+            session.web_req.header["user_agent"] =~ /Windows/
+          dputs(2){"Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}"}
         else
           value = [ value ] + get_server_printers + get_remote_printers(ip)
         end
