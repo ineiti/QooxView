@@ -1,18 +1,29 @@
 class Welcome < View
   def layout
     
-    gui_hbox :nogroup do
-      show_str :username
-      show_pass :password
-      show_str_ro :version
-      show_button :login
+    gui_vbox :nogroup do
+      gui_hbox :nogroup do
+        gui_fields :nogroup do
+        end
+        show_str :username
+        show_pass :password
+        show_str_ro :version
+        show_button :login
+        gui_fields :nogroup do
+        end
+      end
       
       gui_window :login_failed do
         show_html :reason
         show_button :try_again
       end
+      if get_config( false, :WelcomeText )
+        gui_vbox :nogroup do
+          show_html :links
+        end
+      end
     end
-    
+        
     dputs( 5 ){ "#{@layout.inspect}" }
     @visible = false
   end
@@ -22,7 +33,7 @@ class Welcome < View
     if @no_login
       dputs( 2 ){ "No login is enabled" }
       return reply( "session_id", "1" ) + 
-      reply( "list", View.list_views )
+        reply( "list", View.list_views )
     else
       dputs( 2 ){ "Login is enabled" }
       super( session )

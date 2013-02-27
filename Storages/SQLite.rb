@@ -77,7 +77,7 @@ class SQLite < StorageType
 
   def init_table
     db_table, fields = @db_table, @fields
-    dputs(3){"Initializing #{@db_class_name}"}
+    ddputs(3){"Initializing #{@db_class_name} with db_table=#{db_table.inspect}"}
     ActiveRecord::Schema.define do
       new_table = false
       if ! table_exists? db_table
@@ -85,7 +85,7 @@ class SQLite < StorageType
         create_table db_table
         new_table = true
       end
-      dputs( 3 ){ "Fields is #{fields.inspect}" }
+      ddputs( 3 ){ "Fields is #{fields.inspect}" }
       fields.each_key{|f|
         dputs( 3 ){ "Checking for field #{f} in table #{db_table}" }
         if not columns( db_table ).index{|c|

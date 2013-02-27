@@ -221,12 +221,15 @@ require 'gettext/tools/rgettext'
 require 'Helpers/QooxParser'
 require 'Helpers/MigrationVersion'
 
+$qooxview_cmds = []
+
 module QooxView
   def self.do_opts( dir_entities, dir_views )
     opts = GetoptLong.new(
       [ "--help", "-h", GetoptLong::NO_ARGUMENT ],
       [ "--i18n", "-t", GetoptLong::OPTIONAL_ARGUMENT ],
-      [ "--po", "-p", GetoptLong::NO_ARGUMENT ]
+      [ "--po", "-p", GetoptLong::NO_ARGUMENT ],
+      [ "--archive", "-a", GetoptLong::OPTIONAL_ARGUMENT ]
     )
     opts.each{|o,a|
       case o
@@ -266,6 +269,9 @@ module QooxView
             exit
           end
         }
+      when "--archive"
+        dputs(2){"Going to archive AfriCompta"}
+        $qooxview_cmds.push [ :archive, a ]
       end
     }
   end
@@ -295,6 +301,18 @@ module QooxView
     dputs( 0 ){ "Starting RPCQooxdooServices" }
     # Get an instance of all Qooxdoo-services
     rpcqooxdoo = RPCQooxdooService.new
+    
+    $qooxview_cmds.each{|qv|
+      qv_cmd = qv.class == Array ? qv[0] : qv
+      dputs(0){"Doing #{qv.inspect}"}
+      case qv_cmd
+      when :archive
+        month = qv[1] == "" ? 1 : qv[1]
+        dputs(0){"Archiving with starting month #{month}"}
+        Accounts.archive( month )
+        exit
+      end
+    }
   end
 
   # The main function, used to start it all

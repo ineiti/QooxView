@@ -16,3 +16,15 @@ TestConfig:
   Two: "hello"
   Three:
     Thirty: 30
+
+TestList:
+  - one
+  - two three
+
+TestLink2: |
+  Something over
+  multiple lines:
+  one two three
+
+TestLink1:
+  - "Link: <a href='hello there'>link</a>"
