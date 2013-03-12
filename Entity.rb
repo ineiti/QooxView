@@ -327,17 +327,29 @@ class Entity
     field = cmd.to_s
     case field
     when /=$/
+      dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
       # Setting the value
       field = field.chop.to_sym
-      if @proxy.undo or @proxy.logging
-        data_set_log( field, args[0], @proxy.msg, @proxy.undo, @proxy.logging )
-      else
-        data_set( field, args[0] )
-      end
+      self.class.class_eval <<-RUBY
+        def #{field}=( v )
+          if @proxy.undo or @proxy.logging
+            data_set_log( "#{field}".to_sym, v, @proxy.msg, @proxy.undo, @proxy.logging )
+          else
+            data_set( "#{field}".to_sym, v )
+          end
+        end
+      RUBY
+      send( "#{field}=", args[0] )
     else
       # Getting the value
-      dputs( 5 ){ "data_get #{field}" }
-      data_get( field )
+      dputs( 5 ){ "data_get #{field} for class #{self.class.name}" }
+      self.class.class_eval <<-RUBY
+        def #{field}
+          data_get( "#{field}" )
+        end
+      RUBY
+      send( field )
+      #      data_get( field )
     end
   end
 

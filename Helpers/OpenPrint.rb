@@ -150,7 +150,7 @@ module PrintButton
       dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
-        ddputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
+        dputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or
             session.web_req.header["user_agent"] =~ /Windows/

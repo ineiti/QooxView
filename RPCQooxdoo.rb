@@ -249,7 +249,7 @@ class RPCQooxdooHandler
         end
         res['content-type'] = "text/html"
         res['content-length'] = res.body.length
-        dputs( 2 ){ "ACaccess-Reply is #{res.body}" }
+        dputs( 3 ){ "ACaccess-Reply is #{res.body}" }
         raise HTTPStatus::OK
       }
     }

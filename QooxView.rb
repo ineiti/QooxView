@@ -142,12 +142,12 @@ class Hash
   end
   
   def method_missing( s, *args )
-    ddputs(4){"Method is missing: #{s.inspect}"}
+    dputs(4){"Method is missing: #{s.inspect}"}
     
     case s.to_s
     when /^_.*/
       key = s.to_s.sub(/^_/, '').to_sym
-      ddputs(4){"Searching for #{s.inspect} -> #{key}"}
+      dputs(4){"Searching for #{s.inspect} -> #{key}"}
       return self[key]
     else
       super( s, args )
