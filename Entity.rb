@@ -330,7 +330,9 @@ class Entity
       dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
       # Setting the value
       field = field.chop.to_sym
-      self.class.class_eval <<-RUBY
+      
+      if not old_respond_to? "#{field}=".to_sym
+        self.class.class_eval <<-RUBY
         def #{field}=( v )
           if @proxy.undo or @proxy.logging
             data_set_log( "#{field}".to_sym, v, @proxy.msg, @proxy.undo, @proxy.logging )
@@ -338,21 +340,36 @@ class Entity
             data_set( "#{field}".to_sym, v )
           end
         end
-      RUBY
-      send( "#{field}=", args[0] )
+        RUBY
+        send( "#{field}=".to_sym, args[0] )
+      else
+        dputs(0){"#{field}= is already defined - don't know what to do..."}
+        caller.each{|c|
+          dputs(0){"Caller is #{c.inspect}"}          
+        }
+      end
     else
       # Getting the value
       dputs( 5 ){ "data_get #{field} for class #{self.class.name}" }
-      self.class.class_eval <<-RUBY
+      if not old_respond_to? field
+        self.class.class_eval <<-RUBY
         def #{field}
           data_get( "#{field}" )
         end
-      RUBY
-      send( field )
+        RUBY
+        send( field )
+      else
+        dputs(0){"#{field} is already defined - don't know what to do"}
+        caller.each{|c|
+          dputs(0){"Caller is #{c.inspect}"}          
+        }
+      end
       #      data_get( field )
     end
   end
 
+  alias_method :old_respond_to?, :respond_to?
+  
   def respond_to?(cmd)
     field = cmd.to_s
     case field

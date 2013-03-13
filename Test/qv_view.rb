@@ -120,7 +120,7 @@ class TC_View < Test::Unit::TestCase
               :assistant,
               "assistant",
               {:list_type=>:drop,
-                :list_values=>[[0, "---"], [1, "admin"], [2, "surf"]],
+                :list_values=>[[0, "---"], [3, nil], [1, "admin"], [2, "surf"]],
                 :empty=>true}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
@@ -129,12 +129,12 @@ class TC_View < Test::Unit::TestCase
           [["list",
               :teacher,
               "teacher",
-              {:list_type=>:drop, :list_values=>[[1, "admin"], [2, "surf"]]}],
+              {:list_type=>:drop, :list_values=>[[3, nil], [1, "admin"], [2, "surf"]]}],
             ["list",
               :assistant,
               "assistant",
               {:list_type=>:drop,
-                :list_values=>[[0, "---"], [1, "admin"], [2, "surf"]],
+                :list_values=>[[0, "---"], [3, nil], [1, "admin"], [2, "surf"]],
                 :empty=>true}]]]]],
       View.CourseShow.layout_eval
   end

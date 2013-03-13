@@ -105,7 +105,7 @@ class Value
       }.collect{|e|
         [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
       }.sort{|a,b|
-        a[1] <=> b[1]
+        a[1].to_s <=> b[1].to_s
       }
       if args.has_key? :empty
         values.unshift( [ 0, "---" ] )
