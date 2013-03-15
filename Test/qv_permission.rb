@@ -13,4 +13,12 @@ class Tc_permission < Test::Unit::TestCase
     assert Permission.can_view( 'secretary', "Internet" )
   end
   
+  def test_views
+    assert_equal %w( View View.Login ), Permission.views( :default )
+    assert_equal %w( Internet PersonShow View View.Login ), 
+      Permission.views( :internet )
+    assert_equal %w( Internet PersonShow View View.Login ), 
+      Permission.views( %w( internet default ) )
+  end
+  
 end

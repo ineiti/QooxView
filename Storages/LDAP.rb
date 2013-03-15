@@ -106,7 +106,11 @@ class LDAP < StorageType
     ldap.host = @data_ldap_host
     ldap.auth "uid=#{uid},#{@data_ldap_users}", pass
     dputs( 1 ){ ldap.inspect }
-    return ldap.bind
+    begin
+      return ldap.bind
+    rescue Net::LDAP::LdapError
+      return nil
+    end
   end
   
   # Searches for the field in the LDAP-entry, changes it and returns the new

@@ -18,7 +18,7 @@ tests = %w( entity permission stype sqlite gettext helpers migration
   view session )
 #tests = %w( permission )
 #tests = %w( helpers )
-tests = %w( view )
+tests = %w( permission )
 tests.each{|t|
   require "qv_#{t}"
 }

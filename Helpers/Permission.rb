@@ -30,6 +30,19 @@ class Permission
     @@view[ name.to_s ] = view.split(',')
     @@parent[ name.to_s ] = parent.split(',')
   end
+  
+  def self.views( permissions )
+    ddputs(5){"Permissions: #{permissions.inspect}"}
+    [permissions].flatten.collect{|p|
+      ret = @@view[p.to_s]
+      @@parent[p.to_s] and ret += @@parent[p.to_s].collect{|a| self.views(a) }
+      if not ret 
+        ret = []
+      end
+      ddputs(5){"Having #{ret.inspect}"}
+      ret
+    }.flatten.sort.uniq
+  end
 
   def self.session_add( session, perm )
     dputs( 0 ){ "Deprecated - #{caller.inspect}" }
