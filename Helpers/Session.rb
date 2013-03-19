@@ -12,6 +12,7 @@ class Sessions < Entities
   def setup_data
     value_entity_person :owner, :drop, :full_name
     value_str :sid
+    value_str :s_data
   end
   
   # Adds a person with a session.
@@ -25,7 +26,7 @@ class Sessions < Entities
     end
     owner.session_id = sid.to_s
     
-    s = super( :owner => owner, :sid => sid.to_s )
+    s = super( :owner => owner, :sid => sid.to_s, :s_data => {} )
     s.web_req = nil
     return s
   end

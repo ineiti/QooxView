@@ -88,10 +88,11 @@ module VTListPane
 
     dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
     if name == @vtlp_field
+      ret = reply( :empty )
       field_value = args[0][name][0]
-      dputs( 4 ){ "replying with field_value of #{field_value}" }
+      ddputs( 4 ){ "replying with field_value of #{field_value}" }
       item = vtlp_get_entity(args[0])
-      dputs( 4 ){ "item is #{item.inspect}" }
+      ddputs( 4 ){ "item is #{item.inspect}" }
       if item
         ret += reply("update", item.to_hash )
       end

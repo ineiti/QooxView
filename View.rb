@@ -100,6 +100,18 @@ class View < RPCQooxdooService
       @auto_update = 0
       @auto_update_send_values = true
 
+      # Fetch the layout of the view
+      if @is_tabs
+        gui_hboxg do
+          gui_vbox :nogroup do
+            layout
+          end
+          gui_tabs @name
+        end
+      else
+        layout
+      end
+
       # Check for config of this special class
       if $config and $config[:views] and $config[:views][self.class.name.to_sym]
         @config = $config[:views][self.class.name.to_sym]
@@ -117,17 +129,6 @@ class View < RPCQooxdooService
         @config = nil
       end
 
-      # Fetch the layout of the view
-      if @is_tabs
-        gui_hboxg do
-          gui_vbox :nogroup do
-            layout
-          end
-          gui_tabs @name
-        end
-      else
-        layout
-      end
       # Clean up eventual left-overs from a simple (or very complicated) layout
       while @layout.size > 1
         dputs( 5 ){ "Cleaning up" }
@@ -334,6 +335,10 @@ class View < RPCQooxdooService
     when 'block'
       # Shows a block as defined in an Entities - useful if the same
       # values will be shown in different views
+      show_in_field( @data_class.blocks[ value.name ], value.args )
+
+    when 'block_ro'
+      # as "block", but all elements are read-only
       show_in_field( @data_class.blocks[ value.name ], value.args )
 
     when 'find_text'

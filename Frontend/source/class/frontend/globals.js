@@ -11,7 +11,7 @@ function print_a(a) {
 };
 
 function dbg(lvl, str) {
-//  if (lvl <= DBG_LVL) {
-//    qx.log.Logger.info(str)
-//  }
+  if (lvl <= DBG_LVL) {
+    qx.log.Logger.info(str)
+  }
 };

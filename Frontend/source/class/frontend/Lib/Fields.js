@@ -143,7 +143,8 @@ function setValueListArray(val){
 
 function setValueBold(val){
   this.valueBold = val
-  this.setValue( "<table bgcolor='ffffff'><tr><td><b>" + val + 
+  text = val.split("\n").join("<br>")
+  this.setValue( "<table bgcolor='ffffff'><tr><td><b>" + text + 
     "</b></td></tr></table>" )
 }
 
@@ -448,8 +449,10 @@ qx.Class.define("frontend.Lib.Fields", {
           if (params.ro) {
             field_element = new qx.ui.basic.Label("");
             field_element.setRich( true )
+            field_element.setWrap( true )
             field_element.setValueStr = setValueBold
             field_element.getValueSpecial = getValueBold
+            //field_element.setValueStr( "-" )
           //field_element.setReadOnly(true);
           }
           if (type == "int") {
@@ -461,6 +464,17 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.setAutoSize(true);
           field_element.setWidth(300);
           enter_klicks = false;
+          if (params.ro) {
+            field_element.setReadOnly(true);
+          }
+          if (params.ro) {
+            field_element = new qx.ui.basic.Label("");
+            field_element.setRich( true )
+            field_element.setValueStr = setValueBold
+            field_element.getValueSpecial = getValueBold
+            //field_element.setValueStr( "-" )
+          //field_element.setReadOnly(true);
+          }
           break;
         case "date":
           field_element = new qx.ui.form.DateField();
