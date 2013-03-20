@@ -42,9 +42,13 @@ module VTListPane
     @data_class.get_data_instance( d[@vtlp_field][0] )
   end
   
-  def vtlp_update_list( session )
+  def vtlp_update_list( session, choice = nil )
+    list = @data_class.send( @vtlp_method_list )
+    if choice
+      list += [ choice ]
+    end
     rep = reply( "empty", [ @vtlp_field.to_sym ] ) +
-      reply( "update", { @vtlp_field.to_sym => @data_class.send( @vtlp_method_list ) } )
+      reply( "update", { @vtlp_field.to_sym => list } )
     if @update
       rep += rpc_update( session )
     end
@@ -69,7 +73,7 @@ module VTListPane
   
   def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
-    dputs( 2 ){ "Field is #{field.inspect}" }
+    dputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
     if field
       field.data_set_hash( data.to_sym )
     else
@@ -79,7 +83,9 @@ module VTListPane
         dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
       end
     end
-    vtlp_update_list( session )
+    ddputs(3){"vtlp_method is #{@vtlp_method}"}
+    vtlp_update_list( session, data[@vtlp_field][0] )
+#      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
   def rpc_list_choice( session, name, *args )

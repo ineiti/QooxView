@@ -982,7 +982,9 @@ qx.Class.define("frontend.Lib.Fields", {
         
     createDoW: function(){
       var selectBox = new qx.ui.form.SelectBox();
-      var items = ['lu-ve', 'lu-di', 'lu:me:ve', 'ma:je:sa'];
+      var items = ['lu-ve', 'lu-di', 'sa-di', 
+        'lu', 'ma', 'me', 'je', 've', 'sa', 'di', 
+        'lu:me:ve', 'ma:je:sa'];
       for (var i = 0; i < items.length; i++) {
         var tempItem = new qx.ui.form.ListItem(items[i]);
         selectBox.add(tempItem);

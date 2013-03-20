@@ -445,7 +445,7 @@ class Entity
   # Save all data in the hash for which we have an entry
   # if create == true, it won't call LogActions for every field
   def data_set_hash( data, create = false )
-    dputs( 4 ){ "#{data.inspect} - #{create}" }
+    ddputs( 4 ){ "#{data.inspect} - #{create}" }
     fields = @proxy.get_field_names
     data.each{|k,v|
       ks = k.to_sym
