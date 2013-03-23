@@ -7,7 +7,7 @@ class TC_View < Test::Unit::TestCase
       :permissions => 'admin' )
     @surf = Entities.Persons.create( :first_name => "surf", :pass => "surf",
       :permissions => 'internet', :credit => 5000 )
-    @autre = Entities.Persons.create( :pass => "surf",
+    @autre = Entities.Persons.create( :first_name => "autre", :pass => "surf",
       :permissions => 'internet', :credit => 5000 )
     @base = Entities.Courses.create( :first_name => "base_10", :teacher => @surf )
     Sessions.create( @admin, '0.1' )
@@ -82,17 +82,17 @@ class TC_View < Test::Unit::TestCase
             ["list", :ro_list, "ro_list", {:ro=>true, :list_values=>[1,2,3]}],
             ["list", :ro_list2, "ro_list2", {:ro=>true}],
             ["fromto", :duration, "duration", {}],
-            ["list", :worker, "worker", {:list_values=>["admin","surf",nil]}]]]]],
+            ["list", :worker, "worker", {:list_values=>["admin","surf","autre"]}]]]]],
       View.AView.layout_eval
   end
 
   def test_list_update
-    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf",nil]}],
+    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf","autre"]}],
       View.AView.layout_eval[1][0][1][9],
       View.AView.layout_eval.inspect
     Entities.Persons.create( :first_name => "foo", :pass => "foo",
       :session_id => '0.3', :permission => 'internet' )
-    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf",nil,"foo"]}],
+    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf","autre","foo"]}],
       View.AView.layout_eval[1][0][1][9]
   end
 
@@ -115,12 +115,12 @@ class TC_View < Test::Unit::TestCase
           [["list",
               :teacher,
               "teacher",
-              {:list_type=>:drop, :list_values=>[[2, "surf"]]}],
+              {:list_type=>:drop, :list_values=>[[3, "autre"], [2, "surf"]]}],
             ["list",
               :assistant,
               "assistant",
               {:list_type=>:drop,
-                :list_values=>[[0, "---"], [3, nil], [1, "admin"], [2, "surf"]],
+                :list_values=>[[0, "---"], [1, "admin"], [3, "autre"], [2, "surf"]],
                 :empty=>true}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
@@ -129,12 +129,12 @@ class TC_View < Test::Unit::TestCase
           [["list",
               :teacher,
               "teacher",
-              {:list_type=>:drop, :list_values=>[[3, nil], [1, "admin"], [2, "surf"]]}],
+              {:list_type=>:drop, :list_values=>[[1, "admin"], [3, "autre"], [2, "surf"]]}],
             ["list",
               :assistant,
               "assistant",
               {:list_type=>:drop,
-                :list_values=>[[0, "---"], [3, nil], [1, "admin"], [2, "surf"]],
+                :list_values=>[[0, "---"], [1, "admin"], [3, "autre"], [2, "surf"]],
                 :empty=>true}]]]]],
       View.CourseShow.layout_eval
   end
