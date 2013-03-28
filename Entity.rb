@@ -445,18 +445,18 @@ class Entity
   # Save all data in the hash for which we have an entry
   # if create == true, it won't call LogActions for every field
   def data_set_hash( data, create = false )
-    ddputs( 4 ){ "#{data.inspect} - #{create}" }
+    ddputs( 4 ){ "#{data.inspect} - #{create} - id is #{id}" }
     fields = @proxy.get_field_names
     data.each{|k,v|
       ks = k.to_sym
       # Only set data for which there is a field
       if fields.index( ks )
-        dputs(4){"Setting field #{ks}"}
+        ddputs(4){"Setting field #{ks}"}
         if create
-          dputs(5){"Creating without log"}
+          ddputs(5){"Creating without log"}
           data_set( ks, v )
         else
-          dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
+          ddputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
           data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
       end
