@@ -147,21 +147,21 @@ module PrintButton
     ret = []
     @printer_buttons.each{|pb|
       p = stat_printer( session, pb )
-      ddputs(4){"#{pb}-#{p.inspect}"}
+      dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
       if session.web_req and ip = session.web_req.peeraddr[3]
-        ddputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
+        dputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or
             session.web_req.header["user_agent"] =~ /Windows/
-          ddputs(2){"Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}"}
+          dputs(2){"Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}"}
         else
           value = [ value ] + get_server_printers + get_remote_printers(ip)
         end
       end
       ret += reply( :update, pb => value )
     }
-    ddputs(4){"#{ret.inspect}"}
+    dputs(4){"#{ret.inspect}"}
     ret
   end
   
