@@ -73,18 +73,20 @@ module VTListPane
   
   def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
-    dputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
+    ddputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
+    selection = data[@vtlp_field][0]
     if field
       field.data_set_hash( data.to_sym )
     else
       if data[ @vtlp_method ].to_s.length > 0
-        @data_class.create( data.to_sym )
+        n = @data_class.create( data.to_sym )
+        selection = n.id
       else
         dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
       end
     end
-    ddputs(3){"vtlp_method is #{@vtlp_method}"}
-    vtlp_update_list( session, data[@vtlp_field][0] )
+    ddputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
+    vtlp_update_list( session, selection )
 #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
