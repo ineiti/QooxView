@@ -244,17 +244,21 @@ class Entities < RPCQooxdooService
 
   # Returns the Value for an entry
   def get_value( n, b = @blocks )
+    dputs(4){"Name is #{n}"}
     n = n.to_sym
     b.each{|c|
       if c.class == Array
         v = get_value( n, c )
+        dputs(4){"Found array #{v.inspect}"}
         v and return v
       elsif c.class == Value
         if c.name.to_sym == n
+          dputs(4){"Found value #{c.inspect}"}
           return c
         end
       end
     }
+    dputs(4){"Found nothing"}
     return nil
   end
 
@@ -445,18 +449,18 @@ class Entity
   # Save all data in the hash for which we have an entry
   # if create == true, it won't call LogActions for every field
   def data_set_hash( data, create = false )
-    ddputs( 4 ){ "#{data.inspect} - #{create} - id is #{id}" }
+    dputs( 4 ){ "#{data.inspect} - #{create} - id is #{id}" }
     fields = @proxy.get_field_names
     data.each{|k,v|
       ks = k.to_sym
       # Only set data for which there is a field
       if fields.index( ks )
-        ddputs(4){"Setting field #{ks}"}
+        dputs(4){"Setting field #{ks}"}
         if create
-          ddputs(5){"Creating without log"}
+          dputs(5){"Creating without log"}
           data_set( ks, v )
         else
-          ddputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
+          dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
           data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
       end
