@@ -3,22 +3,22 @@
   {
     "name" : "Frontend",
 
-    "summary" : "Custom Application",
-    "description" : "This is a skeleton for a custom application with qooxdoo.",
+    "summary" : "Offer data on the web",
+    "description" : "Access for the Web",
     
-    "homepage" : "http://some.homepage.url/",
+    "homepage" : "http://www.profeda.org",
 
-    "license" : "SomeLicense",
+    "license" : "GPL v3 or later",
     "authors" : 
     [
       {
-        "name" : "First Author (uid)",
-        "email" : "first.author@some.domain"
+        "name" : "Linus Gasser",
+        "email" : "ineiti@profeda.org"
       }
     ],
 
     "version" : "trunk",
-    "qooxdoo-versions": ["1.2"]
+    "qooxdoo-versions": ["1.5.1"]
   },
   
   "provides" : 

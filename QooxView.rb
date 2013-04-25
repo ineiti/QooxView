@@ -220,6 +220,7 @@ require 'gettext/tools/rmsgmerge'
 require 'gettext/tools/rgettext'
 require 'Helpers/QooxParser'
 require 'Helpers/MigrationVersion'
+require 'Helpers/UploadFiles'
 
 $qooxview_cmds = []
 

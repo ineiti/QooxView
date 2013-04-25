@@ -99,13 +99,13 @@ function setValueListCommon(values, list){
       dbg(5, "Found a selection: " + val);
     }
     else 
-      if (val != "") {
-        dbg(5, "Adding new item " + val)
-        var item = new qx.ui.form.ListItem("" + val);
-        list.add(item);
-        if (list.vaueIds && list.indexOf(item) != list.valueIds.length - 1) {
-          alert("Different number of items in list and valueIds!");
-        }
+    if (val != "") {
+      dbg(5, "Adding new item " + val)
+      var item = new qx.ui.form.ListItem("" + val);
+      list.add(item);
+      if (list.vaueIds && list.indexOf(item) != list.valueIds.length - 1) {
+        alert("Different number of items in list and valueIds!");
+      }
     }
   }
   list.setSelection(selection);
@@ -121,15 +121,15 @@ function setValueDrop(val){
     dbg( 3, "Having valueIds " + print_a( this.valueIds ) )
     setValueListCommon( val, this );
   } else 
-    if (val.length == 1 && this.getChildren().length > 0) {
-      var elements = this.getChildren();
-      dbg(5, "Setting value of " + val + " to elements " + elements);
-      for (var e = 0; e < elements.length; e++) {
-        if (elements[e].getLabel() == val) {
-          dbg(5, "Found element " + elements[e])
-          this.setSelection([elements[e]]);
-        }
+  if (val.length == 1 && this.getChildren().length > 0) {
+    var elements = this.getChildren();
+    dbg(5, "Setting value of " + val + " to elements " + elements);
+    for (var e = 0; e < elements.length; e++) {
+      if (elements[e].getLabel() == val) {
+        dbg(5, "Found element " + elements[e])
+        this.setSelection([elements[e]]);
       }
+    }
   }
   else {
     setValueListCommon( val, this );
@@ -166,8 +166,8 @@ function getValueFromTo(){
   var d = this.getChildren();
   var h = d[1].getChildren();
   var ret = [d[0].getSelection()[0].getLabel(), // days of blockage 
-    h[0].getSelection()[0].getLabel(), // the from-hour 
-    h[2].getSelection()[0].getLabel() // the to-hour 
+  h[0].getSelection()[0].getLabel(), // the from-hour 
+  h[2].getSelection()[0].getLabel() // the to-hour 
   ];
   dbg(4, print_a(ret));
   return ret;
@@ -253,15 +253,15 @@ qx.Class.define("frontend.Lib.Fields", {
         
     this.addListener("appear", function(e) {
       root.fireDataEvent("resize", new qx.event.type.Data());
-      //      var bounds = root.getBounds();
-      //      var size = this.getInnerSize();
-      //      var top = Math.round( ( bounds.height - size.height ) / 4);
-      //      var left = Math.round( ( bounds.width - size.width ) / 2);
-      //      dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
-      //      app.layout.set({
-      //        marginTop : top,
-      //        marginLeft : left
-      //      });
+    //      var bounds = root.getBounds();
+    //      var size = this.getInnerSize();
+    //      var top = Math.round( ( bounds.height - size.height ) / 4);
+    //      var left = Math.round( ( bounds.width - size.width ) / 2);
+    //      dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
+    //      app.layout.set({
+    //        marginTop : top,
+    //        marginLeft : left
+    //      });
     } )
   },
     
@@ -301,11 +301,11 @@ qx.Class.define("frontend.Lib.Fields", {
           }
         }
         else 
-          if (field.getValue) {
-            if (field.getValue()) {
-              result[f] = field.getValue();
-              dbg(5, "Field " + f + " is of value " + result[f]);
-            }
+        if (field.getValue) {
+          if (field.getValue()) {
+            result[f] = field.getValue();
+            dbg(5, "Field " + f + " is of value " + result[f]);
+          }
         }
       }
       dbg(4, "getFieldsData: " + print_a(result));
@@ -347,21 +347,21 @@ qx.Class.define("frontend.Lib.Fields", {
             field.removeAll();
           }
           else 
-            if (field.resetValue) {
-              field.resetValue();
-            }
+          if (field.resetValue) {
+            field.resetValue();
+          }
           else 
-            if (field.setValueStr) {
-              field.setValueStr("");
-            }
+          if (field.setValueStr) {
+            field.setValueStr("");
+          }
           else 
-            if (field.setValueArray) {
-              field.setValueArray([]);
-            }
+          if (field.setValueArray) {
+            field.setValueArray([]);
+          }
           else 
-            if (field.setValue) {
-              field.setValue("");
-            }
+          if (field.setValue) {
+            field.setValue("");
+          }
         }
       }
       this.updating = false;
@@ -404,15 +404,15 @@ qx.Class.define("frontend.Lib.Fields", {
             field.setValueStr(data[f].toString());
           }
           else 
-            if (field.setValueArray) {
-              dbg(4, "Setting array value of " + data[f] + " to field " + f);
-              field.setValueArray(data[f]);
-            }
+          if (field.setValueArray) {
+            dbg(4, "Setting array value of " + data[f] + " to field " + f);
+            field.setValueArray(data[f]);
+          }
           else 
-            if (field.setValue) {
-              dbg(4, "Setting normal value of " + data[f] + " to field " + f);
-              field.setValue(data[f].toString());
-            }
+          if (field.setValue) {
+            dbg(4, "Setting normal value of " + data[f] + " to field " + f);
+            field.setValue(data[f].toString());
+          }
         }
       }
     },
@@ -452,8 +452,8 @@ qx.Class.define("frontend.Lib.Fields", {
             field_element.setWrap( true )
             field_element.setValueStr = setValueBold
             field_element.getValueSpecial = getValueBold
-            //field_element.setValueStr( "-" )
-            //field_element.setReadOnly(true);
+          //field_element.setValueStr( "-" )
+          //field_element.setReadOnly(true);
           }
           if (type == "int") {
             field_element.setTextAlign("right");
@@ -472,8 +472,8 @@ qx.Class.define("frontend.Lib.Fields", {
             field_element.setRich( true )
             field_element.setValueStr = setValueBold
             field_element.getValueSpecial = getValueBold
-            //field_element.setValueStr( "-" )
-            //field_element.setReadOnly(true);
+          //field_element.setValueStr( "-" )
+          //field_element.setReadOnly(true);
           }
           break;
         case "date":
@@ -517,17 +517,17 @@ qx.Class.define("frontend.Lib.Fields", {
             if ( typeof(l) === "string" ){
               fe.setLabel(l)
             } else 
-              if ( l.length > 0 ){
-                fe.setLabel(l.shift())
-                var menu = new qx.ui.menu.Menu;
-                for( var i=0; i<l.length; i++ ){
-                  var n = l[i]
-                  var b = new qx.ui.menu.Button(n);
-                  b.addListener("execute", function(e){
-                    fe.fireDataEvent("execute", this.getLabel() )
-                  }, b )
-                  menu.add( b );
-                }
+            if ( l.length > 0 ){
+              fe.setLabel(l.shift())
+              var menu = new qx.ui.menu.Menu;
+              for( var i=0; i<l.length; i++ ){
+                var n = l[i]
+                var b = new qx.ui.menu.Button(n);
+                b.addListener("execute", function(e){
+                  fe.fireDataEvent("execute", this.getLabel() )
+                }, b )
+                menu.add( b );
+              }
               fe.setMenu( menu );
             }
           }
@@ -590,10 +590,10 @@ qx.Class.define("frontend.Lib.Fields", {
             field_element.getValue = getValueListArray;
           }
           else 
-            if (params.list_type != "drop") {
-              field_element.setValueArray = setValueList;
-              field_element.getValue = getValueList;
-            }
+          if (params.list_type != "drop") {
+            field_element.setValueArray = setValueList;
+            field_element.getValue = getValueList;
+          }
           else {
             field_element.setValueArray = setValueDrop;
             field_element.getValue = getValueList;
@@ -644,14 +644,54 @@ qx.Class.define("frontend.Lib.Fields", {
           break;
         case "upload":
           show_label = false;
-          field_element = new com.zenesis.qx.upload.UploadButton("Add File(s)", "myapp/test.png");
-          var uploader = new com.zenesis.qx.upload.UploadMgr(field_element, "/demoupload");
+          field_element = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
+          var button = new com.zenesis.qx.upload.UploadButton(label);
+          field_element.add(button);
+          var progress = new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
+          var pb = new qx.ui.indicator.ProgressBar(0, 100);
+          var pb_color_orig = pb.getBackgroundColor();
+          progress.add( pb );
+          var progress_label = new qx.ui.basic.Label("No file");
+          progress.add( progress_label );
+          field_element.add( progress )
+
+          var uploader = new com.zenesis.qx.upload.UploadMgr(button, "/uploadfiles");
           uploader.addListener("addFile", function(evt) {
             var file = evt.getData();
+            var start = (new Date).getTime();
             var progressListenerId = file.addListener("changeProgress", function(evt) {
-              dbg(2, "Upload " + file.getFilename() + ": " + 
-                evt.getData() + " / " + file.getSize() + " - " +
-                Math.round(evt.getData() / file.getSize() * 100) + "%");
+              var value = Math.round(evt.getData() / file.getSize() * 100)
+              //alert("New value for progressbar " + pb + ": " + value)
+              pb.setValue( value );
+              var diff = ( (new Date).getTime() - start ) / 1000;
+              var elapsed = Math.round( diff ) + "s"
+              var speed = Math.round( evt.getData() / diff / 1000 ) + "kBps"
+              if ( value < 100 ){
+                progress_label.setValue( "Done " + value.toString().rjust(3, "0") +
+                  "% in " + elapsed + " (" + speed + "), " +
+                  " left: " + ( Math.round( 0.8 + diff * ( 100 / value - 1 ) ) ) );
+              } else {
+                progress_label.setValue( "Waiting for browser" );
+              }
+            }, this);
+          
+            // All browsers can at least get changes in state (ie "uploading", "cancelled", and "uploaded")
+            var stateListenerId = file.addListener("changeState", function(evt) {
+              var state = evt.getData();
+      				
+              if (state == "uploading"){
+                pb.setBackgroundColor("#f55");
+                progress_label.setValue( "Started upload" )
+              } else if (state == "uploaded"){
+                pb.setValue( 100 );
+                pb.setBackgroundColor("#5f5");
+                progress_label.setValue( "Finished" )
+              }		
+              if (state == "uploaded" || state == "cancelled") {
+                file.removeListenerById(stateListenerId);
+                file.removeListenerById(progressListenerId);
+              }
+      				
             }, this);
           } );
           break;
@@ -922,11 +962,11 @@ qx.Class.define("frontend.Lib.Fields", {
       win.dontfade = false;
       this.window_fade_to( win, 1 );
       this.focus_if_ok( win.first_field )
-      /*
+    /*
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;
        */
-      //this.windows_fade_to( 1 );
+    //this.windows_fade_to( 1 );
     },
     
     window_fade_to: function( win, target ){
@@ -934,7 +974,7 @@ qx.Class.define("frontend.Lib.Fields", {
         win.isfaded = target;
         //alert( "Fading " + win + " to " + target )
         var effect = new qx.fx.effect.core.Fade(
-        win.layout.getContainerElement().getDomElement());
+          win.layout.getContainerElement().getDomElement());
         //this.windows[w].layout.getContainerElement().getDomElement());
         effect.set({
           from: 1.5 - target,
@@ -944,7 +984,7 @@ qx.Class.define("frontend.Lib.Fields", {
         effect.start();
         win.setEnabled( target < 1 ? false : true );
       } else {
-        //alert( "Trying to fade window " + w + " which is not created yet")
+      //alert( "Trying to fade window " + w + " which is not created yet")
       }
     },
         
@@ -996,8 +1036,8 @@ qx.Class.define("frontend.Lib.Fields", {
     createDoW: function(){
       var selectBox = new qx.ui.form.SelectBox();
       var items = ['lu-ve', 'lu-di', 'sa-di', 
-        'lu', 'ma', 'me', 'je', 've', 'sa', 'di', 
-        'lu:me:ve', 'ma:je:sa'];
+      'lu', 'ma', 'me', 'je', 've', 'sa', 'di', 
+      'lu:me:ve', 'ma:je:sa'];
       for (var i = 0; i < items.length; i++) {
         var tempItem = new qx.ui.form.ListItem(items[i]);
         selectBox.add(tempItem);
