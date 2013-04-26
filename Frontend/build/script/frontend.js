@@ -19,7 +19,7 @@ qx.$$packageData = {};
 
 qx.$$loader = {
   parts : {"boot":[0]},
-  packages : {"0":{"uris":["__out__:frontend.48633ddfa1f8.js"]}},
+  packages : {"0":{"uris":["__out__:frontend.5f157df80caa.js"]}},
   urisBefore : [],
   cssBefore : [],
   boot : "boot",
@@ -11795,7 +11795,7 @@ var fh=fk.addListener(bc,function(fl){var fo=Math.round(fl.getData()/fk.getSize(
 eN.setValue(fo);
 var fm=((new Date).getTime()-fi)/1000;
 var fp=Math.round(fm)+bk;
-var fn=Math.round(fl.getData()/fm*10/1000000)/10+dz;
+var fn=Math.round(fl.getData()/fm/1000)+dz;
 
 if(fo<100){eY.setValue(bJ+fo.toString().rjust(3,bS)+dC+fp+cj+fn+bB+bC+(Math.round(0.8+fm*(100/fo-1))));
 }else{eY.setValue(dw);
