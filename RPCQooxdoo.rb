@@ -109,23 +109,23 @@ end
 
 class RPCQooxdooHandler
   @@paths = {}
-	
+
   # self.answer and self.error return a hash, which will be converted later
   def self.answer( result, id, error = nil )
     not result and result = []
     { "result" => result, "error" => error, "id" => id }
   end
-  
+
   def self.error( origin, code, message, id )
     self.answer( nil, id,
       { "origin" => origin, "code" => code, "message" => message }.to_json )
   end
-  
+
   # Replies to a request
   def self.request( id, service, method, params, web_req = nil )
     session = Sessions.find_by_sid( params[0].shift )
     dputs( 3 ){ "session is #{session.inspect}" }
-    
+
     if service =~ /^View/ and session
       dputs( 3 ){ "Going to test if we can view #{service}" }
       if not session.can_view( service )
