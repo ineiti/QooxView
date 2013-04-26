@@ -209,6 +209,7 @@ module StorageHandler
     d.to_sym!
     if d.has_key? @data_field_id
       # Assure that the data_field_id is an integer
+      dputs(5){"Has key"}
       data_id = d[ @data_field_id ].to_i
       d[ @data_field_id ] = data_id
       e = get_data_instance( data_id )
@@ -216,6 +217,7 @@ module StorageHandler
         dputs( 0 ){ "Didn't find key #{data_id.inspect}" }
         exit 1
       else
+        dputs(5){"Setting hash"}
         e.data_set_hash( d, true )
       end
     else

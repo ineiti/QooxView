@@ -244,21 +244,21 @@ class Entities < RPCQooxdooService
 
   # Returns the Value for an entry
   def get_value( n, b = @blocks )
-    dputs(4){"Name is #{n}"}
+    dputs(5){"Name is #{n}"}
     n = n.to_sym
     b.each{|c|
       if c.class == Array
         v = get_value( n, c )
-        dputs(4){"Found array #{v.inspect}"}
+        dputs(5){"Found array #{v.inspect}"}
         v and return v
       elsif c.class == Value
         if c.name.to_sym == n
-          dputs(4){"Found value #{c.inspect}"}
+          dputs(5){"Found value #{c.inspect}"}
           return c
         end
       end
     }
-    dputs(4){"Found nothing"}
+    dputs(5){"Found nothing"}
     return nil
   end
 
