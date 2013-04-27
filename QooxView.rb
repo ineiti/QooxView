@@ -145,10 +145,14 @@ class Hash
     dputs(4){"Method is missing: #{s.inspect}"}
     
     case s.to_s
-    when /^_.*/
+    when /^_.*[^=]$/
       key = s.to_s.sub(/^_/, '').to_sym
       dputs(4){"Searching for #{s.inspect} -> #{key}"}
       return self[key]
+    when /^_.*=$/
+      key = /^_(.*)=$/.match(s.to_s)[1].to_sym
+      dputs(4){"Setting #{s.inspect} -> #{key} to #{args.inspect}"}
+      return self[key] = args[0]
     else
       super( s, args )
     end
