@@ -91,7 +91,12 @@ class Entities < RPCQooxdooService
         s.configure(s.config)
       }
       dputs( 4 ){ "Block is now: #{@blocks.inspect}" }
-      autoload and load
+      if autoload 
+        dputs( 3 ){"Loading data"}
+        load
+      else
+        dputs( 3 ){"Not loading data because of false return-value of setup_data"}
+      end
     end
   end
 
@@ -195,7 +200,7 @@ class Entities < RPCQooxdooService
   end
 
   def respond_to?( cmd )
-    dputs( 5 ){ cmd }
+    dputs( 5 ){ cmd.inspect }
     if cmd =~ /^(find_by_|search_by_|list_|listp_|value_)/
       return true
     end

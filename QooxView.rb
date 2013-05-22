@@ -164,6 +164,16 @@ class Hash
 end
 
 
+class Array
+  def to_sym
+    collect{|v| v.to_sym }
+  end
+
+  def to_sym!
+    self.replace( to_sym() )
+  end
+end  
+
 
 class String
   def pluralize_simple

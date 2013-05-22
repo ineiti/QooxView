@@ -70,7 +70,7 @@ end
 
 
 class View < RPCQooxdooService
-  attr_reader :visible, :order, :name, :is_tabs, :name_tab
+  attr_reader :visible, :configured, :order, :name, :is_tabs, :name_tab
 
   @@list = []
   @@tabs = []
@@ -99,6 +99,9 @@ class View < RPCQooxdooService
       @update_layout = true
       @auto_update = 0
       @auto_update_send_values = true
+      @configured = true
+      @functions_need = []
+      @functions_reject = []
 
       # Fetch the layout of the view
       if @is_tabs
@@ -135,6 +138,8 @@ class View < RPCQooxdooService
         do_container_end
       end
       dputs( 5 ){ "Layout is #{@layout.inspect}" }
+      
+      update_configured
 
       #if @name.gsub(/[a-z_-]/, '').length > 1
       #  set_data_class( @name.gsub )
@@ -395,7 +400,7 @@ class View < RPCQooxdooService
     views = []
     dputs( 5 ){ @@list.inspect }
     @@list.each{|l|
-      if l.visible and session.can_view( l.class.name )
+      if l.visible and session.can_view( l.class.name ) and l.configured
         dputs(5){"Found view #{l.class.name}"}
         views.push( l )
       end
@@ -427,11 +432,12 @@ class View < RPCQooxdooService
       end
     end
     if not sub_tabs_only
-      dputs( 2 ){ "Views before: #{views.each{|v| v.name }}" }
+      dputs( 3 ){ "Views before: #{views.each{|v| v.name }}" }
       views.delete_if{|l|
         tab_name = l.name.tab_name
         is_tabs_or_tab = @@tabs.index( tab_name )
-        dputs( 3 ){ "#{l.class} is visible? #{l.visible} - order is #{l.order}" }
+        dputs( 3 ){ "#{l.class} is visible? #{l.visible} - " +
+            "configured? #{l.configured} - order is #{l.order}" }
         #dputs( 3 ){ "tabs: #{tabs.inspect} - tab_name: #{tab_name}" }
         # Either we ask specifically for all sub-tabs, but then we don't show the main-tab
         # or we don't ask for tabs and
@@ -440,7 +446,7 @@ class View < RPCQooxdooService
         not ( ( tab_name == tabs and not l.is_tabs ) or
             ( not tabs and ( l.is_tabs or not is_tabs_or_tab ) ) )
       }
-      dputs( 2 ){ "Views after: #{views.each{|v| v.name }}" }
+      dputs( 3 ){ "Views after: #{views.each{|v| v.name }}" }
     end
     self.list_views( views )
   end
@@ -744,5 +750,29 @@ class View < RPCQooxdooService
       dputs( 2 ){ "Collected " + l.name }
       l.name
     }
+  end
+  
+  def update_configured
+    functions = ConfigBase.get_functions
+    @configured = true
+    @functions_need.each{|f|
+      if not functions.index( f )
+        dputs(3){"Rejecting because #{f} is missing"}
+        @configured = false
+      end
+    }
+    @functions_reject.each{|f|
+      if functions.index( f )
+        dputs(3){"Rejecting because #{f} is here"}
+        @configured = false
+      end
+    }    
+  end
+  
+  def self.update_configured_all
+    @@list.each{|l|
+      dputs(4){"Testing for view #{l.name}"}
+      l.update_configured
+    }    
   end
 end

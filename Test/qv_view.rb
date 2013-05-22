@@ -10,8 +10,8 @@ class TC_View < Test::Unit::TestCase
     @autre = Entities.Persons.create( :first_name => "autre", :pass => "surf",
       :permissions => 'internet', :credit => 5000 )
     @base = Entities.Courses.create( :first_name => "base_10", :teacher => @surf )
-    Sessions.create( @admin, '0.1' )
-    Sessions.create( @surf, '0.2' )
+    @session_admin = Sessions.create( @admin, '0.1' )
+    @session_surf = Sessions.create( @surf, '0.2' )
   end
 
   def teardown
@@ -22,9 +22,12 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_order
+    dputs(0){"Testing order"}
+    View.update_configured_all
     reply = request( "View", 'list', [['0.1']] )
     dputs( 0 ){ reply['result'].inspect }
     assert_equal [["BView", "BView"], ["CView", "CView"], 
+      ["ConfigView2", "ConfigView2"],
       ["CourseShow","CourseShow"], ["AView","AView"]], 
       reply['result'][0][:data][:views]
   end
@@ -143,5 +146,26 @@ class TC_View < Test::Unit::TestCase
     params = View.CourseShow.parse_request( 0, 0, ["test", { "one" => 2,
           "teacher" => @surf.id } ] )
     assert_equal @surf.id, params[1]["teacher"]
+  end
+  
+  def make_list( configs = [] )
+    ( [["BView", "BView"],
+        ["CView", "CView"],
+        ["CourseShow", "CourseShow"],
+        ["AView", "AView"]] +
+        configs.collect{|c|
+        ["ConfigView#{c}", "ConfigView#{c}"]}).sort
+  end
+  
+  def test_configured
+    assert_equal make_list([2]), View.list( @session_admin )[:views].sort
+    
+    ConfigBase.store( {:functions => [1] })
+    assert_equal make_list([1,2,3]), 
+      View.list( @session_admin )[:views].sort
+
+    ConfigBase.store( {:functions => [1,2] })
+    assert_equal make_list([1]), 
+      View.list( @session_admin )[:views].sort
   end
 end
