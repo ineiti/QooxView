@@ -35,4 +35,9 @@ class TC_Entity < Test::Unit::TestCase
     ConfigBase.store( :functions => [:take])
     assert_equal [:take], ConfigBase.get_functions
   end
+  
+  def test_conflict
+    ConfigBase.store( :functions => [:now, :or])
+    assert_equal [:now, :take], ConfigBase.get_functions
+  end
 end

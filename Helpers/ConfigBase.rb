@@ -20,6 +20,10 @@ class ConfigBases < Entities
     @@functions_base
   end
   
+  def functions_conflict
+    @@functions_conflict
+  end
+  
   def list_functions
     self.list_functions
   end
@@ -87,7 +91,20 @@ class ConfigBase < Entity
           end
         }
       }
-      c[:functions] = funcs.flatten
+      funcs.flatten!
+      ConfigBases.functions_conflict.each{|f|
+        ddputs(4){"Testing conflict of #{f}"}
+        count = 0
+        f.each{|g|
+          funcs.index( g ) and count += 1
+          ddputs(4){"Count is #{count} for #{g}"}
+          if count > 1
+            ddputs(4){"Deleting #{g}"}
+            funcs.delete( g )
+          end
+        }
+      }
+      c[:functions] = funcs
     end
     ddputs(4){"Storing #{c.inspect}"}
     ConfigBases.singleton.data_set_hash( c )
