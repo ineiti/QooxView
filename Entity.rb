@@ -393,10 +393,10 @@ class Entity
     ret = @proxy.data[@id].dup
     dputs( 5 ){ "Will return #{ret.to_a.join("-")}" }
     ret.each{|f,v|
-      ddputs(5){"Doing field #{f} with #{v.inspect}"}
+      dputs(5){"Doing field #{f} with #{v.inspect}"}
       #if data_get(f).is_a? Entity
       if value = @proxy.get_value(f) and value.dtype == "entity"
-        ddputs(5){"Is an entity"}
+        dputs(5){"Is an entity"}
         if unique_ids
           ret[f] = data_get(f).get_unique
         else
@@ -497,7 +497,7 @@ class Entity
   end
   
   def get_unique
-    ddputs(5){"Unique for #{self.inspect}"}
+    dputs(5){"Unique for #{self.inspect}"}
     data_get( @proxy.data_field_id )
   end
 
