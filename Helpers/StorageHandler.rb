@@ -80,7 +80,7 @@ module StorageHandler
     return false
   end
 
-  # Have a handler for the ActiveRecord-type find_by_ and the name
+  # Have a handler for the ActiveRecord-type match_by_ and the name
   # of the field to search for
   def find_key_by( field, value )
     #dputs( 5 ){ "( #{field}, #{value} ) with #{@data.inspect}" }

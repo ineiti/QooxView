@@ -17,7 +17,7 @@ class Sessions < Entities
   
   # Adds a person with a session.
   def create( owner, sid = nil )
-    if owner.session_id and old = find_by_sid( owner.session_id )
+    if owner.session_id and old = match_by_sid( owner.session_id )
       old.delete
     end
     

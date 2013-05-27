@@ -20,10 +20,10 @@ class TC_Session < Test::Unit::TestCase
     assert_equal @admin.session_id, session.sid
     assert_equal "admin", session.owner.first_name
     
-    search = Sessions.find_by_sid( session.sid )
+    search = Sessions.match_by_sid( session.sid )
     assert_equal session.sid, search.sid
     
     search.close
-    assert_equal nil, Sessions.find_by_sid( session.sid )
+    assert_equal nil, Sessions.match_by_sid( session.sid )
   end
 end

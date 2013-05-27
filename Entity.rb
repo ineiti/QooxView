@@ -150,12 +150,12 @@ class Entities < RPCQooxdooService
     return @data_instances[k]
   end
 
-  def find_by_id( k )
+  def match_by_id( k )
     get_data_instance( k )
   end
 
   # We can
-  # - find_by_field - where the data is searched for the "field"
+  # - match_by_field - where the data is searched for the "field"
   # - search_by_field - where all data matching "field" is returned
   # - list_field - returns an array of all values of "field"
   # - listp_field - returns an array of arrays of all "data_field_id" and values of "field"
@@ -201,7 +201,7 @@ class Entities < RPCQooxdooService
 
   def respond_to?( cmd )
     dputs( 5 ){ cmd.inspect }
-    if cmd =~ /^(find_by_|search_by_|list_|listp_|value_)/
+    if cmd =~ /^(match_by_|search_by_|list_|listp_|value_)/
       return true
     end
     super cmd

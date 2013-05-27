@@ -295,7 +295,7 @@ class View < RPCQooxdooService
     }
   end
 
-  # Shows an input-box for an existing field that will call a "find_by_" method
+  # Shows an input-box for an existing field that will call a "match_by_" method
   # if something is entered
   def show_find( name )
     a = []
@@ -347,7 +347,7 @@ class View < RPCQooxdooService
       show_in_field( @data_class.blocks[ value.name ], value.args )
 
     when 'find_text'
-      # Shows an input-box for any data needed, calling "find_by_" if something is
+      # Shows an input-box for any data needed, calling "match_by_" if something is
       # entered
       show_in_field [ Value.simple( "id_text", name ) ]
 
@@ -488,7 +488,7 @@ class View < RPCQooxdooService
 
   # Gives the GUI-elements for the active view
   def rpc_show( session )
-    # user = Entities.Persons.find_by_session_id( session_id )
+    # user = Entities.Persons.match_by_session_id( session_id )
     # TODO: test for permission
 
     dputs( 5 ){ "entered rpc_show" }

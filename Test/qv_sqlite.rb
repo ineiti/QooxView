@@ -12,9 +12,9 @@ class TC_SQLite < Test::Unit::TestCase
   end
 
   def test_create
-    one = Entities.Movements.find_by_desc( "salaire" )
+    one = Entities.Movements.match_by_desc( "salaire" )
     assert_not_nil one
-    two = Entities.Movements.find_by_desc( "pain" )
+    two = Entities.Movements.match_by_desc( "pain" )
     assert_not_nil two
     assert_equal 100, one.money
     assert_equal 200, two.money
@@ -36,7 +36,7 @@ class TC_SQLite < Test::Unit::TestCase
     dputs( 0 ){ "Loading 1000 entities: " }
     dputs( 0 ){ Benchmark.measure{ Entities.Movements.load } }
     dputs( 0 ){ "Searching in 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ Entities.Movements.find_by_money(500)} }
+    dputs( 0 ){ Benchmark.measure{ Entities.Movements.match_by_money(500)} }
   end
   
   def test_set_value
@@ -44,8 +44,8 @@ class TC_SQLite < Test::Unit::TestCase
     @m1.money = 300
     @m2.money = 500
     Entities.Movements.load
-    one = Entities.Movements.find_by_desc( "salaire" )
-    two = Entities.Movements.find_by_desc( "pain" )
+    one = Entities.Movements.match_by_desc( "salaire" )
+    two = Entities.Movements.match_by_desc( "pain" )
     assert_equal 300, one.money
     assert_equal 500, two.money
     assert_equal 300, @m1.money

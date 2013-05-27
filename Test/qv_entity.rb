@@ -26,20 +26,20 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal "guest", guest.first_name
     assert_equal 1000, guest.credit
 
-    guest = Entities.Persons.find_by_person_id( guest_id )
-    student = Entities.Persons.find_by_person_id( student_id )
+    guest = Entities.Persons.match_by_person_id( guest_id )
+    student = Entities.Persons.match_by_person_id( student_id )
     assert_equal "guest", guest.first_name
     assert_equal "student", student.first_name
   end
 
   def test_create_with_double_id
-    admin = Entities.Persons.find_by_first_name( "admin")
+    admin = Entities.Persons.match_by_first_name( "admin")
     student = Entities.Persons.create( :person_id => admin.person_id, :first_name => "duplicate" )
     assert_equal nil, student
   end
 
   def test_find_admin
-    admin = Entities.Persons.find_by_first_name( "admin" )
+    admin = Entities.Persons.match_by_first_name( "admin" )
     assert_nothing_raised do
       assert_equal 1, admin.person_id
       assert_equal 'super123', admin.pass
@@ -56,7 +56,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_logactions
-    admin = Entities.Persons.find_by_first_name( "admin" )
+    admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100 )
     admin.data_set_log( :pass, "hello123" )
     # Take out the date_stamps, as they change all the time...
@@ -83,10 +83,10 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_logactions_filter
-    admin = Entities.Persons.find_by_first_name( "admin" )
+    admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100 )
     admin.data_set_log( :pass, "hello123" )
-    course = Entities.Courses.find_by_first_name( "base_1010" )
+    course = Entities.Courses.match_by_first_name( "base_1010" )
     course.data_set_log( :end, "1.3.2011" )
 
     log_list = Entities.LogActions.log_list
@@ -103,12 +103,12 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_logactions_filter_multi
-    admin = Entities.Persons.find_by_first_name( "admin" )
+    admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100, "charger:linus" )
     admin.data_set_log( :credit, 200, "charger:viviane" )
     admin.data_set_log( :credit, 300, "charger:linuss" )
     admin.data_set_log( :pass, "hello123" )
-    course = Entities.Courses.find_by_first_name( "base_1010" )
+    course = Entities.Courses.match_by_first_name( "base_1010" )
     course.data_set_log( :end, "1.3.2011" )
 
     log_list = Entities.LogActions.log_list
