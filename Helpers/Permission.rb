@@ -32,14 +32,15 @@ class Permission
   end
   
   def self.views( permissions )
-    ddputs(5){"Permissions: #{permissions.inspect}"}
+    dputs(5){"Permissions: #{permissions.inspect}"}
+    dputs(5){"Views: #{@@view.inspect}"}
     [permissions].flatten.collect{|p|
       ret = @@view[p.to_s]
       @@parent[p.to_s] and ret += @@parent[p.to_s].collect{|a| self.views(a) }
       if not ret 
         ret = []
       end
-      ddputs(5){"Having #{ret.inspect}"}
+      dputs(5){"Having #{ret.inspect}"}
       ret
     }.flatten.sort.uniq
   end

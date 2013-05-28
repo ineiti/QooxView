@@ -118,4 +118,16 @@ class ConfigBase < Entity
   def self.respond_to?( cmd )
     ConfigBases.singleton.respond_to?( cmd )
   end
+  
+  def self.has_function?( func )
+    ConfigBase.get_functions.index( func ) != nil
+  end
+  
+  def self.set_functions( func )
+    self.store( {:functions => func} )
+  end
+  
+  def self.add_function( func )
+    self.store( {:functions => self.get_functions.push( func ) })
+  end
 end

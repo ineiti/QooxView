@@ -9,7 +9,7 @@ class TC_Entity < Test::Unit::TestCase
   
   def test_init
     assert_equal [[1,:take],[2,:over],[3,:world],
-    [4,:now],[5,:or],[6,:never]], ConfigBases.list_functions
+      [4,:now],[5,:or],[6,:never]], ConfigBases.list_functions
   end
   
   def test_save
@@ -39,5 +39,20 @@ class TC_Entity < Test::Unit::TestCase
   def test_conflict
     ConfigBase.store( :functions => [:now, :or])
     assert_equal [:now, :take], ConfigBase.get_functions
+  end
+  
+  def test_hasfunction
+    ConfigBase.store( :functions => [:take, :over ])
+    assert ConfigBase.has_function?(:take)
+    assert ConfigBase.has_function?(:over)
+    assert ! ConfigBase.has_function?(:or)
+  end
+  
+  def test_add_set_function
+    ConfigBase.set_functions([:now, :or])
+    assert_equal [:now, :take], ConfigBase.get_functions
+    
+    ConfigBase.add_function( :over )
+    assert ConfigBase.has_function? :over
   end
 end
