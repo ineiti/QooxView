@@ -601,7 +601,7 @@ class View < RPCQooxdooService
   # Returns the data for the fields as a hash
   def update( session )
     dputs( 4 ){ "update" }
-    get_form_data( session.owner )
+#    get_form_data( session.owner )
   end
 
   # Make a flat array containing the elements of the layout
@@ -634,18 +634,17 @@ class View < RPCQooxdooService
     }
   end
 
-  def get_form_data( d ) # :nodoc:
-    reply = {}
-    return reply if not d
+  def update_form_data( data )
+    rep = {}
+    d = data.to_hash
     dputs( 3 ){ "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}" }
     layout_recurse(@layout).each{|l|
-      #      field = l.split(":")[1].to_sym
-      if d.data.has_key?( l.name ) and d.data[l.name]
-        reply[l.name] = d.data[l.name]
+      if d.has_key?( l.name )
+        rep[l.name] = d[l.name]
       end
     }
-    dputs( 4 ){ "rpc_update #{reply.inspect}" }
-    reply
+    ddputs( 4 ){ "form_data #{rep.inspect}" }
+    reply( :update, rep )
   end
 
   # Packs a command and a data in a hash. Multiple commands can be put together:
@@ -753,7 +752,7 @@ class View < RPCQooxdooService
   end
   
   def update_configured
-    if Kernel.respond_to? :ConfigBase
+    if defined? ConfigBase
       functions = ConfigBase.get_functions
       @configured = true
       @functions_need.each{|f|
