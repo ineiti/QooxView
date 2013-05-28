@@ -753,20 +753,22 @@ class View < RPCQooxdooService
   end
   
   def update_configured
-    functions = ConfigBase.get_functions
-    @configured = true
-    @functions_need.each{|f|
-      if not functions.index( f )
-        dputs(3){"Rejecting because #{f} is missing"}
-        @configured = false
-      end
-    }
-    @functions_reject.each{|f|
-      if functions.index( f )
-        dputs(3){"Rejecting because #{f} is here"}
-        @configured = false
-      end
-    }    
+    if Kernel.respond_to? :ConfigBase
+      functions = ConfigBase.get_functions
+      @configured = true
+      @functions_need.each{|f|
+        if not functions.index( f )
+          dputs(3){"Rejecting because #{f} is missing"}
+          @configured = false
+        end
+      }
+      @functions_reject.each{|f|
+        if functions.index( f )
+          dputs(3){"Rejecting because #{f} is here"}
+          @configured = false
+        end
+      }
+    end
   end
   
   def self.update_configured_all
