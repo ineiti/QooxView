@@ -79,7 +79,7 @@ class Value
     }
   end
 
-  def to_a
+  def to_a( session = nil )
     fe_type, fe_name, args = @dtype, @name, @args.dup
     case @dtype
     when /list|select/
@@ -88,27 +88,35 @@ class Value
     when /entity/
       dputs( 3 ){ "Converting -#{@name}- to array" }
       fe_type = "list"
-      e_all = eclass.search_all
-      values = e_all.select{|e|
-        begin
-          dputs( 3 ){ "Searching whether to show #{e.inspect}" }
-          dputs( 3 ){ "Condition is #{@condition.inspect}" }
-          cond = @condition ? @condition.call( e ) : true
-          dputs( 3 ){ "cond: #{cond}" }
-          method = e.respond_to? @show_method
-          dputs( 3 ){ "method: #{method}" }
-          cond and method
-        rescue Exception => e
-          dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
-          false
+      values = []
+      if ( not args.has_key?( :lazy ) ) and
+          ( ( not args.has_key?( :session ) ) or session )
+        e_all = eclass.search_all
+        values = e_all.select{|e|
+          begin
+            dputs( 3 ){ "Searching whether to show #{e.inspect}" }
+            dputs( 3 ){ "Condition is #{@condition.inspect}" }
+            if args.has_key?( :session )
+              cond = @condition ? @condition.call( e, session ) : true
+            else
+              cond = @condition ? @condition.call( e ) : true
+            end
+            dputs( 3 ){ "cond: #{cond}" }
+            method = e.respond_to? @show_method
+            dputs( 3 ){ "method: #{method}" }
+            cond and method
+          rescue Exception => e
+            dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
+            false
+          end
+        }.collect{|e|
+          [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
+        }.sort{|a,b|
+          a[1].to_s <=> b[1].to_s
+        }
+        if args.has_key? :empty
+          values.unshift( [ 0, "---" ] )
         end
-      }.collect{|e|
-        [ e.send( eclass.data_field_id ), e.send( @show_method ) ]
-      }.sort{|a,b|
-        a[1].to_s <=> b[1].to_s
-      }
-      if args.has_key? :empty
-        values.unshift( [ 0, "---" ] )
       end
       args.merge! :list_values => values
       dputs( 3 ){ "Args for entities is #{args.inspect}" }
@@ -135,7 +143,7 @@ class Value
       dputs( 3 ){ "parsing #{@name}: #{p.inspect}" }
       case @list_type
       when :drop
-        ret = eclass.find_by( eclass.data_field_id, p[0] )
+        ret = eclass.match_by( eclass.data_field_id, p[0] )
         dputs( 3 ){ "And found #{ret.inspect}" }
         if not ret and @args.has_key? :empty
           dputs( 3 ){"Converting nil to 0 as we're an entity_empty"}

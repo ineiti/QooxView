@@ -30,12 +30,21 @@ The following buttons are defined:
 =end
 
 module VTListPane
-  def vtlp_list( field, method, args={} )
+  def vtlp_list( field, method, *args )
     @vtlp_field = field.to_s
-    @vtlp_method = method.to_s
-    @vtlp_method_list = "listp_#{method.to_s}"
-    @vtlp_method.sub!( /^rev_/, "" )
-    show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", args.merge( :callback => true )
+    @vtlp_method = method.to_s.sub( /^rev_/, "" )
+    if args.length > 0 and args[0].class == String
+      @vtlp_method_list = args.shift
+    else
+      @vtlp_method_list = "listp_#{method.to_s}"
+    end
+    args_hash = if args.length > 0 and args[0].class == Hash
+      args.shift
+    else
+      {}
+    end
+    show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
+      args_hash.merge( :callback => true )
   end
   
   def vtlp_get_entity( d )
@@ -43,11 +52,12 @@ module VTListPane
   end
   
   def vtlp_update_list( session, choice = nil )
+    rep = []
     list = @data_class.send( @vtlp_method_list )
     if choice
       list += [ choice ]
     end
-    rep = reply( "empty", [ @vtlp_field.to_sym ] ) +
+    rep += reply( "empty", [ @vtlp_field.to_sym ] ) +
       reply( "update", { @vtlp_field.to_sym => list } )
     if @update
       rep += rpc_update( session )
@@ -87,13 +97,16 @@ module VTListPane
     end
     ddputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
     vtlp_update_list( session, selection )
-#      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
+    #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
   def rpc_list_choice( session, name, *args )
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
     #ret = reply( :empty_only, [ @vtlp_field ] )
     ret = []
+    if @update
+      ret += rpc_update( session )
+    end
 
     dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
     if name == @vtlp_field
@@ -106,9 +119,6 @@ module VTListPane
         ret += reply("update", item.to_hash )
       end
       ret += reply("update", {@vtlp_field.to_sym => [field_value] } )
-    end
-    if @update
-      ret += rpc_update( session )
     end
     dputs( 3 ){ "reply is #{ret.inspect}" }
     ret

@@ -504,17 +504,19 @@ class View < RPCQooxdooService
     reply( 'list', View.list( session, @name_tab ) )
   end
 
-  def update_layout
+  def update_layout( session )
     return [] if not @layout
     dputs( 3 ){ "Updating layout" }
     ret = []
     layout_recurse(@layout).each{|l|
       case l.dtype
       when /list|select|entity/
-        values = l.to_a[3][:list_values]
-        dputs( 3 ){ "Here comes element #{l.name} with new list-value #{values.inspect}" }
-        ret += reply( :empty, [ l.name ] ) +
-          reply( :update, { l.name => values } )
+        if not l.args.has_key?( :lazy )
+          values = l.to_a[3][:list_values]
+          dputs( 3 ){ "Here comes element #{l.name} with new list-value #{values.inspect}" }
+          ret += reply( :empty, [ l.name ] ) +
+            reply( :update, { l.name => values } )
+        end
       end
     }
     dputs( 3 ){ "Reply is #{ret.inspect}" }
@@ -528,7 +530,7 @@ class View < RPCQooxdooService
     ret = []
     if @update_layout
       dputs( 3 ){ "updating layout" }
-      ret += update_layout
+      ret += update_layout( session )
     end
     if @auto_update > 0
       dputs( 3 ){ "auto-updating" }
@@ -601,7 +603,7 @@ class View < RPCQooxdooService
   # Returns the data for the fields as a hash
   def update( session )
     dputs( 4 ){ "update" }
-#    get_form_data( session.owner )
+    #    get_form_data( session.owner )
   end
 
   # Make a flat array containing the elements of the layout
@@ -637,7 +639,8 @@ class View < RPCQooxdooService
   def update_form_data( data )
     rep = {}
     d = data.to_hash
-    dputs( 3 ){ "update #{d.data.inspect} with layout #{@layout.inspect} - #{layout_recurse(@layout).inspect}" }
+    dputs( 5 ){ "update #{d.inspect} with layout #{@layout.inspect} - " +
+        "#{layout_recurse(@layout).inspect}" }
     layout_recurse(@layout).each{|l|
       if d.has_key?( l.name )
         rep[l.name] = d[l.name]
