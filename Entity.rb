@@ -23,7 +23,6 @@ end
 
 
 class Entities < RPCQooxdooService
-  LOAD_DATA = true
   @@all = {}
 
   include StorageHandler
@@ -78,7 +77,8 @@ class Entities < RPCQooxdooService
 
       # Now call the setup_data to initialize the fields
       value_block :default
-      autoload = setup_data()
+      @load_data = true
+      setup_data()
 
       # Finally adding @data_field_id to all storage-types
       dputs( 4 ){ "Adding #{@data_field_id} to block" }
@@ -91,7 +91,7 @@ class Entities < RPCQooxdooService
         s.configure(s.config)
       }
       dputs( 4 ){ "Block is now: #{@blocks.inspect}" }
-      if autoload 
+      if @load_data
         dputs( 3 ){"Loading data"}
         load
       else

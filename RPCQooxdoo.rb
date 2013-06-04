@@ -252,8 +252,8 @@ class RPCQooxdooHandler
         res['content-type'] = "text/html"
         res['content-length'] = res.body.length
         res['status'] = status
-        ddputs( 3 ){ "ACaccess-Reply is #{res.body}" }
-        ddputs( 3 ){"Raising #{status.inspect}"}
+        dputs( 3 ){ "ACaccess-Reply is #{res.body}" }
+        dputs( 3 ){"Raising #{status.inspect}"}
       }
     }
 
@@ -275,13 +275,5 @@ class RPCQooxdooPath
     name = subclass.name.downcase
     dputs( 0 ){ "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
     RPCQooxdooHandler.add_path( name, subclass )
-  end
-  
-  def self.return_status( status, msg )
-    #res.body.length = msg
-    #res['content-type'] = "text/html"
-    #res['content-length'] = res.body.length
-    #ddputs( 3 ){ "ACaccess-Reply is #{res.body}" }
-    raise status
   end
 end
