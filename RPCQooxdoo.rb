@@ -234,6 +234,8 @@ class RPCQooxdooHandler
         dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }
         dputs( 4 ){ "#{path}-Request is #{req.path} and " +
             "method is #{req.request_method}" }
+        
+        status = HTTPStatus::OK
         begin
           if cl.respond_to? :parse_req
             res.body = cl.parse_req( req ).to_s
@@ -249,8 +251,9 @@ class RPCQooxdooHandler
         end
         res['content-type'] = "text/html"
         res['content-length'] = res.body.length
-        dputs( 3 ){ "ACaccess-Reply is #{res.body}" }
-        raise HTTPStatus::OK
+        res['status'] = status
+        ddputs( 3 ){ "ACaccess-Reply is #{res.body}" }
+        ddputs( 3 ){"Raising #{status.inspect}"}
       }
     }
 
@@ -272,5 +275,13 @@ class RPCQooxdooPath
     name = subclass.name.downcase
     dputs( 0 ){ "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
     RPCQooxdooHandler.add_path( name, subclass )
+  end
+  
+  def self.return_status( status, msg )
+    #res.body.length = msg
+    #res['content-type'] = "text/html"
+    #res['content-length'] = res.body.length
+    #ddputs( 3 ){ "ACaccess-Reply is #{res.body}" }
+    raise status
   end
 end
