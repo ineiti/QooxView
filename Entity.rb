@@ -436,7 +436,8 @@ class Entity
         if e and v and v.dtype == "entity"
           dputs( 5 ){ "Getting instance for #{v.inspect}" }
           dputs( 5 ){ "Getting instance with #{e.inspect}" }
-          e = v.eclass.get_data_instance( e )
+          dputs( 5 ){ "Field = #{field}; id = #{@id}"}
+          e = v.eclass.get_data_instance( [e].flatten.first )
         end
       end
       e
@@ -469,7 +470,7 @@ class Entity
           dputs(5){"Creating without log"}
           data_set( ks, v )
         else
-          dputs( 3 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
+          dputs( 4 ){ "Setting @data[#{k.inspect}] = #{v.inspect}" }
           data_set_log( ks, v, nil, ( not create ), ( not create ) )
         end
       end
