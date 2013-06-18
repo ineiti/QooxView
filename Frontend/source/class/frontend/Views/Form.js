@@ -89,7 +89,7 @@ qx.Class.define("frontend.Views.Form", {
         args.push(arguments[i]);
       }
       dbg(5, "callBackend arguments are: " + args.join(":"));
-      //dbg(5, "callback is: " + print_a(this.callback));
+      dbg(5, "callback is: " + print_a(this.callback));
       rpc.callRPCarray("View." + this.viewClass, method, this.callback[0], this.callback[1], args);
     },
         

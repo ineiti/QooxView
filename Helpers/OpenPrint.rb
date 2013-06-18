@@ -81,7 +81,7 @@ module PrintButton
   end
   
   def get_remote_printers(ip)
-    if ip.match( get_config( ".*", :OpenPrint, :search_remote ) )
+    if ip.match( get_config( "none", :OpenPrint, :search_remote ) )
       dputs(2){"Getting printers for #{ip}"}
       call_lpstat(ip)
     else
