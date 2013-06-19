@@ -66,6 +66,11 @@ qx.Class.define("frontend.Views.Form", {
         case "button":
           this.callBackend("button", name, this.fields.getFieldsData());
           break;
+        case "upload":
+          ret = this.fields.getFieldsData()
+          ret['filename'] = value
+          this.callBackend("button", name, ret );
+          break;
         case "split_button":
           var fd = this.fields.getFieldsData()
           fd.menu = value;

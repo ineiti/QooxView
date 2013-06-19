@@ -16,4 +16,8 @@ class UploadFiles < RPCQooxdooPath
     }
     @@files.push name
   end
+  
+  def self.get_files
+    @@files
+  end
 end

@@ -644,6 +644,7 @@ qx.Class.define("frontend.Lib.Fields", {
           break;
         case "upload":
           show_label = false;
+          var do_callback = [ params.callback, this.callback ]
           field_element = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
           var button = new com.zenesis.qx.upload.UploadButton(label);
           field_element.add(button);
@@ -690,6 +691,10 @@ qx.Class.define("frontend.Lib.Fields", {
               if (state == "uploaded" || state == "cancelled") {
                 file.removeListenerById(stateListenerId);
                 file.removeListenerById(progressListenerId);
+                if ( do_callback[0] ){
+                  do_callback[1][1].call(do_callback[1][0],
+                    [0, label, "upload", file.getFilename(), 0])
+                }
               }
       				
             }, this);
