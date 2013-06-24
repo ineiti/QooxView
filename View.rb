@@ -465,15 +465,17 @@ class View < RPCQooxdooService
   end
 
   def rpc_tabs_list_choice( session, args )
+    dputs(4){"args is #{args.inspect}"}
+    ret = []
     if args.class == Hash
-      list = ""
       args.each{|k,v|
         if v.class == Array
-          list = k
+          dputs(4){"Calling rpc_list_choice with #{k.inspect}"}
+          ret += rpc_list_choice( session, k, args ).to_a
         end
       }
-      return rpc_list_choice( session, list, args ).to_a
-    end		
+    end
+    ret
   end
 	
   def rpc_tabs_show( session, args )
@@ -645,7 +647,7 @@ class View < RPCQooxdooService
         rep[l.name] = d[l.name]
       end
     }
-    ddputs( 4 ){ "form_data #{rep.inspect}" }
+    dputs( 4 ){ "form_data #{rep.inspect}" }
     reply( :update, rep )
   end
 
