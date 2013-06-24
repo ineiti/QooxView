@@ -34,9 +34,10 @@ class TC_View < Test::Unit::TestCase
 
   def test_update
     reply = request( 'View.AView', 'update', [['0.1']] )
-    result = reply['result'][0][:data]
+    result = reply['result'][0][:data][0][:data]
+    dputs(4){"Reply is #{reply.inspect} - result is #{result.inspect}"}
     assert_equal "admin", result[:first_name], result.inspect
-    assert result[:permission] == nil
+    assert ! result.index( :permission )
   end
 
   def test_show

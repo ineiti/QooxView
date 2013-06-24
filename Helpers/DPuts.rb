@@ -8,7 +8,7 @@ module DPuts
 	
   def dputs_out( n, s, call )
     DebugLock.instance.synchronize do
-      width = $config[:terminal_width] ? $config[:terminal_width] : 160
+      width = get_config( 160, :terminal_width )
       width -= 30.0
       file, func = call.split(" ")
       file = file[/^.*\/([^.]*)/, 1]
@@ -48,8 +48,8 @@ module DPuts
   end
 
   def log_msg( mod, msg )
-    return if not $config[:log]
-    File.open( $config[:log], "a" ){ |f|
+    return if not get_config( false, :log )
+    File.open( get_config( "", :log ), "a" ){ |f|
       str = Time.now.strftime( "%a %y.%m.%d-%H:%M:%S #{mod}: #{msg}" )
       dputs( 0 ){ "Logging #{str}" }
       f.puts str

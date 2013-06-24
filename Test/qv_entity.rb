@@ -3,7 +3,10 @@ require 'benchmark'
 
 class TC_Entity < Test::Unit::TestCase
   def setup
+    dputs(2){"Deleting everything"}
     Entities.delete_all_data
+    
+    dputs(2){"Setting up data"}
     @admin = Entities.Persons.create( :first_name => "admin", :pass => "super123",
       :address => "cdlf 24", :credit => 10000 )
     Entities.Courses.create( :first_name => "base_1010", :start => "1.10.2010")
@@ -11,6 +14,7 @@ class TC_Entity < Test::Unit::TestCase
       :teacher => @admin )
     @dummies_one = Entities.Dummies.create( :first_name => "one", :phone => "111",
       :no_cache => "123" )
+    dputs(2){"Finished setting up data"}
   end
 
   def teardown
@@ -152,6 +156,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_cache_data
+    dputs(2){"testing cache data"}
     assert_equal "one", @dummies_one.first_name
     assert_equal "111", @dummies_one.phone
     assert_equal "no_cache", @dummies_one.no_cache
@@ -192,5 +197,10 @@ class TC_Entity < Test::Unit::TestCase
     #@base_1011.data_set_hash({:assistant => [1]})
     empty = Courses.get_value( :assistant ).parse( [0] )
     assert_equal 0, empty
+  end
+  
+  def test_needs
+    assert Need1s.ok
+    assert Need2s.ok
   end
 end

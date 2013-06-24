@@ -6,16 +6,13 @@ module StorageHandler
   # Checks whether there is a configuration-option which wants to replace
   # the StorageType
   def replace_st( st )
-    if $config[:StorageHandler]
-      conf = $config[:StorageHandler]
-      if conf[:Replace]
-        conf[:Replace].each{|k,v|
-          if st.to_sym == k.to_sym
-            dputs( 2 ){ "Replacing #{k.inspect} with #{v.inspect}" }
-            st = v.to_sym
-          end
-        }
-      end
+    if get_config( false, :StorageHandler, :Replace )
+      $config[:StorageHandler][:Replace].each{|k,v|
+        if st.to_sym == k.to_sym
+          dputs( 2 ){ "Replacing #{k.inspect} with #{v.inspect}" }
+          st = v.to_sym
+        end
+      }
     end
     st.to_sym
   end

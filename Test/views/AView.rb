@@ -17,4 +17,8 @@ class AView < View
   def test_sub
     return 2
   end
+  
+  def update( session )
+    update_form_data( session.owner )
+  end
 end

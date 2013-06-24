@@ -2,7 +2,7 @@ StorageType:
   CSV:
     csv_dir: ./data2/
 
-views:
+Views:
  Welcome:
   need_pass: true
   hide_pass: false

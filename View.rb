@@ -116,8 +116,8 @@ class View < RPCQooxdooService
       end
 
       # Check for config of this special class
-      if $config and $config[:views] and $config[:views][self.class.name.to_sym]
-        @config = $config[:views][self.class.name.to_sym]
+      if get_config( false, :Views, self.class.name )
+        @config = $config[:Views][self.class.name.to_sym]
         dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
           begin
@@ -603,7 +603,6 @@ class View < RPCQooxdooService
   # Returns the data for the fields as a hash
   def update( session )
     dputs( 4 ){ "update" }
-    #    get_form_data( session.owner )
   end
 
   # Make a flat array containing the elements of the layout

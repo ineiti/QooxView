@@ -36,22 +36,36 @@ include WEBrick
 
 class RPCQooxdooService
   @@services_hash = {}
+  @@needs = {}
   @@is_instance = false
   
   # As we can't call .new during "inherited", we have
   # to do it afterwards - too bad.
   def initialize
-    # The entities have to be initialized before the views
-    [ "Entities", "View" ].each{|e|
-      @@services_hash.each_pair{|k,v|
-        if k =~ /^#{e}/
-          if @@services_hash[k].class == Class
-            dputs( 3 ){ "RPC: making an instance of #{k} with #{v}" }
-            @@services_hash[k] = v.new
+    do_init = true
+
+    while do_init
+      do_init = false
+      
+      # The entities have to be initialized before the views
+      [ "Entities", "View" ].each{|e|
+        @@services_hash.sort.each{|k,v|
+          if k =~ /^#{e}/
+            if @@services_hash[k].class == Class
+              dputs(5){"#{@@needs.inspect}"}
+              if @@needs.has_key?(k) and 
+                  @@services_hash[@@needs[k]].class == Class
+                dputs(3){"Not initializing #{k}, as it needs #{@@needs[k]}"}
+                do_init = true
+              else
+                dputs( 3 ){ "RPC: making an instance of #{k.inspect} with #{v.inspect}" }
+                @@services_hash[k] = v.new
+              end
+            end
           end
-        end
+        }
       }
-    }
+    end
     
     RPCQooxdooService.migrate_all
 

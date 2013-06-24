@@ -202,7 +202,6 @@ $config = {} if not defined? $config
 if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
   File.open( CONFIG_FILE ) { |f| $config = YAML::load( f ).to_sym }
 end
-dputs( 1 ){ "config is #{$config.inspect}" }
 $name = $0.match( /.*\/(.*).rb/ )[1]
 def get_config( default, *path )
   get_config_rec( path, default )
@@ -219,6 +218,7 @@ def get_config_rec( path, default, config = $config )
     end
   end
 end
+dputs( 1 ){ "config is #{$config.inspect}" }
 
 require 'RPCQooxdoo'
 require 'Entity'

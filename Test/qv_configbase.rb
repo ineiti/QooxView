@@ -1,6 +1,6 @@
 require 'test/unit'
 
-class TC_Entity < Test::Unit::TestCase
+class TC_ConfigBase < Test::Unit::TestCase
   def setup
   end
   

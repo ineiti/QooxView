@@ -22,7 +22,7 @@ class StorageType
     @data_cache = true
     
     class_name = self.class.name.to_sym
-    if $config and $config[:StorageType] and $config[:StorageType][class_name]
+    if get_config( false, :StorageType, class_name )
       config = $config[:StorageType][class_name].merge( config )
     end
     

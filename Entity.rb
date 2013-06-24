@@ -53,7 +53,7 @@ class Entities < RPCQooxdooService
 
       # Check for config of this special class
       #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
-      if $config and $config[:entities] and $config[:entities][self.class.name.to_sym]
+      if get_config( false, :Entities, self.class.name )
         @config = $config[:entities][self.class.name.to_sym]
         dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
@@ -309,6 +309,20 @@ class Entities < RPCQooxdooService
       dputs( 3 ){ "Loading #{v.class.name}" }
       v.load
     }
+  end
+  
+  def self.is_setup?( e )
+    ret = false
+    @@all.keys.each{|k|
+      ret |= k.to_s == "Entities::#{e}"
+    }
+    dputs(4){"ret:#{ret} for #{e} with #{@@all.keys.inspect}"}
+    ret
+  end
+  
+  def self.needs( e )
+    dputs(2){"#{self.name} needs #{e}"}
+    @@needs["Entities.#{self.name.to_s}"] = "Entities.#{e.to_s}"
   end
 end
 
