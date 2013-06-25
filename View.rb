@@ -468,13 +468,14 @@ class View < RPCQooxdooService
     dputs(4){"args is #{args.inspect}"}
     ret = []
     if args.class == Hash
-      args.each{|k,v|
-        if v.class == Array
-          dputs(4){"Calling rpc_list_choice with #{k.inspect}"}
+      args.keys.sort.each{|k|
+        if args[k].class == Array
+          dputs(3){"Calling rpc_list_choice with #{k.inspect}"}
           ret += rpc_list_choice( session, k, args ).to_a
         end
       }
     end
+    dputs(3){"ret is #{ret.inspect}"}
     ret
   end
 	
