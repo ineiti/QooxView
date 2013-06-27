@@ -101,6 +101,7 @@ class View < RPCQooxdooService
       @auto_update_send_values = true
       @configured = true
       @functions_need = []
+      @values_need = {}
       @functions_reject = []
 
       # Fetch the layout of the view
@@ -770,6 +771,16 @@ class View < RPCQooxdooService
         if functions.index( f )
           dputs(3){"Rejecting because #{f} is here"}
           @configured = false
+        end
+      }
+      @values_need.keys.each{|k|
+        v = @values_need[k]
+        dputs(3){"Testing whether #{k.inspect} has #{v.inspect}"}
+        if data = ConfigBase.data_get( k )
+          dputs(3){"Found data #{data.inspect}"}
+          if data.to_s != v.to_s
+            @configured = false
+          end
         end
       }
     end

@@ -172,7 +172,9 @@ class Entities < RPCQooxdooService
     when /^list_/
       field = cmd_str.sub( /^list_/, "" )
       dputs( 5 ){ "Using list for field #{field}" }
-      ret = @data.values.collect{|v| v[field.to_sym]}
+      ret = @data.values.collect{|v| v[field.to_sym]}.sort{|a,b|
+        a.downcase <=> b.downcase
+      }
       dputs( 4 ){ "Returning #{ret.inspect}" }
       ret
     when /^listp_/
