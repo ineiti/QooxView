@@ -2,8 +2,6 @@
 # and open the template in the editor.
 
 class ConfigBases < Entities
-  attr_reader :functions
-  
   def setup_data
     value_list :functions, "ConfigBases.list_functions"
     
