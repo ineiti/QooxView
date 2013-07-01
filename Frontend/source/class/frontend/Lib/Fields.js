@@ -654,7 +654,14 @@ qx.Class.define("frontend.Lib.Fields", {
           progress.add( pb );
           var progress_label = new qx.ui.basic.Label("No file");
           progress.add( progress_label );
-          field_element.add( progress )
+          field_element.add( progress );
+          field_element.progress = [ pb, progress_label ]
+          field_element.setValue = function(){
+            //alert("Setting value" );
+            pb.setBackgroundColor("#ffffff");
+            pb.setValue( 0 );
+            progress_label.setValue( "No file" );
+          }
 
           var uploader = new com.zenesis.qx.upload.UploadMgr(button, "/uploadfiles");
           uploader.addListener("addFile", function(evt) {

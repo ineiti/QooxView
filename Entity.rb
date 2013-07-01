@@ -53,9 +53,9 @@ class Entities < RPCQooxdooService
 
       # Check for config of this special class
       #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
-      if get_config( false, :Entities, self.class.name )
-        @config = $config[:entities][self.class.name.to_sym]
-        dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
+      if @config = get_config( nil, :Entities, self.class.name )
+        #@config = $config[:Entities][self.class.name.to_sym]
+        ddputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
           begin
             instance_variable_set( "@#{k.to_s}", eval( v ) )
@@ -63,7 +63,7 @@ class Entities < RPCQooxdooService
             instance_variable_set( "@#{k.to_s}", v )
           end
           self.class.send( :attr_reader, k )
-          dputs( 3 ){ "Setting #{k} = #{v}" }
+          ddputs( 3 ){ "Setting #{k} = #{v}" }
         }
       else
         @config = nil
