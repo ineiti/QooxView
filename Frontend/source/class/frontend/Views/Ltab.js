@@ -258,11 +258,18 @@ qx.Class.define("frontend.Views.Ltab", {
         this.parentLtab.fadeOut();
       } else {
         this.fadeOut();
+        this.timer.pause();
+        
+        var child = null;
+        if ( this.form && this.form.fields && 
+          ( child = this.form.fields.childLtab ) ){
+          child.fadeOut();
+          child.timer.pause();
+        }
       }
     },
 		
     fadeOut: function(){
-      this.timer.pause();
       if ( ! this.form || ! this.form.fields ){
         return
       }
@@ -296,9 +303,6 @@ qx.Class.define("frontend.Views.Ltab", {
           });
         }
         this.effect.start();
-        if ( this.form.fields.childLtab ){
-          this.form.fields.childLtab.fadeOut();
-        }
       //alert( "Fading windows")
       }
     },
@@ -307,6 +311,7 @@ qx.Class.define("frontend.Views.Ltab", {
       if ( this.parentLtab ){
         this.parentLtab.parentFadeIn()
       } else {
+        this.timer.cont();
         //alert( "fade_in is " + this.selectfadein + " for " + this )
         if ( this.selectfadein.search( "parent" ) >= 0 ){
           this.fadeIn();
@@ -315,6 +320,7 @@ qx.Class.define("frontend.Views.Ltab", {
         if ( this.form && this.form.fields && 
           this.form.fields.childLtab ){
           child = this.form.fields.childLtab;
+          child.timer.cont();
           if ( this.selectfadein.search( "child" ) >= 0 ){
             //alert( "fading in child " + child )
             child.fadeIn();
@@ -326,15 +332,14 @@ qx.Class.define("frontend.Views.Ltab", {
         if ( this.selectfadein.search("windows") >= 0 ){
           // Children are automatically faded, too
           this.getActiveForm().fields.windows_fade_to(1);
-          //if ( child ){
-          //  child.getActiveForm().fields.windows_fade_to(1);          
-          //}
+        //if ( child ){
+        //  child.getActiveForm().fields.windows_fade_to(1);          
+        //}
         }
       }
     },
     
     fadeIn: function(){
-      this.timer.cont();
       var aform = this.getActiveForm();
       this.enableThis();
       if ( this.fadedin ){

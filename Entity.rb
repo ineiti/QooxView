@@ -431,7 +431,7 @@ class Entity
       if value = @proxy.get_value(f) and value.dtype == "entity"
         dputs(5){"Is an entity"}
         if unique_ids
-          ret[f] = data_get("_#{f}").get_unique
+          ret[f] = ( d = data_get("_#{f}") ) ? d.get_unique : nil
         else
           ret[f] = [v]
         end

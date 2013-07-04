@@ -700,7 +700,7 @@ qx.Class.define("frontend.Lib.Fields", {
                 file.removeListenerById(progressListenerId);
                 if ( do_callback[0] ){
                   do_callback[1][1].call(do_callback[1][0],
-                    [0, label, "upload", file.getFilename(), 0])
+                    [0, name, "upload", file.getFilename(), 0])
                 }
               }
       				

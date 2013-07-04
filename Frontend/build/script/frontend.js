@@ -19,7 +19,7 @@ qx.$$packageData = {};
 
 qx.$$loader = {
   parts : {"boot":[0]},
-  packages : {"0":{"uris":["__out__:frontend.b1e405440ddb.js"]}},
+  packages : {"0":{"uris":["__out__:frontend.b313ef0b8127.js"]}},
   urisBefore : [],
   cssBefore : [],
   boot : "boot",
@@ -10836,9 +10836,12 @@ dbg(3,Y+print_a(cf));
 rpc.callRPCarray(bu+this.viewClass,cd,this,this.dispatch,cf);
 },parentFadeOut:function(){if(this.parentLtab){this.parentLtab.fadeOut();
 }else{this.fadeOut();
-}},fadeOut:function(){this.timer.pause();
+this.timer.pause();
+var cg=null;
 
-if(!this.form||!this.form.fields){return;
+if(this.form&&this.form.fields&&(cg=this.form.fields.childLtab)){cg.fadeOut();
+cg.timer.pause();
+}}},fadeOut:function(){if(!this.form||!this.form.fields){return;
 }this.form.fields.windows_fade_to(0.5);
 
 if(!this.fadedin){return;
@@ -10852,26 +10855,25 @@ this.effect.set({from:1,to:0.5,duration:0.25});
 }else{this.effect=new qx.fx.effect.core.Highlight(this.getContainerElement().getDomElement());
 this.effect.set({startColor:bn,endColor:bc,duration:0.5});
 }this.effect.start();
+}},parentFadeIn:function(){if(this.parentLtab){this.parentLtab.parentFadeIn();
+}else{this.timer.cont();
+if(this.selectfadein.search(br)>=0){this.fadeIn();
+}var ch=null;
 
-if(this.form.fields.childLtab){this.form.fields.childLtab.fadeOut();
-}}},parentFadeIn:function(){if(this.parentLtab){this.parentLtab.parentFadeIn();
-}else{if(this.selectfadein.search(br)>=0){this.fadeIn();
-}var cg=null;
+if(this.form&&this.form.fields&&this.form.fields.childLtab){ch=this.form.fields.childLtab;
+ch.timer.cont();
 
-if(this.form&&this.form.fields&&this.form.fields.childLtab){cg=this.form.fields.childLtab;
-
-if(this.selectfadein.search(bb)>=0){cg.fadeIn();
-}else{cg.fadeOut();
+if(this.selectfadein.search(bb)>=0){ch.fadeIn();
+}else{ch.fadeOut();
 }}
 if(this.selectfadein.search(ba)>=0){this.getActiveForm().fields.windows_fade_to(1);
-}}},fadeIn:function(){this.timer.cont();
-var ch=this.getActiveForm();
+}}},fadeIn:function(){var ci=this.getActiveForm();
 this.enableThis();
 
 if(this.fadedin){return ;
 }this.fadedin=true;
 
-if(ch&&ch.fields){if(this.getContainerElement().getDomElement()){dbg(5,N);
+if(ci&&ci.fields){if(this.getContainerElement().getDomElement()){dbg(5,N);
 
 if(this.effect){this.effect.cancel();
 }
@@ -10884,97 +10886,97 @@ this.effect.set({startColor:bn,endColor:bI,duration:0.5});
 }}},enableThis:function(){if(this.tabs){this.tabs.setEnabled(true);
 }
 if(this.form&&this.form.fields){this.form.fields.setEnabled(true);
-}var ci=this.getActiveForm();
+}var cj=this.getActiveForm();
 
-if(ci&&ci.fields){ci.fields.setEnabled(true);
-}},setVisibility:function(cj,ck){var cl=this.getActiveForm();
+if(cj&&cj.fields){cj.fields.setEnabled(true);
+}},setVisibility:function(ck,cl){var cm=this.getActiveForm();
 var f;
 
-if(f=cl.fields.fields[cj]){f.setVisibility(ck);
+if(f=cm.fields.fields[ck]){f.setVisibility(cl);
 
-if(f.widget_label){f.widget_label.setVisibility(ck);
-}}else{dbg(3,p+cj);
-}},showView:function(cm){this.layoutView=cm.layout;
-this.dataClass=cm.data_class;
-this.viewClass=cm.view_class;
+if(f.widget_label){f.widget_label.setVisibility(cl);
+}}else{dbg(3,p+ck);
+}},showView:function(cn){this.layoutView=cn.layout;
+this.dataClass=cn.data_class;
+this.viewClass=cn.view_class;
 dbg(5,X+this.layoutView);
 this.timer.stop();
 if(this.tabs){if(this.tabs.getSelection()[0].qv_id!=this.viewClass){for(var v=0;v<this.views.length;v++){if(this.views[v].qv_id==this.viewClass){this.tabs.setSelection([this.views[v]]);
-}}}}var co=this.getRootContainer();
-dbg(5,bO+co);
-var cn=[this,this.dispatch];
-if(!co.hasChildren()){dbg(4,be+this.viewClass);
-this.form=new frontend.Views.Form(cn,this.layoutView,this.dataClass,this.viewClass,this);
+}}}}var cp=this.getRootContainer();
+dbg(5,bO+cp);
+var co=[this,this.dispatch];
+if(!cp.hasChildren()){dbg(4,be+this.viewClass);
+this.form=new frontend.Views.Form(co,this.layoutView,this.dataClass,this.viewClass,this);
 
-if(this.viewClass.search(/Tabs$/)>=0){co.add(this.form,{width:bv,height:bv});
-}else{co.add(this.form);
+if(this.viewClass.search(/Tabs$/)>=0){cp.add(this.form,{width:bv,height:bv});
+}else{cp.add(this.form);
 }this.form.fields.focus_if_ok(this.form.fields.first_field);
 }else{dbg(4,P+this.viewClass+bF);
-}},updateView:function(cp){dbg(4,w+cp);
+}},updateView:function(cq){dbg(4,w+cq);
 
-if(cp){this.form.fields.fill(cp);
-}},createViews:function(cq){var ct=cq.views;
-dbg(5,bK+ct);
+if(cq){this.form.fields.fill(cq);
+}},createViews:function(cr){var cu=cr.views;
+dbg(5,bK+cu);
 this.root.removeAll();
 this.tabs=new qx.ui.tabview.TabView(this.alignTabs).set(B,false);
 this.views=[];
 
-for(var v=0;v<ct.length;v++){dbg(2,bi+ct[v][0]+bo+ct[v][1]);
-this.views[v]=new qx.ui.tabview.Page(ct[v][1]);
-this.views[v].qv_id=ct[v][0];
+for(var v=0;v<cu.length;v++){dbg(2,bi+cu[v][0]+bo+cu[v][1]);
+this.views[v]=new qx.ui.tabview.Page(cu[v][1]);
+this.views[v].qv_id=cu[v][0];
 this.views[v].setLayout(new qx.ui.layout.Canvas());
-var cs=new qx.ui.container.Scroll();
-var cr=new qx.ui.container.Composite();
-cr.setLayout(new qx.ui.layout.Canvas());
-cs.add(cr);
-this.views[v].add(cs,{width:bv,height:bv});
+var ct=new qx.ui.container.Scroll();
+var cs=new qx.ui.container.Composite();
+cs.setLayout(new qx.ui.layout.Canvas());
+ct.add(cs);
+this.views[v].add(ct,{width:bv,height:bv});
 this.tabs.add(this.views[v]);
 }this.root.add(this.tabs,{width:bv,height:bv});
 dbg(3,bD+this.getRootContainer());
 this.parentFadeOut();
 qx.event.Registration.addListener(this.tabs,bA,this.changeView,this);
-rpc.callRPC(bu+ct[0][0],bt,this,this.dispatch);
+rpc.callRPC(bu+cu[0][0],bt,this,this.dispatch);
 this.tabs.setSelection([this.views[0]]);
 },changeView:function(e){this.timer.stop();
 
 if(this.form.fields.childLtab){this.form.fields.childLtab.timer.stop();
-}var cu=e.getData()[0].qv_id;
-dbg(3,L+cu);
+}var cv=e.getData()[0].qv_id;
+dbg(3,L+cv);
 this.form=this.getActiveForm();
-var cw=this.getRootContainer();
-var cx=this.tabs.getSelection()[0];
+var cx=this.getRootContainer();
+var cy=this.tabs.getSelection()[0];
 this.tabs.setEnabled(false);
-var cy=n;
-var cv=null;
+var cz=n;
+var cw=null;
 
 if(this.parentLtab){dbg(3,I);
-cy=s;
-cv=this.parentLtab.form.fields.getOwnFieldsData();
+cz=s;
+cw=this.parentLtab.form.fields.getOwnFieldsData();
 }else{this.setFadeIn(bs);
 
-if(this.form&&this.form.fields){cv=this.form.fields.getOwnFieldsData();
+if(this.form&&this.form.fields){cw=this.form.fields.getOwnFieldsData();
 }}
-if(cx.initValues){dbg(2,b+cx);
+if(cy.initValues){dbg(2,b+cy);
 
-for(var i in cx.initValues){cv[i]=cx.initValues[i];
-}dbg(2,bG+print_a(cv));
-cx.initValues=null;
+for(var i in cy.initValues){cw[i]=cy.initValues[i];
+}dbg(2,bG+print_a(cw));
+cy.initValues=null;
 }this.parentFadeOut();
 
-if(!cw.hasChildren()){dbg(3,bH+cu+S+this.form);
-rpc.callRPC(bu+cu,cy+bt,this,this.dispatch,cv);
-}else{dbg(3,u+print_a(cv));
-this.viewClass=cu;
-rpc.callRPC(bu+cu,cy+bj,this,this.dispatch,cv);
+if(!cx.hasChildren()){dbg(3,bH+cv+S+this.form);
+rpc.callRPC(bu+cv,cz+bt,this,this.dispatch,cw);
+}else{dbg(3,u+print_a(cw));
+this.viewClass=cv;
+rpc.callRPC(bu+cv,cz+bj,this,this.dispatch,cw);
 if(this.form.fields.childLtab){dbg(3,z);
 
-if(this.form.fields.childLtab.form){var cz=this.form.fields.childLtab;
-var cu=cz.tabs.getSelection()[0].qv_id;
-var cv=this.form.fields.getOwnFieldsData();
-rpc.callRPC(bu+cu,l,cz,cz.dispatch,cv);
-}}}},getActiveForm:function(){var cA=this.getRootContainer();
+if(this.form.fields.childLtab.form){var cA=this.form.fields.childLtab;
+var cv=cA.tabs.getSelection()[0].qv_id;
+var cw=this.form.fields.getOwnFieldsData();
+rpc.callRPC(bu+cv,l,cA,cA.dispatch,cw);
+}}}},getActiveForm:function(){var cB=this.getRootContainer();
 
-if(cA.getChildren){return cA.getChildren()[0];
+if(cB.getChildren){return cB.getChildren()[0];
 }else{return null;
 }},getRootContainer:function(){dbg(5,bk);
 return this.tabs?this.tabs.getSelection()[0].getChildren()[0].getChildren()[0]:this.root;
@@ -11835,7 +11837,7 @@ fa.setValue(z);
 if(fs==cd||fs==bA){fl.removeListenerById(fk);
 fl.removeListenerById(fi);
 
-if(fd[0]){fd[1][1].call(fd[1][0],[0,eP,dm,fl.getFilename(),0]);
+if(fd[0]){fd[1][1].call(fd[1][0],[0,name,dm,fl.getFilename(),0]);
 }}},this);
 });
 break;
