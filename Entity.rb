@@ -21,6 +21,10 @@ class Array
 end
 
 
+class ValueUnknown < Exception
+  
+end
+
 
 class Entities < RPCQooxdooService
   @@all = {}
@@ -55,7 +59,7 @@ class Entities < RPCQooxdooService
       #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
       if @config = get_config( nil, :Entities, self.class.name )
         #@config = $config[:Entities][self.class.name.to_sym]
-        ddputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
+        dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
           begin
             instance_variable_set( "@#{k.to_s}", eval( v ) )
@@ -63,7 +67,7 @@ class Entities < RPCQooxdooService
             instance_variable_set( "@#{k.to_s}", v )
           end
           self.class.send( :attr_reader, k )
-          ddputs( 3 ){ "Setting #{k} = #{v}" }
+          dputs( 3 ){ "Setting #{k} = #{v}" }
         }
       else
         @config = nil
@@ -145,6 +149,11 @@ class Entities < RPCQooxdooService
   # Makes for a small proxy, in that only the needed classes are
   # instantiated - useful for stuff like long LDAP-lists...
   def get_data_instance( k )
+    if k.class != Fixnum
+      dputs(0){"value k is #{k.inspect}"}
+      dputs(0){"caller-stack is #{caller}"}
+      exit
+    end
     return nil if not k or not @data[k.to_i]
     @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
     return @data_instances[k]
@@ -350,25 +359,30 @@ class Entity
   def method_missing( cmd, *args )
     dputs( 5 ){ "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}" }
     field = cmd.to_s
+    if not @proxy.get_value( field.sub(/^_/, '' ).sub(/=$/, '' ) )
+      dputs(3){"ValueUnknown for #{cmd.inspect} - #{@proxy.blocks.inspect}"}
+      raise ValueUnknown
+    end
     case field
     when /=$/
-      dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
       # Setting the value
-      field = field.chop.to_sym
+      dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
+      field_set = "_#{field.chop.sub(/^_/, '')}"
       
       if not old_respond_to? "#{field}=".to_sym
         self.class.class_eval <<-RUBY
-        def #{field}=( v )
+        def #{field}( v )
           if @proxy.undo or @proxy.logging
-            data_set_log( "#{field}".to_sym, v, @proxy.msg, @proxy.undo, @proxy.logging )
+            data_set_log( "#{field_set}".to_sym, v, @proxy.msg, @proxy.undo, 
+              @proxy.logging )
           else
-            data_set( "#{field}".to_sym, v )
+            data_set( "#{field_set}".to_sym, v )
           end
         end
         RUBY
-        send( "#{field}=".to_sym, args[0] )
+        send( field, args[0] )
       else
-        dputs(0){"#{field}= is already defined - don't know what to do..."}
+        dputs(0){"#{field} is already defined - don't know what to do..."}
         caller.each{|c|
           dputs(0){"Caller is #{c.inspect}"}          
         }
@@ -376,10 +390,11 @@ class Entity
     else
       # Getting the value
       dputs( 5 ){ "data_get #{field} for class #{self.class.name}" }
+
       if not old_respond_to? field
         self.class.class_eval <<-RUBY
         def #{field}
-          data_get( "#{field}" )
+          data_get( "_#{field.sub(/^_/, '')}", false )
         end
         RUBY
         send( field )
@@ -401,7 +416,7 @@ class Entity
     when /=$/
       return true
     else
-      return ( data_get( field ) or super )
+      return ( @proxy.get_value( cmd ) or super )
     end
   end
 
@@ -414,7 +429,7 @@ class Entity
       if value = @proxy.get_value(f) and value.dtype == "entity"
         dputs(5){"Is an entity"}
         if unique_ids
-          ret[f] = data_get(f).get_unique
+          ret[f] = data_get("_#{f}").get_unique
         else
           ret[f] = [v]
         end
@@ -445,29 +460,47 @@ class Entity
   end
 
   def data_get( field, raw = false )
-    ret = [field].flatten.collect{|f|
-      e = @proxy.get_entry( @id, f.to_s )
-      if not raw
-        v = @proxy.get_value( f )
-        if e and v and v.dtype == "entity"
-          dputs( 5 ){ "Getting instance for #{v.inspect}" }
-          dputs( 5 ){ "Getting instance with #{e.inspect}" }
-          dputs( 5 ){ "Field = #{field}; id = #{@id}"}
-          e = v.eclass.get_data_instance( [e].flatten.first )
+    ret = [field].flatten.collect{|f_orig|
+      f = f_orig.to_s
+      ( direct = f =~ /^_/ ) and f.sub!( /^_/, '' )
+      dputs(4){"Direct is #{direct.inspect} for #{f_orig.inspect}"}
+      if ( self.public_methods.index( f ) ) and ( not direct )
+        dputs(4){"found direct method for #{f} in #{self.class}"}
+        send( f )
+      else
+        dputs(4){"Using proxy for #{f}"}
+        e = @proxy.get_entry( @id, f )
+        dputs(4){"e is #{e.inspect} from #{@proxy.data.inspect}"}
+        if not raw
+          v = @proxy.get_value( f )
+          if e and v and v.dtype == "entity"
+            ddputs( 5 ){ "Getting instance for #{v.inspect}" }
+            ddputs( 5 ){ "Getting instance with #{e.inspect}" }
+            ddputs( 5 ){ "Field = #{field}; id = #{@id}"}
+            e = v.eclass.get_data_instance( [e].flatten.first )
+          end
         end
+        e
       end
-      e
     }
     dputs(4){"Return is #{ret.inspect}"}
     ret.length == 1 ? ret[0] : ret
   end
 
-  def data_set( field, value )
-    if value.is_a? Entity
+  def data_set( field_orig, value )
+    field = field_orig.to_s
+    ( direct = field =~ /^_/ ) and field.sub!( /^_/, '' )
+    dputs(4){"Direct is #{direct} for field #{field_orig.inspect}"}
+    v = if value.is_a? Entity
       dputs( 3 ){ "Converting #{value} to #{value.id}" }
-      @proxy.set_entry( @id, field, value.id )
+      value.id
     else
-      @proxy.set_entry( @id, field, value )
+      value
+    end
+    if ( self.public_methods.index( "#{field}=" ) ) and ( not direct )
+      send( "#{field}=", v )
+    else
+      @proxy.set_entry( @id, field, v )
     end
     self
   end
@@ -503,6 +536,7 @@ class Entity
     if old_value.to_s != new_value.to_s
       dputs( 3 ){ "Set field #{field} to value #{new_value.inspect}" }
       if logging
+        field = field.to_s.sub( /^_/, '' ).to_sym
         if undo
           @proxy.log_action( @id, { field => new_value }, msg, :undo_set_entry, old_value )
         else

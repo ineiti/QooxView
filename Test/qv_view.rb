@@ -86,17 +86,17 @@ class TC_View < Test::Unit::TestCase
             ["list", :ro_list, "ro_list", {:ro=>true, :list_values=>[1,2,3]}],
             ["list", :ro_list2, "ro_list2", {:ro=>true}],
             ["fromto", :duration, "duration", {}],
-            ["list", :worker, "worker", {:list_values=>["admin","surf","autre"]}]]]]],
+            ["list", :worker, "worker", {:list_values=>["admin","autre","surf"]}]]]]],
       View.AView.layout_eval
   end
 
   def test_list_update
-    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf","autre"]}],
+    assert_equal ["list", :worker, "worker", {:list_values=>["admin","autre","surf"]}],
       View.AView.layout_eval[1][0][1][9],
       View.AView.layout_eval.inspect
     Entities.Persons.create( :first_name => "foo", :pass => "foo",
       :session_id => '0.3', :permission => 'internet' )
-    assert_equal ["list", :worker, "worker", {:list_values=>["admin","surf","autre","foo"]}],
+    assert_equal ["list", :worker, "worker", {:list_values=>["admin","autre","foo","surf"]}],
       View.AView.layout_eval[1][0][1][9]
   end
 
@@ -162,6 +162,11 @@ class TC_View < Test::Unit::TestCase
     assert_equal make_list([2]), View.list( @session_admin )[:views].sort
     
     ConfigBase.store( {:functions => [1] })
+    assert_equal make_list([1,2]), 
+      View.list( @session_admin )[:views].sort
+    
+    ConfigBase.value = :one
+    ConfigBase.store
     assert_equal make_list([1,2,3]), 
       View.list( @session_admin )[:views].sort
 

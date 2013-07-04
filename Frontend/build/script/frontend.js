@@ -19,7 +19,7 @@ qx.$$packageData = {};
 
 qx.$$loader = {
   parts : {"boot":[0]},
-  packages : {"0":{"uris":["__out__:frontend.25e884d19b3e.js"]}},
+  packages : {"0":{"uris":["__out__:frontend.b1e405440ddb.js"]}},
   urisBefore : [],
   cssBefore : [],
   boot : "boot",
@@ -10711,122 +10711,129 @@ this.layout.set({marginTop:top,marginLeft:j});
 rpc.callRPC(c,a,this.layout,this.layout.dispatch);
 }}});
 })();
-(function(){var s="100%",q="View.",p="show",o=" - ",n="resize",m="#ffffff",l="update",k="update_with_values",j="Values are: ",h="child",bM="hide",bL="switch_tab",bK="Adding container ",bJ="Looking for ",bI="getActiveForm",bH="Not found ",bG="Found ",bF="Tab already created - updating only - ",bE="update_view",bD="focus",A="changeView with data ",B="Enabled",y="parentFields is ",z="in dispatcher for ",w="auto_update",x="Fading in",t="button",u="Found new tab: ",I="No form -",J="init_values",be=" / ",ba="New tab is: ",bm="",bh=" and field ",by="unhide",bs="auto-update is 0, not updating",R="The following views are allowed: ",bC="initValue for ",bA="Didn't find field ",bz="getRootContainer gives: ",P="empty",V='visible',X="#ff8888",bc="pass_tabs",bf="changeSelection",bi="end_of_req",bo="finished dispatcher",bu="View is: ",C="showView - container is: ",D="tabs_",T="We have to show the following: ",bl="frontend.Views.Ltab",bk="list",bj="timer for update",bq='excluded',bp="Layout ",bg="parent",bn="reload",a="clear",bt=" in ",E="update-method is: ",F="setting updating on false in ",bb=" already here - doing nothing",b="*****===== Dispatcher ",g="session_id",N="Focusing on ",G="Adding something to the show - update_view",H="** UNdoing effects",L="Timer for callback_button",bd="Turning debugging on",bw="Updating children",bv="adding view-tab: ",W="init_values for ",bx="callback_button",Q="updateView: ",br="window_hide",K="empty_only",M="- or fields found",d="debug",Y="tabs_update_view",S="#88ff88",bB="left",U="New view is: ",c="window_show",O="empty_all";
-qx.Class.define(bl,{extend:qx.ui.container.Composite,construct:function(){this.alignTabs=bB;
-this.fadedin=true;
+(function(){var bv="100%",bu="View.",bt="show",bs="parent,child,windows",br="parent",bq="update_with_values",bp="resize",bo=" - ",bn="#ffffff",bm="update",bb="child",ba="windows",Y="Values are: ",X="We have to show the following: ",W="Not found ",V="in dispatcher for ",U="No form -",T=" / ",S=" and field ",R="unhide",bC="auto-update is 0, not updating",bD="getRootContainer gives: ",bA="changeSelection",bB="end_of_req",by="View is: ",bz="list",bw="fade_in",bx=" in ",bE="update-method is: ",bF=" already here - doing nothing",bf="*****===== Dispatcher ",be="Adding container ",bh="hide",bg="Found ",bj="update_view",bi="adding view-tab: ",bl="New tab is: ",bk="getActiveForm",bd="pass_tabs",bc="#ff8888",a='excluded',b="initValue for ",c="clear",d="callback_button",g="window_hide",h="- or fields found",j="debug",k="window_show",l="tabs_update_view",m="switch_tab",bJ="Looking for ",bI="#88ff88",bH="changeView with data ",bG="parentFields is ",bN="button",bM="init_values",bL="empty_only",bK="The following views are allowed: ",bP='visible',bO="showView - container is: ",D="frontend.Views.Ltab",E="reload",B="Enabled",C="session_id",H="Focusing on ",I="Adding something to the show - update_view",F="timer for update",G="Turning debugging on",z="Updating children",A="left",w="updateView: ",u="Tab already created - updating only - ",y="focus",x="Fading in",q="Found new tab: ",p="Didn't find field ",t="empty",s="tabs_",o="auto_update",n="",N="** UNdoing effects",O="finished dispatcher",P="Layout ",Q="setting updating on false in ",J="Timer for callback_button",K="init_values for ",L="New view is: ",M="empty_all";
+qx.Class.define(D,{extend:qx.ui.container.Composite,construct:function(){this.alignTabs=A;
+this.fadedin=false;
 qx.ui.container.Composite.call(this);
 this.setLayout(this.layout=new qx.ui.layout.Canvas());
 this.timer=new frontend.Lib.TimerF();
 this.root=new qx.ui.container.Composite(new qx.ui.layout.Canvas());
 this.root.setPadding(10);
-this.add(this.root,{width:s,height:s});
-this.addListener(n,function(e){root.fireDataEvent(n,new qx.event.type.Data());
+this.add(this.root,{width:bv,height:bv});
+this.selectfadein=bs;
+this.addListener(bp,function(e){root.fireDataEvent(bp,new qx.event.type.Data());
 },this);
-},members:{layoutView:null,dataClass:null,viewClass:null,root:null,views:null,layout:null,list:null,views:null,field:null,tabs:null,timer:null,effect:null,fadedin:null,alignTabs:null,parentLtab:null,initValues:null,dispatch:function(bN){dbg(5,z+this.viewClass);
-var bO=true;
+},members:{layoutView:null,dataClass:null,viewClass:null,root:null,views:null,layout:null,list:null,views:null,field:null,tabs:null,timer:null,effect:null,selectfadein:null,fadedin:null,alignTabs:null,parentLtab:null,initValues:null,dispatch:function(bQ){dbg(5,V+this.viewClass);
+var bR=true;
 this.parentFadeOut();
-var bV=this.getActiveForm();
+var bY=this.getActiveForm();
 
-for(var r=0;r<bN.length;r++){var bP=bN[r];
-dbg(0,b+(r+1)+be+bN.length);
-dbg(0,print_a(bP));
-dbg(0,print_a(bP.data));
-dbg(0,bP.data);
+for(var r=0;r<bQ.length;r++){var bS=bQ[r];
+dbg(0,bf+(r+1)+T+bQ.length);
+dbg(0,print_a(bS));
+dbg(0,print_a(bS.data));
+dbg(0,bS.data);
 
-switch(bP.cmd){case w:this.timer.stop();
-var bT=Math.abs(bP.data)*1000;
+switch(bS.cmd){case o:this.timer.stop();
+var bW=Math.abs(bS.data)*1000;
 
-if(bT>=1){var bU=l;
+if(bW>=1){var bX=bm;
 
-if(bP.data<0){bU=k;
-}dbg(3,E+bU);
-dbg(3,bu+this.viewClass);
-this.timer.start(this.autoUpdate,bT,this,bU,bT);
-}else{dbg(3,bs);
+if(bS.data<0){bX=bq;
+}dbg(3,bE+bX);
+dbg(3,by+this.viewClass);
+this.timer.start(this.autoUpdate,bW,this,bX,bW);
+}else{dbg(3,bC);
 }break;
-case bx:bO=false;
+case d:bR=false;
 unfade=false;
-var bQ=bP.data;
-qx.util.TimerManager.getInstance().start(function(bW,bX){dbg(3,L);
-this.callBackend(t,bQ,this.fields.getFieldsData());
-},null,bV,null,500);
+var bT=bS.data;
+qx.util.TimerManager.getInstance().start(function(ca,cb){dbg(3,J);
+this.callBackend(bN,bT,this.fields.getFieldsData());
+},null,bY,null,500);
 break;
-case h:if(bV.fields.childLtab){bV.fields.childLtab.dispatch(bP.data);
+case bb:if(bY.fields.childLtab){bY.fields.childLtab.dispatch(bS.data);
 }break;
-case a:this.root.removeAll();
+case c:this.root.removeAll();
 break;
-case d:dbg(0,bd);
+case j:dbg(0,G);
 {qx.log.appender.Native;
 qx.log.appender.Console.show();
 };
 break;
-case P:this.getActiveForm().fields.clearData(bP.data);
+case t:this.getActiveForm().fields.clearData(bS.data);
 break;
-case O:this.getActiveForm().fields.clearDataAll();
+case M:this.getActiveForm().fields.clearDataAll();
 break;
-case K:this.getActiveForm().fields.clearDataOnly(bP.data);
+case bL:this.getActiveForm().fields.clearDataOnly(bS.data);
 break;
-case bD:var f=bP.data;
+case bw:this.setFadeIn(bS.data);
+break;
+case y:var f=bS.data;
 
-if(bV&&bV.fields&&bV.fields.fields){if(bV.fields.fields[f]){dbg(2,N+f);
-bV.fields.focus_if_ok(bV.fields.fields[f]);
-}else{dbg(2,bH+f+bt+print_a(bV.fields.fields));
-}}else{dbg(3,I+bV+M);
+if(bY&&bY.fields&&bY.fields.fields){if(bY.fields.fields[f]){dbg(2,H+f);
+bY.fields.focus_if_ok(bY.fields.fields[f]);
+}else{dbg(2,W+f+bx+print_a(bY.fields.fields));
+}}else{dbg(3,U+bY+h);
 }break;
-case bM:this.setVisibility(bP.data,bq);
+case bh:this.setVisibility(bS.data,a);
 break;
-case J:var bS=bP.data[0];
-var bR=bP.data[1];
-dbg(2,W+bS+o+print_a(bR));
+case bM:var bV=bS.data[0];
+var bU=bS.data[1];
+dbg(2,K+bV+bo+print_a(bU));
 var f=null;
 
 for(var v=0;v<this.views.length;v++){dbg(2,bJ+this.views[v].qv_id);
 
-if(this.views[v].qv_id==bS){dbg(2,bG+this.views[v]);
-this.views[v].initValues=bR;
+if(this.views[v].qv_id==bV){dbg(2,bg+this.views[v]);
+this.views[v].initValues=bU;
 }}break;
-case bk:this.createViews(bP.data);
+case bz:this.createViews(bS.data);
 break;
-case bg:if(this.parentLtab){this.parentLtab.dispatch(bP.data);
+case br:if(this.parentLtab){this.parentLtab.dispatch(bS.data);
 }break;
-case bc:bV.fields.childLtab.getActiveForm().callBackend(bP.data[0],bP.data[1],bP.data[2]);
-bO=false;
+case bd:bY.fields.childLtab.getActiveForm().callBackend(bS.data[0],bS.data[1],bS.data[2]);
+bR=false;
 break;
-case bn:window.location.reload();
+case E:window.location.reload();
 break;
-case g:rpc.session_id=bP.data;
+case C:rpc.session_id=bS.data;
 break;
-case p:this.showView(bP.data);
-bV=this.getActiveForm();
+case bt:this.showView(bS.data);
+bY=this.getActiveForm();
 break;
-case bL:for(var v=0;v<this.views.length;v++){if(this.views[v].qv_id==bP.data){this.tabs.setSelection([this.views[v]]);
-dbg(3,u+bP.data);
-dbg(3,ba+this.tabs.getSelection()[0].qv_id);
+case m:for(var v=0;v<this.views.length;v++){if(this.views[v].qv_id==bS.data){this.tabs.setSelection([this.views[v]]);
+dbg(3,q+bS.data);
+dbg(3,bl+this.tabs.getSelection()[0].qv_id);
 }}break;
-case by:this.setVisibility(bP.data,V);
+case R:this.setVisibility(bS.data,bP);
 break;
-case l:this.updateView(bP.data);
+case bm:this.updateView(bS.data);
 break;
-case br:bV.fields.window_hide(bP.data);
+case g:bY.fields.window_hide(bS.data);
+this.setFadeIn(bs);
 break;
-case c:bO=false;
-bV.fields.window_show(bP.data);
+case k:bR=false;
+bY.fields.window_show(bS.data);
+this.setFadeIn(ba);
 break;
-case bi:if(bO&&rpc.RpcQueue.length==0){dbg(2,x);
+case bB:if(bR&&rpc.RpcQueue.length==0){dbg(2,x);
 this.parentFadeIn();
-this.parentEnableAll();
 }break;
 }}
-if(this.form){dbg(5,F+this.form);
+if(this.form){dbg(5,Q+this.form);
 this.form.fields.updating=false;
-}dbg(5,bo);
-},autoUpdate:function(bY,ca){dbg(3,bj);
-var cb=[];
+}dbg(5,O);
+},setFadeIn:function(cc){this.selectfadein=cc;
 
-if(bY==k){cb=[this.form.fields.getFieldsData()];
-dbg(3,j+print_a(cb));
+if(this.parentLtab){this.parentLtab.selectfadein=this.selectfadein;
+}},autoUpdate:function(cd,ce){dbg(3,F);
+var cf=[];
+
+if(cd==bq){cf=[this.form.fields.getFieldsData()];
+dbg(3,Y+print_a(cf));
 }this.parentFadeOut();
-rpc.callRPCarray(q+this.viewClass,bY,this,this.dispatch,cb);
+rpc.callRPCarray(bu+this.viewClass,cd,this,this.dispatch,cf);
 },parentFadeOut:function(){if(this.parentLtab){this.parentLtab.fadeOut();
 }else{this.fadeOut();
 }},fadeOut:function(){this.timer.pause();
@@ -10843,127 +10850,133 @@ if(this.form.fields&&this.form.fields.getContainerElement()&&this.form.fields.ge
 if(true){this.effect=new qx.fx.effect.core.Fade(this.getContainerElement().getDomElement());
 this.effect.set({from:1,to:0.5,duration:0.25});
 }else{this.effect=new qx.fx.effect.core.Highlight(this.getContainerElement().getDomElement());
-this.effect.set({startColor:m,endColor:X,duration:0.5});
+this.effect.set({startColor:bn,endColor:bc,duration:0.5});
 }this.effect.start();
 
 if(this.form.fields.childLtab){this.form.fields.childLtab.fadeOut();
-}}},parentFadeIn:function(){if(this.parentLtab){this.parentLtab.fadeIn();
-this.fadeIn();
-}else{this.fadeIn();
-}},fadeIn:function(){this.timer.cont();
-aform=this.getActiveForm();
-aform.fields.windows_fade_to(1);
+}}},parentFadeIn:function(){if(this.parentLtab){this.parentLtab.parentFadeIn();
+}else{if(this.selectfadein.search(br)>=0){this.fadeIn();
+}var cg=null;
+
+if(this.form&&this.form.fields&&this.form.fields.childLtab){cg=this.form.fields.childLtab;
+
+if(this.selectfadein.search(bb)>=0){cg.fadeIn();
+}else{cg.fadeOut();
+}}
+if(this.selectfadein.search(ba)>=0){this.getActiveForm().fields.windows_fade_to(1);
+}}},fadeIn:function(){this.timer.cont();
+var ch=this.getActiveForm();
+this.enableThis();
 
 if(this.fadedin){return ;
 }this.fadedin=true;
 
-if(aform&&aform.fields){if(this.getContainerElement().getDomElement()){dbg(5,H);
+if(ch&&ch.fields){if(this.getContainerElement().getDomElement()){dbg(5,N);
 
 if(this.effect){this.effect.cancel();
 }
 if(true){this.effect=new qx.fx.effect.core.Fade(this.getContainerElement().getDomElement());
 this.effect.set({from:0.5,to:1,duration:0.25});
 }else{if(this.getContainerElement().getDomElement()){this.effect=new qx.fx.effect.core.Highlight(this.getContainerElement().getDomElement());
-this.effect.set({startColor:m,endColor:S,duration:0.5});
+this.effect.set({startColor:bn,endColor:bI,duration:0.5});
 }else{alert("didnt find dom-element");
 }}this.effect.start();
-}}
-if(this.form&&this.form.fields&&this.form.fields.childLtab){this.form.fields.childLtab.fadeIn();
-}},parentEnableAll:function(){if(this.parentLtab){this.parentLtab.enableAll();
-}else{this.enableAll();
-}},enableAll:function(){if(this.tabs){this.tabs.setEnabled(true);
+}}},enableThis:function(){if(this.tabs){this.tabs.setEnabled(true);
 }
 if(this.form&&this.form.fields){this.form.fields.setEnabled(true);
+}var ci=this.getActiveForm();
 
-if(this.form.fields.childLtab){this.form.fields.childLtab.enableAll();
-}}},setVisibility:function(cc,cd){aform=this.getActiveForm();
+if(ci&&ci.fields){ci.fields.setEnabled(true);
+}},setVisibility:function(cj,ck){var cl=this.getActiveForm();
 var f;
 
-if(f=aform.fields.fields[cc]){f.setVisibility(cd);
+if(f=cl.fields.fields[cj]){f.setVisibility(ck);
 
-if(f.widget_label){f.widget_label.setVisibility(cd);
-}}else{dbg(3,bA+cc);
-}},showView:function(ce){this.layoutView=ce.layout;
-this.dataClass=ce.data_class;
-this.viewClass=ce.view_class;
-dbg(5,T+this.layoutView);
+if(f.widget_label){f.widget_label.setVisibility(ck);
+}}else{dbg(3,p+cj);
+}},showView:function(cm){this.layoutView=cm.layout;
+this.dataClass=cm.data_class;
+this.viewClass=cm.view_class;
+dbg(5,X+this.layoutView);
 this.timer.stop();
 if(this.tabs){if(this.tabs.getSelection()[0].qv_id!=this.viewClass){for(var v=0;v<this.views.length;v++){if(this.views[v].qv_id==this.viewClass){this.tabs.setSelection([this.views[v]]);
-}}}}var cg=this.getRootContainer();
-dbg(5,C+cg);
-var cf=[this,this.dispatch];
-if(!cg.hasChildren()){dbg(4,bK+this.viewClass);
-this.form=new frontend.Views.Form(cf,this.layoutView,this.dataClass,this.viewClass,this);
+}}}}var co=this.getRootContainer();
+dbg(5,bO+co);
+var cn=[this,this.dispatch];
+if(!co.hasChildren()){dbg(4,be+this.viewClass);
+this.form=new frontend.Views.Form(cn,this.layoutView,this.dataClass,this.viewClass,this);
 
-if(this.viewClass.search(/Tabs$/)>=0){cg.add(this.form,{width:s,height:s});
-}else{cg.add(this.form);
+if(this.viewClass.search(/Tabs$/)>=0){co.add(this.form,{width:bv,height:bv});
+}else{co.add(this.form);
 }this.form.fields.focus_if_ok(this.form.fields.first_field);
-}else{dbg(4,bp+this.viewClass+bb);
-}},updateView:function(ch){dbg(4,Q+ch);
+}else{dbg(4,P+this.viewClass+bF);
+}},updateView:function(cp){dbg(4,w+cp);
 
-if(ch){this.form.fields.fill(ch);
-}},createViews:function(ci){var cl=ci.views;
-dbg(5,R+cl);
+if(cp){this.form.fields.fill(cp);
+}},createViews:function(cq){var ct=cq.views;
+dbg(5,bK+ct);
 this.root.removeAll();
 this.tabs=new qx.ui.tabview.TabView(this.alignTabs).set(B,false);
 this.views=[];
 
-for(var v=0;v<cl.length;v++){dbg(2,bv+cl[v][0]+o+cl[v][1]);
-this.views[v]=new qx.ui.tabview.Page(cl[v][1]);
-this.views[v].qv_id=cl[v][0];
+for(var v=0;v<ct.length;v++){dbg(2,bi+ct[v][0]+bo+ct[v][1]);
+this.views[v]=new qx.ui.tabview.Page(ct[v][1]);
+this.views[v].qv_id=ct[v][0];
 this.views[v].setLayout(new qx.ui.layout.Canvas());
-var ck=new qx.ui.container.Scroll();
-var cj=new qx.ui.container.Composite();
-cj.setLayout(new qx.ui.layout.Canvas());
-ck.add(cj);
-this.views[v].add(ck,{width:s,height:s});
+var cs=new qx.ui.container.Scroll();
+var cr=new qx.ui.container.Composite();
+cr.setLayout(new qx.ui.layout.Canvas());
+cs.add(cr);
+this.views[v].add(cs,{width:bv,height:bv});
 this.tabs.add(this.views[v]);
-}this.root.add(this.tabs,{width:s,height:s});
-dbg(3,bz+this.getRootContainer());
+}this.root.add(this.tabs,{width:bv,height:bv});
+dbg(3,bD+this.getRootContainer());
 this.parentFadeOut();
-qx.event.Registration.addListener(this.tabs,bf,this.changeView,this);
-rpc.callRPC(q+cl[0][0],p,this,this.dispatch);
+qx.event.Registration.addListener(this.tabs,bA,this.changeView,this);
+rpc.callRPC(bu+ct[0][0],bt,this,this.dispatch);
 this.tabs.setSelection([this.views[0]]);
 },changeView:function(e){this.timer.stop();
 
 if(this.form.fields.childLtab){this.form.fields.childLtab.timer.stop();
-}var cm=e.getData()[0].qv_id;
-dbg(3,U+cm);
+}var cu=e.getData()[0].qv_id;
+dbg(3,L+cu);
 this.form=this.getActiveForm();
-var co=this.getRootContainer();
-var cp=this.tabs.getSelection()[0];
+var cw=this.getRootContainer();
+var cx=this.tabs.getSelection()[0];
 this.tabs.setEnabled(false);
-var cq=bm;
-var cn=null;
+var cy=n;
+var cv=null;
 
-if(this.parentLtab){dbg(3,G);
-cq=D;
-cn=this.parentLtab.form.fields.getOwnFieldsData();
-}else if(this.form&&this.form.fields){cn=this.form.fields.getOwnFieldsData();
-}
-if(cp.initValues){dbg(2,bC+cp);
+if(this.parentLtab){dbg(3,I);
+cy=s;
+cv=this.parentLtab.form.fields.getOwnFieldsData();
+}else{this.setFadeIn(bs);
 
-for(var i in cp.initValues){cn[i]=cp.initValues[i];
-}dbg(2,y+print_a(cn));
-cp.initValues=null;
+if(this.form&&this.form.fields){cv=this.form.fields.getOwnFieldsData();
+}}
+if(cx.initValues){dbg(2,b+cx);
+
+for(var i in cx.initValues){cv[i]=cx.initValues[i];
+}dbg(2,bG+print_a(cv));
+cx.initValues=null;
 }this.parentFadeOut();
 
-if(!co.hasChildren()){dbg(3,A+cm+bh+this.form);
-rpc.callRPC(q+cm,cq+p,this,this.dispatch,cn);
-}else{dbg(3,bF+print_a(cn));
-this.viewClass=cm;
-rpc.callRPC(q+cm,cq+bE,this,this.dispatch,cn);
-if(this.form.fields.childLtab){dbg(3,bw);
+if(!cw.hasChildren()){dbg(3,bH+cu+S+this.form);
+rpc.callRPC(bu+cu,cy+bt,this,this.dispatch,cv);
+}else{dbg(3,u+print_a(cv));
+this.viewClass=cu;
+rpc.callRPC(bu+cu,cy+bj,this,this.dispatch,cv);
+if(this.form.fields.childLtab){dbg(3,z);
 
-if(this.form.fields.childLtab.form){var cr=this.form.fields.childLtab;
-var cm=cr.tabs.getSelection()[0].qv_id;
-var cn=this.form.fields.getOwnFieldsData();
-rpc.callRPC(q+cm,Y,cr,cr.dispatch,cn);
-}}}},getActiveForm:function(){var cs=this.getRootContainer();
+if(this.form.fields.childLtab.form){var cz=this.form.fields.childLtab;
+var cu=cz.tabs.getSelection()[0].qv_id;
+var cv=this.form.fields.getOwnFieldsData();
+rpc.callRPC(bu+cu,l,cz,cz.dispatch,cv);
+}}}},getActiveForm:function(){var cA=this.getRootContainer();
 
-if(cs.getChildren){return cs.getChildren()[0];
+if(cA.getChildren){return cA.getChildren()[0];
 }else{return null;
-}},getRootContainer:function(){dbg(5,bI);
+}},getRootContainer:function(){dbg(5,bk);
 return this.tabs?this.tabs.getSelection()[0].getChildren()[0].getChildren()[0]:this.root;
 }}});
 })();

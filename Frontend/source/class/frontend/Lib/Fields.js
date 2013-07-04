@@ -1002,6 +1002,7 @@ qx.Class.define("frontend.Lib.Fields", {
         
     windows_fade_to: function( target ){
       //return;
+      //alert( "fading windows " + print_a( this.windows ) + " to " + target );
       for ( var w in this.windows ){
         //alert( "fading windows " + w + " to " + target );
         this.window_fade_to( this.windows[w], target );

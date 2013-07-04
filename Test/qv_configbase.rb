@@ -5,6 +5,8 @@ class TC_ConfigBase < Test::Unit::TestCase
   end
   
   def teardown
+    ConfigBase.value = []
+    ConfigBase.store( :functions => [] )
   end
   
   def test_init

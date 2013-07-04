@@ -2,38 +2,50 @@
 require 'net/ldap'
 require 'parseconfig'
 
-#LDAP_FILE_CONF='/etc/ldapscripts/ldapscripts.conf'
-#LDAP_FILE_CONF2='/etc/ldap.conf'
-#LDAP_FILE_PASS='/etc/ldap.secret'
-LDAP_FILE_CONF='ldapscripts.conf'
-LDAP_FILE_PASS='ldap.secret'
-
 class LDAP < StorageType
   attr_accessor :data_ldap_base, :data_ldap_users
+  
+  def self.get_config_file( first, second, config )
+    file = get_config( first, :LDAPConfig, config )
+    if ! File.exists?( file )
+      file = second
+    end
+    if ! File.exists?( file )
+      dputs( 0 ){ "Can't find #{file}"}
+      exit
+    end
+    dputs(3){"Returning #{file} for #{first}-#{second}-#{config}"}
+    file
+  end
   
   # Load the configuration file and set up different variables
   # for LDAP. This has to be loaded just once
   def configure( config )
     dputs( 2 ){ "Configuring LDAP: #{config.inspect}" }
-    if config['ldap-config']
+    if conf = get_config( nil, :LDAPConfig, :array )
       @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users,
-      @data_ldap_pass = config['ldap-config']
+        @data_ldap_pass = conf
     else
-      ldap_config = ParseConfig.new( LDAP_FILE_CONF )
+      file_conf = LDAP.get_config_file( "ldapscripts.conf", 
+        "/etc/ldapscripts/ldapscripts.conf", :ldapscripts )
+      ldap_config = ParseConfig.new( file_conf )
       dputs( 2 ){ "Configuration options are #{ldap_config.get_params.inspect}" }
       @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users =
-      ldap_config.params['SERVER'], ldap_config.params['SUFFIX'], ldap_config.params['BINDDN'],
-      ldap_config.params['USUFFIX']
-      @data_ldap_pass = `cat #{ LDAP_FILE_PASS }`
+        ldap_config.params['SERVER'], ldap_config.params['SUFFIX'], ldap_config.params['BINDDN'],
+        ldap_config.params['USUFFIX']
+      
+      file_pass = LDAP.get_config_file( "ldap.secret", "/etc/ldap.secret",
+        :ldapsecret )
+      @data_ldap_pass = `cat #{ file_pass }`
     end
     @data_ldap_users += ",#{@data_ldap_base}"
-      %w( host base root pass users ).each{|v| eval( "dputs( 3 ){ @data_ldap_#{v}.to_s}" ) }
+    %w( host base root pass users ).each{|v| eval( "dputs( 3 ){ @data_ldap_#{v}.to_s}" ) }
     
     @data_ldap = Net::LDAP.new :host => @data_ldap_host,
       :auth => {
-        :method => :simple,
-        :username => @data_ldap_root,
-        :password => @data_ldap_pass
+      :method => :simple,
+      :username => @data_ldap_root,
+      :password => @data_ldap_pass
     }
     
     # Don't cache data, always ask
@@ -125,7 +137,7 @@ class LDAP < StorageType
     
     value_stored = value.class == Array ? value.to_json : value
     dputs( 3 ){ "Replacing attribute in " +
-      "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
+        "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
     if not dn
       dputs( 0 ){ "DN is empty... #{@dns.inspect}" }
@@ -136,7 +148,7 @@ class LDAP < StorageType
     log_msg( 'DataElement', "Replaced #{attribute} in #{dn} with #{value}" )
     dputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message}" }
     @data_ldap.search( :base => @data_ldap_base, 
-        :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
+      :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
       dputs( 3 ){ "Found entry: #{entry.inspect}" }
       if value_stored.to_s == entry[attribute][0].to_s
         dputs( 4 ){ "returning value #{value.inspect}" }
@@ -154,7 +166,7 @@ class LDAP < StorageType
     filter = Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s )
     
     @data_ldap.search( :base => @data_ldap_base,
-        :filter => filter ){ |entry|      
+      :filter => filter ){ |entry|      
       dputs( 5 ){ "DN: #{entry.dn} - #{attribute}" }
       if entry.respond_to? attribute
         ret = entry[attribute][0]
@@ -190,9 +202,9 @@ class LDAP < StorageType
       @data_ldap.search( :base => @data_ldap_base, :filter => filter ) do |entry|
         dputs( 4 ){ "DN: #{entry.dn}" }
         if entry.respond_to? @field_id_ldap
-					ldap_id = entry[@field_id_ldap].to_s.gsub( /[^0-9]/, '' )
+          ldap_id = entry[@field_id_ldap].to_s.gsub( /[^0-9]/, '' )
           dputs( 2 ){ "Found #{@field_id_ldap}, getting real value of " +
-						"#{ldap_id}"}
+              "#{ldap_id}"}
           id = ldap_id.to_i
           data[@data_field_id] = id
           @dns[id] = entry.dn.to_s

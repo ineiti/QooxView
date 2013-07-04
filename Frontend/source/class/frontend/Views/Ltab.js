@@ -19,7 +19,7 @@ qx.Class.define("frontend.Views.Ltab", {
      */
   construct: function( ){
     this.alignTabs = "left"
-    this.fadedin = true;
+    this.fadedin = false;
     this.base(arguments);
     this.setLayout(this.layout = new qx.ui.layout.Canvas());
     this.timer = new frontend.Lib.TimerF();
@@ -32,6 +32,8 @@ qx.Class.define("frontend.Views.Ltab", {
       width: "100%", 
       height: "100%"
     });
+    
+    this.selectfadein = "parent,child,windows";
 
     this.addListener("resize", function(e){
       root.fireDataEvent("resize", new qx.event.type.Data());
@@ -50,6 +52,7 @@ qx.Class.define("frontend.Views.Ltab", {
     tabs: null,
     timer: null,
     effect: null,
+    selectfadein: null,
     fadedin: null,
     alignTabs: null,
     parentLtab: null,
@@ -132,6 +135,9 @@ qx.Class.define("frontend.Views.Ltab", {
             // Only empties the given fields (usually lists)
             this.getActiveForm().fields.clearDataOnly(res.data);
             break;
+          case "fade_in":
+            this.setFadeIn( res.data )
+            break;
           case "focus":
             var f = res.data;
             if ( aform && aform.fields && aform.fields.fields ){
@@ -203,10 +209,12 @@ qx.Class.define("frontend.Views.Ltab", {
             break;
           case "window_hide":
             aform.fields.window_hide(res.data);
+            this.setFadeIn( "parent,child,windows" )
             break;
           case "window_show":
             enable = false;
             aform.fields.window_show(res.data);
+            this.setFadeIn( "windows" )
             break;
           case "end_of_req":
             //alert( "eor" );
@@ -214,7 +222,6 @@ qx.Class.define("frontend.Views.Ltab", {
               //alert( "enabling" )
               dbg( 2, "Fading in" )
               this.parentFadeIn();
-              this.parentEnableAll();
             }
             break;
         }
@@ -225,6 +232,13 @@ qx.Class.define("frontend.Views.Ltab", {
         this.form.fields.updating = false;
       }
       dbg(5, "finished dispatcher");
+    },
+    
+    setFadeIn: function( who ){
+      this.selectfadein = who;
+      if ( this.parentLtab ){
+        this.parentLtab.selectfadein = this.selectfadein
+      }
     },
     
     autoUpdate: function(userData, timerId){
@@ -291,22 +305,43 @@ qx.Class.define("frontend.Views.Ltab", {
     
     parentFadeIn: function(){
       if ( this.parentLtab ){
-        //alert( "Fading in parent layout");
-        this.parentLtab.fadeIn();
-        this.fadeIn();
+        this.parentLtab.parentFadeIn()
       } else {
-        this.fadeIn();
+        //alert( "fade_in is " + this.selectfadein + " for " + this )
+        if ( this.selectfadein.search( "parent" ) >= 0 ){
+          this.fadeIn();
+        }
+        var child = null;
+        if ( this.form && this.form.fields && 
+          this.form.fields.childLtab ){
+          child = this.form.fields.childLtab;
+          if ( this.selectfadein.search( "child" ) >= 0 ){
+            //alert( "fading in child " + child )
+            child.fadeIn();
+          } else {
+            //alert( "fading OUT child " + child )
+            child.fadeOut();
+          }
+        }
+        if ( this.selectfadein.search("windows") >= 0 ){
+          // Children are automatically faded, too
+          this.getActiveForm().fields.windows_fade_to(1);
+          //if ( child ){
+          //  child.getActiveForm().fields.windows_fade_to(1);          
+          //}
+        }
       }
     },
     
     fadeIn: function(){
       this.timer.cont();
-      aform = this.getActiveForm();
-      aform.fields.windows_fade_to(1);
+      var aform = this.getActiveForm();
+      this.enableThis();
       if ( this.fadedin ){
-        //alert( "already faded in" );
+        //alert( "already faded in " + this );
         return
       }
+      //alert( "fading in " + this )
       this.fadedin = true;
       if ( aform && aform.fields ){
         //alert( "Found aform" );
@@ -341,35 +376,24 @@ qx.Class.define("frontend.Views.Ltab", {
           this.effect.start();
         }
       }
-      if ( this.form && this.form.fields && 
-        this.form.fields.childLtab ){
-        this.form.fields.childLtab.fadeIn();
-      }
     },
     
-    parentEnableAll: function(){
-      if ( this.parentLtab ){
-        this.parentLtab.enableAll();
-      } else {
-        this.enableAll();
-      }
-    },
-    
-    enableAll: function(){
+    enableThis: function(){
       if ( this.tabs ){
-        // alert( "Enabling tabs " + this.tabs );
+        //alert( "Enabling tabs " + this.tabs );
         this.tabs.setEnabled(true);
       }
       if ( this.form && this.form.fields ){
         this.form.fields.setEnabled( true );
-        if ( this.form.fields.childLtab ){
-          this.form.fields.childLtab.enableAll();
-        }
+      }
+      var aform = this.getActiveForm();
+      if ( aform && aform.fields ){
+        aform.fields.setEnabled( true );
       }
     },
         
     setVisibility: function( el, vi ){
-      aform = this.getActiveForm();
+      var aform = this.getActiveForm();
       var f;
       if ( f = aform.fields.fields[el] ){
         f.setVisibility(vi);
@@ -393,8 +417,8 @@ qx.Class.define("frontend.Views.Ltab", {
       // Assure we're in the right tab
       if (this.tabs) {
         if (this.tabs.getSelection()[0].qv_id != this.viewClass) {
-          //                    alert("Changed tabs in the meantime: " +
-          //                    this.tabs.getSelection()[0].qv_id );
+          //alert("Changed tabs in the meantime: " +
+          //this.tabs.getSelection()[0].qv_id );
           for (var v = 0; v < this.views.length; v++) {
             if (this.views[v].qv_id == this.viewClass) {
               this.tabs.setSelection([this.views[v]]);
@@ -467,6 +491,7 @@ qx.Class.define("frontend.Views.Ltab", {
       rpc.callRPC("View." + views[0][0], "show", this, this.dispatch);
       this.tabs.setSelection([this.views[0]]);
     },
+    
     // Every time the view changes, this is called, which calls the Backend, which will call showView
     changeView: function(e){
       this.timer.stop();
@@ -478,6 +503,7 @@ qx.Class.define("frontend.Views.Ltab", {
       this.form = this.getActiveForm();
       var container = this.getRootContainer();
       var tabSel = this.tabs.getSelection()[0];
+      //alert( "Disabling tabs " + this.tabs )
       this.tabs.setEnabled(false);
       var inTabs = "";
       var parentFields = null;
@@ -487,8 +513,12 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg(3, "Adding something to the show - update_view");
         inTabs = "tabs_";
         parentFields = this.parentLtab.form.fields.getOwnFieldsData();
-      } else if ( this.form && this.form.fields ) {
-        parentFields = this.form.fields.getOwnFieldsData();
+      } else {
+        //alert( "resetting fadein")
+        this.setFadeIn( "parent,child,windows" );
+        if ( this.form && this.form.fields ) {
+          parentFields = this.form.fields.getOwnFieldsData();
+        }
       }
       if ( tabSel.initValues ){
         dbg( 2, "initValue for " + tabSel );
@@ -522,6 +552,7 @@ qx.Class.define("frontend.Views.Ltab", {
         }
       }
     },
+    
     // Helper function to get to the active form
     getActiveForm: function(){
       var base = this.getRootContainer();

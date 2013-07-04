@@ -134,9 +134,9 @@ module PrintButton
     dputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
       if get_server_printers.index( pn )
-        cmd = "lp -d #{pn.sub(/^server /, '')}"
+        cmd = "lp -o fitplot -d #{pn.sub(/^server /, '')}"
       elsif get_remote_printers( remote ).index( pn )
-        cmd = "lp -h #{remote}:631 -d #{pn}"
+        cmd = "lp -o fitplot -h #{remote}:631 -d #{pn}"
       end
     end
     dputs(3){"Command will be #{cmd}"}

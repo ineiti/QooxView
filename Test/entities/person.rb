@@ -22,6 +22,10 @@ class Persons < Entities
     value_int :session_id
     value_list :permissions
     
+    value_block :override
+    value_int :value1
+    value_int :value2
+    
 #    value_block :add_new
 #    value_bogus :name_bogus
 #    value_africompta_bogus :name_2, "account_name"
@@ -29,4 +33,12 @@ class Persons < Entities
 end
 
 class Person < Entity
+  def value1
+    _value1 / 2
+  end
+
+  def value1=( v )
+    self._value1 = v
+    self.value2 = 2 * v
+  end
 end

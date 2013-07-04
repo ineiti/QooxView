@@ -140,7 +140,7 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_value_add_new
     assert_equal %w( session_id address credit first_name pass person_id permissions
-     l_a l_c l_d l_s l ).sort.to_s,
+     l_a l_c l_d l_s l value1 value2 ).sort.to_s,
       Entities.Persons.get_field_names.sortk.to_s
 
     assert_equal ["list", :l_a, "l_a", {:list_type=>"array", :list_values=>[]}],
@@ -202,5 +202,17 @@ class TC_Entity < Test::Unit::TestCase
   def test_needs
     assert Need1s.ok
     assert Need2s.ok
+  end
+  
+  def test_values_override
+    @admin.value1 = 10
+    assert_equal 5, @admin.value1
+    assert_equal 20, @admin.value2
+    assert_equal 10, @admin._value1
+  end
+  
+  def test_missing_value
+    assert_raise( ValueUnknown ){ @admin.value3 }
+    assert_nothing_raised{ @admin._value1 }
   end
 end

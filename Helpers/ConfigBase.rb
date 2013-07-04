@@ -4,6 +4,7 @@
 class ConfigBases < Entities
   def setup_data
     value_list :functions, "ConfigBases.list_functions"
+    value_list :test_function, "ConfigBases.list_functions"
     
     respond_to? :add_config and add_config
     
@@ -69,7 +70,7 @@ class ConfigBase < Entity
     ConfigBases.singleton.get_functions_numeric
   end
   
-  def self.store( c )
+  def self.store( c = {} )
     if c.has_key? :functions
       funcs = c[:functions]
       ddputs(4){"Storing functions: #{funcs.inspect}"}
@@ -110,6 +111,7 @@ class ConfigBase < Entity
   end
 
   def self.method_missing( m, *args )
+    ddputs(4){"#{m} - #{args.inspect}"}
     ConfigBases.singleton.send( m, args )
   end
   

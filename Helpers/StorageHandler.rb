@@ -236,6 +236,7 @@ module StorageHandler
 
   def set_entry( id, field, v )
     value = v.is_a?( Entity ) ? v.id : v
+    field = field.to_sym
     @storage.each{|k, di|
       if di.has_field field
         #        if value.to_s != @data[id.to_i][field].to_s
@@ -254,6 +255,7 @@ module StorageHandler
     id = id.to_i
     # First look if there is a non-caching DataStorage
     @storage.each{|k, di|
+      dputs(5){"Storage is #{di}"}
       if di.has_field field and not di.data_cache
         dputs( 4 ){ "#{di} doesn't have data_cache for #{id} - #{field}" }
         val = di.get_entry( id, field )

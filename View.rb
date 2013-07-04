@@ -781,6 +781,8 @@ class View < RPCQooxdooService
           if data.to_s != v.to_s
             @configured = false
           end
+        else
+          @configured = false
         end
       }
     end
