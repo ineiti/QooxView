@@ -397,7 +397,7 @@ class View < RPCQooxdooService
       dputs( 2 ){ "No session given, returning empty" }
       return { :views => [] }
     end
-    dputs( 4 ){ "Found user #{session.owner.login_name} for session_id #{session_id}" }
+    dputs( 4 ){ "Found user #{session.owner.inspect} for session_id #{session_id}" }
     views = []
     dputs( 5 ){ @@list.inspect }
     @@list.each{|l|

@@ -4,7 +4,6 @@
 class ConfigBases < Entities
   def setup_data
     value_list :functions, "ConfigBases.list_functions"
-    value_list :test_function, "ConfigBases.list_functions"
     
     respond_to? :add_config and add_config
     
@@ -93,15 +92,15 @@ class ConfigBase < Entity
       funcs.flatten!
       ConfigBases.functions_conflict.each{|f|
         ddputs(4){"Testing conflict of #{f}"}
-        count = 0
-        f.each{|g|
-          funcs.index( g ) and count += 1
-          ddputs(4){"Count is #{count} for #{g}"}
-          if count > 1
-            ddputs(4){"Deleting #{g}"}
-            funcs.delete( g )
-          end
-        }
+        list = f.collect{|g|
+          funcs.index( g )
+        }.select{|l| l }.sort
+        ddputs(4){"List is #{list.inspect}"}
+        if list.length > 1
+          list.pop
+          ddputs(4){"Deleting #{list.inspect}"}
+          list.each{|l| funcs.delete_at( l ) }
+        end
       }
       c[:functions] = funcs
     end
@@ -129,5 +128,9 @@ class ConfigBase < Entity
   
   def self.add_function( func )
     self.store( {:functions => self.get_functions.push( func ) })
+  end
+  
+  def self.del_function( func )
+    self.store( {:functions => self.get_functions.reject{|f| f == func} })
   end
 end

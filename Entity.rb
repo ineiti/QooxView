@@ -149,6 +149,7 @@ class Entities < RPCQooxdooService
   # Makes for a small proxy, in that only the needed classes are
   # instantiated - useful for stuff like long LDAP-lists...
   def get_data_instance( k )
+    return nil if ! k
     if k.class != Fixnum
       dputs(0){"value k is #{k.inspect}"}
       dputs(0){"caller-stack is #{caller}"}
@@ -360,7 +361,8 @@ class Entity
     dputs( 5 ){ "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}" }
     field = cmd.to_s
     if not @proxy.get_value( field.sub(/^_/, '' ).sub(/=$/, '' ) )
-      dputs(3){"ValueUnknown for #{cmd.inspect} - #{@proxy.blocks.inspect}"}
+      dputs(0){"ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
+          "#{@proxy.blocks.inspect}"}
       raise ValueUnknown
     end
     case field
@@ -474,9 +476,9 @@ class Entity
         if not raw
           v = @proxy.get_value( f )
           if e and v and v.dtype == "entity"
-            ddputs( 5 ){ "Getting instance for #{v.inspect}" }
-            ddputs( 5 ){ "Getting instance with #{e.inspect}" }
-            ddputs( 5 ){ "Field = #{field}; id = #{@id}"}
+            dputs( 5 ){ "Getting instance for #{v.inspect}" }
+            dputs( 5 ){ "Getting instance with #{e.inspect}" }
+            dputs( 5 ){ "Field = #{field}; id = #{@id}"}
             e = v.eclass.get_data_instance( [e].flatten.first )
           end
         end

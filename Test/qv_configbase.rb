@@ -57,4 +57,15 @@ class TC_ConfigBase < Test::Unit::TestCase
     ConfigBase.add_function( :over )
     assert ConfigBase.has_function? :over
   end
+  
+  def test_add_multiple
+    ConfigBase.add_function :now
+    assert ConfigBase.has_function? :now
+    ConfigBase.add_function :or
+    assert ConfigBase.has_function? :or
+    assert ! ConfigBase.has_function?( :now )
+    ConfigBase.add_function :now
+    assert ConfigBase.has_function? :now
+    assert ! ConfigBase.has_function?( :or )
+  end
 end
