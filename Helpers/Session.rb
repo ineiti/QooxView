@@ -38,8 +38,9 @@ class Session < Entity
   
   def setup_instance
     @web_req = nil
+    self.s_data ||= {}
   end
-  
+
   def can_view( v )
     dputs(3){"Owner is #{owner.inspect}"}
     return Permission.can_view( owner.permissions, v )
