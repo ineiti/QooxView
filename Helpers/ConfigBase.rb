@@ -72,7 +72,7 @@ class ConfigBase < Entity
   def self.store( c = {} )
     if c.has_key? :functions
       funcs = c[:functions]
-      ddputs(4){"Storing functions: #{funcs.inspect}"}
+      dputs(4){"Storing functions: #{funcs.inspect}"}
       if funcs.index{|i| i.to_i.to_s == i.to_s }
         dputs(3){"Converting numeric to names"}
         funcs = funcs.collect{|d|
@@ -91,26 +91,26 @@ class ConfigBase < Entity
       }
       funcs.flatten!
       ConfigBases.functions_conflict.each{|f|
-        ddputs(4){"Testing conflict of #{f}"}
+        dputs(4){"Testing conflict of #{f}"}
         list = f.collect{|g|
           funcs.index( g )
         }.select{|l| l }.sort
-        ddputs(4){"List is #{list.inspect}"}
+        dputs(4){"List is #{list.inspect}"}
         if list.length > 1
           list.pop
-          ddputs(4){"Deleting #{list.inspect}"}
+          dputs(4){"Deleting #{list.inspect}"}
           list.each{|l| funcs.delete_at( l ) }
         end
       }
       c[:functions] = funcs
     end
-    ddputs(4){"Storing #{c.inspect}"}
+    dputs(4){"Storing #{c.inspect}"}
     ConfigBases.singleton.data_set_hash( c )
     View.update_configured_all
   end
 
   def self.method_missing( m, *args )
-    ddputs(4){"#{m} - #{args.inspect}"}
+    dputs(4){"#{m} - #{args.inspect}"}
     ConfigBases.singleton.send( m, args )
   end
   

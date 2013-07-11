@@ -104,10 +104,6 @@ module VTListPane
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
     #ret = reply( :empty_only, [ @vtlp_field ] )
     ret = []
-    if @update
-      ret += rpc_update( session )
-    end
-
     dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
     if name == @vtlp_field
       ret = reply( :empty )
@@ -120,6 +116,10 @@ module VTListPane
       end
       ret += reply("update", {@vtlp_field.to_sym => [field_value] } )
     end
+    if @update
+      ret += rpc_update( session )
+    end
+
     dputs( 3 ){ "reply is #{ret.inspect}" }
     ret
   end

@@ -17,7 +17,7 @@ class Welcome < View
         show_html :reason
         show_button :try_again
       end
-      if get_config( false, :WelcomeText )
+      if get_config( false, :welcome_text )
         gui_vbox :nogroup do
           show_html :links
         end
