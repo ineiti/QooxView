@@ -295,6 +295,7 @@ qx.Class.define("frontend.Lib.Fields", {
         dbg(5, "Looking at field " + f)
         var field = this.fields[f]
         if (field.getValueSpecial) {
+          dbg(5, "has getValueSpecial");
           if (field.getValueSpecial()) {
             result[f] = field.getValueSpecial();
             dbg(5, "Field " + f + " is of special-value " + result[f]);
@@ -302,7 +303,8 @@ qx.Class.define("frontend.Lib.Fields", {
         }
         else 
         if (field.getValue) {
-          if (field.getValue()) {
+          dbg(5, "has getValue");
+          if (field.getValue) {
             result[f] = field.getValue();
             dbg(5, "Field " + f + " is of value " + result[f]);
           }
@@ -314,17 +316,20 @@ qx.Class.define("frontend.Lib.Fields", {
          
     // Gets also parent and child data, if available 
     getFieldsData: function(){
+      dbg( 5, "GetFieldsData" )
       var result = this.getOwnFieldsData();
       if ( this.childLtab && this.childLtab.form && this.childLtab.form.fields ){
         var otherData = this.childLtab.form.fields.getOwnFieldsData();
         for ( var res in otherData ){
           result[res] = otherData[res];
+          dbg( 3, "got data for me: " + res + " = " + result[res] )
         }
       }
       if ( this.ltab.parentLtab ){
         var otherData = this.ltab.parentLtab.form.fields.getOwnFieldsData();
         for ( var res in otherData ){
           result[res] = otherData[res];
+          dbg( 3, "got data for parent: " + res + " = " + result[res] )
         }
       }
       return result;
@@ -622,6 +627,41 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element = new qx.ui.table.Table(tableModel).set({
             decorator: null
           });
+          field_element.getSelectionModel().setSelectionMode(
+            qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
+          field_element.setValueArray = function(val){
+            //var val = [[1,2,3],[4,5,6]]
+            //alert( "Setting val " + print_a( val ))
+            var values = val;
+            if ( val && ( val[0].length > 1 ) && ( val[0][1] instanceof Array ) ){
+              this.valueIds = []
+              for ( var i = 0; i < val.length; i++ ){
+                this.valueIds.push( val[i][0] )
+                values[i] = val[i][1]
+              }
+            } else {
+              this.valueIds = null
+            }
+            //alert( "Setting data to " + print_a( values ) + 
+            //  " - valueIds = " + print_a( this.valueIds) )
+            this.getTableModel().setData(values)
+          }
+          field_element.getValue = function(){
+            var ret = [];
+            var vids = this.valueIds;
+            this.getSelectionModel().iterateSelection(function(ind) {
+              if ( vids ){
+                //alert( "getting valueIds of " + ( ind + 1 ) )
+                ret.push( vids[ind])
+              } else {
+                ret.push(ind);
+              }
+            });
+            //alert( "Returning " + print_a( ret ) + " with valueIds of " +
+            //  print_a( vids ) )
+            return ret;
+          }
+          field_element.setMaxHeight(250);
           show_label = false;
           listener = "dataEdited";
           break;
@@ -780,7 +820,7 @@ qx.Class.define("frontend.Lib.Fields", {
                 var data = e.getData ? e.getData() : "";
                 // Have a delay for some actions that might take time
                 if (delay == 0) {
-                  dbg( 3, "Callback is " + print_a( this.callback ) )
+                  //dbg( 3, "Callback is " + print_a( this.callback ) )
                   this.callback[1].call(this.callback[0], [id, name, type, data, params])
                 }
                 else {

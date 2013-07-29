@@ -69,9 +69,9 @@ qx.Class.define("frontend.Views.Ltab", {
       for (var r = 0; r < results.length; r++) {
         var res = results[r];
         dbg(0, "*****===== Dispatcher " + (r + 1) + " / " + results.length)
-        dbg(0, print_a(res));
-        dbg(0, print_a(res.data));
-        dbg(0, res.data);
+        dbg(0, "res: " + print_a(res));
+        //dbg(0, "res.data array: " + print_a(res.data));
+        dbg(0, "res.data:" + res.data);
         switch (res.cmd) {
           case "auto_update":
             // Enable an automatic update every n seconds
