@@ -160,7 +160,7 @@ function getValueBold(){
  hours.add(new qx.ui.basic.Label("-"));
  hours.add(this.createHours());
  field_element.add(hours);
- */
+*/
 function getValueFromTo(){
   dbg(5, "getValueFromTo");
   var d = this.getChildren();
@@ -189,48 +189,48 @@ function twoDecimals(x){
 }
 
 /**
- * A fields-wrapper for working together with the RPC-part of Qooxdoo
- */
+* A fields-wrapper for working together with the RPC-part of Qooxdoo
+*/
 qx.Class.define("frontend.Lib.Fields", {
   extend: qx.ui.container.Composite,
     
   /*
-   * Constructor of Lib.Fields
-   * Takes:
-   * - p : parameters to pass to the form, may be empty
-   *  - NOTINUSE: rpc: method to call for the RPC-server whenever a request has to be made,
-   *   may also be "" to show only a local form (like login and stuff)
-   *  - write: groups that have the right to write in these fields, defaults
-   *    to "all"
-   *  - callback: function to call in case something has changed. This is an
-   *     array of [ this, this.callback_function ], so that the appropriate
-   *     environment can be recreated.
-   * - f : array of fields to offer to the user. The syntax is:
-   *     type:name:[label][:params]
-   *     where type is one of the following, name is used for the array in
-   *     "fields", label is shown where appliable, if empty is copied from
-   *     name, params is used for some special fields
-   *  - id_text: the id-field for this block, of type text
-   *  - id_dropdown: the id-field for this block, of type dropdown
-   *  - id_hidden: the id-field for this block, of type hidden
-   *  - text: a single line of text
-   *  - date: gets a date
-   *  - tel: holds a telephone-number
-   *  - select: takes a list of arguments to chose from, may include a comma-
-   *    seperated list of values
-   *  - button: shows a button
-   *  - composite: offers a Composite-widget, to be filled in later
-   *  - hidden: stores information but doesn't display
-   *
-   * Does:
-   * - id-lookup: whenever the id-field is changed, it calls the RPC-method
-   *  to get the data of the according id-field and fills the fields with that
-   *  data
-   * - changes to fields: if the user has the appropriate rights, all fields
-   *  are changeable. If changes occur, the RPC-method is called with the new
-   *  value for that field.
-   *
-   */
+ * Constructor of Lib.Fields
+ * Takes:
+ * - p : parameters to pass to the form, may be empty
+ *  - NOTINUSE: rpc: method to call for the RPC-server whenever a request has to be made,
+ *   may also be "" to show only a local form (like login and stuff)
+ *  - write: groups that have the right to write in these fields, defaults
+ *    to "all"
+ *  - callback: function to call in case something has changed. This is an
+ *     array of [ this, this.callback_function ], so that the appropriate
+ *     environment can be recreated.
+ * - f : array of fields to offer to the user. The syntax is:
+ *     type:name:[label][:params]
+ *     where type is one of the following, name is used for the array in
+ *     "fields", label is shown where appliable, if empty is copied from
+ *     name, params is used for some special fields
+ *  - id_text: the id-field for this block, of type text
+ *  - id_dropdown: the id-field for this block, of type dropdown
+ *  - id_hidden: the id-field for this block, of type hidden
+ *  - text: a single line of text
+ *  - date: gets a date
+ *  - tel: holds a telephone-number
+ *  - select: takes a list of arguments to chose from, may include a comma-
+ *    seperated list of values
+ *  - button: shows a button
+ *  - composite: offers a Composite-widget, to be filled in later
+ *  - hidden: stores information but doesn't display
+ *
+ * Does:
+ * - id-lookup: whenever the id-field is changed, it calls the RPC-method
+ *  to get the data of the according id-field and fills the fields with that
+ *  data
+ * - changes to fields: if the user has the appropriate rights, all fields
+ *  are changeable. If changes occur, the RPC-method is called with the new
+ *  value for that field.
+ *
+ */
   construct: function(params, fields, rLayout){
     this.base(arguments, this.layout = new qx.ui.layout.VBox(1));
     var ps = ["rpc", "write", "callback"];
@@ -278,7 +278,7 @@ qx.Class.define("frontend.Lib.Fields", {
     /*
     first_button: null,
     first_button_window: null,
-     */
+   */
     updating: null,
     index: null,
     timer: null,
@@ -342,30 +342,32 @@ qx.Class.define("frontend.Lib.Fields", {
       if (fields) {
         dbg(5, "Deleting fields " + print_a(fields));
         for (var f = 0; f < fields.length; f++) {
-          var field = this.fields[fields[f]];
-          dbg(5, "Clearing field/list " + field);
-          if ( field.valueIds ){
-            field.valueIds = [];
-          }
-          if (field.removeAll && !field.getDateFormat) {
-            field.resetSelection();
-            field.removeAll();
-          }
-          else 
-          if (field.resetValue) {
-            field.resetValue();
-          }
-          else 
-          if (field.setValueStr) {
-            field.setValueStr("");
-          }
-          else 
-          if (field.setValueArray) {
-            field.setValueArray([]);
-          }
-          else 
-          if (field.setValue) {
-            field.setValue("");
+          var field;
+          if ( field = this.fields[fields[f]] ) {
+            dbg(5, "Clearing field/list " + field);
+            if ( field.valueIds ){
+              field.valueIds = [];
+            }
+            if (field.removeAll && !field.getDateFormat) {
+              field.resetSelection();
+              field.removeAll();
+            }
+            else 
+            if (field.resetValue) {
+              field.resetValue();
+            }
+            else 
+            if (field.setValueStr) {
+              field.setValueStr("");
+            }
+            else 
+            if (field.setValueArray) {
+              field.setValueArray([]);
+            }
+            else 
+            if (field.setValue) {
+              field.setValue("");
+            }
           }
         }
       }
@@ -488,8 +490,15 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.setValueStr = setValueDate;
           break;
         case "info":
-          field_element = new qx.ui.form.TextField(params.text);
-          field_element.setReadOnly(true);
+          //field_element = new qx.ui.form.TextField(params.text);
+          //field_element.setReadOnly(true);
+          
+          field_element = new qx.ui.basic.Label(params.text);
+          field_element.setRich( true )
+          field_element.setWrap( true )
+          field_element.setValueStr = setValueBold
+          field_element.getValueSpecial = getValueBold
+
           break;
         case "pass":
           field_element = new qx.ui.form.PasswordField("");
@@ -633,7 +642,8 @@ qx.Class.define("frontend.Lib.Fields", {
             //var val = [[1,2,3],[4,5,6]]
             //alert( "Setting val " + print_a( val ))
             var values = val;
-            if ( val && ( val[0].length > 1 ) && ( val[0][1] instanceof Array ) ){
+            if ( val && ( val[0] instanceof Array ) && 
+              ( val[0][1] instanceof Array ) ){
               this.valueIds = []
               for ( var i = 0; i < val.length; i++ ){
                 this.valueIds.push( val[i][0] )
@@ -661,6 +671,7 @@ qx.Class.define("frontend.Lib.Fields", {
             //  print_a( vids ) )
             return ret;
           }
+          field_element.setStatusBarVisible(false);
           field_element.setMaxHeight(250);
           show_label = false;
           listener = "dataEdited";
@@ -930,7 +941,7 @@ qx.Class.define("frontend.Lib.Fields", {
             /*
             var old_button = this.first_button;
             this.first_button = null;
-             */
+           */
             var l = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
             this.calcView(view_str[1], l);
             var win = new qx.ui.window.Window("Window").set({
@@ -954,7 +965,7 @@ qx.Class.define("frontend.Lib.Fields", {
             /*
             win.first_button = this.first_button;
             this.first_button = old_button;
-             */
+           */
 
             break;
           case "tabs":
@@ -1017,7 +1028,7 @@ qx.Class.define("frontend.Lib.Fields", {
     /*
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;
-       */
+     */
     //this.windows_fade_to( 1 );
     },
     
@@ -1069,7 +1080,7 @@ qx.Class.define("frontend.Lib.Fields", {
         this.first_button = this.first_button_window;
         this.first_button_window = null;
       }
-       */
+     */
       this.focus_if_ok( this.first_field );
     },
         

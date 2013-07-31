@@ -153,7 +153,15 @@ qx.Class.define("frontend.Views.Ltab", {
             }
             break;
           case "hide":
-            this.setVisibility( res.data, 'excluded' );
+          case "unhide":
+            if ( ! ( res.data instanceof Array ) ){
+              res.data = [ res.data ]
+            }
+            for ( var i = 0; i < res.data.length; i++ ){
+              this.setVisibility( res.data[i], 
+                res.cmd == "hide" ? "excluded" : 'visible' );
+            //this.setVisibility( res.data[i], 'excluded' );
+            }
             break;
           case "init_values":
             var tab = res.data[0];
@@ -200,9 +208,6 @@ qx.Class.define("frontend.Views.Ltab", {
                 dbg( 3, "New tab is: " + this.tabs.getSelection()[0].qv_id );
               }
             }
-            break;
-          case "unhide":
-            this.setVisibility( res.data, 'visible' );
             break;
           case "update":
             this.updateView(res.data)
