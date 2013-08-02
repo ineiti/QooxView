@@ -137,7 +137,7 @@ class RPCQooxdooHandler
 
   # Replies to a request
   def self.request( id, service, method, params, web_req = nil )
-    session = Sessions.match_by_sid( params[0].shift )
+    session = Sessions.match_by_sid( params[0].shift ) || Sessions.create
     dputs( 3 ){ "session is #{session.inspect}" }
 
     if service =~ /^View/ and session

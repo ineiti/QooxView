@@ -83,7 +83,7 @@ module VTListPane
   
   def rpc_button_save( session, data )
     field = vtlp_get_entity( data )
-    ddputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
+    dputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
     selection = data[@vtlp_field][0]
     if field
       field.data_set_hash( data.to_sym )
@@ -95,7 +95,7 @@ module VTListPane
         dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
       end
     end
-    ddputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
+    dputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
     vtlp_update_list( session, selection )
     #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
@@ -108,9 +108,9 @@ module VTListPane
     if name == @vtlp_field
       ret = reply( :empty )
       field_value = args[0][name][0]
-      ddputs( 4 ){ "replying with field_value of #{field_value}" }
+      dputs( 4 ){ "replying with field_value of #{field_value}" }
       item = vtlp_get_entity(args[0])
-      ddputs( 4 ){ "item is #{item.inspect}" }
+      dputs( 4 ){ "item is #{item.inspect}" }
       if item
         ret += reply("update", item.to_hash )
       end

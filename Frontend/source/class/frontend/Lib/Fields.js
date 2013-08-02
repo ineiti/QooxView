@@ -661,7 +661,8 @@ qx.Class.define("frontend.Lib.Fields", {
             var vids = this.valueIds;
             this.getSelectionModel().iterateSelection(function(ind) {
               if ( vids ){
-                //alert( "getting valueIds of " + ( ind + 1 ) )
+                //alert( "getting valueIds of " + ( ind + 1 ) + " in " +
+                //  print_a( vids ) )
                 ret.push( vids[ind])
               } else {
                 ret.push(ind);
