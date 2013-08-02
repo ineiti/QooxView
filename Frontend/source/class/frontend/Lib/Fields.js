@@ -188,6 +188,42 @@ function twoDecimals(x){
   return x < 10 ? "0" + x : x;
 }
 
+function setValueArrayTable(val){
+  //var val = [[1,2,3],[4,5,6]]
+  //alert( "Setting val " + print_a( val ))
+  var values = val;
+  if ( val && ( val[0] instanceof Array ) && 
+    ( val[0][1] instanceof Array ) ){
+    this.valueIds = []
+    for ( var i = 0; i < val.length; i++ ){
+      this.valueIds.push( val[i][0] )
+      values[i] = val[i][1]
+    }
+  } else {
+    this.valueIds = null
+  }
+  //alert( "Setting data to " + print_a( values ) + 
+  //  " - valueIds = " + print_a( this.valueIds) )
+  this.getTableModel().setData(values)
+}
+
+function getValueTable(){
+  var ret = [];
+  var vids = this.valueIds;
+  this.getSelectionModel().iterateSelection(function(ind) {
+    if ( vids ){
+      //alert( "getting valueIds of " + ( ind + 1 ) + " in " +
+      //  print_a( vids ) )
+      ret.push( vids[ind])
+    } else {
+      ret.push(ind);
+    }
+  });
+  //alert( "Returning " + print_a( ret ) + " with valueIds of " +
+  //  print_a( vids ) )
+  return ret;
+}
+          
 /**
 * A fields-wrapper for working together with the RPC-part of Qooxdoo
 */
@@ -340,6 +376,9 @@ qx.Class.define("frontend.Lib.Fields", {
       dbg(5, "clearDataOnly");
       this.updating = true;
       if (fields) {
+        if ( ! ( fields instanceof Array ) ){
+          fields = [ fields ]
+        }
         dbg(5, "Deleting fields " + print_a(fields));
         for (var f = 0; f < fields.length; f++) {
           var field;
@@ -632,48 +671,23 @@ qx.Class.define("frontend.Lib.Fields", {
         case "table":
           var headings = params.headings;
           var tableModel = new qx.ui.table.model.Simple();
+          var height = params.height || 250;
+          var widths = params.widths;
           tableModel.setColumns(headings);
           field_element = new qx.ui.table.Table(tableModel).set({
             decorator: null
           });
           field_element.getSelectionModel().setSelectionMode(
             qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
-          field_element.setValueArray = function(val){
-            //var val = [[1,2,3],[4,5,6]]
-            //alert( "Setting val " + print_a( val ))
-            var values = val;
-            if ( val && ( val[0] instanceof Array ) && 
-              ( val[0][1] instanceof Array ) ){
-              this.valueIds = []
-              for ( var i = 0; i < val.length; i++ ){
-                this.valueIds.push( val[i][0] )
-                values[i] = val[i][1]
-              }
-            } else {
-              this.valueIds = null
-            }
-            //alert( "Setting data to " + print_a( values ) + 
-            //  " - valueIds = " + print_a( this.valueIds) )
-            this.getTableModel().setData(values)
-          }
-          field_element.getValue = function(){
-            var ret = [];
-            var vids = this.valueIds;
-            this.getSelectionModel().iterateSelection(function(ind) {
-              if ( vids ){
-                //alert( "getting valueIds of " + ( ind + 1 ) + " in " +
-                //  print_a( vids ) )
-                ret.push( vids[ind])
-              } else {
-                ret.push(ind);
-              }
-            });
-            //alert( "Returning " + print_a( ret ) + " with valueIds of " +
-            //  print_a( vids ) )
-            return ret;
-          }
+          field_element.setValueArray = setValueArrayTable;
+          field_element.getValue = getValueTable;
           field_element.setStatusBarVisible(false);
-          field_element.setMaxHeight(250);
+          field_element.setMaxHeight(height);
+          if ( widths ){
+            for ( var i = 0; i < widths.length; i++ ){
+              field_element.setColumnWidth( i, widths[i] );
+            }
+          }
           show_label = false;
           listener = "dataEdited";
           break;
