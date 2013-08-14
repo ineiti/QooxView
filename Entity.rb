@@ -310,13 +310,15 @@ class Entities < RPCQooxdooService
   end
 
   def self.save_all
+    dputs(1){"Saving everything"}
     @@all.each{|k,v|
-      dputs( 0 ){ "Saving #{v.class.name}" }
+      dputs( 3 ){ "Saving #{v.class.name}" }
       v.save
     }
   end
 
   def self.load_all
+    dputs(1){"Loading everything"}
     @@all.each{|k,v|
       dputs( 3 ){ "Loading #{v.class.name}" }
       v.load

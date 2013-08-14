@@ -641,6 +641,8 @@ class View < RPCQooxdooService
 
   def update_form_data( data )
     rep = {}
+    not data and return rep
+
     d = data.to_hash
     dputs( 5 ){ "update #{d.inspect} with layout #{@layout.inspect} - " +
         "#{layout_recurse(@layout).inspect}" }

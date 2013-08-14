@@ -98,12 +98,12 @@ function setValueListCommon(values, list){
       selection.push(item);
       dbg(5, "Found a selection: " + val);
     }
-    else 
+    else
     if (val != "") {
       dbg(5, "Adding new item " + val)
       var item = new qx.ui.form.ListItem("" + val);
       list.add(item);
-      if (list.vaueIds && list.indexOf(item) != list.valueIds.length - 1) {
+      if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
         alert("Different number of items in list and valueIds!");
       }
     }
