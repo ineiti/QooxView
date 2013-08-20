@@ -474,7 +474,7 @@ class Entity
       else
         dputs(4){"Using proxy for #{f}"}
         e = @proxy.get_entry( @id, f )
-        dputs(4){"e is #{e.inspect} from #{@proxy.data.inspect}"}
+        dputs(5){"e is #{e.inspect} from #{@proxy.data.inspect}"}
         if not raw
           v = @proxy.get_value( f )
           if e and v and v.dtype == "entity"
