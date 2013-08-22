@@ -283,7 +283,6 @@ qx.Class.define("frontend.Views.Ltab", {
         return
       }
       this.fadedin = false;
-      alert( "disable form" )
       this.form.fields.setEnabled( false );
       if ( this.form.fields && this.form.fields.getContainerElement() &&
         this.form.fields.getContainerElement().getDomElement() ){

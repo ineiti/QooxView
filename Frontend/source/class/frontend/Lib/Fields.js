@@ -204,6 +204,7 @@ function setValueArrayTable(val){
   }
   //alert( "Setting data to " + print_a( values ) + 
   //  " - valueIds = " + print_a( this.valueIds) )
+  this.getSelectionModel().resetSelection();
   this.getTableModel().setData(values)
 }
 
@@ -675,7 +676,8 @@ qx.Class.define("frontend.Lib.Fields", {
           var widths = params.widths;
           tableModel.setColumns(headings);
           field_element = new qx.ui.table.Table(tableModel).set({
-            decorator: null
+            decorator: null,
+            showCellFocusIndicator: false
           });
           field_element.getSelectionModel().setSelectionMode(
             qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
