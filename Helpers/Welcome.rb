@@ -26,14 +26,16 @@ class Welcome < View
         
     dputs( 5 ){ "#{@layout.inspect}" }
     @visible = false
+    @no_login ||= false
   end
   
   def rpc_show( session )
     dputs( 3 ){ self.inspect }
     if @no_login
       dputs( 2 ){ "No login is enabled" }
-      return reply( "session_id", "1" ) + 
-        reply( "list", View.list_views )
+      return reply( :session_id, 1 ) + 
+        View.rpc_list( session )
+#        reply( "list", View.list_views )
     else
       dputs( 2 ){ "Login is enabled" }
       super( session )
@@ -42,7 +44,7 @@ class Welcome < View
   
   def self.nologin
     dputs( 2 ){ "Going for no login" }
-    $config.merge!( {:views=>{:Welcome=>{:no_login=>true}}} )
+    $config.merge!( {:Views=>{:Welcome=>{:no_login=>true}}} )
   end
   
   def rpc_button_try_again( session, data )
