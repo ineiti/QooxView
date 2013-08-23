@@ -123,7 +123,7 @@ require 'gettext'
 
 include DPuts
 extend DPuts
-if not Module.constants.index "DEBUG_LVL"
+if not defined?(DEBUG_LVL)
   DEBUG_LVL = 5
 end
 
@@ -199,7 +199,7 @@ end
 
 
 $config = {} if not defined? $config
-if Module.constants.index "CONFIG_FILE" and FileTest.exist?(CONFIG_FILE)
+if defined?(CONFIG_FILE) and FileTest.exist?(CONFIG_FILE)
   File.open( CONFIG_FILE ) { |f| $config = YAML::load( f ).to_sym }
 end
 $name = $0.match( /.*\/(.*).rb/ )[1]
@@ -218,7 +218,7 @@ def get_config_rec( path, default, config = $config )
     end
   end
 end
-dputs( 1 ){ "config is #{$config.inspect}" }
+dputs( 1 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
 
 require 'RPCQooxdoo'
 require 'Entity'

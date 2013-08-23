@@ -11,7 +11,8 @@ module Docsplit
 
   ESCAPE        = lambda {|x| Shellwords.shellescape(x) }
    
-  ROOT_E        = ROOT.map(&ESCAPE).join('')
+  #ROOT_E        = ROOT.map(&ESCAPE).join('')
+  ROOT_E = ROOT
 
   CLASSPATH     = "#{ROOT_E}/build#{File::PATH_SEPARATOR}#{ROOT_E}/vendor/'*'"
 
