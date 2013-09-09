@@ -218,7 +218,7 @@ def get_config_rec( path, default, config = $config )
     end
   end
 end
-dputs( 1 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
+defined?( CONFIG_FILE ) and dputs( 1 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
 
 require 'RPCQooxdoo'
 require 'Entity'

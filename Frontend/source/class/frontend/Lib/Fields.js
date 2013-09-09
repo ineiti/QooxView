@@ -269,7 +269,7 @@ qx.Class.define("frontend.Lib.Fields", {
  *
  */
   construct: function(params, fields, rLayout){
-    this.base(arguments, this.layout = new qx.ui.layout.VBox(1));
+    this.base(arguments, this.layout = new qx.ui.layout.Canvas());
     var ps = ["rpc", "write", "callback"];
     for (var p = 0; p < ps.length; p++) {
       var pa = ps[p];
@@ -280,6 +280,7 @@ qx.Class.define("frontend.Lib.Fields", {
     this.windows = {};
     this.updating = false;
     this.field_id = null;
+    this.needs_expansion = {};
     this.ltab = rLayout;
     dbg(5, "Writing is " + this.write + " our id is " + this);
     this.index = 1;
@@ -287,19 +288,6 @@ qx.Class.define("frontend.Lib.Fields", {
     if (fields) {
       this.calcView(fields, this);
     }
-        
-    this.addListener("appear", function(e) {
-      root.fireDataEvent("resize", new qx.event.type.Data());
-    //      var bounds = root.getBounds();
-    //      var size = this.getInnerSize();
-    //      var top = Math.round( ( bounds.height - size.height ) / 4);
-    //      var left = Math.round( ( bounds.width - size.width ) / 2);
-    //      dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
-    //      app.layout.set({
-    //        marginTop : top,
-    //        marginLeft : left
-    //      });
-    } )
   },
     
   members: {
@@ -323,6 +311,8 @@ qx.Class.define("frontend.Lib.Fields", {
     layout: null,
     childLtab: null, // an eventual sub-tab in our layout - only one possible
     ltab: null, // this is where we're attached to
+    needs_expansion: null, // will be used to know whether we expand the first
+    // group or not
         
     // Returns a map of all data in the Field
     getOwnFieldsData: function(){
@@ -623,12 +613,18 @@ qx.Class.define("frontend.Lib.Fields", {
           if (params.list_type != "drop") {
             field_element = new qx.ui.form.List();
             field_element.setSelectionMode(params.list_type ? "single" : "additive");
-            field_element.setMaxHeight(250);
+            if ( ! params.flexheight ){
+              //field_element.setMaxHeight(250);             
+              field_element.setMaxHeight(250);
+              field_element.setAllowGrowX(true);
+              field_element.setAllowStretchX(true);
+              field_element.setAllowGrowY(true);
+              field_element.setAllowStretchY(true);
+            }else{
+              //field_element.setMinHeight(250);
+            //alert( "flexheight" )
+            }
             field_element.setMinWidth(200);
-            field_element.setAllowGrowX(true);
-            field_element.setAllowStretchX(true);
-            field_element.setAllowGrowY(true);
-            field_element.setAllowStretchY(true);
             if ( params.nopreselect ){
               field_element.nopreselect = true
             }
@@ -657,7 +653,7 @@ qx.Class.define("frontend.Lib.Fields", {
           }
           field_element.setValueArray(params.list_values);
                     
-          field_element.setHeight(null);
+          //field_element.setHeight(null);
           //field_element.setMaxHeight( 100 );
           listener = "changeSelection";
           if (params.callback) {
@@ -675,23 +671,30 @@ qx.Class.define("frontend.Lib.Fields", {
           var height = params.height || 250;
           var widths = params.widths;
           tableModel.setColumns(headings);
-          field_element = new qx.ui.table.Table(tableModel).set({
+          
+          var table = new qx.ui.table.Table(tableModel).set({
             decorator: null,
             showCellFocusIndicator: false
           });
-          field_element.getSelectionModel().setSelectionMode(
+          table.getSelectionModel().setSelectionMode(
             qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
-          field_element.setValueArray = setValueArrayTable;
-          field_element.getValue = getValueTable;
-          field_element.setStatusBarVisible(false);
-          field_element.setMaxHeight(height);
+          table.setValueArray = setValueArrayTable;
+          table.getValue = getValueTable;
+          table.setStatusBarVisible(false);
+          table.setAllowShrinkY( true );
+          table.setAllowStretchY( true );
+          table.setMaxHeight(height);
           if ( widths ){
             for ( var i = 0; i < widths.length; i++ ){
-              field_element.setColumnWidth( i, widths[i] );
+              table.setColumnWidth( i, widths[i] );
             }
           }
+          //field_element = new qx.ui.container.Scroll();
+          //field_element.add( table );
+          field_element = table;
           show_label = false;
           listener = "dataEdited";
+          //params.flexheight = 1;
           break;
         case "hidden":
           this.fields[name] = new qx.ui.basic.Label(params);
@@ -818,6 +821,13 @@ qx.Class.define("frontend.Lib.Fields", {
             row: index,
             column: 1
           });
+          if ( params.flexheight ){
+            dbg( 3, "Setting rowflex to " + params.flexheight )
+            layout.getLayout().setRowFlex( index, params.flexheight );
+            if ( params.flexheight > 0){
+              this.needs_expansion.height = "100%";
+            }
+          }
         }
         else {
           dbg(5, "Adding without VBox: " + field_element + " to " + layout.getLayout().toString());
@@ -896,36 +906,6 @@ qx.Class.define("frontend.Lib.Fields", {
       if (view_str[0] && view_str[0].split) {
         var args = view_str[0].split(":");
         switch (args[0]) {
-          case "vbox":
-            dbg(5, "Adding a vbox to " + lyt);
-            var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
-              alignX: "right"
-            }));
-            lyt.add(this.calcView(view_str[1], layout ));
-            break;
-          case "vboxg":
-            dbg(5, "Adding a vbox to " + lyt);
-            var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
-              alignX: "right"
-            }));
-            lyt.add(this.calcView(view_str[1], layout ), {
-              flex: 1
-            });
-            break;
-          case "hbox":
-            dbg(5, "Adding a hbox to " + lyt);
-            var hbox = new qx.ui.layout.HBox(10);
-            var container = new qx.ui.container.Composite( hbox );
-            lyt.add(this.calcView(view_str[1], container));
-            break;
-          case "hboxg":
-            dbg(5, "Adding a hbox to " + lyt);
-            var hbox = new qx.ui.layout.HBox(10);
-            var container = new qx.ui.container.Composite( hbox );
-            lyt.add(this.calcView(view_str[1], container), {
-              flex: 1
-            });
-            break;
           case "fields_layout":
             dbg(5, "Adding a fields_layout to " + lyt + " - " + print_a(view_str[1]));
             //lyt.add( 
@@ -945,11 +925,125 @@ qx.Class.define("frontend.Lib.Fields", {
             break;
           case "group":
             dbg(5, "Adding a group to " + lyt);
+            if ( ! this.first_group ){
+              this.first_group = lyt;
+            }
             var gb = new qx.ui.groupbox.GroupBox();
-            gb.setLayout(new qx.ui.layout.VBox(10))
-            lyt.add(this.calcView(view_str[1], gb), {
+            gb.setLayout(new qx.ui.layout.VBox(10));
+            if ( false ){
+              lyt.add(this.calcView(view_str[1], gb) );
+            } else {
+              if ( lyt.getLayout().constructor != qx.ui.layout.Canvas ){
+                dbg( 3, "Adding with flex" );
+                lyt.add(this.calcView(view_str[1], gb), {
+                  flex: 1
+                });
+              } else {
+                dbg( 3, "Adding for canvas" );
+                var sub_layout = this.calcView(view_str[1], gb);
+                //alert( "needs_expansion.height is " + this.needs_expansion.height );
+                lyt.add( sub_layout, this.needs_expansion );
+              }
+            }
+            break;
+          case "groupw":
+            dbg(5, "Adding a group to " + lyt);
+            var gb = new qx.ui.groupbox.GroupBox();
+            gb.setLayout(new qx.ui.layout.VBox(10));
+            if ( false ){
+              lyt.add(this.calcView(view_str[1], gb) );
+            } else {
+              if ( lyt.getLayout().constructor != qx.ui.layout.Canvas ){
+                dbg( 3, "Adding with flex" );
+                lyt.add(this.calcView(view_str[1], gb), {
+                  flex: 1
+                });
+              } else {
+                dbg( 3, "Adding for canvas" );
+                lyt.add(this.calcView(view_str[1], gb),
+                {
+                  height: "100%",
+                  width: "100%"
+                });
+              }
+            }
+            break;
+          case "hbox":
+            dbg(5, "Adding a hbox to " + lyt);
+            var hbox = new qx.ui.layout.HBox(10);
+            var container = new qx.ui.container.Composite( hbox );
+            var opts = this.needs_expansion.height;
+            var sub_layout = this.calcView(view_str[1], container);
+            if ( opts != this.needs_expansion.height ){
+              opts = { flex: 1 };
+            } else {
+              opts = {};
+            }
+            lyt.add( sub_layout, opts );
+            break;
+          case "hboxg":
+            dbg(5, "Adding a hbox to " + lyt);
+            var hbox = new qx.ui.layout.HBox(10);
+            var container = new qx.ui.container.Composite( hbox );
+            lyt.add(this.calcView(view_str[1], container), {
               flex: 1
             });
+            break;
+          case "shrink":
+            dbg(5, "Adding a shrink-group to " + lyt);
+            var gb = new qx.ui.groupbox.GroupBox();
+            gb.setLayout(new qx.ui.layout.VBox(10));
+            lyt.add(this.calcView(view_str[1], gb));
+            break;
+          case "tabs":
+            var tabsName = view_str[1][0][0];
+            dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
+            this.childLtab = new frontend.Views.Ltab( this.ltab.app );
+            this.childLtab.alignTabs = "top";
+            this.childLtab.parentLtab = this.ltab;
+            var container = new qx.ui.container.Composite(new qx.ui.layout.Grow());
+            container.add( this.childLtab );
+            lyt.add( container, {
+              flex: 5
+            } );
+            rpc.callRPC("View." + tabsName, "list_tabs", this.childLtab, this.childLtab.dispatch);
+            break;
+          case "vbox":
+            dbg(5, "Adding a vbox to " + lyt);
+            var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
+              alignX: "right"
+            }));
+            var opts = this.needs_expansion.height;
+            var sub_layout = this.calcView(view_str[1], layout );
+            if ( opts != this.needs_expansion.height ){
+              opts = { flex: 1 };
+            } else {
+              opts = {};
+            }
+            lyt.add( sub_layout, opts );
+            break;
+          case "vboxg":
+            dbg(5, "Adding a vboxg to " + lyt);
+            var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
+              alignX: "right"
+            }));
+            lyt.add(this.calcView(view_str[1], layout ), {
+              flex: 1
+            });
+            break;
+          case "vboxgl":
+            dbg(5, "Adding a vboxgl to " + lyt);
+            var layout = new qx.ui.container.Composite(new qx.ui.layout.VBox(10).set({
+              alignX: "right"
+            }));
+            /*var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
+            container.add( this.calcView(view_str[1], layout ), {
+              width: "100%", 
+              height: "100%"
+            } );*/
+            lyt.add( this.calcView(view_str[1], layout ), {
+              flex: 1
+            } );
             break;
           case "window":
             dbg(5, "Adding a window with layout " + view_str[1] );
@@ -985,22 +1079,6 @@ qx.Class.define("frontend.Lib.Fields", {
            */
 
             break;
-          case "tabs":
-            var tabsName = view_str[1][0][0];
-            dbg( 3, "Adding new tabs " + print_a( view_str ) + "::" + tabsName);
-            this.childLtab = new frontend.Views.Ltab;
-            this.childLtab.alignTabs = "top";
-            this.childLtab.parentLtab = this.ltab;
-            var container = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-            container.add( this.childLtab, {
-              width: "100%", 
-              height: "100%"
-            } );
-            lyt.add( container, {
-              flex: 5
-            } );
-            rpc.callRPC("View." + tabsName, "list_tabs", this.childLtab, this.childLtab.dispatch);
-            break;
         }
       }
       else {
@@ -1014,9 +1092,7 @@ qx.Class.define("frontend.Lib.Fields", {
           }
           else {
             dbg(5, "Creating element with fields " + elements[l] + " on layout " + lyt);
-            this.addElement(elements[l], lyt, parseInt(l), {
-              flex: 1
-            });
+            this.addElement(elements[l], lyt, parseInt(l));
           }
         }
       }

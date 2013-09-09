@@ -198,6 +198,14 @@ class View < RPCQooxdooService
     do_container( arg == :nogroup ? [btype] : ['group', btype], b )
   end
 
+  def do_boxg( btype, arg, b )
+    if @actual[-1] == "fields"
+      dputs( 0 ){ "Can't put a VBox or a HBox in a field!" }
+      exit
+    end
+    do_container( arg == :nogroup ? [btype] : ['groupw', btype], b )
+  end
+
   # A vertical box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_vbox( arg = nil, &b )
@@ -211,6 +219,13 @@ class View < RPCQooxdooService
     do_box( 'vboxg', arg, b )
   end
 
+  # A vertical box, takes :nogroup as an argument, so it doesn't do
+  # a "group" around it, and as such doesn't draw a gray line
+  # Different that vboxg, it grows but with limit to it's parent
+  def gui_vboxgl( arg = nil, &b )
+    do_box( 'vboxgl', arg, b )
+  end
+
   # A horizontal box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_hbox( arg = nil, &b )
@@ -221,7 +236,7 @@ class View < RPCQooxdooService
   # a "group" around it, and as such doesn't draw a gray line
   # Different that hbox, it grows
   def gui_hboxg( arg = nil, &b )
-    do_box( 'hboxg', arg, b )
+    do_boxg( 'hboxg', arg, b )
   end
 
   def gui_grow( &b )
@@ -244,6 +259,11 @@ class View < RPCQooxdooService
   # Draws a gray border around
   def gui_group( &b )
     do_container( 'group', b )
+  end
+
+  # Draws a gray border around and allows height-fill
+  def gui_shrink( &b )
+    do_container( 'shrink', b )
   end
 
   # Presents a tabs-in-tab
