@@ -242,7 +242,7 @@ class RPCQooxdooHandler
 		
     # And any other handling required by modules
     @@paths.each{|path,cl|
-      dputs( 1 ){ "Mouting path /#{path} to class #{cl.name}" }
+      dputs( 1 ){ "Mounting path /#{path} to class #{cl.name}" }
       server.mount_proc("/#{path.to_s}") {|req, res|
         $webrick_request = req
         dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }

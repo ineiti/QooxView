@@ -77,7 +77,7 @@ module PrintButton
   attr_reader :printer_buttons
   
   def call_lpstat(ip)
-    %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+    %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
   end
   
   def get_remote_printers(ip)

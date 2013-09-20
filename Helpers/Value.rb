@@ -121,7 +121,7 @@ class Value
       args.merge! :list_values => values
       dputs( 3 ){ "Args for entities is #{args.inspect}" }
     end
-    GetText.locale = 'fr'
+    #GetText.locale = "en"
     dputs( 3 ){ "Going to name #{fe_name} to #{GetText._(fe_name.to_s)}" }
     [ fe_type, fe_name, GetText._( fe_name.to_s ), args ]
   end

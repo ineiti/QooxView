@@ -82,9 +82,12 @@ A simple YAML-configuration style is supported by default.
 The Log-class can do logging and supports an undo-function very easily
 =end
 
+class StorageLoadError < Exception
+end
+
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
-SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.5/ext/sqlite3/sqlite3.o"
+SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o"
 
 # Test for compilation of sqlite3
 if not File.exists? SQLITE3_OBJ
@@ -107,7 +110,6 @@ end
 
 require 'yaml'
 
-GETTEXT_DIR=QOOXVIEW_DIR+"/gettext-2.2.0/bin"
 # I think the rubygems way is just really not useful, sorry
 Dir[ QOOXVIEW_DIR + "/libs/*" ].each{ |lib|
   library = File.expand_path( "#{lib}/lib" )
@@ -118,7 +120,6 @@ require 'active_record'
 require 'json'
 require 'Helpers/DPuts'
 require 'gettext'
-
 
 
 include DPuts
@@ -188,6 +189,10 @@ class String
       return "#{self}s"
     end
   end
+
+  def to_a
+    [ self ]
+  end
 end
 
 
@@ -229,9 +234,10 @@ require 'Helpers/LogActions'
 require 'Helpers/Welcome'
 require 'Helpers/OpenPrint'
 require 'getoptlong'
-require 'gettext/tools/rmsgfmt'
-require 'gettext/tools/rmsgmerge'
-require 'gettext/tools/rgettext'
+require 'gettext'
+require 'gettext/tools/msgfmt'
+require 'gettext/tools/msgmerge'
+require 'gettext/tools/xgettext'
 require 'Helpers/QooxParser'
 require 'Helpers/MigrationVersion'
 require 'Helpers/UploadFiles'
@@ -258,15 +264,15 @@ module QooxView
         potfile = "po/#{$name}.pot"
         %x[ mkdir -p po; rm -f #{potfile} ]
         paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
-        dputs( 0 ){ "paths is #{paths.collect{|p| Dir[p] }}" }
-        GetText.rgettext( paths.collect{|p| Dir[p] }.flatten, potfile )
+        dputs( 0 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
+        GetText::Tools::XGetText.run( *paths.collect{|p| Dir[p] }.flatten, "-o", "#{potfile}" )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
           if File.exists? pofile
             %x[ mv #{pofile} #{pofile}.tmp ]
-            %x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
+            #%x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
             # Should be possible with rmsgmerge, but it didn't work :(
-            # GetText.rmsgmerge( "#{pofile}.tmp", potfile, pofile )
+            GetText::Tools::MsgMerge.run( "#{pofile}.tmp", potfile, "-o", pofile )
             %x[ rm #{pofile}.tmp ]
           else
             %x[ cp #{potfile} #{pofile} ]
@@ -279,7 +285,7 @@ module QooxView
           lang = po.match(/.*#{$name}-(.*).po/)[1]
           path = "po/#{lang}/LC_MESSAGES"
           dputs( 2 ){ "Doing po-file #{po} for language #{lang} with path #{path}" }
-          if not %x[ mkdir -p #{path}] or not GetText.rmsgfmt( po, "#{path}/#{$name}.mo" )
+          if not %x[ mkdir -p #{path}] or not GetText::Tools::MsgFmt.run( po, "-o#{path}/#{$name}.mo" )
             dputs( 0 ){ "Error while making mo-files, exiting" }
             exit
           end
@@ -292,13 +298,16 @@ module QooxView
   end
 
   def self.init( dir_entities = nil, dir_views = nil )
-    if not ( Module.constants.index( 'Test' ) )
+    if not ( Module.constants.index( 'Test' ) or Module.constants.index( :Test ) )
       dputs( 0 ){ "Doing options" }
       self.do_opts( dir_entities, dir_views )
     end
 
     GetText.bindtextdomain( $name, :path => "po" )
-    GetText.locale = "fr"
+    if get_config( nil, :locale_force )
+      GetText.locale = get_config( nil, :locale_force )
+    end
+    GetText::TextDomainManager.cached = false
 
     # Include all modules in the dir_entities and dir_views
     # directories

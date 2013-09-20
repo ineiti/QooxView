@@ -1,6 +1,3 @@
-class CSVLoadError < Exception
-end
-
 class CSV < StorageType
   
   def configure( config )
@@ -73,7 +70,7 @@ class CSV < StorageType
       }
       rescue JSON::ParserError
         dputs(0){"Oups - couldn't load CSV for #{@csv_file}"}
-        raise CSVLoadError
+        raise StorageLoadError
       end
       dputs( 5 ){ "data is now #{data.inspect}" }
     end
