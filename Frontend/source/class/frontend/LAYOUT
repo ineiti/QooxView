@@ -1,0 +1,120 @@
+// The layout of the application from QooxDoo point of view:
+
+// ** Sent by QooxView
+["group",[["vboxg",[["group",[["fields",[["list","hi","hi",
+                                {"flexheight":1}]]]]]]]]]
+// ** Translates into
+// Application:
+// this.getRoot().add
+//   Composite ( Grid )
+//    row:2,column:2 = Spacer
+//    row:1,column:1 =
+//     Ltab
+// Ltab.init:
+//   Composite( Grow )
+// Ltab.createViews:
+//   TabView( Page( Grow ) )
+//     Scroll( Composite( Grow ) )
+// Fields.init:
+//   Composite( Canvas )
+// Fields.calcView:
+//   GroupBox( VBox( 10 ) ), flex: 1
+//     Composite( VBox( 10 ) ), flex: 1
+//       GroupBox( VBox( 10 ) ), flex: 1
+//         Composite( Grid().colflex ), flex: 1
+// Fields.addElement:
+//   form.List
+
+// ** In Javascript
+var doc = this.getRoot();
+
+// Application:
+// this.getRoot().add
+//   Composite ( Grid )
+//    row:2,column:2 = Spacer
+//    row:1,column:1 =
+//     Ltab
+var a1 = new qx.ui.container.Composite(can_grid = new qx.ui.layout.Grid(2,2));
+if ( false ){
+can_grid.setRowFlex( 0, 1 );
+can_grid.setRowFlex( 2, 1 );
+can_grid.setColumnFlex( 0, 1 );
+can_grid.setColumnFlex( 2, 1 );
+} else {
+can_grid.setRowFlex( 1, 1 );
+can_grid.setColumnFlex( 1, 1 );
+}
+a1.add( new qx.ui.core.Spacer(), {row: 2, column: 2} );
+
+doc.add( a1, { width: "100%", height: "100%" } );
+
+// Ltab.init:
+//   Composite( Grow )
+var ltab;
+a1.add(
+  ltab = new qx.ui.container.Composite( new qx.ui.layout.Grow() ),
+  { row: 1, column: 1 }
+);
+
+// Ltab.createViews:
+//   TabView( Page( Grow ) )
+//     Scroll( Composite( Grow ) )
+var ltabcvg, ltabcvp, ltabcvs;
+ltabcvp = new qx.ui.tabview.Page("PersonEdit");
+ltabcvp.setLayout( new qx.ui.layout.Grow() );
+( ltabcvs = new qx.ui.container.Scroll() ).add(
+  ltabcvg = new qx.ui.container.Composite( new qx.ui.layout.Grow() ) );
+ltabcvp.add( ltabcvs );
+var ltabcvv;
+( ltabcvv = new qx.ui.tabview.TabView("left").set("Enabled", true) ).
+  add( ltabcvp )
+ltab.add( ltabcvv );
+
+// Fields.init:
+//   Composite( VBox )
+var fields;
+ltabcvg.add(
+  fields = new qx.ui.container.Composite( new qx.ui.layout.VBox( 10 ) )
+);
+
+// Fields.calcView:
+//   GroupBox( VBox( 10 ) ), flex: 1
+//     Composite( VBox( 10 ) ), flex: 1
+//       GroupBox( VBox( 10 ) ), flex: 1
+//         Composite( Grid().colflex ), flex: 1
+var fieldscv1, fieldscv2, fieldscv3, fieldscv;
+fieldscv1 = new qx.ui.groupbox.GroupBox();
+fieldscv1.setLayout( new qx.ui.layout.VBox( 10 ) );
+fieldscv2 = new qx.ui.container.Composite( new qx.ui.layout.VBox( 10 ).set({
+              alignX: "right"
+            }) );
+fieldscv3 = new qx.ui.groupbox.GroupBox();
+fieldscv3.setLayout( new qx.ui.layout.VBox( 10 ) );
+fieldscv = new qx.ui.container.Composite( fieldscvg = new qx.ui.layout.Grid().
+  setColumnAlign(0, "right", "middle").setSpacing(5).
+  setColumnFlex(0, 0).setColumnFlex(1, 1) );
+fieldscvg.setColumnFlex( 1, 1 );
+fieldscv3.add( fieldscv, { flex: 1 } );
+fieldscv2.add( fieldscv3, { flex: 1 } );
+fieldscv1.add( fieldscv2, { flex: 1 } );
+fields.add( fieldscv1, { flex: 1 } );
+
+// Fields.addElement:
+//   form.List
+fieldscv.add(
+  new qx.ui.basic.Label( "List:" ), {row: 0, column: 0 }
+);
+var fieldsae;
+fieldscv.add(
+  fieldsae = new qx.ui.form.List(), {row: 0, column: 1}
+);
+fieldscvg.setRowFlex( 0, 1 );
+for ( var i = 0; i < 20; i++ ){
+  fieldsae.add(new qx.ui.form.ListItem("" + i));
+}
+
+fieldsae.setMinHeight(250);
+fieldsae.setMinWidth(200);
+                    
+//fieldsae.setHeight(null);
+
