@@ -151,9 +151,10 @@ class Entities < RPCQooxdooService
   def get_data_instance( k )
     return nil if ! k
     if k.class != Fixnum
+      dputs(0){"This is very bad"}
       dputs(0){"value k is #{k.inspect}"}
       dputs(0){"caller-stack is #{caller}"}
-      exit
+      raise "WrongIndex"
     end
     return nil if not k or not @data[k.to_i]
     @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
