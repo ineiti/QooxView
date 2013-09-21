@@ -4,7 +4,8 @@
 
 require 'rubygems'
 require 'docsplit'
-require 'zip/zipfilesystem'; include Zip
+#require 'zip/zipfilesystem'; include Zip
+require 'zip'
 
 class OpenPrint
   attr_accessor :lp_cmd
