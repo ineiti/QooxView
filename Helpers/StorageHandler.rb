@@ -82,7 +82,7 @@ module StorageHandler
   def find_key_by( field, value )
     #dputs( 5 ){ "( #{field}, #{value} ) with #{@data.inspect}" }
     @data.each_key{|k|
-      dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is "+
+      ddputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is "+
           ":#{@data[k][field.to_sym].to_s}: "}
       #if @data[k] and @data[k][field.to_sym].to_s.downcase == value.to_s.downcase
       if @data[k] and (@data[k][field.to_sym].to_s =~ /#{value.to_s}/i)
