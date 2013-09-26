@@ -107,17 +107,15 @@ class RPCQooxdooService
     @@services_hash
   end
   
-  # Adds a new service of type "subclass" and stores it under "name"
-  def self.add_new_service_old( subclass, name )
-    dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
-    @@services_hash[ name ] = @@is_instance ? subclass.new : subclass
+  def self.migrate( name )
+    @@services_hash[ name ].migrate    
   end
-
+  
   # Adds a new service of type "subclass" and stores it under "name"
   def self.add_new_service( subclass, name )
     dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = subclass.new
-    @@services_hash[ name ].migrate
+    self.migrate( name )
   end
 end
 
@@ -266,8 +264,8 @@ class RPCQooxdooHandler
         res['content-type'] = "text/html"
         res['content-length'] = res.body.length
         res['status'] = status
-        dputs( 3 ){ "ACaccess-Reply is #{res.body}" }
-        dputs( 3 ){"Raising #{status.inspect}"}
+        dputs( 3 ){ "#{path}-reply is #{res.body}" }
+        dputs( 3 ){"Status is #{status.inspect}"}
       }
     }
 
