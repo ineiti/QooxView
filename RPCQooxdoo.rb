@@ -198,7 +198,7 @@ class RPCQooxdooHandler
       answer = self.error( 2,0, "Didn't receive request", -1 )
     else
       data = JSON.parse( d )
-      dputs( 2 ){ "Request-data is: #{data.inspect}" }
+      dputs( 3 ){ "Request-data is: #{data.inspect}" }
       answer = self.request( data['id'], data['service'], data['method'], data['params'], web_req )
     end
     
@@ -234,7 +234,7 @@ class RPCQooxdooHandler
       res.body = self.parse_query( req )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs( 2 ){ "RPC-Reply is #{res.body}" }
+      dputs( 3 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		
