@@ -248,8 +248,11 @@ class RPCQooxdooHandler
             "method is #{req.request_method}" }
         
         status = HTTPStatus::OK
+        res['content-type'] = "text/html"
         begin
-          if cl.respond_to? :parse_req
+          if cl.respond_to? :parse_req_res
+            res.body = cl.parse_req_res( req, res ).to_s
+          elsif cl.respond_to? :parse_req
             res.body = cl.parse_req( req ).to_s
           else
             res.body = cl.parse( req.request_method, req.path, req.query ).to_s
@@ -261,10 +264,11 @@ class RPCQooxdooHandler
           puts e.backtrace
           res.body = "Error in handling method"
         end
-        res['content-type'] = "text/html"
         res['content-length'] = res.body.length
         res['status'] = status
-        dputs( 3 ){ "#{path}-reply is #{res.body}" }
+        if res['content-type'] == "text/html"
+          dputs( 3 ){ "#{path}-reply is #{res.body}" }
+        end
         dputs( 3 ){"Status is #{status.inspect}"}
       }
     }

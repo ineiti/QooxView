@@ -621,7 +621,7 @@ qx.Class.define("frontend.Lib.Fields", {
               field_element.setAllowGrowY(true);
               field_element.setAllowStretchY(true);
             }else{
-              //field_element.setMinHeight(250);
+            //field_element.setMinHeight(250);
             //alert( "flexheight" )
             }
             field_element.setMinWidth(200);
@@ -694,6 +694,14 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element = table;
           show_label = false;
           listener = "dataEdited";
+          
+          if ( params.render_html ){
+            for ( var i = 0; i < params.render_html.length; i++ ){
+              var htmlTable = new qx.ui.table.cellrenderer.Html();
+              table.getTableColumnModel().setDataCellRenderer(
+                params.render_html[i], htmlTable);              
+            }
+          }
           //params.flexheight = 1;
           break;
         case "hidden":
@@ -975,7 +983,9 @@ qx.Class.define("frontend.Lib.Fields", {
             var opts = this.needs_expansion.height;
             var sub_layout = this.calcView(view_str[1], container);
             if ( opts != this.needs_expansion.height ){
-              opts = { flex: 1 };
+              opts = {
+                flex: 1
+              };
             } else {
               opts = {};
             }
@@ -1016,7 +1026,9 @@ qx.Class.define("frontend.Lib.Fields", {
             var opts = this.needs_expansion.height;
             var sub_layout = this.calcView(view_str[1], layout );
             if ( opts != this.needs_expansion.height ){
-              opts = { flex: 1 };
+              opts = {
+                flex: 1
+              };
             } else {
               opts = {};
             }
