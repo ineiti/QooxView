@@ -82,6 +82,14 @@ A simple YAML-configuration style is supported by default.
 The Log-class can do logging and supports an undo-function very easily
 =end
 
+
+if not String.method_defined? :force_encoding
+  class String
+    def force_encoding( *args )
+    end
+  end
+end
+
 class StorageLoadError < Exception
 end
 
@@ -195,7 +203,6 @@ class String
   end
 end
 
-
 class Array
   def to_s
     "[#{join(",")}]"
@@ -265,7 +272,7 @@ module QooxView
         %x[ mkdir -p po; rm -f #{potfile} ]
         paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
         dputs( 0 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
-        GetText::Tools::XGetText.run( *paths.collect{|p| Dir[p] }.flatten, "-o", "#{potfile}" )
+        GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
           if File.exists? pofile
