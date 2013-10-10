@@ -19,7 +19,11 @@ module Docsplit
     # The first line of the help output holds the name and version number
     # of the office software to be used for extraction.
     def version_string
-      @@help ||= `#{office_executable} -h 2>&1`.split("\n").first
+      versionstr =  `#{office_executable} -h 2>&1`.split("\n").first
+      if !!versionstr.match(/[0-9]*/)
+              versionstr =  `#{office_executable} --version`.split("\n").first
+      end
+      @@help ||= versionstr
     end
     def libre_office?
       !!version_string.match(/^LibreOffice/)
@@ -46,6 +50,7 @@ module Docsplit
       else # probably linux/unix
         search_paths = %w(
           /usr/lib/libreoffice
+          /usr/bin/libreoffice
           /usr/lib64/libreoffice
           /opt/libreoffice
           /usr/lib/openoffice
