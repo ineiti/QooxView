@@ -73,7 +73,7 @@ class ConfigBase < Entity
     if c.has_key? :functions
       funcs = c[:functions]
       dputs(4){"Storing functions: #{funcs.inspect}"}
-      if funcs.index{|i| i.to_s.to_i.to_s == i.to_s }
+      if funcs.index{|i| i.to_i.to_s == i.to_s }
         dputs(3){"Converting numeric to names"}
         funcs = funcs.collect{|d|
           ConfigBases.functions[d-1].to_sym

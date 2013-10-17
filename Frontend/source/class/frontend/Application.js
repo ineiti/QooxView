@@ -21,35 +21,19 @@ qx.Class.define("frontend.Application", {
 	 */
   members : {
     layout : null,
-    lay_grid: null,
-    cont_grid: null,
-    
-    squeezeCenter: function(){
-      for ( var i = 0; i < 3; i++ ){
-        this.lay_grid.setColumnFlex( i, i != 1 );
-        this.lay_grid.setRowFlex( i, ( 1 + i ) * ( i != 1 ) );
-      }      
-    },
 
-    inflateCenter: function(){
-      for ( var i = 0; i < 3; i++ ){
-        this.lay_grid.setColumnFlex( i, i == 1 );
-        this.lay_grid.setRowFlex( i, i == 1 );
-      }
-    },
-
+    /**
+		 * This method contains the initial application code and gets called
+		 * during startup of the application
+		 *
+		 * @lint ignoreDeprecated(alert)
+		 */
     main : function() {
       // Call super class
       this.base(arguments);
       app = this;
       root = this.getRoot();
-      this.cont_grid = new qx.ui.container.Composite( 
-        this.lay_grid = new qx.ui.layout.Grid(2,2));
-      this.cont_grid.add( this.layout = new frontend.Views.Ltab( this ),
-        {row:1, column:1} );
-      this.cont_grid.add( new qx.ui.core.Spacer(), {row:2, column:2} )
-      this.squeezeCenter();
-      root.add(this.cont_grid, {
+      root.add(this.layout = new frontend.Views.Ltab(), {
         width : "100%",
         height : "100%"
       });
@@ -60,7 +44,6 @@ qx.Class.define("frontend.Application", {
       }
       rpc = new frontend.Lib.RPC;
 
-/* NewLayout
       root.addListener("resize", function(e) {
         var bounds = this.layout.getBounds();
         if(this.layout.getChildren()) {
@@ -80,8 +63,6 @@ qx.Class.define("frontend.Application", {
           }
         }
       }, this);
-*/
-
       // We start with the Welcome-view which shows a login-screen or other
       rpc.callRPC("View.Welcome", "show", this.layout, this.layout.dispatch)
     }

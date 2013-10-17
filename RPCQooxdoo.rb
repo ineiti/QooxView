@@ -107,15 +107,17 @@ class RPCQooxdooService
     @@services_hash
   end
   
-  def self.migrate( name )
-    @@services_hash[ name ].migrate    
+  # Adds a new service of type "subclass" and stores it under "name"
+  def self.add_new_service_old( subclass, name )
+    dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
+    @@services_hash[ name ] = @@is_instance ? subclass.new : subclass
   end
-  
+
   # Adds a new service of type "subclass" and stores it under "name"
   def self.add_new_service( subclass, name )
     dputs( 5 ){ "Add a new service: #{subclass} as #{name}" }
     @@services_hash[ name ] = subclass.new
-    self.migrate( name )
+    @@services_hash[ name ].migrate
   end
 end
 
@@ -135,7 +137,7 @@ class RPCQooxdooHandler
 
   # Replies to a request
   def self.request( id, service, method, params, web_req = nil )
-    session = Sessions.match_by_sid( params[0].shift ) || Sessions.create
+    session = Sessions.match_by_sid( params[0].shift )
     dputs( 3 ){ "session is #{session.inspect}" }
 
     if service =~ /^View/ and session
@@ -198,7 +200,7 @@ class RPCQooxdooHandler
       answer = self.error( 2,0, "Didn't receive request", -1 )
     else
       data = JSON.parse( d )
-      dputs( 3 ){ "Request-data is: #{data.inspect}" }
+      dputs( 2 ){ "Request-data is: #{data.inspect}" }
       answer = self.request( data['id'], data['service'], data['method'], data['params'], web_req )
     end
     
@@ -234,13 +236,13 @@ class RPCQooxdooHandler
       res.body = self.parse_query( req )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs( 3 ){ "RPC-Reply is #{res.body}" }
+      dputs( 2 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		
     # And any other handling required by modules
     @@paths.each{|path,cl|
-      dputs( 1 ){ "Mounting path /#{path} to class #{cl.name}" }
+      dputs( 1 ){ "Mouting path /#{path} to class #{cl.name}" }
       server.mount_proc("/#{path.to_s}") {|req, res|
         $webrick_request = req
         dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }
@@ -248,11 +250,8 @@ class RPCQooxdooHandler
             "method is #{req.request_method}" }
         
         status = HTTPStatus::OK
-        res['content-type'] = "text/html"
         begin
-          if cl.respond_to? :parse_req_res
-            res.body = cl.parse_req_res( req, res ).to_s
-          elsif cl.respond_to? :parse_req
+          if cl.respond_to? :parse_req
             res.body = cl.parse_req( req ).to_s
           else
             res.body = cl.parse( req.request_method, req.path, req.query ).to_s
@@ -264,12 +263,11 @@ class RPCQooxdooHandler
           puts e.backtrace
           res.body = "Error in handling method"
         end
+        res['content-type'] = "text/html"
         res['content-length'] = res.body.length
         res['status'] = status
-        if res['content-type'] == "text/html"
-          dputs( 3 ){ "#{path}-reply is #{res.body}" }
-        end
-        dputs( 3 ){"Status is #{status.inspect}"}
+        dputs( 3 ){ "ACaccess-Reply is #{res.body}" }
+        dputs( 3 ){"Raising #{status.inspect}"}
       }
     }
 

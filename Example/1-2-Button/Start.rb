@@ -10,12 +10,12 @@ class Welcome < View
 
   # The button with the name "welt" is called
   def rpc_button_welt( session, *args )
-    reply( :update, :welcome => "Hallo Welt" )
+    reply( 'update', { :welcome => "Hallo Welt" } )
   end
 
   # The button with the name "world" is called
   def rpc_button_world( session, *args )
-    reply( :update, :welcome => "Hello world" )
+    reply( 'update', { :welcome => "Hello world" } )
   end
 end
 

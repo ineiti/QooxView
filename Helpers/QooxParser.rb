@@ -23,23 +23,23 @@ module QooxParser
           when /show_button/
             buttons = l.sub( /^[^:]*:/, '' ).gsub( /:/, '' ).chop.split( /,\s*/ )
             buttons.each{|b|
-              po = POEntry.new(:normal)
+              po = PoMessage.new(:normal)
               po.msgid = b
-              po.references = [ "#{file}:#{line}" ]
+              po.sources = "#{file}:#{line}"
               po.add_comment( "Comes from file #{file} and line is #{l}" )
               ary << po
             }
           else
-            po = POEntry.new(:normal)
+            po = PoMessage.new(:normal)
             po.msgid = l.sub( /^[^:]*:/, '' ).sub( /,.*/, '' ).chop
-            po.references = [ "#{file}:#{line}" ]
+            po.sources = "#{file}:#{line}"
             po.add_comment( "Comes from file #{file} and line is #{l}" )
             ary << po
           end
         elsif l =~ /<\s*View\s*$/
-          po = POEntry.new(:normal)
+          po = PoMessage.new(:normal)
           po.msgid = l.sub( /^\s*class\s*/, '' ).sub( /\s*<.*$/, '' ).chop
-          po.references = [ "#{file}:#{line}" ]
+          po.sources = "#{file}:#{line}"
           po.add_comment( "Comes from file #{file} and line is #{l}" )
           ary << po            
         end
@@ -51,4 +51,4 @@ module QooxParser
 end
 
 # Add this parser to GetText::RGetText
-GetText::Tools::XGetText.add_parser(QooxParser)
+RGetText.add_parser(QooxParser)

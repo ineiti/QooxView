@@ -198,14 +198,6 @@ class View < RPCQooxdooService
     do_container( arg == :nogroup ? [btype] : ['group', btype], b )
   end
 
-  def do_boxg( btype, arg, b )
-    if @actual[-1] == "fields"
-      dputs( 0 ){ "Can't put a VBox or a HBox in a field!" }
-      exit
-    end
-    do_container( arg == :nogroup ? [btype] : ['groupw', btype], b )
-  end
-
   # A vertical box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_vbox( arg = nil, &b )
@@ -219,13 +211,6 @@ class View < RPCQooxdooService
     do_box( 'vboxg', arg, b )
   end
 
-  # A vertical box, takes :nogroup as an argument, so it doesn't do
-  # a "group" around it, and as such doesn't draw a gray line
-  # Different that vboxg, it grows but with limit to it's parent
-  def gui_vboxgl( arg = nil, &b )
-    do_box( 'vboxgl', arg, b )
-  end
-
   # A horizontal box, takes :nogroup as an argument, so it doesn't do
   # a "group" around it, and as such doesn't draw a gray line
   def gui_hbox( arg = nil, &b )
@@ -236,7 +221,7 @@ class View < RPCQooxdooService
   # a "group" around it, and as such doesn't draw a gray line
   # Different that hbox, it grows
   def gui_hboxg( arg = nil, &b )
-    do_boxg( 'hboxg', arg, b )
+    do_box( 'hboxg', arg, b )
   end
 
   def gui_grow( &b )
@@ -259,11 +244,6 @@ class View < RPCQooxdooService
   # Draws a gray border around
   def gui_group( &b )
     do_container( 'group', b )
-  end
-
-  # Draws a gray border around and allows height-fill
-  def gui_shrink( &b )
-    do_container( 'shrink', b )
   end
 
   # Presents a tabs-in-tab
@@ -661,8 +641,6 @@ class View < RPCQooxdooService
 
   def update_form_data( data )
     rep = {}
-    not data and return rep
-
     d = data.to_hash
     dputs( 5 ){ "update #{d.inspect} with layout #{@layout.inspect} - " +
         "#{layout_recurse(@layout).inspect}" }
@@ -747,8 +725,6 @@ class View < RPCQooxdooService
     @@services_hash["View.#{m}"]
   end
 
-  # Gets the request and converts the ids of the Entites back to
-  # the objects they once were - which makes life much more easy... 
   def parse_request( method, session, params )
     dputs( 3 ){ "Parsing #{params.inspect}" }
     if params[1]
