@@ -4,7 +4,8 @@
 
 require 'rubygems'
 require 'docsplit'
-require 'zip/zipfilesystem'; include Zip
+#require 'zip/zipfilesystem'; include Zip
+require 'zip'
 
 class OpenPrint
   attr_accessor :lp_cmd
@@ -42,7 +43,7 @@ class OpenPrint
     dputs(3){"Copying to -#{tmp_file.inspect}-"}
 
     FileUtils::cp( @file, tmp_file )
-    ZipFile.open( tmp_file ){ |z|
+    Zip::File.open( tmp_file ){ |z|
       doc = z.read("content.xml")
       fields.each{|f|
         doc.gsub!( f[0], f[1].to_s )
@@ -77,7 +78,7 @@ module PrintButton
   attr_reader :printer_buttons
   
   def call_lpstat(ip)
-    %x( lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+    %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
   end
   
   def get_remote_printers(ip)

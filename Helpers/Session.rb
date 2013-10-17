@@ -16,16 +16,19 @@ class Sessions < Entities
   end
   
   # Adds a person with a session.
-  def create( owner, sid = nil )
-    if owner.session_id and old = match_by_sid( owner.session_id )
-      old.delete
-    end
-    
+  def create( owner = nil, sid = nil )
     if ! sid
       sid = rand
     end
-    owner.session_id = sid.to_s
+
+    if owner
+      if owner.session_id and old = match_by_sid( owner.session_id )
+        old.delete
+      end
     
+      owner.session_id = sid.to_s
+    end
+
     s = super( :owner => owner, :sid => sid.to_s, :s_data => {} )
     s.web_req = nil
     return s
@@ -43,7 +46,7 @@ class Session < Entity
 
   def can_view( v )
     dputs(3){"Owner is #{owner.inspect}"}
-    return Permission.can_view( owner.permissions, v )
+    return Permission.can_view( owner ? owner.permissions : nil, v )
   end
   
   def close

@@ -28,14 +28,15 @@ class CSV < StorageType
       dputs( 5 ){ "Not saving data for #{@name}" }
     else
       dputs( 3 ){ "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
-      system "mkdir -p #{@csv_dir}"
+      FileUtils.mkdir_p @csv_dir
       dputs( 5 ){ "Data is #{data.inspect}" }
       File.open( "#{@csv_file}.tmp", "w"){|f|
         data_each(data){|d|
           write_line( f, d )
         }
       }
-      system "mv #{@csv_file}.tmp #{@csv_file}"
+      dputs(5){"Moving file"}
+      FileUtils.mv "#{@csv_file}.tmp", @csv_file
     end
   end
   
@@ -54,6 +55,7 @@ class CSV < StorageType
     # Go and fetch eventual existing data from the file
     dputs( 3 ){ "Starting to load #{@csv_file}" }
     if File.exists?( @csv_file )
+      begin
       File.open( @csv_file, "r").readlines().each{|l|
         dputs( 5 ){ "Reading line #{l}" }
         # Convert the keys in the lines back to Symbols
@@ -66,6 +68,10 @@ class CSV < StorageType
         data_csv[@data_field_id] = data_csv[@data_field_id].to_i
         data[ data_csv[@data_field_id] ] = data_csv
       }
+      rescue JSON::ParserError
+        dputs(0){"Oups - couldn't load CSV for #{@csv_file}"}
+        raise StorageLoadError
+      end
       dputs( 5 ){ "data is now #{data.inspect}" }
     end
     

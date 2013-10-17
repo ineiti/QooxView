@@ -151,9 +151,10 @@ class Entities < RPCQooxdooService
   def get_data_instance( k )
     return nil if ! k
     if k.class != Fixnum
+      dputs(0){"This is very bad"}
       dputs(0){"value k is #{k.inspect}"}
       dputs(0){"caller-stack is #{caller}"}
-      exit
+      raise "WrongIndex"
     end
     return nil if not k or not @data[k.to_i]
     @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
@@ -310,13 +311,15 @@ class Entities < RPCQooxdooService
   end
 
   def self.save_all
+    dputs(1){"Saving everything"}
     @@all.each{|k,v|
-      dputs( 0 ){ "Saving #{v.class.name}" }
+      dputs( 3 ){ "Saving #{v.class.name}" }
       v.save
     }
   end
 
   def self.load_all
+    dputs(1){"Loading everything"}
     @@all.each{|k,v|
       dputs( 3 ){ "Loading #{v.class.name}" }
       v.load
@@ -472,7 +475,7 @@ class Entity
       else
         dputs(4){"Using proxy for #{f}"}
         e = @proxy.get_entry( @id, f )
-        dputs(4){"e is #{e.inspect} from #{@proxy.data.inspect}"}
+        dputs(5){"e is #{e.inspect} from #{@proxy.data.inspect}"}
         if not raw
           v = @proxy.get_value( f )
           if e and v and v.dtype == "entity"

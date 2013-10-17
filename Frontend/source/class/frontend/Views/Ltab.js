@@ -17,29 +17,23 @@ qx.Class.define("frontend.Views.Ltab", {
      * Constructor of Views.Chooser Takes:
      *
      */
-  construct: function( ){
-    this.alignTabs = "left"
+  construct: function( app ){
+    this.app = app;
+    this.alignTabs = "left";
     this.fadedin = false;
     this.base(arguments);
-    this.setLayout(this.layout = new qx.ui.layout.Canvas());
+    this.setLayout(this.layout = new qx.ui.layout.Grow());
     this.timer = new frontend.Lib.TimerF();
 
-    // this adds the container manager in one go
-    this.root = new qx.ui.container.Composite(new qx.ui.layout.Canvas());
-    this.root.setPadding(10);
-        
-    this.add(this.root, {
-      width: "100%", 
-      height: "100%"
-    });
-    
     this.selectfadein = "parent,child,windows";
-
+  /*
     this.addListener("resize", function(e){
       root.fireDataEvent("resize", new qx.event.type.Data());
     }, this);
+*/
   },
   members: {
+    app: null,
     layoutView: null,
     dataClass: null,
     viewClass: null,
@@ -57,7 +51,7 @@ qx.Class.define("frontend.Views.Ltab", {
     alignTabs: null,
     parentLtab: null,
     initValues: null,
-        
+
     // This is called upon return from the server, and dispatches to the
     // appropriate functions. The result is an array of commands.
     dispatch: function(results){
@@ -69,9 +63,9 @@ qx.Class.define("frontend.Views.Ltab", {
       for (var r = 0; r < results.length; r++) {
         var res = results[r];
         dbg(0, "*****===== Dispatcher " + (r + 1) + " / " + results.length)
-        dbg(0, print_a(res));
-        dbg(0, print_a(res.data));
-        dbg(0, res.data);
+        dbg(0, "res: " + print_a(res));
+        //dbg(0, "res.data array: " + print_a(res.data));
+        dbg(0, "res.data:" + res.data);
         switch (res.cmd) {
           case "auto_update":
             // Enable an automatic update every n seconds
@@ -109,7 +103,7 @@ qx.Class.define("frontend.Views.Ltab", {
             }
             break;
           case "clear":
-            this.root.removeAll();
+            this.removeAll();
             break;
           case "debug":
             // Enable logging in debug variant
@@ -153,7 +147,15 @@ qx.Class.define("frontend.Views.Ltab", {
             }
             break;
           case "hide":
-            this.setVisibility( res.data, 'excluded' );
+          case "unhide":
+            if ( ! ( res.data instanceof Array ) ){
+              res.data = [ res.data ]
+            }
+            for ( var i = 0; i < res.data.length; i++ ){
+              this.setVisibility( res.data[i], 
+                res.cmd == "hide" ? "excluded" : 'visible' );
+            //this.setVisibility( res.data[i], 'excluded' );
+            }
             break;
           case "init_values":
             var tab = res.data[0];
@@ -200,9 +202,6 @@ qx.Class.define("frontend.Views.Ltab", {
                 dbg( 3, "New tab is: " + this.tabs.getSelection()[0].qv_id );
               }
             }
-            break;
-          case "unhide":
-            this.setVisibility( res.data, 'visible' );
             break;
           case "update":
             this.updateView(res.data)
@@ -255,7 +254,7 @@ qx.Class.define("frontend.Views.Ltab", {
 
     parentFadeOut: function(){
       if ( this.parentLtab ){
-        this.parentLtab.fadeOut();
+        this.parentLtab.parentFadeOut();
       } else {
         this.fadeOut();
         this.timer.pause();
@@ -433,6 +432,7 @@ qx.Class.define("frontend.Views.Ltab", {
       }
             
       var container = this.getRootContainer();
+      //alert( "container is " + container );
       dbg(5, "showView - container is: " + container);
       var cback = [this, this.dispatch];
       // dbg(5, "cback in showView is " + print_a(cback))
@@ -440,15 +440,15 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg(4, "Adding container " + this.viewClass);
         this.form = new frontend.Views.Form(cback, this.layoutView, 
           this.dataClass, this.viewClass, this);
+        container.add( this.form );
+/*
         if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
           // Sub-tabbed tabs get all the width
-          container.add( this.form, {
-            width: "100%", 
-            height: "100%"
-          } );
+          container.add( this.form );
         } else {
           container.add( this.form );
         }
+*/
         this.form.fields.focus_if_ok( this.form.fields.first_field);
       }
       else {
@@ -465,7 +465,7 @@ qx.Class.define("frontend.Views.Ltab", {
       var views = results.views
       dbg(5, "The following views are allowed: " + views);
             
-      this.root.removeAll();
+      this.removeAll();
             
       this.tabs = new qx.ui.tabview.TabView(this.alignTabs).set("Enabled", false);
             
@@ -474,21 +474,16 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg(2, "adding view-tab: " + views[v][0] + " - " + views[v][1]);
         this.views[v] = new qx.ui.tabview.Page(views[v][1]);
         this.views[v].qv_id = views[v][0]
-        this.views[v].setLayout(new qx.ui.layout.Canvas());
+        this.views[v].setLayout(new qx.ui.layout.Grow());
         var scroller = new qx.ui.container.Scroll();
-        var composite = new qx.ui.container.Composite();
-        composite.setLayout(new qx.ui.layout.Canvas());
+        var composite = new qx.ui.container.Composite(new qx.ui.layout.Grow());
+        //alert( "tab-cont is " + composite );
         scroller.add(composite);
-        this.views[v].add(scroller, {
-          width: "100%",
-          height: "100%"
-        });
+        this.views[v].add(scroller);
         this.tabs.add(this.views[v]);
       }
-      this.root.add(this.tabs, {
-        width: "100%",
-        height: "100%"
-      });
+      this.add(this.tabs);
+      this.app.inflateCenter();
       dbg(3, "getRootContainer gives: " + this.getRootContainer());
       this.parentFadeOut();
             
@@ -571,7 +566,7 @@ qx.Class.define("frontend.Views.Ltab", {
     getRootContainer: function(){
       dbg(5, "getActiveForm");
       return this.tabs ? this.tabs.getSelection()[0].getChildren()[0].getChildren()[0] : 
-      this.root;
+      this;
     }
   }
 });
