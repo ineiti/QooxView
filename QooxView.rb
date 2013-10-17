@@ -305,7 +305,11 @@ module QooxView
     dputs( 0 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
     [ dir_entities, dir_views ].each{|d|
       if d
-        Dir[d+"/**/*.rb"].each{|f| require(f)}
+        dputs( 2 ){ "Initializing directory #{d}" }
+        Dir[d+"/**/*.rb"].each{|f| 
+          dputs( 3 ){ "Requiring file #{f}" }
+          require(f)
+        }
       end
     }
 
