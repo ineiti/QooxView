@@ -264,10 +264,11 @@ class RPCQooxdooHandler
           puts e.backtrace
           res.body = "Error in handling method"
         end
+        res.body.force_encoding( "ASCII-8BIT" )
         res['content-length'] = res.body.length
         res['status'] = status
         if res['content-type'] == "text/html"
-          dputs( 3 ){ "#{path}-reply is #{res.body}" }
+          dputs( 3 ){ "#{path}-reply is #{res.body.inspect}" }
         end
         dputs( 3 ){"Status is #{status.inspect}"}
       }
