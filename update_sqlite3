@@ -1,4 +1,9 @@
 #!/bin/sh
+rm -f $( dirname $0 )/libs/sqlite3-*/ext/sqlite3/*.o
+rm -f $( dirname $0 )/libs/sqlite3-*/ext/sqlite3/*.log
+rmdir $( dirname $0 )/libs/sqlite3-*/ext/sqlite3
+rmdir $( dirname $0 )/libs/sqlite3-*/ext
+rmdir $( dirname $0 )/libs/sqlite3-*
 SQL_DIR=$( echo $( dirname $0 )/libs/sqlite3-* )
 if echo $SQL_DIR | grep -qv "^/"; then
   SQL_DIR="$( pwd )/$SQL_DIR"
