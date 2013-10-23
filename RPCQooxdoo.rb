@@ -234,7 +234,7 @@ class RPCQooxdooHandler
       res.body = self.parse_query( req )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs( 3 ){ "RPC-Reply is #{res.body}" }
+      dputs( 2 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		

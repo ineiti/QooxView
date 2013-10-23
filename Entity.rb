@@ -361,7 +361,8 @@ class Entity
   end
 
   def method_missing( cmd, *args )
-    dputs( 5 ){ "Entity#method_missing #{cmd}, with #{args} and #{args[0].class}" }
+    dputs( 5 ){ "Entity#method_missing #{cmd} in #{self.class.name}," + 
+        " with #{args} and #{args[0].class}" }
     field = cmd.to_s
     if not @proxy.get_value( field.sub(/^_/, '' ).sub(/=$/, '' ) )
       dputs(0){"ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +

@@ -77,15 +77,23 @@ class LDAP < StorageType
         @fields.each{|k,v|
           ln = v[:ldap_name]
           if entry.respond_to? ln.to_sym
-            value = entry[ln.to_sym][0].to_s
+            value = entry[ln.to_sym][0].to_s.force_encoding( Encoding::UTF_8 )
             #if entry.dn =~ /kaina/
             #  dputs( 0 ){ entry.inspect }
             #  dputs( 0 ){ data_ldap.inspect }
             #end
-            # dputs( 4 ){ "Responding to #{[k,v,value,value.class].inspect}" }
+            if ln.to_sym == :givenname or ln.to_sym == :l
+              ddputs( 4 ){ "Responding to #{[k,v,value,value.class].inspect}" }
+            end
             if value[0..0] == "["
               # dputs( 4 ){ "Parsing value #{value}" }
               value = JSON.parse( value )
+              if ln.to_sym == :givenname or ln.to_sym == :l
+                ddputs( 4 ){ "Parsing to #{[k,v,value,value.class].inspect}" }
+              end
+              if value.class == String
+                value.force_encoding( Encoding::UTF_8 )
+              end
             end
             data_ldap.merge!( { k => value } )
           end
@@ -140,11 +148,12 @@ class LDAP < StorageType
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
     if not dn
-      dputs( 0 ){ "DN is empty... #{@dns.inspect}" }
+      dputs( 0 ){ "DN is empty... #{@dns.to_a.last(10).inspect}" }
+      dputs( 0 ){"DN is empty: id, field, value = #{id}, #{field}, #{value}"}
       return
     end    
     
-    ret = @data_ldap.replace_attribute( dn, attribute, value_stored )
+    ret = @data_ldap.replace_attribute( dn, attribute, value_stored.to_s )
     log_msg( 'DataElement', "Replaced #{attribute} in #{dn} with #{value}" )
     dputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message}" }
     @data_ldap.search( :base => @data_ldap_base, 
@@ -193,7 +202,12 @@ class LDAP < StorageType
     if @entity.respond_to? :data_create
       dputs( 1 ){ "Going to call data_create of #{@name}" }
       @entity.data_create( data )
-      uid = @fields.select{|k,v| v[:ldap_name].to_sym == :uid }[0][0]
+      uid = @fields.select{|k,v| 
+        ddputs(3){"Field is #{k.inspect} - #{v.inspect}"}
+        v and ( v[:ldap_name].to_sym == :uid ) 
+      }
+      ddputs(3){"Found uid #{uid.inspect}"}
+      uid = uid.to_a[0][0]
       dputs( 1 ){ "Found uid to be field #{uid.inspect}: #{data[uid]}" }
       filter = Net::LDAP::Filter.eq( "uid", data[uid] )
       @field_id_ldap = @fields[ @data_field_id ][:ldap_name].to_sym
