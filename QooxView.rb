@@ -154,6 +154,8 @@ class Hash
     dputs(4){"Method is missing: #{s.inspect}"}
     
     case s.to_s
+    when "to_ary"
+      super( s, args )
     when /^_.*[^=]$/
       key = s.to_s.sub(/^_/, '').to_sym
       dputs(4){"Searching for #{s.inspect} -> #{key}"}
@@ -166,7 +168,7 @@ class Hash
       super( s, args )
     end
   end
-  
+
   #  def to_s
   #    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
   #  end
@@ -214,7 +216,8 @@ $config = {} if not defined? $config
 if defined?(CONFIG_FILE) and FileTest.exist?(CONFIG_FILE)
   File.open( CONFIG_FILE ) { |f| $config = YAML::load( f ).to_sym }
 end
-$name = $0.match( /.*\/(.*).rb/ )[1]
+$name = $0.match( /.*?([^\/]*).rb/ )[1]
+
 def get_config( default, *path )
   get_config_rec( path, default )
 end

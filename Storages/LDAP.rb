@@ -69,7 +69,7 @@ class LDAP < StorageType
     
     dputs( 3 ){ "Going to read #{@data_ldap_base}" }
     @data_ldap.search( :base => @data_ldap_base, :filter => filter ) do |entry|
-      #dputs( 4 ){ "DN: #{entry.dn}" }
+      dputs( 4 ){ "DN: #{entry.dn}" }
       data_ldap = {}
       if entry.respond_to? @field_id_ldap
         field_id_value = entry[@field_id_ldap].to_s
@@ -77,23 +77,26 @@ class LDAP < StorageType
         @fields.each{|k,v|
           ln = v[:ldap_name]
           if entry.respond_to? ln.to_sym
-            value = entry[ln.to_sym][0].to_s.force_encoding( Encoding::UTF_8 )
+            value = entry[ln.to_sym][0].to_s
+            dputs(4){"Value is #{value.inspect} with encoding #{value.encoding}"}
+            value.force_encoding( Encoding::UTF_8 )
             #if entry.dn =~ /kaina/
             #  dputs( 0 ){ entry.inspect }
             #  dputs( 0 ){ data_ldap.inspect }
             #end
-            if ln.to_sym == :givenname or ln.to_sym == :l
-              ddputs( 4 ){ "Responding to #{[k,v,value,value.class].inspect}" }
+            if ln.to_sym == :givenname or ln.to_sym == :l or ln.to_sym == :sn
+              dputs( 4 ){ "Responding to #{[k,v,value,value.class].inspect} - " +
+                "encoding is #{value.encoding}"}
             end
             if value[0..0] == "["
               # dputs( 4 ){ "Parsing value #{value}" }
               value = JSON.parse( value )
-              if ln.to_sym == :givenname or ln.to_sym == :l
-                ddputs( 4 ){ "Parsing to #{[k,v,value,value.class].inspect}" }
+              if ln.to_sym == :givenname or ln.to_sym == :l or ln.to_sym == :sn
+                dputs( 4 ){ "Parsing to #{[k,v,value,value.class].inspect}" }
               end
-              if value.class == String
-                value.force_encoding( Encoding::UTF_8 )
-              end
+              #if value.class == String
+              #  value.force_encoding( Encoding::UTF_8 )
+              #end
             end
             data_ldap.merge!( { k => value } )
           end
@@ -144,6 +147,7 @@ class LDAP < StorageType
     dn = @dns[ id.to_i ]
     
     value_stored = value.class == Array ? value.to_json : value
+    value_stored.force_encoding( Encoding::UTF_8 )
     dputs( 3 ){ "Replacing attribute in " +
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
@@ -159,11 +163,13 @@ class LDAP < StorageType
     @data_ldap.search( :base => @data_ldap_base, 
       :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
       dputs( 3 ){ "Found entry: #{entry.inspect}" }
-      if value_stored.to_s == entry[attribute][0].to_s
+      value_entry = entry[attribute][0].to_s
+      value_entry.force_encoding( Encoding::UTF_8 )
+      if value_stored.to_s == value_entry
         dputs( 4 ){ "returning value #{value.inspect}" }
         return value
       else
-        dputs( 0 ){ "Didn't get right return value: #{entry[attribute[0]].to_s} instead of #{value.to_s}" }
+        dputs( 0 ){ "Didn't get right return value: #{value_entry.inspect} instead of #{value_stored.inspect}" }
       end
     end
     return nil
@@ -203,10 +209,10 @@ class LDAP < StorageType
       dputs( 1 ){ "Going to call data_create of #{@name}" }
       @entity.data_create( data )
       uid = @fields.select{|k,v| 
-        ddputs(3){"Field is #{k.inspect} - #{v.inspect}"}
+        dputs(3){"Field is #{k.inspect} - #{v.inspect}"}
         v and ( v[:ldap_name].to_sym == :uid ) 
       }
-      ddputs(3){"Found uid #{uid.inspect}"}
+      dputs(3){"Found uid #{uid.inspect}"}
       uid = uid.to_a[0][0]
       dputs( 1 ){ "Found uid to be field #{uid.inspect}: #{data[uid]}" }
       filter = Net::LDAP::Filter.eq( "uid", data[uid] )

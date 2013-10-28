@@ -259,6 +259,9 @@ module StorageHandler
       if di.has_field field and not di.data_cache
         dputs( 4 ){ "#{di} doesn't have data_cache for #{id} - #{field}" }
         val = di.get_entry( id, field )
+        if val.class == String
+          val.force_encoding( Encoding::UTF_8 )
+        end
         dputs( 4 ){ "#{id} - #{field} - #{val.inspect}" }
         @data[id][field] = val
         return val

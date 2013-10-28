@@ -44,7 +44,7 @@ class OpenPrint
 
     FileUtils::cp( @file, tmp_file )
     Zip::File.open( tmp_file ){ |z|
-      doc = z.read("content.xml")
+      doc = z.read("content.xml").force_encoding( Encoding::UTF_8 )
       fields.each{|f|
         doc.gsub!( f[0], f[1].to_s )
       }

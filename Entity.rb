@@ -20,12 +20,6 @@ class Array
   end
 end
 
-
-class ValueUnknown < Exception
-  
-end
-
-
 class Entities < RPCQooxdooService
   @@all = {}
 
@@ -360,6 +354,22 @@ class Entity
   def setup_instance
   end
 
+  alias_method :old_respond_to?, :respond_to?
+  
+  def respond_to?(cmd)
+    field = cmd.to_s
+    if field == "to_ary"
+      dputs(4){"not responding to_ary"}
+      return false
+    end
+    case field
+    when /=$/
+      return true
+    else
+      return ( @proxy.get_value( cmd ) or super )
+    end
+  end
+
   def method_missing( cmd, *args )
     dputs( 5 ){ "Entity#method_missing #{cmd} in #{self.class.name}," + 
         " with #{args} and #{args[0].class}" }
@@ -367,7 +377,11 @@ class Entity
     if not @proxy.get_value( field.sub(/^_/, '' ).sub(/=$/, '' ) )
       dputs(0){"ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
           "#{@proxy.blocks.inspect}"}
-      raise ValueUnknown
+      if field =~ /^_/
+        raise "ValueUnknown"
+      else
+        return super
+      end
     end
     case field
     when /=$/
@@ -411,18 +425,6 @@ class Entity
         }
       end
       #      data_get( field )
-    end
-  end
-
-  alias_method :old_respond_to?, :respond_to?
-  
-  def respond_to?(cmd)
-    field = cmd.to_s
-    case field
-    when /=$/
-      return true
-    else
-      return ( @proxy.get_value( cmd ) or super )
     end
   end
 
@@ -566,4 +568,15 @@ class Entity
     #@id
     to_hash.inspect
   end
+
+  def to_a
+    dputs(5){"to_a on #{self}"}
+    [ self ]
+  end
+
+  #def to_ary
+  #  #[ to_hash.to_a ]
+  #  dputs(5){"to_arying on #{self}"}
+  #  [ self ]
+  #end
 end

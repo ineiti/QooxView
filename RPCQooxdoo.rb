@@ -234,7 +234,7 @@ class RPCQooxdooHandler
       res.body = self.parse_query( req )
       res['content-type'] = "text/html"
       res['content-length'] = res.body.length
-      dputs( 2 ){ "RPC-Reply is #{res.body}" }
+      dputs( 3 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		
@@ -264,7 +264,7 @@ class RPCQooxdooHandler
           puts e.backtrace
           res.body = "Error in handling method"
         end
-        res.body.force_encoding( "ASCII-8BIT" )
+        res.body.force_encoding( Encoding::ASCII_8BIT )
         res['content-length'] = res.body.length
         res['status'] = status
         if res['content-type'] == "text/html"
