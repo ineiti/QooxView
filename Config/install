@@ -1,0 +1,25 @@
+#!/bin/bash
+
+. $( dirname ${BASH_SOURCE[0]} )/../../Config/lib_config
+LINKFILES=$DIR/files
+
+if [ ! -f ../libs/sqlite3-*/ext/sqlite3/sqlite3.o ]; then
+  ./update_sqlite3
+fi
+
+rm -f ../libs/docsplit*
+
+echo Installing for $DIST_MAIN
+case $DIST_MAIN in
+Debian_6|Ubuntu_12)
+  WEBRICK=/usr/lib/ruby/1.9.1/webrick/httprequest.rb
+  if [ -f $WEBRICK ]; then
+    perl -pi -e "s/1024([\) ])/10240\1/" $WEBRICK
+  fi
+  link docsplit-0.6.4 ../libs
+  ;;
+*)
+  link docsplit-0.7.2 ../libs
+  ;;
+esac
+
