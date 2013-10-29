@@ -147,7 +147,6 @@ class LDAP < StorageType
     dn = @dns[ id.to_i ]
     
     value_stored = value.class == Array ? value.to_json : value
-    value_stored.force_encoding( Encoding::UTF_8 )
     dputs( 3 ){ "Replacing attribute in " +
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
