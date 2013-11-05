@@ -153,12 +153,12 @@ class LDAP < StorageType
     if not dn
       dputs( 0 ){ "DN is empty... #{@dns.to_a.last(10).inspect}" }
       dputs( 0 ){"DN is empty: id, field, value = #{id}, #{field}, #{value}"}
-      return
+      #return
     end    
     
     ret = @data_ldap.replace_attribute( dn, attribute, value_stored.to_s )
     log_msg( 'DataElement', "Replaced #{attribute} in #{dn} with #{value}" )
-    dputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message}" }
+    ddputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message} - #{ret.inspect}" }
     @data_ldap.search( :base => @data_ldap_base, 
       :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
       dputs( 3 ){ "Found entry: #{entry.inspect}" }

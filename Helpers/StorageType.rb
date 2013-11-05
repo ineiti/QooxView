@@ -72,7 +72,7 @@ class StorageType
     data.values.sort{|s, t|
       #dputs( 3 ){ s.inspect }
       #dputs( 4 ){ t.inspect }
-      s[@data_field_id] <=> t[@data_field_id]
+      s[@data_field_id].to_i <=> t[@data_field_id].to_i
     }.each{|d|
       dw = extract_data( d )
       if dw.size > 1

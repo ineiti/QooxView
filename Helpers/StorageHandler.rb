@@ -179,7 +179,7 @@ module StorageHandler
     dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
     if not args[ @data_field_id ]
       nid = new_id[@data_field_id]
-      dputs( 3 ){ "Adding data_field_id of #{nid}" }
+      ddputs( 3 ){ "Adding data_field_id of #{nid}" }
       args.merge!( { @data_field_id => nid } )
     end
 
@@ -187,7 +187,10 @@ module StorageHandler
     # data
     @storage.each{|k, di| di.data_create( args ) }
     data_id = args[@data_field_id].to_i
-    if not @data[ data_id ]
+    if not @data[ data_id ] or true
+      if @data[ data_id ]
+        dputs( 0 ){ "Error: creating double-entry #{args.inspect}" }
+      end
       @data[data_id] = { @data_field_id => data_id }
       dputs( 5 ){ "@data is now #{@data.inspect}" }
       dputs( 5 ){ "data_class is now #{@data_class.to_s}" }
