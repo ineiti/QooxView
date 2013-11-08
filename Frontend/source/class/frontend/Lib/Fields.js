@@ -112,6 +112,10 @@ function setValueListCommon(values, list){
 }
 
 function setValueList(val){
+  if ( this.getMinHeight() == 30 ){
+    this.setHeight(null);
+    this.setMaxHeight(150);
+  }
   setValueListCommon(val, this);
 }
 
@@ -611,15 +615,20 @@ qx.Class.define("frontend.Lib.Fields", {
           break;
         case "list":
           if (params.list_type != "drop") {
-            field_element = new qx.ui.form.List();
+            field_element = new qx.ui.form.List()/*.set({
+              minHeight: 30,
+              maxHeight: 30
+            })*/;
             field_element.setSelectionMode(params.list_type ? "single" : "additive");
             if ( ! params.flexheight ){
-              //field_element.setMaxHeight(250);             
-              field_element.setMaxHeight(250);
-              field_element.setAllowGrowX(true);
-              field_element.setAllowStretchX(true);
-              field_element.setAllowGrowY(true);
-              field_element.setAllowStretchY(true);
+              field_element.setMinHeight( 30 );
+              field_element.setMaxHeight( 30 );
+            //field_element.setMaxHeight(250);             
+            //field_element.setMaxHeight(250);
+            //field_element.setAllowGrowX(true);
+            //field_element.setAllowStretchX(true);
+            //field_element.setAllowGrowY(true);
+            //field_element.setAllowStretchY(true);
             }else{
             //field_element.setMinHeight(250);
             //alert( "flexheight" )
@@ -980,9 +989,9 @@ qx.Class.define("frontend.Lib.Fields", {
             dbg(5, "Adding a hbox to " + lyt);
             var hbox = new qx.ui.layout.HBox(10);
             var container = new qx.ui.container.Composite( hbox );
-            var opts = this.needs_expansion.height;
+            var opts = this.needs_expansion.width;
             var sub_layout = this.calcView(view_str[1], container);
-            if ( opts != this.needs_expansion.height ){
+            if ( opts != this.needs_expansion.width ){
               opts = {
                 flex: 1
               };

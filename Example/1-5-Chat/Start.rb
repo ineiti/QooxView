@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -I../..
+#!/usr/local/bin/ruby -I../..
 # A very simple chat program - everybody can
 # join in and chose a name
 # The conversation shows the last 10 messages, without scrolling

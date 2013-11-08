@@ -147,7 +147,7 @@ class LDAP < StorageType
     dn = @dns[ id.to_i ]
     
     value_stored = value.class == Array ? value.to_json : value
-    dputs( 3 ){ "Replacing attribute in " +
+    ddputs( 3 ){ "Replacing attribute in " +
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
     if not dn

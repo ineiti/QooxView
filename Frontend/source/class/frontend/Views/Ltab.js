@@ -269,15 +269,12 @@ qx.Class.define("frontend.Views.Ltab", {
     },
 		
     fadeOut: function(){
-      if ( ! this.form || ! this.form.fields ){
-        return
-      }
-      this.form.fields.windows_fade_to( 0.5 );
-      if ( ! this.fadedin ){
+      if ( ! this.form || ! this.form.fields || ! this.fadedin ){
         return
       }
       this.fadedin = false;
       this.form.fields.setEnabled( false );
+      this.form.fields.windows_fade_to( 0.5 );
       if ( this.form.fields && this.form.fields.getContainerElement() &&
         this.form.fields.getContainerElement().getDomElement() ){
         // alert( "Doing fadout on " + this );

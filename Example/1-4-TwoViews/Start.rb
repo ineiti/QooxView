@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -I../..
+#!/usr/local/bin/ruby -I../.. -I.
 
 # Show everything
 DEBUG_LVL=5
