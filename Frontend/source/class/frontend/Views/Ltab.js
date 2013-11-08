@@ -282,13 +282,17 @@ qx.Class.define("frontend.Views.Ltab", {
           this.effect.cancel();
         }
         if ( true ){
-          this.effect = new qx.fx.effect.core.Fade(
-            this.getContainerElement().getDomElement());
-          this.effect.set( {
-            from: 1, 
-            to: 0.5,
-            duration: 0.25
-          });
+          if ( true ){
+            this.fadeOut( 0.25 );
+          } else {
+            this.effect = new qx.fx.effect.core.Fade(
+              this.getContainerElement().getDomElement());
+            this.effect.set( {
+              from: 1, 
+              to: 0.5,
+              duration: 0.25
+            });
+          }
         } else {
           this.effect = new qx.fx.effect.core.Highlight(
             this.getContainerElement().getDomElement());
@@ -298,7 +302,7 @@ qx.Class.define("frontend.Views.Ltab", {
             duration: 0.5
           });
         }
-        this.effect.start();
+        //this.effect.start();
       //alert( "Fading windows")
       }
     },
@@ -354,13 +358,17 @@ qx.Class.define("frontend.Views.Ltab", {
             this.effect.cancel();
           }
           if ( true ){
-            this.effect = new qx.fx.effect.core.Fade(
-              this.getContainerElement().getDomElement());
-            this.effect.set({
-              from: 0.5,
-              to: 1,
-              duration: 0.25
-            });
+            if ( true ){
+              this.fadeIn( 0.25 );
+            } else {
+              this.effect = new qx.fx.effect.core.Fade(
+                this.getContainerElement().getDomElement());
+              this.effect.set({
+                from: 0.5,
+                to: 1,
+                duration: 0.25
+              });
+            }
           } else {
             if ( this.getContainerElement().getDomElement() ){
               this.effect = new qx.fx.effect.core.Highlight(
@@ -374,7 +382,7 @@ qx.Class.define("frontend.Views.Ltab", {
               alert( "didnt find dom-element");
             }
           }
-          this.effect.start();
+          //this.effect.start();
         }
       }
     },
@@ -438,7 +446,7 @@ qx.Class.define("frontend.Views.Ltab", {
         this.form = new frontend.Views.Form(cback, this.layoutView, 
           this.dataClass, this.viewClass, this);
         container.add( this.form );
-/*
+        /*
         if ( this.viewClass.search( /Tabs$/ ) >= 0 ){
           // Sub-tabbed tabs get all the width
           container.add( this.form );

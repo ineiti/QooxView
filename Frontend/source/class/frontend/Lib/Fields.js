@@ -112,9 +112,9 @@ function setValueListCommon(values, list){
 }
 
 function setValueList(val){
-  if ( this.getMinHeight() == 30 ){
+  if ( this.maxheight ){
     this.setHeight(null);
-    this.setMaxHeight(150);
+    this.setMaxHeight(this.maxheight);
   }
   setValueListCommon(val, this);
 }
@@ -615,23 +615,12 @@ qx.Class.define("frontend.Lib.Fields", {
           break;
         case "list":
           if (params.list_type != "drop") {
-            field_element = new qx.ui.form.List()/*.set({
-              minHeight: 30,
-              maxHeight: 30
-            })*/;
+            field_element = new qx.ui.form.List();
             field_element.setSelectionMode(params.list_type ? "single" : "additive");
-            if ( ! params.flexheight ){
+            if ( params.maxheight ){
               field_element.setMinHeight( 30 );
               field_element.setMaxHeight( 30 );
-            //field_element.setMaxHeight(250);             
-            //field_element.setMaxHeight(250);
-            //field_element.setAllowGrowX(true);
-            //field_element.setAllowStretchX(true);
-            //field_element.setAllowGrowY(true);
-            //field_element.setAllowStretchY(true);
-            }else{
-            //field_element.setMinHeight(250);
-            //alert( "flexheight" )
+              field_element.maxheight = params.maxheight;
             }
             field_element.setMinWidth(200);
             if ( params.nopreselect ){
@@ -1033,15 +1022,14 @@ qx.Class.define("frontend.Lib.Fields", {
               alignX: "right"
             }));
             var opts = this.needs_expansion.height;
+            var flex = {};
             var sub_layout = this.calcView(view_str[1], layout );
             if ( opts != this.needs_expansion.height ){
-              opts = {
+              flex = {
                 flex: 1
               };
-            } else {
-              opts = {};
             }
-            lyt.add( sub_layout, opts );
+            lyt.add( sub_layout, flex );
             break;
           case "vboxg":
             dbg(5, "Adding a vboxg to " + lyt);
@@ -1152,7 +1140,6 @@ qx.Class.define("frontend.Lib.Fields", {
         //alert( "Fading " + win + " to " + target )
         var effect = new qx.fx.effect.core.Fade(
           win.layout.getContainerElement().getDomElement());
-        //this.windows[w].layout.getContainerElement().getDomElement());
         effect.set({
           from: 1.5 - target,
           to: target,
