@@ -1137,15 +1137,24 @@ qx.Class.define("frontend.Lib.Fields", {
     window_fade_to: function( win, target ){
       if ( win.created && ! win.dontfade && win.isfaded != target ){
         win.isfaded = target;
-        //alert( "Fading " + win + " to " + target )
-        var effect = new qx.fx.effect.core.Fade(
-          win.layout.getContainerElement().getDomElement());
-        effect.set({
-          from: 1.5 - target,
-          to: target,
-          duration: 0.25
-        });
-        effect.start();
+        
+        if ( true ){
+          if ( target < 1.0 ){
+            //win.fadeOut( 0.25 );
+          } else {
+            //win.fadeIn( 0.25 );
+          }
+        } else {
+          //alert( "Fading " + win + " to " + target )
+          var effect = new qx.fx.effect.core.Fade(
+            win.layout.getContainerElement().getDomElement());
+          effect.set({
+            from: 1.5 - target,
+            to: target,
+            duration: 0.25
+          });
+          effect.start();
+        }
         win.setEnabled( target < 1 ? false : true );
       } else {
       //alert( "Trying to fade window " + w + " which is not created yet")

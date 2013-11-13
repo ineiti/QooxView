@@ -3,8 +3,13 @@ require 'gettext'
 
 class TC_Gettext < Test::Unit::TestCase
   def setup
-    GetText.bindtextdomain( 'gettext', 'po' )
+    dputs(0){"setting up"}
+    $name = "gettext"
+    GetText.bindtextdomain( 'gettext', :path => '/tmp' )
+        GetText.bindtextdomain( $name, :path => "po" )
     GetText.locale = "en"
+    GetText::TextDomainManager.cached = false
+    dputs(0){"getting texts"}
     @a = GetText._("one")
     @b = GetText._("two")
   end

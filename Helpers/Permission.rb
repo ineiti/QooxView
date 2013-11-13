@@ -86,7 +86,7 @@ class Permission
     if not permission or permission.length == 0
       permission = %w( default )
     end
-    permission.each{|p|
+    permission.to_a.each{|p|
       perm_list = self.getViewParent( p )
       dputs( 5 ){ "p is #{p} and perm_list is #{perm_list.inspect}" }
       perm_list.each{|pl|

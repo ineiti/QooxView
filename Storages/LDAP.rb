@@ -147,7 +147,7 @@ class LDAP < StorageType
     dn = @dns[ id.to_i ]
     
     value_stored = value.class == Array ? value.to_json : value
-    ddputs( 3 ){ "Replacing attribute in " +
+    dputs( 3 ){ "Replacing attribute in " +
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
     if not dn
@@ -158,7 +158,7 @@ class LDAP < StorageType
     
     ret = @data_ldap.replace_attribute( dn, attribute, value_stored.to_s )
     log_msg( 'DataElement', "Replaced #{attribute} in #{dn} with #{value}" )
-    ddputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message} - #{ret.inspect}" }
+    dputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message} - #{ret.inspect}" }
     @data_ldap.search( :base => @data_ldap_base, 
       :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
       dputs( 3 ){ "Found entry: #{entry.inspect}" }

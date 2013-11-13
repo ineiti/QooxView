@@ -45,7 +45,6 @@ qx.Class.define("frontend.Views.Ltab", {
     field: null,
     tabs: null,
     timer: null,
-    effect: null,
     selectfadein: null,
     fadedin: null,
     alignTabs: null,
@@ -152,9 +151,9 @@ qx.Class.define("frontend.Views.Ltab", {
               res.data = [ res.data ]
             }
             for ( var i = 0; i < res.data.length; i++ ){
-              this.setVisibility( res.data[i], 
+              this.setElementVisibility( res.data[i], 
                 res.cmd == "hide" ? "excluded" : 'visible' );
-            //this.setVisibility( res.data[i], 'excluded' );
+            //this.setElementVisibility( res.data[i], 'excluded' );
             }
             break;
           case "init_values":
@@ -278,7 +277,7 @@ qx.Class.define("frontend.Views.Ltab", {
       if ( this.form.fields && this.form.fields.getContainerElement() &&
         this.form.fields.getContainerElement().getDomElement() ){
         // alert( "Doing fadout on " + this );
-        if (this.effect) {
+        if (this.effect && false) {
           this.effect.cancel();
         }
         if ( true ){
@@ -354,7 +353,7 @@ qx.Class.define("frontend.Views.Ltab", {
         if ( this.getContainerElement().getDomElement() ){
           //alert( "Doing fadin on layout " + aform );
           dbg(5, "** UNdoing effects");
-          if (this.effect) {
+          if (this.effect && false) {
             this.effect.cancel();
           }
           if ( true ){
@@ -401,7 +400,7 @@ qx.Class.define("frontend.Views.Ltab", {
       }
     },
         
-    setVisibility: function( el, vi ){
+    setElementVisibility: function( el, vi ){
       var aform = this.getActiveForm();
       var f;
       if ( f = aform.fields.fields[el] ){

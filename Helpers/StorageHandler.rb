@@ -179,7 +179,7 @@ module StorageHandler
     dputs( 5 ){ "Data_field_id is #{@data_field_id}" }
     if not args[ @data_field_id ]
       nid = new_id[@data_field_id]
-      ddputs( 3 ){ "Adding data_field_id of #{nid}" }
+      dputs( 3 ){ "Adding data_field_id of #{nid}" }
       args.merge!( { @data_field_id => nid } )
     end
 

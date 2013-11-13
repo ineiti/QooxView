@@ -11,7 +11,7 @@ class UploadFiles < RPCQooxdooPath
     dputs(4){"Writing to #{filename.inspect} in #{path.inspect}"}
     name = "#{path}/#{filename}"
     dputs(2){"Writing to #{name}"}
-    File.open( "#{name}", "w" ){|f|
+    File.open( "#{name}", "w:ASCII-8BIT" ){|f|
       f << req.query["file"]
     }
     @@files.push name

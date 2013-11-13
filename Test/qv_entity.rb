@@ -212,7 +212,8 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_missing_value
-    assert_raise( ValueUnknown ){ @admin.value3 }
+    assert_raise( NoMethodError ){ @admin.value3 }
+    assert_raise( RuntimeError ){ @admin._value3 }
     assert_nothing_raised{ @admin._value1 }
   end
 end
