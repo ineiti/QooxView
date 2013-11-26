@@ -19,9 +19,13 @@ cd /tmp/sqlite3
 rm -f ext/sqlite3/*.o
 ruby setup.rb config --prefix=/usr &&
 ruby setup.rb setup &&
-sudo ruby setup.rb install
+if which sudo; then
+  sudo ruby setup.rb install
+else
+  ruby setup.rb install --install-prefix=/usr/local/rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/
+fi
 
 # Again, if we had spaces
 cp ext/sqlite3/*.o "$SQL_DIR/ext/sqlite3"
 cd "$SQL_DIR"
-rm -rf /tmp/sqlite3
+#rm -rf /tmp/sqlite3

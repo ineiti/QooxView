@@ -104,7 +104,8 @@ function setValueListCommon(values, list){
       var item = new qx.ui.form.ListItem("" + val);
       list.add(item);
       if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
-        alert("Different number of items in list and valueIds!");
+        alert("Different number of items in list and valueIds!\n" +
+        list.field_name + " - " + item );
       }
     }
   }
@@ -794,6 +795,7 @@ qx.Class.define("frontend.Lib.Fields", {
         dbg(5, "Adding: " + type + ":" + name + ":" + label + " to " + layout.getLayout());
         this.fields[name] = field_element;
         this.fields[name].field_name = name; 
+        field_element.field_name = name;
         field_element.setTabIndex(this.index++);
         if (!this.first_field) {
           this.first_field = field_element;
@@ -1138,22 +1140,10 @@ qx.Class.define("frontend.Lib.Fields", {
       if ( win.created && ! win.dontfade && win.isfaded != target ){
         win.isfaded = target;
         
-        if ( true ){
-          if ( target < 1.0 ){
-            //win.fadeOut( 0.25 );
-          } else {
-            //win.fadeIn( 0.25 );
-          }
+        if ( target < 1.0 ){
+        //win.fadeOut( 0.25 );
         } else {
-          //alert( "Fading " + win + " to " + target )
-          var effect = new qx.fx.effect.core.Fade(
-            win.layout.getContainerElement().getDomElement());
-          effect.set({
-            from: 1.5 - target,
-            to: target,
-            duration: 0.25
-          });
-          effect.start();
+        //win.fadeIn( 0.25 );
         }
         win.setEnabled( target < 1 ? false : true );
       } else {

@@ -102,8 +102,9 @@ if not File.exists? SQLITE3_OBJ
   puts "We'll have to compile the sqlite3-library, else it probably won't work."
   print "Try to compile sqlite3? [Y/n] "
   if gets.chomp.downcase != "n"
-    puts "Path is #{ QOOXVIEW_DIR }/update_sqlite3"
-    %x[ #{ QOOXVIEW_DIR }/update_sqlite3 ]
+    install= "#{ QOOXVIEW_DIR }/Config/install"
+    puts "Path is #{install}"
+    %x[ #{install} ]
     puts "Finished"
     if File.exists? SQLITE3_OBJ
       print "Seems to be successful - press <ENTER> to continue "

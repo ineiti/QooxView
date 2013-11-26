@@ -277,32 +277,7 @@ qx.Class.define("frontend.Views.Ltab", {
       if ( this.form.fields && this.form.fields.getContainerElement() &&
         this.form.fields.getContainerElement().getDomElement() ){
         // alert( "Doing fadout on " + this );
-        if (this.effect && false) {
-          this.effect.cancel();
-        }
-        if ( true ){
-          if ( true ){
-            this.fadeOut( 0.25 );
-          } else {
-            this.effect = new qx.fx.effect.core.Fade(
-              this.getContainerElement().getDomElement());
-            this.effect.set( {
-              from: 1, 
-              to: 0.5,
-              duration: 0.25
-            });
-          }
-        } else {
-          this.effect = new qx.fx.effect.core.Highlight(
-            this.getContainerElement().getDomElement());
-          this.effect.set( {
-            startColor: "#ffffff", 
-            endColor: "#ff8888", 
-            duration: 0.5
-          });
-        }
-        //this.effect.start();
-      //alert( "Fading windows")
+        this.fadeOut( 0.25 );
       }
     },
     
@@ -352,36 +327,7 @@ qx.Class.define("frontend.Views.Ltab", {
         //if ( aform.getContainerElement().getDomElement() ){
         if ( this.getContainerElement().getDomElement() ){
           //alert( "Doing fadin on layout " + aform );
-          dbg(5, "** UNdoing effects");
-          if (this.effect && false) {
-            this.effect.cancel();
-          }
-          if ( true ){
-            if ( true ){
-              this.fadeIn( 0.25 );
-            } else {
-              this.effect = new qx.fx.effect.core.Fade(
-                this.getContainerElement().getDomElement());
-              this.effect.set({
-                from: 0.5,
-                to: 1,
-                duration: 0.25
-              });
-            }
-          } else {
-            if ( this.getContainerElement().getDomElement() ){
-              this.effect = new qx.fx.effect.core.Highlight(
-                this.getContainerElement().getDomElement());
-              this.effect.set({
-                startColor: "#ffffff",
-                endColor: "#88ff88",
-                duration: 0.5
-              });
-            } else {
-              alert( "didnt find dom-element");
-            }
-          }
-          //this.effect.start();
+          this.fadeIn( 0.25 );
         }
       }
     },
