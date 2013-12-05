@@ -133,6 +133,11 @@ class RPCQooxdooHandler
       { "origin" => origin, "code" => code, "message" => message }.to_json )
   end
 
+  def self.get_ip( req )
+    ddputs(3){"header is #{req.header.inspect}"}
+    req.header["x-forwarded-for"].first || req.peeraddr[3]
+  end
+
   # Replies to a request
   def self.request( id, service, method, params, web_req = nil )
     session = Sessions.match_by_sid( params[0].shift ) || Sessions.create
@@ -144,6 +149,7 @@ class RPCQooxdooHandler
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
       session.web_req = web_req
+      session.client_ip = self.get_ip( req )
     end
     
     dputs( 3 ){ "Going to call #{service}, #{method}" }
