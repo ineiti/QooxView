@@ -31,18 +31,18 @@ class Sessions < Entities
 
     s = super( :owner => owner, :sid => sid.to_s, :s_data => {} )
     s.web_req = nil
-    s.client_id = nil
+    s.client_ip = nil
     return s
   end
 
 end
 
 class Session < Entity
-  attr_accessor :web_req, :client_id
+  attr_accessor :web_req, :client_ip
   
   def setup_instance
     @web_req = nil
-    @client_id = nil
+    @client_ip = nil
     self.s_data ||= {}
   end
 

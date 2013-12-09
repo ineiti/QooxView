@@ -149,7 +149,7 @@ class RPCQooxdooHandler
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
       session.web_req = web_req
-      session.client_ip = self.get_ip( req )
+      session.client_ip = self.get_ip( web_req )
     end
     
     dputs( 3 ){ "Going to call #{service}, #{method}" }
