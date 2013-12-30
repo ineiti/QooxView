@@ -48,6 +48,6 @@ class Welcome < View
   end
   
   def rpc_button_try_again( session, data )
-    reply( "window_hide" )
+    reply( :window_hide )
   end
 end

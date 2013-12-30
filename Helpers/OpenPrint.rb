@@ -131,7 +131,7 @@ module PrintButton
   def cmd_printer( session, button )
     cmd = nil
     pn = stat_printer( session, button ).data_str
-    remote = session.web_req.peeraddr[3]
+    remote = session.client_ip
     dputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
       if get_server_printers.index( pn )
@@ -150,7 +150,7 @@ module PrintButton
       p = stat_printer( session, pb )
       dputs(4){"#{pb}-#{p.inspect}"}
       value = "#{GetText._( pb.to_s )} #{p.data_str}"
-      if session.web_req and ip = session.web_req.peeraddr[3]
+      if session.web_req and ip = session.client_ip
         dputs(4){"#{session.web_req.inspect} - #{ip.inspect}"}
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or

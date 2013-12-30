@@ -1,5 +1,15 @@
 require 'test/unit'
 
+class SimulWebReq
+  def self.header
+    {}
+  end
+  
+  def self.peeraddr
+    [0,0,0,0]
+  end
+end
+
 class TC_View < Test::Unit::TestCase
   def setup
     Entities.delete_all_data()
@@ -18,7 +28,7 @@ class TC_View < Test::Unit::TestCase
   end
 
   def request( service, method, args )
-    RPCQooxdooHandler.request(1, service, method, args )
+    RPCQooxdooHandler.request(1, service, method, args, SimulWebReq )
   end
 
   def test_order

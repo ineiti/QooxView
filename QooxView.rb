@@ -367,7 +367,11 @@ module QooxView
     dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
       "build" : "source"
     dputs( 1 ){ "Directory for Frontend is: #{dir_html}" }
+
     log_msg( "main", "Starting up" )
+    if cmd = get_config( false, :startupCmd )
+      %x[ #{cmd} ]
+    end
     RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
   end
 end

@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby -I.. -I.
 require 'test/unit'
-DEBUG_LVL = 3
+DEBUG_LVL = 0
 CONFIG_FILE='config.yaml'
 require 'QooxView'
 require 'st_dummy'
@@ -17,7 +17,7 @@ QooxView.init( 'entities', 'views' )
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
 #tests = %w( gettext )
-tests = %w( entity )
+#tests = %w( configbase )
 #tests = %w( permission )
 tests.each{|t|
   require "qv_#{t}"

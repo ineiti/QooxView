@@ -40,7 +40,7 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_conflict
     ConfigBase.store( :functions => [:now, :or])
-    assert_equal [:now, :take], ConfigBase.get_functions
+    assert_equal [:or, :take], ConfigBase.get_functions
   end
   
   def test_hasfunction
@@ -52,7 +52,7 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_add_set_function
     ConfigBase.set_functions([:now, :or])
-    assert_equal [:now, :take], ConfigBase.get_functions
+    assert_equal [:or, :take], ConfigBase.get_functions
     
     ConfigBase.add_function( :over )
     assert ConfigBase.has_function? :over

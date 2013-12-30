@@ -134,8 +134,12 @@ class RPCQooxdooHandler
   end
 
   def self.get_ip( req )
-    ddputs(3){"header is #{req.header.inspect}"}
-    req.header["x-forwarded-for"].first || req.peeraddr[3]
+    dputs(3){"header is #{req.header.inspect}"}
+    if ret = req.header["x-forwarded-for"]
+      ret.first
+    else
+      req.peeraddr[3]
+    end
   end
 
   # Replies to a request
@@ -149,7 +153,9 @@ class RPCQooxdooHandler
         return self.error( 2, 3, "Not allowed to view that!", id )
       end
       session.web_req = web_req
-      session.client_ip = self.get_ip( web_req )
+      if web_req
+        session.client_ip = self.get_ip( web_req )
+      end
     end
     
     dputs( 3 ){ "Going to call #{service}, #{method}" }

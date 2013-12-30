@@ -171,7 +171,7 @@ module StorageHandler
     return { @data_field_id => last_id }
   end
 
-  def create( args )
+  def create( args, allow_double = false )
     if args.class != Hash
       dputs( 0 ){ "Entities.create takes a hash! You gave a #{args.class}" }
       exit
@@ -187,7 +187,7 @@ module StorageHandler
     # data
     @storage.each{|k, di| di.data_create( args ) }
     data_id = args[@data_field_id].to_i
-    if not @data[ data_id ] or true
+    if not @data[ data_id ] or allow_double
       if @data[ data_id ]
         dputs( 0 ){ "Error: creating double-entry #{args.inspect}" }
       end
