@@ -202,27 +202,35 @@ class RPCQooxdooHandler
   
   # Parsing of an incoming RPC-request - returns a string to be sent
   # to the client
-  def self.parse( stid, d, web_req = nil )
+  def self.parse( data, web_req = nil )
     answer = nil
     
     # Prepare all variables
-    if not d
+    if not data
       answer = self.error( 2,0, "Didn't receive request", -1 )
     else
-      data = JSON.parse( d )
       dputs( 3 ){ "Request-data is: #{data.inspect}" }
       answer = self.request( data['id'], data['service'], data['method'], data['params'], web_req )
     end
     
     # And put it in a nice qx-compatible reply
     dputs( 3 ){ "Answer is #{answer}" }
-    return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
-      "#{ActiveSupport::JSON.encode(answer) } );"
+    return answer    
   end
   
   # A more easy handler for a query-hash, e.g. camping or webrick
   def self.parse_query( q )
-    self.parse( q.query['_ScriptTransport_id'], q.query['_ScriptTransport_data'], q )
+    request = JSON.parse( q.body )
+    ddputs(4){"JSON of body is #{request.inspect}"}
+    self.parse( request, q ).to_json
+  end
+  
+  def self.parse_query_xdomain( q )
+    stid = q.query['_ScriptTransport_id']
+    answer = self.parse( JSON.parse( q.query['_ScriptTransport_data'] ), q )
+
+    return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
+      "#{answer.to_json} );"
   end
   
   # And a no-worry with Webrick
@@ -238,13 +246,20 @@ class RPCQooxdooHandler
       trap(signal){ server.shutdown }
     }
     
+    #server.mount "/rpc", GetPost
     # This is the remote-procedure-handling from the Frontend
     server.mount_proc('/rpc') {|req, res|
       $webrick_request = req
       dputs( 5 ){ "Request is #{req.inspect}" }
+      dputs( 5 ){ "Body is is #{req.body.inspect}"}
       dputs( 4 ){ "Request-path is #{req.path}" }
-      res.body = self.parse_query( req )
-      res['content-type'] = "text/html"
+      if req.body
+        res.body = self.parse_query( req )
+      else
+        res.body = self.parse_query_xdomain( req )
+      end
+      #res['content-type'] = "text/html"
+      res['content-type'] = "application/json"
       res['content-length'] = res.body.length
       dputs( 3 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK

@@ -37,7 +37,7 @@ class TC_Helpers < Test::Unit::TestCase
     assert_equal 2, @inside
   end
 	
-  def test_speed_dputs
+  def test_speed_create
     Benchmark.bm{|x|
 			
       (0..4).each{|b|

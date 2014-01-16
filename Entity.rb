@@ -39,6 +39,7 @@ class Entities < RPCQooxdooService
     @storage = nil
     @msg = nil
     @undo = @logging = true
+    @last_id = 1
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
