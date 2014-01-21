@@ -7,6 +7,10 @@ Views:
   need_pass: true
   hide_pass: false
 
+Entities:
+  LogActions:
+    logging: false
+
 StorageType:
   STdummy1:
     conf: passit
@@ -28,3 +32,5 @@ TestLink2: |
 
 TestLink1:
   - "Link: <a href='hello there'>link</a>"
+
+profiling: profile.txt

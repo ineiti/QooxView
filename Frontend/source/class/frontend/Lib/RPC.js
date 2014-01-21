@@ -56,7 +56,7 @@ qx.Class.define("frontend.Lib.RPC", {
 					
       // call a remote procedure -- takes no arguments, returns a string
       this.RpcRunning = this.rpc.callAsync(function(result, ex, id) {
-        dbg( 3, "RpcRunning = null" );
+        dbg( 3, "RpcRunning = null, ex == ", ex );
         if (ex == null) {
           //alert( "Result is " + result );
           result.push( { cmd: 'end_of_req', data: '' } );

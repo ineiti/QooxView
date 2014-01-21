@@ -164,11 +164,15 @@ module StorageHandler
   end
 
   def new_id
-    last_id = 1
-    if @data.keys.length > 0
-      last_id = @data.keys.max{|a,b| a.to_i <=> b.to_i} + 1
+#    last_id = 1
+#    if @data.keys.length > 0
+#      last_id = @data.keys.max{|a,b| a.to_i <=> b.to_i} + 1
+#    end
+    while @data.has_key? @last_id
+      dputs( 5 ){ "Already having id #{@last_id}" }
+      @last_id += 1
     end
-    return { @data_field_id => last_id }
+    return { @data_field_id => @last_id }
   end
 
   def create( args, allow_double = false )
