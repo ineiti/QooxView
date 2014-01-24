@@ -303,9 +303,13 @@ class RPCQooxdooHandler
 
     server.mount( '/tmp', HTTPServlet::FileHandler, "/tmp" )
     server.mount( '/', HTTPServlet::FileHandler, dir )
-    
-    server.start
-    exit
+
+    server_loop = Thread.new{
+      server.start
+      dputs( 1 ){"Webrick stopped"}
+    }
+    sleep 40
+    server.shutdown
   end
 
   def self.add_path( path, cl )

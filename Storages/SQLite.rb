@@ -51,11 +51,14 @@ class SQLite < StorageType
   end
 
   def set_entry( data, field, value )
-    dputs( 5 ){ "Searching id #{data.inspect}" }
+    ddputs( 5 ){ "Searching id #{data.inspect}" }
     entry = @db_class.first( :conditions => { @data_field_id => data } )
     if entry
+      ddputs( 5 ){ "Setting value" }
       entry.send( "#{field}=", value )
-      entry.save!
+      ddputs( 5 ){ "Saving" }
+      #entry.save!
+      ddputs( 5 ){ "Done" }
       return value
     else
       dputs( 2 ){ "Didn't find id #{data.inspect}" }

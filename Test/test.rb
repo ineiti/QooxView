@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby -I.. -I.
 require 'test/unit'
-require 'test/unit/testsuite'
+#require 'test/unit/testsuite'
 DEBUG_LVL = 0
 CONFIG_FILE='config.yaml'
 require 'QooxView'

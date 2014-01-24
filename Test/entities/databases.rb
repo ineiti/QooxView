@@ -7,10 +7,6 @@ class Movements < Entities
   end
 end
 
-class Movement < Entity
-  
-end
-
 class Accounts < Entities
   def setup_data
     @default_type = :SQLite
@@ -18,8 +14,4 @@ class Accounts < Entities
     value_str :name
     value_int :multiplier
   end
-end
-
-class Account < Entity
-  
 end

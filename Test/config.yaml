@@ -33,4 +33,4 @@ TestLink2: |
 TestLink1:
   - "Link: <a href='hello there'>link</a>"
 
-profiling: profile.txt
+#profiling: profile.txt

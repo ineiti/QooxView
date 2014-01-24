@@ -387,18 +387,20 @@ class Entity
     case field
     when /=$/
       # Setting the value
-      dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
+      ddputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
       field_set = "_#{field.chop.sub(/^_/, '')}"
       
       if not old_respond_to? "#{field}=".to_sym
         self.class.class_eval <<-RUBY
         def #{field}( v )
-          if @proxy.undo or @proxy.logging
-            data_set_log( "#{field_set}".to_sym, v, @proxy.msg, @proxy.undo, 
-              @proxy.logging )
-          else
+          ddputs(5){"We're directly in =#{field_set}"}
+          #if @proxy.undo or @proxy.logging
+          #  data_set_log( "#{field_set}".to_sym, v, @proxy.msg, @proxy.undo, 
+          #    @proxy.logging )
+          #else
             data_set( "#{field_set}".to_sym, v )
-          end
+          #end
+          ddputs(5){"Leaving =#{field_set}"}
         end
         RUBY
         send( field, args[0] )
@@ -499,9 +501,9 @@ class Entity
   def data_set( field_orig, value )
     field = field_orig.to_s
     ( direct = field =~ /^_/ ) and field.sub!( /^_/, '' )
-    dputs(4){"Direct is #{direct} for field #{field_orig.inspect}"}
+    ddputs(4){"Direct is #{direct} for field #{field_orig.inspect}"}
     v = if value.is_a? Entity
-      dputs( 3 ){ "Converting #{value} to #{value.id}" }
+      ddputs( 3 ){ "Converting #{value} to #{value.id}" }
       value.id
     else
       value
@@ -509,7 +511,9 @@ class Entity
     if ( self.public_methods.index( "#{field}=" ) ) and ( not direct )
       send( "#{field}=", v )
     else
+      ddputs(4){"setting entry"}
       @proxy.set_entry( @id, field, v )
+      ddputs(4){"Finished setting entry"}
     end
     self
   end

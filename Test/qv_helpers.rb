@@ -59,4 +59,21 @@ class TC_Helpers < Test::Unit::TestCase
     assert_equal "Something over\nmultiple lines:\none two three\n", 
       get_config( nil, :TestLink2 )
   end
+  
+  def test_create_sqlite
+    Accounts.create( :name => "test" )
+  end
+
+  def test_speed_sqlite
+    Benchmark.bm{|x|
+			
+      (0..4).each{|b|
+        x.report( "Accounts #{(b*50).to_s.rjust(3)}" ){
+          (1..50).each{|i|
+            Accounts.create( :name => "test" )
+          }
+        }
+      }
+    }
+  end
 end
