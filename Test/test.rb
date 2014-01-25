@@ -17,9 +17,9 @@ QooxView.init( 'entities', 'views' )
 
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
-tests = %w( helpers )
-#tests = %w( configbase )
-#tests = %w( permission )
+#tests = %w( helpers )
+#tests = %w( sqlite )
+#tests = %w( entity )
 
 tests.each{|t|
   require "qv_#{t}"

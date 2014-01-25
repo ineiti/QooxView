@@ -127,12 +127,26 @@ module StorageHandler
 
   # Like search_by, but only ONE exact matche
   def match_by( field, value )
-    ret = search_by( field, "^#{value}$" )
-    if ret.length > 0
-      return ret[0]
-    else
-      return nil
-    end
+    field = field.to_sym
+    v = value.to_s
+    @data.each_key{|k|
+      if @data[k]
+        [@data[k][field]].flatten.each{|d|
+          if d.to_s == v
+            dputs( 4 ){ "Found data-entry #{k}: #{@data[k].inspect}" }
+            return get_data_instance( k )
+          end
+        }
+      end
+    }
+    return nil
+
+    #    ret = search_by( field, "^#{value}$" )
+    #    if ret.length > 0
+    #      return ret[0]
+    #    else
+    #      return nil
+    #    end
   end
   
   # Like search_by, but only exact matcheS
@@ -164,10 +178,10 @@ module StorageHandler
   end
 
   def new_id
-#    last_id = 1
-#    if @data.keys.length > 0
-#      last_id = @data.keys.max{|a,b| a.to_i <=> b.to_i} + 1
-#    end
+    #    last_id = 1
+    #    if @data.keys.length > 0
+    #      last_id = @data.keys.max{|a,b| a.to_i <=> b.to_i} + 1
+    #    end
     while @data.has_key? @last_id
       dputs( 5 ){ "Already having id #{@last_id}" }
       @last_id += 1
@@ -247,9 +261,8 @@ module StorageHandler
     @storage.each{|k, di|
       if di.has_field field
         #        if value.to_s != @data[id.to_i][field].to_s
-        ddputs(4){"di.set_entry"}
         val = di.set_entry( id, field, value )
-        ddputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
+        dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
         @data[ id.to_i ][ field ] = val
         #        end
         return val
@@ -343,6 +356,7 @@ module StorageHandler
     @storage.each{|k, di|
       di.delete_all( local_only )
     }
+    @last_id = 1
   end
 
 end

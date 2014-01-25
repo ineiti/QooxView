@@ -25,24 +25,45 @@ class TC_SQLite < Test::Unit::TestCase
     test_create
   end
   
-  def tes_speed
+  def test_speed
     Entities.delete_all_data
-    dputs( 0 ){ "Creation of 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ }
-      (1..1000).each{|e|
-        Entities.Movements.create( :desc => "test", :money => e)
+    dputs( 0 ){ "Creation of 250 entities: " }
+    (1..4).each{|f|
+      dputs( 0 ){ Benchmark.measure{
+          (1..250).each{|e|
+            Entities.Movements.create( :desc => "test", :money => e)
+          }
+        }.to_s
       }
     }
     dputs( 0 ){ "Loading 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ Entities.Movements.load } }
+    dputs( 0 ){ Benchmark.measure{ Entities.Movements.load }.to_s }
     dputs( 0 ){ "Searching in 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ Entities.Movements.match_by_money(500)} }
+    dputs( 0 ){ Benchmark.measure{ Entities.Movements.matches_by_desc("test")}.to_s }
+    dputs( 0 ){ "Searching test gives " +
+        "#{Entities.Movements.matches_by_desc('test').count}"}
   end
   
   def test_set_value
     Entities.Movements.load
     @m1.money = 300
     @m2.money = 500
+    assert_equal 300, @m1.money
+    assert_equal 500, @m2.money
+    Entities.Movements.load
+    one = Entities.Movements.match_by_desc( "salaire" )
+    two = Entities.Movements.match_by_desc( "pain" )
+    assert_equal 100, one.money
+    assert_equal 200, two.money
+    assert_equal 100, @m1.money
+    assert_equal 200, @m2.money
+
+    @m1.money = 300
+    Entities.Movements.save
+    @m2.money = 500
+    Entities.Movements.save
+    assert_equal 300, @m1.money
+    assert_equal 500, @m2.money
     Entities.Movements.load
     one = Entities.Movements.match_by_desc( "salaire" )
     two = Entities.Movements.match_by_desc( "pain" )

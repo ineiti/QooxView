@@ -221,7 +221,7 @@ class RPCQooxdooHandler
   # A more easy handler for a query-hash, e.g. camping or webrick
   def self.parse_query( q )
     request = JSON.parse( q.body )
-    ddputs(4){"JSON of body is #{request.inspect}"}
+    dputs(4){"JSON of body is #{request.inspect}"}
     self.parse( request, q ).to_json
   end
   

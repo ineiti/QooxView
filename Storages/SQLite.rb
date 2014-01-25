@@ -42,23 +42,27 @@ class SQLite < StorageType
     eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
     @db_class = eval( @db_class_name )
     dputs(4){"db_class is #{db_class.inspect}"}
+    
+    @entries = {}
+    @entries_save = {}
   end
 
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save( data )
-    dputs( 5 ){ "Not implemented!" }
+    dputs(3){"Saving #{@entries_save.count} entries in #{@db_class}"}
+    @entries_save.each_value{|v|
+      v.save
+    }
+    @entries_save = {}
   end
 
   def set_entry( data, field, value )
-    ddputs( 5 ){ "Searching id #{data.inspect}" }
-    entry = @db_class.first( :conditions => { @data_field_id => data } )
-    if entry
-      ddputs( 5 ){ "Setting value" }
+    dputs( 5 ){ "Searching id #{data.inspect}" }
+    @entries[data] ||= @db_class.first( :conditions => { @data_field_id => data } )
+    if entry = @entries[data]
       entry.send( "#{field}=", value )
-      ddputs( 5 ){ "Saving" }
-      #entry.save!
-      ddputs( 5 ){ "Done" }
+      @entries_save[data] = entry
       return value
     else
       dputs( 2 ){ "Didn't find id #{data.inspect}" }
@@ -112,6 +116,7 @@ class SQLite < StorageType
   def load
     dputs( 2 ){ "Loading data for #{@db_class_name}" }
     res = Hash[ *@db_class.all.collect{|s|
+        @entries[s[@data_field_id]] = s
         [ s[@data_field_id].to_i, s.attributes.symbolize_keys ]
       }.flatten(1)
     ]

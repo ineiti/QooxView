@@ -69,7 +69,7 @@ class TC_Helpers < Test::Unit::TestCase
 			
       (0..4).each{|b|
         x.report( "Accounts #{(b*50).to_s.rjust(3)}" ){
-          (1..50).each{|i|
+          (1..500).each{|i|
             Accounts.create( :name => "test" )
           }
         }
