@@ -174,7 +174,12 @@ class Entities < RPCQooxdooService
       action = "#{$~[1]}#{$~[2]}"
       field = cmd_str.sub( /^(find|search|match|matches)(_by|)_/, "" )
       dputs( 4 ){ "Using #{action} for field #{field}" }
-      self.send( action, field, args[0] )
+      if args[0].is_a? Entity
+        dputs(4){"Getting id because it's an Entity"}
+        self.send( action, field, args[0].id )
+      else
+        self.send( action, field, args[0] )
+      end
     when /^list_/
       field = cmd_str.sub( /^list_/, "" )
       dputs( 5 ){ "Using list for field #{field}" }
