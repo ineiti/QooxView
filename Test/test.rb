@@ -1,4 +1,5 @@
 #!/usr/local/bin/ruby -I.. -I.
+#!/usr/bin/env ruby -I.. -I.
 require 'test/unit'
 #require 'test/unit/testsuite'
 DEBUG_LVL = 0
@@ -18,8 +19,8 @@ QooxView.init( 'entities', 'views' )
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
 #tests = %w( helpers )
-#tests = %w( sqlite )
-#tests = %w( entity )
+tests = %w( entity )
+#tests = %w( configbase )
 
 tests.each{|t|
   require "qv_#{t}"

@@ -13,7 +13,7 @@ class OpenPrint
   def initialize( file, dir = nil )
     @file = file
     @dir = dir
-    @base = `basename #{file}`.chomp
+    @base = File.basename file
     @lp_cmd = nil
     @counter = 0
   end
@@ -48,7 +48,7 @@ class OpenPrint
       fields.each{|f|
         doc.gsub!( f[0], f[1].to_s )
       }
-      z.file.open("content.xml", "w"){ |f|
+      z.get_output_stream("content.xml"){ |f|
         f.write( doc )       
       }
       z.commit
@@ -71,6 +71,21 @@ class OpenPrint
       # Download PDF
       return "#{pdf_file}"
     end
+  end
+  
+  def self.print_nup( files, base = nil )
+    base ||= File.basename files.first, ".pdf"
+    pages = []
+    [1,2].each{|page|
+      pages[page] = "/tmp/#{base}-#{page}.pdf"
+      cmd = "pdfnup --quiet --no-landscape --nup 2x2 " +
+        files.join(" #{page} ") + " #{page.to_s}" +
+        " --outfile #{pages[page]}"
+      dputs(3){"Running command #{cmd}"}
+      %x[ #{cmd} ]
+    }
+    pages.shift
+    return pages
   end
 end
 

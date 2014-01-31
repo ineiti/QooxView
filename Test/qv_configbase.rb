@@ -11,7 +11,8 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_init
     assert_equal [[1,:take],[2,:over],[3,:world],
-      [4,:now],[5,:or],[6,:never]], ConfigBases.list_functions
+      [4,:now],[5,:or],[6,:never],
+      [7, :linux], [8, :on], [9, :desktop]], ConfigBases.list_functions
   end
   
   def test_save
@@ -32,7 +33,7 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_base
     ConfigBase.store( :functions => [:now])
-    assert_equal [:now, :take], ConfigBase.get_functions
+    assert_equal [:now, :take, :linux], ConfigBase.get_functions
 
     ConfigBase.store( :functions => [:take])
     assert_equal [:take], ConfigBase.get_functions
@@ -40,7 +41,7 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_conflict
     ConfigBase.store( :functions => [:now, :or])
-    assert_equal [:or, :take], ConfigBase.get_functions
+    assert_equal [:or, :take, :linux], ConfigBase.get_functions
   end
   
   def test_hasfunction
@@ -52,7 +53,7 @@ class TC_ConfigBase < Test::Unit::TestCase
   
   def test_add_set_function
     ConfigBase.set_functions([:now, :or])
-    assert_equal [:or, :take], ConfigBase.get_functions
+    assert_equal [:or, :take, :linux], ConfigBase.get_functions
     
     ConfigBase.add_function( :over )
     assert ConfigBase.has_function? :over

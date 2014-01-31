@@ -355,7 +355,7 @@ module QooxView
   end
 
   # The main function, used to start it all
-  def self.startWeb( port = 3302 )
+  def self.startWeb( port = 3302, duration = nil )
     dputs( 0 ){ "Configuring port for #{port}" }
     # Suppose we've not being initialized when there are no permissions
     if Permission.list.size == 0
@@ -372,6 +372,7 @@ module QooxView
     if cmd = get_config( false, :startupCmd )
       %x[ #{cmd} ]
     end
-    RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/" )
+    RPCQooxdooHandler.webrick( port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/",
+      duration)
   end
 end

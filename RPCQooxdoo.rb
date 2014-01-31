@@ -234,7 +234,7 @@ class RPCQooxdooHandler
   end
   
   # And a no-worry with Webrick
-  def self.webrick( port, dir = "." )
+  def self.webrick( port, dir = ".", duration = nil )
     access_log_stream = File.open('webrick.access.log', 'w')
     logger = [[ access_log_stream, AccessLog::COMBINED_LOG_FORMAT ]]
     #logger.push [$stderr, WEBrick::AccessLog::COMMON_LOG_FORMAT]
@@ -242,9 +242,6 @@ class RPCQooxdooHandler
     server = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new( "webrick.log" ),
       :AccessLog => logger )
     # server = HTTPServer.new(:Port => port )
-    ['INT', 'TERM'].each { |signal|
-      trap(signal){ server.shutdown }
-    }
     
     #server.mount "/rpc", GetPost
     # This is the remote-procedure-handling from the Frontend
@@ -304,12 +301,20 @@ class RPCQooxdooHandler
     server.mount( '/tmp', HTTPServlet::FileHandler, "/tmp" )
     server.mount( '/', HTTPServlet::FileHandler, dir )
 
-    server_loop = Thread.new{
+    if not duration
+      ['INT', 'TERM'].each { |signal|
+        trap(signal){ server.shutdown }
+      }
       server.start
-      dputs( 1 ){"Webrick stopped"}
-    }
-    sleep 40
-    server.shutdown
+    else
+      server_loop = Thread.new{
+        server.start
+        dputs( 1 ){"Webrick stopped"}
+      }
+      sleep duration
+      server.shutdown
+      server_loop.join
+    end
   end
 
   def self.add_path( path, cl )

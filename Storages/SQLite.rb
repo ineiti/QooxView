@@ -23,6 +23,7 @@ class SQLite < StorageType
     @name_file = name_file
     #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
+    dputs( 4 ){ "Opening database" }
     open_db
 
     super config
@@ -34,11 +35,14 @@ class SQLite < StorageType
   end
   
   def open_db
+    dputs( 4 ){ "Opening connection" }
     ActiveRecord::Base.establish_connection(
       :adapter => "sqlite3", :database => "data/#{@name_file}" )
 
+    dputs( 4 ){ "Initializing tables" }
     init_table
     
+    dputs( 4 ){ "Getting Base" }
     eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
     @db_class = eval( @db_class_name )
     dputs(4){"db_class is #{db_class.inspect}"}

@@ -185,7 +185,7 @@ class TC_Entity < Test::Unit::TestCase
     require 'rubygems'
     require 'perftools'
     PerfTools::CpuProfiler.start("/tmp/profile") do
-      (1..200).each{|p|
+      (1..400).each{|p|
         dputs( 1 ){ "Creating person #{p}" }
         Courses.create( :first_name => "#{p}", :last_name => "#{p}" )
       }
