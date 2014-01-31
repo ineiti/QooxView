@@ -73,19 +73,33 @@ class OpenPrint
     end
   end
   
-  def self.print_nup( files, base = nil )
-    base ||= File.basename files.first, ".pdf"
-    pages = []
-    [1,2].each{|page|
-      pages[page] = "/tmp/#{base}-#{page}.pdf"
-      cmd = "pdfnup --quiet --no-landscape --nup 2x2 " +
-        files.join(" #{page} ") + " #{page.to_s}" +
-        " --outfile #{pages[page]}"
-      dputs(3){"Running command #{cmd}"}
+  # Input: 1..n files with 2 pages, front and back
+  # Output: one 2x2-nup PDF front
+  #         one 2x2-nup PDF back
+  #         to be printed "long edge duplex"
+  def self.print_nup_duplex( files, base = nil )
+    Dir.mktmpdir{|dir|
+      allpages = "#{dir}/allpages.pdf"
+      cmd = "pdfjam --quiet --landscape --outfile #{allpages} " +
+        files.join( " '1,2' ") + " '1,2,{},{}' "
+      ddputs(3){"Running allpages-command #{cmd}"}
       %x[ #{cmd} ]
+      
+      pages_all = ((files.count + 1) & ~1).times
+      documents = { :front => pages_all.collect{|i| ( i ^ 1 ) * 2 + 1 }.join(","),
+        :back => pages_all.collect{|i| i * 2 + 2 }.join(",") }
+
+      base ||= File.basename files.first, ".pdf"
+      documents.collect{|suffix, pages|
+        pages_file = "/tmp/#{base}-#{suffix}.pdf"
+        cmd = "pdfnup --quiet --landscape --nup 2x2 " +
+          "#{allpages} #{pages} --outfile #{pages_file}"
+
+        ddputs(3){"Running pdfnup-command #{cmd}"}
+        %x[ #{cmd} ]
+        pages_file
+      }
     }
-    pages.shift
-    return pages
   end
 end
 
