@@ -616,8 +616,13 @@ class View < RPCQooxdooService
   end
 
   # Upon choice of an entry in the list
-  def rpc_list_choice( session, name, *args )
-    dputs( 3 ){ "Got a new choice of list: #{name.inspect} - #{args.inspect}" }
+  def rpc_list_choice( session, name, data )
+    if respond_to? "rpc_list_choice_#{name}"
+      dputs(3){"Calling rpc_list_choice-#{name}"}
+      return send( "rpc_list_choice_#{name}", session, data )
+    else
+      dputs( 3 ){ "Got a new choice of list: #{name.inspect} - #{data.inspect}" }
+    end
   end
 
   # Send the current values that are displayed
