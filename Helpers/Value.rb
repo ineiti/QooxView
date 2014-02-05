@@ -142,7 +142,8 @@ class Value
     when /entity/
       dputs( 3 ){ "parsing #{@name}: #{p.inspect}" }
       case @list_type
-      when :drop
+      when :drop, :single
+        dputs(3){"Getting entity for #{@list_type}-#{eclass.class.inspect}"}
         ret = eclass.match_by( eclass.data_field_id, p[0] )
         dputs( 3 ){ "And found #{ret.inspect}" }
         if not ret and @args.has_key? :empty

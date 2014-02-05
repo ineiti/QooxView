@@ -160,11 +160,13 @@ class Hash
     when /^_.*[^=]$/
       key = s.to_s.sub(/^_/, '').to_sym
       dputs(4){"Searching for #{s.inspect} -> #{key}"}
-      return self[key]
+      self.has_key? key and return self[key]
+      return self[key.to_s]
     when /^_.*=$/
       key = /^_(.*)=$/.match(s.to_s)[1].to_sym
       dputs(4){"Setting #{s.inspect} -> #{key} to #{args.inspect}"}
-      return self[key] = args[0]
+      self.has_key? key and return self[key] = args[0]
+      return self[key.to_s] = args[0]
     else
       super( s, args )
     end

@@ -82,7 +82,7 @@ class OpenPrint
       allpages = "#{dir}/allpages.pdf"
       cmd = "pdfjam --quiet --landscape --outfile #{allpages} " +
         files.join( " '1,2' ") + " '1,2,{},{}' "
-      ddputs(3){"Running allpages-command #{cmd}"}
+      dputs(3){"Running allpages-command #{cmd}"}
       %x[ #{cmd} ]
       
       pages_all = ((files.count + 1) & ~1).times
@@ -95,7 +95,7 @@ class OpenPrint
         cmd = "pdfnup --quiet --landscape --nup 2x2 " +
           "#{allpages} #{pages} --outfile #{pages_file}"
 
-        ddputs(3){"Running pdfnup-command #{cmd}"}
+        dputs(3){"Running pdfnup-command #{cmd}"}
         %x[ #{cmd} ]
         pages_file
       }

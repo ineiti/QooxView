@@ -599,6 +599,8 @@ class View < RPCQooxdooService
       dputs( 3 ){ "Found #{rpc_name} and calling it with #{args.inspect}" }
       return self.send( rpc_name, session, args[0] )
     else
+      dputs( 0 ){ "Error: Didn't find anybody for #{rpc_name} in " +
+          "#{self.class.inspect} - ignoring" }
       return []
     end
   end
