@@ -23,7 +23,7 @@ qx.Class.define("frontend.Lib.RPC", {
     this.rpc = new qx.io.remote.Rpc();
     // For debugging the ruby-thread in peace
     this.rpc.setTimeout(1000000);
-    this.rpc.setCrossDomain(true);
+    //this.rpc.setCrossDomain(true);
     var url = document.URL.replace( /\?.*/, '' ).replace( /\/$/, '' ) + "/rpc";
     dbg( 3, "URL for RPC is " + url );
     this.rpc.setUrl(url);
