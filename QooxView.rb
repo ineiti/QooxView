@@ -236,7 +236,7 @@ def get_config_rec( path, default, config = $config )
     end
   end
 end
-defined?( CONFIG_FILE ) and dputs( 1 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
+defined?( CONFIG_FILE ) and dputs( 2 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
 
 require 'RPCQooxdoo'
 require 'Entity'
@@ -368,7 +368,7 @@ module QooxView
     # First check whether QooxDoo is running in source- or buid-mode
     dir_html = File.exist?( QOOXVIEW_DIR + "/Frontend/build/script/frontend.js" ) ?
       "build" : "source"
-    dputs( 1 ){ "Directory for Frontend is: #{dir_html}" }
+    dputs( 2 ){ "Directory for Frontend is: #{dir_html}" }
 
     log_msg( "main", "Starting up" )
     if cmd = get_config( false, :startupCmd )

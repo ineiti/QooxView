@@ -264,7 +264,7 @@ class RPCQooxdooHandler
 		
     # And any other handling required by modules
     @@paths.each{|path,cl|
-      dputs( 1 ){ "Mounting path /#{path} to class #{cl.name}" }
+      dputs( 2 ){ "Mounting path /#{path} to class #{cl.name}" }
       server.mount_proc("/#{path.to_s}") {|req, res|
         $webrick_request = req
         dputs( 5 ){ "Webrick_request is #{$webrick_request.inspect}" }
@@ -309,7 +309,7 @@ class RPCQooxdooHandler
     else
       server_loop = Thread.new{
         server.start
-        dputs( 1 ){"Webrick stopped"}
+        dputs( 2 ){"Webrick stopped"}
       }
       sleep duration
       server.shutdown

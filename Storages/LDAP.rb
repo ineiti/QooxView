@@ -128,7 +128,7 @@ class LDAP < StorageType
     ldap = Net::LDAP.new
     ldap.host = @data_ldap_host
     ldap.auth "uid=#{uid},#{@data_ldap_users}", pass
-    dputs( 1 ){ ldap.inspect }
+    dputs( 2 ){ ldap.inspect }
     begin
       return ldap.bind
     rescue Net::LDAP::LdapError
@@ -205,7 +205,7 @@ class LDAP < StorageType
   # object is extracted from the LDAP-tree.
   def data_create( data )
     if @entity.respond_to? :data_create
-      dputs( 1 ){ "Going to call data_create of #{@name}" }
+      dputs( 2 ){ "Going to call data_create of #{@name}" }
       @entity.data_create( data )
       uid = @fields.select{|k,v| 
         dputs(3){"Field is #{k.inspect} - #{v.inspect}"}
@@ -213,7 +213,7 @@ class LDAP < StorageType
       }
       dputs(3){"Found uid #{uid.inspect}"}
       uid = uid.to_a[0][0]
-      dputs( 1 ){ "Found uid to be field #{uid.inspect}: #{data[uid]}" }
+      dputs( 2 ){ "Found uid to be field #{uid.inspect}: #{data[uid]}" }
       filter = Net::LDAP::Filter.eq( "uid", data[uid] )
       @field_id_ldap = @fields[ @data_field_id ][:ldap_name].to_sym
       

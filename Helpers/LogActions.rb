@@ -39,7 +39,7 @@ class LogActions < Entities
         :undo_function => undo_function, :data_old => data_old,
         :date_stamp => Time.now.strftime("%Y:%m:%d %H:%M:%S")} )
     else
-      dputs( 1 ){ "Not logging: #{[data, undo_function, data_old].inspect}" }
+      dputs( 2 ){ "Not logging: #{[data, undo_function, data_old].inspect}" }
     end
   end
 
@@ -54,7 +54,7 @@ class LogActions < Entities
       dputs( 5 ){ "Inspected result: #{res.inspect}" }
       return res
     else
-      dputs( 1 ){ "Asked to list, but logging disabled!" }
+      dputs( 0 ){ "Asked to list, but logging disabled!" }
       return []
     end
   end
@@ -70,7 +70,7 @@ class LogActions < Entities
         target.send( e[:undo_function], e[:data], e[:data_old] )
       end
     else
-      dputs( 1 ){ "Can't undo if logging set to false" }
+      dputs( 0 ){ "Can't undo if logging set to false" }
     end
   end
 end

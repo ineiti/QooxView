@@ -92,7 +92,7 @@ module VTListPane
         n = @data_class.create( data.to_sym )
         selection = n.id
       else
-        dputs( 1 ){ "Didn't have a #{@vtlp_method}"}
+        dputs( 0 ){ "Didn't have a #{@vtlp_method}"}
       end
     end
     dputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}

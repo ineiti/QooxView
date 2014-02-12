@@ -94,7 +94,7 @@ class CSV < StorageType
     # rm -rf /*
     # as a user ;)
     if not local_only
-      dputs( 1 ){ "Deleting #{@csv_dir}" }
+      dputs( 2 ){ "Deleting #{@csv_dir}" }
       FileUtils.rm Dir.glob( "#{@csv_dir}/*csv" )
     end
   end

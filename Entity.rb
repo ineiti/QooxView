@@ -305,13 +305,13 @@ class Entities < RPCQooxdooService
 
   def self.delete_all_data( local_only = false )
     @@all.each_pair{|k,v|
-      dputs( 1 ){ "Erasing data of #{k}" }
+      dputs( 2 ){ "Erasing data of #{k}" }
       v.delete_all( local_only )
     }
   end
 
   def self.save_all
-    dputs(1){"Saving everything"}
+    dputs(2){"Saving everything"}
     @@all.each{|k,v|
       dputs( 3 ){ "Saving #{v.class.name}" }
       v.save
@@ -319,7 +319,7 @@ class Entities < RPCQooxdooService
   end
 
   def self.load_all
-    dputs(1){"Loading everything"}
+    dputs(2){"Loading everything"}
     @@all.each{|k,v|
       dputs( 3 ){ "Loading #{v.class.name}" }
       v.load

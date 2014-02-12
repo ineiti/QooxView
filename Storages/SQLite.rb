@@ -92,7 +92,7 @@ class SQLite < StorageType
     ActiveRecord::Schema.define do
       new_table = false
       if ! table_exists? db_table
-        dputs( 1 ){ "Creating table #{db_table}" }
+        dputs( 2 ){ "Creating table #{db_table}" }
         create_table db_table
         new_table = true
       end
