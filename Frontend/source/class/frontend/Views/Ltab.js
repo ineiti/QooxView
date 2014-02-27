@@ -67,6 +67,7 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg(0, "res.data:" + res.data);
         switch (res.cmd) {
           case "auto_update":
+          case "auto_update_async":
             // Enable an automatic update every n seconds
             this.timer.stop();
             // The time is positive if we only ask the backend to send new data
@@ -74,8 +75,11 @@ qx.Class.define("frontend.Views.Ltab", {
             var time = Math.abs(res.data) * 1000;
             if ( time >= 1 ){
               var method = "update";
+              if ( res.cmd == "auto_update_async" ){
+                method = "update_async";
+              }
               if (res.data < 0) {
-                method = "update_with_values"
+                method = method + "_with_values"
               }
               dbg(3, "update-method is: " + method);
               dbg(3, "View is: " + this.viewClass);
@@ -243,11 +247,13 @@ qx.Class.define("frontend.Views.Ltab", {
       //alert( "in auto-update");
       dbg(3, "timer for update")
       var values = [];
-      if (userData == "update_with_values") {
+      if (userData.replace( /^update(_async)*/, '') == "_with_values") {
         values = [this.form.fields.getFieldsData()];
         dbg(3, "Values are: " + print_a(values));
       }
-      this.parentFadeOut();
+      if ( userData.replace( /_with_values/, '') == "update"){
+        this.parentFadeOut();
+      }
       rpc.callRPCarray("View." + this.viewClass, userData, this, this.dispatch, values);
     },
 

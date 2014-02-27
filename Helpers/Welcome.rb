@@ -1,4 +1,6 @@
 class Welcome < View
+  attr_accessor :no_login
+  
   def layout
     
     gui_vbox :nogroup do
@@ -33,9 +35,8 @@ class Welcome < View
     dputs( 3 ){ self.inspect }
     if @no_login
       dputs( 2 ){ "No login is enabled" }
-      return reply( :session_id, 1 ) + 
+      return reply( :session_id, session.sid ) + 
         View.rpc_list( session )
-#        reply( "list", View.list_views )
     else
       dputs( 2 ){ "Login is enabled" }
       super( session )
@@ -44,7 +45,8 @@ class Welcome < View
   
   def self.nologin
     dputs( 2 ){ "Going for no login" }
-    $config.merge!( {:Views=>{:Welcome=>{:no_login=>true}}} )
+    $config.__Views.__Welcome.__no_login = true
+    View.Welcome.no_login = true
   end
   
   def rpc_button_try_again( session, data )

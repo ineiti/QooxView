@@ -105,7 +105,7 @@ function setValueListCommon(values, list){
       list.add(item);
       if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
         alert("Different number of items in list and valueIds!\n" +
-        list.field_name + " - " + item );
+          list.field_name + " - " + item );
       }
     }
   }
@@ -596,7 +596,8 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element = new qx.ui.basic.Label().set({
             value: params.text,
             rich: true,
-            allowGrowX: true
+            allowGrowX: true,
+            allowGrowY: true
           });
           // field_element.set( {height: 100})
           show_label = false;
@@ -825,15 +826,36 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.widget_label = widget_label;
         }
         if (/Grid/.test(layout.getLayout().toString())) {
-          layout.add(field_element, {
-            row: index,
-            column: 1
-          });
+          if ( params.wide ){
+            layout.add(field_element, {
+              row: index,
+              column: 0,
+              colSpan: 2
+            });
+          } else {
+            layout.add(field_element, {
+              row: index,
+              column: 1
+            });
+          }
+          if ( params.flex ){
+            params.flexheight = 1;
+            params.flexwidth = 1;
+          }
           if ( params.flexheight ){
             dbg( 3, "Setting rowflex to " + params.flexheight )
+            //alert( "setting flexheight")
             layout.getLayout().setRowFlex( index, params.flexheight );
             if ( params.flexheight > 0){
               this.needs_expansion.height = "100%";
+            }
+          }
+          if ( params.flexwidth ){
+            dbg( 3, "Setting colflex to " + params.flexwidth )
+            //alert( "setting flexwidth")
+            layout.getLayout().setColumnFlex( index, params.flexwidth );
+            if ( params.flexwidth > 0){
+              this.needs_expansion.width = "100%";
             }
           }
         }

@@ -158,15 +158,21 @@ class Hash
     when "to_ary"
       super( s, args )
     when /^_.*[^=]$/
-      key = s.to_s.sub(/^_/, '').to_sym
+      key = s.to_s.sub(/^_{1,2}/, '').to_sym
       dputs(4){"Searching for #{s.inspect} -> #{key}"}
       self.has_key? key and return self[key]
-      return self[key.to_s]
+      self.has_key? key.to_s and return self[key.to_s]
+      if s.to_s =~ /^__/
+        return self[key] = {}
+      else
+        return nil
+      end
     when /^_.*=$/
-      key = /^_(.*)=$/.match(s.to_s)[1].to_sym
+      key = /^_{1,2}(.*)=$/.match(s.to_s)[1].to_sym
       dputs(4){"Setting #{s.inspect} -> #{key} to #{args.inspect}"}
       self.has_key? key and return self[key] = args[0]
-      return self[key.to_s] = args[0]
+      self.has_key? key.to_s and return self[key.to_s] = args[0]
+      return self[key] = args[0]
     else
       super( s, args )
     end
@@ -277,7 +283,7 @@ module QooxView
         potfile = "po/#{$name}.pot"
         %x[ mkdir -p po; rm -f #{potfile} ]
         paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
-        dputs( 0 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
+        dputs( 2 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
         GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
@@ -299,7 +305,7 @@ module QooxView
           path = "po/#{lang}/LC_MESSAGES"
           dputs( 2 ){ "Doing po-file #{po} for language #{lang} with path #{path}" }
           if not %x[ mkdir -p #{path}] or not GetText::Tools::MsgFmt.run( po, "-o#{path}/#{$name}.mo" )
-            dputs( 0 ){ "Error while making mo-files, exiting" }
+            dputs( 0 ){ "Error: can't make mo-files, exiting" }
             exit
           end
         }
@@ -312,7 +318,7 @@ module QooxView
 
   def self.init( dir_entities = nil, dir_views = nil )
     if not ( Module.constants.index( 'Test' ) or Module.constants.index( :Test ) )
-      dputs( 0 ){ "Doing options" }
+      dputs( 2 ){ "Doing options" }
       self.do_opts( dir_entities, dir_views )
     end
 
@@ -324,7 +330,7 @@ module QooxView
 
     # Include all modules in the dir_entities and dir_views
     # directories
-    dputs( 0 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
+    dputs( 2 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
     [ dir_entities, dir_views ].each{|d|
       if d
         dputs( 2 ){ "Initializing directory #{d}" }
@@ -339,17 +345,17 @@ module QooxView
       Permission.add( 'default', '.*' )
     end
 
-    dputs( 0 ){ "Starting RPCQooxdooServices" }
+    dputs( 2 ){ "Starting RPCQooxdooServices" }
     # Get an instance of all Qooxdoo-services
     rpcqooxdoo = RPCQooxdooService.new
     
     $qooxview_cmds.each{|qv|
       qv_cmd = qv.class == Array ? qv[0] : qv
-      dputs(0){"Doing #{qv.inspect}"}
+      dputs(2){"Doing #{qv.inspect}"}
       case qv_cmd
       when :archive
         month = qv[1] == "" ? 1 : qv[1]
-        dputs(0){"Archiving with starting month #{month}"}
+        dputs(2){"Archiving with starting month #{month}"}
         Accounts.archive( month )
         exit
       end
@@ -358,7 +364,7 @@ module QooxView
 
   # The main function, used to start it all
   def self.startWeb( port = 3302, duration = nil )
-    dputs( 0 ){ "Configuring port for #{port}" }
+    dputs( 2 ){ "Configuring port for #{port}" }
     # Suppose we've not being initialized when there are no permissions
     if Permission.list.size == 0
       self.init

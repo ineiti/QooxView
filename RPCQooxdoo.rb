@@ -326,7 +326,7 @@ end
 class RPCQooxdooPath
   def self.inherited( subclass )
     name = subclass.name.downcase
-    dputs( 0 ){ "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
+    dputs( 2 ){ "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
     RPCQooxdooHandler.add_path( name, subclass )
   end
 end

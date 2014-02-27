@@ -117,6 +117,7 @@ class View < RPCQooxdooService
       end
 
       # Check for config of this special class
+      dputs(5){"config is #{$config.inspect}"}
       if get_config( false, :Views, self.class.name )
         @config = $config[:Views][self.class.name.to_sym]
         dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
@@ -567,7 +568,7 @@ class View < RPCQooxdooService
     if @update
       update = rpc_update( session )
       dputs( 3 ){ "@update #{update.inspect}" }
-      ret += update
+      update and ret += update
     end
     if args
       dputs( 3 ){ "Args: #{args.inspect}" }

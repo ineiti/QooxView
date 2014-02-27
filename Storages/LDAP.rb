@@ -11,7 +11,7 @@ class LDAP < StorageType
       file = second
     end
     if ! File.exists?( file )
-      dputs( 0 ){ "Can't find #{file}"}
+      dputs( 0 ){ "Error: Can't find #{file}"}
       exit
     end
     dputs(3){"Returning #{file} for #{first}-#{second}-#{config}"}
@@ -151,8 +151,8 @@ class LDAP < StorageType
         "#{[ @data_ldap_pass, dn, attribute, field, value, value_stored ].inspect}" }
 
     if not dn
-      dputs( 0 ){ "DN is empty... #{@dns.to_a.last(10).inspect}" }
-      dputs( 0 ){"DN is empty: id, field, value = #{id}, #{field}, #{value}"}
+      dputs( 0 ){ "Error: DN is empty... #{@dns.to_a.last(10).inspect}" }
+      dputs( 0 ){"Error: DN is empty: id, field, value = #{id}, #{field}, #{value}"}
       #return
     end    
     
@@ -168,7 +168,7 @@ class LDAP < StorageType
         dputs( 4 ){ "returning value #{value.inspect}" }
         return value
       else
-        dputs( 0 ){ "Didn't get right return value: #{value_entry.inspect} instead of #{value_stored.inspect}" }
+        dputs( 0 ){ "Error: Didn't get right return value: #{value_entry.inspect} instead of #{value_stored.inspect}" }
       end
     end
     return nil
@@ -231,9 +231,9 @@ class LDAP < StorageType
         end
       end          
     else
-      dputs( 0 ){ "LDAP can't create data on it's own! Needs #{@name}.data_create!" }
+      dputs( 0 ){ "Error: LDAP can't create data on it's own! Needs #{@name}.data_create!" }
       exit 0
     end
-    dputs( 0 ){ "Data is now #{data.inspect}" }
+    dputs( 2 ){ "Data is now #{data.inspect}" }
   end
 end
