@@ -23,6 +23,8 @@ class SQLite < StorageType
     @name_file = name_file
     #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
+    #ActiveRecord::Base.logger = Logger.new(STDERR)
+    
     dputs( 4 ){ "Opening database" }
     open_db
 
@@ -78,8 +80,10 @@ class SQLite < StorageType
   # computer crashes
   def data_create( data )
     dputs( 5 ){ "Creating early data #{data.inspect} with #{data.class}" }
-    dputs(5){"db_class is #{db_class.inspect}"}
+    dputs(5){"hello for #{data.inspect}"}
+    dputs(5){"db_class is #{@db_class.inspect}"}
     e = @db_class.create( data )
+    dputs(5){"hello - 2"}
     new_id = e.attributes[@data_field_id.to_s]
     dputs( 5 ){ "New id is #{new_id}" }
     data[@data_field_id] = new_id

@@ -203,7 +203,11 @@ module StorageHandler
 
     # Ask every storage-type whether he wants to change something in the
     # data
-    @storage.each{|k, di| di.data_create( args ) }
+    dputs(3){"Asking storages to intervene"}
+    @storage.each{|k, di| 
+      dputs(3){"Intervention from #{k.inspect}"}
+      di.data_create( args ) 
+    }
     data_id = args[@data_field_id].to_i
     if not @data[ data_id ] or allow_double
       if @data[ data_id ]
