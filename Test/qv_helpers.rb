@@ -30,22 +30,28 @@ class TC_Helpers < Test::Unit::TestCase
 	
   def test_dputs
     @inside = 1
-    dputs( 0 ){ "Calling for show_me #{show_me}" }
+    dbg = DEBUG_LVL
+    Object.send( :remove_const, :DEBUG_LVL )
+    Object.const_set( :DEBUG_LVL, 1 )
+
+    dputs( 1 ){ "Calling for show_me #{show_me}" }
     assert_equal 2, @inside
 		
-    dputs( 6 ){ "This shouldn't be called #{show_me}" }
+    dputs( 2 ){ "This shouldn't be called #{show_me}" }
     assert_equal 2, @inside
+
+    Object.send( :remove_const, :DEBUG_LVL )
+    Object.const_set( :DEBUG_LVL, dbg )
   end
 	
   def test_speed_create
-    Benchmark.bm{|x|
-			
-      (0..4).each{|b|
-        x.report( "Users #{(b*50).to_s.rjust(3)}" ){
+    dputs(1){"Benchmarking"}
+    (0..4).each{|b|
+      dputs(1){ Benchmark.measure( "Users #{(b*50).to_s.rjust(3)}" ){
           (1..50).each{|i|
             Entities.Persons.create( :first_name => "admin#{b*50+i}", :pass => "super123", :session_id => '0.1', :permission => 'admin' )
           }
-        }
+        }.to_s
       }
     }
   end
@@ -65,14 +71,13 @@ class TC_Helpers < Test::Unit::TestCase
   end
 
   def test_speed_sqlite
-    Benchmark.bm{|x|
-			
-      (0..4).each{|b|
-        x.report( "Accounts #{(b*50).to_s.rjust(3)}" ){
+    dputs(1){"Benchmark"}
+    (0..4).each{|b|
+      dputs(1){ Benchmark.measure( "Accounts #{(b*50).to_s.rjust(3)}" ){
           (1..500).each{|i|
             Accounts.create( :name => "test" )
           }
-        }
+        }.to_s
       }
     }
   end

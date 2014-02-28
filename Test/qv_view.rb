@@ -32,10 +32,9 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_order
-    dputs(0){"Testing order"}
     View.update_configured_all
     reply = request( "View", 'list', [['0.1']] )
-    dputs( 0 ){ reply['result'].inspect }
+    dputs( 1 ){ reply['result'].inspect }
     assert_equal [["BView", "BView"], ["CView", "CView"], 
       ["ConfigView2", "ConfigView2"],
       ["CourseShow","CourseShow"], ["AView","AView"]], 
@@ -47,7 +46,7 @@ class TC_View < Test::Unit::TestCase
     result = reply['result'][0][:data][0][:data]
     dputs(4){"Reply is #{reply.inspect} - result is #{result.inspect}"}
     assert_equal "admin", result[:first_name], result.inspect
-    assert ! result.index( :permission )
+    assert ! result.key( :permission )
   end
 
   def test_show

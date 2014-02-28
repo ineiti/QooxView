@@ -20,7 +20,6 @@ module Docsplit
     # of the office software to be used for extraction.
     def version_string
       versionstr =  `#{office_executable} -h 2>&1`.split("\n").first
-      puts "Version is #{versionstr.inspect}"
       if !versionstr.match(/[0-9]+/)
               puts "taking other version"
               versionstr =  `#{office_executable} --version`.split("\n").first

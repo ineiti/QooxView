@@ -12,7 +12,7 @@ class TC_Migration < Test::Unit::TestCase
   end
 
   def teardown
-    dputs(0){"Tearing down"}
+    dputs(1){"Tearing down"}
     CVSInventories.class_eval( '
       def setup_data
         value_date :date
@@ -41,18 +41,18 @@ class TC_Migration < Test::Unit::TestCase
     dputs(5){"Before class_eval"}
     CVSInventories.class_eval( '
       def setup_data
-        dputs(0){"new inventories"}
+        dputs(1){"new inventories"}
         value_date :date
         value_str :iname
         value_str :typ
       end
   
       def migration_1( inv )
-        dputs(0){"Adjusting inv #{inv.inspect}"}
+        dputs(1){"Adjusting inv #{inv.inspect}"}
         inv.typ = inv.iname.split[0]
       end
 
-      dputs(0){"Adding to RPC"}
+      dputs(1){"Adding to RPC"}
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
@@ -61,12 +61,12 @@ class TC_Migration < Test::Unit::TestCase
     
     CVSInventories.class_eval( '
       def migration_2( inv )
-        dputs(0){"Adjusting inv #{inv.inspect}"}
+        dputs(1){"Adjusting inv #{inv.inspect}"}
         inv.typ = inv.date
       end
 
       def migration_3( inv )
-        dputs(0){"Adjusting inv #{inv.inspect}"}
+        dputs(1){"Adjusting inv #{inv.inspect}"}
         inv.iname = inv.typ + "-"
       end
 
@@ -87,7 +87,7 @@ class TC_Migration < Test::Unit::TestCase
       end
   
       def migration_1( inv )
-        dputs(0){"rename: Adjusting inv #{inv.inspect}"}
+        dputs(1){"rename: Adjusting inv #{inv.inspect}"}
         inv.i_name = inv.iname
       end
 
@@ -106,9 +106,9 @@ class TC_Migration < Test::Unit::TestCase
       end
   
       def migration_1_raw( inv )
-        dputs(0){"renaming raw: Adjusting inv #{inv.inspect}"}
+        dputs(1){"renaming raw: Adjusting inv #{inv.inspect}"}
         inv[:i_name] = inv[:iname]
-        dputs(0){"Is now #{inv.inspect}"}
+        dputs(1){"Is now #{inv.inspect}"}
       end
 
       RPCQooxdooService.add_new_service( CVSInventories,

@@ -60,33 +60,30 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_logactions
+    oldlog = LogActions.logging
+    LogActions.logging = true
     admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100 )
     admin.data_set_log( :pass, "hello123" )
     # Take out the date_stamps, as they change all the time...
     log_list = Entities.LogActions.log_list.each{|l| l.delete( :date_stamp )}
-    return
     assert_equal [
-=begin
-    {:logaction_id=>0, :data_field=>:no_cache, :undo_function=>:undo_set_entry,
-      :data_value=>"123", :data_old=>"\"no_cache\"", 
-      :data_class=>Dummy, :data_class_id=>0, :msg=>nil},
-    {:logaction_id=>1, :data_field=>:dummy_id, :undo_function=>:undo_set_entry,
-      :data_value=>0, :data_old=>"\"dummy_id\"", :data_class=>Dummy,
-      :data_class_id=>0, :msg=>nil},
-=end
-      {:logaction_id=>0, :undo_function=>:undo_set_entry,
+      {:logaction_id=>1, :undo_function=>:undo_set_entry,
         :data_field=>:credit, :data_value=>100, :data_old=>10000, 
         :data_class => "Person",
-        :data_class_id=>0 },
-      {:logaction_id=>1, :undo_function=>:undo_set_entry,
+        :data_class_id=>1, :msg => nil },
+      {:logaction_id=>2, :undo_function=>:undo_set_entry,
         :data_field=>:pass, :data_value=>"hello123",
         :data_old=>"super123", :data_class => "Person",
-        :data_class_id=>0} ],
+        :data_class_id=>1, :msg => nil } ],
       log_list
+    LogActions.logging = oldlog
   end
 
   def test_logactions_filter
+    oldlog = LogActions.logging
+    LogActions.logging = true
+
     admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100 )
     admin.data_set_log( :pass, "hello123" )
@@ -104,9 +101,14 @@ class TC_Entity < Test::Unit::TestCase
 
     log_list = Entities.LogActions.log_list( { :data_class => Person, :data_field => :credit } )
     assert_equal 1, log_list.size
+
+    LogActions.logging = oldlog
   end
 
   def test_logactions_filter_multi
+    oldlog = LogActions.logging
+    LogActions.logging = true
+
     admin = Entities.Persons.match_by_first_name( "admin" )
     admin.data_set_log( :credit, 100, "charger:linus" )
     admin.data_set_log( :credit, 200, "charger:viviane" )
@@ -126,6 +128,8 @@ class TC_Entity < Test::Unit::TestCase
 
     assert_equal 4, Entities.Persons.log_list.size
     assert_equal 1, Entities.Persons.log_list( { :msg => "^charger:linus$" } ).size
+
+    LogActions.logging = oldlog
   end
 
   def test_getfields

@@ -27,20 +27,20 @@ class TC_SQLite < Test::Unit::TestCase
   
   def test_speed
     Entities.delete_all_data
-    dputs( 0 ){ "Creation of 250 entities: " }
+    dputs( 1 ){ "Creation of 250 entities: " }
     (1..4).each{|f|
-      dputs( 0 ){ Benchmark.measure{
+      dputs( 1 ){ Benchmark.measure{
           (1..250).each{|e|
             Entities.Movements.create( :desc => "test", :money => e)
           }
         }.to_s
       }
     }
-    dputs( 0 ){ "Loading 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ Entities.Movements.load }.to_s }
-    dputs( 0 ){ "Searching in 1000 entities: " }
-    dputs( 0 ){ Benchmark.measure{ Entities.Movements.matches_by_desc("test")}.to_s }
-    dputs( 0 ){ "Searching test gives " +
+    dputs( 1 ){ "Loading 1000 entities: " }
+    dputs( 1 ){ Benchmark.measure{ Entities.Movements.load }.to_s }
+    dputs( 1 ){ "Searching in 1000 entities: " }
+    dputs( 1 ){ Benchmark.measure{ Entities.Movements.matches_by_desc("test")}.to_s }
+    dputs( 1 ){ "Searching test gives " +
         "#{Entities.Movements.matches_by_desc('test').count}"}
   end
   

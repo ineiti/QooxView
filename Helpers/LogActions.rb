@@ -6,6 +6,8 @@
 # idea, and the whole "data"-scheme should be outsourced in DataElement.
 
 class LogActions < Entities
+  attr_accessor :logging
+  
   def setup_data
     add_new_storage :CSV, :add_only => true
     @undo = false

@@ -51,7 +51,7 @@ module DPuts
     return if not get_config( false, :log )
     File.open( get_config( "", :log ), "a" ){ |f|
       str = Time.now.strftime( "%a %y.%m.%d-%H:%M:%S #{mod}: #{msg}" )
-      dputs( 0 ){ "Logging #{str}" }
+      dputs( 1 ){ "Logging #{str}" }
       f.puts str
     }
   end
