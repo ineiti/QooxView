@@ -64,7 +64,7 @@ class OpenPrint
     @dir and FileUtils::cp( pdf_file, @dir )
     #    FileUtils::rm( tmp_file )
     if @lp_cmd
-      dputs( 0 ){ "Printing with --#{@lp_cmd} #{pdf_file}--" }
+      dputs( 2 ){ "Printing with --#{@lp_cmd} #{pdf_file}--" }
       `#{@lp_cmd} #{pdf_file}`
       return true
     else

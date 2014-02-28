@@ -207,7 +207,8 @@ class Entities < RPCQooxdooService
       cmds = cmd_str.split("_")[1..-1]
       value_add( cmds, args )
     else
-      dputs( 0 ){ "Method is missing: #{cmd} in Entities" }
+      dputs( 0 ){ "Error: Method is missing: #{cmd} in Entities" }
+      dputs( 0 ){ caller.inspect }
       super cmd, *args
     end
   end
