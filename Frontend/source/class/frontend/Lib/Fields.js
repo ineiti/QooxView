@@ -104,7 +104,8 @@ function setValueListCommon(values, list){
       var item = new qx.ui.form.ListItem("" + val);
       list.add(item);
       if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
-        alert("Different number of items in list and valueIds!\n" +
+        alert("Different number of items in list and valueIds! Val is -" +
+          val + "-\n" +
           list.field_name + " - " + item );
       }
     }
@@ -543,7 +544,8 @@ qx.Class.define("frontend.Lib.Fields", {
           listener = "execute";
           field_element = new qx.ui.form.Button(label);
           field_element.getData = function(){};
-          field_element.setAllowGrowY( false );
+          //field_element.setAllowGrowY( true );
+          //field_element.setMinHeight( 50 )
           show_label = false;
           if (!button_default || params.def) {
             button_default = field_element;

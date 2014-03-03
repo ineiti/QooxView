@@ -7,8 +7,23 @@ module DPuts
   end
 	
   def dputs_out( n, s, call )
+    return if get_config( false, :DPuts, :silent )
+    if precision = get_config( false, :DPuts, :show_time )
+      $dputs_time ||= Time.now - 120
+      now = Time.now
+      show = false
+      case precision
+      when /sec/
+        show = now.to_i != $dputs_time.to_i
+      when /min/
+        show = ( now.to_i % 60 ) != ( $dputs_time.to_i % 60 )
+      end
+      show and puts "\n   *** It is now: " + 
+        Time.now.strftime( "%Y-%m-%d %H:%M:%S" )
+      $dputs_time = now
+    end
     DebugLock.instance.synchronize do
-      width = get_config( 160, :terminal_width )
+      width = get_config( 160, :DPuts, :terminal_width )
       width -= 30.0
       file, func = call.split(" ")
       file = file[/^.*\/([^.]*)/, 1]
@@ -48,8 +63,8 @@ module DPuts
   end
 
   def log_msg( mod, msg )
-    return if not get_config( false, :log )
-    File.open( get_config( "", :log ), "a" ){ |f|
+    return if not get_config( false, :DPuts, :log )
+    File.open( get_config( "", :DPuts, :log ), "a" ){ |f|
       str = Time.now.strftime( "%a %y.%m.%d-%H:%M:%S #{mod}: #{msg}" )
       dputs( 1 ){ "Logging #{str}" }
       f.puts str

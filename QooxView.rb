@@ -242,6 +242,23 @@ def get_config_rec( path, default, config = $config )
     end
   end
 end
+def set_config( value, *path )
+  if path.length == 0 
+    dputs(0){"Error: empty path in #{caller.inspect}"}
+  else
+    config = $config
+    path[0...-1].each{|p| 
+      dputs(4){"Doing level #{p}"}
+      if ! config.has_key? p
+        config[p] = {}
+        dputs(4){"Added Hash to #{p} - #{$config.inspect}"}
+      end
+      config = config[p]
+    }
+    config[path.last] = value
+    dputs(4){"config is #{config.inspect} - $config is #{$config.inspect}"}
+  end
+end
 defined?( CONFIG_FILE ) and dputs( 2 ){ "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
 
 require 'RPCQooxdoo'

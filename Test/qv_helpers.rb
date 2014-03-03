@@ -22,6 +22,28 @@ class TC_Helpers < Test::Unit::TestCase
     assert_equal "hello", get_config( nil, :TestConfig, :Two )
     assert_equal 30, get_config( nil, :TestConfig, :Three, :Thirty )
   end
+  
+  def test_set_config
+    set_config( 1, :SetConfig )
+    assert_equal 1, get_config( 2, :SetConfig )
+    set_config( 2, :SetConfig )
+    assert_equal 2, get_config( 3, :SetConfig )
+    set_config( 2, :SetConfig2, :Level )
+    assert_equal 2, get_config( 3, :SetConfig2, :Level )
+    set_config( 3, :SetConfig2, :Level )
+    assert_equal 3, get_config( 4, :SetConfig2, :Level )
+    set_config( 4, :SetConfig3, :Level, :Two )
+    assert_equal 4, get_config( 5, :SetConfig3, :Level, :Two )
+  end
+  
+  def test_dputs_time
+    dputs(1){"Testing time"}
+    set_config( 'sec', :DPuts, :showTime )
+    dputs(1){"First"}
+    dputs(1){"Second"}
+    sleep(1)
+    dputs(1){"Third"}
+  end
 	
   def show_me
     @inside += 1
