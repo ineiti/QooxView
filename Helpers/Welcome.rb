@@ -2,7 +2,6 @@ class Welcome < View
   attr_accessor :no_login
   
   def layout
-    
     gui_vbox :nogroup do
       gui_hbox :nogroup do
         gui_fields :nogroup do
@@ -10,7 +9,11 @@ class Welcome < View
         show_str :username
         show_pass :password
         show_str_ro :version
-        show_button :login
+        if get_config( false, :Views, :Welcome, :direct_internet )
+          show_button :login, :connect
+        else
+          show_button :login
+        end
         gui_fields :nogroup do
         end
       end

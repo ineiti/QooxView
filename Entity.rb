@@ -56,13 +56,14 @@ class Entities < RPCQooxdooService
         #@config = $config[:Entities][self.class.name.to_sym]
         dputs( 3 ){ "Writing config #{@config.inspect} for #{self.class.name}" }
         @config.each{ |k, v|
-          begin
+          dputs( 3 ){ "Setting #{k} = #{v}" }
+          case v
+          when /true|false/
             instance_variable_set( "@#{k.to_s}", eval( v ) )
-          rescue Exception => e
+          else
             instance_variable_set( "@#{k.to_s}", v )
           end
           self.class.send( :attr_reader, k )
-          dputs( 3 ){ "Setting #{k} = #{v}" }
         }
       else
         @config = nil

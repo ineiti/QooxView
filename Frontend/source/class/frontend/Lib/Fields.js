@@ -103,11 +103,13 @@ function setValueListCommon(values, list){
       dbg(5, "Adding new item " + val)
       var item = new qx.ui.form.ListItem("" + val);
       list.add(item);
+      /*
       if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
-        alert("Different number of items in list and valueIds! Val is -" +
-          val + "-\n" +
+        alert("Different number of items in list and valueIds! Val:item:npr are -" +
+          [ val, item, list.nopreselect ].join("-") + "\n" +
           list.field_name + " - " + item );
       }
+      */
     }
   }
   list.setSelection(selection);

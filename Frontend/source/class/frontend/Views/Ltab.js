@@ -451,7 +451,7 @@ qx.Class.define("frontend.Views.Ltab", {
     // Every time the view changes, this is called, which calls the Backend, which will call showView
     changeView: function(e){
       this.timer.stop();
-      if ( this.form.fields.childLtab ){
+      if ( this.form && this.form.fields.childLtab ){
         this.form.fields.childLtab.timer.stop();
       }
       var newView = e.getData()[0].qv_id;//.getSelection()[0];

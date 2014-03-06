@@ -16,7 +16,7 @@ module DPuts
       when /sec/
         show = now.to_i != $dputs_time.to_i
       when /min/
-        show = ( now.to_i % 60 ) != ( $dputs_time.to_i % 60 )
+        show = ( now.to_i / 60 ).floor != ( $dputs_time.to_i / 60 ).floor
       end
       show and puts "\n   *** It is now: " + 
         Time.now.strftime( "%Y-%m-%d %H:%M:%S" )
