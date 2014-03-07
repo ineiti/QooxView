@@ -71,11 +71,11 @@ class TC_Entity < Test::Unit::TestCase
       {:logaction_id=>1, :undo_function=>:undo_set_entry,
         :data_field=>:credit, :data_value=>100, :data_old=>10000, 
         :data_class => "Person",
-        :data_class_id=>1, :msg => nil },
+        :data_class_id=>1 },
       {:logaction_id=>2, :undo_function=>:undo_set_entry,
         :data_field=>:pass, :data_value=>"hello123",
         :data_old=>"super123", :data_class => "Person",
-        :data_class_id=>1, :msg => nil } ],
+        :data_class_id=>1 } ],
       log_list
     LogActions.logging = oldlog
   end
@@ -216,8 +216,11 @@ class TC_Entity < Test::Unit::TestCase
   end
   
   def test_missing_value
+    old = get_config( false, :DPuts, :silent )
+    set_config( true, :DPuts, :silent )
     assert_raise( NoMethodError ){ @admin.value3 }
     assert_raise( RuntimeError ){ @admin._value3 }
     assert_nothing_raised{ @admin._value1 }
+    set_config( old, :DPuts, :silent )
   end
 end

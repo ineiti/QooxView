@@ -264,11 +264,15 @@ module StorageHandler
     field = field.to_sym
     @storage.each{|k, di|
       if di.has_field field
-        #        if value.to_s != @data[id.to_i][field].to_s
-        val = di.set_entry( id, field, value )
-        dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
-        @data[ id.to_i ][ field ] = val
-        #        end
+        if ! @data[id.to_i].has_key?( field ) or
+            value.to_s != @data[id.to_i][field].to_s
+          val = di.set_entry( id, field, value )
+          dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
+          @data[ id.to_i ][ field ] = val
+        else
+          log_msg "StorageHandler", "Trying to overwrite with same value in " +
+            "#{self.class.name}-#{field}-#{value.to_s}"
+        end
         return val
       end
     }

@@ -63,10 +63,10 @@ module DPuts
   end
 
   def log_msg( mod, msg )
+    dputs( 1 ){ "Info from #{mod}: #{msg}" }
     return if not get_config( false, :DPuts, :log )
     File.open( get_config( "", :DPuts, :log ), "a" ){ |f|
       str = Time.now.strftime( "%a %y.%m.%d-%H:%M:%S #{mod}: #{msg}" )
-      dputs( 1 ){ "Logging #{str}" }
       f.puts str
     }
   end

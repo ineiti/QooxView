@@ -51,6 +51,9 @@ class TC_Helpers < Test::Unit::TestCase
   end
 	
   def test_dputs
+    old = get_config( false, :DPuts, :silent )
+    set_config( true, :DPuts, :silent )
+
     @inside = 1
     dbg = DEBUG_LVL
     Object.send( :remove_const, :DEBUG_LVL )
@@ -64,6 +67,8 @@ class TC_Helpers < Test::Unit::TestCase
 
     Object.send( :remove_const, :DEBUG_LVL )
     Object.const_set( :DEBUG_LVL, dbg )
+
+    set_config( old, :DPuts, :silent )
   end
 	
   def test_speed_create

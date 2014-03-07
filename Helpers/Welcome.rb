@@ -10,7 +10,7 @@ class Welcome < View
         show_pass :password
         show_str_ro :version
         if get_config( false, :Views, :Welcome, :direct_internet )
-          show_button :login, :connect
+          show_button :login, :direct_connect
         else
           show_button :login
         end

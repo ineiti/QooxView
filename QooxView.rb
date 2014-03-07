@@ -295,13 +295,14 @@ module QooxView
         puts "\t-t [lang]\tUpdate translations - takes an optional language-argument"
         puts "\t-p\tCreate .mo-files"
         puts "\t--help\tShow this help"
-        exit
+        raise "PrintHelp"
       when "--i18n"
         potfile = "po/#{$name}.pot"
         %x[ mkdir -p po; rm -f #{potfile} ]
         paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
         dputs( 2 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
-        GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
+        #GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
+        GetText::Tools::XGetText.run( *paths.collect{|p| Dir[p] }.flatten, "-o", "#{potfile}" )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
           if File.exists? pofile
@@ -314,7 +315,7 @@ module QooxView
             %x[ cp #{potfile} #{pofile} ]
           end
         end
-        exit
+        raise "UpdatePot"
       when "--po"
         dputs( 2 ){ "Making mo-files" }
         Dir.glob( "po/#{$name}-*.po").each{|po|
@@ -326,6 +327,7 @@ module QooxView
             exit
           end
         }
+        raise "MakeMo"
       when "--archive"
         dputs(2){"Going to archive AfriCompta"}
         $qooxview_cmds.push [ :archive, a ]
