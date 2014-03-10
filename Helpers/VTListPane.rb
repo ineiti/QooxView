@@ -30,7 +30,7 @@ The following buttons are defined:
 =end
 
 module VTListPane
-  def vtlp_list( field, method, *args )
+  def vtlp_setup( field, method, *args )
     @vtlp_field = field.to_s
     @vtlp_method = method.to_s.sub( /^rev_/, "" )
     if args.length > 0 and args[0].class == String
@@ -38,17 +38,30 @@ module VTListPane
     else
       @vtlp_method_list = "listp_#{method.to_s}"
     end
-    args_hash = if args.length > 0 and args[0].class == Hash
+    if args.length > 0 and args[0].class == Hash
       args.shift
     else
       {}
     end
+  end
+  
+  def vtlp_list( field, method, *args )
+    @vtlp_use_entity = false
+    args_hash = vtlp_setup( field, method, args )
     show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
       args_hash.merge( :callback => true )
   end
   
+  def vtlp_list_entity( field, entity, method, *args )
+    @vtlp_use_entity = true
+    args_hash = vtlp_setup( field, method, args )
+    show_entity field, entity, "single",
+      "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
+      args_hash.merge( :callback => true )    
+  end
+  
   def vtlp_get_entity( d )
-    @data_class.get_data_instance( d[@vtlp_field][0] )
+    @vtlp_use_entity ? d : @data_class.get_data_instance( d[@vtlp_field][0] )
   end
   
   def vtlp_update_list( session, choice = nil )

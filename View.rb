@@ -277,16 +277,15 @@ class View < RPCQooxdooService
     if not @actual.last =~ /^fields/
       do_container_start( %w( group fields ) )
     end
-    dputs( 5 ){ "we'll show: #{a.inspect}" }
+    dputs( 4 ){ "we'll show: #{a.inspect}" }
     [a].flatten.each{ |v|
-      case v
-      when v.dtype == "entity"
-        show_entity( *e.split(',') )
-      else
-        value = v.deep_clone
-        value.args.merge!( args )
-        @layout.last.push value
+      dputs( 4 ){ "Working on: #{v.dtype.inspect}: #{a.inspect}" }
+      if v.dtype == "entity"
+        ddputs(3){"Showing entity #{v.inspect}"}
       end
+      value = v.deep_clone
+      value.args.merge!( args )
+      @layout.last.push value
     }
   end
 
@@ -295,14 +294,8 @@ class View < RPCQooxdooService
   # - entity - what entity to show
   # - gui - how to display it (drop)
   # - field - what field of the entity to display
-  def show_entity( name, entity, gui, field )
-    case gui
-    when :drop
-      show_in_field( Value.new( %w( list drop ),
-          [name, "Entities.#{entity}.list_#{field}" ] ) )
-    else
-      show_in_field( Value.simple( "text", name ) )
-    end
+  def show_entity( name, entity, gui, field, args )
+    show_add( ['entity', entity ], [name, gui, field, args])
   end
 
   # Shows an existing field
