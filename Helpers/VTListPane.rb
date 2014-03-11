@@ -47,16 +47,16 @@ module VTListPane
   
   def vtlp_list( field, method, *args )
     @vtlp_use_entity = false
-    args_hash = vtlp_setup( field, method, args )
+    args_hash = vtlp_setup( field, method, *args )
     show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
       args_hash.merge( :callback => true )
   end
   
   def vtlp_list_entity( field, entity, method, *args )
     @vtlp_use_entity = true
-    args_hash = vtlp_setup( field, method, args )
+    args_hash = vtlp_setup( field, method, *args )
     show_entity field, entity, "single",
-      "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
+      @vtlp_method, 
       args_hash.merge( :callback => true )    
   end
   
@@ -113,21 +113,26 @@ module VTListPane
     #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
-  def rpc_list_choice( session, name, *args )
+  def rpc_list_choice( session, name, data )
     #Calling rpc_list_choice with [["courses", {"courses"=>["base_25"], "name_base"=>["base"]}]]
     #ret = reply( :empty_only, [ @vtlp_field ] )
     ret = []
-    dputs( 3 ){ "rpc_list_choice with #{name} - #{args.inspect}" }
+    dputs( 3 ){ "rpc_list_choice with #{name} - #{data.inspect}" }
     if name == @vtlp_field
       ret = reply( :empty )
-      field_value = args[0][name][0]
-      dputs( 4 ){ "replying with field_value of #{field_value}" }
-      item = vtlp_get_entity(args[0])
+      item = if @vtlp_use_entity
+        field_value = data[name].get_unique
+        data[name]
+      else
+        field_value = data[name][0]
+        dputs( 4 ){ "replying with field_value of #{field_value}" }
+        vtlp_get_entity(data)
+      end
       dputs( 4 ){ "item is #{item.inspect}" }
       if item
-        ret += reply("update", item.to_hash )
+        ret += reply( :update, item.to_hash )
       end
-      ret += reply("update", {@vtlp_field.to_sym => [field_value] } )
+      ret += reply( :update, {@vtlp_field.to_sym => [field_value] } )
     end
     if @update
       ret += rpc_update( session )

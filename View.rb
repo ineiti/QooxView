@@ -281,7 +281,7 @@ class View < RPCQooxdooService
     [a].flatten.each{ |v|
       dputs( 4 ){ "Working on: #{v.dtype.inspect}: #{a.inspect}" }
       if v.dtype == "entity"
-        ddputs(3){"Showing entity #{v.inspect}"}
+        dputs(3){"Showing entity #{v.inspect}"}
       end
       value = v.deep_clone
       value.args.merge!( args )

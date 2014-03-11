@@ -101,9 +101,9 @@ class Value
             else
               cond = @condition ? @condition.call( e ) : true
             end
-            dputs( 3 ){ "cond: #{cond}" }
+            dputs( 3 ){ "cond #{@condition}: #{cond}" }
             method = e.respond_to? @show_method
-            dputs( 3 ){ "method: #{method}" }
+            dputs( 3 ){ "method #{@show_method}: #{method}" }
             cond and method
           rescue Exception => e
             dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
@@ -141,7 +141,7 @@ class Value
     case @dtype
     when /entity/
       dputs( 3 ){ "parsing #{@name}: #{p.inspect}" }
-      case @list_type
+      case @list_type.to_sym
       when :drop, :single
         dputs(3){"Getting entity for #{@list_type}-#{eclass.class.inspect}-" +
             "#{p.inspect}"
