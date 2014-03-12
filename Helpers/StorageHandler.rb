@@ -269,9 +269,10 @@ module StorageHandler
           val = di.set_entry( id, field, value )
           dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
           @data[ id.to_i ][ field ] = val
-        else
+        elsif DEBUG_LVL >= 3
           log_msg "StorageHandler", "Trying to overwrite with same value in " +
-            "#{self.class.name}-#{field}-#{value.to_s}"
+            "#{self.class.name}-#{field}-#{value.to_s}\n" +
+            caller.inspect
         end
         return val
       end
@@ -359,6 +360,7 @@ module StorageHandler
   end
 
   def delete_all( local_only = false )
+    dputs(3){"Deleting all of #{self.class.name}"}
     @data_instances = {}
     @data = {}
     @storage.each{|k, di|

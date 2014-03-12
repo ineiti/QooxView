@@ -485,7 +485,7 @@ class Entity
         dputs(4){"found direct method for #{f} in #{self.class}"}
         send( f )
       else
-        dputs(4){"Using proxy for #{f}"}
+        dputs(4){"Using proxy #{@proxy.class.name} for #{f}"}
         e = @proxy.get_entry( @id, f )
         dputs(5){"e is #{e.inspect} from #{@proxy.data.inspect}"}
         if not raw

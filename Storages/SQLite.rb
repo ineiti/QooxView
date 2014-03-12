@@ -133,14 +133,16 @@ class SQLite < StorageType
   end
 
   def delete_all( local_only = false )
-    db_table = @db_table
-    dputs( 2 ){ "Deleting table #{db_table}" }
-    ActiveRecord::Schema.define do
-      if table_exists? db_table
-        drop_table db_table.to_sym
+    if ! local_only
+      db_table = @db_table
+      dputs( 2 ){ "Deleting table #{db_table}" }
+      ActiveRecord::Schema.define do
+        if table_exists? db_table
+          drop_table db_table.to_sym
+        end
       end
+      init_table
     end
-    init_table
   end
   
   def self.with_all_sqlites
@@ -162,7 +164,7 @@ class SQLite < StorageType
     }
   end
   
-  def self.dbs_open_load_migrate
+  def self.dbs_open_load
     dputs(2){"Opening all dbs"}
     SQLite.with_all_sqlites{|sql|
       sql.open_db
@@ -171,6 +173,10 @@ class SQLite < StorageType
     RPCQooxdooService.entities{|e|
       e.load
     }
+  end
+  
+  def self.dbs_open_load_migrate
+    SQLite.dbs_open_load
     dputs(2){"Migrating all dbs"}
     RPCQooxdooService.migrate_all    
   end
