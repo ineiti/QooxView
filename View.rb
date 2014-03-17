@@ -688,12 +688,16 @@ class View < RPCQooxdooService
 
   # Standard button which just saves the entered data
   def rpc_button_save( session, data )
-    reply( 'update', @data_class.save_data( data ) )
+    reply( :update, @data_class.save_data( data ) )
   end
 
   # Standard button that cleans all fields
   def rpc_button_new( session, data )
-    reply( 'empty' )
+    reply( :empty )
+  end
+  
+  def rpc_button_close( session, data )
+    reply( :window_hide )
   end
 
   # Standard search-field action to take

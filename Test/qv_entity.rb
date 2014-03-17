@@ -71,10 +71,12 @@ class TC_Entity < Test::Unit::TestCase
       {:logaction_id=>1, :undo_function=>:undo_set_entry,
         :data_field=>:credit, :data_value=>100, :data_old=>10000, 
         :data_class => "Person",
+        :msg => nil,
         :data_class_id=>1 },
       {:logaction_id=>2, :undo_function=>:undo_set_entry,
         :data_field=>:pass, :data_value=>"hello123",
         :data_old=>"super123", :data_class => "Person",
+        :msg => nil,
         :data_class_id=>1 } ],
       log_list
     LogActions.logging = oldlog
