@@ -110,8 +110,12 @@ class ConfigBase < Entity
   end
 
   def self.method_missing( m, *args )
-    dputs(4){"#{m} - #{args.inspect}"}
-    ConfigBases.singleton.send( m, args )
+    dputs(4){"#{m} - #{args.inspect} - #{ConfigBases.singleton.inspect}"}
+    if args.length > 0
+      ConfigBases.singleton.send( m, args )
+    else
+      ConfigBases.singleton.send( m )
+    end
   end
   
   def self.respond_to?( cmd )

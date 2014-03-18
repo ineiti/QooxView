@@ -302,7 +302,8 @@ module QooxView
         paths = [ "#{dir_entities}/*.rb", "#{dir_views}/*.rb", "#{dir_views}/*/*.rb" ]
         dputs( 2 ){ "potfile is #{potfile.inspect}, paths is #{paths.collect{|p| Dir[p] }}" }
         #GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
-        GetText::Tools::XGetText.run( *paths.collect{|p| Dir[p] }.flatten, "-o", "#{potfile}" )
+        GetText::Tools::XGetText.run( *paths.collect{|p| Dir[p] }.concat(
+            ["-o", "#{potfile}" ]).flatten )
         if a.length > 0
           pofile = "po/#{$name}-#{a}.po"
           if File.exists? pofile
@@ -341,12 +342,6 @@ module QooxView
       self.do_opts( dir_entities, dir_views )
     end
 
-    GetText.bindtextdomain( $name, :path => "po" )
-    if get_config( nil, :locale_force )
-      GetText.locale = get_config( nil, :locale_force )
-    end
-    GetText::TextDomainManager.cached = false
-
     # Include all modules in the dir_entities and dir_views
     # directories
     dputs( 2 ){ "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
@@ -365,8 +360,21 @@ module QooxView
     end
 
     dputs( 2 ){ "Starting RPCQooxdooServices" }
+    # We want to load an eventual ConfigBase first, so that other modules can
+    # read the configuration - but we don't want logging yet
+    rpcqooxdoo = Entities.nolog do
+      RPCQooxdooService.new( "Entities.ConfigBase" )
+    end
+
+    GetText.bindtextdomain( $name, :path => "po" )
+    if ConfigBase.locale_force
+      ddputs(3){"Forcing locale to #{ConfigBase.locale_force}"}
+      GetText.locale = ConfigBase.locale_force
+    end
+    GetText::TextDomainManager.cached = false
+
     # Get an instance of all Qooxdoo-services
-    rpcqooxdoo = RPCQooxdooService.new
+    rpcqooxdoo.get_services
     
     $qooxview_cmds.each{|qv|
       qv_cmd = qv.class == Array ? qv[0] : qv

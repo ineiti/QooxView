@@ -22,6 +22,7 @@ end
 
 class Entities < RPCQooxdooService
   @@all = {}
+  @@logging = true
 
   include StorageHandler
 
@@ -232,7 +233,7 @@ class Entities < RPCQooxdooService
   # [data_old] - eventual old data interesting to "undo_function"
   # It will return the index of the action
   def log_action( id, data, msg = nil, undo_function = nil, data_old = nil )
-    Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
+    @@logging and Entities.LogActions.log_action( @data_class, id, data, msg, undo_function, data_old )
   end
 
   # Checks for a list of it's own type, enhanced by filter
@@ -340,6 +341,14 @@ class Entities < RPCQooxdooService
   def self.needs( e )
     dputs(2){"#{self.name} needs #{e}"}
     @@needs["Entities.#{self.name.to_s}"] = "Entities.#{e.to_s}"
+  end
+  
+  def self.nolog( &b )
+    oldlog = @@logging
+    @@logging = false
+    ret = yield b
+    @@logging = oldlog
+    ret
   end
 end
 
@@ -507,15 +516,17 @@ class Entity
   def data_set( field_orig, value )
     field = field_orig.to_s
     ( direct = field =~ /^_/ ) and field.sub!( /^_/, '' )
-    dputs(4){"Direct is #{direct} for field #{field_orig.inspect}"}
+    dputs(4){"Direct is #{direct.inspect} for field #{field_orig.inspect}"}
     v = if value.is_a? Entity
       dputs( 3 ){ "Converting #{value} to #{value.id}" }
       value.id
     else
       value
     end
-    if ( self.public_methods.index( "#{field}=" ) ) and ( not direct )
-      send( "#{field}=", v )
+    dputs(4){"Self is #{self.public_methods.inspect}"}
+    if ( self.public_methods.index( "#{field}=".to_sym ) ) and ( not direct )
+      dputs(3){"Setting #{field} through local method"}
+      send( "#{field}=".to_sym, v )
     else
       dputs(4){"setting entry"}
       @proxy.set_entry( @id, field, v )

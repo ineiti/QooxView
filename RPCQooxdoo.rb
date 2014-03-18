@@ -41,7 +41,11 @@ class RPCQooxdooService
   
   # As we can't call .new during "inherited", we have
   # to do it afterwards - too bad.
-  def initialize
+  def initialize( services = ".*" )
+    get_services( services )
+  end
+  
+  def get_services( services = ".*" )
     do_init = true
 
     while do_init
@@ -50,7 +54,8 @@ class RPCQooxdooService
       # The entities have to be initialized before the views
       [ "Entities", "View" ].each{|e|
         @@services_hash.sort.each{|k,v|
-          if k =~ /^#{e}/
+          if k =~ /^#{e}/ and k =~ /#{services}/
+            dputs(3){"Initializing #{k.inspect} with #{v.inspect}"}
             if @@services_hash[k].class == Class
               dputs(5){"#{@@needs.inspect}"}
               if @@needs.has_key?(k) and 
@@ -75,9 +80,10 @@ class RPCQooxdooService
   def self.migrate_all
     # And now do eventual migrations on everybody
     @@services_hash.each_pair{|k,v|
-      if k =~ /^Entities/
-        dputs( 4 ){ "Migration of #{k}" }
+      if k =~ /^Entities/ and v.class != Class
+        dputs( 3 ){ "Migration of #{k}" }
         v.migrate
+        dputs( 3 ){ "Migration of #{k}" }
       end
     }
   end
