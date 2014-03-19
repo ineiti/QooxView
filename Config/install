@@ -11,7 +11,7 @@ rm -f ../libs/docsplit*
 
 echo Installing for $DIST_MAIN
 case $DIST_MAIN in
-Debian_6|Ubuntu_12)
+Debian_6|Ubuntu_12|"Arch Linux")
   WEBRICK=/usr/lib/ruby/1.9.1/webrick/httprequest.rb
   if [ -f $WEBRICK ]; then
     perl -pi -e "s/1024([\) ])/10240\1/" $WEBRICK
