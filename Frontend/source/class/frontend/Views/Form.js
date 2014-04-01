@@ -46,13 +46,13 @@ qx.Class.define("frontend.Views.Form", {
          */
     changeId: function(result){
       dbg(3, "Got changeId with " + print_a(result));
-      dbg(5, "dataClass is " + this.dataClass);
       //dbg(5, "callBack is " + this.callBackend);
       var id = result[0];
       var name = result[1];
       var type = result[2];
       var value = result[3];
       var params = result[4];
+      dbg(5, "dataClass is " + this.dataClass + " Type is: " + type);
       switch (type) {
         case "str":
         case "int":
@@ -79,6 +79,11 @@ qx.Class.define("frontend.Views.Form", {
           break;
         case "list":
           this.callBackend("list_choice", name, this.fields.getFieldsData());
+          break;
+        case "date":
+          if (params.callback) {
+            this.callBackend("callback", params.callback, this.fields.getFieldsData());
+          }
           break;
         default:
           this.fields.updating = false;

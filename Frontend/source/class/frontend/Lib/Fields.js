@@ -103,7 +103,7 @@ function setValueListCommon(values, list){
       dbg(5, "Adding new item " + val)
       var item = new qx.ui.form.ListItem("" + val);
       list.add(item);
-      /*
+    /*
       if (list.valueIds && list.indexOf(item) != list.valueIds.length - 1) {
         alert("Different number of items in list and valueIds! Val:item:npr are -" +
           [ val, item, list.nopreselect ].join("-") + "\n" +
@@ -526,6 +526,10 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element.setDateFormat(new qx.util.format.DateFormat("dd.MM.yyyy"));
           field_element.getValueSpecial = getValueDate;
           field_element.setValueStr = setValueDate;
+          if (params.callback) {
+            do_callback = true;
+            listener = "changeValue";
+          }
           break;
         case "info":
           //field_element = new qx.ui.form.TextField(params.text);
@@ -877,7 +881,9 @@ qx.Class.define("frontend.Lib.Fields", {
           }
           for ( var l=0; l<listener.length; l++ ){
             field_element.addListener(listener[l], function(e){
-              //alert( "Listener " + name + ":" + e )
+              //alert( "Listener " + name + ":" + e + " for " + label )
+              dbg( 4, "updating " + this.updating + " delay:" + delay + 
+                " delayTimer:" + this.delayTimer )
               // Supposing Javascript has only one executable thread!
               if (!this.updating || (delay > 0 && this.delayTimer)) {
                 dbg(5, "Listener: " + type + ":" + name + ":" + this.field_id);

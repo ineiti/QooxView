@@ -172,6 +172,15 @@ module PrintButton
     dputs(3){"Command will be #{cmd}"}
     cmd
   end
+  
+  def send_printer( session, button, file )
+    if cmd = cmd_printer( session, button )
+      %x[ #{cmd} #{file} ]
+      stat_printer( session, button ).data_str
+    else
+      return nil
+    end
+  end
 
   def reply_print(session)
     ret = []
