@@ -702,12 +702,25 @@ qx.Class.define("frontend.Lib.Fields", {
           field_element = table;
           show_label = false;
           listener = "dataEdited";
-          
-          if ( params.render_html ){
-            for ( var i = 0; i < params.render_html.length; i++ ){
-              var htmlTable = new qx.ui.table.cellrenderer.Html();
-              table.getTableColumnModel().setDataCellRenderer(
-                params.render_html[i], htmlTable);              
+          dbg(3, "params is " + print_a( params ) )
+          if ( params.columns ){
+            for ( var i = 0; i < params.columns.length; i++ ){
+              var rendering = null;
+              var p = params.columns[i];
+              dbg(3, "Rendering " + p + " for index " + i );
+              if ( p == "html" ){
+                rendering = new qx.ui.table.cellrenderer.Html();
+              } else if ( /^align_/.test( p ) ){
+                var str = p.replace("align_", "")
+                dbg(3, "Found alignement: " + str )
+                rendering = new qx.ui.table.cellrenderer.String( str )
+              } else if ( p == "dynamic" ){
+                rendering = new qx.ui.table.cellrenderer.Dynamic();
+              }
+              if ( rendering ){
+                dbg(3, "rendering " + rendering )
+                table.getTableColumnModel().setDataCellRenderer( i, rendering);
+              }
             }
           }
           //params.flexheight = 1;

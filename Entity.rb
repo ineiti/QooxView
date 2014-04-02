@@ -499,9 +499,9 @@ class Entity
         dputs(5){"e is #{e.inspect} from #{@proxy.data.inspect}"}
         if not raw
           v = @proxy.get_value( f )
-          if e and v and v.dtype == "entity"
+          if e.class == Fixnum and v and v.dtype == "entity"
             dputs( 5 ){ "Getting instance for #{v.inspect}" }
-            dputs( 5 ){ "Getting instance with #{e.inspect}" }
+            dputs( 5 ){ "Getting instance with #{e.class} - #{e.inspect}" }
             dputs( 5 ){ "Field = #{field}; id = #{@id}"}
             e = v.eclass.get_data_instance( [e].flatten.first )
           end

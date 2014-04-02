@@ -368,7 +368,7 @@ module QooxView
 
     GetText.bindtextdomain( $name, :path => "po" )
     if ConfigBase.locale_force
-      ddputs(3){"Forcing locale to #{ConfigBase.locale_force}"}
+      dputs(3){"Forcing locale to #{ConfigBase.locale_force}"}
       GetText.locale = ConfigBase.locale_force
     end
     GetText::TextDomainManager.cached = false
