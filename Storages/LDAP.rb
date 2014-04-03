@@ -157,7 +157,7 @@ class LDAP < StorageType
     end    
     
     ret = @data_ldap.replace_attribute( dn, attribute, value_stored.to_s )
-    log_msg( 'DataElement', "Replaced #{attribute} in #{dn} with #{value}" )
+    dputs(3){ "Replaced #{attribute} in #{dn} with #{value}" }
     dputs( 3 ){ "State of LDAP is: #{@data_ldap.get_operation_result.message} - #{ret.inspect}" }
     @data_ldap.search( :base => @data_ldap_base, 
       :filter => Net::LDAP::Filter.eq( @field_id_ldap.to_s, id.to_s ) ) do |entry|
