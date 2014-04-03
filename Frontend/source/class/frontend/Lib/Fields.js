@@ -808,7 +808,7 @@ qx.Class.define("frontend.Lib.Fields", {
           } );
           break;
         default:
-          alert("This shouldn't happen! Asked for element " + type);
+          alert("Asked for unknown element " + type);
           break;
       }
             

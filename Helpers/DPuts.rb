@@ -61,6 +61,11 @@ module DPuts
     s = yield s
     dputs_out( -n, s, caller(0)[1] )
   end
+  
+  def dp( s )
+    dputs_out( 0, s.class == String ? s : s.inspect, caller(0)[1] )
+    s
+  end
 
   def log_msg( mod, msg )
     dputs( 1 ){ "Info from #{mod}: #{msg}" }

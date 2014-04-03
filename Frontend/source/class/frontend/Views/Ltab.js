@@ -226,6 +226,9 @@ qx.Class.define("frontend.Views.Ltab", {
               this.parentFadeIn();
             }
             break;
+          default:
+            alert( "Unknown command " + res.cmd )
+            break;
         }
       }
 

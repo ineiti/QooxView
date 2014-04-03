@@ -57,7 +57,7 @@ class LDAP < StorageType
   end
   
   def save(data)
-    dputs( 2 ){ "Everything should already be saved..." }
+    dputs( 3 ){ "Everything should already be saved..." }
   end
   
   def load

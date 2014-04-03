@@ -685,6 +685,13 @@ class View < RPCQooxdooService
   def self.reply( cmd, data = nil )
     [{ :cmd => cmd, :data => data }]
   end
+  
+  def reply_visible( visible, element )
+    View.reply_visible( visible, element )
+  end
+  def self.reply_visible( visible, element )
+    View.reply( visible ? :unhide : :hide, element )
+  end
 
   # Standard button which just saves the entered data
   def rpc_button_save( session, data )

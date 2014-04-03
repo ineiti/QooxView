@@ -344,6 +344,7 @@ module StorageHandler
   end
 
   def load
+    dputs(2){"Loading #{self.class.name}"}
     @data = {}
     @storage.each{|k,di|
       dputs( 5 ){ "Loading #{k} at #{di.name} with #{di.inspect}" }
