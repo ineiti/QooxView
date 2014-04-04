@@ -137,6 +137,14 @@ if not defined?(DEBUG_LVL)
   DEBUG_LVL = 5
 end
 
+class Array
+  if ! Array.respond_to? :to_h
+    def to_h
+      Hash[ *self ]
+    end
+  end
+end
+
 # Converts all keys of a hash to syms recursively
 class Hash
   def to_sym
