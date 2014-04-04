@@ -176,6 +176,9 @@ qx.Class.define("frontend.Views.Ltab", {
           case "list":
             this.createViews(res.data);
             break;
+          case "none":
+            dbg( 5, "Doing nothing" )
+            break
           case "parent":
             if ( this.parentLtab ){
               this.parentLtab.dispatch( res.data );

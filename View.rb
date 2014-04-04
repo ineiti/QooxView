@@ -593,7 +593,7 @@ class View < RPCQooxdooService
       dputs( 3 ){ "Found #{rpc_name} and calling it with #{args.inspect}" }
       return self.send( rpc_name, session, args[0] )
     else
-      dputs( 0 ){ "Error: Didn't find anybody for #{rpc_name} in " +
+      dputs( 0 ){ "Error: Nobody listens to #{rpc_name} in " +
           "#{self.class.inspect} - ignoring" }
       return []
     end
@@ -615,7 +615,8 @@ class View < RPCQooxdooService
       dputs(3){"Calling rpc_list_choice-#{name}"}
       return send( "rpc_list_choice_#{name}", session, data )
     else
-      dputs( 3 ){ "Got a new choice of list: #{name.inspect} - #{data.inspect}" }
+      dputs( 0 ){ "Error: Nobody listens to " +
+          "rpc_list_coice_#{name.inspect} - #{data.inspect}" }
     end
   end
 
