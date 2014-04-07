@@ -285,6 +285,7 @@ require 'gettext/tools/xgettext'
 require 'Helpers/QooxParser'
 require 'Helpers/MigrationVersion'
 require 'Helpers/UploadFiles'
+defined? HAS_CONFIGBASE or require 'Helpers/ConfigBase'
 
 $qooxview_cmds = []
 

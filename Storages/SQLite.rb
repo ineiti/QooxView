@@ -25,9 +25,11 @@ class SQLite < StorageType
     ActiveRecord::Migration.verbose = false
     #ActiveRecord::Base.logger = Logger.new(STDERR)
     
+    @mutex_es = Mutex.new
+
     dputs( 4 ){ "Opening database" }
     open_db
-
+    
     super config
   end
   
@@ -37,43 +39,49 @@ class SQLite < StorageType
   end
   
   def open_db
-    dputs( 4 ){ "Opening connection" }
-    ActiveRecord::Base.establish_connection(
-      :adapter => "sqlite3", :database => "data/#{@name_file}" )
+    @mutex_es.synchronize {
+      dputs( 4 ){ "Opening connection" }
+      ActiveRecord::Base.establish_connection(
+        :adapter => "sqlite3", :database => "data/#{@name_file}" )
 
-    dputs( 4 ){ "Initializing tables" }
-    init_table
+      dputs( 4 ){ "Initializing tables" }
+      init_table
     
-    dputs( 4 ){ "Getting Base" }
-    eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
-    @db_class = eval( @db_class_name )
-    dputs(4){"db_class is #{db_class.inspect}"}
+      dputs( 4 ){ "Getting Base" }
+      eval( "class #{@db_class_name} < ActiveRecord::Base; end" )
+      @db_class = eval( @db_class_name )
+      dputs(4){"db_class is #{db_class.inspect}"}
     
-    @entries = {}
-    @entries_save = {}
+      @entries = {}
+      @entries_save = {}
+    }
   end
 
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save( data )
-    dputs(3){"Saving #{@entries_save.count} entries in #{@db_class}"}
-    @entries_save.each_value{|v|
-      v.save
+    @mutex_es.synchronize {
+      dputs(3){"Saving #{@entries_save.count} entries in #{@db_class}"}
+      @entries_save.each_value{|v|
+        v.save
+      }
+      @entries_save = {}
     }
-    @entries_save = {}
   end
 
   def set_entry( data, field, value )
-    dputs( 5 ){ "Searching id #{data.inspect}" }
-    @entries[data] ||= @db_class.first( :conditions => { @data_field_id => data } )
-    if entry = @entries[data]
-      entry.send( "#{field}=", value )
-      @entries_save[data] = entry
-      return value
-    else
-      dputs( 2 ){ "Didn't find id #{data.inspect}" }
-      return nil
-    end
+    @mutex_es.synchronize {
+      dputs( 5 ){ "Searching id #{data.inspect}" }
+      @entries[data] ||= @db_class.first( :conditions => { @data_field_id => data } )
+      if entry = @entries[data]
+        entry.send( "#{field}=", value )
+        @entries_save[data] = entry
+        return value
+      else
+        dputs( 2 ){ "Didn't find id #{data.inspect}" }
+        return nil
+      end
+    }
   end
 
   # Each new entry is directly stored, helping somewhat if the program or the

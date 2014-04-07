@@ -4,6 +4,12 @@
 class ConfigBases < Entities
   def setup_data
     value_list :functions, "ConfigBases.list_functions"
+    value_str :locale_force
+    value_text :welcome_text
+
+    @@functions = []
+    @@functions_base = {}
+    @@functions_conflict = []
     
     respond_to? :add_config and add_config
     
@@ -32,7 +38,7 @@ class ConfigBases < Entities
       self.search_all[0]
     else
       dputs(5){"Creating instance"}
-      self.create({:functions => []})
+      self.create({:functions => [], :locale_force => nil, :welcome_msg => "" })
     end
   end
 
