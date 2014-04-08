@@ -2,7 +2,7 @@
 #!/usr/bin/env ruby -I.. -I.
 require 'test/unit'
 #require 'test/unit/testsuite'
-DEBUG_LVL = 0
+DEBUG_LVL = 1
 CONFIG_FILE='config.yaml'
 require 'QooxView'
 require 'st_dummy'
@@ -19,7 +19,7 @@ QooxView.init( 'entities', 'views' )
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
 #tests = %w( helpers )
-#tests = %w( view )
+#tests = %w( entity )
 #tests = %w( configbase )
 
 tests.each{|t|

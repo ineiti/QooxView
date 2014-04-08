@@ -27,7 +27,8 @@ class Entities < RPCQooxdooService
   include StorageHandler
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id, 
-    :storage, :data, :name, :msg, :undo, :logging
+    :storage, :data, :name, :msg, :undo, :logging, :keys,
+    :save_after_create
 
   def initialize
     begin
@@ -41,6 +42,7 @@ class Entities < RPCQooxdooService
     @msg = nil
     @undo = @logging = true
     @last_id = 1
+    @save_after_create = true
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
@@ -50,6 +52,7 @@ class Entities < RPCQooxdooService
       @blocks = {}
       @data_instances = {}
       @default_type = :CSV
+      @keys = {}
 
       # Check for config of this special class
       #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
@@ -172,9 +175,14 @@ class Entities < RPCQooxdooService
     cmd_str = cmd.to_s
     dputs( 5 ){ "Method missing: #{cmd}" }
     case cmd_str
-    when /^(find|search|match|matches)(_by|)_/
+    when /^match_(key|by)_(.*)/
+      define_singleton_method( cmd_str.to_sym ){ |arg| match_key( $~[2], arg ) }
+      self.send( cmd_str.to_sym, *args )
+    when /^create_key_(.*)/
+      create_key( $~[1] )
+    when /^(find|search|matches)(_by|)_/
       action = "#{$~[1]}#{$~[2]}"
-      field = cmd_str.sub( /^(find|search|match|matches)(_by|)_/, "" )
+      field = cmd_str.sub( /^(find|search|matches)(_by|)_/, "" )
       dputs( 4 ){ "Using #{action} for field #{field}" }
       if args[0].is_a? Entity
         dputs(4){"Getting id because it's an Entity"}
@@ -351,8 +359,6 @@ class Entities < RPCQooxdooService
     ret
   end
 end
-
-
 
 #
 # Defines one simple Entity

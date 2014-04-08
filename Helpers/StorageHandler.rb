@@ -140,26 +140,12 @@ module StorageHandler
       end
     }
     return nil
-
-    #    ret = search_by( field, "^#{value}$" )
-    #    if ret.length > 0
-    #      return ret[0]
-    #    else
-    #      return nil
-    #    end
   end
   
   # Like search_by, but only exact matcheS
   def matches_by( field, value )
     ret = search_by( field, "^#{value}$" )
     return ret
-=begin
-    if ret.length > 0
-      return ret
-    else
-      return []
-    end
-=end
   end
   
   # filter is a hash with field/value-pairs to be searched.
@@ -219,7 +205,8 @@ module StorageHandler
       args.each{|k,v|
         set_entry( data_id, k, v )
       }
-      save
+      @save_after_create and save
+      update_key( data_id )
       return get_data_instance( data_id )
     else
       @storage.each{|k, di| di.data_double( args ) }
@@ -368,6 +355,35 @@ module StorageHandler
       di.delete_all( local_only )
     }
     @last_id = 1
+  end
+  
+  def create_key( name )
+    name = name.to_sym
+    if @keys.has_key? name
+      dputs(2){"#{self.class.name} already has key #{name}"}
+    else
+      entries = {}
+      @data.each_pair{|k,v|
+        dputs(5){"Adding #{name} = #{v[name]} in #{v.inspect}"}
+        entries[v[name]] = k
+      }
+      dputs(4){"Setting keys[#{name}] to #{entries.inspect}"}
+      @keys[name] = entries
+    end
+  end
+  
+  def match_key( name, entry )
+    dputs(5){"Matching #{entry} of #{name} in #{@keys.inspect}"}
+    name = name.to_sym
+    @keys.has_key? name or create_key( name )
+    get_data_instance( @keys[name][entry] )
+  end
+  
+  def update_key( id )
+    dputs(5){"Updating keys #{@keys.inspect} for #{id}"}
+    @keys.each_key{|k|
+      @keys[k].merge!(@data[id][k] => id)
+    }
   end
 
 end

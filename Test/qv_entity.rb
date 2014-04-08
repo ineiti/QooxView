@@ -225,4 +225,46 @@ class TC_Entity < Test::Unit::TestCase
     assert_nothing_raised{ @admin._value1 }
     set_config( old, :DPuts, :silent )
   end
+  
+  def test_create_key
+    assert_equal( {}, Persons.keys )
+    Persons.create_key_first_name
+
+    assert_equal( {:first_name=>{"admin"=>1}}, Persons.keys )
+  end
+  
+  def test_match_key
+    Persons.create_key_first_name
+    assert_equal( "super123", Persons.match_key_first_name( "admin" ).pass )
+    assert_equal nil, Persons.match_key_first_name( "foo" )
+    
+    Persons.create( :first_name => "foo", :pass => "bar" )
+    assert_equal( "bar", Persons.match_key_first_name( "foo" ).pass )
+  end
+  
+  def test_speed_match
+    dputs(1){"Creating 1000 entries"}
+    Persons.save_after_create = false
+    (1..1000).each{ |i|
+      Persons.create( :first_name => "name_#{i}", :pass => i )
+    }
+    (1..1).each{|i|
+      dputs(1){"Benchmarking match - Turn #{i}"}
+      dputs(1){ Benchmark.measure( "match_#{i}" ){
+          (1..2000).each{|i|
+            Persons.match_by( :first_name, "name_#{i}")
+          }
+        }.to_s
+      }
+    }
+    (1..3).each{|i|
+      dputs(1){"Benchmarking match_key - Turn #{i}"}    
+      dputs(1){ Benchmark.measure( "match_key_#{i}" ){
+          (1..2000).each{|i|
+            Persons.match_key( :first_name, "name_#{i}")
+          }
+        }.to_s
+      }
+    }
+  end
 end
