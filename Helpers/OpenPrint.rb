@@ -211,4 +211,25 @@ module PrintButton
     end
     reply_print( session )
   end
+  
+  def send_printer_reply( session, button, data, file, ret_post = [] )
+    rpc_print( session, button, data ) +
+      reply( :window_show, :print_status ) +
+      reply( :update, :status => 
+        if printer = send_printer( session, button, file )
+        "Printed to #{printer}"
+      else
+        "<a href='#{file}' target='other'>#{file}</a>"
+      end ) + 
+      ret_post
+  end
+  
+  def window_print_status
+    gui_window :print_status do
+      gui_vbox :nogroup do
+        show_html :status
+        show_button :close
+      end
+    end
+  end
 end
