@@ -238,8 +238,10 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal( "super123", Persons.match_key_first_name( "admin" ).pass )
     assert_equal nil, Persons.match_key_first_name( "foo" )
     
-    Persons.create( :first_name => "foo", :pass => "bar" )
+    foo = Persons.create( :first_name => "foo", :pass => "bar" )
     assert_equal( "bar", Persons.match_key_first_name( "foo" ).pass )
+    assert Persons.match_key_person_id( foo.id ), "Failed foo.id"
+    assert Persons.match_key_person_id( foo.id.to_s ), "Failed string of foo.id"
   end
   
   def test_speed_match

@@ -365,7 +365,7 @@ module StorageHandler
       entries = {}
       @data.each_pair{|k,v|
         dputs(5){"Adding #{name} = #{v[name]} in #{v.inspect}"}
-        entries[v[name]] = k
+        entries[v[name].to_s] = k
       }
       dputs(4){"Setting keys[#{name}] to #{entries.inspect}"}
       @keys[name] = entries
@@ -376,13 +376,13 @@ module StorageHandler
     dputs(5){"Matching #{entry} of #{name} in #{@keys.inspect}"}
     name = name.to_sym
     @keys.has_key? name or create_key( name )
-    get_data_instance( @keys[name][entry] )
+    get_data_instance( @keys[name][entry.to_s] )
   end
   
   def update_key( id )
     dputs(5){"Updating keys #{@keys.inspect} for #{id}"}
     @keys.each_key{|k|
-      @keys[k].merge!(@data[id][k] => id)
+      @keys[k].merge!(@data[id][k].to_s => id)
     }
   end
 
