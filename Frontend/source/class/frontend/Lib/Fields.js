@@ -1167,13 +1167,16 @@ qx.Class.define("frontend.Lib.Fields", {
     // Put a window into visibility, hiding the background
     window_show: function(name){
       dbg(2, "Showing window " + name);
-      win = this.windows[name];
-      win.setVisibility("visible");
-      win.focus();
-      win.activate();
-      win.dontfade = false;
-      this.window_fade_to( win, 1 );
-      this.focus_if_ok( win.first_field )
+      if ( win = this.windows[name] ){
+        win.setVisibility("visible");
+        win.focus();
+        win.activate();
+        win.dontfade = false;
+        this.window_fade_to( win, 1 );
+        this.focus_if_ok( win.first_field )        
+      } else {
+        alert( "Asked for non-existing window " + name )
+      }
     /*
       this.first_button_window = this.first_button;
       this.first_button = win.first_button;

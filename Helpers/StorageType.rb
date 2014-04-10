@@ -70,8 +70,6 @@ class StorageType
     dputs( 5 ){ data.inspect }
     dputs( 5 ){ data.values.inspect }
     data.values.sort{|s, t|
-      #dputs( 3 ){ s.inspect }
-      #dputs( 4 ){ t.inspect }
       s[@data_field_id].to_i <=> t[@data_field_id].to_i
     }.each{|d|
       dw = extract_data( d )

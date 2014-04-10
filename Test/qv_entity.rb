@@ -135,7 +135,8 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_getfields
-    assert_equal %w( assistant course_id first_name start end street plz teacher tel ).sort.to_s,
+    assert_equal %w( assistant course_id first_name start end street plz 
+      students teacher tel ).sort.to_s,
       Entities.Courses.get_field_names.sortk.to_s
   end
 
@@ -268,5 +269,24 @@ class TC_Entity < Test::Unit::TestCase
         }.to_s
       }
     }
+  end
+  
+  def test_list_entity
+    @base_1011.teacher = @admin
+    assert_equal @admin, @base_1011.teacher
+    Entities.save_all
+    Entities.load_all
+    assert_equal @admin, @base_1011.teacher
+    
+    course = Courses.create( :first_name => "foo",
+      :students => [@admin] )
+    course.students = [@admin]
+    assert_equal @admin, course.students.first
+    
+    Entities.save_all
+    Entities.load_all
+    
+    course = Courses.find_by_first_name( "foo" )
+    assert_equal @admin, course.students.first
   end
 end

@@ -616,7 +616,7 @@ class View < RPCQooxdooService
       return send( "rpc_list_choice_#{name}", session, data )
     else
       dputs( 0 ){ "Error: Nobody listens to " +
-          "rpc_list_coice_#{name.to_s} in #{self.class.name.to_s} " +
+          "rpc_list_choice_#{name.to_s} in #{self.class.name.to_s} " +
           "- #{data.inspect}" }
     end
   end

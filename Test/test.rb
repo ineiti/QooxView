@@ -2,7 +2,7 @@
 #!/usr/bin/env ruby -I.. -I.
 require 'test/unit'
 #require 'test/unit/testsuite'
-DEBUG_LVL = 1
+DEBUG_LVL = 0
 CONFIG_FILE='config.yaml'
 require 'QooxView'
 require 'st_dummy'

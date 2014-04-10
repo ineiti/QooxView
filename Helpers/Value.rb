@@ -47,6 +47,14 @@ class Value
       case cmds[0]
       when /(array|choice|drop|single)/
         @args.merge! :list_type => ( @list_type = cmds.shift )
+      when /entity/
+        dputs(3){"Adding an entity with #{cmds.inspect} - #{arguments.inspect}"}
+        @dtype = "list_entity"
+        cmds.shift
+        @entity_class = cmds.shift.pluralize_simple.gsub( /([A-Z])/, " \\1" ).
+          split.collect{ |s| s.capitalize }.join
+        @args.merge! :list_type => ( @list_type = :single )
+        @show_method, @condition = arguments
       end
       if arguments[0]
         @list = arguments.shift
@@ -121,7 +129,6 @@ class Value
       args.merge! :list_values => values
       dputs( 3 ){ "Args for entities is #{args.inspect}" }
     end
-    #GetText.locale = "en"
     dputs( 3 ){ "Going to name #{fe_name} to #{GetText._(fe_name.to_s)}" }
     [ fe_type, fe_name, GetText._( fe_name.to_s ), args ]
   end
@@ -131,7 +138,8 @@ class Value
   end
 
   def eclass
-    if @dtype == "entity" and not @eclass_proxy
+    dputs(4){"Asking eclass for #{self.inspect}"}
+    if @dtype =~ /^(list_)*entity$/ and not @eclass_proxy
       @eclass_proxy = Entities.send( @entity_class )
     end
     return @eclass_proxy
@@ -144,8 +152,7 @@ class Value
       case @list_type.to_sym
       when :drop, :single
         dputs(3){"Getting entity for #{@list_type}-#{eclass.class.inspect}-" +
-            "#{p.inspect}"
-        }
+            "#{p.inspect}" }
         ret = eclass.match_by( eclass.data_field_id, p[0] )
         dputs( 3 ){ "And found #{ret.inspect}" }
         if not ret and @args.has_key? :empty
@@ -155,9 +162,6 @@ class Value
         return ret
       else
         dputs( 0 ){ "List-type #{@list_type} not supported yet!" }
-        #        ent_value = id_value.collect{|i|
-        #          ent.find_by( ent.data_field_id, i )
-        #        }
         return nil
       end
     end

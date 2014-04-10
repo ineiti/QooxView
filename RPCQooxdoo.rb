@@ -171,7 +171,7 @@ class RPCQooxdooHandler
       s = RPCQooxdooService::services[ service ]
       method = "rpc_#{method}"
       if s.respond_to?( method )
-        dputs( 3 ){ "Calling #{method} with #{params.inspect}" }
+        dputs( 2 ){ "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request( method, session, params[0] )
           dputs( 4 ){"Parsed request is #{parsed.inspect}"}
@@ -264,7 +264,7 @@ class RPCQooxdooHandler
       #res['content-type'] = "text/html"
       res['content-type'] = "application/json"
       res['content-length'] = res.body.length
-      dputs( 3 ){ "RPC-Reply is #{res.body}" }
+      dputs( 2 ){ "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
     }
 		

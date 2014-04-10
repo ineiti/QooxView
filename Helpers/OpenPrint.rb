@@ -212,7 +212,7 @@ module PrintButton
     reply_print( session )
   end
   
-  def send_printer_reply( session, button, data, file, ret_post = [] )
+  def send_printer_reply( session, button, data, file )
     rpc_print( session, button, data ) +
       reply( :window_show, :print_status ) +
       reply( :update, :status => 
@@ -220,8 +220,7 @@ module PrintButton
         "Printed to #{printer}"
       else
         "<a href='#{file}' target='other'>#{file}</a>"
-      end ) + 
-      ret_post
+      end )
   end
   
   def window_print_status

@@ -247,7 +247,17 @@ module StorageHandler
   end
 
   def set_entry( id, field, v )
-    value = v.is_a?( Entity ) ? v.id : v
+    value = if v.is_a? Entity
+      dputs( 3 ){ "Converting #{v} to #{v.id}" }
+      v.id
+    elsif v.is_a? Array
+      dputs(3){"Storing an array #{v.inspect}"}
+      v.collect{|val|
+        val.is_a?( Entity ) ? val.id : val
+      }
+    else
+      v
+    end
     field = field.to_sym
     @storage.each{|k, di|
       if di.has_field field

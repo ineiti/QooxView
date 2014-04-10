@@ -510,6 +510,11 @@ class Entity
             dputs( 5 ){ "Getting instance with #{e.class} - #{e.inspect}" }
             dputs( 5 ){ "Field = #{field}; id = #{@id}"}
             e = v.eclass.get_data_instance( [e].flatten.first )
+          elsif v.dtype == "list_entity"
+            dputs(4){"Converting list_entity #{v.inspect} of #{e.inspect}"}
+            e = e.collect{|val|
+              v.eclass.get_data_instance( val )
+            }
           end
         end
         e
@@ -523,12 +528,20 @@ class Entity
     field = field_orig.to_s
     ( direct = field =~ /^_/ ) and field.sub!( /^_/, '' )
     dputs(4){"Direct is #{direct.inspect} for field #{field_orig.inspect}"}
+=begin
     v = if value.is_a? Entity
       dputs( 3 ){ "Converting #{value} to #{value.id}" }
       value.id
+    elsif value.is_a? Array
+      dputs(3){"Storing an array #{value.inspect}"}
+      dp value.collect{|val|
+        val.is_a?( Entity ) ? val.id : val
+      }
     else
       value
     end
+=end
+    v = value
     dputs(4){"Self is #{self.public_methods.inspect}"}
     if ( self.public_methods.index( "#{field}=".to_sym ) ) and ( not direct )
       dputs(3){"Setting #{field} through local method"}
