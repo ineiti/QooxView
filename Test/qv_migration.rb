@@ -4,6 +4,26 @@ require 'benchmark'
 class TC_Migration < Test::Unit::TestCase
   def setup
     Entities.delete_all_data
+    CVSInventories.class_eval( '
+      def setup_data
+        value_date :date
+        value_str :iname
+      end
+
+      (1..3).each{|v|
+        begin
+          remove_method "migration_#{v}".to_sym
+        rescue NameError
+        end
+        begin
+          remove_method "migration_#{v}_raw".to_sym
+        rescue NameError
+        end
+      }
+
+      RPCQooxdooService.add_new_service( CVSInventories,
+        "Entities.CVSInventories" )
+      ')
     @pers = Entities.Persons.create( :login_name => "test" )
     @inv1 = Entities.CVSInventories.create( :date => "121201", :iname => "comp 01" )
     @inv2 = Entities.CVSInventories.create( :date => "121202", :iname => "comp 02" )
@@ -13,22 +33,6 @@ class TC_Migration < Test::Unit::TestCase
 
   def teardown
     dputs(1){"Tearing down"}
-    CVSInventories.class_eval( '
-      def setup_data
-        value_date :date
-        value_str :iname
-      end
-
-      begin
-        remove_method :migration_1
-        remove_method :migration_2
-        remove_method :migration_3
-      rescue NameError
-      end
-
-      RPCQooxdooService.add_new_service( CVSInventories,
-        "Entities.CVSInventories" )
-    ')
   end
   
   def test_cvs_normal
@@ -86,9 +90,9 @@ class TC_Migration < Test::Unit::TestCase
         value_str :i_name
       end
   
-      def migration_1( inv )
+      def migration_1_raw( inv )
         dputs(1){"rename: Adjusting inv #{inv.inspect}"}
-        inv.i_name = inv.iname
+        inv._i_name = inv._iname
       end
 
       RPCQooxdooService.add_new_service( CVSInventories,
@@ -115,7 +119,8 @@ class TC_Migration < Test::Unit::TestCase
         "Entities.CVSInventories" )
       ')    
 
-    assert_equal "comp 01", CVSInventories.match_by_date("121201").i_name
+    cvs = CVSInventories.match_by_date("121201")
+    assert_equal "comp 01", cvs.i_name
   end
 
 end

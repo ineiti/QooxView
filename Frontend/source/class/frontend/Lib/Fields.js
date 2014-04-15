@@ -439,6 +439,7 @@ qx.Class.define("frontend.Lib.Fields", {
         
     // Fills data in the fields
     fill: function(data){
+      this.updating = true
       dbg(3, "Filling with data " + print_a(data))
       for (var f in this.fields) {
         dbg(5, "Looking for data of field " + f);
@@ -460,6 +461,7 @@ qx.Class.define("frontend.Lib.Fields", {
           }
         }
       }
+      this.updating = false
     },
         
     addElement: function(element, layout, index){

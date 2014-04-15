@@ -134,7 +134,11 @@ class TC_View < Test::Unit::TestCase
               "assistant",
               {:list_type=>:drop,
                 :list_values=>[[0, "---"], [1, "admin"], [3, "autre"], [2, "surf"]],
-                :empty=>true}]]]]],
+                :empty=>true}],
+            ["list",
+              :students,
+              "students",
+              {:list_type=>:single, :list_values=>[]}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
     assert_equal ["group",
@@ -148,7 +152,11 @@ class TC_View < Test::Unit::TestCase
               "assistant",
               {:list_type=>:drop,
                 :list_values=>[[0, "---"], [1, "admin"], [3, "autre"], [2, "surf"]],
-                :empty=>true}]]]]],
+                :empty=>true}],
+            ["list",
+              :students,
+              "students",
+              {:list_type=>:single, :list_values=>[]}]]]]],
       View.CourseShow.layout_eval
   end
   

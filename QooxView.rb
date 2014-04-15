@@ -134,7 +134,8 @@ require 'gettext'
 include DPuts
 extend DPuts
 if not defined?(DEBUG_LVL)
-  DEBUG_LVL = 5
+  # Unknown debug-level for recognition in ConfigBase
+  DEBUG_LVL = 0.5
 end
 
 class Array

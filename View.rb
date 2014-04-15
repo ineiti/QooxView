@@ -694,6 +694,21 @@ class View < RPCQooxdooService
   def self.reply_visible( visible, element )
     View.reply( visible ? :unhide : :hide, element )
   end
+  
+  def reply_one_two( choice, one, two )
+    View.reply_one_two(choice, one, two)
+  end
+  def self.reply_one_two(choice, one, two)
+    View.reply_visible(choice, one) +
+      View.reply_visible( ! choice, two )
+  end
+  
+  def reply_show_hide( show, hide )
+    View.reply_show_hide( show, hide )
+  end
+  def self.reply_show_hide( show, hide )
+    self.reply_one_two( true, show, hide )
+  end
 
   # Standard button which just saves the entered data
   def rpc_button_save( session, data )

@@ -69,8 +69,8 @@ class CSV < StorageType
             data_csv.merge!( { k.to_sym => v } )
           }
           # dputs( 5 ){ "Putting #{data_csv.inspect}" }
-          data_csv[@data_field_id] = data_csv[@data_field_id].to_i
-          data[ data_csv[@data_field_id] ] = data_csv
+          did = data_csv[@data_field_id] = data_csv[@data_field_id].to_i
+          data[ did ] = data_csv
         }
       rescue JSON::ParserError
         dputs(0){"Oups - couldn't load CSV for #{@csv_file}"}

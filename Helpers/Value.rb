@@ -89,8 +89,8 @@ class Value
 
   def to_a( session = nil )
     fe_type, fe_name, args = @dtype, @name, @args.dup
-    case @dtype
-    when /list|select/
+    case @dtype.to_s
+    when "list", "select"
       dputs( 3 ){ "List is #{@list}" }
       @list.size > 0 and args.merge! :list_values => eval( @list ).to_a
     when /entity/

@@ -6,6 +6,8 @@ class ConfigBases < Entities
     value_list :functions, "ConfigBases.list_functions"
     value_str :locale_force
     value_text :welcome_text
+    value_int :debug_lvl
+    value_str :version_local
 
     @@functions = []
     @@functions_base = {}
@@ -14,6 +16,14 @@ class ConfigBases < Entities
     respond_to? :add_config and add_config
     
     return true
+  end
+  
+  def migration_1( c )
+    c._debug_lvl = DEBUG_LVL
+    c._locale_force = get_config( nil, :locale_force )
+    c._version_local = get_config( "orig", :version_local )
+    c._welcome_text = get_config( false, :welcome_text )
+    dputs(3){"Migrating out: #{c.inspect}"}
   end
   
   def functions
@@ -142,5 +152,22 @@ class ConfigBase < Entity
   
   def self.del_function( func )
     self.store( {:functions => self.get_functions.reject{|f| f == func} })
+  end
+end
+
+class ConfigBase < Entity
+  def setup_instance
+    dputs(4){"Setting up ConfigBase with debug_lvl = #{debug_lvl}"}
+    if DEBUG_LVL == 0.5
+      # Special marked DEBUG_LVL which means there is only a definition in here
+      self.debug_lvl = debug_lvl
+    end
+  end
+
+  def debug_lvl=( lvl )
+    dputs(4){"Setting debug-lvl to #{lvl}"}
+    data_set( :_debug_lvl, lvl.to_i )
+    Object.send( :remove_const, :DEBUG_LVL )
+    Object.const_set( :DEBUG_LVL, lvl.to_i )
   end
 end

@@ -510,7 +510,7 @@ class Entity
             dputs( 5 ){ "Getting instance with #{e.class} - #{e.inspect}" }
             dputs( 5 ){ "Field = #{field}; id = #{@id}"}
             e = v.eclass.get_data_instance( [e].flatten.first )
-          elsif v.dtype == "list_entity"
+          elsif v and v.dtype == "list_entity"
             dputs(4){"Converting list_entity #{v.inspect} of #{e.inspect}"}
             e = e.collect{|val|
               v.eclass.get_data_instance( val )
