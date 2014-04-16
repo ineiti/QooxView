@@ -3,9 +3,12 @@
 
 class ConfigBases < Entities
   def setup_data
+    value_block :wide
     value_list :functions, "ConfigBases.list_functions"
-    value_str :locale_force
     value_text :welcome_text
+    
+    value_block :narrow
+    value_str :locale_force
     value_int :debug_lvl
     value_str :version_local
 

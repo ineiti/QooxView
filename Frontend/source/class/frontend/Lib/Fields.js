@@ -438,8 +438,10 @@ qx.Class.define("frontend.Lib.Fields", {
     },
         
     // Fills data in the fields
-    fill: function(data){
-      this.updating = true
+    fill: function(data, silence){
+      if ( silence ){
+        this.updating = true
+      }
       dbg(3, "Filling with data " + print_a(data))
       for (var f in this.fields) {
         dbg(5, "Looking for data of field " + f);
@@ -461,9 +463,19 @@ qx.Class.define("frontend.Lib.Fields", {
           }
         }
       }
-      this.updating = false
+      if ( silence ){
+        this.updating = false
+      }
     },
-        
+    
+    fill_silence: function( data ){
+      this.fill( data, true )
+    },
+    
+    fill_update: function( data ){
+      this.fill( data, false )
+    },
+
     addElement: function(element, layout, index){
       dbg(5, "addElement called with " + [print_a(element), layout, index].join(":"))
       var type = element.shift();

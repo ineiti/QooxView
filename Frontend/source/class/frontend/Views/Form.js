@@ -106,7 +106,7 @@ qx.Class.define("frontend.Views.Form", {
     // Small wrapper to correctly set the updating-flag
     newData: function(data){
       if (data) {
-        this.fields.fill(data);
+        this.fields.fill_silence(data);
       }
       else {
         alert("This ID doesn't exist!");

@@ -65,13 +65,14 @@ module VTListPane
   end
   
   def vtlp_update_list( session, choice = nil )
-    rep = []
     list = @data_class.send( @vtlp_method_list )
-    if choice
-      list += [ choice ]
+    rep = reply( :empty, @vtlp_field ) + if choice
+      reply( :update_callback, @vtlp_field => list + [choice] )
+      #      list += [ choice ]
+    else
+      reply( :update, @vtlp_field.to_sym => list )
     end
-    rep += reply( "empty", [ @vtlp_field.to_sym ] ) +
-      reply( "update", { @vtlp_field.to_sym => list } )
+    
     if @update
       rep += rpc_update( session )
     end

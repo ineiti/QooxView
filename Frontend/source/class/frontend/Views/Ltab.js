@@ -210,7 +210,10 @@ qx.Class.define("frontend.Views.Ltab", {
             }
             break;
           case "update":
-            this.updateView(res.data)
+            this.updateView(res.data, true)
+            break;
+          case "update_callback":
+            this.updateView(res.data, false)
             break;
           case "window_hide":
             aform.fields.window_hide(res.data);
@@ -417,10 +420,10 @@ qx.Class.define("frontend.Views.Ltab", {
         dbg(4, "Layout " + this.viewClass + " already here - doing nothing");
       }
     },
-    updateView: function(results){
+    updateView: function(results, silence){
       dbg(4, "updateView: " + results)
       if (results) {
-        this.form.fields.fill(results);
+        this.form.fields.fill(results, silence);
       }
     },
     createViews: function(results){
