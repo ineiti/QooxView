@@ -361,6 +361,7 @@ module StorageHandler
     dputs(3){"Deleting all of #{self.class.name}"}
     @data_instances = {}
     @data = {}
+    @keys = {}
     @storage.each{|k, di|
       di.delete_all( local_only )
     }

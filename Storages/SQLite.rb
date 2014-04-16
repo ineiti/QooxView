@@ -40,7 +40,7 @@ class SQLite < StorageType
   
   def open_db
     @mutex_es.synchronize {
-      dputs( 4 ){ "Opening connection" }
+      dputs( 4 ){ "Opening connection to #{@name_file}" }
       ActiveRecord::Base.establish_connection(
         :adapter => "sqlite3", :database => "data/#{@name_file}" )
 
@@ -186,6 +186,6 @@ class SQLite < StorageType
   def self.dbs_open_load_migrate
     SQLite.dbs_open_load
     dputs(2){"Migrating all dbs"}
-    RPCQooxdooService.migrate_all    
+    RPCQooxdooService.migrate_all
   end
 end
