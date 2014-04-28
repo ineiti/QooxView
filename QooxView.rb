@@ -144,6 +144,14 @@ class Array
       Hash[ *self ]
     end
   end
+
+  def to_sym
+    collect{|v| v.to_sym }
+  end
+
+  def to_sym!
+    self.replace( to_sym() )
+  end
 end
 
 # Converts all keys of a hash to syms recursively
@@ -186,22 +194,15 @@ class Hash
       super( s, args )
     end
   end
+  
+  def to_s
+    "[#{join(",")}]"
+  end
 
   #  def to_s
   #    "{#{each{|k,v| k.to_s + ':' + v.to_s + ' '}}}"
   #  end
 end
-
-
-class Array
-  def to_sym
-    collect{|v| v.to_sym }
-  end
-
-  def to_sym!
-    self.replace( to_sym() )
-  end
-end  
 
 
 class String
@@ -223,9 +224,13 @@ class String
   end
 end
 
-class Array
-  def to_s
-    "[#{join(",")}]"
+class Date
+  def to_web
+    strftime( "%d.%m.%Y")
+  end
+  
+  def self.from_web( d )
+    Date.strptime( d, '%d.%m.%Y' )
   end
 end
 

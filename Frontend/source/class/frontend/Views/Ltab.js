@@ -209,10 +209,10 @@ qx.Class.define("frontend.Views.Ltab", {
               }
             }
             break;
-          case "update":
+          case "update_silent":
             this.updateView(res.data, true)
             break;
-          case "update_callback":
+          case "update":
             this.updateView(res.data, false)
             break;
           case "window_hide":
