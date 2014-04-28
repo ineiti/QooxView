@@ -152,6 +152,11 @@ class Array
   def to_sym!
     self.replace( to_sym() )
   end
+    
+  def to_s
+    "[#{join(",")}]"
+  end
+
 end
 
 # Converts all keys of a hash to syms recursively
@@ -193,10 +198,6 @@ class Hash
     else
       super( s, args )
     end
-  end
-  
-  def to_s
-    "[#{join(",")}]"
   end
 
   #  def to_s
