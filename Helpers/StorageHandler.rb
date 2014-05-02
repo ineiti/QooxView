@@ -189,7 +189,7 @@ module StorageHandler
 
     # Ask every storage-type whether he wants to change something in the
     # data
-    dputs(3){"Asking storages to intervene"}
+    dputs(3){"Asking storages to intervene for #{self.class.name}"}
     @storage.each{|k, di| 
       dputs(3){"Intervention from #{k.inspect}"}
       di.data_create( args ) 

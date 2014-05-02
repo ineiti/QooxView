@@ -289,4 +289,9 @@ class TC_Entity < Test::Unit::TestCase
     course = Courses.find_by_first_name( "foo" )
     assert_equal @admin, course.students.first
   end
+  
+  def test_create_equal
+    p = Persons.create( :value1 => 10 )
+    assert_equal 20, p.value2
+  end
 end

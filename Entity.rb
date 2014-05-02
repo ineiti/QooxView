@@ -28,7 +28,7 @@ class Entities < RPCQooxdooService
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id, 
     :storage, :data, :name, :msg, :undo, :logging, :keys,
-    :save_after_create
+    :save_after_create, :values
 
   def initialize
     begin
@@ -50,6 +50,7 @@ class Entities < RPCQooxdooService
 
       # Initialize the basic variables
       @blocks = {}
+      @values = []
       @data_instances = {}
       @default_type = :CSV
       @keys = {}
@@ -136,6 +137,7 @@ class Entities < RPCQooxdooService
 
   def value_add( cmds, args )
     value = Value.new( cmds, args, @default_type )
+    @values.push value
 
     if not get_field_names.index value.name.to_sym
       # Prepare the entry in the blocks
@@ -157,8 +159,11 @@ class Entities < RPCQooxdooService
       raise "WrongIndex"
     end
     return nil if not k or not @data[k.to_i]
-    @data_instances[k.to_i] ||= @data_class.new( @data[k.to_i][@data_field_id], self )
-    return @data_instances[k]
+    if ! @data_instances[k.to_i] 
+      @data_instances[k.to_i]= @data_class.new( @data[k.to_i][@data_field_id], self )
+      @data_instances[k.to_i].init_instance
+    end
+    return @data_instances[k.to_i]
   end
 
   def match_by_id( k )
@@ -369,6 +374,19 @@ class Entity
     dputs( 5 ){ "Creating entity -#{proxy}- with id #{id}" }
     @id = id.to_i
     @proxy = proxy
+  end
+  
+  def init_instance
+    if true
+      @proxy.values.each{|v|
+        field = v.name
+        if self.public_methods.index( "#{field}=".to_sym ) && 
+            ( value = data_get( field ) )
+          dputs(3){"Setting #{field} to #{value}"}
+          send( "#{field}=".to_sym, value )
+        end
+      }
+    end
 
     setup_instance
   end
@@ -503,7 +521,7 @@ class Entity
         dputs(4){"Using proxy #{@proxy.class.name} for #{f}"}
         e = @proxy.get_entry( @id, f )
         dputs(5){"e is #{e.inspect} from #{@proxy.data.inspect}"}
-        if not raw
+        if not raw and e
           v = @proxy.get_value( f )
           if e.class == Fixnum and v and v.dtype == "entity"
             dputs( 5 ){ "Getting instance for #{v.inspect}" }
@@ -543,7 +561,7 @@ class Entity
 =end
     v = value
     dputs(4){"Self is #{self.public_methods.inspect}"}
-    if ( self.public_methods.index( "#{field}=".to_sym ) ) and ( not direct )
+    if ( self.public_methods.index( "#{field}=".to_sym ) ) && ( not direct )
       dputs(3){"Setting #{field} through local method"}
       send( "#{field}=".to_sym, v )
     else
