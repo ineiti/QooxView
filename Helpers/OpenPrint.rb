@@ -161,7 +161,7 @@ module PrintButton
     cmd = nil
     pn = stat_printer( session, button ).data_str
     remote = session.client_ip
-    dputs(3){"Found printer #{pn} with remote #{remote}"}
+    ddputs(3){"Found printer #{pn} with remote #{remote}"}
     if pn != "PDF"
       if get_server_printers.index( pn )
         cmd = "lp -o fitplot -d #{pn.sub(/^server /, '')}"

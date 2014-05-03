@@ -271,6 +271,7 @@ module StorageHandler
             "#{self.class.name}-#{field}-#{value.to_s}\n" +
             caller.inspect
         end
+        update_key( id.to_i )
         return val
       end
     }
