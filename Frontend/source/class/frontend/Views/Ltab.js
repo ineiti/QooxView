@@ -262,6 +262,8 @@ qx.Class.define("frontend.Views.Ltab", {
       }
       if ( userData.replace( /_with_values/, '') == "update"){
         this.parentFadeOut();
+      } else {
+        alert( "Async update" )
       }
       rpc.callRPCarray("View." + this.viewClass, userData, this, this.dispatch, values);
     },
@@ -289,6 +291,9 @@ qx.Class.define("frontend.Views.Ltab", {
       this.fadedin = false;
       this.form.fields.setEnabled( false );
       this.form.fields.windows_fade_to( 0.5 );
+      if ( this.tabs ){
+        this.tabs.setEnabled( false );
+      }
       if ( this.form.fields && this.form.fields.getContainerElement() &&
         this.form.fields.getContainerElement().getDomElement() ){
         // alert( "Doing fadout on " + this );
@@ -337,6 +342,9 @@ qx.Class.define("frontend.Views.Ltab", {
       }
       //alert( "fading in " + this )
       this.fadedin = true;
+      if ( this.tabs ){
+        this.tabs.setEnabled( true );
+      }
       if ( aform && aform.fields ){
         //alert( "Found aform" );
         //if ( aform.getContainerElement().getDomElement() ){

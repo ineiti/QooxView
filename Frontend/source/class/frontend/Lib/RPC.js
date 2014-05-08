@@ -45,7 +45,7 @@ qx.Class.define("frontend.Lib.RPC", {
         this.RpcQueue.unshift( args );
         return;
       }
-			
+
       this.rpc.setServiceName(service);
 
       dbg(5, "Adding session_id " + this.session_id);
@@ -59,7 +59,10 @@ qx.Class.define("frontend.Lib.RPC", {
         dbg( 3, "RpcRunning = null, ex == ", ex );
         if (ex == null) {
           //alert( "Result is " + result );
-          result.push( { cmd: 'end_of_req', data: '' } );
+          result.push( {
+            cmd: 'end_of_req', 
+            data: ''
+          } );
           //alert( result.length + " - " + event );
           //alert( "Going to call " + obj + " - " + print_a( result ) );
           event.call(obj, result);

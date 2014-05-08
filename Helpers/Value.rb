@@ -114,7 +114,8 @@ class Value
             dputs( 3 ){ "method #{@show_method}: #{method}" }
             cond and method
           rescue Exception => e
-            dputs( 0 ){ "Couldn't get value: #{e.inspect}" }
+            dputs( 0 ){ "Error: while trying to work #{eclass.name} with #{e.inspect}"}
+            dputs( 0 ){ "Error: and condition #{condition.inspect}: #{e.inspect}" }
             false
           end
         }.collect{|e|

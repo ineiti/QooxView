@@ -552,7 +552,13 @@ class View < RPCQooxdooService
     end
     if @auto_update > 0
       dputs( 3 ){ "auto-updating" }
-      ret += reply( "auto_update", @auto_update * ( @auto_update_send_values ? -1 : 1 ) )
+      ret += reply( "auto_update", 
+        @auto_update * ( @auto_update_send_values ? -1 : 1 ) )
+    end
+    if @auto_update_async > 0
+      dputs( 3 ){ "auto-updating async" }
+      ret += reply( "auto_update_async", 
+        @auto_update_async * ( @auto_update_send_values ? -1 : 1 ) )
     end
     if @debug
       dputs( 4 ){ "debugging" }
