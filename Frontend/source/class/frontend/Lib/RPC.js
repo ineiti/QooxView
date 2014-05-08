@@ -37,9 +37,9 @@ qx.Class.define("frontend.Lib.RPC", {
     RpcRunning : null,
     RpcQueue: null,
 
-    callRPCarray : function(service, method, obj, event, params) {
+    callRPCarray : function(service, method, obj, event, params, async) {
       if ( this.RpcRunning ){
-        var args = [service, method, obj, event, params];
+        var args = [service, method, obj, event, params, async ];
         //alert( "Oops, RPC is running - queueing" );
         //dbg( 4, "Queuing RPC call " + print_a( args ) );
         this.RpcQueue.unshift( args );
@@ -55,7 +55,7 @@ qx.Class.define("frontend.Lib.RPC", {
         + [ service, method, params.join(":") ].join("-"))
 					
       // call a remote procedure -- takes no arguments, returns a string
-      this.RpcRunning = this.rpc.callAsync(function(result, ex, id) {
+      var rpcr = this.rpc.callAsync(function(result, ex, id) {
         dbg( 3, "RpcRunning = null, ex == ", ex );
         if (ex == null) {
           //alert( "Result is " + result );
@@ -65,18 +65,27 @@ qx.Class.define("frontend.Lib.RPC", {
           } );
           //alert( result.length + " - " + event );
           //alert( "Going to call " + obj + " - " + print_a( result ) );
-          event.call(obj, result);
+          event.call(obj, result, service);
           rpc.RpcRunning = null;
           if ( rpc.RpcQueue.length > 0 ){
             dbg( 3, "Calling a queued RPC" );
-            //alert( "Calling queued");
             var r = rpc.RpcQueue.pop();
-            rpc.callRPCarray( r[0], r[1], r[2], r[3], r[4] );
+            rpc.callRPCarray( r[0], r[1], r[2], r[3], r[4], r[5] );
           }
         } else {
           alert("Async(" + id + ") exception: " + ex);
         }
       }, method, params);
+      if ( ! async ){
+        this.RpcRunning = rpcr;
+      } else {
+        if ( rpc.RpcQueue.length > 0 ){
+          dbg( 3, "Calling a queued RPC directly out of async" );
+          alert( "rare - async queued after sync!" )
+          var r = rpc.RpcQueue.pop();
+          rpc.callRPCarray( r[0], r[1], r[2], r[3], r[4], r[5] );
+        }        
+      }
     },
 
     callRPC : function(service, method, obj, event) {

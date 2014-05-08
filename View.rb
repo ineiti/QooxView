@@ -98,6 +98,7 @@ class View < RPCQooxdooService
       @update = false
       @update_layout = true
       @auto_update = 0
+      @auto_update_async = 0
       @auto_update_send_values = true
       @configured = true
       @functions_need = []

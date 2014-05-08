@@ -51,6 +51,23 @@ qx.Class.define("frontend.Views.Ltab", {
     parentLtab: null,
     initValues: null,
 
+    dispatch_async: function( results, source ){
+      source = source.replace( /^.*\./, '' )
+      var dest = this.viewClass
+      if ( this.parentLtab ){
+        dest = this.parentLtab.viewClass.replace( /Tabs$/, '' ) +
+        dest.replace( /^[A-Z][a-z]*/, '' )
+      }
+      if ( source == dest ){
+        //alert( "Async of " + source + " with " + dest + " : " +
+        //  this.parentLtab.viewClass );
+        this.dispatch( results )
+        //this.timer.cont();
+      } else {
+        //alert( "Oups - got " + source + " instead of " + dest )
+      }
+    },
+    
     // This is called upon return from the server, and dispatches to the
     // appropriate functions. The result is an array of commands.
     dispatch: function(results){
@@ -260,12 +277,17 @@ qx.Class.define("frontend.Views.Ltab", {
         values = [this.form.fields.getFieldsData()];
         dbg(3, "Values are: " + print_a(values));
       }
+      var dispatcher = this.dispatch_async;
+      var async = false;
       if ( userData.replace( /_with_values/, '') == "update"){
         this.parentFadeOut();
+        dispatcher = this.dispatch
       } else {
-        alert( "Async update" )
+        this.timer.pause();
+        async = true
       }
-      rpc.callRPCarray("View." + this.viewClass, userData, this, this.dispatch, values);
+      rpc.callRPCarray("View." + this.viewClass, userData, 
+        this, dispatcher, values, async );
     },
 
     parentFadeOut: function(){
@@ -294,8 +316,8 @@ qx.Class.define("frontend.Views.Ltab", {
       if ( this.tabs ){
         this.tabs.setEnabled( false );
       }
-      if ( this.form.fields && this.form.fields.getContainerElement() &&
-        this.form.fields.getContainerElement().getDomElement() ){
+      if ( this.form.fields && this.form.fields.getContentElement() &&
+        this.form.fields.getContentElement().getDomElement() ){
         // alert( "Doing fadout on " + this );
         this.fadeOut( 0.25 );
       }
@@ -347,8 +369,8 @@ qx.Class.define("frontend.Views.Ltab", {
       }
       if ( aform && aform.fields ){
         //alert( "Found aform" );
-        //if ( aform.getContainerElement().getDomElement() ){
-        if ( this.getContainerElement().getDomElement() ){
+        //if ( aform.getContentElement().getDomElement() ){
+        if ( this.getContentElement().getDomElement() ){
           //alert( "Doing fadin on layout " + aform );
           this.fadeIn( 0.25 );
         }
