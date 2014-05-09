@@ -102,8 +102,15 @@ module StorageHandler
     return key ? get_data_instance( key ) : nil
   end
 
-  def search_all
+  def search_all_
     search_by( @data_field_id, ".*" )
+  end
+
+  # Searching of misuse in search_all - found and accepted misuses can take
+  # search_all_
+  def search_all
+    log_msg :StorageHandler, "Search_all for #{self.name} in #{caller.inspect}"
+    search_all_
   end
 
   # Similar to find_by, but searches multiple instances that are similar to the
@@ -397,5 +404,14 @@ module StorageHandler
       @keys[k].merge!(@data[id][k].to_s => id)
     }
   end
+  
+  def first
+    key = @data.first
+    return key ? get_data_instance( key[0] ) : nil
+  end
 
+  def last
+    key = @data.last
+    return key ? get_data_instance( key[0] ) : nil
+  end
 end

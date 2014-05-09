@@ -46,13 +46,8 @@ class ConfigBases < Entities
   end
   
   def self.singleton
-    if search_all.length > 0
-      dputs(5){"Returning first occurence #{self.search_all.inspect}"}
-      self.search_all[0]
-    else
-      dputs(5){"Creating instance"}
+    first or
       self.create({:functions => [], :locale_force => nil, :welcome_msg => "" })
-    end
   end
 
   def self.list_functions

@@ -99,7 +99,8 @@ class Value
       values = []
       if ( not args.has_key?( :lazy ) ) and
           ( ( not args.has_key?( :session ) ) or session )
-        e_all = eclass.search_all
+        log_msg :values, "will search_all for #{eclass.name}"
+        e_all = eclass.search_all_
         values = e_all.select{|e|
           begin
             dputs( 3 ){ "Searching whether to show #{e.inspect}" }
