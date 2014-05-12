@@ -377,6 +377,7 @@ class Entity
   end
   
   def init_instance
+    @pre_init = true
     if true
       @proxy.values.each{|v|
         field = v.name
@@ -389,6 +390,7 @@ class Entity
     end
 
     setup_instance
+    @pre_init = false
   end
 
   # Dummy setup - replace with real setup
