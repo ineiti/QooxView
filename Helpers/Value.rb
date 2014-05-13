@@ -107,8 +107,8 @@ class Value
         e_all = eclass.search_all_
         values = e_all.select{|e|
           begin
-            ddputs( 3 ){ "Searching whether to show #{@name}/#{e.class.name}:#{e.inspect}" }
-            ddputs( 3 ){ "Condition is #{@condition.inspect}" }
+            dputs( 3 ){ "Searching whether to show #{@name}/#{e.class.name}:#{e.inspect}" }
+            dputs( 3 ){ "Condition is #{@condition.inspect}" }
             if args.has_key?( :session )
               cond = @condition ? @condition.call( e, session ) : true
             else
