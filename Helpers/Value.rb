@@ -68,6 +68,10 @@ class Value
         split.collect{ |s| s.capitalize }.join
       @args.merge! :list_type => ( @list_type = arguments.shift )
       @show_method, @condition = arguments
+      if @list_type && ( ! cmds.index( "lazy" ) ) && @show_method == nil
+        dputs( 0 ){ "No show_method defined in #{@name} at #{caller[5].inspect}" }
+        raise "value_entity_uncomplete"
+      end
     when "array"
       dputs( 0 ){ "Not yet supported!" }
       exit
@@ -103,8 +107,8 @@ class Value
         e_all = eclass.search_all_
         values = e_all.select{|e|
           begin
-            dputs( 3 ){ "Searching whether to show #{e.inspect}" }
-            dputs( 3 ){ "Condition is #{@condition.inspect}" }
+            ddputs( 3 ){ "Searching whether to show #{@name}/#{e.class.name}:#{e.inspect}" }
+            ddputs( 3 ){ "Condition is #{@condition.inspect}" }
             if args.has_key?( :session )
               cond = @condition ? @condition.call( e, session ) : true
             else
@@ -112,11 +116,13 @@ class Value
             end
             dputs( 3 ){ "cond #{@condition}: #{cond}" }
             method = e.respond_to? @show_method
-            dputs( 3 ){ "method #{@show_method}: #{method}" }
-            cond and method
-          rescue Exception => e
+            #dputs( 3 ){ "method #{@show_method}: #{method}" }
+            #cond and method
+            false
+          rescue Exception => err
             dputs( 0 ){ "Error: while trying to work #{eclass.name} with #{e.inspect}"}
-            dputs( 0 ){ "Error: and condition #{condition.inspect}: #{e.inspect}" }
+            dputs( 0 ){ "Error: and condition #{@condition.inspect}: #{err.inspect}" }
+            dputs( 0 ){ "Callstack: #{caller.inspect}"}
             false
           end
         }.collect{|e|
