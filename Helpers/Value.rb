@@ -103,7 +103,7 @@ class Value
       values = []
       if ( not args.has_key?( :lazy ) ) and
           ( ( not args.has_key?( :session ) ) or session )
-        log_msg :values, "will search_all for #{eclass.name} in #{@name}"
+        dputs(2){ "will search_all for #{eclass.name} in #{@name}" }
         e_all = eclass.search_all_
         values = e_all.select{|e|
           begin
@@ -116,9 +116,8 @@ class Value
             end
             dputs( 3 ){ "cond #{@condition}: #{cond}" }
             method = e.respond_to? @show_method
-            #dputs( 3 ){ "method #{@show_method}: #{method}" }
-            #cond and method
-            false
+            dputs( 3 ){ "method #{@show_method}: #{method}" }
+            cond and method
           rescue Exception => err
             dputs( 0 ){ "Error: while trying to work #{eclass.name} with #{e.inspect}"}
             dputs( 0 ){ "Error: and condition #{@condition.inspect}: #{err.inspect}" }

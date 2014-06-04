@@ -140,7 +140,7 @@ class RPCQooxdooHandler
   end
 
   def self.get_ip( req )
-    dputs(3){"header is #{req.header.inspect}"}
+    dputs(3){"header is #{req.header.inspect} - peeraddr is #{req.peeraddr.inspect}"}
     if ret = req.header["x-forwarded-for"]
       ret.first
     else
