@@ -103,7 +103,7 @@ class Value
       values = []
       if ( not args.has_key?( :lazy ) ) and
           ( ( not args.has_key?( :session ) ) or session )
-        dputs(2){ "will search_all for #{eclass.name} in #{@name}" }
+        dputs(3){ "will search_all for #{eclass.name} in #{@name}" }
         e_all = eclass.search_all_
         values = e_all.select{|e|
           begin
