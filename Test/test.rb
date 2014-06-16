@@ -12,13 +12,14 @@ Permission.add( 'admin', '.*' )
 Permission.add( 'internet', 'Internet,PersonShow', 'default' )
 Permission.add( 'student', '', 'internet' )
 Permission.add( 'professor', '', 'student' )
-Permission.add( 'secretary', 'PersonModify,FlagAddInternet', 'professor' )
+Permission.add( 'cybermanager', '', '')
+Permission.add( 'secretary', 'PersonModify,FlagAddInternet', 'professor,cybermanager' )
 
 QooxView.init( 'entities', 'views' )
 
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
-#tests = %w( helpers )
+tests = %w( permission )
 #tests = %w( entity )
 #tests = %w( configbase )
 

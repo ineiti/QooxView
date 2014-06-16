@@ -111,6 +111,19 @@ class Permission
     return false
   end
 
+  def self.has_role( permission, role )
+    permission.to_a.each{|perm|
+      dputs(4){"Testing #{perm} on #{role}"}
+      return true if perm == role.to_s
+      @@parent[perm] and @@parent[perm].each{|par|
+        dputs(4){"Testing parent #{par} on #{role}"}
+        return true if par == role.to_s || self.has_role( par, role )
+      }
+    }
+    dputs(4){"Nothing found for #{permission.inspect} on #{role}"}
+    return false
+  end
+
   # Get session
   def self.get_session( data )
     dputs( 0 ){ "Deprecated - #{caller.inspect}" }
