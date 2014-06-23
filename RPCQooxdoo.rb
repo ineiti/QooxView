@@ -200,7 +200,7 @@ class RPCQooxdooHandler
           return self.error(2, 2, "Error in handling method", id)
         end
       else
-        return self.error(2, 2, "No such method", id)
+        return self.error(2, 2, "No such method #{method} for #{s.class.name}", id)
       end
     else
       return self.error(2, 1, "No such service", id)

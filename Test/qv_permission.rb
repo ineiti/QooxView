@@ -23,6 +23,9 @@ class Tc_permission < Test::Unit::TestCase
 
   def test_has_role
     assert Permission.has_role( 'professor', 'professor' )
+    assert ! Permission.has_role( 'professo', 'professor' )
+    assert ! Permission.has_role( 'rofessor', 'professor' )
+    assert Permission.has_role( 'admin', 'professor' )
     assert ! Permission.has_role( 'student', 'professor' )
     assert Permission.has_role( %w( professor secretary ), 'cybermanager' )
     assert Permission.has_role( %w( secretary professor ), 'cybermanager' )

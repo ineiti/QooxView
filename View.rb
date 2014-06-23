@@ -576,7 +576,7 @@ class View < RPCQooxdooService
       update and ret += update
     end
     if args
-      dputs(3) { "Args: #{args.inspect}" }
+      ddputs(3) { "Args: #{args.inspect}" }
       if args.class == Array
         args.flatten!(1)
       end
@@ -591,7 +591,7 @@ class View < RPCQooxdooService
     ret = []
     args.keys.each { |a|
       if l = layout_find(a)
-        dputs(3) { "found layout for #{a}" }
+        ddputs(3) { "found layout for #{a}" }
         ret += reply(:update, a => args[a])
       end
     }
@@ -646,6 +646,10 @@ class View < RPCQooxdooService
   def rpc_update(session)
     dputs(4) { "rpc_update" }
     reply("update", update(session))
+  end
+
+  def rpc_update_async( session )
+    rpc_update( session )
   end
 
   # Returns the data for the fields as a hash
