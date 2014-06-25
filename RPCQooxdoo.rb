@@ -306,7 +306,7 @@ class RPCQooxdooHandler
     }
 
     @@file_paths.each { |web, dir|
-      ddputs(2) { "Mounting web-path /#{web} to file-path #{dir}" }
+      dputs(2) { "Mounting web-path /#{web} to file-path #{dir}" }
       @@server.mount("/#{web}", HTTPServlet::FileHandler, dir)
     }
 

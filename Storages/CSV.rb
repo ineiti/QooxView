@@ -40,7 +40,7 @@ class CSV < StorageType
           }
         }
         #%x[ sync ]
-        ddputs(5) { 'Moving file' }
+        dputs(5) { 'Moving file' }
         FileUtils.mv tmpfile, @csv_file
       }
     end
@@ -56,7 +56,7 @@ class CSV < StorageType
       write_line(f, data)
     }
     #%x[ sync ]
-    ddputs(5) { 'Moving file' }
+    dputs(5) { 'Moving file' }
     FileUtils.mv tmpfile, @csv_file
   end
 

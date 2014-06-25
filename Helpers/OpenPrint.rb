@@ -151,6 +151,7 @@ module PrintButton
   def stat_printer( session, button )
     stat_name = "#{self.name}:#{button}:#{session.owner.login_name}"
     stat = Entities.Statics.get(stat_name)
+    dputs(2){"Getting printer #{stat_name} == #{stat.data_str}"}
     if stat.data_str == ""
       stat.data_str = get_server_printers.first
     end
