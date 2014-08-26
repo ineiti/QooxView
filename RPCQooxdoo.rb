@@ -240,19 +240,26 @@ class RPCQooxdooHandler
         "#{answer.to_json} );"
   end
 
+  @@server = []
+
   # And a no-worry with Webrick
   def self.webrick(port, dir = ".", duration = nil)
+    dputs(3){"Starting webrick for port #{port}, dir #{dir}, duration #{duration.inspect}"}
     access_log_stream = File.open('webrick.access.log', 'w')
     logger = [[access_log_stream, AccessLog::COMBINED_LOG_FORMAT]]
     #logger.push [$stderr, WEBrick::AccessLog::COMMON_LOG_FORMAT]
     #logger.push [$stderr, WEBrick::AccessLog::REFERER_LOG_FORMAT]
-    @@server = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new("webrick.log"),
+    if @@server[port]
+      dputs(2){"Server already running - halting"}
+      @@server[port].shutdown
+    end
+    @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new("webrick.log"),
                               :AccessLog => logger)
     # server = HTTPServer.new(:Port => port )
 
     #server.mount "/rpc", GetPost
     # This is the remote-procedure-handling from the Frontend
-    @@server.mount_proc('/rpc') { |req, res|
+    @@server[port].mount_proc('/rpc') { |req, res|
       $webrick_request = req
       dputs(5) { "Request is #{req.inspect}" }
       dputs(5) { "Body is is #{req.body.inspect}" }
@@ -272,7 +279,7 @@ class RPCQooxdooHandler
     # And any other handling required by modules
     @@paths.each { |path, cl|
       dputs(2) { "Mounting path /#{path} to class #{cl.name}" }
-      @@server.mount_proc("/#{path.to_s}") { |req, res|
+      @@server[port].mount_proc("/#{path.to_s}") { |req, res|
         $webrick_request = req
         dputs(5) { "Webrick_request is #{$webrick_request.inspect}" }
         dputs(4) { "#{path}-Request is #{req.path} and " +
@@ -307,24 +314,29 @@ class RPCQooxdooHandler
 
     @@file_paths.each { |web, dir|
       dputs(2) { "Mounting web-path /#{web} to file-path #{dir}" }
-      @@server.mount("/#{web}", HTTPServlet::FileHandler, dir)
+      @@server[port].mount("/#{web}", HTTPServlet::FileHandler, dir)
     }
 
-    @@server.mount('/tmp', HTTPServlet::FileHandler, '/tmp')
-    @@server.mount('/', HTTPServlet::FileHandler, dir)
+    @@server[port].mount('/tmp', HTTPServlet::FileHandler, '/tmp')
+    @@server[port].mount('/', HTTPServlet::FileHandler, dir)
 
     if not duration
+      dputs(2){"Starting forever"}
       ['INT', 'TERM'].each { |signal|
-        trap(signal) { @@server.shutdown }
+        trap(signal) {
+          dputs(3){"Shutting down http-server"}
+          @@server[port].shutdown
+        }
       }
-      @@server.start
+      @@server[port].start
     else
+      dputs(2){"Starting for #{duration} seconds"}
       server_loop = Thread.new {
-        @@server.start
+        @@server[port].start
         dputs(2) { 'Webrick stopped' }
       }
       sleep duration
-      @@server.shutdown
+      @@server[port].shutdown
       server_loop.join
     end
   end

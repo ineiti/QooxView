@@ -11,7 +11,7 @@ class LogActions < Entities
   def setup_data
     add_new_storage :CSV, :add_only => true
     @undo = false
-    defined? @logging or @logging = true
+    defined? @logging or @logging = false
 
     value_date :date_stamp
     value_str :data_class

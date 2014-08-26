@@ -1,5 +1,8 @@
+#!/usr/bin/env ruby
 #!/usr/local/bin/ruby -I.. -I.
-#!/usr/bin/env ruby -I.. -I.
+
+$LOAD_PATH.push ".", ".."
+
 require 'test/unit'
 #require 'test/unit/testsuite'
 DEBUG_LVL = 0
