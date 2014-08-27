@@ -56,15 +56,24 @@ class CSV < StorageType
   # Each new entry is directly stored, helping somewhat if the program or the
   # computer crashes
   def data_create(data)
-    FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
-    tmpfile = "#{@csv_file}.tmp"
-    File.exists? @csv_file and FileUtils.cp @csv_file, tmpfile
-    File.open(tmpfile, 'a') { |f|
-      write_line(f, data)
+    @mutex.synchronize {
+      begin
+        FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
+        tmpfile = "#{@csv_file}.tmp"
+        File.exists? @csv_file and FileUtils.cp @csv_file, tmpfile
+        File.open(tmpfile, 'a') { |f|
+          write_line(f, data)
+        }
+        #%x[ sync ]
+        dputs(5) { 'Moving file' }
+        FileUtils.mv tmpfile, @csv_file
+      rescue Exception => e
+        dputs(0) { "Error: couldn't save newly created data #{self.class.name}" }
+        dputs(0) { "#{e.inspect}" }
+        dputs(0) { "#{e.to_s}" }
+        puts e.backtrace
+      end
     }
-    #%x[ sync ]
-    dputs(5) { 'Moving file' }
-    FileUtils.mv tmpfile, @csv_file
   end
 
   # loads the data
@@ -72,26 +81,28 @@ class CSV < StorageType
     data = {}
     # Go and fetch eventual existing data from the file
     dputs(3) { "Starting to load #{@csv_file}" }
-    if File.exists?(@csv_file)
-      begin
-        File.open(@csv_file, "r").readlines().each { |l|
-          dputs(5) { "Reading line #{l}" }
-          # Convert the keys in the lines back to Symbols
-          data_parse = JSON.parse(l)
-          data_csv = {}
-          data_parse.each { |k, v|
-            data_csv.merge!({k.to_sym => v})
+    @mutex.synchronize {
+      if File.exists?(@csv_file)
+        begin
+          File.open(@csv_file, "r").readlines().each { |l|
+            dputs(5) { "Reading line #{l}" }
+            # Convert the keys in the lines back to Symbols
+            data_parse = JSON.parse(l)
+            data_csv = {}
+            data_parse.each { |k, v|
+              data_csv.merge!({k.to_sym => v})
+            }
+            # dputs( 5 ){ "Putting #{data_csv.inspect}" }
+            did = data_csv[@data_field_id] = data_csv[@data_field_id].to_i
+            data[did] = data_csv
           }
-          # dputs( 5 ){ "Putting #{data_csv.inspect}" }
-          did = data_csv[@data_field_id] = data_csv[@data_field_id].to_i
-          data[did] = data_csv
-        }
-      rescue JSON::ParserError
-        dputs(0) { "Oups - couldn't load CSV for #{@csv_file}" }
-        raise StorageLoadError
+        rescue JSON::ParserError
+          dputs(0) { "Oups - couldn't load CSV for #{@csv_file}" }
+          raise StorageLoadError
+        end
+        dputs(5) { "data is now #{data.inspect}" }
       end
-      dputs(5) { "data is now #{data.inspect}" }
-    end
+    }
 
     return data
   end
