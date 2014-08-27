@@ -414,7 +414,7 @@ class Entity
   end
 
   def method_missing( cmd, *args )
-    dputs( 5 ){ "Entity#method_missing #{cmd} in #{self.class.name}," + 
+    dputs( 5 ){ "Entity#method_missing #{cmd} in #{self.class.name}," +
         " with #{args} and #{args[0].class}" }
     field = cmd.to_s
     if not @proxy.get_value( field.sub(/^_/, '' ).sub(/=$/, '' ) )
@@ -432,7 +432,9 @@ class Entity
       dputs( 5 ){ "data_set #{field} for class #{self.class.name}" }
       field_set = "_#{field.chop.sub(/^_/, '')}"
       
-      if not old_respond_to? "#{field}=".to_sym
+      if not old_respond_to? "#{field}".to_sym
+        dputs(3){"Creating method #{field} for #{self.class.name}"}
+        dputs(4){"Self is #{self.public_methods.sort.inspect}"}
         self.class.class_eval <<-RUBY
         def #{field}( v )
           if @proxy.undo or @proxy.logging
@@ -562,7 +564,7 @@ class Entity
     end
 =end
     v = value
-    dputs(4){"Self is #{self.public_methods.inspect}"}
+    dputs(4){"Self is #{self.public_methods.sort.inspect}"}
     if ( self.public_methods.index( "#{field}=".to_sym ) ) && ( not direct )
       dputs(3){"Setting #{field} through local method"}
       send( "#{field}=".to_sym, v )
