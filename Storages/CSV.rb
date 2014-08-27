@@ -30,18 +30,25 @@ class CSV < StorageType
       dputs(5) { "Not saving data for #{@name}" }
     else
       @mutex.synchronize {
-        dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
-        FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
-        dputs(5) { "Data is #{data.inspect}" }
-        tmpfile = "#{@csv_file}.tmp"
-        File.open(tmpfile, "w") { |f|
-          data_each(data) { |d|
-            write_line(f, d)
+        begin
+          dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
+          FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
+          dputs(5) { "Data is #{data.inspect}" }
+          tmpfile = "#{@csv_file}.tmp"
+          File.open(tmpfile, "w") { |f|
+            data_each(data) { |d|
+              write_line(f, d)
+            }
           }
-        }
-        #%x[ sync ]
-        dputs(5) { 'Moving file' }
-        FileUtils.mv tmpfile, @csv_file
+          #%x[ sync ]
+          dputs(5) { 'Moving file' }
+          FileUtils.mv tmpfile, @csv_file
+        rescue Exception => e
+          dputs(0) { "Error: couldn't save CSV #{self.class.name}" }
+          dputs(0) { "#{e.inspect}" }
+          dputs(0) { "#{e.to_s}" }
+          puts e.backtrace
+        end
       }
     end
   end
