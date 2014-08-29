@@ -132,7 +132,7 @@ module StorageHandler
     return result
   end
 
-  # Like search_by, but only ONE exact matche
+  # Like search_by, but only ONE EXACT match
   def match_by( field, value )
     field = field.to_sym
     v = value.to_s
@@ -149,7 +149,7 @@ module StorageHandler
     return nil
   end
   
-  # Like search_by, but only exact matcheS
+  # Like search_by, but only EXACT matcheS
   def matches_by( field, value )
     ret = search_by( field, "^#{value}$" )
     return ret
@@ -266,6 +266,7 @@ module StorageHandler
       v
     end
     field = field.to_sym
+    dputs(4){"Storing #{value} in #{field}"}
     @storage.each{|k, di|
       if di.has_field field
         if ! @data[id.to_i].has_key?( field ) or
@@ -273,7 +274,7 @@ module StorageHandler
           val = di.set_entry( id, field, value )
           dputs( 4 ){ "#{id} - #{field} - #{value.inspect}" }
           @data[ id.to_i ][ field ] = val
-        elsif DEBUG_LVL >= 4
+        elsif DEBUG_LVL >= 3
           log_msg "StorageHandler", "Trying to overwrite with same value in " +
             "#{self.class.name}-#{field}-#{value.to_s}\n" +
             caller.inspect
