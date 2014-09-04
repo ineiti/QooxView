@@ -23,7 +23,7 @@ QooxView.init( 'entities', 'views' )
 tests = %w( entity permission stype sqlite helpers migration
   view session configbase )
 #tests = %w( permission )
-#tests = %w( entity )
+tests = %w( stor_csv )
 #tests = %w( configbase )
 
 tests.each{|t|

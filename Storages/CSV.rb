@@ -2,8 +2,9 @@ class CSV < StorageType
 
   def configure(config)
     dputs(3) { "Configuring CSV with #{@name}" }
-    @csv_dir = "data/"
+    @csv_dir = 'data/'
     @add_only = false
+    @backup_count = 5
     super config
     @csv_file = @csv_dir + "#{@entity.class.name}.csv"
     dputs(5) { "data_file is #{@csv_file}" }
@@ -34,15 +35,23 @@ class CSV < StorageType
           dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
           FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
           dputs(5) { "Data is #{data.inspect}" }
-          tmpfile = "#{@csv_file}.tmp"
-          File.open(tmpfile, "w") { |f|
+          newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}"
+          if File.exists? newfile
+            newfile += "_#{Dir.glob(newfile+'*').size}"
+          end
+          File.open(newfile, 'w') { |f|
             data_each(data) { |d|
               write_line(f, d)
+              if di = @entity.data_instances[d[@data_field_id]]
+                di.changed = false
+              end
             }
           }
           #%x[ sync ]
-          dputs(5) { 'Moving file' }
-          FileUtils.mv tmpfile, @csv_file
+          dputs(5) { 'Delete oldest file' }
+          if (backups = Dir.glob("#{@csv_file}.*").sort).size > @backup_count
+            FileUtils.rm backups.first(backups.size - @backup_count)
+          end
         rescue Exception => e
           dputs(0) { "Error: couldn't save CSV #{self.class.name}" }
           dputs(0) { "#{e.inspect}" }
@@ -53,9 +62,9 @@ class CSV < StorageType
     end
   end
 
-  # Each new entry is directly stored, helping somewhat if the program or the
-  # computer crashes
+  # Each new entry is directly stored if @add_only is true
   def data_create(data)
+    @add_only or return
     @mutex.synchronize {
       begin
         FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
@@ -78,13 +87,14 @@ class CSV < StorageType
 
   # loads the data
   def load
-    data = {}
     # Go and fetch eventual existing data from the file
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
-      if File.exists?(@csv_file)
+      while (allfiles = Dir.glob("#{@csv_file}*").sort).size > 0
         begin
-          File.open(@csv_file, "r").readlines().each { |l|
+          dputs(3) { "Loading file #{allfiles.last} of #{allfiles}" }
+          data = {}
+          File.open(allfiles.last, 'r').readlines().each { |l|
             dputs(5) { "Reading line #{l}" }
             # Convert the keys in the lines back to Symbols
             data_parse = JSON.parse(l)
@@ -96,15 +106,17 @@ class CSV < StorageType
             did = data_csv[@data_field_id] = data_csv[@data_field_id].to_i
             data[did] = data_csv
           }
+          return data
         rescue JSON::ParserError
-          dputs(0) { "Oups - couldn't load CSV for #{@csv_file}" }
-          raise StorageLoadError
+          log_msg :CSV, "Oups - couldn't load CSV for #{allfiles.last}"
+          FileUtils.rm allfiles.last
+          raise StorageLoadError unless allfiles.size > 1
         end
         dputs(5) { "data is now #{data.inspect}" }
       end
     }
 
-    return data
+    return {}
   end
 
   def check_login(uid, pass)
@@ -124,7 +136,7 @@ class CSV < StorageType
     # as a user ;)
     if not local_only
       dputs(2) { "Deleting #{@csv_dir}" }
-      FileUtils.rm Dir.glob("#{@csv_dir}/*csv")
+      FileUtils.rm Dir.glob("#{@csv_dir}/*csv.*")
     end
   end
 end

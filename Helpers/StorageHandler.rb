@@ -214,7 +214,9 @@ module StorageHandler
       }
       @save_after_create and save
       update_key( data_id )
-      return get_data_instance( data_id )
+      d =  get_data_instance( data_id )
+      @changed = d.changed = true
+      return d
     else
       @storage.each{|k, di| di.data_double( args ) }
       dputs( 2 ){ "Trying to create a double entry with data_id #{args[@data_field_id]}!" }
@@ -360,10 +362,12 @@ module StorageHandler
   end
 
   def save
+    return unless @changed
     @storage.each{|k,di|
       dputs( 5 ){ "Saving #{k} at #{di.inspect}" }
       di.save( @data )
     }
+    @changed = false
   end
 
   def delete_all( local_only = false )

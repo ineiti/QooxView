@@ -57,7 +57,7 @@ class StorageType
   end
   
   # Returns only the relevant part of the data
-  def extract_data( d )
+  def extract_data_old( d )
     ret = {}
      ( @fields.keys + [ @data_field_id ] ).uniq.each{|k| 
       ret.merge! k => d[k]
@@ -72,10 +72,7 @@ class StorageType
     data.values.sort{|s, t|
       s[@data_field_id].to_i <=> t[@data_field_id].to_i
     }.each{|d|
-      dw = extract_data( d )
-      if dw.size > 1
-        yield dw
-      end
+      yield d
     }
   end
   

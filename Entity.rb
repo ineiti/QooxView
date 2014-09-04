@@ -28,7 +28,7 @@ class Entities < RPCQooxdooService
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id, 
     :storage, :data, :name, :msg, :undo, :logging, :keys,
-    :save_after_create, :values
+    :save_after_create, :values, :changed
 
   def initialize
     begin
@@ -40,9 +40,10 @@ class Entities < RPCQooxdooService
     end
     @storage = nil
     @msg = nil
-    @undo = @logging = true
+    @undo = @logging = false
     @last_id = 1
-    @save_after_create = true
+    @save_after_create = false
+    @changed = false
 
     if @data_class != "Entity"
       @@all[ @data_class ] = self
@@ -327,7 +328,7 @@ class Entities < RPCQooxdooService
   end
 
   def self.save_all
-    dputs(2){"Saving everything"}
+    dputs(2){ 'Saving everything' }
     @@all.each{|k,v|
       dputs( 3 ){ "Saving #{v.class.name}" }
       v.save
@@ -335,7 +336,7 @@ class Entities < RPCQooxdooService
   end
 
   def self.load_all
-    dputs(2){"Loading everything"}
+    dputs(2){ 'Loading everything'  }
     @@all.each{|k,v|
       dputs( 3 ){ "Loading #{v.class.name}" }
       v.load
@@ -370,10 +371,12 @@ end
 #
 class Entity
   attr_reader :id
+  attr_accessor :changed
   def initialize( id, proxy )
     dputs( 5 ){ "Creating entity -#{proxy}- with id #{id}" }
     @id = id.to_i
     @proxy = proxy
+    @changed = false
   end
   
   def init_instance
@@ -573,6 +576,8 @@ class Entity
       @proxy.set_entry( @id, field, v )
       dputs(4){"Finished setting entry"}
     end
+    @changed = true
+    @proxy.changed = true
     self
   end
 
