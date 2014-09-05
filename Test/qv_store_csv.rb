@@ -1,6 +1,6 @@
 require 'benchmark'
 
-class TC_Stor_CSV < Test::Unit::TestCase
+class TC_Store_CSV < Test::Unit::TestCase
   def setup
     dputs(2){"Deleting everything"}
     Entities.delete_all_data
