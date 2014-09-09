@@ -520,7 +520,7 @@ qx.Class.define("frontend.Lib.Fields", {
           break;
         case "text":
           field_element = new qx.ui.form.TextArea("");
-          field_element.setAutoSize(true);
+          field_element.setAutoSize(false);
           field_element.setWidth(300);
           enter_klicks = false;
           if (params.ro) {

@@ -71,7 +71,7 @@ module VTListPane
   
   def vtlp_update_list( session, choice = nil )
     list = @data_class.send( @vtlp_method_list )
-    rep = reply( :empty, @vtlp_field ) + if choice
+    rep = reply( :empty_only, @vtlp_field ) + if choice
       reply( :update, @vtlp_field => list + [choice] )
     else
       reply( :update, @vtlp_field => list )
@@ -115,7 +115,6 @@ module VTListPane
     end
     dputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
     vtlp_update_list( session, selection )
-    #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
   def rpc_list_choice_vtlistpanel( session, name, data )
@@ -126,6 +125,7 @@ module VTListPane
     end
     dputs( 3 ){ "rpc_list_choice with #{name} - #{data.inspect}" }
     if name == @vtlp_field
+      # TODO: empty only fields from @data_class
       ret = reply( :empty )
       item = if @vtlp_use_entity
         field_value = data[name].get_unique
