@@ -223,6 +223,10 @@ class String
   def to_a
     [ self ]
   end
+
+  def date_from_web
+    Date.from_web( self )
+  end
 end
 
 class Date
