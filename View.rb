@@ -624,10 +624,10 @@ class View < RPCQooxdooService
   # Upon choice of an entry in the list
   def rpc_list_choice(session, name, data)
     if respond_to? "rpc_list_choice_#{name}"
-      ddputs(3) { "Calling rpc_list_choice-#{name}" }
+      dputs(3) { "Calling rpc_list_choice-#{name}" }
       return send("rpc_list_choice_#{name}", session, data)
     elsif @main_tab
-      ddputs(3) { "Calling #{@main_tab}.rpc_list_choice" }
+      dputs(3) { "Calling #{@main_tab}.rpc_list_choice" }
       mt = View.method_missing(@main_tab)
       if mt.respond_to? :rpc_list_choice_sub
         mt.rpc_list_choice_sub(session, name, data)
