@@ -50,6 +50,11 @@ module VTListPane
     args_hash = vtlp_setup( field, method, *args )
     show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
       args_hash.merge( :callback => true )
+    self.class_eval <<-RUBY
+      def rpc_list_choice_#{field}( session, data )
+        rpc_list_choice_vtlistpanel( session, "#{field}", data )
+      end
+    RUBY
   end
   
   def vtlp_list_entity( field, entity, method, *args )
@@ -113,7 +118,7 @@ module VTListPane
     #      [data[@vtlp_field][0], field.data_get(@vtlp_method)] )
   end
   
-  def rpc_list_choice( session, name, data )
+  def rpc_list_choice_vtlistpanel( session, name, data )
     ret = if @update and @update == :before
       rpc_update( session )
     else
@@ -135,6 +140,7 @@ module VTListPane
         ret += reply( :update, item.to_hash )
       end
       ret += reply( :update, {@vtlp_field.to_sym => [field_value] } )
+      session.s_data[@vtlp_field.to_sym] = field_value
     end
     if @update and @update != :before
       ret += rpc_update( session )
