@@ -880,7 +880,7 @@ qx.Class.define("frontend.Lib.Fields", {
           if ( params.flexheight ){
             dbg( 3, "Setting rowflex to " + params.flexheight )
             //alert( "setting flexheight")
-            layout.getLayout().setRowFlex( index, params.flexheight );
+            layout.getLayout().setRowFlex( index, params.flexheight * 10 );
             if ( params.flexheight > 0){
               this.needs_expansion.height = "100%";
             }
@@ -888,7 +888,7 @@ qx.Class.define("frontend.Lib.Fields", {
           if ( params.flexwidth ){
             dbg( 3, "Setting colflex to " + params.flexwidth )
             //alert( "setting flexwidth")
-            layout.getLayout().setColumnFlex( index, params.flexwidth );
+            layout.getLayout().setColumnFlex( 1, params.flexwidth * 10 );
             if ( params.flexwidth > 0){
               this.needs_expansion.width = "100%";
             }
@@ -986,7 +986,7 @@ qx.Class.define("frontend.Lib.Fields", {
             flexit = 0;
           case "fields":
             dbg(5, "Adding some fields to " + lyt);
-            var layout = lyt.add(this.calcView(view_str[1], new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0, "right", "middle").setSpacing(5).setColumnFlex(0, flexit).setColumnFlex(1, 1))), {
+            var layout = lyt.add(this.calcView(view_str[1], new qx.ui.container.Composite(new qx.ui.layout.Grid().setColumnAlign(0, "right", "middle").setSpacing(5).setColumnFlex(0, flexit).setColumnFlex(1, 3))), {
               flex: 1
             });
             break;
