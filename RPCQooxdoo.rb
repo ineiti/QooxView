@@ -244,17 +244,22 @@ class RPCQooxdooHandler
 
   # And a no-worry with Webrick
   def self.webrick(port, dir = ".", duration = nil)
-    dputs(3){"Starting webrick for port #{port}, dir #{dir}, duration #{duration.inspect}"}
+    dputs(3) { "Starting webrick for port #{port}, dir #{dir}, duration #{duration.inspect}" }
     access_log_stream = File.open('webrick.access.log', 'w')
     logger = [[access_log_stream, AccessLog::COMBINED_LOG_FORMAT]]
     #logger.push [$stderr, WEBrick::AccessLog::COMMON_LOG_FORMAT]
     #logger.push [$stderr, WEBrick::AccessLog::REFERER_LOG_FORMAT]
     if @@server[port]
-      dputs(2){"Server already running - halting"}
+      dputs(2) { "Server already running - halting" }
       @@server[port].shutdown
     end
-    @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new("webrick.log"),
-                              :AccessLog => logger)
+    begin
+      @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new("webrick.log"),
+                                      :AccessLog => logger)
+    rescue Errno::EADDRINUSE => e
+      dputs(0){"Couldn't bind to address #{port} - already in use"}
+      raise Errno::EADDRINUSE
+    end
     # server = HTTPServer.new(:Port => port )
 
     #server.mount "/rpc", GetPost
@@ -321,16 +326,16 @@ class RPCQooxdooHandler
     @@server[port].mount('/', HTTPServlet::FileHandler, dir)
 
     if not duration
-      dputs(2){"Starting forever"}
+      dputs(2) { "Starting forever" }
       ['INT', 'TERM'].each { |signal|
         trap(signal) {
-          dputs(3){"Shutting down http-server"}
+          dputs(3) { "Shutting down http-server" }
           @@server[port].shutdown
         }
       }
       @@server[port].start
     else
-      dputs(2){"Starting for #{duration} seconds"}
+      dputs(2) { "Starting for #{duration} seconds" }
       server_loop = Thread.new {
         @@server[port].start
         dputs(2) { 'Webrick stopped' }
@@ -345,7 +350,7 @@ class RPCQooxdooHandler
     @@paths[path.to_sym] = cl
   end
 
-  def self.add_file_path( web, dir )
+  def self.add_file_path(web, dir)
     @@file_paths[web.to_sym] = dir
   end
 
