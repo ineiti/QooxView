@@ -69,4 +69,9 @@ class TC_ConfigBase < Test::Unit::TestCase
     assert ConfigBase.has_function? :now
     assert ! ConfigBase.has_function?( :or )
   end
+
+  def test_value
+    ConfigBase.integer = 10
+    assert_equal 10, ConfigBase.integer
+  end
 end

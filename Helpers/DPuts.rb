@@ -51,7 +51,7 @@ module DPuts
   end
 
   def dputs_getcaller
-    caller(0)[2].sub(/:.*:in/, '')
+    caller(0)[2].sub(/:.*:in/, '').sub(/block .*in /,'')
   end
 
   def dputs_func
@@ -74,6 +74,7 @@ module DPuts
 
   def ddputs(n, &s)
     s = yield s
+    #dp caller(0)
     dputs_out(-n, s, caller(0)[1])
   end
 

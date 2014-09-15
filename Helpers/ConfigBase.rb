@@ -126,7 +126,7 @@ class ConfigBase < Entity
   def self.method_missing( m, *args )
     dputs(4){"#{m} - #{args.inspect} - #{ConfigBases.singleton.inspect}"}
     if args.length > 0
-      ConfigBases.singleton.send( m, args )
+      ConfigBases.singleton.send( m, *args )
     else
       ConfigBases.singleton.send( m )
     end

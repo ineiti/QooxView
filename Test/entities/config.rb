@@ -7,5 +7,6 @@ class ConfigBases < Entities
     @@functions_conflict = [ [:now, :or ] ]
   
     value_list :value, "%w( one two three )"
+    value_int :integer
   end
 end
