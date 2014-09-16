@@ -14,6 +14,6 @@ class ConfigView3 < View
   def layout
     @functions_need = [ :take ]
     @functions_reject = [ :over ]
-    @values_need = { :value => [:one] }
+    @values_need = { :value => :one }
   end
 end

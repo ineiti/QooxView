@@ -867,6 +867,7 @@ class View < RPCQooxdooService
           @configured = false
         end
       }
+      dputs(3){"Configured for #{self.name} is #{@configured}"}
     end
   end
 
