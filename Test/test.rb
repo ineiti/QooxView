@@ -20,10 +20,10 @@ Permission.add( 'secretary', 'PersonModify,FlagAddInternet', 'professor,cyberman
 
 QooxView.init( 'entities', 'views' )
 
-tests = %w( entity permission stype sqlite helpers migration
-  view session configbase store_csv)
+tests = %w( configbase entity helpers migration permission print session sqlite
+  store_csv stype test_creation view )
 #tests = %w( permission )
-tests = %w( view )
+#tests = %w( view )
 #tests = %w( configbase )
 
 tests.each{|t|
