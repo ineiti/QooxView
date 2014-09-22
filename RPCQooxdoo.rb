@@ -182,12 +182,12 @@ class RPCQooxdooHandler
           if answer.class == Array
             answer.delete_if { |a|
               a.class != Hash or
-                  (a.keys.join != "cmddata" and
-                      a.keys.join != "datacmd")
+                  (a.keys.join != 'cmddata' and
+                      a.keys.join != 'datacmd')
             }
           else
-            dputs(2) { "Creating empty reply" }
-            answer = [{:cmd => "none", :data => []}]
+            dputs(2) { 'Creating empty reply' }
+            answer = [{:cmd => 'none', :data => []}]
           end
 
           dputs(3) { "Final answer is #{answer.inspect}" }
@@ -197,7 +197,7 @@ class RPCQooxdooHandler
           dputs(0) { "#{e.inspect}" }
           dputs(0) { "#{e.to_s}" }
           puts e.backtrace
-          return self.error(2, 2, "Error in handling method", id)
+          return self.error(2, 2, 'Error in handling method', id)
         end
       else
         return self.error(2, 2, "No such method #{method} for #{s.class.name}", id)
