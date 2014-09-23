@@ -48,6 +48,7 @@ module DPuts
         puts ' ' * (32) + l
       }
     end
+    s
   end
 
   def dputs_getcaller
@@ -90,6 +91,7 @@ module DPuts
       str = Time.now.strftime("%a %y.%m.%d-%H:%M:%S #{mod}: #{msg}")
       f.puts str
     }
+    msg
   end
 
 end

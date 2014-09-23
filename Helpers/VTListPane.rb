@@ -60,7 +60,7 @@ module VTListPane
   def vtlp_list_entity( field, entity, method, *args )
     @vtlp_use_entity = true
     args_hash = vtlp_setup( field, method, *args )
-    show_entity field, entity, "single",
+    show_entity field, entity, 'single',
       @vtlp_method, 
       args_hash.merge( :callback => true )    
   end
