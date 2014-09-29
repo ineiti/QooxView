@@ -138,11 +138,12 @@ class ICC < RPCQooxdooPath
                          :md5 => transfer_md5, :tid => tid,
                          :user => login.login_name, :pass => login.password_plain}.to_json)
     return ret if ret._code == 'Error'
+    percent and percent.call( '0%')
     t_array.each { |t|
       if percent
         p = "#{((pos+1) * 100 / t_array.length).floor}%"
         percent.call p
-        ddputs(3) { p }
+        dputs(3) { "Percentage done: #{p}" }
       end
       ret = ICC.send_post(url, tid, t)
       return ret if ret =~ /^Error:/
