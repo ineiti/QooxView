@@ -138,7 +138,7 @@ class TC_View < Test::Unit::TestCase
             ["list",
               :students,
               "students",
-              {:list_type=>:single, :list_values=>[]}]]]]],
+              {:list_type=>:single, :lazy=>true, :list_values=>[]}]]]]],
       View.CourseShow.layout_eval
     @admin.credit = 2000
     assert_equal ["group",
@@ -156,7 +156,7 @@ class TC_View < Test::Unit::TestCase
             ["list",
               :students,
               "students",
-              {:list_type=>:single, :list_values=>[]}]]]]],
+              {:list_type=>:single, :lazy=>true, :list_values=>[]}]]]]],
       View.CourseShow.layout_eval
   end
   

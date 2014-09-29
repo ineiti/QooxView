@@ -17,7 +17,7 @@ class TC_Gettext < Test::Unit::TestCase
   def teardown
   end
 
-  def test_domain
+  def tes_domain
     GetText.locale = "fr"
     assert_equal "un", GetText._("one")
     assert_equal "one", @a

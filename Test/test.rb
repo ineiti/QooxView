@@ -10,26 +10,30 @@ CONFIG_FILE='config.yaml'
 require 'QooxView'
 require 'st_dummy'
 
-Permission.add( 'default', 'View,View.Login' )
-Permission.add( 'admin', '.*', '.*' )
-Permission.add( 'internet', 'Internet,PersonShow', 'default' )
-Permission.add( 'student', '', 'internet' )
-Permission.add( 'professor', '', 'student' )
-Permission.add( 'cybermanager', '', '')
-Permission.add( 'secretary', 'PersonModify,FlagAddInternet', 'professor,cybermanager' )
+Permission.add('default', 'View,View.Login')
+Permission.add('admin', '.*', '.*')
+Permission.add('internet', 'Internet,PersonShow', 'default')
+Permission.add('student', '', 'internet')
+Permission.add('professor', '', 'student')
+Permission.add('cybermanager', '', '')
+Permission.add('secretary', 'PersonModify,FlagAddInternet', 'professor,cybermanager')
 
-QooxView.init( 'entities', 'views' )
+QooxView.init('entities', 'views')
 
 tests = Dir.glob('qv_*.rb')
 #tests = %w( permission )
-tests = %w( icc )
+#tests = %w( permission )
 #tests = %w( configbase )
 
-tests.each{|t|
-  require "qv_#{t}"
+tests.each { |t|
+  begin
+    require "qv_#{t}"
+  rescue LoadError => e
+    require t
+  end
 }
 
-$profiling = get_config( nil, :profiling )
+$profiling = get_config(nil, :profiling)
 if $profiling
   require 'rubygems'
   require 'perftools'

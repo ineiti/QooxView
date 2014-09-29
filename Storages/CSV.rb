@@ -40,7 +40,7 @@ class CSV < StorageType
             if File.exists? final
               final += "_#{Dir.glob(final+'*').size}"
             end
-            ddputs(3) { "Renaming temporary #{f} to #{final}" }
+            dputs(3) { "Renaming temporary #{f} to #{final}" }
             File.rename(f, final)
           }
           newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}_tmp"
@@ -99,7 +99,7 @@ class CSV < StorageType
       Dir.glob("#{@csv_file}*").sort.reverse.each { |file|
         next if File.size(file) == 0
         begin
-          ddputs(3) { "Loading file #{file}" }
+          dputs(3) { "Loading file #{file}" }
           data = {}
           File.open(file, 'r').readlines().each { |l|
             dputs(5) { "Reading line #{l}" }

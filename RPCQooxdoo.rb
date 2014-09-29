@@ -121,6 +121,7 @@ class RPCQooxdooService
   def self.add_new_service(subclass, name)
     dputs(5) { "Add a new service: #{subclass} as #{name}" }
     @@services_hash[name] = subclass.new
+    @@services_hash[name].load
     self.migrate(name)
   end
 end

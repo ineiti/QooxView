@@ -34,7 +34,7 @@ class TC_ICC < Test::Unit::TestCase
     @str = ''
     ICC.transfer(@admin, 'Persons.longtransfer', SecureRandom.random_bytes(1024),
                  url: url){|s| @str += s}
-    assert_equal '50%100%', @str
+    assert_equal '0%50%100%', @str
 
     main.kill.join
   end

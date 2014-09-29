@@ -39,13 +39,13 @@ class Persons < Entities
   end
 
   def icc_adduser( tr )
-    ddputs(2){"Data is #{tr._data}"}
+    dputs(2){"Data is #{tr._data}"}
     Persons.create( tr._data )
   end
 
   def icc_longtransfer( tr )
     @longtransfer_size = tr._data.size
-    ddputs(2){"Received #{@longtransfer_size} bytes"}
+    dputs(2){"Received #{@longtransfer_size} bytes"}
   end
 
   def get_longtransfer_bytes

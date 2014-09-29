@@ -13,7 +13,7 @@ class Courses < Entities
     value_block :names
     value_entity_Persons :teacher, :drop, :first_name, proc { |p| p.credit and p.credit > 1000 }
     value_entity_Persons_empty :assistant, :drop, :first_name
-    value_list_entity_persons :students, :login_name
+    value_list_entity_persons_lazy :students, :login_name
   end
 end
 

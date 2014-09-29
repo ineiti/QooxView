@@ -24,25 +24,25 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
-    @pers = Entities.Persons.create( :login_name => "test" )
-    @inv1 = Entities.CVSInventories.create( :date => "121201", :iname => "comp 01" )
-    @inv2 = Entities.CVSInventories.create( :date => "121202", :iname => "comp 02" )
-    @inv3 = Entities.CVSInventories.create( :date => "121203", :iname => "comp 03" )
-    Entities.save_all
+    @pers = Entities.Persons.create( :login_name => 'test')
+    @inv1 = Entities.CVSInventories.create( :date => '121201', :iname => 'comp 01')
+    @inv2 = Entities.CVSInventories.create( :date => '121202', :iname => 'comp 02')
+    @inv3 = Entities.CVSInventories.create( :date => '121203', :iname => 'comp 03')
+    Entities.save_all( true )
   end
 
   def teardown
-    dputs(1){"Tearing down"}
+    dputs(1){ 'Tearing down' }
   end
   
   def test_cvs_normal
-    assert_equal "121201", @inv1.date
+    assert_equal '121201', @inv1.date
   end
   
   def test_cvs_init
-    assert_equal "comp 01", CVSInventories.match_by_date("121201").iname
+    assert_equal 'comp 01', CVSInventories.match_by_date('121201').iname
 
-    dputs(5){"Before class_eval"}
+    dputs(5){ 'Before class_eval' }
     CVSInventories.class_eval( '
       def setup_data
         dputs(1){"new inventories"}
@@ -61,7 +61,7 @@ class TC_Migration < Test::Unit::TestCase
         "Entities.CVSInventories" )
       ')
     
-    assert_equal "comp", CVSInventories.match_by_date("121201").typ
+    assert_equal 'comp', CVSInventories.match_by_date('121201').typ
     
     CVSInventories.class_eval( '
       def migration_2( inv )
@@ -77,7 +77,7 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
-    assert_equal "121201-", CVSInventories.match_by_date("121201").iname
+    assert_equal '121201-', CVSInventories.match_by_date('121201').iname
   end
   
   # Also tests deletion - this is kind of a bug that it works, because
@@ -99,7 +99,7 @@ class TC_Migration < Test::Unit::TestCase
         "Entities.CVSInventories" )
       ')
     
-    assert_equal "comp 01", CVSInventories.match_by_date("121201").i_name
+    assert_equal 'comp 01', CVSInventories.match_by_date('121201').i_name
   end
   
   def test_raw
@@ -119,8 +119,8 @@ class TC_Migration < Test::Unit::TestCase
         "Entities.CVSInventories" )
       ')    
 
-    cvs = CVSInventories.match_by_date("121201")
-    assert_equal "comp 01", cvs.i_name
+    cvs = CVSInventories.match_by_date('121201')
+    assert_equal 'comp 01', cvs.i_name
   end
 
 end

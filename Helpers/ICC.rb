@@ -132,13 +132,13 @@ class ICC < RPCQooxdooPath
 
     pos = 0
     dputs(3) { "Going to transfer: #{t_array.inspect}" }
+    percent and percent.call( '0%')
     tid = Digest::MD5.hexdigest(rand.to_s)
     ret = ICC.send_post(url, :start,
                         {:method => method, :chunks => t_array.length,
                          :md5 => transfer_md5, :tid => tid,
                          :user => login.login_name, :pass => login.password_plain}.to_json)
     return ret if ret._code == 'Error'
-    percent and percent.call( '0%')
     t_array.each { |t|
       if percent
         p = "#{((pos+1) * 100 / t_array.length).floor}%"
