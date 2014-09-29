@@ -6,6 +6,7 @@
 # - longer post-function
 # - put json around everything
 require 'cgi'
+require 'net/http'
 
 class ICC < RPCQooxdooPath
   @@transfers = {}
@@ -114,8 +115,8 @@ class ICC < RPCQooxdooPath
     return err
   end
 
-  def self.transfer(method, transfer = '', url: ConfigBase.server_uri, json: true,
-      percent_str: nil)
+  def self.transfer(login, method, transfer = '', url: ConfigBase.server_uri, json: true,
+      &percent)
     block_size = 4096
     if json
       method.prepend 'json@'
@@ -132,17 +133,16 @@ class ICC < RPCQooxdooPath
     pos = 0
     dputs(3) { "Going to transfer: #{t_array.inspect}" }
     tid = Digest::MD5.hexdigest(rand.to_s)
-    center = Persons.center
     ret = ICC.send_post(url, :start,
                         {:method => method, :chunks => t_array.length,
                          :md5 => transfer_md5, :tid => tid,
-                         :user => center.login_name, :pass => center.password_plain}.to_json)
+                         :user => login.login_name, :pass => login.password_plain}.to_json)
     return ret if ret._code == 'Error'
-    percent_str and ps = percent_str
     t_array.each { |t|
-      if percent_str
-        percent_str and percent_str = "#{ps} #{((pos+1) * 100 / t_array.length).floor}%"
-        ddputs(3) { percent_str }
+      if percent
+        p = "#{((pos+1) * 100 / t_array.length).floor}%"
+        percent.call p
+        ddputs(3) { p }
       end
       ret = ICC.send_post(url, tid, t)
       return ret if ret =~ /^Error:/

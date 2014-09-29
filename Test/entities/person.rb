@@ -1,8 +1,14 @@
 class Persons < Entities
+  attr_reader :longtransfer_size
+
   def setup_data
     value_block :block_one
     value_str :first_name
     value_str :pass
+
+    value_block :login
+    value_str :login_name
+    value_str :password_plain
     
 #    value_block :array
 #    value_array :a, :String
@@ -29,6 +35,21 @@ class Persons < Entities
 #    value_block :add_new
 #    value_bogus :name_bogus
 #    value_africompta_bogus :name_2, "account_name"
+    @longtransfer_size = 0
+  end
+
+  def icc_adduser( tr )
+    ddputs(2){"Data is #{tr._data}"}
+    Persons.create( tr._data )
+  end
+
+  def icc_longtransfer( tr )
+    @longtransfer_size = tr._data.size
+    ddputs(2){"Received #{@longtransfer_size} bytes"}
+  end
+
+  def get_longtransfer_bytes
+    @longtransfer_size
   end
 end
 
@@ -40,5 +61,9 @@ class Person < Entity
   def value1=( v )
     self._value1 = v
     self.value2 = 2 * v
+  end
+
+  def check_pass( p )
+    p == password_plain
   end
 end
