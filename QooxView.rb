@@ -90,9 +90,6 @@ if not String.method_defined? :force_encoding
   end
 end
 
-class StorageLoadError < Exception
-end
-
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
 SQLITE3_OBJ=QOOXVIEW_DIR + "/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o"

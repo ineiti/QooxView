@@ -37,7 +37,7 @@ class TC_Store_CSV < Test::Unit::TestCase
   end
 
   def get_persons_csv
-    Dir.glob('data/Persons.csv.*').sort
+    dp Dir.glob('data/Persons.csv.*').sort
   end
 
   def test_backup_count
@@ -55,19 +55,27 @@ class TC_Store_CSV < Test::Unit::TestCase
       @admin.first_name = "admin#{i}"
       Entities.save_all
     }
-    File.open( get_persons_csv.last, 'a' ){|f|
-      f.write( '--no--valid--json--' )
-    }
+
+    # The last saved file is a _tmp-file and will be deleted and ignored
     Entities.load_all
     assert_equal 'admin4', Persons.find_by_pass('super123').first_name
     assert_equal 4, get_persons_csv.count
 
+    # Test an invalid file - will the second-last be taken?
+    File.open( get_persons_csv.last, 'a' ){|f|
+      f.write( '--no--valid--json--' )
+    }
+    Entities.load_all
+    assert_equal 'admin3', Persons.find_by_pass('super123').first_name
+    assert_equal 3, get_persons_csv.count
+
+    # Invalidate everything
     get_persons_csv.each{|name|
       File.open( name, 'a' ){|f|
         f.write( '--no--valid--json--' )
       }
     }
-    assert_raise(StorageLoadError){Entities.load_all}
+    Entities.load_all
     assert_equal 0, get_persons_csv.count, get_persons_csv
   end
 end

@@ -35,10 +35,15 @@ class CSV < StorageType
           dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
           FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
           dputs(5) { "Data is #{data.inspect}" }
-          newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}"
-          if File.exists? newfile
-            newfile += "_#{Dir.glob(newfile+'*').size}"
-          end
+          Dir.glob("#{@csv_file}*tmp").each { |f|
+            final = f.sub(/_tmp$/, '')
+            if File.exists? final
+              final += "_#{Dir.glob(final+'*').size}"
+            end
+            ddputs(3) { "Renaming temporary #{f} to #{final}" }
+            File.rename(f, final)
+          }
+          newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}_tmp"
           File.open(newfile, 'w') { |f|
             data_each(data) { |d|
               write_line(f, d)
@@ -68,7 +73,7 @@ class CSV < StorageType
     @mutex.synchronize {
       begin
         FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
-        tmpfile = "#{@csv_file}.tmp"
+        tmpfile = "#{@csv_file}_tmp"
         File.exists? @csv_file and FileUtils.cp @csv_file, tmpfile
         File.open(tmpfile, 'a') { |f|
           write_line(f, data)
@@ -90,11 +95,13 @@ class CSV < StorageType
     # Go and fetch eventual existing data from the file
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
-      while (allfiles = Dir.glob("#{@csv_file}*").sort).size > 0
+      FileUtils.rm Dir.glob( "#{@csv_file}*_tmp")
+      Dir.glob("#{@csv_file}*").sort.reverse.each { |file|
+        next if File.size(file) == 0
         begin
-          dputs(3) { "Loading file #{allfiles.last} of #{allfiles}" }
+          ddputs(3) { "Loading file #{file}" }
           data = {}
-          File.open(allfiles.last, 'r').readlines().each { |l|
+          File.open(file, 'r').readlines().each { |l|
             dputs(5) { "Reading line #{l}" }
             # Convert the keys in the lines back to Symbols
             data_parse = JSON.parse(l)
@@ -106,14 +113,13 @@ class CSV < StorageType
             did = data_csv[@data_field_id] = data_csv[@data_field_id].to_i
             data[did] = data_csv
           }
+          dputs(5) { "data is now #{data.inspect}" }
           return data
         rescue JSON::ParserError
-          log_msg :CSV, "Oups - couldn't load CSV for #{allfiles.last}"
-          FileUtils.rm allfiles.last
-          raise StorageLoadError unless allfiles.size > 1
+          log_msg :CSV, "Oups - couldn't load CSV for #{file}"
+          FileUtils.rm file
         end
-        dputs(5) { "data is now #{data.inspect}" }
-      end
+      }
     }
 
     return {}
