@@ -142,7 +142,7 @@ class ICC < RPCQooxdooPath
     t_array.each { |t|
       if percent_str
         percent_str and percent_str = "#{ps} #{((pos+1) * 100 / t_array.length).floor}%"
-        dputs(3) { percent_str }
+        ddputs(3) { percent_str }
       end
       ret = ICC.send_post(url, tid, t)
       return ret if ret =~ /^Error:/
