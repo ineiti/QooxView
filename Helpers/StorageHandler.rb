@@ -361,11 +361,11 @@ module StorageHandler
     }
   end
 
-  def save
-    return unless @changed
+  def save( notmp: false )
+    return unless ( @changed || notmp )
     @storage.each{|k,di|
       dputs( 5 ){ "Saving #{k} at #{di.inspect}" }
-      di.save( @data )
+      di.save( @data, notmp: notmp )
     }
     @changed = false
   end

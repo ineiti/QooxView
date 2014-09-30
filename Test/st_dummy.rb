@@ -5,7 +5,7 @@ class STdummy1 < StorageType
     {}
   end
   
-  def save( data )
+  def save( data, notmp: false )
     
   end
 
@@ -15,7 +15,7 @@ class STdummy2 < STdummy1
   
   def configure( config )
     dputs( 3 ){ "Configuration of STdummy2 is: #{config.inspect}" }
-    @conf = config[:conf] + "_"
+    @conf = config[:conf] + '_'
   end
 end
 

@@ -26,45 +26,44 @@ class CSV < StorageType
 
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
-  def save(data)
-    if @add_only
-      dputs(5) { "Not saving data for #{@name}" }
-    else
-      @mutex.synchronize {
-        begin
-          dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
-          FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
-          dputs(5) { "Data is #{data.inspect}" }
-          Dir.glob("#{@csv_file}*tmp").each { |f|
-            final = f.sub(/_tmp$/, '')
-            if File.exists? final
-              final += "_#{Dir.glob(final+'*').size}"
-            end
-            dputs(3) { "Renaming temporary #{f} to #{final}" }
-            File.rename(f, final)
-          }
-          newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}_tmp"
-          File.open(newfile, 'w') { |f|
-            data_each(data) { |d|
-              write_line(f, d)
-              if di = @entity.data_instances[d[@data_field_id]]
-                di.changed = false
+  def save(data, notmp: false)
+    @add_only ?
+        dputs(5) { "Not saving data for #{@name}" } :
+        @mutex.synchronize {
+          begin
+            dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
+            FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
+            dputs(5) { "Data is #{data.inspect}" }
+            Dir.glob("#{@csv_file}*tmp").each { |f|
+              final = f.sub(/_tmp$/, '')
+              if File.exists? final
+                final += "_#{Dir.glob(final+'*').size}"
               end
+              dputs(3) { "Renaming temporary #{f} to #{final}" }
+              File.rename(f, final)
             }
-          }
-          #%x[ sync ]
-          dputs(5) { 'Delete oldest file' }
-          if (backups = Dir.glob("#{@csv_file}.*").sort).size > @backup_count
-            FileUtils.rm backups.first(backups.size - @backup_count)
+            newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}"
+            notmp or newfile += '_tmp'
+            File.open(newfile, 'w') { |f|
+              data_each(data) { |d|
+                write_line(f, d)
+                if di = @entity.data_instances[d[@data_field_id]]
+                  di.changed = false
+                end
+              }
+            }
+            #%x[ sync ]
+            dputs(5) { 'Delete oldest file' }
+            if (backups = Dir.glob("#{@csv_file}.*").sort).size > @backup_count
+              FileUtils.rm backups.first(backups.size - @backup_count)
+            end
+          rescue Exception => e
+            dputs(0) { "Error: couldn't save CSV #{self.class.name}" }
+            dputs(0) { "#{e.inspect}" }
+            dputs(0) { "#{e.to_s}" }
+            puts e.backtrace
           end
-        rescue Exception => e
-          dputs(0) { "Error: couldn't save CSV #{self.class.name}" }
-          dputs(0) { "#{e.inspect}" }
-          dputs(0) { "#{e.to_s}" }
-          puts e.backtrace
-        end
-      }
-    end
+        }
   end
 
   # Each new entry is directly stored if @add_only is true

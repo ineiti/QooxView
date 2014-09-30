@@ -58,7 +58,7 @@ class SQLite < StorageType
 
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
-  def save(data)
+  def save(data, notmp: false)
     @mutex_es.synchronize {
       dputs(3) { "Saving #{@entries_save.count} entries in #{@db_class}" }
       @entries_save.each_value { |v|
