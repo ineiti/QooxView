@@ -41,18 +41,18 @@ class RPCQooxdooService
 
   # As we can't call .new during "inherited", we have
   # to do it afterwards - too bad.
-  def initialize(services = ".*")
+  def initialize(services = '.*')
     get_services(services)
   end
 
-  def get_services(services = ".*")
+  def get_services(services = '.*')
     do_init = true
 
     while do_init
       do_init = false
 
       # The entities have to be initialized before the views
-      ["Entities", "View"].each { |e|
+      %w(Entities View).each { |e|
         @@services_hash.sort.each { |k, v|
           if k =~ /^#{e}/ and k =~ /#{services}/
             dputs(3) { "Initializing #{k.inspect} with #{v.inspect}" }
@@ -102,7 +102,7 @@ class RPCQooxdooService
     #    name = "#{subclass}".sub( /^.*?_/, "" ).gsub( '_', '.' )
     name = "#{subclass}".gsub('_', '.')
     super_name = subclass.superclass.name
-    if super_name != "RPCQooxdooService"
+    if super_name != 'RPCQooxdooService'
       name = "#{super_name}.#{name}"
     end
     dputs(5) { "A new handler -#{subclass} is created for the class: #{super_name} with path #{name}" }
@@ -133,17 +133,17 @@ class RPCQooxdooHandler
   # self.answer and self.error return a hash, which will be converted later
   def self.answer(result, id, error = nil)
     not result and result = []
-    {"result" => result, "error" => error, "id" => id}
+    {'result' => result, 'error' => error, 'id' => id}
   end
 
   def self.error(origin, code, message, id)
     self.answer(nil, id,
-                {"origin" => origin, "code" => code, "message" => message}.to_json)
+                {'origin' => origin, 'code' => code, 'message' => message}.to_json)
   end
 
   def self.get_ip(req)
     dputs(3) { "header is #{req.header.inspect} - peeraddr is #{req.peeraddr.inspect}" }
-    if ret = req.header["x-forwarded-for"]
+    if (ret = req.header["x-forwarded-for"])
       ret.first
     else
       req.peeraddr[3]
@@ -158,7 +158,7 @@ class RPCQooxdooHandler
     if service =~ /^View/ and session
       dputs(3) { "Going to test if we can view #{service}" }
       if not session.can_view(service)
-        return self.error(2, 3, "Not allowed to view that!", id)
+        return self.error(2, 3, 'Not allowed to view that!', id)
       end
       session.web_req = web_req
       if web_req
@@ -204,7 +204,7 @@ class RPCQooxdooHandler
         return self.error(2, 2, "No such method #{method} for #{s.class.name}", id)
       end
     else
-      return self.error(2, 1, "No such service", id)
+      return self.error(2, 1, 'No such service', id)
     end
   end
 
@@ -251,11 +251,11 @@ class RPCQooxdooHandler
     #logger.push [$stderr, WEBrick::AccessLog::COMMON_LOG_FORMAT]
     #logger.push [$stderr, WEBrick::AccessLog::REFERER_LOG_FORMAT]
     if @@server[port]
-      dputs(2) { "Server already running - halting" }
+      dputs(2) { 'Server already running - halting' }
       @@server[port].shutdown
     end
     begin
-      @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new("webrick.log"),
+      @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new('webrick.log'),
                                       :AccessLog => logger)
     rescue Errno::EADDRINUSE => e
       dputs(0){"Couldn't bind to address #{port} - already in use"}
@@ -276,7 +276,7 @@ class RPCQooxdooHandler
         res.body = self.parse_query_xdomain(req)
       end
       #res['content-type'] = "text/html"
-      res['content-type'] = "application/json"
+      res['content-type'] = 'application/json'
       res['content-length'] = res.body.length
       dputs(2) { "RPC-Reply is #{res.body}" }
       raise HTTPStatus::OK
@@ -292,7 +292,7 @@ class RPCQooxdooHandler
             "method is #{req.request_method}" }
 
         status = HTTPStatus::OK
-        res['content-type'] = "text/html"
+        res['content-type'] = 'text/html'
         begin
           if cl.respond_to? :parse_req_res
             res.body = cl.parse_req_res(req, res).to_s
@@ -306,12 +306,12 @@ class RPCQooxdooHandler
           dputs(0) { "#{e.inspect}" }
           dputs(0) { "#{e.to_s}" }
           puts e.backtrace
-          res.body = "Error in handling method"
+          res.body = 'Error in handling method'
         end
         res.body.force_encoding(Encoding::ASCII_8BIT)
         res['content-length'] = res.body.length
         res['status'] = status
-        if res['content-type'] == "text/html"
+        if res['content-type'] == 'text/html'
           dputs(3) { "#{path}-reply is #{res.body.inspect}" }
         end
         dputs(3) { "Status is #{status.inspect}" }
@@ -327,10 +327,10 @@ class RPCQooxdooHandler
     @@server[port].mount('/', HTTPServlet::FileHandler, dir)
 
     if not duration
-      dputs(2) { "Starting forever" }
-      ['INT', 'TERM'].each { |signal|
+      dputs(2) { 'Starting forever' }
+      %w(INT TERM).each { |signal|
         trap(signal) {
-          dputs(3) { "Shutting down http-server" }
+          dputs(3) { 'Shutting down http-server' }
           @@server[port].shutdown
         }
       }
