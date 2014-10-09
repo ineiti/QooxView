@@ -11,7 +11,7 @@ class ConfigBases < Entities
     value_str :locale_force
     value_int :debug_lvl
     value_str :version_local
-    value_bool :use_printing
+    value_int :use_printing
 
     @@functions = []
     @@functions_base = {}

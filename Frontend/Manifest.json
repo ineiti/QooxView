@@ -3,17 +3,17 @@
   {
     "name" : "Frontend",
 
-    "summary" : "Custom Application",
-    "description" : "This is a skeleton for a custom application with qooxdoo.",
+    "summary" : "Frontend for QooxView",
+    "description" : "Simple Rails/Access ripoff",
     
-    "homepage" : "http://some.homepage.url/",
+    "homepage" : "http://github.com/ineiti/qooxview/",
 
-    "license" : "SomeLicense",
+    "license" : "GPLv3 or later",
     "authors" : 
     [
       {
-        "name" : "First Author (uid)",
-        "email" : "first.author@some.domain"
+        "name" : "Linus Gasser",
+        "email" : "ineiti@profeda.org"
       }
     ],
 

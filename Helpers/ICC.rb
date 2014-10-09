@@ -145,7 +145,7 @@ class ICC < RPCQooxdooPath
       if percent
         p = "#{((pos+1) * 100 / t_array.length).floor}%"
         percent.call p
-        dputs(3) { "Percentage done: #{p}" }
+        ddputs(3) { "Percentage done: #{p}" }
       end
       ret = ICC.send_post(url, tid, t)
       return ret if ret =~ /^Error:/
