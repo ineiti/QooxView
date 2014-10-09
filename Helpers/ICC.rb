@@ -129,10 +129,12 @@ class ICC < RPCQooxdooPath
       start = (block_size * t_array.length)
       t_array.push transfer[start..(start+block_size -1)]
     end
+    dputs(2) { "Transfer is #{transfer.size} and cut up in #{t_array.size} pieces of " +
+        "#{block_size} length" }
 
     pos = 0
     dputs(3) { "Going to transfer: #{t_array.inspect}" }
-    percent and percent.call( '0%')
+    percent and percent.call('0%')
     tid = Digest::MD5.hexdigest(rand.to_s)
     ret = ICC.send_post(url, :start,
                         {:method => method, :chunks => t_array.length,
