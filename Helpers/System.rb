@@ -11,4 +11,7 @@ module System
     Kernel.system( cmd )
   end
 
+  def exists?( cmd )
+    run_bool( "which #{cmd}")
+  end
 end

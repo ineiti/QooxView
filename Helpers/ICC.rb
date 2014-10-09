@@ -38,14 +38,14 @@ class ICC < RPCQooxdooPath
         end
       end
       if tr = @@transfers[query._cmdkey]
-        dputs(3) { "Found transfer-id #{query._cmdkey}, #{tr._chunks} left" }
+        ddputs(3) { "Found transfer-id #{query._cmdkey}, #{tr._chunks} left" }
         tr._data += query._data
         if (tr._chunks -= 1) <= 0
           if Digest::MD5.hexdigest(tr._data) == tr._md5
-            dputs(2) { "Successfully received cmdkey #{tr._cmdkey}" }
+            dputs(1) { "Successfully received cmdkey #{tr._cmdkey}" }
             ret = self.response('OK', self.data_received(tr))
           else
-            dputs(2) { "cmdkey #{tr._cmdkey} transmitted with errors, " +
+            dputs(1) { "cmdkey #{tr._cmdkey} transmitted with errors, " +
                 "#{Digest::MD5.hexdigest(tr._data)} instead of #{tr._md5}" }
             ret = self.response('Error', 'wrong MD5')
           end
@@ -145,8 +145,9 @@ class ICC < RPCQooxdooPath
       if percent
         p = "#{((pos+1) * 100 / t_array.length).floor}%"
         percent.call p
-        ddputs(3) { "Percentage done: #{p}" }
+        dputs(3) { "Percentage done: #{p}" }
       end
+      ddputs(2){"Sending id #{tid}"}
       ret = ICC.send_post(url, tid, t)
       return ret if ret =~ /^Error:/
       pos += 1
