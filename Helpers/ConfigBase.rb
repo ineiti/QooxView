@@ -12,6 +12,7 @@ class ConfigBases < Entities
     value_int :debug_lvl
     value_str :version_local
     value_int :use_printing
+    value_int :block_size
 
     @@functions = []
     @@functions_base = {}
@@ -20,6 +21,10 @@ class ConfigBases < Entities
     respond_to? :add_config and add_config
     
     return true
+  end
+
+  def migration_2( c )
+    c.block_size = 16_384
   end
   
   def migration_1( c )

@@ -117,7 +117,7 @@ class ICC < RPCQooxdooPath
 
   def self.transfer(login, method, transfer = '', url: ConfigBase.server_uri, json: true,
       &percent)
-    block_size = 4096
+    block_size = ConfigBase.block_size.to_i
     if json
       method.prepend 'json@'
       transfer = [transfer].to_json

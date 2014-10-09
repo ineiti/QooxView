@@ -34,6 +34,9 @@ qx.Class.define("frontend.Application",
              * @lint ignoreDeprecated(alert)
              * @require(qx.module.Attribute)
              */
+            layout: null,
+            lay_grid: null,
+            cont_grid: null,
 
             main: function () {
                 // Call super class
@@ -58,93 +61,10 @@ qx.Class.define("frontend.Application",
                     ]);
                 }
                 rpc = new frontend.Lib.RPC;
-                /*
-                 */
-                /* NewLayout
-                 root.addListener("resize", function(e) {
-                 var bounds = this.layout.getBounds();
-                 if(this.layout.getChildren()) {
-                 var layout = this.layout.getChildren()[0];
-                 if(layout && layout.getChildren()[0]) {
-                 layout = layout.getChildren()[0];
-                 var size = layout.getInnerSize();
-                 if(size) {
-                 var top = Math.round( ( bounds.height - size.height ) / 4);
-                 var left = Math.round( ( bounds.width - size.width ) / 2);
-                 dbg(0, "Resizing to " + print_a(bounds) + "-" + print_a(size));
-                 this.layout.set({
-                 marginTop : top,
-                 marginLeft : left
-                 });
-                 }
-                 }
-                 }
-                 }, this);
-                 */
 
                 // We start with the Welcome-view which shows a login-screen or other
                 rpc.callRPC("View.Welcome", "show", this.layout, this.layout.dispatch);
-                // Create a button
-                /*
-                var button1 = new qx.ui.form.Button("First Button", "frontend/test.png");
-
-                // Document is the application root
-                var doc = this.getRoot();
-
-                // Add button to document at fixed coordinates
-                doc.add(button1, {left: 100, top: 50});
-
-                // Add an event listener
-                button1.addListener("execute", function (e) {
-                    q('#test').setHtml('hi');
-                });
-
-                var html = new qx.ui.embed.Html();
-                html.setHtml('<table><tr id="test">hello</tr></table>');
-                doc.add(html);
-                */
             },
-
-            main2: function () {
-                // Call super class
-                this.base(arguments);
-
-                // Enable logging in debug variant
-                if (qx.core.Environment.get("qx.debug")) {
-                    // support native logging capabilities, e.g. Firebug for Firefox
-                    qx.log.appender.Native;
-                    // support additional cross-browser console. Press F7 to toggle visibility
-                    qx.log.appender.Console;
-                }
-
-                /*
-                 -------------------------------------------------------------------------
-                 Below is your actual application code...
-                 -------------------------------------------------------------------------
-                 */
-
-                // Create a button
-                var button1 = new qx.ui.form.Button("First Button", "frontend/test.png");
-
-                // Document is the application root
-                var doc = this.getRoot();
-
-                // Add button to document at fixed coordinates
-                doc.add(button1, {left: 100, top: 50});
-
-                // Add an event listener
-                button1.addListener("execute", function (e) {
-                    q('#test').setHtml('hi');
-                });
-
-                var html = new qx.ui.embed.Html();
-                html.setHtml('<table><tr id="test">hello</tr></table>');
-                doc.add(html);
-            },
-
-            layout: null,
-            lay_grid: null,
-            cont_grid: null,
 
             squeezeCenter: function () {
                 for (var i = 0; i < 3; i++) {

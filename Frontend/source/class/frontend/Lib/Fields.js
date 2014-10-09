@@ -605,19 +605,19 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                     break;
-                case "html":
-                    field_element = new qx.ui.embed.Html(  );
+                case "html_embed":
+                    field_element = new qx.ui.embed.Html();
                     field_element.setHtml(params.text);
                     field_element.setValue = field_element.setHtml;
-                    /*
+                    show_label = false;
+                    break;
+                case "html":
                     field_element = new qx.ui.basic.Label().set({
                         value: params.text,
                         rich: true,
                         allowGrowX: true,
                         allowGrowY: true
                     });
-                    */
-                    // field_element.set( {height: 100})
                     show_label = false;
                     break;
                 case "select":
