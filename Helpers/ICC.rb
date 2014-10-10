@@ -43,8 +43,8 @@ class ICC < RPCQooxdooPath
       end
       if tr = @@transfers[query._cmdkey]
         counter = query._counter.to_i
-        dputs(3) { "Found transfer-id #{query._cmdkey}/"+
-            "#{counter+1}/#{tr._chunks}" }
+        dputs(2) { "Found transfer-id #{query._cmdkey}/"+
+            "#{counter+1}/#{tr._chunks} - #{tr._method}" }
         if tr._data[counter]
           dputs(1) { "Received block #{counter} double - discarding" }
         else
