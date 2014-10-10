@@ -27,7 +27,7 @@ class Entities < RPCQooxdooService
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id,
                 :storage, :data, :name, :msg, :undo, :logging, :keys,
-                :save_after_create, :values, :changed
+                :save_after_create, :values, :changed, :null_allowed
 
   def initialize
     begin
@@ -43,6 +43,7 @@ class Entities < RPCQooxdooService
     @last_id = 1
     @save_after_create = false
     @changed = false
+    @null_allowed = false
 
     if @data_class != "Entity"
       @@all[@data_class] = self
@@ -331,7 +332,7 @@ class Entities < RPCQooxdooService
     start = Time.now
     @@all.each { |k, v|
       dputs(3) { "Saving #{v.class.name}" }
-      v.save( notmp: notmp )
+      v.save(notmp: notmp)
     }
     log_msg :Entities, "Time for saving everything: #{Time.now - start}"
   end
@@ -533,12 +534,16 @@ class Entity
         dputs(5) { "e is #{e.inspect} from #{@proxy.data.inspect}" }
         if not raw and e
           v = @proxy.get_value(f)
-          if e.class == Fixnum and v and v.dtype == "entity"
+          if e.class == Fixnum and v and v.dtype == 'entity'
             dputs(5) { "Getting instance for #{v.inspect}" }
             dputs(5) { "Getting instance with #{e.class} - #{e.inspect}" }
             dputs(5) { "Field = #{field}; id = #{@id}" }
-            e = v.eclass.get_data_instance([e].flatten.first)
-          elsif v and v.dtype == "list_entity"
+            if e > 0 or @proxy.null_allowed
+              e = v.eclass.get_data_instance([e].flatten.first)
+            else
+              return nil
+            end
+          elsif v and v.dtype == 'list_entity'
             dputs(4) { "Converting list_entity #{v.inspect} of #{e.inspect}" }
             e = e.collect { |val|
               v.eclass.get_data_instance(val)

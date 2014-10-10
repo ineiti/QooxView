@@ -13,6 +13,8 @@ class TC_ICC < Test::Unit::TestCase
   end
 
   def test_transfer
+    ConfigBase.block_size = 4096
+
     @port = 3302
     url = "http://localhost:#{@port}/icc"
     main = Thread.new {

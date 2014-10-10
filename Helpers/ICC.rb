@@ -11,8 +11,12 @@ require 'net/http'
 class ICC < RPCQooxdooPath
   @@transfers = {}
 
-  def self.response(code, msg)
-    {code: code, msg: msg}.to_json
+  def self.response(code, msg, json: true)
+    if json
+      {code: code, msg: msg}.to_json
+    else
+      {code: code, msg: msg}
+    end
   end
 
   def self.parse_req(req)
@@ -28,31 +32,38 @@ class ICC < RPCQooxdooPath
         dputs(3) { "d is #{d.inspect}" }
         if (user = Persons.match_by_login_name(d._user)) and
             (user.check_pass(d._pass))
-          @@transfers[d._tid] = d.merge(:data => '')
+          @@transfers[d._tid] = d.merge(:data => [])
           d._chunks > 0 and return self.response('OK', 'send data')
           query._cmdkey = d._tid
-          query._data = ''
+          query._data = []
         else
           dputs(3) { "User #{d._user.inspect} with pass #{d._pass.inspect} unknown" }
           return self.response('Error', 'authentication')
         end
       end
       if tr = @@transfers[query._cmdkey]
-        ddputs(3) { "Found transfer-id #{query._cmdkey}, #{tr._chunks} left" }
-        tr._data += query._data
-        if (tr._chunks -= 1) <= 0
-          if Digest::MD5.hexdigest(tr._data) == tr._md5
-            dputs(1) { "Successfully received cmdkey #{tr._cmdkey}" }
-            ret = self.response('OK', self.data_received(tr))
-          else
-            dputs(1) { "cmdkey #{tr._cmdkey} transmitted with errors, " +
-                "#{Digest::MD5.hexdigest(tr._data)} instead of #{tr._md5}" }
-            ret = self.response('Error', 'wrong MD5')
-          end
-          @@transfers.delete query._cmdkey
-          return ret
+        counter = query._counter.to_i
+        dputs(3) { "Found transfer-id #{query._cmdkey}/"+
+            "#{counter+1}/#{tr._chunks}" }
+        if tr._data[counter]
+          dputs(1) { "Received block #{counter} double - discarding" }
         else
-          return self.response('OK', "send #{tr._chunks} more chunks")
+          tr._data[counter] = query._data
+          if counter == tr._chunks - 1
+            tr._data = tr._data.join
+            if Digest::MD5.hexdigest(tr._data) == tr._md5
+              dputs(1) { "Successfully received cmdkey #{query._cmdkey}" }
+              ret = self.response('OK', self.data_received(tr))
+            else
+              dputs(1) { "cmdkey #{tr._cmdkey} transmitted with errors, " +
+                  "#{Digest::MD5.hexdigest(tr._data)} instead of #{tr._md5}" }
+              ret = self.response('Error', 'wrong MD5')
+            end
+            @@transfers.delete query._cmdkey
+            return ret
+          else
+            return self.response('OK', "send #{tr._chunks - counter - 1} more chunks")
+          end
         end
       end
       return self.response('Error', 'must start or use existing cmdkey')
@@ -94,30 +105,46 @@ class ICC < RPCQooxdooPath
     end
   end
 
-  def self.send_post(url, cmdkey, data, retries: 4)
+  def self.send_post(url, cmdkey, data, counter: 0, retries: 4)
     path = URI.parse(url)
-    post = {:cmdkey => cmdkey, :data => data}
-    dputs(3) { "Sending to #{path.inspect}: #{data.inspect}" }
-    err = ''
+    post = {:cmdkey => cmdkey, :data => data, :counter => counter}
+    dputs(3) { "Sending to #{path.inspect}: #{cmdkey}/#{count}" }
+    err = self.response('Error', 'Unknown', json: false)
     (1..retries).each { |i|
       begin
         ret = Net::HTTP.post_form(path, post)
-        dputs(4) { "Return-value is #{ret.inspect}, body is #{ret.body}" }
-        return JSON.parse(ret.body)
+        dputs(2) { "Return-value is #{ret.inspect}, #{ret.message}, #{ret.code}, body is #{ret.body}" }
+        if ret.code.to_i == 200
+          begin
+            return JSON.parse(ret.body)
+          rescue JSON::ParserError
+            dputs(1) { "Couldn't parse #{ret.body}" }
+            err._msg = 'Reply parse-error'
+            sleep 5
+          end
+        else
+          dputs(1) { "Error-reply was #{ret.inspect}" }
+          err._msg = "Error: #{ret.code}:#{ret.message}"
+          sleep 5
+        end
       rescue Timeout::Error
-        dputs(2) { 'Timeout occured' }
-        err = 'Error: Timeout occured'
+        dputs(1) { 'Timeout occured' }
+        err._msg = 'Error: Timeout occured'
       rescue Errno::ECONNRESET
-        dputs(2) { 'Connection reset' }
-        err = 'Error: Connection reset'
+        dputs(1) { 'Connection reset' }
+        err._msg = 'Error: Connection reset'
       end
     }
-    return err
+    return JSON.parse( err ).to_json
   end
 
   def self.transfer(login, method, transfer = '', url: ConfigBase.server_uri, json: true,
       &percent)
     block_size = ConfigBase.block_size.to_i
+    if block_size < 128
+      dputs(0) { "Unacceptable block-size of #{block_size}" }
+      return nil
+    end
     if json
       method.prepend 'json@'
       transfer = [transfer].to_json
@@ -129,10 +156,9 @@ class ICC < RPCQooxdooPath
       start = (block_size * t_array.length)
       t_array.push transfer[start..(start+block_size -1)]
     end
-    dputs(2) { "Transfer is #{transfer.size} and cut up in #{t_array.size} pieces of " +
-        "#{block_size} length" }
+    dputs(2) { "Transfer-size is #{transfer.size} and cut up in "+
+        "#{t_array.size} pieces of #{block_size} length" }
 
-    pos = 0
     dputs(3) { "Going to transfer: #{t_array.inspect}" }
     percent and percent.call('0%')
     tid = Digest::MD5.hexdigest(rand.to_s)
@@ -141,16 +167,15 @@ class ICC < RPCQooxdooPath
                          :md5 => transfer_md5, :tid => tid,
                          :user => login.login_name, :pass => login.password_plain}.to_json)
     return ret if ret._code == 'Error'
-    t_array.each { |t|
+    t_array.each_index { |i|
       if percent
-        p = "#{((pos+1) * 100 / t_array.length).floor}%"
+        p = "#{((i+1) * 100 / t_array.length).floor}%"
         percent.call p
         dputs(3) { "Percentage done: #{p}" }
       end
-      ddputs(2){"Sending id #{tid}"}
-      ret = ICC.send_post(url, tid, t)
+      dputs(2) { "Sending id #{tid}/#{i+1}" }
+      ret = ICC.send_post(url, tid, t_array[i], counter: i)
       return ret if ret =~ /^Error:/
-      pos += 1
     }
     return ret
   end
@@ -161,4 +186,5 @@ class ICC < RPCQooxdooPath
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
     JSON::parse(Net::HTTP.get(path))
   end
+
 end

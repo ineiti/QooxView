@@ -44,13 +44,13 @@ class Value
 
     # Do some special cases
     case @dtype
-      when "list"
+      when 'list'
         case cmds[0]
           when /(array|choice|drop|single)/
             @args.merge! :list_type => (@list_type = cmds.shift)
           when /entity/
             dputs(3) { "Adding an entity with #{cmds.inspect} - #{arguments.inspect}" }
-            @dtype = "list_entity"
+            @dtype = 'list_entity'
             cmds.shift
             @entity_class = cmds.shift.pluralize_simple.gsub(/([A-Z])/, " \\1").
                 split.collect { |s| s.capitalize }.join
@@ -60,29 +60,29 @@ class Value
         if arguments[0]
           @list = arguments.shift
         end
-      when "select"
+      when 'select'
         @list = arguments.shift
-      when "entity"
+      when 'entity'
         # So that "courseType" gets correctly translated to
         # "CourseTypes" (mind the capital in the middle)
         @entity_class = cmds.shift.pluralize_simple.gsub(/([A-Z])/, " \\1").
             split.collect { |s| s.capitalize }.join
         @args.merge! :list_type => (@list_type = arguments.shift)
         @show_method, @condition = arguments
-        if @list_type && (!cmds.index("lazy")) && @show_method == nil
+        if @list_type && (!cmds.index('lazy')) && @show_method == nil
           dputs(0) { "No show_method defined in #{@name} at #{caller[5].inspect}" }
-          raise "value_entity_uncomplete"
+          raise 'value_entity_uncomplete'
         end
         #if !@list_type
         #  dputs(0) { "No list-type for #{@name} at #{caller[5].inspect}" }
         #  raise "value_entity_uncomplete"
         #end
-      when "array"
-        dputs(0) { "Not yet supported!" }
+      when 'array'
+        dputs(0) { 'Not yet supported!' }
         exit
-      when "info"
+      when 'info'
         @args.merge! :text => arguments.pop
-      when "html"
+      when 'html'
         @args.merge! :text => arguments.pop
       else
         if arguments.size > 0
@@ -99,12 +99,12 @@ class Value
   def to_a(session = nil)
     fe_type, fe_name, args = @dtype, @name, @args.dup
     case @dtype.to_s
-      when "list", "select"
+      when 'list', 'select'
         dputs(3) { "List is #{@list}" }
         @list.size > 0 and args.merge! :list_values => eval(@list).to_a
       when /entity/
         dputs(3) { "Converting -#{@name}- to array" }
-        fe_type = "list"
+        fe_type = 'list'
         values = []
         if (not args.has_key?(:lazy)) and
             ((not args.has_key?(:session)) or session)
@@ -135,7 +135,7 @@ class Value
             a[1].to_s <=> b[1].to_s
           }
           if args.has_key? :empty
-            values.unshift([0, "---"])
+            values.unshift([0, '---'])
           end
         end
         args.merge! :list_values => values
@@ -181,7 +181,7 @@ class Value
 
   # TODO: implement this cloning instead of deep_clone from object
   def clone_later
-    dputs(0) { "Cloning Value!" }
+    dputs(0) { 'Cloning Value!' }
     v = Value.new([@dtype], [@name])
     v.st = @st
     v.args = @args
