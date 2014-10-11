@@ -405,6 +405,22 @@ qx.Class.define("frontend.Lib.Fields", {
             this.updating = false;
         },
 
+        // Deletes all selections or only "fields", if given
+        clearSelections: function () {
+            this.updating = true;
+
+            dbg(5, "Clearing selections of " + print_a( this.fields ) +
+            " : " + this.fields.length);
+            for (var f in this.fields) {
+                var field = this.fields[f];
+                if (field.setSelection) {
+                    dbg(5, "Clearing selection of " + f);
+                    field.setSelection([]);
+                }
+            }
+            this.updating = false;
+        },
+
         // Deletes all data in the fields
         clearData: function (lists) {
             dbg(5, "clearData");
@@ -502,7 +518,7 @@ qx.Class.define("frontend.Lib.Fields", {
                         field_element.setWrap(true)
                         field_element.setValueStr = setValueBold
                         field_element.getValueSpecial = getValueBold
-                        //field_element.setValueStr( "-" )
+                        //field_element.setValueStr("-")
                         //field_element.setReadOnly(true);
                     }
                     if (type == "int") {
@@ -534,6 +550,9 @@ qx.Class.define("frontend.Lib.Fields", {
                     if (params.callback) {
                         do_callback = true;
                         listener = "changeValue";
+                    }
+                    if (params.ro) {
+                        field_element.setEnabled(false);
                     }
                     break;
                 case "info":

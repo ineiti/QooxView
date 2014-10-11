@@ -25,7 +25,7 @@ class Value
   def initialize(cmds, arguments, dt = nil)
     dputs(3) { "Added new: #{cmds.inspect}, #{arguments.inspect}" }
 
-    if cmds[-1] == "ALL"
+    if cmds[-1] == 'ALL'
       @st = cmds.pop
     else
       @st = (StorageType.has? cmds[-1]) ? cmds.pop : dt
@@ -73,10 +73,10 @@ class Value
           dputs(0) { "No show_method defined in #{@name} at #{caller[5].inspect}" }
           raise 'value_entity_uncomplete'
         end
-        #if !@list_type
-        #  dputs(0) { "No list-type for #{@name} at #{caller[5].inspect}" }
-        #  raise "value_entity_uncomplete"
-        #end
+      #if !@list_type
+      #  dputs(0) { "No list-type for #{@name} at #{caller[5].inspect}" }
+      #  raise "value_entity_uncomplete"
+      #end
       when 'array'
         dputs(0) { 'Not yet supported!' }
         exit
@@ -173,7 +173,8 @@ class Value
             end
             return ret
           else
-            dputs(0) { "List-type #{@list_type} not supported yet!" }
+            dputs(0) { "List-type #{@list_type} not supported yet in " +
+                "#{@name}::#{@list_type}!" }
             return nil
         end
     end

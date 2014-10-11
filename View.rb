@@ -85,7 +85,7 @@ class View < RPCQooxdooService
     @name_tab = nil
     @main_tab = nil
 
-    if @name != "View"
+    if @name != 'View'
       @@list.push self
       if @name =~ /.*Tabs$/
         @name_tab = @name.tab_name
@@ -96,8 +96,7 @@ class View < RPCQooxdooService
       end
       dputs(4) { "Initializing #{self.class.name}" }
       dputs(5) { "Total list of view-classes: #{@@list.join('::')}" }
-      #@data_class = Entities.service( @name.sub( /([A-Z][a-z]*).*/, '\1' ).pluralize )
-      @data_class = Entities.service(@name.tab_name.pluralize_simple)
+
       @layout = [[]]
       @actual = []
       @update = false
@@ -109,6 +108,12 @@ class View < RPCQooxdooService
       @functions_need = []
       @values_need = {}
       @functions_reject = []
+      @data_class = Entities.service(@name.tab_name.pluralize_simple)
+
+      if Entities.has_entity?(dc = @name.sub(/^[A-Z][a-z_-]*/, ''))
+        dputs(3) { "Setting data-class to #{dc} for #{@name}" }
+        set_data_class(dc.pluralize)
+      end
 
       # Fetch the layout of the view
       if @is_tabs
@@ -148,10 +153,6 @@ class View < RPCQooxdooService
       dputs(5) { "Layout is #{@layout.inspect}" }
 
       update_configured
-
-      #if @name.gsub(/[a-z_-]/, '').length > 1
-      #  set_data_class( @name.gsub )
-      #end
     end
   end
 
@@ -163,7 +164,7 @@ class View < RPCQooxdooService
   # This method lets you set the data_class of your view. Later on this
   # will be automated by taking the first part of the view
   def set_data_class(d_c)
-    dputs(3) { "Getting pointer for class #{@data_class}" }
+    dputs(3) { "Getting pointer #{d_c} for class #{@data_class}" }
     @data_class = Entities.send(d_c)
   end
 
@@ -286,7 +287,7 @@ class View < RPCQooxdooService
     dputs(4) { "we'll show: #{a.inspect}" }
     [a].flatten.each { |v|
       dputs(4) { "Working on: #{v.dtype.inspect}: #{a.inspect}" }
-      if v.dtype == "entity"
+      if v.dtype == 'entity'
         dputs(3) { "Showing entity #{v.inspect}" }
       end
       value = v.deep_clone
@@ -305,7 +306,7 @@ class View < RPCQooxdooService
   end
 
   # Shows an existing field
-  def show_field(name)
+  def show_field(name, args = nil)
     @data_class.blocks.each { |k, v|
       dputs(4) { "#{k}:#{v}" }
       fields = v.select { |f| f.name == name }
@@ -314,6 +315,11 @@ class View < RPCQooxdooService
         show_in_field fields
       end
     }
+    args and show_arg( name, args )
+  end
+
+  def show_field_ro( name, args = {} )
+    show_field( name, {:ro => true}.merge( args ))
   end
 
   # Shows an input-box for an existing field that will call a "match_by_" method
@@ -370,11 +376,11 @@ class View < RPCQooxdooService
       when 'find_text'
         # Shows an input-box for any data needed, calling "match_by_" if something is
         # entered
-        show_in_field [Value.simple("id_text", name)]
+        show_in_field [Value.simple('id_text', name)]
 
       when 'htmls'
         # HTML-fields aren't under a "field", but a "group" is enough
-        do_container_start "group"
+        do_container_start 'group'
         @layout.last.push value
         do_container_end
 
@@ -388,9 +394,9 @@ class View < RPCQooxdooService
   def show_arg(val, args, lay = @layout)
     lay.each { |l|
       case l.class.name
-        when "Array"
+        when 'Array'
           show_arg(val, args, l)
-        when "Value"
+        when 'Value'
           if l.name == val
             l.args.merge! args
           end
@@ -648,8 +654,8 @@ class View < RPCQooxdooService
     reply("update", update(session))
   end
 
-  def rpc_update_async( session )
-    rpc_update( session )
+  def rpc_update_async(session)
+    rpc_update(session)
   end
 
   # Returns the data for the fields as a hash
@@ -867,7 +873,7 @@ class View < RPCQooxdooService
           @configured = false
         end
       }
-      dputs(3){"Configured for #{self.name} is #{@configured}"}
+      dputs(3) { "Configured for #{self.name} is #{@configured}" }
     end
   end
 

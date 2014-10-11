@@ -45,7 +45,7 @@ class Entities < RPCQooxdooService
     @changed = false
     @null_allowed = false
 
-    if @data_class != "Entity"
+    if @data_class != 'Entity'
       @@all[@data_class] = self
       dputs(4) { "Initializing #{self.class.name} with data_class = #{@data_class}" }
 
@@ -352,6 +352,14 @@ class Entities < RPCQooxdooService
     }
     dputs(4) { "ret:#{ret} for #{e} with #{@@all.keys.inspect}" }
     ret
+  end
+
+  def self.has_entity?(a)
+    dputs(4){"Searching #{a.inspect} in #{@@all.keys.inspect}"}
+    @@all.keys.each{|k|
+      return true if k.name.to_s == a.to_s
+    }
+    return false
   end
 
   def self.needs(e)

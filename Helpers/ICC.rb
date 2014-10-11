@@ -143,7 +143,7 @@ class ICC < RPCQooxdooPath
     block_size = ConfigBase.block_size.to_i
     if block_size < 128
       dputs(0) { "Unacceptable block-size of #{block_size}" }
-      return nil
+      return self.response('Error', 'No block-size')
     end
     if json
       method.prepend 'json@'

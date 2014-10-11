@@ -150,6 +150,9 @@ qx.Class.define("frontend.Views.Ltab", {
                         // Only empties the given fields (usually lists)
                         this.getActiveForm().fields.clearDataOnly(res.data);
                         break;
+                    case "empty_selections":
+                        this.getActiveForm().fields.clearSelections();
+                        break;
                     case "eval":
                         window.eval(res.data);
                         break;

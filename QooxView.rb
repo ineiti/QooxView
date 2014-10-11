@@ -206,6 +206,8 @@ end
 class String
   def pluralize_simple
     case self
+      when /y$/
+        return self.sub(/y$/, 'ies')
       when /us$/
         return self.sub(/us$/, 'i')
       when /s$/
@@ -223,6 +225,10 @@ class String
 
   def date_from_web
     Date.from_web(self)
+  end
+
+  def cut( reg )
+    sub(reg, '')
   end
 end
 
