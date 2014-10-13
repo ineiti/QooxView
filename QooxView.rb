@@ -240,6 +240,10 @@ class Date
   def self.from_web(d)
     Date.strptime(d, '%d.%m.%Y')
   end
+
+  def self.from_db(d)
+    (d.class == String) ? Date.strptime(d, '%Y-%m-%d') : d
+  end
 end
 
 
