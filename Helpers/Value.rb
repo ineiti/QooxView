@@ -162,7 +162,7 @@ class Value
       when /entity/
         dputs(3) { "parsing #{@name}: #{p.inspect}" }
         case @list_type.to_sym
-          when :drop, :single
+          when :drop, :single, :multi
             dputs(3) { "Getting entity for #{@list_type}-#{eclass.class.inspect}-" +
                 "#{p.inspect}" }
             ret = eclass.match_by(eclass.data_field_id, p[0])

@@ -337,26 +337,26 @@ class View < RPCQooxdooService
   # Shows a button, takes care about placing it correctly. Takes also
   # multiple buttons as arguments
   def show_button(*buttons)
-    do_container_end if @actual.last == "fields"
-    do_container(buttons.length > 1 ? "hbox" : "vbox", proc {
+    do_container_end if @actual.last == 'fields'
+    do_container(buttons.length > 1 ? 'hbox' : 'vbox', proc {
       buttons.each { |b|
         #        @layout.last.push [ :button, b, b, nil ]
         @layout.last.push Value.simple(:button, b)
       }
     }
     )
-    do_container_end if @actual.last == "group"
+    do_container_end if @actual.last == 'group'
   end
 
   def show_split_button(name, menu)
     dputs(4) { "Adding a split-button #{name} with menu #{menu.inspect}" }
-    do_container_end if @actual.last == "fields"
-    do_container("vbox", proc {
+    do_container_end if @actual.last == 'fields'
+    do_container('vbox', proc {
       @layout.last.push Value.new([:split_button],
                                   [name, {:menu => menu}])
     }
     )
-    do_container_end if @actual.last == "group"
+    do_container_end if @actual.last == 'group'
   end
 
   # Adds a new, general item

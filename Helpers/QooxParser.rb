@@ -20,7 +20,7 @@ module QooxParser
             l =~ /^\s*vtlp_list\s+[^=]/
           case l
           when /(value_block|show_block)/
-          when /show_button/
+          when /(show_button|show_print)/
             buttons = l.sub( /^[^:]*:/, '' ).gsub( /:/, '' ).chop.split( /,\s*/ )
             buttons.each{|b|
               po = POEntry.new(:normal)

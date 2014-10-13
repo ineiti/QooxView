@@ -31,7 +31,7 @@ class OpenPrint
   end
 
   def print_hash(fields, counter = nil, name = nil)
-    print(fields.collect { |k,v| [/--#{k}--/,v]}, counter, name)
+    print(fields.collect { |k, v| [/--#{k}--/, v] }, counter, name)
   end
 
   def print(fields, counter = nil, name = nil)
