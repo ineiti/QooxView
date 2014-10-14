@@ -12,6 +12,6 @@ module System
   end
 
   def exists?( cmd )
-    run_bool( "which #{cmd}")
+    run_bool( "which #{cmd} > /dev/null 2>&1")
   end
 end
