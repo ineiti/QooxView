@@ -175,7 +175,7 @@ class Value
           when :multi
             dputs(3) { "Getting entities for #{@list_type}-#{eclass.class.inspect}-" +
                 "#{p.inspect}" }
-            dp ret = p.collect{|el| eclass.match_by(eclass.data_field_id, el) }
+            ret = p.collect{|el| eclass.match_by(eclass.data_field_id, el) }
             dputs(3) { "And found #{ret.inspect}" }
             if not ret and @args.has_key? :empty
               dputs(3) { "Converting nil to 0 as we're an entity_empty" }
