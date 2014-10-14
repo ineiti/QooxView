@@ -334,7 +334,7 @@ class Entities < RPCQooxdooService
       dputs(3) { "Saving #{v.class.name}" }
       v.save(notmp: notmp)
     }
-    dputs(2){ "Time for saving everything: #{Time.now - start}"}
+    dputs(2) { "Time for saving everything: #{Time.now - start}" }
   end
 
   def self.load_all
@@ -355,8 +355,8 @@ class Entities < RPCQooxdooService
   end
 
   def self.has_entity?(a)
-    dputs(4){"Searching #{a.inspect} in #{@@all.keys.inspect}"}
-    @@all.keys.each{|k|
+    dputs(4) { "Searching #{a.inspect} in #{@@all.keys.inspect}" }
+    @@all.keys.each { |k|
       return true if k.name.to_s == a.to_s
     }
     return false
@@ -657,6 +657,10 @@ class Entity
   def to_a
     dputs(5) { "to_a on #{self}" }
     [self]
+  end
+
+  def to_frontend
+    [id, to_hash.collect { |k, v| v }.join(':')]
   end
 
   #def to_ary

@@ -5,7 +5,7 @@
  ************************************************************************ */
 /* ************************************************************************
  #asset(frontend/*)
-  ************************************************************************ */
+ ************************************************************************ */
 
 /**
  * Create the views in a Gestion-project
@@ -138,20 +138,35 @@ qx.Class.define("frontend.Views.Ltab", {
                         }
                         break;
                     case "empty":
-                        // By default empties only normal fields. If given a list of
-                        // names, clears also these lists
-                        this.getActiveForm().fields.clearData(res.data);
+                        // Only empties the given fields (usually lists)
+                        this.getActiveForm().fields.clearDataOnly(res.data);
                         break;
                     case "empty_all":
                         // Let's empty everything
                         this.getActiveForm().fields.clearDataAll();
                         break;
-                    case "empty_only":
-                        // Only empties the given fields (usually lists)
-                        this.getActiveForm().fields.clearDataOnly(res.data);
+                    case "empty_fields":
+                        // By default empties only normal fields. If given a list of
+                        // names, clears also these lists
+                        this.getActiveForm().fields.clearData(res.data);
                         break;
                     case "empty_selections":
                         this.getActiveForm().fields.clearSelections();
+                        break;
+                        // Combines :empty with :update for the same field
+                    case "empty_update":
+                        this.getActiveForm().fields.clearDataOnly(res.data);
+                        this.updateView(res.data, false)
+                        break;
+                    // Combines :empty_all with :update
+                    case "empty_all_update":
+                        this.getActiveForm().fields.clearDataAll();
+                        this.updateView(res.data, false)
+                        break;
+                    // Combines :empty_all with :update
+                    case "empty_fields_update":
+                        this.getActiveForm().fields.clearData(res.data);
+                        this.updateView(res.data, false)
                         break;
                     case "eval":
                         window.eval(res.data);

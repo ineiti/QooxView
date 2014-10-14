@@ -150,10 +150,19 @@ class Array
     self.replace(to_sym())
   end
 
-  def to_s
-    "[#{join(",")}]"
+  def to_frontend
+    collect{|a| a.to_frontend}.sort{|a,b| a[1]<=>b[1]}
   end
 
+  def to_s
+    "[#{join(',')}]"
+  end
+end
+
+class Object
+  def to_frontend
+    to_s
+  end
 end
 
 # Converts all keys of a hash to syms recursively

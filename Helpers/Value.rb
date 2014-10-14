@@ -162,10 +162,20 @@ class Value
       when /entity/
         dputs(3) { "parsing #{@name}: #{p.inspect}" }
         case @list_type.to_sym
-          when :drop, :single, :multi
+          when :drop, :single
             dputs(3) { "Getting entity for #{@list_type}-#{eclass.class.inspect}-" +
                 "#{p.inspect}" }
             ret = eclass.match_by(eclass.data_field_id, p[0])
+            dputs(3) { "And found #{ret.inspect}" }
+            if not ret and @args.has_key? :empty
+              dputs(3) { "Converting nil to 0 as we're an entity_empty" }
+              ret = 0
+            end
+            return ret
+          when :multi
+            dputs(3) { "Getting entities for #{@list_type}-#{eclass.class.inspect}-" +
+                "#{p.inspect}" }
+            dp ret = p.collect{|el| eclass.match_by(eclass.data_field_id, el) }
             dputs(3) { "And found #{ret.inspect}" }
             if not ret and @args.has_key? :empty
               dputs(3) { "Converting nil to 0 as we're an entity_empty" }

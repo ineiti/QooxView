@@ -227,7 +227,7 @@ module ActiveModel
       [attributes].flatten.each do |attribute|
         value = @base.send(:read_attribute_for_validation, attribute)
         is_empty = value.respond_to?(:empty?) ? value.empty? : false
-        add(attribute, :empty, options) if value.nil? || is_empty
+        add(attribute, :empty_fields, options) if value.nil? || is_empty
       end
     end
 

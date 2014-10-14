@@ -112,7 +112,7 @@ class View < RPCQooxdooService
 
       if Entities.has_entity?(dc = @name.sub(/^[A-Z][a-z_-]*/, ''))
         dputs(3) { "Setting data-class to #{dc} for #{@name}" }
-        set_data_class(dc.pluralize)
+        set_data_class(dc.pluralize_simple)
       end
 
       # Fetch the layout of the view
@@ -315,11 +315,11 @@ class View < RPCQooxdooService
         show_in_field fields
       end
     }
-    args and show_arg( name, args )
+    args and show_arg(name, args)
   end
 
-  def show_field_ro( name, args = {} )
-    show_field( name, {:ro => true}.merge( args ))
+  def show_field_ro(name, args = {})
+    show_field(name, {:ro => true}.merge(args))
   end
 
   # Shows an input-box for an existing field that will call a "match_by_" method
@@ -544,7 +544,7 @@ class View < RPCQooxdooService
           if not l.args.has_key?(:lazy)
             values = l.to_a[3][:list_values]
             dputs(3) { "Here comes element #{l.name} with new list-value #{values.inspect}" }
-            ret += reply(:empty, [l.name]) +
+            ret += reply(:empty_fields, [l.name]) +
                 reply(:update, {l.name => values})
           end
       end
@@ -642,7 +642,7 @@ class View < RPCQooxdooService
             "neither does #{@name} listen to rpc_list_choice_#{name.to_s}" }
       end
     else
-      dputs(0) { "Error: Nobody listens to " +
+      dputs(0) { 'Error: Nobody listens to ' +
           "rpc_list_choice_#{name.to_s} in #{self.class.name.to_s} " +
           "- #{data.inspect}" }
     end
