@@ -69,7 +69,7 @@ class Value
             split.collect { |s| s.capitalize }.join
         @args.merge! :list_type => (@list_type = arguments.shift)
         @show_method, @condition = arguments
-        if @list_type && (!cmds.index('lazy')) && @show_method == nil
+        if @list_type && cmds.index('all') && @show_method == nil
           dputs(0) { "No show_method defined in #{@name} at #{caller[5].inspect}" }
           raise 'value_entity_uncomplete'
         end
@@ -106,8 +106,8 @@ class Value
         dputs(3) { "Converting -#{@name}- to array" }
         fe_type = 'list'
         values = []
-        if (not args.has_key?(:lazy)) and
-            ((not args.has_key?(:session)) or session)
+        if args.has_key?(:all) and
+            ((! args.has_key?(:session)) or session)
           dputs(3) { "will search_all for #{eclass.name} in #{@name}" }
           e_all = eclass.search_all_
           values = e_all.select { |e|
