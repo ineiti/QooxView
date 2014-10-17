@@ -256,7 +256,7 @@ class RPCQooxdooHandler
     end
     begin
       @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new('webrick.log'),
-                                      :AccessLog => logger)
+                                      :AccessLog => logger, :DoNotReverseLookup => true)
     rescue Errno::EADDRINUSE => e
       dputs(0){"Couldn't bind to address #{port} - already in use"}
       raise Errno::EADDRINUSE
