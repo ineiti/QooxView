@@ -59,6 +59,19 @@ class TC_Entity < Test::Unit::TestCase
     test_find_admin
   end
 
+  def test_double_case
+    dc1 = DoubleCases.create(name: 'dc1')
+    d1 = Doubles.create(name: 'd1', dc: dc1)
+    assert_equal dc1, d1.dc
+    Entities.save_all(true)
+    Entities.delete_all_data(true)
+    Entities.load_all
+
+    dc1 = DoubleCases.match_by_name('dc1')
+    d1 = Doubles.match_by_name('d1')
+    assert_equal dc1, d1.dc
+  end
+
   def test_logactions
     oldlog = LogActions.logging
     LogActions.logging = true
