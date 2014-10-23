@@ -277,6 +277,14 @@ class Entities < RPCQooxdooService
     ret.flatten.collect { |c| c.to_sym }
   end
 
+  # Gets all field names of a block
+  def get_block_fields(block)
+    return [] unless @blocks.has_key? block.to_sym
+    @blocks[block.to_sym].collect{|v|
+      dp v.name
+    }
+  end
+
   # Returns the Value for an entry
   def get_value(n, b = @blocks)
     dputs(5) { "Name is #{n}" }
