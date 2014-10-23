@@ -168,6 +168,14 @@ class ConfigBase < Entity
     end
   end
 
+  def save_block_to_object( block, obj )
+    ConfigBases.get_block_fields( block ).each{|f|
+      value = data_get( f )
+      dputs(2){"Setting #{f} in #{block} to #{value}"}
+      obj.send( "#{f}=", value )
+    }
+  end
+
   def debug_lvl=( lvl )
     dputs(4){"Setting debug-lvl to #{lvl}"}
     data_set( :_debug_lvl, lvl.to_i )

@@ -281,7 +281,7 @@ class Entities < RPCQooxdooService
   def get_block_fields(block)
     return [] unless @blocks.has_key? block.to_sym
     @blocks[block.to_sym].collect{|v|
-      dp v.name
+      v.name
     }
   end
 
