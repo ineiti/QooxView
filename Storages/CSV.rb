@@ -6,7 +6,10 @@ class CSV < StorageType
     @add_only = false
     @backup_count = 5
     super config
-    @csv_file = @csv_dir + "#{@entity.class.name}.csv"
+    @csv_backup = "#{@csv_dir}/backup/"
+    @csv_name = "#{@entity.class.name}.csv"
+    @csv_file = @csv_dir + @csv_name
+    @csv_backup_file = @csv_backup + @csv_name
     dputs(5) { "data_file is #{@csv_file}" }
 
     @mutex = Mutex.new
@@ -32,7 +35,9 @@ class CSV < StorageType
         @mutex.synchronize {
           begin
             dputs(3) { "Saving data for #{@name} to #{@csv_dir} - #{@csv_file}" }
-            FileUtils.mkdir_p @csv_dir unless File.exists? @csv_dir
+            [@csv_dir, @csv_backup].each { |d|
+              FileUtils.mkdir_p d unless File.exists? d
+            }
             dputs(5) { "Data is #{data.inspect}" }
             Dir.glob("#{@csv_file}*tmp").each { |f|
               final = f.sub(/_tmp$/, '')
@@ -42,7 +47,11 @@ class CSV < StorageType
               dputs(3) { "Renaming temporary #{f} to #{final}" }
               File.rename(f, final)
             }
-            newfile = "#{@csv_file}.#{Time.now.strftime('%Y%m%d_%H%M%S')}"
+            Dir.glob("#{@csv_file}*").each{|f|
+              time = File.mtime(f).strftime('%Y%m%d_%H%M%S')
+              FileUtils.mv f, "#{@csv_backup_file}.#{time}"
+            }
+            newfile = @csv_file
             notmp or newfile += '_tmp'
             File.open(newfile, 'w') { |f|
               data_each(data) { |d|
@@ -54,7 +63,7 @@ class CSV < StorageType
             }
             #%x[ sync ]
             dputs(5) { 'Delete oldest file' }
-            if (backups = Dir.glob("#{@csv_file}.*").sort).size > @backup_count
+            if (backups = Dir.glob("#{@csv_backup_file}.*").sort).size > @backup_count
               FileUtils.rm backups.first(backups.size - @backup_count)
             end
           rescue Exception => e
@@ -89,14 +98,26 @@ class CSV < StorageType
     }
   end
 
+  # Restores somewhat sane directory with all saved files in 'backup'
+  def cleanup
+    FileUtils.mkdir @csv_backup unless File.exists? @csv_backup
+    log_msg :CSV, "Cleaning up #{@csv_file}"
+    FileUtils.rm @csv_file if File.exists? @csv_file
+    Dir.glob("#{@csv_file}.*").sort.reverse[1..-1].each { |f|
+      FileUtils.mv f, @csv_backup
+    }
+    FileUtils.mv Dir.glob("#{@csv_file}*").first, @csv_file
+  end
+
   # loads the data
   def load
     # Go and fetch eventual existing data from the file
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
-      FileUtils.rm Dir.glob( "#{@csv_file}*_tmp")
-      Dir.glob("#{@csv_file}*").sort.reverse.each { |file|
-        next if File.size(file) == 0
+      FileUtils.rm Dir.glob("#{@csv_file}*_tmp")
+      cleanup if Dir.glob("#{@csv_file}*").size > 1
+      ["#{@csv_file}"].concat(Dir.glob("backup/#{@csv_file}*").sort.reverse).each { |file|
+        next if (!File.exists?(file) || File.size(file) == 0)
         begin
           dputs(3) { "Loading file #{file}" }
           data = {}
