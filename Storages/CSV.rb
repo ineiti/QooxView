@@ -47,13 +47,12 @@ class CSV < StorageType
               dputs(3) { "Renaming temporary #{f} to #{final}" }
               File.rename(f, final)
             }
-            Dir.glob("#{@csv_file}*").each{|f|
+            Dir.glob("#{@csv_file}*").each { |f|
               time = File.mtime(f).strftime('%Y%m%d_%H%M%S')
               FileUtils.mv f, "#{@csv_backup_file}.#{time}"
             }
-            newfile = @csv_file
-            notmp or newfile += '_tmp'
-            File.open(newfile, 'w') { |f|
+            tmpfile = "#{@csv_file}_tmp"
+            File.open(tmpfile, 'w') { |f|
               data_each(data) { |d|
                 write_line(f, d)
                 if di = @entity.data_instances[d[@data_field_id]]
@@ -61,6 +60,7 @@ class CSV < StorageType
                 end
               }
             }
+            FileUtils.mv tmpfile, @csv_file
             #%x[ sync ]
             dputs(5) { 'Delete oldest file' }
             if (backups = Dir.glob("#{@csv_backup_file}.*").sort).size > @backup_count
@@ -102,11 +102,11 @@ class CSV < StorageType
   def cleanup
     FileUtils.mkdir @csv_backup unless File.exists? @csv_backup
     log_msg :CSV, "Cleaning up #{@csv_file}"
-    FileUtils.rm @csv_file if File.exists? @csv_file
-    Dir.glob("#{@csv_file}.*").sort.reverse[1..-1].each { |f|
-      FileUtils.mv f, @csv_backup
+    Dir.glob("#{@csv_file}*").each { |f|
+      time = File.mtime(f).strftime('%Y%m%d_%H%M%S')
+      FileUtils.mv f, "#{@csv_backup_file}.#{time}"
     }
-    FileUtils.mv Dir.glob("#{@csv_file}*").first, @csv_file
+    FileUtils.mv Dir.glob("#{@csv_backup_file}*").sort.reverse.first, @csv_file
   end
 
   # loads the data
@@ -114,7 +114,6 @@ class CSV < StorageType
     # Go and fetch eventual existing data from the file
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
-      FileUtils.rm Dir.glob("#{@csv_file}*_tmp")
       cleanup if Dir.glob("#{@csv_file}*").size > 1
       ["#{@csv_file}"].concat(Dir.glob("backup/#{@csv_file}*").sort.reverse).each { |file|
         next if (!File.exists?(file) || File.size(file) == 0)
