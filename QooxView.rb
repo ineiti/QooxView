@@ -138,7 +138,7 @@ end
 class Array
   if ![].respond_to? :to_h
     def to_h
-      Hash[*self]
+      Hash[*self.flatten]
     end
   end
 
