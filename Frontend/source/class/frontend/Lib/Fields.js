@@ -409,13 +409,16 @@ qx.Class.define("frontend.Lib.Fields", {
         clearSelections: function () {
             this.updating = true;
 
-            dbg(5, "Clearing selections of " + print_a( this.fields ) +
-            " : " + this.fields.length);
+            dbg(5, "Clearing selections of " + print_a(this.fields) +
+                " : " + this.fields.length);
             for (var f in this.fields) {
                 var field = this.fields[f];
                 if (field.setSelection) {
                     dbg(5, "Clearing selection of " + f);
                     field.setSelection([]);
+                } else if (field.resetSelection) {
+                    dbg(5, "Clearing selection of " + f);
+                    field.resetSelection();
                 }
             }
             this.updating = false;

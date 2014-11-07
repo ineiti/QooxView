@@ -48,20 +48,20 @@ class OpenPrint
 
     FileUtils::cp(@file, tmp_file)
     Zip::File.open(tmp_file) { |z|
-      doc = z.read("content.xml").force_encoding(Encoding::UTF_8)
+      doc = z.read('content.xml').force_encoding(Encoding::UTF_8)
       fields.each { |f|
         doc.gsub!(f[0], f[1].to_s)
       }
-      z.get_output_stream("content.xml") { |f|
+      z.get_output_stream('content.xml') { |f|
         f.write(doc)
       }
       z.commit
     }
 
     if not get_config(false, :OpenPrint, :simulation)
-      Docsplit.extract_pdf tmp_file, :output => "/tmp"
+      Docsplit.extract_pdf tmp_file, :output => '/tmp'
       #FileUtils::cp( tmp_file, pdf_file )
-      dputs(5) { "Finished docsplit" }
+      dputs(5) { 'Finished docsplit' }
     else
       FileUtils::cp(tmp_file, pdf_file)
     end
@@ -83,6 +83,7 @@ class OpenPrint
   #         to be printed "long edge duplex"
   def self.print_nup_duplex(files, base = nil)
     Dir.mktmpdir { |dir|
+      files.class == Array or files = [files]
       allpages = "#{dir}/allpages.pdf"
       cmd = "pdfjam --quiet --landscape --outfile #{allpages} " +
           files.join(" '1,2' ") + " '1,2,{},{}' "
@@ -93,10 +94,10 @@ class OpenPrint
       documents = {:front => pages_all.collect { |i| (i ^ 1) * 2 + 1 }.join(","),
                    :back => pages_all.collect { |i| i * 2 + 2 }.join(",")}
 
-      base ||= File.basename files.first, ".pdf"
+      base ||= File.basename files.first, '.pdf'
       documents.collect { |suffix, pages|
         pages_file = "/tmp/#{base}-#{suffix}.pdf"
-        cmd = "pdfnup --quiet --landscape --nup 2x2 " +
+        cmd = 'pdfnup --quiet --landscape --nup 2x2 ' +
             "#{allpages} #{pages} --outfile #{pages_file}"
 
         dputs(3) { "Running pdfnup-command #{cmd}" }
@@ -167,11 +168,11 @@ module PrintButton
     pn = stat_printer(session, button).data_str
     remote = session.client_ip
     dputs(3) { "Found printer #{pn} with remote #{remote}" }
-    if pn != "PDF"
+    if pn != 'PDF'
       if get_server_printers.index(pn)
-        cmd = "lp -o fitplot -d #{pn.sub(/^server /, '')}"
+        cmd = "lp -o media=a4 -o fitplot -d #{pn.sub(/^server /, '')}"
       elsif get_remote_printers(remote).index(pn)
-        cmd = "lp -o fitplot -h #{remote}:631 -d #{pn}"
+        cmd = "lp -o media=a4 -o fitplot -h #{remote}:631 -d #{pn}"
       end
     end
     dputs(3) { "Command will be #{cmd}" }
