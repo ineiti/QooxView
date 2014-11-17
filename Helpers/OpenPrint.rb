@@ -112,7 +112,11 @@ module PrintButton
   attr_reader :printer_buttons
 
   def call_lpstat(ip)
-    %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+    if ConfigBase.use_printing.to_i > 0
+      %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+    else
+      []
+    end
   end
 
   def get_remote_printers(ip)
