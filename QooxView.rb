@@ -239,6 +239,10 @@ class String
   def cut( reg )
     sub(reg, '')
   end
+
+  def nonempty
+    length > 0 ? self : nil
+  end
 end
 
 class Date
