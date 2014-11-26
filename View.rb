@@ -622,6 +622,11 @@ class View < RPCQooxdooService
     call_named('button', session, name, *args)
   end
 
+  # Call the children's rpc_button_name, if present
+  def rpc_table(session, name, *args)
+    call_named('table', session, name, *args)
+  end
+
   # Call the children's rpc_callback_name, if present
   def rpc_callback(session, name, *args)
     call_named('callback', session, name, *args)

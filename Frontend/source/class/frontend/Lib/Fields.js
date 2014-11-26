@@ -715,8 +715,31 @@ qx.Class.define("frontend.Lib.Fields", {
                         decorator: null,
                         showCellFocusIndicator: false
                     });
-                    table.getSelectionModel().setSelectionMode(
-                        qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
+                    switch (params.callback) {
+                        case 'edit':
+                            var tcm = table.getTableColumnModel();
+                            for (var e = 0; e < params.edit.length; e++) {
+                                var col = params.edit[e];
+                                tableModel.setColumnEditable(col, true);
+                                tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
+                            }
+                            do_callback = true;
+                            listener = "dataEdited";
+                            //table.getSelectionModel().setSelectionMode(
+                            //    qx.ui.table.selection.Model.SINGLE_SELECTION);
+                            break;
+                        case 'click':
+                            do_callback = true;
+                            listener = "cellClick";
+                            break;
+                        case 'dblClick':
+                            do_callback = true;
+                            listener = "cellDblclick";
+                            break;
+                        default:
+                            table.getSelectionModel().setSelectionMode(
+                                qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
+                    }
                     table.setValueArray = setValueArrayTable;
                     table.getValue = getValueTable;
                     table.setStatusBarVisible(false);
@@ -732,7 +755,6 @@ qx.Class.define("frontend.Lib.Fields", {
                     //field_element.add( table );
                     field_element = table;
                     show_label = false;
-                    listener = "dataEdited";
                     dbg(3, "params is " + print_a(params))
                     if (params.columns) {
                         for (var i = 0; i < params.columns.length; i++) {
@@ -923,6 +945,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     if (typeof( listener ) === "string") {
                         listener = [listener]
                     }
+                    dbg(4, print_a(listener))
                     for (var l = 0; l < listener.length; l++) {
                         field_element.addListener(listener[l], function (e) {
                             //alert( "Listener " + name + ":" + e + " for " + label )

@@ -30,6 +30,7 @@ class CSV < StorageType
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save(data, notmp: false)
+    dputs_func
     @add_only ?
         dputs(5) { "Not saving data for #{@name}" } :
         @mutex.synchronize {
@@ -38,19 +39,13 @@ class CSV < StorageType
             [@csv_dir, @csv_backup].each { |d|
               FileUtils.mkdir_p d unless File.exists? d
             }
-            dputs(5) { "Data is #{data.inspect}" }
-            Dir.glob("#{@csv_file}*tmp").each { |f|
-              final = f.sub(/_tmp$/, '')
-              if File.exists? final
-                final += "_#{Dir.glob(final+'*').size}"
-              end
-              dputs(3) { "Renaming temporary #{f} to #{final}" }
-              File.rename(f, final)
-            }
-            Dir.glob("#{@csv_file}*").each { |f|
-              time = File.mtime(f).strftime('%Y%m%d_%H%M%S')
-              FileUtils.mv f, "#{@csv_backup_file}.#{time}"
-            }
+            #dputs(5) { "Data is #{data.inspect}" }
+
+            if File.exists? @csv_file
+              time = File.mtime(@csv_file).strftime('%Y%m%d_%H%M%S')
+              FileUtils.cp @csv_file, "#{@csv_backup_file}.#{time}"
+            end
+
             tmpfile = "#{@csv_file}_tmp"
             File.open(tmpfile, 'w') { |f|
               data_each(data) { |d|
@@ -62,12 +57,14 @@ class CSV < StorageType
             }
             FileUtils.mv tmpfile, @csv_file
             #%x[ sync ]
-            dputs(5) { 'Delete oldest file' }
+            dputs(3) { 'Delete oldest file(s)' }
             if (backups = Dir.glob("#{@csv_backup_file}.*").sort).size > @backup_count
-              FileUtils.rm backups.first(backups.size - @backup_count)
+              oldfiles = backups.first(backups.size - @backup_count)
+              dputs(3){"Deleting #{oldfiles.inspect}"}
+              FileUtils.rm oldfiles
             end
           rescue Exception => e
-            dputs(0) { "Error: couldn't save CSV #{self.class.name}" }
+            dputs(0) { "Error: couldn't save CSV #{@name}" }
             dputs(0) { "#{e.inspect}" }
             dputs(0) { "#{e.to_s}" }
             puts e.backtrace
