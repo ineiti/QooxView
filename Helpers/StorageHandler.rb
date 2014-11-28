@@ -359,6 +359,8 @@ module StorageHandler
       @data.merge!(di.load) { |k, o, n| o.merge(n) }
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
+
+    respond_to?(:loaded) and loaded
   end
 
   def save(notmp: false)
