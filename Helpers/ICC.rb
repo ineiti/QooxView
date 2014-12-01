@@ -129,13 +129,13 @@ class ICC < RPCQooxdooPath
         end
       rescue Timeout::Error
         dputs(1) { 'Timeout occured' }
-        err._msg = 'Error: Timeout occured'
+        err._msg = 'Timeout occured'
       rescue Errno::ECONNRESET
         dputs(1) { 'Connection reset' }
-        err._msg = 'Error: Connection reset'
+        err._msg = 'Connection reset'
       end
     }
-    return JSON.parse( err ).to_json
+    return err
   end
 
   def self.transfer(login, method, transfer = '', url: ConfigBase.server_uri, json: true,
@@ -143,7 +143,7 @@ class ICC < RPCQooxdooPath
     block_size = ConfigBase.block_size.to_i
     if block_size < 128
       dputs(0) { "Unacceptable block-size of #{block_size}" }
-      return self.response('Error', 'No block-size')
+      return self.response('Error', 'No block-size', json: false)
     end
     if json
       method.prepend 'json@'

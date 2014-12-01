@@ -30,7 +30,6 @@ class CSV < StorageType
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save(data, notmp: false)
-    dputs_func
     @add_only ?
         dputs(5) { "Not saving data for #{@name}" } :
         @mutex.synchronize {
