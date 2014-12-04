@@ -151,7 +151,7 @@ class Array
   end
 
   def to_frontend
-    collect{|a| a.to_frontend}.sort{|a,b| a[1]<=>b[1]}
+    collect { |a| a.to_frontend }.sort { |a, b| a[1]<=>b[1] }
   end
 
   def to_s
@@ -236,7 +236,7 @@ class String
     Date.from_web(self)
   end
 
-  def cut( reg )
+  def cut(reg)
     sub(reg, '')
   end
 
@@ -256,6 +256,30 @@ class Date
 
   def self.from_db(d)
     (d.class == String) ? Date.strptime(d, '%Y-%m-%d') : d
+  end
+end
+
+class Fixnum
+  def separator(sep = ' ')
+    self.to_s.tap do |s|
+      :go while s.gsub!(/^([^.]*)(\d)(?=(\d{3})+)/, "\\1\\2#{sep}")
+    end
+  end
+
+  def to_MB( label = 'MB')
+    "#{( self / 1_000_000).separator} #{label}"
+  end
+end
+
+class Bignum
+  def separator(sep = ' ')
+    self.to_s.tap do |s|
+      :go while s.gsub!(/^([^.]*)(\d)(?=(\d{3})+)/, "\\1\\2#{sep}")
+    end
+  end
+
+  def to_MB( label = 'MB')
+    "#{( self / 1_000_000).separator} #{label}"
   end
 end
 
