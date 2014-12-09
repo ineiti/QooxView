@@ -28,7 +28,7 @@ class TC_Migration < Test::Unit::TestCase
     @inv1 = Entities.CVSInventories.create( :date => '121201', :iname => 'comp 01')
     @inv2 = Entities.CVSInventories.create( :date => '121202', :iname => 'comp 02')
     @inv3 = Entities.CVSInventories.create( :date => '121203', :iname => 'comp 03')
-    Entities.save_all( true )
+    Entities.save_all
   end
 
   def teardown

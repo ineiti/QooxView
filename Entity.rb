@@ -335,12 +335,12 @@ class Entities < RPCQooxdooService
     }
   end
 
-  def self.save_all(notmp = false)
+  def self.save_all()
     dputs(2) { 'Saving everything' }
     start = Time.now
     @@all.each { |k, v|
       dputs(3) { "Saving #{v.class.name}" }
-      v.save(notmp: notmp)
+      v.save()
     }
     dputs(2) { "Time for saving everything: #{Time.now - start}" }
   end

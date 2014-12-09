@@ -363,11 +363,11 @@ module StorageHandler
     respond_to?(:loaded) and loaded
   end
 
-  def save(notmp: false)
-    return unless (@changed || notmp)
+  def save()
+    return unless @changed
     @storage.each { |k, di|
       dputs(5) { "Saving #{k} at #{di.inspect}" }
-      di.save(@data, notmp: notmp)
+      di.save(@data)
     }
     @changed = false
   end

@@ -29,7 +29,7 @@ class CSV < StorageType
 
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
-  def save(data, notmp: false)
+  def save(data)
     @add_only ?
         dputs(5) { "Not saving data for #{@name}" } :
         @mutex.synchronize {
@@ -42,7 +42,13 @@ class CSV < StorageType
 
             if File.exists? @csv_file
               time = File.mtime(@csv_file).strftime('%Y%m%d_%H%M%S')
-              FileUtils.cp @csv_file, "#{@csv_backup_file}.#{time}"
+              backup = "#{@csv_backup_file}.#{time}"
+              counter = 1
+              while File.exists? backup
+                backup = "#{@csv_backup_file}.#{time}-#{counter}"
+                counter += 1
+              end
+              FileUtils.cp @csv_file, backup
             end
 
             tmpfile = "#{@csv_file}_tmp"
@@ -111,7 +117,7 @@ class CSV < StorageType
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
       cleanup if Dir.glob("#{@csv_file}*").size > 1
-      ["#{@csv_file}"].concat(Dir.glob("backup/#{@csv_file}*").sort.reverse).each { |file|
+      ["#{@csv_file}"].concat(Dir.glob("#{@csv_backup_file}*").sort.reverse).each { |file|
         next if (!File.exists?(file) || File.size(file) == 0)
         begin
           dputs(3) { "Loading file #{file}" }
@@ -157,7 +163,8 @@ class CSV < StorageType
     # as a user ;)
     if not local_only
       dputs(2) { "Deleting #{@csv_dir}" }
-      FileUtils.rm Dir.glob("#{@csv_dir}/*csv.*")
+      FileUtils.rm Dir.glob("#{@csv_file}")
+      FileUtils.rm Dir.glob("#{@csv_backup_file}*")
     end
   end
 end

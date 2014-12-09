@@ -6,12 +6,12 @@ class TC_Store_CSV < Test::Unit::TestCase
     Entities.delete_all_data
 
     dputs(2) { 'Setting up data' }
-    @admin = Entities.Persons.create(:first_name => 'admin', :pass => 'super123',
+    @admin = Persons.create(:first_name => 'admin', :pass => 'super123',
                                      :address => 'cdlf 24', :credit => 10000)
-    Entities.Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
-    @base_1011 = Entities.Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
+    Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
+    @base_1011 = Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
                                          :teacher => @admin)
-    @dummies_one = Entities.Dummies.create(:first_name => 'one', :phone => '111',
+    @dummies_one = Dummies.create(:first_name => 'one', :phone => '111',
                                            :no_cache => '123')
     dputs(2) { 'Finished setting up data' }
   end
@@ -37,37 +37,39 @@ class TC_Store_CSV < Test::Unit::TestCase
   end
 
   def get_persons_csv
-    Dir.glob('data/Persons.csv.*').sort
+    (Dir.glob('data/Persons.csv') +
+        Dir.glob('data/backup/Persons.csv.*')).sort
   end
 
   def test_backup_count
     (0..5).each { |i|
-      assert get_persons_csv.size == i, "We don't have #{i} files"
-      Entities.save_all
+      assert( get_persons_csv.size == i,
+              "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
       @admin.first_name = "admin#{i}"
+      Entities.save_all
     }
-    assert get_persons_csv.size == 5
+    assert get_persons_csv.size == 6
   end
 
   def test_dirty_data
     (0..5).each { |i|
-      assert get_persons_csv.size == i, "We don't have #{i} files"
+      assert( get_persons_csv.size == i,
+              "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
       @admin.first_name = "admin#{i}"
       Entities.save_all
     }
 
-    # The last saved file is a _tmp-file and will be deleted and ignored
     Entities.load_all
-    assert_equal 'admin4', Persons.find_by_pass('super123').first_name
-    assert_equal 4, get_persons_csv.count
+    assert_equal 'admin5', Persons.find_by_pass('super123').first_name
+    assert_equal 6, get_persons_csv.count
 
     # Test an invalid file - will the second-last be taken?
-    File.open(get_persons_csv.last, 'a') { |f|
+    File.open('data/Persons.csv', 'a') { |f|
       f.write('--no--valid--json--')
     }
     Entities.load_all
-    assert_equal 'admin3', Persons.find_by_pass('super123').first_name
-    assert_equal 3, get_persons_csv.count
+    assert_equal 'admin4', Persons.find_by_pass('super123').first_name
+    assert_equal 5, get_persons_csv.count
 
     # Invalidate everything
     get_persons_csv.each { |name|

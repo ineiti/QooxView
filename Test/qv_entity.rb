@@ -53,7 +53,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_save_load
-    Entities.save_all(true)
+    Entities.save_all
     Entities.delete_all_data(true)
     Entities.load_all
     test_find_admin
@@ -63,7 +63,7 @@ class TC_Entity < Test::Unit::TestCase
     dc1 = DoubleCases.create(name: 'dc1')
     d1 = Doubles.create(name: 'd1', dc: dc1)
     assert_equal dc1, d1.dc
-    Entities.save_all(true)
+    Entities.save_all
     Entities.delete_all_data(true)
     Entities.load_all
 
@@ -287,7 +287,7 @@ class TC_Entity < Test::Unit::TestCase
   def test_list_entity
     @base_1011.teacher = @admin
     assert_equal @admin, @base_1011.teacher
-    Entities.save_all(true)
+    Entities.save_all
     Entities.load_all
     assert_equal @admin, @base_1011.teacher
 
@@ -296,7 +296,7 @@ class TC_Entity < Test::Unit::TestCase
     course.students = [@admin]
     assert_equal @admin, course.students.first
 
-    Entities.save_all(true)
+    Entities.save_all
     Entities.load_all
 
     course = Courses.find_by_first_name("foo")
