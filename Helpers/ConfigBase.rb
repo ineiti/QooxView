@@ -51,6 +51,9 @@ class ConfigBases < Entities
     self.list_functions
   end
 
+  def init
+  end
+
   def self.singleton
     first or
         self.create({:functions => [], :locale_force => nil, :welcome_msg => ""})

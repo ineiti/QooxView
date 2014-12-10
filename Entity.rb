@@ -91,17 +91,17 @@ class Entities < RPCQooxdooService
       value_block @data_field_id
       value_int_ALL @data_field_id
 
-      dputs(4) { "Configuring all storages" }
+      dputs(4) { 'Configuring all storages' }
       @storage.each { |k, s|
         dputs(4) { "Configuring #{k} #{s.inspect}" }
         s.configure(s.config)
       }
       dputs(4) { "Block is now: #{@blocks.inspect}" }
       if @load_data
-        dputs(3) { "Loading data" }
+        dputs(3) { 'Loading data' }
         load
       else
-        dputs(3) { "Not loading data because of false return-value of setup_data" }
+        dputs(3) { 'Not loading data because of false return-value of setup_data' }
       end
     end
   end
@@ -116,7 +116,7 @@ class Entities < RPCQooxdooService
   def singular(name)
     case name
       when /ies$/
-        return name.sub(/ies$/, "y")
+        return name.sub(/ies$/, 'y')
       when /s$/
         return name.chop
     end
@@ -154,10 +154,10 @@ class Entities < RPCQooxdooService
   def get_data_instance(k)
     return nil if !k
     if k.class != Fixnum
-      dputs(0) { "This is very bad" }
+      dputs(0) { 'This is very bad' }
       dputs(0) { "value k is #{k.inspect}" }
       dputs(0) { "caller-stack is #{caller}" }
-      raise "WrongIndex"
+      raise 'WrongIndex'
     end
     return nil if not k or not @data[k.to_i]
     if !@data_instances[k.to_i]
@@ -188,7 +188,7 @@ class Entities < RPCQooxdooService
         create_key($~[1])
       when /^(find|search|matches)(_by|)_/
         action = "#{$~[1]}#{$~[2]}"
-        field = cmd_str.sub(/^(find|search|matches)(_by|)_/, "")
+        field = cmd_str.sub(/^(find|search|matches)(_by|)_/, '')
         dputs(4) { "Using #{action} for field #{field}" }
         if args[0].is_a? Entity
           dputs(4) { "Getting id because it's an Entity" }
@@ -197,7 +197,7 @@ class Entities < RPCQooxdooService
           self.send(action, field, args[0])
         end
       when /^list_/
-        field = cmd_str.sub(/^list_/, "")
+        field = cmd_str.sub(/^list_/, '')
         dputs(5) { "Using list for field #{field}" }
         ret = @data.values.collect { |v| v[field.to_sym] }.sort { |a, b|
           a.downcase <=> b.downcase
@@ -205,10 +205,10 @@ class Entities < RPCQooxdooService
         dputs(4) { "Returning #{ret.inspect}" }
         ret
       when /^listp_/
-        field = cmd_str.sub(/^listp_/, "")
+        field = cmd_str.sub(/^listp_/, '')
         reverse = field =~ /^rev_/
         if reverse
-          field.sub!(/^rev_/, "")
+          field.sub!(/^rev_/, '')
         end
         dputs(5) { "Using listpairs for field #{field.inspect}, #{@data.inspect}" }
         ret = @data.keys.collect { |k|
@@ -220,7 +220,7 @@ class Entities < RPCQooxdooService
         dputs(3) { "Returning #{ret.inspect}" }
         ret
       when /^value_/
-        cmds = cmd_str.split("_")[1..-1]
+        cmds = cmd_str.split('_')[1..-1]
         value_add(cmds, args)
       else
         dputs(0) { "Error: Method is missing: #{cmd} in Entities" }
@@ -301,7 +301,7 @@ class Entities < RPCQooxdooService
         end
       end
     }
-    dputs(5) { "Found nothing" }
+    dputs(5) { 'Found nothing' }
     return nil
   end
 
@@ -314,7 +314,7 @@ class Entities < RPCQooxdooService
   # in @@services_hash
   def self.method_missing(m, *args)
     dputs(5) { "I think I got a class: #{m}" }
-    if self.name == "Entities"
+    if self.name == 'Entities'
       # This is for the Entities-class
       if ret = Entities.service(m)
         return ret
@@ -333,6 +333,7 @@ class Entities < RPCQooxdooService
       dputs(2) { "Erasing data of #{k}" }
       v.delete_all(local_only)
     }
+    ConfigBases.init
   end
 
   def self.save_all()
@@ -423,8 +424,8 @@ class Entity
 
   def respond_to?(cmd)
     field = cmd.to_s
-    if field == "to_ary"
-      dputs(4) { "not responding to_ary" }
+    if field == 'to_ary'
+      dputs(4) { 'not responding to_ary' }
       return false
     end
     case field
@@ -443,7 +444,7 @@ class Entity
       dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
           "#{@proxy.blocks.inspect}" }
       if field =~ /^_/
-        raise "ValueUnknown"
+        raise 'ValueUnknown'
       else
         return super
       end
@@ -499,12 +500,12 @@ class Entity
 
   def to_hash(unique_ids = false)
     ret = @proxy.data[@id].dup
-    dputs(5) { "Will return #{ret.to_a.join("-")}" }
+    dputs(5) { "Will return #{ret.to_a.join('-')}" }
     ret.each { |f, v|
       dputs(5) { "Doing field #{f} with #{v.inspect}" }
       #if data_get(f).is_a? Entity
-      if value = @proxy.get_value(f) and value.dtype == "entity"
-        dputs(5) { "Is an entity" }
+      if value = @proxy.get_value(f) and value.dtype == 'entity'
+        dputs(5) { 'Is an entity' }
         if unique_ids
           ret[f] = (d = data_get("_#{f}")) ? d.get_unique : nil
         else
@@ -617,7 +618,7 @@ class Entity
       if fields.index(ks)
         dputs(4) { "Setting field #{ks}" }
         if create
-          dputs(5) { "Creating without log" }
+          dputs(5) { 'Creating without log' }
           data_set(ks, v)
         else
           dputs(4) { "Setting @data[#{k.inspect}] = #{v.inspect}" }

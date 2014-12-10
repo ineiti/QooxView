@@ -37,12 +37,12 @@ class Sessions < Entities
   end
 
   def loaded
-    log_msg :Sessions, "Before cleaning up: #{@data.length}"
+    before = @data.length
     # Reject all sessions that never got opened and those who are older than one day
     @data.delete_if { |k, v|
       !v._owner || (v._last_seen && Time.now.to_i - v._last_seen.to_i > 86_400)
     }
-    log_msg :Sessions, "After cleaning up: #{@data.length}"
+    log_msg :Sessions, "Cleaning up: from #{before} to #{@data.length}"
   end
 
 end

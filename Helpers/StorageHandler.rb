@@ -361,6 +361,9 @@ module StorageHandler
     }
 
     respond_to?(:loaded) and loaded
+    dputs(3){"Looking to migrate #{self.class.name}"}
+    migrate
+    respond_to?(:migrated) and migrated
   end
 
   def save()

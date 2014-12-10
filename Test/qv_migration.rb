@@ -24,10 +24,10 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
-    @pers = Entities.Persons.create( :login_name => 'test')
-    @inv1 = Entities.CVSInventories.create( :date => '121201', :iname => 'comp 01')
-    @inv2 = Entities.CVSInventories.create( :date => '121202', :iname => 'comp 02')
-    @inv3 = Entities.CVSInventories.create( :date => '121203', :iname => 'comp 03')
+    @pers = Persons.create( :login_name => 'test')
+    @inv1 = CVSInventories.create( :date => '121201', :iname => 'comp 01')
+    @inv2 = CVSInventories.create( :date => '121202', :iname => 'comp 02')
+    @inv3 = CVSInventories.create( :date => '121203', :iname => 'comp 03')
     Entities.save_all
   end
 
@@ -83,6 +83,7 @@ class TC_Migration < Test::Unit::TestCase
   # Also tests deletion - this is kind of a bug that it works, because
   # the Entities.load function should not load fields that are not
   # defined - probably only works for CVS...
+  # As this is a raw-migration, it is probably OK
   def test_cvs_rename
     CVSInventories.class_eval( '
       def setup_data
@@ -122,5 +123,4 @@ class TC_Migration < Test::Unit::TestCase
     cvs = CVSInventories.match_by_date('121201')
     assert_equal 'comp 01', cvs.i_name
   end
-
 end
