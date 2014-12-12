@@ -70,6 +70,28 @@ end
 
 
 class ConfigBase < Entity
+  def setup_instance
+    dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
+    if !Object.const_defined? :DEBUG_LVL
+      self.debug_lvl = debug_lvl
+    end
+  end
+
+  def save_block_to_object(block, obj)
+    ConfigBases.get_block_fields(block).each { |f|
+      value = data_get(f)
+      dputs(2) { "Setting #{f} in #{block} to #{value}" }
+      obj.send("#{f}=", value)
+    }
+  end
+
+  def debug_lvl=(lvl)
+    dputs(4) { "Setting debug-lvl to #{lvl}" }
+    data_set(:_debug_lvl, lvl.to_i)
+    Object.const_defined?(:DEBUG_LVL) and Object.send(:remove_const, :DEBUG_LVL)
+    Object.const_set(:DEBUG_LVL, lvl.to_i)
+  end
+
   def to_hash
     super.merge(:functions => get_functions_numeric)
   end
@@ -159,29 +181,5 @@ class ConfigBase < Entity
 
   def self.del_function(func)
     self.store({:functions => self.get_functions.reject { |f| f == func }})
-  end
-end
-
-class ConfigBase < Entity
-  def setup_instance
-    dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
-    if !Object.const_defined? :DEBUG_LVL
-      self.debug_lvl = debug_lvl
-    end
-  end
-
-  def save_block_to_object(block, obj)
-    ConfigBases.get_block_fields(block).each { |f|
-      value = data_get(f)
-      dputs(2) { "Setting #{f} in #{block} to #{value}" }
-      obj.send("#{f}=", value)
-    }
-  end
-
-  def debug_lvl=(lvl)
-    dputs(4) { "Setting debug-lvl to #{lvl}" }
-    data_set(:_debug_lvl, lvl.to_i)
-    Object.const_defined?(:DEBUG_LVL) and Object.send(:remove_const, :DEBUG_LVL)
-    Object.const_set(:DEBUG_LVL, lvl.to_i)
   end
 end

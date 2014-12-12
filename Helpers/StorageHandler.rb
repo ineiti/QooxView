@@ -329,7 +329,7 @@ module StorageHandler
     end
     version = mv.version + 1
     dputs(3) { "Checking for migration_#{version} of #{@name}" }
-    while self.respond_to?(vers_str = "migration_#{version}".to_sym) or
+    while self.respond_to?(vers_str = "migration_#{version}".to_sym) ||
         self.respond_to?(vers_str = "migration_#{version}_raw".to_sym)
       dputs(2) { "Migrating #{@name} to version #{version}, calling #{vers_str}" }
       dputs(4) { "Working on #{data.inspect}" }
@@ -361,9 +361,6 @@ module StorageHandler
     }
 
     respond_to?(:loaded) and loaded
-    dputs(3){"Looking to migrate #{self.class.name}"}
-    migrate
-    respond_to?(:migrated) and migrated
   end
 
   def save()

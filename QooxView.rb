@@ -98,7 +98,7 @@ SQLITE3_OBJ=QOOXVIEW_DIR + '/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o'
 if not File.exists? SQLITE3_OBJ
   puts "We'll have to compile the sqlite3-library, else it probably won't work."
   print 'Try to compile sqlite3? [Y/n] '
-  if gets.chomp.downcase != "n"
+  if gets.chomp.downcase != 'n'
     install= "#{ QOOXVIEW_DIR }/Config/install"
     puts "Path is #{install}"
     %x[ #{install} ]
@@ -117,7 +117,7 @@ end
 require 'yaml'
 
 # I think the rubygems way is just really not useful, sorry
-Dir[QOOXVIEW_DIR + "/libs/*"].each { |lib|
+Dir[QOOXVIEW_DIR + '/libs/*'].each { |lib|
   library = File.expand_path("#{lib}/lib")
   $: << library
 }
@@ -371,7 +371,7 @@ module QooxView
               %x[ mv #{pofile} #{pofile}.tmp ]
               #%x[ msgmerge #{pofile}.tmp #{potfile} -o #{pofile} ]
               # Should be possible with rmsgmerge, but it didn't work :(
-              GetText::Tools::MsgMerge.run("#{pofile}.tmp", potfile, "-o", pofile)
+              GetText::Tools::MsgMerge.run("#{pofile}.tmp", potfile, '-o', pofile)
               %x[ rm #{pofile}.tmp ]
             else
               %x[ cp #{potfile} #{pofile} ]
@@ -436,13 +436,14 @@ module QooxView
 
     # Get an instance of all Qooxdoo-services
     rpcqooxdoo.get_services
+    Entities.load_all
 
     $qooxview_cmds.each { |qv|
       qv_cmd = qv.class == Array ? qv[0] : qv
       dputs(2) { "Doing #{qv.inspect}" }
       case qv_cmd
         when :archive
-          month = qv[1] == "" ? 1 : qv[1]
+          month = qv[1] == '' ? 1 : qv[1]
           dputs(2) { "Archiving with starting month #{month}" }
           Accounts.archive(month)
           exit

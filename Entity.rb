@@ -280,7 +280,7 @@ class Entities < RPCQooxdooService
   # Gets all field names of a block
   def get_block_fields(block)
     return [] unless @blocks.has_key? block.to_sym
-    @blocks[block.to_sym].collect{|v|
+    @blocks[block.to_sym].collect { |v|
       v.name
     }
   end
@@ -306,14 +306,19 @@ class Entities < RPCQooxdooService
   end
 
   def self.service(s)
-    @@services_hash["Entities.#{s}"]
+    dputs(4) { "#{s}, #{@@services_hash["Entities.#{s}"].class.inspect}" }
+    if (ret = @@services_hash["Entities.#{s}"]).class == Class
+      dputs(0) { "#{s} is missing" }
+      exit
+    end
+    ret
   end
 
   # For an easy Entities.Classname access to all entities stored
   # Might also be used by subclasses to directly acces the instance stored
   # in @@services_hash
   def self.method_missing(m, *args)
-    dputs(5) { "I think I got a class: #{m}" }
+    dputs(5) { "I think I got a class: #{self.name} - #{m} - #{caller.inspect}" }
     if self.name == 'Entities'
       # This is for the Entities-class
       if ret = Entities.service(m)
@@ -351,6 +356,11 @@ class Entities < RPCQooxdooService
     @@all.each { |k, v|
       dputs(3) { "Loading #{v.class.name}" }
       v.load
+    }
+    @@all.each { |k, v|
+      dputs(3) { "Looking to migrate #{k}" }
+      v.migrate
+      respond_to?(:migrated) and migrated
     }
   end
 

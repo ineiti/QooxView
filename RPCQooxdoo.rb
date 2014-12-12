@@ -46,10 +46,12 @@ class RPCQooxdooService
   end
 
   def get_services(services = '.*')
+    #dputs_func
     do_init = true
 
     while do_init
       do_init = false
+      dputs(3) { "List is: #{@@services_hash.keys.inspect} for services #{services.inspect}" }
 
       # The entities have to be initialized before the views
       %w(Entities View).each { |e|
@@ -57,10 +59,11 @@ class RPCQooxdooService
           if k =~ /^#{e}/ and k =~ /#{services}/
             dputs(3) { "Initializing #{k.inspect} with #{v.inspect}" }
             if @@services_hash[k].class == Class
-              dputs(5) { "#{@@needs.inspect}" }
+              dputs(5) { "Needs is: #{@@needs.inspect}" }
               if @@needs.has_key?(k) and
                   @@services_hash[@@needs[k]].class == Class
                 dputs(3) { "Not initializing #{k}, as it needs #{@@needs[k]}" }
+                get_services(@@needs[k])
                 do_init = true
               else
                 dputs(3) { "RPC: making an instance of #{k.inspect} with #{v.inspect}" }
@@ -72,12 +75,11 @@ class RPCQooxdooService
       }
     end
 
-    RPCQooxdooService.migrate_all
-
     @@is_instance = true
   end
 
   def self.migrate_all
+    dputs(0) { 'Obsolete' }
     # And now do eventual migrations on everybody
     @@services_hash.each_pair { |k, v|
       if k =~ /^Entities/ and v.class != Class
@@ -113,11 +115,6 @@ class RPCQooxdooService
     @@services_hash
   end
 
-  def self.migrate(name)
-    log_msg :RPCQooxdooService, 'Obsolete call to migrate'
-    @@services_hash[name].migrate
-  end
-
   # Adds a new service of type "subclass" and stores it under "name"
   def self.add_new_service(subclass, name)
     dputs(5) { "Add a new service: #{subclass} as #{name}" }
@@ -143,10 +140,10 @@ class RPCQooxdooHandler
   def self.get_ip(req)
     dputs(3) { "header is #{req.header.inspect} - peeraddr is #{req.peeraddr.inspect}" }
     if (ret = req.header['x-forwarded-for']) && (ret != [])
-      dputs(3){ "x-forward of #{ret.inspect}"}
+      dputs(3) { "x-forward of #{ret.inspect}" }
       ret.first
     else
-      dputs(3){ "peeraddr - #{req.peeraddr[3]}"}
+      dputs(3) { "peeraddr - #{req.peeraddr[3]}" }
       req.peeraddr[3]
     end
   end
@@ -259,7 +256,7 @@ class RPCQooxdooHandler
       @@server[port] = HTTPServer.new(:Port => port, :Logger => WEBrick::Log.new('webrick.log'),
                                       :AccessLog => logger, :DoNotReverseLookup => true)
     rescue Errno::EADDRINUSE => e
-      dputs(0){"Couldn't bind to address #{port} - already in use"}
+      dputs(0) { "Couldn't bind to address #{port} - already in use" }
       raise Errno::EADDRINUSE
     end
     # server = HTTPServer.new(:Port => port )
