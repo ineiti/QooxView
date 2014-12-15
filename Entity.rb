@@ -83,7 +83,6 @@ class Entities < RPCQooxdooService
 
       # Now call the setup_data to initialize the fields
       value_block :default
-      @load_data = true
       setup_data()
 
       # Finally adding @data_field_id to all storage-types
@@ -97,12 +96,6 @@ class Entities < RPCQooxdooService
         s.configure(s.config)
       }
       dputs(4) { "Block is now: #{@blocks.inspect}" }
-      if @load_data
-        dputs(3) { 'Loading data' }
-        load
-      else
-        dputs(3) { 'Not loading data because of false return-value of setup_data' }
-      end
     end
   end
 

@@ -426,6 +426,7 @@ module QooxView
     rpcqooxdoo = Entities.nolog do
       RPCQooxdooService.new('Entities.ConfigBase')
     end
+    Entities.ConfigBases.load
 
     GetText.bindtextdomain($name, :path => 'po')
     if ConfigBase.locale_force
