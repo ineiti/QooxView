@@ -602,8 +602,7 @@ class Entity
     else
       dputs(4) { "setting entry #{field} to #{v.inspect}" }
       @proxy.set_entry(@id, field, v)
-      dputs(4) { 'Finished setting entry'
-      }
+      dputs(4) { 'Finished setting entry' }
     end
     @changed = true
     @proxy.changed = true

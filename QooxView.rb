@@ -436,8 +436,9 @@ module QooxView
     GetText::TextDomainManager.cached = false
 
     # Get an instance of all Qooxdoo-services
-    rpcqooxdoo.get_services
+    rpcqooxdoo.get_services('^Entities.*')
     Entities.load_all
+    rpcqooxdoo.get_services('^View.*')
 
     $qooxview_cmds.each { |qv|
       qv_cmd = qv.class == Array ? qv[0] : qv

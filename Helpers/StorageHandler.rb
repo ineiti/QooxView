@@ -9,7 +9,7 @@ module StorageHandler
     if get_config(false, :StorageHandler, :Replace)
       $config[:StorageHandler][:Replace].each { |k, v|
         if st.to_sym == k.to_sym
-          dputs(2) { "Replacing #{k.inspect} with #{v.inspect}" }
+          dputs(3) { "Replacing #{k.inspect} with #{v.inspect}" }
           st = v.to_sym
         end
       }
@@ -21,7 +21,7 @@ module StorageHandler
   def add_value_to_storage(value)
     return if !value.st
     args = value.args.merge(:dtype => value.dtype)
-    if value.st != "ALL"
+    if value.st != 'ALL'
       st = replace_st(value.st)
       if not @storage.has_key? st
         # A request for another type
@@ -103,7 +103,7 @@ module StorageHandler
   end
 
   def search_all_
-    search_by(@data_field_id, ".*")
+    search_by(@data_field_id, '.*')
   end
 
   # Searching of misuse in search_all - found and accepted misuses can take
@@ -139,6 +139,7 @@ module StorageHandler
     @data.each_key { |k|
       if @data[k]
         [@data[k][field]].flatten.each { |d|
+          dputs(5){"Searching #{v} in #{d} of #{@data[k].inspect}"}
           if d.to_s == v
             dputs(4) { "Found data-entry #{k}: #{@data[k].inspect}" }
             return get_data_instance(k)
@@ -277,7 +278,7 @@ module StorageHandler
           dputs(4) { "#{id} - #{field} - #{value.inspect}" }
           @data[id.to_i][field] = val
         elsif DEBUG_LVL >= 3
-          log_msg "StorageHandler", "Trying to overwrite with same value in " +
+          log_msg 'StorageHandler', 'Trying to overwrite with same value in ' +
               "#{self.class.name}-#{field}-#{value.to_s}\n" +
               caller.inspect
         end

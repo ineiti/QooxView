@@ -19,7 +19,7 @@ class OpenPrint
   end
 
   def replace_accents(str)
-    str = str.downcase.gsub(/ /, "_")
+    str = str.downcase.gsub(/ /, '_')
     accents = Hash[*%w( a àáâä e éèêë i ìíîï o òóôöœ u ùúûü c ç ss ß )]
     dputs(4) { "str was #{str}" }
     accents.each { |k, v|
@@ -91,8 +91,8 @@ class OpenPrint
       %x[ #{cmd} ]
 
       pages_all = ((files.count + 1) & ~1).times
-      documents = {:front => pages_all.collect { |i| (i ^ 1) * 2 + 1 }.join(","),
-                   :back => pages_all.collect { |i| i * 2 + 2 }.join(",")}
+      documents = {:front => pages_all.collect { |i| (i ^ 1) * 2 + 1 }.join(','),
+                   :back => pages_all.collect { |i| i * 2 + 2 }.join(',')}
 
       base ||= File.basename files.first, '.pdf'
       documents.collect { |suffix, pages|
@@ -120,7 +120,7 @@ module PrintButton
   end
 
   def get_remote_printers(ip)
-    if ip.match(get_config("none", :OpenPrint, :search_remote))
+    if ip.match(get_config('none', :OpenPrint, :search_remote))
       dputs(2) { "Getting printers for #{ip}" }
       call_lpstat(ip)
     else
@@ -130,7 +130,7 @@ module PrintButton
   end
 
   def get_server_printers
-    call_lpstat("localhost").collect { |p|
+    call_lpstat('localhost').collect { |p|
       "server #{p}"
     } + %w( PDF )
   end
@@ -159,9 +159,9 @@ module PrintButton
 
   def stat_printer(session, button)
     stat_name = "#{self.name}:#{button}:#{session.owner.login_name}"
-    stat = Entities.Statics.get(stat_name)
-    dputs(2) { "Getting printer #{stat_name} == #{stat.data_str}" }
-    if stat.data_str == ""
+    stat = Statics.get(stat_name)
+    dputs(3) { "Getting printer #{stat_name} == #{stat.data_str}" }
+    if stat.data_str == ''
       stat.data_str = get_server_printers.first
     end
     stat
@@ -199,11 +199,11 @@ module PrintButton
       dputs(4) { "#{pb}-#{p.inspect}" }
       value = "#{GetText._(pb.to_s)} #{p.data_str}"
       if session.web_req and ip = session.client_ip
-        dputs(4) { "#{session.web_req.inspect} - #{ip.inspect}" }
+        #dputs(4) { "#{session.web_req.inspect} - #{ip.inspect}" }
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or
-            session.web_req.header["user_agent"] =~ /Windows/
-          dputs(2) { "Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}" }
+            session.web_req.header['user_agent'] =~ /Windows/
+          dputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}" }
         else
           value = [value] + get_server_printers + get_remote_printers(ip)
         end

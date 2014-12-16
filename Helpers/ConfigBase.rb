@@ -1,10 +1,11 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
+require 'observer'
 
 class ConfigBases < Entities
   def setup_data
     value_block :wide
-    value_list :functions, "ConfigBases.list_functions"
+    value_list :functions, 'ConfigBases.list_functions'
     value_text :welcome_text
 
     value_block :narrow
@@ -30,7 +31,7 @@ class ConfigBases < Entities
   def migration_1(c)
     c._debug_lvl = DEBUG_LVL
     c._locale_force = get_config(nil, :locale_force)
-    c._version_local = get_config("orig", :version_local)
+    c._version_local = get_config('orig', :version_local)
     c._welcome_text = get_config(false, :welcome_text)
     dputs(3) { "Migrating out: #{c.inspect}" }
   end
@@ -56,7 +57,7 @@ class ConfigBases < Entities
 
   def self.singleton
     first or
-        self.create({:functions => [], :locale_force => nil, :welcome_msg => ""})
+        self.create({:functions => [], :locale_force => nil, :welcome_msg => ''})
   end
 
   def self.list_functions
@@ -70,6 +71,8 @@ end
 
 
 class ConfigBase < Entity
+  include Observable
+
   def setup_instance
     dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
     if !Object.const_defined? :DEBUG_LVL
@@ -77,10 +80,19 @@ class ConfigBase < Entity
     end
   end
 
+  def data_set(field, value)
+    old = data_get(field)
+    ret = super(field, value)
+    changed if old != value
+    notify_observers(field, value, old)
+    ret
+  end
+
   def save_block_to_object(block, obj)
+    dputs(3) { "Pushing block #{block} to object #{obj.name}" }
     ConfigBases.get_block_fields(block).each { |f|
       value = data_get(f)
-      dputs(2) { "Setting #{f} in #{block} to #{value}" }
+      dputs(3) { "Setting #{f} in #{block} to #{value}" }
       obj.send("#{f}=", value)
     }
   end
