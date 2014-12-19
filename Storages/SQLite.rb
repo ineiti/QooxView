@@ -32,7 +32,7 @@ class SQLite < StorageType
     super config
   end
 
-  # Allows for 
+  # Allows for debugging when wanting to load another db
   def close_db
     ActiveRecord::Base.remove_connection
   end
@@ -71,6 +71,9 @@ class SQLite < StorageType
   def set_entry(data, field, value)
     @mutex_es.synchronize {
       dputs(5) { "Searching id #{data.inspect}" }
+      if @entries[data]
+        @entries[data].save
+      end
       @entries[data] ||= @db_class.first(:conditions => {@data_field_id => data})
       if entry = @entries[data]
         entry.send("#{field}=", value)
@@ -112,12 +115,15 @@ class SQLite < StorageType
         dputs(3) { "Checking for field #{f} in table #{db_table}" }
         if not columns(db_table).index { |c|
           c.name.to_s == f.to_s }
-          dputs(new_table ? 4 : 1) { "Adding column #{f} to table #{db_table}" }
+          dputs(new_table ? 4 : 1) { "Adding column #{f} of type " +
+              "#{fields[f][:dtype]} to table #{db_table}" }
           case fields[f][:dtype]
-            when 'int'
+            when /int/, /entity/
               add_column(db_table, f, :integer)
-            when 'bool'
+            when /bool/
               add_column(db_table, f, :boolean)
+            when /float/
+              add_column(db_table, f, :float)
             else
               add_column(db_table, f, :string)
           end
@@ -131,9 +137,9 @@ class SQLite < StorageType
   def load
     dputs(2) { "Loading data for #{@db_class_name}" }
     res = Hash[*@db_class.all.collect { |s|
-      @entries[s[@data_field_id]] = s
-      [s[@data_field_id].to_i, s.attributes.symbolize_keys]
-    }.flatten(1)
+                 @entries[s[@data_field_id]] = s
+                 [s[@data_field_id].to_i, s.attributes.symbolize_keys]
+               }.flatten(1)
     ]
     dputs(5) { "Result is: #{res.inspect}" }
     return res

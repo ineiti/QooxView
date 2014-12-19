@@ -103,7 +103,9 @@ module StorageHandler
   end
 
   def search_all_
-    search_by(@data_field_id, '.*')
+    @data.each_key.collect { |k|
+      get_data_instance(k)
+    }
   end
 
   # Searching of misuse in search_all - found and accepted misuses can take
@@ -139,7 +141,7 @@ module StorageHandler
     @data.each_key { |k|
       if @data[k]
         [@data[k][field]].flatten.each { |d|
-          dputs(5){"Searching #{v} in #{d} of #{@data[k].inspect}"}
+          dputs(5) { "Searching #{v} in #{d} of #{@data[k].inspect}" }
           if d.to_s == v
             dputs(4) { "Found data-entry #{k}: #{@data[k].inspect}" }
             return get_data_instance(k)
@@ -279,8 +281,8 @@ module StorageHandler
           @data[id.to_i][field] = val
         elsif DEBUG_LVL >= 3
           log_msg 'StorageHandler', 'Trying to overwrite with same value in ' +
-              "#{self.class.name}-#{field}-#{value.to_s}\n" +
-              caller.inspect
+                                      "#{self.class.name}-#{field}-#{value.to_s}\n" +
+                                      caller.inspect
         end
         update_key(id.to_i)
         return val
