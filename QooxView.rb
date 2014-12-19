@@ -455,7 +455,7 @@ module QooxView
 
   # The main function, used to start it all
   def self.startWeb(port = 3302, duration = nil)
-    dputs(2) { "Configuring port for #{port}" }
+    ddputs(2) { "Configuring port for #{port}" }
     # Suppose we've not being initialized when there are no permissions
     if Permission.list.size == 0
       self.init
