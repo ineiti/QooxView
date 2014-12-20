@@ -186,6 +186,8 @@ module StorageHandler
   end
 
   def create(args, allow_double = false)
+    oldload = @loading
+    @loading = true
     if args.class != Hash
       dputs(0) { "Entities.create takes a hash! You gave a #{args.class}" }
       exit
@@ -219,10 +221,12 @@ module StorageHandler
       update_key(data_id)
       d = get_data_instance(data_id)
       @changed = d.changed = true
+      @loading = oldload
       return d
     else
       @storage.each { |k, di| di.data_double(args) }
       dputs(2) { "Trying to create a double entry with data_id #{args[@data_field_id]}!" }
+      @loading = oldload
       return nil
     end
   end

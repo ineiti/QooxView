@@ -79,12 +79,14 @@ class RPCQooxdooService
   end
 
   def self.migrate_all
-    dputs(0) { 'Obsolete' }
     # And now do eventual migrations on everybody
     @@services_hash.each_pair { |k, v|
       if k =~ /^Entities/ and v.class != Class
         dputs(3) { "Migration of #{k}" }
+        oldload = v.loading
+        v.loading = true
         v.migrate
+        v.loading = oldload
         dputs(3) { "Migration of #{k}" }
       end
     }

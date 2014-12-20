@@ -27,7 +27,8 @@ class Entities < RPCQooxdooService
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id,
                 :storage, :data, :name, :msg, :undo, :logging, :keys,
-                :save_after_create, :values, :changed, :null_allowed
+                :save_after_create, :values, :changed, :null_allowed,
+                :loading
 
   def initialize
     begin
@@ -44,6 +45,7 @@ class Entities < RPCQooxdooService
     @save_after_create = false
     @changed = false
     @null_allowed = false
+    @loading = false
 
     if @data_class != 'Entity'
       @@all[@data_class] = self
@@ -348,11 +350,13 @@ class Entities < RPCQooxdooService
     dputs(2) { 'Loading everything' }
     @@all.each { |k, v|
       dputs(3) { "Loading #{v.class.name}" }
+      v.loading = true
       v.load
     }
     @@all.each { |k, v|
       dputs(3) { "Looking to migrate #{k}" }
       v.migrate
+      v.loading = false
       respond_to?(:migrated) and migrated
     }
   end

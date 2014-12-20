@@ -34,6 +34,7 @@ class SQLite < StorageType
 
   # Allows for debugging when wanting to load another db
   def close_db
+    dputs(4){"Closing db #{@name_file}"}
     ActiveRecord::Base.remove_connection
   end
 
