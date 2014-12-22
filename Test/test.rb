@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #!/usr/local/bin/ruby -I.. -I.
 
-$LOAD_PATH.push ".", ".."
+$LOAD_PATH.push '.', '..'
 
 require 'test/unit'
 #require 'test/unit/testsuite'
@@ -22,7 +22,7 @@ QooxView.init('entities', 'views')
 
 tests = Dir.glob('qv_*.rb')
 #tests = %w( permission )
-tests = %w( migration )
+#tests = %w( print view )
 #tests = %w( configbase )
 
 tests.each { |t|

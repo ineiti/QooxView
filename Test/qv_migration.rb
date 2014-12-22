@@ -60,7 +60,8 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
-    
+
+    Entities.load_all
     assert_equal 'comp', CVSInventories.match_by_date('121201').typ
     
     CVSInventories.class_eval( '
@@ -77,6 +78,7 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
+    Entities.load_all
     assert_equal '121201-', CVSInventories.match_by_date('121201').iname
   end
   
@@ -90,7 +92,7 @@ class TC_Migration < Test::Unit::TestCase
         value_date :date
         value_str :i_name
       end
-  
+
       def migration_1_raw( inv )
         dputs(1){"rename: Adjusting inv #{inv.inspect}"}
         inv._i_name = inv._iname
@@ -99,7 +101,8 @@ class TC_Migration < Test::Unit::TestCase
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
-    
+
+    Entities.load_all
     assert_equal 'comp 01', CVSInventories.match_by_date('121201').i_name
   end
   
@@ -118,8 +121,9 @@ class TC_Migration < Test::Unit::TestCase
 
       RPCQooxdooService.add_new_service( CVSInventories,
         "Entities.CVSInventories" )
-      ')    
+      ')
 
+    Entities.load_all
     cvs = CVSInventories.match_by_date('121201')
     assert_equal 'comp 01', cvs.i_name
   end

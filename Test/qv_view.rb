@@ -31,13 +31,26 @@ class TC_View < Test::Unit::TestCase
     RPCQooxdooHandler.request(1, service, method, args, SimulWebReq)
   end
 
+  def make_list(configs = [])
+    ([%w(BView BView),
+      %w(CView CView),
+      %w(CourseShow CourseShow),
+      %w(AView AView),
+      %w(PrintView PrintView)] +
+        configs.collect { |c|
+          %W(ConfigView#{c} ConfigView#{c}) }).sort
+  end
+
   def test_order
     View.update_configured_all
     reply = request('View', 'list', [['0.1']])
     dputs(1) { reply['result'].inspect }
-    assert_equal [%w(BView BView), %w(CView CView),
+    assert_equal [%w(BView BView),
+                  %w(CView CView),
                   %w(ConfigView2 ConfigView2),
-                  %w(CourseShow CourseShow), %w(AView AView)],
+                  %w(CourseShow CourseShow),
+                  %w(PrintView PrintView),
+                  %w(AView AView)],
                  reply['result'][0][:data][:views]
   end
 
@@ -169,15 +182,6 @@ class TC_View < Test::Unit::TestCase
     params = View.CourseShow.parse_request(0, 0, ['test', {'one' => 2,
                                                            'teacher' => @surf.id}])
     assert_equal @surf.id, params[1]['teacher']
-  end
-
-  def make_list(configs = [])
-    ([%w(BView BView),
-      %w(CView CView),
-      %w(CourseShow CourseShow),
-      %w(AView AView)] +
-        configs.collect { |c|
-          %W(ConfigView#{c} ConfigView#{c}) }).sort
   end
 
   def test_configured
