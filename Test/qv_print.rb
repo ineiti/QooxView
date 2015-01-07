@@ -26,13 +26,18 @@ class TC_Print < Test::Unit::TestCase
       OpenPrint.print_nup_duplex( [card_1_pdf], 'name-nup')
   end
 
+  def test_print_formulas
+    op = OpenPrint.new('Files/print_formulas_2.ods')
+    op.print([%w(101 1), %w(102 2), %w(1002 1), %w(1003 2),
+             %w(2010-08-20 2015-01-07)])
+  end
+
   def test_openprint
     @admin = Entities.Persons.create( :login_name => 'admin', :password => 'super123',
                                       :permissions => ['default'] )
     @josue = Entities.Persons.create( :login_name => 'josue', :password => 'super',
                                       :permissions => ['default'] )
 
-    RPCQooxdooService.services.inspect
     mm = RPCQooxdooService.services['View.PrintView']
     sa = Sessions.create( @admin )
     sj = Sessions.create( @josue )

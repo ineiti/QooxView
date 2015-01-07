@@ -34,7 +34,7 @@ class OpenPrint
     print(fields.collect { |k, v| [/--#{k}--/, v] }, counter, name)
   end
 
-  def print(fields, counter = nil, name = nil)
+  def print(fields = [], counter = nil, name = nil)
     dputs(3) { "New print for -#{@file.inspect}-" }
     if name
       tmp_file = "/tmp/#{replace_accents(name)}.#{@base.sub(/.*\./, '')}"
@@ -49,9 +49,12 @@ class OpenPrint
     FileUtils::cp(@file, tmp_file)
     Zip::File.open(tmp_file) { |z|
       doc = z.read('content.xml').force_encoding(Encoding::UTF_8)
-      fields.each { |f|
-        doc.gsub!(f[0], f[1].to_s)
+      fields.each { |old, new|
+        doc.gsub!(old, new.to_s)
       }
+      # Replace dates that need to be calculated with a '_'
+      doc.gsub!(/(table:formula=[^<>]*date-value=").*?"/, '\1_\2"')
+      puts doc.split('><').join("\n")
       z.get_output_stream('content.xml') { |f|
         f.write(doc)
       }
