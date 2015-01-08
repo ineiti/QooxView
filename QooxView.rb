@@ -92,24 +92,26 @@ end
 
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
-SQLITE3_OBJ=QOOXVIEW_DIR + '/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o'
+if false
+  SQLITE3_OBJ=QOOXVIEW_DIR + '/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o'
 
 # Test for compilation of sqlite3
-if not File.exists? SQLITE3_OBJ
-  puts "We'll have to compile the sqlite3-library, else it probably won't work."
-  print 'Try to compile sqlite3? [Y/n] '
-  if gets.chomp.downcase != 'n'
-    install= "#{ QOOXVIEW_DIR }/Config/install"
-    puts "Path is #{install}"
-    %x[ #{install} ]
-    puts 'Finished'
-    if File.exists? SQLITE3_OBJ
-      print 'Seems to be successful - press <ENTER> to continue '
-      gets
-    else
-      puts 'Compilation failed - if you want to try anyway, enter the following command:'
-      puts "touch #{ SQLITE3_OBJ }"
-      exit
+  if not File.exists? SQLITE3_OBJ
+    puts "We'll have to compile the sqlite3-library, else it probably won't work."
+    print 'Try to compile sqlite3? [Y/n] '
+    if gets.chomp.downcase != 'n'
+      install= "#{ QOOXVIEW_DIR }/Config/install"
+      puts "Path is #{install}"
+      %x[ #{install} ]
+      puts 'Finished'
+      if File.exists? SQLITE3_OBJ
+        print 'Seems to be successful - press <ENTER> to continue '
+        gets
+      else
+        puts 'Compilation failed - if you want to try anyway, enter the following command:'
+        puts "touch #{ SQLITE3_OBJ }"
+        exit
+      end
     end
   end
 end
@@ -266,8 +268,8 @@ class Fixnum
     end
   end
 
-  def to_MB( label = 'MB')
-    "#{( self / 1_000_000).separator} #{label}"
+  def to_MB(label = 'MB')
+    "#{(self / 1_000_000).separator} #{label}"
   end
 end
 
@@ -278,8 +280,8 @@ class Bignum
     end
   end
 
-  def to_MB( label = 'MB')
-    "#{( self / 1_000_000).separator} #{label}"
+  def to_MB(label = 'MB')
+    "#{(self / 1_000_000).separator} #{label}"
   end
 end
 
@@ -364,7 +366,7 @@ module QooxView
           dputs(2) { "potfile is #{potfile.inspect}, paths is #{paths.collect { |p| Dir[p] }}" }
           #GetText::Tools::XGetText.run( paths.collect{|p| Dir[p] }.flatten.concat( [ "-o", "#{potfile}" ] ) )
           GetText::Tools::XGetText.run(*paths.collect { |p| Dir[p] }.concat(
-              %W(-o #{potfile})).flatten)
+                                           %W(-o #{potfile})).flatten)
           if a.length > 0
             pofile = "po/#{$name}-#{a}.po"
             if File.exists? pofile
