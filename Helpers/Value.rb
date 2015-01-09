@@ -107,8 +107,8 @@ class Value
         fe_type = 'list'
         values = []
         if args.has_key?(:all) and
-            ((! args.has_key?(:session)) or session)
-          dputs(3) { "will search_all for #{eclass.name} in #{@name}" }
+            ((!args.has_key?(:session)) or session)
+          ddputs(3) { "will search_all for #{eclass.name} in #{@name}: " }
           e_all = eclass.search_all_
           values = e_all.select { |e|
             begin
@@ -175,7 +175,7 @@ class Value
           when :multi
             dputs(3) { "Getting entities for #{@list_type}-#{eclass.class.inspect}-" +
                 "#{p.inspect}" }
-            ret = p.collect{|el| eclass.match_by(eclass.data_field_id, el) }
+            ret = p.collect { |el| eclass.match_by(eclass.data_field_id, el) }
             dputs(3) { "And found #{ret.inspect}" }
             if not ret and @args.has_key? :empty
               dputs(3) { "Converting nil to 0 as we're an entity_empty" }
