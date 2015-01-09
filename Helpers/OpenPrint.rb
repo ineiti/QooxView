@@ -54,7 +54,6 @@ class OpenPrint
       }
       # Replace dates that need to be calculated with a '_'
       doc.gsub!(/(table:formula=[^<>]*date-value=").*?"/, '\1_\2"')
-      puts doc.split('><').join("\n")
       z.get_output_stream('content.xml') { |f|
         f.write(doc)
       }
