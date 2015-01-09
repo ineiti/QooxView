@@ -328,8 +328,8 @@ class View < RPCQooxdooService
     a = []
     @data_class.blocks.each { |k, v|
       a.push(*v.select { |b| b.name == name }.collect { |e|
-        Value.simple(e.dtype, e.name, 'id')
-      })
+               Value.simple(e.dtype, e.name, 'id')
+             })
     }
     show_in_field a
   end
@@ -339,11 +339,11 @@ class View < RPCQooxdooService
   def show_button(*buttons)
     do_container_end if @actual.last == 'fields'
     do_container(buttons.length > 1 ? 'hbox' : 'vbox', proc {
-      buttons.each { |b|
-        #        @layout.last.push [ :button, b, b, nil ]
-        @layout.last.push Value.simple(:button, b)
-      }
-    }
+                                                       buttons.each { |b|
+                                                         #        @layout.last.push [ :button, b, b, nil ]
+                                                         @layout.last.push Value.simple(:button, b)
+                                                       }
+                                                     }
     )
     do_container_end if @actual.last == 'group'
   end
@@ -352,9 +352,9 @@ class View < RPCQooxdooService
     dputs(4) { "Adding a split-button #{name} with menu #{menu.inspect}" }
     do_container_end if @actual.last == 'fields'
     do_container('vbox', proc {
-      @layout.last.push Value.new([:split_button],
-                                  [name, {:menu => menu}])
-    }
+                         @layout.last.push Value.new([:split_button],
+                                                     [name, {:menu => menu}])
+                       }
     )
     do_container_end if @actual.last == 'group'
   end
@@ -820,18 +820,17 @@ class View < RPCQooxdooService
   # the objects they once were - which makes life much more easy... 
   def parse_request(method, session, params)
     dputs(3) { "Parsing #{params.inspect}" }
-    if params[1]
-      layout_recurse.each { |l|
-        if params[1].has_key? l.name.to_s
-          value = params[1][l.name.to_s]
-          rep = l.parse(value)
-          if rep
-            dputs(3) { "Converted #{value} to #{rep.to_s}" }
-            params[1][l.name.to_s] = rep
-          end
+    return params if params.length == 0
+    layout_recurse.each { |l|
+      if params.last.has_key? l.name.to_s
+        value = params.last[l.name.to_s]
+        rep = l.parse(value)
+        if rep
+          dputs(3) { "Converted #{value} to #{rep.to_s}" }
+          params.last[l.name.to_s] = rep
         end
-      }
-    end
+      end
+    }
     return params
   end
 
