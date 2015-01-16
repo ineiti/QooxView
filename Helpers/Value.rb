@@ -108,7 +108,7 @@ class Value
         values = []
         if args.has_key?(:all) and
             ((!args.has_key?(:session)) or session)
-          ddputs(3) { "will search_all for #{eclass.name} in #{@name}: " }
+          dputs(3) { "will search_all for #{eclass.name} in #{@name}: " }
           e_all = eclass.search_all_
           values = e_all.select { |e|
             begin
