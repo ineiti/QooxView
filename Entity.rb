@@ -447,7 +447,13 @@ class Entity
     dputs(5) { "Entity#method_missing #{cmd} in #{self.class.name}," +
         " with #{args.inspect} and #{args[0].class}" }
     field = cmd.to_s
-    if not @proxy.get_value(field.sub(/^_/, '').sub(/=$/, ''))
+    field_clean = field.sub(/^_/, '').sub(/=$/, '')
+    if not @proxy.get_value(field_clean)
+      case field_clean
+        when /^listp_(.*)/
+          ddputs(3){"Returning listp for #{cmd} - #{$1}"}
+          return [self.id, self.send($1)]
+      end
       dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
           "#{@proxy.blocks.inspect}" }
       if field =~ /^_/
