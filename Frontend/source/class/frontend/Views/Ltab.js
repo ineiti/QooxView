@@ -259,12 +259,13 @@ qx.Class.define("frontend.Views.Ltab", {
                         this.setFadeIn("parent,child,windows")
                         break;
                     case "window_show":
-                        enable = false;
+                        //enable = false;
                         aform.fields.window_show(res.data);
                         this.setFadeIn("windows")
                         break;
                     case "end_of_req":
                         //alert( "eor" );
+                        dbg(2, "enable: " + enable + ", queuelen: " + rpc.RpcQueue.length)
                         if (enable && rpc.RpcQueue.length == 0) {
                             //alert( "enabling" )
                             dbg(2, "Fading in")
@@ -317,7 +318,7 @@ qx.Class.define("frontend.Views.Ltab", {
                 this.parentLtab.parentFadeOut();
             } else {
                 this.fadeOut();
-                this.timer.pause();
+                //this.timer.pause();
 
                 var child = null;
                 if (this.form && this.form.fields &&
@@ -329,12 +330,16 @@ qx.Class.define("frontend.Views.Ltab", {
         },
 
         fadeOut: function () {
-            if (!this.form || !this.form.fields || !this.fadedin) {
+            if (!this.form || !this.form.fields ) {
+                return
+            }
+            dbg(5,"fading out windows");
+            this.form.fields.windows_fade_to(0.5);
+            if (!this.fadedin){
                 return
             }
             this.fadedin = false;
             this.form.fields.setEnabled(false);
-            this.form.fields.windows_fade_to(0.5);
             if (this.tabs) {
                 this.tabs.setEnabled(false);
             }
