@@ -118,6 +118,7 @@ module VTListPane
   end
   
   def rpc_list_choice_vtlistpanel( session, name, data )
+    dputs_func
     ret = if @update and @update == :before
       rpc_update( session )
     else
