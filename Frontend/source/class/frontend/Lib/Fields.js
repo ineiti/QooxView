@@ -544,6 +544,9 @@ qx.Class.define("frontend.Lib.Fields", {
                         //field_element.setValueStr( "-" )
                         //field_element.setReadOnly(true);
                     }
+                    if (params.height){
+                        field_element.setHeight(params.height)
+                    }
                     break;
                 case "date":
                     field_element = new qx.ui.form.DateField();

@@ -37,17 +37,18 @@ class Welcome < View
   def rpc_show( session )
     dputs( 3 ){ self.inspect }
     if @no_login
-      dputs( 2 ){ "No login is enabled" }
+      dputs( 2 ){ 'No login is enabled' }
+      dp session
       return reply( :session_id, session.sid ) + 
         View.rpc_list( session )
     else
-      dputs( 2 ){ "Login is enabled" }
+      dputs( 2 ){ 'Login is enabled' }
       super( session )
     end
   end
   
   def self.nologin
-    dputs( 2 ){ "Going for no login" }
+    dputs( 2 ){ 'Going for no login' }
     $config.__Views.__Welcome.__no_login = true
     View.Welcome.no_login = true
   end

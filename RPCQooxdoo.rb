@@ -152,6 +152,8 @@ class RPCQooxdooHandler
 
   # Replies to a request
   def self.request(id, service, method, params, web_req = nil)
+    #dp params[0]
+    #dp Sessions.search_all_
     session = Sessions.match_by_sid(params[0].shift) || Sessions.create
     dputs(3) { "session is #{session.inspect}" }
 
