@@ -38,7 +38,7 @@ class Welcome < View
     dputs( 3 ){ self.inspect }
     if @no_login
       dputs( 2 ){ 'No login is enabled' }
-      dp session
+      session
       return reply( :session_id, session.sid ) + 
         View.rpc_list( session )
     else
