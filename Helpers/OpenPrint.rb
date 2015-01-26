@@ -126,7 +126,7 @@ module PrintButton
       dputs(2) { "Getting printers for #{ip}" }
       call_lpstat(ip)
     else
-      dputs(2) { "Not getting remote for #{ip}" }
+      dputs(3) { "Not getting remote for #{ip}" }
       []
     end
   end
