@@ -452,7 +452,7 @@ class Entity
     if not @proxy.get_value(field_clean)
       case field_clean
         when /^listp_(.*)/
-          ddputs(3){"Returning listp for #{cmd} - #{$1}"}
+          dputs(3){"Returning listp for #{cmd} - #{$1}"}
           return [self.id, self.send($1)]
       end
       dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
