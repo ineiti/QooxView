@@ -272,6 +272,13 @@ class Entities < RPCQooxdooService
     ret.flatten.collect { |c| c.to_sym }
   end
 
+  # Returns non-list field-names
+  def get_non_list_field_names(b = @blocks)
+    get_field_names(b).select { |f|
+      !%w(list select entity).index(get_value(f).dtype)
+    }
+  end
+
   # Gets all field names of a block
   def get_block_fields(block)
     return [] unless @blocks.has_key? block.to_sym
@@ -452,7 +459,7 @@ class Entity
     if not @proxy.get_value(field_clean)
       case field_clean
         when /^listp_(.*)/
-          dputs(3){"Returning listp for #{cmd} - #{$1}"}
+          dputs(3) { "Returning listp for #{cmd} - #{$1}" }
           return [self.id, self.send($1)]
       end
       dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +

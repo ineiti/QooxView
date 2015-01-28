@@ -30,9 +30,9 @@ The following buttons are defined:
 =end
 
 module VTListPane
-  def vtlp_setup( field, method, *args )
+  def vtlp_setup(field, method, *args)
     @vtlp_field = field.to_s
-    @vtlp_method = method.to_s.sub( /^rev_/, "" )
+    @vtlp_method = method.to_s.sub(/^rev_/, "")
     if args.length > 0 and args[0].class == String
       @vtlp_method_list = args.shift
     else
@@ -44,110 +44,110 @@ module VTListPane
       {}
     end
   end
-  
-  def vtlp_list( field, method, *args )
+
+  def vtlp_list(field, method, *args)
     @vtlp_use_entity = false
-    args_hash = vtlp_setup( field, method, *args )
-    show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}", 
-      args_hash.merge( :callback => true )
+    args_hash = vtlp_setup(field, method, *args)
+    show_list_single field, "Entities.#{@data_class.class.to_s}.#{@vtlp_method_list}",
+                     args_hash.merge(:callback => true)
     self.class_eval <<-RUBY
       def rpc_list_choice_#{field}( session, data )
         rpc_list_choice_vtlistpanel( session, "#{field}", data )
       end
     RUBY
   end
-  
-  def vtlp_list_entity( field, entity, method, *args )
+
+  def vtlp_list_entity(field, entity, method, *args)
     @vtlp_use_entity = true
-    args_hash = vtlp_setup( field, method, *args )
+    args_hash = vtlp_setup(field, method, *args)
     show_entity field, entity, 'single',
-      @vtlp_method, 
-      args_hash.merge( :callback => true )    
+                @vtlp_method,
+                args_hash.merge(:callback => true)
   end
-  
-  def vtlp_get_entity( d )
-    @vtlp_use_entity ? d : @data_class.get_data_instance( d[@vtlp_field][0] )
+
+  def vtlp_get_entity(d)
+    @vtlp_use_entity ? d : @data_class.get_data_instance(d[@vtlp_field][0])
   end
-  
-  def vtlp_update_list( session, choice = nil )
-    list = @data_class.send( @vtlp_method_list )
-    rep = reply( :empty_fields, @vtlp_field ) + if choice
-      reply( :update, @vtlp_field => list + [choice] )
-    else
-      reply( :update, @vtlp_field => list )
-    end
-    
+
+  def vtlp_update_list(session, choice = nil)
+    list = @data_class.send(@vtlp_method_list)
+    rep = reply(:empty_fields, @vtlp_field) + if choice
+                                                reply(:update, @vtlp_field => list + [choice])
+                                              else
+                                                reply(:update, @vtlp_field => list)
+                                              end
+
     if @update
-      rep += rpc_update( session )
+      rep += rpc_update(session)
     end
     rep
   end
-  
-  def rpc_button_new( session, data )
-    vtlp_update_list( session )
+
+  def rpc_button_new(session, data)
+    vtlp_update_list(session)
   end
-  
-  def rpc_button_delete( session, data )
-    dputs( 3 ){ "session, data: #{[session, data.inspect].join(':')}" }
-    id = vtlp_get_entity( data )
-    dputs( 3 ){ "Got #{id.inspect}" }
+
+  def rpc_button_delete(session, data)
+    dputs(3) { "session, data: #{[session, data.inspect].join(':')}" }
+    id = vtlp_get_entity(data)
+    dputs(3) { "Got #{id.inspect}" }
     if id
-      dputs( 2 ){ "Deleting entry #{id}" }
+      dputs(2) { "Deleting entry #{id}" }
       id.delete
     end
-    
-    vtlp_update_list( session )
+
+    vtlp_update_list(session)
   end
-  
-  def rpc_button_save( session, data )
-    field = vtlp_get_entity( data )
-    dputs( 2 ){ "Field is #{field.inspect}, setting data #{data.inspect}" }
+
+  def rpc_button_save(session, data)
+    field = vtlp_get_entity(data)
+    dputs(2) { "Field is #{field.inspect}, setting data #{data.inspect}" }
     selection = data[@vtlp_field][0]
     if field
-      field.data_set_hash( data.to_sym )
+      field.data_set_hash(data.to_sym)
     else
-      if data[ @vtlp_method ].to_s.length > 0
-        n = @data_class.create( data.to_sym )
+      if data[@vtlp_method].to_s.length > 0
+        n = @data_class.create(data.to_sym)
         selection = n.id
       else
-        dputs( 0 ){ "Didn't have a #{@vtlp_method}"}
+        dputs(0) { "Didn't have a #{@vtlp_method}" }
       end
     end
-    dputs(3){"vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}"}
-    vtlp_update_list( session, selection )
+    dputs(3) { "vtlp_method is #{@vtlp_method} - selection is #{selection.inspect}" }
+    vtlp_update_list(session, selection)
   end
-  
-  def rpc_list_choice_vtlistpanel( session, name, data )
+
+  def rpc_list_choice_vtlistpanel(session, name, data)
     #dputs_func
     ret = if @update and @update == :before
-      rpc_update( session )
-    else
-      []
-    end
-    dputs( 3 ){ "rpc_list_choice with #{name} - #{data.inspect}" }
+            rpc_update(session)
+          else
+            []
+          end
+    dputs(3) { "rpc_list_choice with #{name} - #{data.inspect}" }
     if name == @vtlp_field
       # TODO: empty only fields from @data_class
-      ret = reply( :empty )
+      ret = reply(:empty, @data_class.get_non_list_field_names)
       item = if @vtlp_use_entity
-        field_value = data[name].get_unique
-        data[name]
-      else
-        field_value = data[name][0]
-        dputs( 4 ){ "replying with field_value of #{field_value}" }
-        vtlp_get_entity(data)
-      end
-      dputs( 4 ){ "item is #{item.inspect}" }
+               field_value = data[name].get_unique
+               data[name]
+             else
+               field_value = data[name][0]
+               dputs(4) { "replying with field_value of #{field_value}" }
+               vtlp_get_entity(data)
+             end
+      dputs(4) { "item is #{item.inspect}" }
       if item
-        ret += reply( :update, item.to_hash )
+        ret += reply(:update, item.to_hash)
       end
-      ret += reply( :update, {@vtlp_field.to_sym => [field_value] } )
+      ret += reply(:update, {@vtlp_field.to_sym => [field_value]})
       session.s_data[@vtlp_field.to_sym] = field_value
     end
     if @update and @update != :before
-      ret += rpc_update( session )
+      ret += rpc_update(session)
     end
 
-    dputs( 3 ){ "reply is #{ret.inspect}" }
+    dputs(3) { "reply is #{ret.inspect}" }
     ret
   end
 end

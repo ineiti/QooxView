@@ -53,7 +53,7 @@ end
 class String
   def tab_parts
     res = self.match(/^([A-Z][a-z]*)([A-Z]*[a-z]*)/)
-    return res ? res[1, 2] : ["", ""]
+    return res ? res[1, 2] : ['', '']
   end
 
   def tab_name
@@ -147,7 +147,7 @@ class View < RPCQooxdooService
 
       # Clean up eventual left-overs from a simple (or very complicated) layout
       while @layout.size > 1
-        dputs(5) { "Cleaning up" }
+        dputs(5) { 'Cleaning up' }
         do_container_end
       end
       dputs(5) { "Layout is #{@layout.inspect}" }
@@ -199,7 +199,7 @@ class View < RPCQooxdooService
   end
 
   def do_box(btype, arg, b)
-    if @actual[-1] == "fields"
+    if @actual[-1] == 'fields'
       dputs(0) { "Can't put a VBox or a HBox in a field!" }
       exit
     end
@@ -207,7 +207,7 @@ class View < RPCQooxdooService
   end
 
   def do_boxg(btype, arg, b)
-    if @actual[-1] == "fields"
+    if @actual[-1] == 'fields'
       dputs(0) { "Can't put a VBox or a HBox in a field!" }
       exit
     end
@@ -410,7 +410,7 @@ class View < RPCQooxdooService
   end
 
   def rpc_list(session)
-    dputs(5) { "rpc_list" }
+    dputs(5) { 'rpc_list' }
     View.rpc_list(session)
   end
 
@@ -420,7 +420,7 @@ class View < RPCQooxdooService
 
   def self.list(session, tabs = nil) # :nodoc:
     if not session
-      dputs(2) { "No session given, returning empty" }
+      dputs(2) { 'No session given, returning empty' }
       return {:views => []}
     end
     dputs(4) { "Found user #{session.owner.inspect} for session_id #{session_id}" }
@@ -449,7 +449,7 @@ class View < RPCQooxdooService
         dputs(5) { "Calculating doubles for #{t}, found #{vlen}" }
         if vlen == 1
           dputs(3) { "Deleting tab #{t}" }
-          views.delete_if { |v| v.name.tab_name == t and v.name.sub_name == "Tabs" }
+          views.delete_if { |v| v.name.tab_name == t and v.name.sub_name == 'Tabs' }
         end
       }
       if main_tabs.length == 1
@@ -479,7 +479,7 @@ class View < RPCQooxdooService
   end
 
   def self.list_views(list = @@list)
-    {:views => list.select { |l| l.name != "Welcome" }.sort { |s, t|
+    {:views => list.select { |l| l.name != 'Welcome' }.sort { |s, t|
       #dputs( 3 ){ "#{s.order} - #{t.order}" }
       #dputs( 4 ){ "#{s.name} - #{t.name}" }
       order = s.order.to_i <=> t.order.to_i
@@ -521,8 +521,8 @@ class View < RPCQooxdooService
     # user = Entities.Persons.match_by_session_id( session_id )
     # TODO: test for permission
 
-    dputs(5) { "entered rpc_show" }
-    reply("show",
+    dputs(5) { 'entered rpc_show' }
+    reply('show',
           {:layout => layout_eval,
            :data_class => @data_class.class.to_s,
            :view_class => self.class.to_s}) +
@@ -530,13 +530,13 @@ class View < RPCQooxdooService
   end
 
   def rpc_list_tabs(session)
-    dputs(3) { "Showing tabs for @name" }
+    dputs(3) { 'Showing tabs for @name' }
     reply('list', View.list(session, @name_tab))
   end
 
   def update_layout(session)
     return [] if not @layout
-    dputs(3) { "Updating layout" }
+    dputs(3) { 'Updating layout' }
     ret = []
     layout_recurse(@layout).each { |l|
       case l.dtype
@@ -559,22 +559,22 @@ class View < RPCQooxdooService
     #    reply( 'update', layout_recurse( @layout ))
     ret = []
     if @update_layout
-      dputs(3) { "updating layout" }
+      dputs(3) { 'updating layout' }
       ret += update_layout(session)
     end
     if @auto_update > 0
-      dputs(3) { "auto-updating" }
-      ret += reply("auto_update",
+      dputs(3) { 'auto-updating' }
+      ret += reply('auto_update',
                    @auto_update * (@auto_update_send_values ? -1 : 1))
     end
     if @auto_update_async > 0
-      dputs(3) { "auto-updating async" }
-      ret += reply("auto_update_async",
+      dputs(3) { 'auto-updating async' }
+      ret += reply('auto_update_async',
                    @auto_update_async * (@auto_update_send_values ? -1 : 1))
     end
     if @debug
-      dputs(4) { "debugging" }
-      ret += reply("debug", 1)
+      dputs(4) { 'debugging' }
+      ret += reply('debug', 1)
     end
     if @update
       update = rpc_update(session)
@@ -655,8 +655,8 @@ class View < RPCQooxdooService
 
   # Send the current values that are displayed
   def rpc_update(session)
-    dputs(4) { "rpc_update" }
-    reply("update", update(session))
+    dputs(4) { 'rpc_update' }
+    reply('update', update(session))
   end
 
   def rpc_update_async(session)
@@ -665,7 +665,7 @@ class View < RPCQooxdooService
 
   # Returns the data for the fields as a hash
   def update(session)
-    dputs(4) { "update" }
+    dputs(4) { 'update' }
   end
 
   # Make a flat array containing the elements of the layout
@@ -799,7 +799,7 @@ class View < RPCQooxdooService
     dputs(5) { "Method missing: #{cmd}" }
     case cmd_str
       when /^show_/
-        cmds = cmd_str.split("_")[1..-1]
+        cmds = cmd_str.split('_')[1..-1]
         show_add(cmds, args)
       else
         super(cmd, args)
@@ -844,7 +844,7 @@ class View < RPCQooxdooService
     @@list.select { |l|
       l.name =~ /^#{@name}/
     }.collect { |l|
-      dputs(2) { "Collected " + l.name }
+      dputs(2) { 'Collected ' + l.name }
       l.name
     }
   end

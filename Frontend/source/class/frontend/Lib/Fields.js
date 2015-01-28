@@ -151,7 +151,7 @@ function setValueBold(val) {
     this.valueBold = val
     text = val.split("\n").join("<br>")
     this.setValue("<table bgcolor='ffffff'><tr><td><b>" + text +
-        "</b></td></tr></table>")
+    "</b></td></tr></table>")
 }
 
 function getValueBold() {
@@ -217,17 +217,16 @@ function setValueArrayTable(val) {
 function getValueTable() {
     var ret = [];
     var vids = this.valueIds;
+    var model = this.getTableModel();
     this.getSelectionModel().iterateSelection(function (ind) {
+        var values = model.getRowDataAsMap(ind);
         if (vids) {
-            //alert( "getting valueIds of " + ( ind + 1 ) + " in " +
-            //  print_a( vids ) )
-            ret.push(vids[ind])
-        } else {
-            ret.push(ind);
+            values.element_id = vids[ind];
         }
+        ret.push(values);
     });
-    //alert( "Returning " + print_a( ret ) + " with valueIds of " +
-    //  print_a( vids ) )
+    //alert("Returning " + print_a(ret) + " with valueIds of " +
+    //print_a(vids))
     return ret;
 }
 
@@ -373,7 +372,7 @@ qx.Class.define("frontend.Lib.Fields", {
             this.updating = true;
             if (fields) {
                 if (!( fields instanceof Array )) {
-                    fields = [ fields ]
+                    fields = [fields]
                 }
                 dbg(5, "Deleting fields " + print_a(fields));
                 for (var f = 0; f < fields.length; f++) {
@@ -410,7 +409,7 @@ qx.Class.define("frontend.Lib.Fields", {
             this.updating = true;
 
             dbg(5, "Clearing selections of " + print_a(this.fields) +
-                " : " + this.fields.length);
+            " : " + this.fields.length);
             for (var f in this.fields) {
                 var field = this.fields[f];
                 if (field.setSelection) {
@@ -502,10 +501,10 @@ qx.Class.define("frontend.Lib.Fields", {
             dbg(5, "addElement " + type + " - " + label + " - " + print_a(params));
             switch (type) {
                 // TODO: differenciate the different types
-                case "str":
-                case "tel":
                 case "array":
                 case "int":
+                case "str":
+                case "tel":
                     field_element = new qx.ui.form.TextField("");
                     if (params.id || params.callback) {
                         do_callback = true;
@@ -528,53 +527,6 @@ qx.Class.define("frontend.Lib.Fields", {
                         field_element.setTextAlign("right");
                     }
                     break;
-                case "text":
-                    field_element = new qx.ui.form.TextArea("");
-                    field_element.setAutoSize(false);
-                    field_element.setWidth(300);
-                    enter_klicks = false;
-                    if (params.ro) {
-                        field_element.setReadOnly(true);
-                    }
-                    if (params.ro) {
-                        field_element = new qx.ui.basic.Label("");
-                        field_element.setRich(true)
-                        field_element.setValueStr = setValueBold
-                        field_element.getValueSpecial = getValueBold
-                        //field_element.setValueStr( "-" )
-                        //field_element.setReadOnly(true);
-                    }
-                    if (params.height){
-                        field_element.setHeight(params.height)
-                    }
-                    break;
-                case "date":
-                    field_element = new qx.ui.form.DateField();
-                    field_element.setDateFormat(new qx.util.format.DateFormat("dd.MM.yyyy"));
-                    field_element.getValueSpecial = getValueDate;
-                    field_element.setValueStr = setValueDate;
-                    if (params.callback) {
-                        do_callback = true;
-                        listener = "changeValue";
-                    }
-                    if (params.ro) {
-                        field_element.setEnabled(false);
-                    }
-                    break;
-                case "info":
-                    //field_element = new qx.ui.form.TextField(params.text);
-                    //field_element.setReadOnly(true);
-
-                    field_element = new qx.ui.basic.Label(params.text);
-                    field_element.setRich(true)
-                    field_element.setWrap(true)
-                    field_element.setValueStr = setValueBold
-                    field_element.getValueSpecial = getValueBold
-
-                    break;
-                case "pass":
-                    field_element = new qx.ui.form.PasswordField("");
-                    break;
                 case "button":
                     do_callback = true;
                     listener = "execute";
@@ -593,48 +545,40 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                     break;
-                case "split_button":
-                    do_callback = true;
-                    listener = "execute";
-                    field_element = new qx.ui.form.SplitButton(label);
-
-                    field_element.getData = function () {
-                    };
-                    field_element.setAllowGrowY(false);
-                    field_element.setValueArray = function (l) {
-                        var fe = this;
-                        if (typeof(l) === "string") {
-                            fe.setLabel(l)
-                        } else if (l.length > 0) {
-                            fe.setLabel(l.shift())
-                            var menu = new qx.ui.menu.Menu;
-                            for (var i = 0; i < l.length; i++) {
-                                var n = l[i]
-                                var b = new qx.ui.menu.Button(n);
-                                b.addListener("execute", function (e) {
-                                    fe.fireDataEvent("execute", this.getLabel())
-                                }, b)
-                                menu.add(b);
-                            }
-                            fe.setMenu(menu);
-                        }
-                    }
-                    field_element.setValueArray([label].concat(params.menu))
+                case "composite":
+                    field_element = new qx.ui.container.Composite();
                     show_label = false;
-                    if (!button_default || params.def) {
-                        button_default = field_element;
-                        for (var i in this.fields) {
-                            if (!this.fields[i].button_default) {
-                                this.fields[i].button_default = button_default;
-                            }
-                        }
+                    listener = null;
+                    break;
+                case "date":
+                    field_element = new qx.ui.form.DateField();
+                    field_element.setDateFormat(new qx.util.format.DateFormat("dd.MM.yyyy"));
+                    field_element.getValueSpecial = getValueDate;
+                    field_element.setValueStr = setValueDate;
+                    if (params.callback) {
+                        do_callback = true;
+                        listener = "changeValue";
+                    }
+                    if (params.ro) {
+                        field_element.setEnabled(false);
                     }
                     break;
-                case "html_embed":
-                    field_element = new qx.ui.embed.Html();
-                    field_element.setHtml(params.text);
-                    field_element.setValue = field_element.setHtml;
-                    show_label = false;
+                case "fromto":
+                    field_element = new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
+                    field_element.add(this.createDoW());
+                    var hours = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
+                    hours.add(this.createHours());
+                    hours.add(new qx.ui.basic.Label("-"));
+                    hours.add(this.createHours());
+                    field_element.add(hours);
+                    field_element.getValue = getValueFromTo;
+                    field_element.setValueStr = setValueFromTo;
+                    break;
+                case "hidden":
+                    this.fields[name] = new qx.ui.basic.Label(params);
+                    if (params.id) {
+                        this.field_id = name;
+                    }
                     break;
                 case "html":
                     field_element = new qx.ui.basic.Label().set({
@@ -645,18 +589,22 @@ qx.Class.define("frontend.Lib.Fields", {
                     });
                     show_label = false;
                     break;
-                case "select":
-                    field_element = new qx.ui.form.SelectBox();
-                    // There are labels to put in the select-box
-                    if (params.list_values) {
-                        while (params.list_values.length > 0) {
-                            field_element.add(new qx.ui.form.ListItem(params.list_values.shift()));
-                        }
-                    }
-                    field_element.searchLabel = searchLabel;
-                    field_element.searchIndex = searchIndex;
-                    field_element.selectedIndex = selectedIndex;
-                    listener = "changeSelection";
+                case "html_embed":
+                    field_element = new qx.ui.embed.Html();
+                    field_element.setHtml(params.text);
+                    field_element.setValue = field_element.setHtml;
+                    show_label = false;
+                    break;
+                case "info":
+                    //field_element = new qx.ui.form.TextField(params.text);
+                    //field_element.setReadOnly(true);
+
+                    field_element = new qx.ui.basic.Label(params.text);
+                    field_element.setRich(true)
+                    field_element.setWrap(true)
+                    field_element.setValueStr = setValueBold
+                    field_element.getValueSpecial = getValueBold
+
                     break;
                 case "list":
                     if (params.list_type != "drop") {
@@ -702,10 +650,58 @@ qx.Class.define("frontend.Lib.Fields", {
                         do_callback = true;
                     }
                     break;
-                case "composite":
-                    field_element = new qx.ui.container.Composite();
+                case "pass":
+                    field_element = new qx.ui.form.PasswordField("");
+                    break;
+                case "select":
+                    field_element = new qx.ui.form.SelectBox();
+                    // There are labels to put in the select-box
+                    if (params.list_values) {
+                        while (params.list_values.length > 0) {
+                            field_element.add(new qx.ui.form.ListItem(params.list_values.shift()));
+                        }
+                    }
+                    field_element.searchLabel = searchLabel;
+                    field_element.searchIndex = searchIndex;
+                    field_element.selectedIndex = selectedIndex;
+                    listener = "changeSelection";
+                    break;
+                case "split_button":
+                    do_callback = true;
+                    listener = "execute";
+                    field_element = new qx.ui.form.SplitButton(label);
+
+                    field_element.getData = function () {
+                    };
+                    field_element.setAllowGrowY(false);
+                    field_element.setValueArray = function (l) {
+                        var fe = this;
+                        if (typeof(l) === "string") {
+                            fe.setLabel(l)
+                        } else if (l.length > 0) {
+                            fe.setLabel(l.shift())
+                            var menu = new qx.ui.menu.Menu;
+                            for (var i = 0; i < l.length; i++) {
+                                var n = l[i]
+                                var b = new qx.ui.menu.Button(n);
+                                b.addListener("execute", function (e) {
+                                    fe.fireDataEvent("execute", this.getLabel())
+                                }, b)
+                                menu.add(b);
+                            }
+                            fe.setMenu(menu);
+                        }
+                    }
+                    field_element.setValueArray([label].concat(params.menu))
                     show_label = false;
-                    listener = null;
+                    if (!button_default || params.def) {
+                        button_default = field_element;
+                        for (var i in this.fields) {
+                            if (!this.fields[i].button_default) {
+                                this.fields[i].button_default = button_default;
+                            }
+                        }
+                    }
                     break;
                 case "table":
                     var headings = params.headings;
@@ -750,8 +746,13 @@ qx.Class.define("frontend.Lib.Fields", {
                     table.setAllowStretchY(true);
                     table.setMaxHeight(height);
                     if (widths) {
+                        var width = 0;
                         for (var i = 0; i < widths.length; i++) {
+                            width += widths[i];
                             table.setColumnWidth(i, widths[i]);
+                        }
+                        if (!params.width) {
+                            params.width = width
                         }
                     }
                     //field_element = new qx.ui.container.Scroll();
@@ -781,26 +782,32 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
                     //params.flexheight = 1;
                     break;
-                case "hidden":
-                    this.fields[name] = new qx.ui.basic.Label(params);
-                    if (params.id) {
-                        this.field_id = name;
+                case "text":
+                    field_element = new qx.ui.form.TextArea("");
+                    field_element.setAutoSize(false);
+                    field_element.setWidth(300);
+                    enter_klicks = false;
+                    if (params.ro) {
+                        field_element.setReadOnly(true);
                     }
-                    break;
-                case "fromto":
-                    field_element = new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
-                    field_element.add(this.createDoW());
-                    var hours = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
-                    hours.add(this.createHours());
-                    hours.add(new qx.ui.basic.Label("-"));
-                    hours.add(this.createHours());
-                    field_element.add(hours);
-                    field_element.getValue = getValueFromTo;
-                    field_element.setValueStr = setValueFromTo;
+                    if (params.ro) {
+                        field_element = new qx.ui.basic.Label("");
+                        field_element.setRich(true)
+                        field_element.setValueStr = setValueBold
+                        field_element.getValueSpecial = getValueBold
+                        //field_element.setValueStr( "-" )
+                        //field_element.setReadOnly(true);
+                    }
+                    if (params.height) {
+                        field_element.setHeight(params.height)
+                    }
+                    if (params.width) {
+                        field_element.setWidth(params.width)
+                    }
                     break;
                 case "upload":
                     show_label = false;
-                    var do_callback = [ params.callback, this.callback ]
+                    var do_callback = [params.callback, this.callback]
                     field_element = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
                     var button = new com.zenesis.qx.upload.UploadButton(label);
                     field_element.add(button);
@@ -811,7 +818,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     var progress_label = new qx.ui.basic.Label("No file");
                     progress.add(progress_label);
                     field_element.add(progress);
-                    field_element.progress = [ pb, progress_label ]
+                    field_element.progress = [pb, progress_label]
                     field_element.setValue = function () {
                         //alert("Setting value" );
                         pb.setBackgroundColor("#ffffff");
@@ -832,8 +839,8 @@ qx.Class.define("frontend.Lib.Fields", {
                             var speed = Math.round(evt.getData() / diff / 1000) + "kBps"
                             if (value < 100) {
                                 progress_label.setValue("Done " + value.toString().rjust(3, "0") +
-                                    "% in " + elapsed + " (" + speed + "), " +
-                                    " left: " + ( Math.round(0.8 + diff * ( 100 / value - 1 )) ));
+                                "% in " + elapsed + " (" + speed + "), " +
+                                " left: " + ( Math.round(0.8 + diff * ( 100 / value - 1 )) ));
                             } else {
                                 progress_label.setValue("Waiting for browser");
                             }
@@ -953,7 +960,7 @@ qx.Class.define("frontend.Lib.Fields", {
                         field_element.addListener(listener[l], function (e) {
                             //alert( "Listener " + name + ":" + e + " for " + label )
                             dbg(4, "updating " + this.updating + " delay:" + delay +
-                                " delayTimer:" + this.delayTimer)
+                            " delayTimer:" + this.delayTimer)
                             // Supposing Javascript has only one executable thread!
                             if (!this.updating || (delay > 0 && this.delayTimer)) {
                                 dbg(5, "Listener: " + type + ":" + name + ":" + this.field_id);
@@ -1293,9 +1300,9 @@ qx.Class.define("frontend.Lib.Fields", {
             var selectBox = new qx.ui.form.SelectBox();
             for (var i = 0; i < 48; i++) {
                 var tempItem = new qx.ui.form.ListItem("" +
-                    twoDecimals(Math.floor(i / 2)) +
-                    ":" +
-                    twoDecimals((i % 2) * 30));
+                twoDecimals(Math.floor(i / 2)) +
+                ":" +
+                twoDecimals((i % 2) * 30));
                 selectBox.add(tempItem);
             }
             selectBox.setWidth(null);

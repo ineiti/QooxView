@@ -338,7 +338,7 @@ module StorageHandler
     dputs(3) { "Checking for migration_#{version} of #{@name}" }
     while self.respond_to?(vers_str = "migration_#{version}".to_sym) ||
         self.respond_to?(vers_str = "migration_#{version}_raw".to_sym)
-      dputs(2) { "Migrating #{@name} to version #{version}, calling #{vers_str}" }
+      log_msg :Migration, "Migrating #{@name} to version #{version}, calling #{vers_str}"
       dputs(4) { "Working on #{data.inspect}" }
       @data.each { |k, v|
         if vers_str.to_s =~ /_raw$/
@@ -355,7 +355,9 @@ module StorageHandler
       dputs(5) { "Data is now #{@data.inspect}" }
       mv.version = version
       version += 1
+      @changed = true
     end
+    @changed and save
   end
 
   def load
