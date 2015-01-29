@@ -57,7 +57,7 @@ qx.Class.define("frontend.Views.Ltab", {
             var dest = this.viewClass
             if (this.parentLtab) {
                 dest = this.parentLtab.viewClass.replace(/Tabs$/, '') +
-                    dest.replace(/^[A-Z][a-z]*/, '')
+                dest.replace(/^[A-Z][a-z]*/, '')
             }
             if (source == dest) {
                 //alert( "Async of " + source + " with " + dest + " : " +
@@ -153,7 +153,7 @@ qx.Class.define("frontend.Views.Ltab", {
                     case "empty_selections":
                         this.getActiveForm().fields.clearSelections();
                         break;
-                        // Combines :empty with :update for the same field
+                    // Combines :empty with :update for the same field
                     case "empty_update":
                         this.getActiveForm().fields.clearDataOnly(res.data);
                         this.updateView(res.data, false)
@@ -176,13 +176,24 @@ qx.Class.define("frontend.Views.Ltab", {
                         break;
                     case "focus":
                         var f = res.data;
+                        dbg(2, "res data is " + print_a(f))
                         if (aform && aform.fields && aform.fields.fields) {
-                            if (aform.fields.fields[f]) {
-                                dbg(2, "Focusing on " + f)
-                                aform.fields.focus_if_ok(aform.fields.fields[f]);
+                            if (f.table) {
+                                if (aform.fields.fields[f.table]){
+                                    dbg(2, "Focusing on table " + f.table);
+                                    aform.fields.focus_table(aform.fields.fields[f.table],
+                                        f.row, f.column);
+                                } else {
+                                    dbg(2, "Table " + f.table + " not found");
+                                }
                             } else {
-                                dbg(2, "Not found " + f + " in " +
+                                if (aform.fields.fields[f]) {
+                                    dbg(2, "Focusing on " + f)
+                                    aform.fields.focus_if_ok(aform.fields.fields[f]);
+                                } else {
+                                    dbg(2, "Not found " + f + " in " +
                                     print_a(aform.fields.fields));
+                                }
                             }
                         } else {
                             dbg(3, "No form -" + aform + "- or fields found");
@@ -191,11 +202,11 @@ qx.Class.define("frontend.Views.Ltab", {
                     case "hide":
                     case "unhide":
                         if (!( res.data instanceof Array )) {
-                            res.data = [ res.data ]
+                            res.data = [res.data]
                         }
                         for (var i = 0; i < res.data.length; i++) {
                             this.setElementVisibility(res.data[i],
-                                    res.cmd == "hide" ? "excluded" : 'visible');
+                                res.cmd == "hide" ? "excluded" : 'visible');
                             //this.setElementVisibility( res.data[i], 'excluded' );
                         }
                         break;
@@ -330,12 +341,12 @@ qx.Class.define("frontend.Views.Ltab", {
         },
 
         fadeOut: function () {
-            if (!this.form || !this.form.fields ) {
+            if (!this.form || !this.form.fields) {
                 return
             }
-            dbg(5,"fading out windows");
+            dbg(5, "fading out windows");
             this.form.fields.windows_fade_to(0.5);
-            if (!this.fadedin){
+            if (!this.fadedin) {
                 return
             }
             this.fadedin = false;

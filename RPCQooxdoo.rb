@@ -168,7 +168,7 @@ class RPCQooxdooHandler
       end
     end
 
-    dputs(3) { "Going to call #{service}, #{method}" }
+    ddputs(3) { "Going to call #{service}, #{method}" }
     # Get an answer with some error-checking
 
     if RPCQooxdooService::services.has_key?(service)

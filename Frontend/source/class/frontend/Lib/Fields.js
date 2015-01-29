@@ -215,16 +215,19 @@ function setValueArrayTable(val) {
 }
 
 function getValueTable() {
+    dbg(2, "Getting table " + this)
     var ret = [];
     var vids = this.valueIds;
     var model = this.getTableModel();
     this.getSelectionModel().iterateSelection(function (ind) {
+        dbg(2, "Adding index " + ind)
         var values = model.getRowDataAsMap(ind);
         if (vids) {
             values.element_id = vids[ind];
         }
         ret.push(values);
     });
+    dbg(2, "Returning " + print_a(ret))
     //alert("Returning " + print_a(ret) + " with valueIds of " +
     //print_a(vids))
     return ret;
@@ -1225,6 +1228,25 @@ qx.Class.define("frontend.Lib.Fields", {
             if (field && field.isFocusable()) {
                 dbg(4, "Focusing on " + field);
                 field.focus();
+            }
+        },
+
+        focus_table: function (table, row, column) {
+            if (table && table.isFocusable()) {
+                dbg(2, "Focusing on table " + table + " row: " + row +
+                " column: " + column);
+                table.focus();
+                if (row > table.getTableModel().getRowCount()){
+                    dbg(2, "Asking for row " + row + " which doesn't exist");
+                    return
+                }
+                var selectionModel = table.getSelectionModel();
+                selectionModel.resetSelection();
+                selectionModel.addSelectionInterval(row, row);
+                table.setFocusedCell(column, row);
+                table.startEditing();
+            } else {
+                dbg(0, "Couldn't focus on table " + table);
             }
         },
 
