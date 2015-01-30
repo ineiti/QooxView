@@ -156,8 +156,11 @@ class Entities < RPCQooxdooService
     end
     return nil if not k or not @data[k.to_i]
     if !@data_instances[k.to_i]
+      old_loading = @loading
+      @loading = true
       @data_instances[k.to_i]= @data_class.new(@data[k.to_i][@data_field_id], self)
       @data_instances[k.to_i].init_instance
+      @loading = old_loading
     end
     return @data_instances[k.to_i]
   end
