@@ -338,12 +338,13 @@ class View < RPCQooxdooService
   # multiple buttons as arguments
   def show_button(*buttons)
     do_container_end if @actual.last == 'fields'
-    do_container(buttons.length > 1 ? 'hbox' : 'vbox', proc {
-                                                       buttons.each { |b|
-                                                         #        @layout.last.push [ :button, b, b, nil ]
-                                                         @layout.last.push Value.simple(:button, b)
-                                                       }
-                                                     }
+    do_container(buttons.length > 1 ? 'hbox' : 'vbox',
+                 proc {
+                   buttons.each { |b|
+                     #        @layout.last.push [ :button, b, b, nil ]
+                     @layout.last.push Value.simple(:button, b)
+                   }
+                 }
     )
     do_container_end if @actual.last == 'group'
   end
