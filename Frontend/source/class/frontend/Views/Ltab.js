@@ -145,7 +145,7 @@ qx.Class.define("frontend.Views.Ltab", {
                         // Let's empty everything
                         this.getActiveForm().fields.clearDataAll();
                         break;
-                    case "empty_fields":
+                    case "empty_nonlists":
                         // By default empties only normal fields. If given a list of
                         // names, clears also these lists
                         this.getActiveForm().fields.clearData(res.data);
@@ -163,8 +163,8 @@ qx.Class.define("frontend.Views.Ltab", {
                         this.getActiveForm().fields.clearDataAll();
                         this.updateView(res.data, false)
                         break;
-                    // Combines :empty_all with :update
-                    case "empty_fields_update":
+                    // Combines :empty_nonlists with :update
+                    case "empty_nonlists_update":
                         this.getActiveForm().fields.clearData(res.data);
                         this.updateView(res.data, false)
                         break;
@@ -248,6 +248,9 @@ qx.Class.define("frontend.Views.Ltab", {
                         break;
                     case "reload":
                         window.location.reload();
+                        break;
+                    case "select":
+                        this.select(res.data, false)
                         break;
                     case "session_id":
                         rpc.session_id = res.data;
@@ -498,6 +501,13 @@ qx.Class.define("frontend.Views.Ltab", {
         updateView: function (results, silence) {
             dbg(4, "updateView: " + results)
             if (results) {
+                this.form.fields.fill(results, silence);
+            }
+        },
+        select: function (results, silence) {
+            dbg(4, "select: " + results)
+            if (results) {
+                this.form.fields.unselect(results);
                 this.form.fields.fill(results, silence);
             }
         },

@@ -7,6 +7,9 @@
  #asset(frontend/*)
  ************************************************************************ */
 function searchLabel(name) {
+    // Why do we have to do this?
+    dbg(5, "selectables are: " + this.getSelectables())
+
     var selectables = this.getSelectables();
     for (var s = 0; s < selectables.length; s++) {
         var item = selectables[s];
@@ -17,12 +20,18 @@ function searchLabel(name) {
 }
 
 function searchIndex(id) {
+    // Why do we have to do this?
+    dbg(5, "selectables are: " + this.getSelectables())
+
     this.setSelection([this.getSelectables()[id]]);
 }
 
 function selectedIndex() {
     var id = 0;
     var item = this.getSelection()[0];
+    // Why do we have to do this?
+    dbg(5, "selectables are: " + this.getSelectables())
+
     var items = this.getSelectables();
     for (var s = 0; s < items.length; s++) {
         if (items[s] == item) {
@@ -56,6 +65,9 @@ function getValueList() {
 function getValueListArray() {
     dbg(5, "getValueListArray");
     var ret = [];
+    // Why do we have to do this?
+    dbg(5, "selectables are: " + this.getSelectables())
+
     var selectables = this.getSelectables();
     for (var s = 0; s < selectables.length; s++) {
         ret.push(selectables[s].getLabel());
@@ -65,15 +77,17 @@ function getValueListArray() {
 
 function setValueListCommon(values, list) {
     dbg(5, "setValueList " + print_a(values));
+    dbg(5, "valueIds is " + print_a(list.valueIds))
     var selection = [];
     if (!values || !values.length) {
-        dbg(5, "aborting setValueList");
+        list.setSelection(selection);
+        dbg(5, "removing selection");
         return;
     }
     for (var v = 0; v < values.length; v++) {
         var val = values[v];
         var item = null;
-        dbg(5, "Adding value " + print_a(val))
+        dbg(5, "Adding value :" + val + ":")
         if (val instanceof Array) {
             // The first position is the internal id, the second is what to show
             dbg(5, "Value is an array!")
@@ -86,14 +100,16 @@ function setValueListCommon(values, list) {
         //        else if ( val != null && val != "" ){
         else {
             if (list.valueIds) {
+                // Why do we have to do this?
+                dbg(5, "selectables are: " + list.getSelectables(true))
                 item = list.getSelectables(true)[list.valueIds.indexOf(val)];
-            }
-            else {
+            } else {
                 if (list.findItem) {
                     item = list.findItem(val);
                 }
             }
         }
+        dbg(3, "item is " + item + " and nopreselect: " + list.nopreselect)
         if (item && ( !list.nopreselect )) {
             selection.push(item);
             dbg(5, "Found a selection: " + val);
@@ -210,6 +226,7 @@ function setValueArrayTable(val) {
     }
     //alert( "Setting data to " + print_a( values ) +
     //  " - valueIds = " + print_a( this.valueIds) )
+    this.cancelEditing();
     this.getSelectionModel().resetSelection();
     this.getTableModel().setData(values)
 }
@@ -327,20 +344,24 @@ qx.Class.define("frontend.Lib.Fields", {
             dbg(5, "getFieldsData");
             var result = {};
             for (var f in this.fields) {
-                dbg(5, "Looking at field " + f)
+                //dbg(5, "Looking at field " + f)
                 var field = this.fields[f]
                 if (field.getValueSpecial) {
-                    dbg(5, "has getValueSpecial");
+                    dbg(5, f + " has getValueSpecial");
                     if (field.getValueSpecial()) {
                         result[f] = field.getValueSpecial();
-                        dbg(5, "Field " + f + " is of special-value " + result[f]);
+                        if (result[f]){
+                            dbg(5, "Field " + f + " is of special-value " + result[f]);
+                        }
                     }
                 }
                 else if (field.getValue) {
-                    dbg(5, "has getValue");
+                    dbg(5, f + " has getValue");
                     if (field.getValue) {
                         result[f] = field.getValue();
-                        dbg(5, "Field " + f + " is of value " + result[f]);
+                        if ( result[f]){
+                            dbg(5, "Field " + f + " is of value " + result[f]);
+                        }
                     }
                 }
             }
@@ -451,14 +472,32 @@ qx.Class.define("frontend.Lib.Fields", {
             this.clearDataOnly(fields);
         },
 
+        // removes selection on lists
+        unselect: function (data) {
+            var old_update = this.updating;
+            this.updating = true;
+            dbg(3, "Start unselecting " + print_a(data));
+            for (var d in data) {
+                dbg(3, "d is " + d + " - data[d] is " + data[d]);
+                var field = this.fields[d];
+                if (field) {
+                    dbg(3, "unselecting " + field);
+                    this.fill({field: []}, true);
+                }
+            }
+            this.updating = old_update;
+            this.updating = false
+        },
+
         // Fills data in the fields
         fill: function (data, silence) {
+            var old_update = this.updating;
             if (silence) {
                 this.updating = true
             }
-            dbg(3, "Filling with data " + print_a(data))
+            dbg(3, "Filling with data " + print_a(data) + " silence: " + silence)
             for (var f in this.fields) {
-                dbg(5, "Looking for data of field " + f);
+                //dbg(5, "Looking for data of field " + f);
                 var field = this.fields[f]
                 if (data[f] != null) {
                     if (field.setValueStr) {
@@ -475,17 +514,11 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
                 }
             }
-            if (silence) {
-                this.updating = false
-            }
+            this.updating = old_update
         },
 
         fill_silence: function (data) {
             this.fill(data, true)
-        },
-
-        fill_update: function (data) {
-            this.fill(data, false)
         },
 
         addElement: function (element, layout, index) {
@@ -1279,7 +1312,7 @@ qx.Class.define("frontend.Lib.Fields", {
                 table.cancelEditing();
                 table.focus();
                 var row_max = table.getTableModel().getRowCount();
-                if (row > row_max) {
+                if (row >= row_max) {
                     dbg(2, "Asking for row " + row + " which doesn't exist");
                     return
                 }
