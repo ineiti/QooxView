@@ -71,11 +71,8 @@ module VTListPane
 
   def vtlp_update_list(session, choice = nil)
     list = @data_class.send(@vtlp_method_list)
-    rep = reply(:empty_fields, @vtlp_field) + if choice
-                                                reply(:update, @vtlp_field => list + [choice])
-                                              else
-                                                reply(:update, @vtlp_field => list)
-                                              end
+    dp newval = (list + [choice]).compact
+    rep = reply(:empty_update, @vtlp_field => newval)
 
     if @update
       rep += rpc_update(session)

@@ -175,7 +175,7 @@ class RPCQooxdooHandler
       s = RPCQooxdooService::services[service]
       method = "rpc_#{method}"
       if s.respond_to?(method)
-        dputs(3) { "Calling #{method} with #{params.inspect}" }
+        ddputs(3) { "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request(method, session, params[0])
           dputs(4) { "Parsed request is #{parsed.inspect}" }
@@ -193,7 +193,7 @@ class RPCQooxdooHandler
             answer = [{:cmd => 'none', :data => []}]
           end
 
-          dputs(3) { "Final answer is #{answer.inspect}" }
+          ddputs(3) { "Final answer is #{answer.inspect}" }
           return self.answer(answer, id)
         rescue Exception => e
           dputs(0) { "Error while handling #{method} with #{params.inspect}: #{e.message}" }

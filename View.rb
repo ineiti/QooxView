@@ -544,8 +544,7 @@ class View < RPCQooxdooService
           if not l.args.has_key?(:lazy)
             values = l.to_a[3][:list_values]
             dputs(3) { "Here comes element #{l.name} with new list-value #{values.inspect}" }
-            ret += reply(:empty_fields, [l.name]) +
-                reply(:update, {l.name => values})
+            ret += reply(:empty_update, {l.name => values})
           end
       end
     }
