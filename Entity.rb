@@ -275,7 +275,7 @@ class Entities < RPCQooxdooService
   # Returns non-list field-names
   def get_non_list_field_names(b = @blocks)
     get_field_names(b).select { |f|
-      !%w(list select entity).index(get_value(f).dtype)
+      !%w(list select entity).index(dp get_value(f).dtype)
     }
   end
 
