@@ -706,6 +706,33 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                     break;
+                case "table2":
+                    // table model
+                    var tableModel = new qx.ui.table.model.Simple();
+                    tableModel.setColumns(["ID", "A number", "A date", "Boolean"]);
+                    tableModel.setData([[1, 2, 3, 4], [11, 22, 33, 44]]);
+
+// make second column editable
+                    tableModel.setColumnEditable(1, true);
+
+// table
+                    var table = new qx.ui.table.Table(tableModel).set({
+                        decorator: null
+                    });
+
+                    var tcm = table.getTableColumnModel();
+
+// Display a checkbox in column 3
+                    tcm.setDataCellRenderer(3, new qx.ui.table.cellrenderer.Boolean());
+
+// use a different header renderer
+                    tcm.setHeaderCellRenderer(2, new qx.ui.table.headerrenderer.Icon("icon/16/apps/office-calendar.png", "A date"));
+
+                    //table.setFocusedCell(1, 1);
+                    //table.startEditing();
+                    field_element = table;
+
+                    break;
                 case "table":
                     var headings = params.headings;
                     var tableModel = new qx.ui.table.model.Simple();
@@ -717,14 +744,19 @@ qx.Class.define("frontend.Lib.Fields", {
                         decorator: null,
                         showCellFocusIndicator: false
                     });
+
+                    if (params.edit) {
+                        for (var e = 0; e < params.edit.length; e++) {
+                            var col = params.edit[e];
+                            dbg(2, "Setting column " + col + " as editable")
+                            tableModel.setColumnEditable(col, true);
+                            //var tcm = table.getTableColumnModel();
+                            //tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
+                        }
+                    }
+
                     switch (params.callback) {
                         case 'edit':
-                            var tcm = table.getTableColumnModel();
-                            for (var e = 0; e < params.edit.length; e++) {
-                                var col = params.edit[e];
-                                tableModel.setColumnEditable(col, true);
-                                tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
-                            }
                             do_callback = true;
                             listener = "dataEdited";
                             //table.getSelectionModel().setSelectionMode(
@@ -760,9 +792,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
                     //field_element = new qx.ui.container.Scroll();
                     //field_element.add( table );
-                    field_element = table;
                     show_label = false;
-                    dbg(3, "params is " + print_a(params))
                     if (params.columns) {
                         for (var i = 0; i < params.columns.length; i++) {
                             var rendering = null;
@@ -783,6 +813,15 @@ qx.Class.define("frontend.Lib.Fields", {
                             }
                         }
                     }
+                    table.addListener('deactivate', function (e) {
+                        if (!table.updating) {
+                            dbg(2, "****** ******* ****** blur")
+                            //table.cancelEditing();
+                        } else {
+                            dbg(2, "***** ***** ***** not blurring because updating")
+                        }
+                    });
+                    field_element = table;
                     //params.flexheight = 1;
                     break;
                 case "text":
@@ -997,6 +1036,7 @@ qx.Class.define("frontend.Lib.Fields", {
                             else {
                                 dbg(3, "Can't call listener while he's working!");
                             }
+                            e.stop();
                         }, this);
                         dbg(5, "Finished adding listener " + listener[l])
                     }
@@ -1231,20 +1271,26 @@ qx.Class.define("frontend.Lib.Fields", {
             }
         },
 
-        focus_table: function (table, row, column) {
+        focus_table: function (table, col, row) {
             if (table && table.isFocusable()) {
                 dbg(2, "Focusing on table " + table + " row: " + row +
-                " column: " + column);
+                " column: " + col);
+                table.stopEditing();
+                table.cancelEditing();
                 table.focus();
-                if (row > table.getTableModel().getRowCount()){
+                var row_max = table.getTableModel().getRowCount();
+                if (row > row_max) {
                     dbg(2, "Asking for row " + row + " which doesn't exist");
                     return
                 }
+                table.resetCellFocus();
+                table.resetSelection();
                 var selectionModel = table.getSelectionModel();
                 selectionModel.resetSelection();
-                selectionModel.addSelectionInterval(row, row);
-                table.setFocusedCell(column, row);
+                selectionModel.setSelectionInterval(row, row);
+                table.setFocusedCell(col, row);
                 table.startEditing();
+                dbg(2, "Finished focusing);")
             } else {
                 dbg(0, "Couldn't focus on table " + table);
             }

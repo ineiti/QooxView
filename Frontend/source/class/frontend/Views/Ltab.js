@@ -175,14 +175,21 @@ qx.Class.define("frontend.Views.Ltab", {
                         this.setFadeIn(res.data)
                         break;
                     case "focus":
+                        this.parentFadeIn();
                         var f = res.data;
                         dbg(2, "res data is " + print_a(f))
                         if (aform && aform.fields && aform.fields.fields) {
                             if (f.table) {
-                                if (aform.fields.fields[f.table]){
+                                var table = aform.fields.fields[f.table];
+
+                                if (table) {
+                                    var old_update = table.updating;
+                                    table.updating = true;
+
                                     dbg(2, "Focusing on table " + f.table);
-                                    aform.fields.focus_table(aform.fields.fields[f.table],
-                                        f.row, f.column);
+                                    aform.fields.focus_table(table, f.col, f.row);
+
+                                    table.updating = old_update;
                                 } else {
                                     dbg(2, "Table " + f.table + " not found");
                                 }
