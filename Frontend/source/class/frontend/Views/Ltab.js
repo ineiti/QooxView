@@ -155,7 +155,9 @@ qx.Class.define("frontend.Views.Ltab", {
                         break;
                     // Combines :empty with :update for the same field
                     case "empty_update":
-                        this.getActiveForm().fields.clearDataOnly(res.data);
+                        dbg(3, "res.data is " + print_a(res.data) );
+                        dbg(3, "res.data is " + print_a(Object.keys(res.data)) );
+                        this.getActiveForm().fields.clearDataOnly(Object.keys(res.data));
                         this.updateView(res.data, false)
                         break;
                     // Combines :empty_all with :update
@@ -165,7 +167,7 @@ qx.Class.define("frontend.Views.Ltab", {
                         break;
                     // Combines :empty_nonlists with :update
                     case "empty_nonlists_update":
-                        this.getActiveForm().fields.clearData(res.data);
+                        this.getActiveForm().fields.clearData(Object.keys(res.data));
                         this.updateView(res.data, false)
                         break;
                     case "eval":

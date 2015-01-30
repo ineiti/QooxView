@@ -392,7 +392,7 @@ qx.Class.define("frontend.Lib.Fields", {
 
         // Deletes all data given in "fields"
         clearDataOnly: function (fields) {
-            dbg(5, "clearDataOnly");
+            dbg(5, "clearDataOnly " + print_a(fields));
             this.updating = true;
             if (fields) {
                 if (!( fields instanceof Array )) {
