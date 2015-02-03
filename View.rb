@@ -822,7 +822,7 @@ class View < RPCQooxdooService
     dputs(3) { "Parsing #{params.inspect}" }
     return params if params.length == 0
     layout_recurse.each { |l|
-      if params.last.has_key? l.name.to_s
+      if params.last && params.last.has_key?(l.name.to_s)
         value = params.last[l.name.to_s]
         rep = l.parse(value)
         if rep

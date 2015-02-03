@@ -184,7 +184,11 @@ class ICC < RPCQooxdooPath
     args_json = {}
     args.each_pair { |k, v| args_json[k] = v.to_json }
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
-    JSON::parse(Net::HTTP.get(path))
+    begin
+      JSON::parse(Net::HTTP.get(path))
+    rescue JSON::ParserError => e
+      {error: e}
+    end
   end
 
 end

@@ -154,6 +154,7 @@ class RPCQooxdooHandler
   def self.request(id, service, method, params, web_req = nil)
     #dp params[0]
     #dp Sessions.search_all_
+    show_request_reply = 3
     session = Sessions.match_by_sid(params[0].shift) || Sessions.create
     dputs(3) { "session is #{session.inspect}" }
 
@@ -168,14 +169,14 @@ class RPCQooxdooHandler
       end
     end
 
-    dputs(3) { "Going to call #{service}, #{method}" }
+    dputs(show_request_reply) { "Going to call #{service}, #{method}" }
     # Get an answer with some error-checking
 
     if RPCQooxdooService::services.has_key?(service)
       s = RPCQooxdooService::services[service]
       method = "rpc_#{method}"
       if s.respond_to?(method)
-        ddputs(3) { "Calling #{method} with #{params.inspect}" }
+        dputs(3) { "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request(method, session, params[0])
           dputs(4) { "Parsed request is #{parsed.inspect}" }
@@ -193,7 +194,7 @@ class RPCQooxdooHandler
             answer = [{:cmd => 'none', :data => []}]
           end
 
-          ddputs(3) { "Final answer is #{answer.inspect}" }
+          dputs(show_request_reply) { "Final answer is #{answer.inspect}" }
           return self.answer(answer, id)
         rescue Exception => e
           dputs(0) { "Error while handling #{method} with #{params.inspect}: #{e.message}" }
