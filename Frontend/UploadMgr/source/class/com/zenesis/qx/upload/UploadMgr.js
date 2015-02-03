@@ -140,9 +140,11 @@ qx.Class.define("com.zenesis.qx.upload.UploadMgr", {
 				var data = this.__widgetsData[widget.toHashCode()];
 				if (data) {
 					data.appearId = null;
-					var container = widget.getContainerElement();
-					container.setStyle("overflow", "hidden");
-					container.addAt(this._createInputElement(widget), 0);
+                                        if ( widget.getContainerElement ){
+					  var container = widget.getContainerElement();
+					  container.setStyle("overflow", "hidden");
+					  container.addAt(this._createInputElement(widget), 0);
+                                        }
 					this.__fixupSize(widget);
 				}
 			}, this);

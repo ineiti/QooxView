@@ -1,2 +1,2 @@
-LINK=$(dirname $0)/source/qooxdoo-4.1-sdk
-test -e $LINK || ln -s /Users/ineiti/Downloads/qooxdoo-4.1-sdk/ $LINK
+LINK=$(dirname $0)/source/qooxdoo-3.0.1-sdk
+test -e $LINK || ln -s /Users/ineiti/Downloads/qooxdoo-3.0.1-sdk/ $LINK
