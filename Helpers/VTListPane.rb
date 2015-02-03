@@ -124,11 +124,11 @@ module VTListPane
     dputs(3) { "rpc_list_choice with #{name} - #{data.inspect}" }
     if name == @vtlp_field
       # TODO: empty only fields from @data_class
-      dp layout_recurse.collect{|l| "#{l.name}::#{l.dtype}"}.join(' - ')
-      empty_fields = layout_recurse.select{|l|
+      dputs(4) { layout_recurse.collect { |l| "#{l.name}::#{l.dtype}" }.join(' - ') }
+      empty_fields = layout_recurse.select { |l|
         !%w(list button entity).index(l.dtype.to_s)
-      }.collect{|l| l.name}
-      dp empty_fields.join(' - ')
+      }.collect { |l| l.name }
+      dputs(4) { empty_fields.join(' - ') }
       ret = reply(:empty, empty_fields)
       item = if @vtlp_use_entity
                field_value = data[name].get_unique
