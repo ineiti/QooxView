@@ -8,7 +8,7 @@ require 'docsplit'
 require 'zip'
 
 class OpenPrint
-  attr_accessor :lp_cmd
+  attr_accessor :lp_cmd, :file
 
   def initialize(file, dir = nil)
     @file = file
@@ -34,7 +34,26 @@ class OpenPrint
     print(fields.collect { |k, v| [/--#{k}--/, v] }, counter, name)
   end
 
-  def print(fields = [], counter = nil, name = nil)
+  def get_content
+    return unless File.exists? @file
+    Zip::File.open(@file) { |z|
+      z.read('content.xml').force_encoding(Encoding::UTF_8)
+    }
+  end
+
+  def print_file(pdf_file)
+    if @lp_cmd
+      dputs(2) { "Printing with --#{@lp_cmd} #{pdf_file}--" }
+      System.run_bool("#{@lp_cmd} #{pdf_file}")
+      return true
+    else
+      # Download PDF
+      return "#{pdf_file}"
+    end
+  end
+
+
+  def make_pdf(fields = [], counter = nil, name = nil)
     dputs(3) { "New print for -#{@file.inspect}-" }
     if name
       tmp_file = "/tmp/#{replace_accents(name)}.#{@base.sub(/.*\./, '')}"
@@ -68,22 +87,25 @@ class OpenPrint
       FileUtils::cp(tmp_file, pdf_file)
     end
     @dir and FileUtils::cp(pdf_file, @dir)
-    #    FileUtils::rm( tmp_file )
-    if @lp_cmd
-      dputs(2) { "Printing with --#{@lp_cmd} #{pdf_file}--" }
-      `#{@lp_cmd} #{pdf_file}`
-      return true
-    else
-      # Download PDF
-      return "#{pdf_file}"
-    end
+    pdf_file
+  end
+
+  def print(fields = [], counter = nil, name = nil)
+    file = make_pdf(fields, counter, name)
+    print_file(file)
+  end
+
+  def print_join(files, outfile = nil)
+    outfile ||= files.first.sub(/.pdf$/, '-joined.pdf')
+    OpenPrint.pdf_join(files, outfile)
+    print_file(outfile)
   end
 
   # Input: 1..n files with 2 pages, front and back
   # Output: one 2x2-nup PDF front
   #         one 2x2-nup PDF back
   #         to be printed "long edge duplex"
-  def self.print_nup_duplex(files, base = nil)
+  def self.pdf_nup_duplex(files, base = nil)
     Dir.mktmpdir { |dir|
       files.class == Array or files = [files]
       allpages = "#{dir}/allpages.pdf"
@@ -107,6 +129,13 @@ class OpenPrint
         pages_file
       }
     }
+  end
+
+  # Input: 1..n files
+  # Output: one PDF-file
+  def self.pdf_join(files, outfile)
+    files.class == Array or files = [files]
+    System.run_bool "pdfjam --quiet --landscape --outfile #{outfile} #{files.join(' ')}"
   end
 end
 
@@ -195,6 +224,7 @@ module PrintButton
   end
 
   def reply_print(session)
+    dputs_func
     ret = []
     @printer_buttons.each { |pb|
       p = stat_printer(session, pb)
@@ -217,6 +247,7 @@ module PrintButton
   end
 
   def rpc_print(session, name, data)
+    dputs_func
     dputs(4) { "Printing button #{name} with #{data.inspect}" }
     if data and data['menu'] and data['menu'].length > 0
       stat_printer(session, name).data_str = data['menu']
@@ -228,11 +259,11 @@ module PrintButton
     rpc_print(session, button, data) +
         reply(:window_show, :print_status) +
         reply(:update, :status =>
-            if printer = send_printer(session, button, file)
-              "Printed to #{printer}"
-            else
-              "<a href='#{file}' target='other'>#{file}</a>"
-            end)
+                         if printer = send_printer(session, button, file)
+                           "Printed to #{printer}"
+                         else
+                           "<a href='#{file}' target='other'>#{file}</a>"
+                         end)
   end
 
   def window_print_status

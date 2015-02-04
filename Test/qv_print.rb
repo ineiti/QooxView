@@ -20,10 +20,10 @@ class TC_Print < Test::Unit::TestCase
       card_2_pdf = '/tmp/name-1.pdf'
     end
     assert_equal %w(/tmp/name-nup-front.pdf /tmp/name-nup-back.pdf),
-      OpenPrint.print_nup_duplex( [card_1_pdf, card_2_pdf], 'name-nup')
+      OpenPrint.pdf_nup_duplex( [card_1_pdf, card_2_pdf], 'name-nup')
 
     assert_equal %w(/tmp/name-nup-front.pdf /tmp/name-nup-back.pdf),
-      OpenPrint.print_nup_duplex( [card_1_pdf], 'name-nup')
+      OpenPrint.pdf_nup_duplex( [card_1_pdf], 'name-nup')
   end
 
   def test_print_formulas
