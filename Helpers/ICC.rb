@@ -72,19 +72,20 @@ class ICC < RPCQooxdooPath
       dputs(3) { "Path #{req.path} is #{path.inspect}" }
       query = CGI.parse(req.query_string)
       log_msg :ICC, "Got query: #{path.inspect} - #{query}"
-      self.request(path[1], "icc_#{path[2]}", query)
+      ICC.request(path[1], path[2], query)
     end
   end
 
   def self.request(entity_name, m, query_json)
     m =~ /^icc_/ and log_msg :ICC, "Method #{m} includes 'icc_' - probably not what you want"
-    method = "icc_#{m}"
+    json = m[0] != '_'
+    method = "icc_#{m.sub(/^_/, '')}"
     if en = Object.const_get(entity_name)
       dputs(3) { "Sending #{method} to #{entity_name}" }
       query={}
       query_json.each_pair { |k, v| query[k] = JSON.parse(v.first) }
       dputs(3) { "Found query #{query.inspect}" }
-      self.response('OK', en.send(method, query))
+      self.response('OK', en.send(method, query), json: json)
     else
       self.response('Error', log_msg(:ICC, "Object #{entity_name} doesn't exist"))
     end
