@@ -234,13 +234,19 @@ function setValueArrayTable(val) {
 function getValueTable() {
     dbg(2, "Getting table " + this)
     var ret = [];
-    var vids = this.valueIds;
-    var model = this.getTableModel();
-    this.getSelectionModel().iterateSelection(function (ind) {
-        dbg(2, "Adding index " + ind)
-        var values = model.getRowDataAsMap(ind);
-        if (vids) {
-            values.element_id = vids[ind];
+    var table = this;
+    var vids = table.valueIds;
+    var model = table.getTableModel();
+    table.getSelectionModel().iterateSelection(function (ind) {
+        if (table.is_editable || !vids) {
+            dbg(2, "Adding index with all values" + ind)
+            var values = model.getRowDataAsMap(ind);
+            if (vids) {
+                values.element_id = vids[ind];
+            }
+        } else {
+            dbg(2, "Adding value_id only for " + ind + ": " + values)
+            values = vids[ind];
         }
         ret.push(values);
     });
@@ -350,7 +356,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     dbg(5, f + " has getValueSpecial");
                     if (field.getValueSpecial()) {
                         result[f] = field.getValueSpecial();
-                        if (result[f]){
+                        if (result[f]) {
                             dbg(5, "Field " + f + " is of special-value " + result[f]);
                         }
                     }
@@ -359,7 +365,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     dbg(5, f + " has getValue");
                     if (field.getValue) {
                         result[f] = field.getValue();
-                        if ( result[f]){
+                        if (result[f]) {
                             dbg(5, "Field " + f + " is of value " + result[f]);
                         }
                     }
@@ -739,33 +745,6 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                     break;
-                case "table2":
-                    // table model
-                    var tableModel = new qx.ui.table.model.Simple();
-                    tableModel.setColumns(["ID", "A number", "A date", "Boolean"]);
-                    tableModel.setData([[1, 2, 3, 4], [11, 22, 33, 44]]);
-
-// make second column editable
-                    tableModel.setColumnEditable(1, true);
-
-// table
-                    var table = new qx.ui.table.Table(tableModel).set({
-                        decorator: null
-                    });
-
-                    var tcm = table.getTableColumnModel();
-
-// Display a checkbox in column 3
-                    tcm.setDataCellRenderer(3, new qx.ui.table.cellrenderer.Boolean());
-
-// use a different header renderer
-                    tcm.setHeaderCellRenderer(2, new qx.ui.table.headerrenderer.Icon("icon/16/apps/office-calendar.png", "A date"));
-
-                    //table.setFocusedCell(1, 1);
-                    //table.startEditing();
-                    field_element = table;
-
-                    break;
                 case "table":
                     var headings = params.headings;
                     var tableModel = new qx.ui.table.model.Simple();
@@ -786,6 +765,7 @@ qx.Class.define("frontend.Lib.Fields", {
                             //var tcm = table.getTableColumnModel();
                             //tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
                         }
+                        table.is_editable = true
                     }
 
                     switch (params.callback) {

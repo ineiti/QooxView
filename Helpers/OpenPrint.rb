@@ -224,7 +224,7 @@ module PrintButton
   end
 
   def reply_print(session)
-    dputs_func
+    #dputs_func
     ret = []
     @printer_buttons.each { |pb|
       p = stat_printer(session, pb)
@@ -247,7 +247,7 @@ module PrintButton
   end
 
   def rpc_print(session, name, data)
-    dputs_func
+    #dputs_func
     dputs(4) { "Printing button #{name} with #{data.inspect}" }
     if data and data['menu'] and data['menu'].length > 0
       stat_printer(session, name).data_str = data['menu']
