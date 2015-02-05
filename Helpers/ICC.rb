@@ -78,14 +78,16 @@ class ICC < RPCQooxdooPath
 
   def self.request(entity_name, m, query_json)
     m =~ /^icc_/ and log_msg :ICC, "Method #{m} includes 'icc_' - probably not what you want"
-    json = m[0] != '_'
+    binary = m[0] == '_'
     method = "icc_#{m.sub(/^_/, '')}"
     if en = Object.const_get(entity_name)
       dputs(3) { "Sending #{method} to #{entity_name}" }
       query={}
       query_json.each_pair { |k, v| query[k] = JSON.parse(v.first) }
       dputs(3) { "Found query #{query.inspect}" }
-      self.response('OK', en.send(method, query), json: json)
+      msg = en.send(method, query)
+      self.response('OK', binary ? Base64::encode64(msg.force_encoding(Encoding::ASCII_8BIT)) :
+                            msg)
     else
       self.response('Error', log_msg(:ICC, "Object #{entity_name} doesn't exist"))
     end
@@ -186,7 +188,9 @@ class ICC < RPCQooxdooPath
     args.each_pair { |k, v| args_json[k] = v.to_json }
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
     begin
-      JSON::parse(Net::HTTP.get(path))
+      ret = JSON::parse(Net::HTTP.get(path))
+      method[0] == '_' and ret._msg = Base64::decode64(ret._msg)
+      ret
     rescue JSON::ParserError => e
       {error: e}
     end

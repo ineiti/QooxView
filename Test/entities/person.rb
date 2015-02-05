@@ -48,6 +48,10 @@ class Persons < Entities
     dputs(2){"Received #{@longtransfer_size} bytes"}
   end
 
+  def icc_getbinary( _args )
+    return IO.read('file_binary.bin').force_encoding(Encoding::ASCII_8BIT)
+  end
+
   def get_longtransfer_bytes
     @longtransfer_size
   end
