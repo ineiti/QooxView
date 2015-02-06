@@ -865,6 +865,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     var do_callback = [params.callback, this.callback]
                     field_element = new qx.ui.container.Composite(new qx.ui.layout.HBox(2));
                     var button = new com.zenesis.qx.upload.UploadButton(label);
+                    button.setLabel('hello there');
                     field_element.add(button);
                     var progress = new qx.ui.container.Composite(new qx.ui.layout.VBox(2));
                     var pb = new qx.ui.indicator.ProgressBar(0, 100);
