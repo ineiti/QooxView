@@ -615,6 +615,8 @@ qx.Class.define("frontend.Lib.Fields", {
                     field_element.add(hours);
                     field_element.getValue = getValueFromTo;
                     field_element.setValueStr = setValueFromTo;
+                    field_element.resetSelection = function(){};
+                    field_element.removeAll = function(){};
                     break;
                 case "hidden":
                     this.fields[name] = new qx.ui.basic.Label(params);
