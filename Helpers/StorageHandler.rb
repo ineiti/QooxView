@@ -232,6 +232,7 @@ module StorageHandler
   end
 
   def save_data(d)
+    dputs_func
     dputs(5) { "Saving #{d.inspect}" }
     d.to_sym!
     if d.has_key? @data_field_id

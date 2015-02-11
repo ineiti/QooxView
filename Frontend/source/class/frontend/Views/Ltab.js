@@ -106,6 +106,9 @@ qx.Class.define("frontend.Views.Ltab", {
                             dbg(3, "auto-update is 0, not updating")
                         }
                         break;
+                    case "bar_position":
+                        this.tabs.setBarPosition( res.data );
+                        break;
                     case "callback_button":
                         //aform.fadeOut();
                         enable = false;
@@ -296,7 +299,7 @@ qx.Class.define("frontend.Views.Ltab", {
                         }
                         break;
                     default:
-                        alert("Unknown command " + res.cmd)
+                        alert("Unknown command: " + res.cmd)
                         break;
                 }
             }

@@ -407,7 +407,8 @@ class View < RPCQooxdooService
 
   # Returns a list of the available views for a given user
   def self.rpc_list(session)
-    View.reply(:list, View.list(session))
+    View.reply(:list, View.list(session)) +
+        (session.s_data._sub_tabs_only ? View.reply(:bar_position, 'top') : [])
   end
 
   def rpc_list(session)
@@ -476,6 +477,7 @@ class View < RPCQooxdooService
       }
       dputs(3) { "Views after: #{views.each { |v| v.name }}" }
     end
+    session.s_data._sub_tabs_only = sub_tabs_only
     self.list_views(views)
   end
 

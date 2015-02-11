@@ -2,3 +2,12 @@ cd $( dirname $0 )
 ./mklink
 ./generate.py clean
 ./generate.py build
+
+# always load the newest version, if it changed
+MD5=md5sum
+if which md5; then
+  MD5=md5
+fi
+SUM=$( $MD5 build/script/frontend.js | sed -e "s/.* //" )
+echo Replacing with md5sum of $SUM
+perl -pi -e "s/md5sum_frontend/$SUM/" build/index.html
