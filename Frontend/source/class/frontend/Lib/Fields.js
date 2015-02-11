@@ -883,6 +883,10 @@ qx.Class.define("frontend.Lib.Fields", {
                         pb.setValue(0);
                         progress_label.setValue("No file");
                     }
+                    field_element.setValueStr = function(label){
+                        alert('setting label ' + label)
+                        button.setLabel(label);
+                    }
 
                     var uploader = new com.zenesis.qx.upload.UploadMgr(button, "/uploadfiles");
                     uploader.addListener("addFile", function (evt) {
