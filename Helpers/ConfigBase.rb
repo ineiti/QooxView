@@ -83,8 +83,10 @@ class ConfigBase < Entity
   def data_set(field, value)
     old = data_get(field)
     ret = super(field, value)
-    changed if old != value
-    notify_observers(field, value, old)
+    if !@loading
+      changed if old != value
+      notify_observers(field, value, old)
+    end
     ret
   end
 
@@ -163,6 +165,7 @@ class ConfigBase < Entity
     end
     dputs(4) { "Storing #{c.inspect}" }
     ConfigBases.singleton.data_set_hash(c)
+    ConfigBase.setup_instance
     View.update_configured_all
   end
 
