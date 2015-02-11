@@ -759,23 +759,12 @@ qx.Class.define("frontend.Lib.Fields", {
                         showCellFocusIndicator: false
                     });
 
-                    if (params.edit) {
-                        for (var e = 0; e < params.edit.length; e++) {
-                            var col = params.edit[e];
-                            dbg(2, "Setting column " + col + " as editable")
-                            tableModel.setColumnEditable(col, true);
-                            //var tcm = table.getTableColumnModel();
-                            //tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
-                        }
-                        table.is_editable = true
-                    }
-
                     switch (params.callback) {
                         case 'edit':
                             do_callback = true;
                             listener = "dataEdited";
-                            //table.getSelectionModel().setSelectionMode(
-                            //    qx.ui.table.selection.Model.SINGLE_SELECTION);
+                            table.getSelectionModel().setSelectionMode(
+                                qx.ui.table.selection.Model.SINGLE_SELECTION);
                             break;
                         case 'click':
                             do_callback = true;
@@ -789,6 +778,19 @@ qx.Class.define("frontend.Lib.Fields", {
                             table.getSelectionModel().setSelectionMode(
                                 qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION_TOGGLE);
                     }
+                    if (params.edit) {
+                        for (var e = 0; e < params.edit.length; e++) {
+                            var col = params.edit[e];
+                            dbg(2, "Setting column " + col + " as editable")
+                            tableModel.setColumnEditable(col, true);
+                            //var tcm = table.getTableColumnModel();
+                            //tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
+                            table.getSelectionModel().setSelectionMode(
+                                qx.ui.table.selection.Model.SINGLE_SELECTION);
+                        }
+                        table.is_editable = true
+                    }
+
                     table.setValueArray = setValueArrayTable;
                     table.getValue = getValueTable;
                     table.setStatusBarVisible(false);
@@ -828,14 +830,18 @@ qx.Class.define("frontend.Lib.Fields", {
                             }
                         }
                     }
+                    /*
+                    // Not used for the moment - should be using the callback whenever
+                    // somebody edits the table. But doesn't work reliably - yet
                     table.addListener('deactivate', function (e) {
                         if (!table.updating) {
                             dbg(2, "****** ******* ****** blur")
-                            //table.cancelEditing();
+                            table.cancelEditing();
                         } else {
                             dbg(2, "***** ***** ***** not blurring because updating")
                         }
                     });
+                    */
                     field_element = table;
                     //params.flexheight = 1;
                     break;
@@ -877,14 +883,12 @@ qx.Class.define("frontend.Lib.Fields", {
                     progress.add(progress_label);
                     field_element.add(progress);
                     field_element.progress = [pb, progress_label]
-                    field_element.setValue = function () {
+                    field_element.setValue = function (label) {
                         //alert("Setting value" );
                         pb.setBackgroundColor("#ffffff");
                         pb.setValue(0);
                         progress_label.setValue("No file");
-                    }
-                    field_element.setValueStr = function(label){
-                        alert('setting label ' + label)
+                        dbg(3, 'setting label ' + label)
                         button.setLabel(label);
                     }
 
