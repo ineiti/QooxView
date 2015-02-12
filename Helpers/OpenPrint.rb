@@ -143,7 +143,7 @@ module PrintButton
   attr_reader :printer_buttons
 
   def call_lpstat(ip)
-    if ConfigBase.use_printing.to_i > 0
+    if ConfigBase.use_printing == 'true'
       %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
     else
       []

@@ -12,7 +12,7 @@ class ConfigBases < Entities
     value_str :locale_force
     value_int :debug_lvl
     value_str :version_local
-    value_int :use_printing
+    value_str :use_printing
     value_int :block_size
 
     @@functions = []
@@ -22,18 +22,6 @@ class ConfigBases < Entities
     respond_to? :add_config and add_config
 
     return true
-  end
-
-  def migration_2(c)
-    c.block_size = 16_384
-  end
-
-  def migration_1(c)
-    c._debug_lvl = DEBUG_LVL
-    c._locale_force = get_config(nil, :locale_force)
-    c._version_local = get_config('orig', :version_local)
-    c._welcome_text = get_config(false, :welcome_text)
-    dputs(3) { "Migrating out: #{c.inspect}" }
   end
 
   def functions

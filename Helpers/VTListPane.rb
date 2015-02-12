@@ -98,7 +98,7 @@ module VTListPane
 
   def rpc_button_save(session, data)
     field = vtlp_get_entity(data)
-    dputs(2) { "Field is #{field.inspect}, setting data #{data.inspect}" }
+    dputs(3) { "Field is #{field.inspect}, setting data #{data.inspect}" }
     selection = data[@vtlp_field][0]
     if field
       field.data_set_hash(data.to_sym)
