@@ -11,3 +11,4 @@ fi
 SUM=$( $MD5 build/script/frontend.js | sed -e "s/.* //" )
 echo Replacing with md5sum of $SUM
 perl -pi -e "s/md5sum_frontend/$SUM/" build/index.html
+

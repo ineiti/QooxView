@@ -231,15 +231,16 @@ function setValueArrayTable(val) {
     this.getTableModel().setData(values)
 }
 
-function getValueTable() {
+function getValueTable(getall) {
     dbg(2, "Getting table " + this)
     var ret = [];
     var table = this;
     var vids = table.valueIds;
     var model = table.getTableModel();
+    table.stopEditing();
     table.getSelectionModel().iterateSelection(function (ind) {
         if (table.is_editable || !vids) {
-            dbg(2, "Adding index with all values" + ind)
+            dbg(2, "Adding index with all values " + ind)
             var values = model.getRowDataAsMap(ind);
             if (vids) {
                 values.element_id = vids[ind];
@@ -248,6 +249,7 @@ function getValueTable() {
             dbg(2, "Adding value_id only for " + ind + ": " + values)
             values = vids[ind];
         }
+        dbg(2, "Adding " + print_a(values))
         ret.push(values);
     });
     dbg(2, "Returning " + print_a(ret))
