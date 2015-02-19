@@ -2,11 +2,10 @@ require 'test/unit'
 
 class TC_ConfigBase < Test::Unit::TestCase
   def setup
+    Entities.delete_all_data
   end
   
   def teardown
-    ConfigBase.value = []
-    ConfigBase.store( :functions => [] )
   end
   
   def test_init
@@ -73,5 +72,27 @@ class TC_ConfigBase < Test::Unit::TestCase
   def test_value
     ConfigBase.integer = 10
     assert_equal 10, ConfigBase.integer
+  end
+
+  def test_change_value
+    ConfigBase.integer = 10
+    assert_equal 10, ConfigBase.integer
+    ConfigBase.add_function :now
+    assert_equal 11, ConfigBase.integer
+    ConfigBase.add_function :now
+    assert_equal 11, ConfigBase.integer
+    ConfigBase.del_function :now
+    assert_equal 14, ConfigBase.integer
+
+    c = Courses.create(name: 'test')
+    assert_equal nil, c.tel
+    ConfigBase.add_function :now
+    assert_equal '1', c.tel
+
+    Entities.delete_all_data
+    c = Courses.create(name: 'test')
+    assert_equal nil, c.tel
+    ConfigBase.add_function :now
+    assert_equal '1', c.tel
   end
 end

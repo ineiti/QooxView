@@ -3,6 +3,8 @@
 require 'observer'
 
 class ConfigBases < Entities
+  include Observable
+
   def setup_data
     value_block :wide
     value_list :functions, 'ConfigBases.list_functions'
@@ -22,6 +24,12 @@ class ConfigBases < Entities
     respond_to? :add_config and add_config
 
     return true
+  end
+
+  def call_changed(action, value, old)
+    ConfigBases.singleton.update(action, value, old)
+    changed
+    notify_observers(action, value, old)
   end
 
   def functions
@@ -59,23 +67,47 @@ end
 
 
 class ConfigBase < Entity
-  include Observable
-
   def setup_instance
     dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
     if !Object.const_defined? :DEBUG_LVL
       self.debug_lvl = debug_lvl
     end
+    is_loading { setup_defaults }
+  end
+
+  def setup_defaults
+  end
+
+  def is_loading
+    oldloading = @loading
+    @loading = true
+    yield
+    @loading = oldloading
   end
 
   def data_set(field, value)
     old = data_get(field)
     ret = super(field, value)
     if !@loading
-      changed if old != value
-      notify_observers(field, value, old)
+      return if old == value
+      dputs(3) { "Updating #{field} to #{value.inspect}, #{old.inspect}" }
+      if field == :functions
+        if (del = old - value).length > 0
+          @proxy.call_changed(:function_del, del, nil)
+        end
+        if (add = value - old).length > 0
+          @proxy.call_changed(:function_add, add, nil)
+        end
+      else
+        @proxy.call_changed(field, value, old)
+      end
     end
     ret
+  end
+
+  def update(action, value, old = nil)
+    dputs(3) { "No action #{action.inspect} changed to #{value.inspect} from #{old.inspect}" }
+    #super(action, value, old)
   end
 
   def save_block_to_object(block, obj)
