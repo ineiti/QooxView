@@ -640,7 +640,7 @@ class Entity
       # Only set data for which there is a field
       if fields.index(ks)
         dputs(4) { "Setting field #{ks}" }
-        if create
+        if create || true
           dputs(5) { 'Creating without log' }
           data_set(ks, v)
         else
@@ -654,7 +654,7 @@ class Entity
 
   # Sets the value of a single entry and attaches an UNDO
   def data_set_log(field, value, msg = nil, undo = true, logging = true)
-    dputs(5) { "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}" }
+    ddputs(5) { "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}" }
     old_value = data_get(field)
     new_value = data_set(field, value).data_get(field)
     dputs(5) { "new_value is #{new_value.class}" }
