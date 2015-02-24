@@ -185,10 +185,10 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_configured
-    ConfigBase.functions = []
+    ConfigBase.store(function: [])
     assert_equal make_list([2]), View.list(@session_admin)[:views].sort
 
-    ConfigBase.store({:functions => [1]})
+    ConfigBase.store(functions: [1])
     assert_equal make_list([1, 2]),
                  View.list(@session_admin)[:views].sort
 
@@ -197,7 +197,7 @@ class TC_View < Test::Unit::TestCase
     assert_equal make_list([1, 2, 3]),
                  View.list(@session_admin)[:views].sort
 
-    ConfigBase.store({:functions => [1, 2]})
+    ConfigBase.store(functions: [1, 2])
     assert_equal make_list([1]),
                  View.list(@session_admin)[:views].sort
   end
