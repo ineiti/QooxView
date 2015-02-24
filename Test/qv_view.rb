@@ -185,6 +185,7 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_configured
+    ConfigBase.functions = []
     assert_equal make_list([2]), View.list(@session_admin)[:views].sort
 
     ConfigBase.store({:functions => [1]})

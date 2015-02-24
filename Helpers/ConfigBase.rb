@@ -69,10 +69,10 @@ end
 class ConfigBase < Entity
   def setup_instance
     dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
+    is_loading { setup_defaults }
     if !Object.const_defined? :DEBUG_LVL
       self.debug_lvl = debug_lvl
     end
-    is_loading { setup_defaults }
   end
 
   def setup_defaults
@@ -185,7 +185,7 @@ class ConfigBase < Entity
     end
     dputs(4) { "Storing #{c.inspect}" }
     ConfigBases.singleton.data_set_hash(c)
-    ConfigBase.setup_instance
+    ConfigBase.setup_defaults
     View.update_configured_all
   end
 

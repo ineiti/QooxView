@@ -21,12 +21,11 @@ end
 
 class Entities < RPCQooxdooService
   @@all = {}
-  @@logging = true
 
   include StorageHandler
 
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id,
-                :storage, :data, :name, :msg, :undo, :logging, :keys,
+                :storage, :data, :name, :keys,
                 :save_after_create, :values, :changed, :null_allowed,
                 :loading
 
@@ -39,8 +38,6 @@ class Entities < RPCQooxdooService
       @data_class = eval(singular(self.class.name))
     end
     @storage = nil
-    @msg = nil
-    @undo = @logging = false
     @last_id = 1
     @save_after_create = false
     @changed = false
@@ -239,27 +236,6 @@ class Entities < RPCQooxdooService
     dputs(0) { "I'm !*2@#" }
   end
 
-  # Log one action, with data, which is supposed to be a
-  # Hash. Two possibilities:
-  # [undo_function] - points to a function which can undo the operation. It will get "data" and "data_old", if applicable
-  # [data_old] - eventual old data interesting to "undo_function"
-  # It will return the index of the action
-  def log_action(id, data, msg = nil, undo_function = nil, data_old = nil)
-    @@logging and Entities.LogActions.log_action(@data_class, id, data, msg, undo_function, data_old)
-  end
-
-  # Checks for a list of it's own type, enhanced by filter
-  def log_list(f = {})
-    filter = {:data_class => @data_class}.merge(f)
-    dputs(3) { "filter is #{filter}" }
-    Entities.LogActions.log_list(filter)
-  end
-
-  # Undoes a given action
-  def log_undo(action_id)
-    Entities.LogActions.log_undo(self, action_id)
-  end
-
   # Return an array of all available field-names as symbols
   def get_field_names(b = @blocks)
     ret = b.collect { |c|
@@ -394,13 +370,6 @@ class Entities < RPCQooxdooService
     @@needs["Entities.#{self.name.to_s}"] = "Entities.#{e.to_s}"
   end
 
-  def self.nolog(&b)
-    oldlog = @@logging
-    @@logging = false
-    ret = yield b
-    @@logging = oldlog
-    ret
-  end
 end
 
 #
@@ -483,15 +452,10 @@ class Entity
           dputs(3) { "Creating method #{field} for #{self.class.name}" }
           dputs(4) { "Self is #{self.public_methods.sort.inspect}" }
           self.class.class_eval <<-RUBY
-        def #{field}( v )
-          if @proxy.undo or @proxy.logging
-            data_set_log( "#{field_set}".to_sym, v, @proxy.msg, @proxy.undo, 
-              @proxy.logging )
-          else
-            data_set( "#{field_set}".to_sym, v )
-          end
-          dputs(5){"Leaving =#{field_set}"}
-        end
+            def #{field}( v )
+              data_set( "#{field_set}".to_sym, v )
+              dputs(5){"Leaving =#{field_set}"}
+            end
           RUBY
           dputs(4) { "Sending #{args[0]} to #{field}" }
           send(field, args[0])
@@ -538,11 +502,6 @@ class Entity
       end
     }
     ret
-  end
-
-  # Show all logs for this entity
-  def log_list(f = {})
-    @proxy.log_list({:data_class_id => @id}.merge(f))
   end
 
   # Deletes the entry from the main part
@@ -631,7 +590,6 @@ class Entity
   end
 
   # Save all data in the hash for which we have an entry
-  # if create == true, it won't call LogActions for every field
   def data_set_hash(data, create = false)
     dputs(4) { "#{data.inspect} - #{create} - id is #{id}" }
     fields = @proxy.get_field_names
@@ -640,35 +598,9 @@ class Entity
       # Only set data for which there is a field
       if fields.index(ks)
         dputs(4) { "Setting field #{ks}" }
-        if create || true
-          dputs(5) { 'Creating without log' }
-          data_set(ks, v)
-        else
-          dputs(4) { "Setting @data[#{k.inspect}] = #{v.inspect}" }
-          data_set_log(ks, v, nil, (not create), (not create))
-        end
+        data_set(ks, v)
       end
     }
-    self
-  end
-
-  # Sets the value of a single entry and attaches an UNDO
-  def data_set_log(field, value, msg = nil, undo = true, logging = true)
-    ddputs(5) { "For id #{@id}, setting entry #{field} to #{value.inspect} with undo being #{undo}" }
-    old_value = data_get(field)
-    new_value = data_set(field, value).data_get(field)
-    dputs(5) { "new_value is #{new_value.class}" }
-    if old_value.to_s != new_value.to_s
-      dputs(3) { "Set field #{field} to value #{new_value.inspect}" }
-      if logging
-        field = field.to_s.sub(/^_/, '').to_sym
-        if undo
-          @proxy.log_action(@id, {field => new_value}, msg, :undo_set_entry, old_value)
-        else
-          @proxy.log_action(@id, {field => new_value}, msg)
-        end
-      end
-    end
     self
   end
 

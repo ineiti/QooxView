@@ -77,9 +77,6 @@ of both:
 
 A simple YAML-configuration style is supported by default.
 
-=== Logging and undo
-
-The Log-class can do logging and supports an undo-function very easily
 =end
 
 
@@ -425,10 +422,8 @@ module QooxView
 
     dputs(2) { 'Starting RPCQooxdooServices' }
     # We want to load an eventual ConfigBase first, so that other modules can
-    # read the configuration - but we don't want logging yet
-    rpcqooxdoo = Entities.nolog do
-      RPCQooxdooService.new('Entities.ConfigBase')
-    end
+    # read the configuration
+    rpcqooxdoo = RPCQooxdooService.new('Entities.ConfigBase')
     Entities.ConfigBases.load
 
     GetText.bindtextdomain($name, :path => 'po')
