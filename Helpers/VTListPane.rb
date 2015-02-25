@@ -81,7 +81,8 @@ module VTListPane
   end
 
   def rpc_button_new(session, data)
-    vtlp_update_list(session)
+    reply(:empty, empty_fields) +
+        vtlp_update_list(session)
   end
 
   def rpc_button_delete(session, data)
@@ -114,6 +115,12 @@ module VTListPane
     vtlp_update_list(session, selection)
   end
 
+  def empty_fields
+    layout_recurse.select { |l|
+      !%w(list button entity).index(l.dtype.to_s)
+    }.collect { |l| l.name }
+  end
+
   def rpc_list_choice_vtlistpanel(session, name, data)
     #dputs_func
     ret = if @update and @update == :before
@@ -123,11 +130,7 @@ module VTListPane
           end
     dputs(3) { "rpc_list_choice with #{name} - #{data.inspect}" }
     if name == @vtlp_field
-      # TODO: empty only fields from @data_class
       dputs(4) { layout_recurse.collect { |l| "#{l.name}::#{l.dtype}" }.join(' - ') }
-      empty_fields = layout_recurse.select { |l|
-        !%w(list button entity).index(l.dtype.to_s)
-      }.collect { |l| l.name }
       dputs(4) { empty_fields.join(' - ') }
       ret = reply(:empty, empty_fields)
       item = if @vtlp_use_entity
