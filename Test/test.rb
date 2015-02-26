@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #!/usr/local/bin/ruby -I.. -I.
 
-$LOAD_PATH.push '.', '..'
+$LOAD_PATH.push '.', '..', '../../HelperClasses/lib'
 
 require 'test/unit'
 #require 'test/unit/testsuite'
@@ -46,5 +46,3 @@ if $profiling
     CPUPROFILE_FREQUENCY=500
   "
 end
-
-

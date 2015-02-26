@@ -72,7 +72,9 @@ class ICC < RPCQooxdooPath
       dputs(3) { "Path #{req.path} is #{path.inspect}" }
       query = CGI.parse(req.query_string)
       log_msg :ICC, "Got query: #{path.inspect} - #{query}"
-      ICC.request(path[1], path[2], query)
+      ret = ICC.request(path[1], path[2], query)
+      log_msg :ICC, "Returning #{ret}"
+      ret
     end
   end
 

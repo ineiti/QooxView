@@ -116,7 +116,7 @@ class TC_Helpers < Test::Unit::TestCase
 
   def test_make_steps
     session = {s_data: {value: 10}}
-    ms = MakeSteps.new(session, :test) { |session, step|
+    ms = MakeSteps.new(session) { |session, _data, step|
       case step
         when 0
           assert_equal 10, session._s_data._value
@@ -134,32 +134,33 @@ class TC_Helpers < Test::Unit::TestCase
           session._s_data._value += 1
           ms.step = 2
       end
+      nil
     }
 
-    ms.make_step(session, :test)
-    ms.make_step(session, :test)
-    ms.make_step(session, :test)
-    ms.make_step(session, :test)
+    ms.make_step(session)
+    ms.make_step(session)
+    ms.make_step(session)
+    ms.make_step(session)
     assert_equal 14, session._s_data._value
   end
 
   def test_make_steps_wait
     session = {s_data: {value: 10}}
-    ms = MakeSteps.new(session, :test) { |session, step|
+    ms = MakeSteps.new(session, -1) { |session, _data, step|
       case step
         when 0
           assert_equal 10, session._s_data._value
           sleep 1.5
-          session._s_data._value += 1
+          [session._s_data._value += 1]
         when 1
           assert_equal 11, session._s_data._value
-          session._s_data._value += 1
+          [session._s_data._value += 1]
       end
     }
 
-    assert_equal nil, ms.make_step(session, :test, wait: 1)
-    assert_equal 11, ms.make_step(session, :test, wait: 1)
-    ms.make_step(session, :test)
+    assert_equal [{:cmd=>:auto_update, :data=>-1}], ms.make_step(session)
+    assert_equal [11,{:cmd=>:auto_update, :data=>0}], ms.make_step(session)
+    ms.make_step(session)
     assert_equal 12, session._s_data._value
   end
 end
