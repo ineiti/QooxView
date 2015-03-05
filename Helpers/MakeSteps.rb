@@ -18,7 +18,7 @@ class MakeSteps
   def reply
     dputs_func
     dputs(3){"Oldstep: #{@oldstep} - #{@step}"}
-    if @oldstep == @step
+    if @oldstep == @step && @step >= 0
       @step += 1
       dputs(3) { "Increasing step to #{@step}" }
     end
@@ -27,7 +27,7 @@ class MakeSteps
     @ret.length == 0 and @ret = @status.to_a
     @ret += View.reply(:auto_update, @auto_update.to_i)
     dputs(3) { "ret is now #{@ret.inspect}" }
-    @auto_update = nil if @wait == 0
+    @auto_update = nil if (@wait == 0 || @step == -1)
     dputs(3) { "Auto-update is #{@auto_update}" }
     @status = nil
     return @ret
