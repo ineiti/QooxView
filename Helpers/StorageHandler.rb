@@ -331,7 +331,7 @@ module StorageHandler
 
   def migrate
     if not mv = MigrationVersions.match_by(:class_name, @name)
-      dputs(2) { "#{@name} has no migration yet" }
+      dputs(2) { "#{@name.inspect} has no migration yet" }
       mv = Entities.MigrationVersions.create(:class_name => @name,
                                              :version => 0)
     end
