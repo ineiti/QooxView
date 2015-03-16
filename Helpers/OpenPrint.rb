@@ -144,7 +144,8 @@ module PrintButton
 
   def call_lpstat(ip)
     if ConfigBase.use_printing.to_s == 'true'
-      %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a | sed -e "s/ .*//" ).split
+      %x( which lpstat >/dev/null 2>&1 && lpstat -h #{ip}:631 -a 2>/dev/null |
+          sed -e "s/ .*//" ).split
     else
       []
     end
