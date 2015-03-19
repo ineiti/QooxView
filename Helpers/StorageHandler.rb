@@ -137,7 +137,7 @@ module StorageHandler
   # Like search_by, but only ONE EXACT match
   def match_by(field, value)
     field = field.to_sym
-    v = value.to_s
+    v = value.is_a?(Entity) ? value.id : value.to_s
     @data.each_key { |k|
       if @data[k]
         [@data[k][field]].flatten.each { |d|
@@ -412,7 +412,8 @@ module StorageHandler
     dputs(5) { "Matching #{entry} of #{name} in #{@keys.inspect}" }
     name = name.to_sym
     @keys.has_key? name or create_key(name)
-    get_data_instance(@keys[name][entry.to_s])
+    e = entry.is_a?(Entity) ? entry.id.to_s : entry.to_s
+    get_data_instance(@keys[name][e])
   end
 
   def update_key(id)

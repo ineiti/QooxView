@@ -109,6 +109,8 @@ class Entities < RPCQooxdooService
     case name
       when /ies$/
         return name.sub(/ies$/, 'y')
+      when /sses$/
+        return name.sub(/es$/, '')
       when /s$/
         return name.chop
     end
