@@ -218,6 +218,8 @@ class String
         return self.sub(/y$/, 'ies')
       when /us$/
         return self.sub(/us$/, 'i')
+      when /ss$/
+        return "#{self}es"
       when /s$/
         return self
       when /man$/
