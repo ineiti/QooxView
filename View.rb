@@ -821,6 +821,7 @@ class View < RPCQooxdooService
   # Gets the request and converts the ids of the Entites back to
   # the objects they once were - which makes life much more easy... 
   def parse_request(method, session, params)
+    #dputs_func
     dputs(3) { "Parsing #{params.inspect}" }
     return params if params.length == 0
     layout_recurse.each { |l|
