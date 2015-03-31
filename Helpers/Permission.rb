@@ -81,13 +81,11 @@ class Permission
   end
 
   def self.can_view( permission, view )
-    time = Timing.new(3)
     action = view.to_s.gsub( /^View\./, '' )
     dputs( 4 ){ "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}" }
     if not permission or permission.length == 0
       permission = %w( default )
     end
-    time.probe('preparation')
 
     permission.to_a.each{|p|
       perm_list = self.getViewParent( p )
@@ -104,14 +102,12 @@ class Permission
             dputs( 5 ){ "Searching #{action} - #{data.tab_name} for #{data} - #{action.class}" }
             if action =~ /^#{data}$/ or action =~ /^#{data.tab_name}Tabs$/
               dputs( 3 ){ "#{action} is allowed" }
-              time.probe("Found #{p}")
               return true
             end
           end
         end
       }
     }
-    time.probe('each')
 
     dputs( 3 ){ "#{action} is NOT allowed" }
     return false

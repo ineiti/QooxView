@@ -149,8 +149,9 @@ class ConfigBase < Entity
   end
 
   def self.store(c = {})
+    #dputs_func
     if c.has_key? :functions
-      funcs = c[:functions]
+      funcs = c._functions
       dputs(4) { "Storing functions: #{funcs.inspect}" }
       if funcs.index { |i| i.to_s.to_i.to_s == i.to_s }
         dputs(3) { 'Converting numeric to names' }

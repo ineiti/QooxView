@@ -8,8 +8,6 @@
 require 'Helpers/Value'
 require 'Helpers/StorageType'
 require 'Helpers/StorageHandler'
-require 'helperclasses/timing'
-include HelperClasses
 require 'Storages/CSV.rb'
 require 'Storages/LDAP.rb'
 require 'Storages/SQLite.rb'
@@ -460,7 +458,6 @@ class Entity
           self.class.class_eval <<-RUBY
             def #{field}( v )
               data_set( "#{field_set}".to_sym, v )
-              @cache.delete :#{field_clean}
             end
           RUBY
           dputs(4) { "Sending #{args[0]} to #{field}" }
@@ -528,7 +525,6 @@ class Entity
   end
 
   def data_get(field, raw = false, dbg = 3)
-    time = Timing.new(dbg)
     ret = [field].flatten.collect { |f_orig|
       f = f_orig.to_s
       (direct = f =~ /^_/) and f.sub!(/^_/, '')
@@ -539,18 +535,18 @@ class Entity
       else
         dputs(4) { "Using proxy #{@proxy.class.name} for #{f}" }
         e = @proxy.get_entry(@id, f)
-        time.probe('getting entry')
+
         dputs(5) { "e is #{e.inspect} from #{@proxy.data.inspect}" }
         if not raw and e
           v = @proxy.get_value(f)
-          time.probe('getting value')
+
           if e.class == Fixnum and v and v.dtype == 'entity'
             dputs(5) { "Getting instance for #{v.inspect}" }
             dputs(5) { "Getting instance with #{e.class} - #{e.inspect}" }
             dputs(5) { "Field = #{field}; id = #{@id}" }
             if e > 0 or @proxy.null_allowed
               e = v.eclass.get_data_instance([e].flatten.first)
-              time.probe('getting instance')
+
             else
               return nil
             end
@@ -597,6 +593,8 @@ class Entity
     end
     @changed = true
     @proxy.changed = true
+    @cache.delete field.to_sym
+
     self
   end
 

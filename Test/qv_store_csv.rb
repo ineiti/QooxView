@@ -67,6 +67,7 @@ class TC_Store_CSV < Test::Unit::TestCase
     File.open('data/Persons.csv', 'a') { |f|
       f.write('--no--valid--json--')
     }
+    Entities.delete_all_data(true)
     Entities.load_all
     assert_equal 'admin4', Persons.find_by_pass('super123').first_name
     assert_equal 5, get_persons_csv.count
@@ -77,7 +78,9 @@ class TC_Store_CSV < Test::Unit::TestCase
         f.write('--no--valid--json--')
       }
     }
+
+    Entities.delete_all_data(true)
     Entities.load_all
-    assert_equal 0, get_persons_csv.count, get_persons_csv
+    assert_equal 1, get_persons_csv.count, get_persons_csv
   end
 end

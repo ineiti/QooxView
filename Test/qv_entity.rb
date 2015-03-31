@@ -219,13 +219,13 @@ class TC_Entity < Test::Unit::TestCase
     course = Courses.create(:first_name => 'foo',
                             :students => [@admin])
     course.students = [@admin]
-    assert_equal @admin, course.students.first
+    assert_equal @admin.to_hash, course.students.first.to_hash
 
     Entities.save_all
     Entities.load_all
 
     course = Courses.find_by_first_name('foo')
-    assert_equal @admin, course.students.first
+    assert_equal @admin.to_hash, course.students.first.to_hash
   end
 
   def test_create_equal

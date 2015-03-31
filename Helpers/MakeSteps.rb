@@ -16,7 +16,7 @@ class MakeSteps
   end
 
   def reply
-    dputs_func
+    #dputs_func
     dputs(3){"Oldstep: #{@oldstep} - #{@step}"}
     if @oldstep == @step && @step >= 0
       @step += 1
