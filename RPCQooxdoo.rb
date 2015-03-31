@@ -155,7 +155,7 @@ class RPCQooxdooHandler
     #dp params[0]
     #dp Sessions.search_all_
     #dp web_req
-    show_request_reply = 2
+    show_request_reply = 3
     session = Sessions.match_by_sid(params[0].shift) || Sessions.create
     dputs(3) { "session is #{session.inspect}" }
 
