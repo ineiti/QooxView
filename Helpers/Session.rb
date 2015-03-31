@@ -58,7 +58,8 @@ class Session < Entity
 
   def can_view(v)
     dputs(3) { "Owner is #{owner.inspect}" }
-    return Permission.can_view(owner ? owner.permissions : nil, v)
+    perms = owner ? owner.permissions : nil
+    return Permission.can_view(perms, v)
   end
 
   def close

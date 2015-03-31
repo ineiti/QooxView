@@ -429,7 +429,10 @@ class View < RPCQooxdooService
     views = []
     dputs(5) { @@list.inspect }
     @@list.each { |l|
-      if l.visible and session.can_view(l.class.name) and l.configured
+      shown = l.visible
+      shown &&= session.can_view(l.class.name)
+      shown &&= l.configured
+      if shown
         dputs(5) { "Found view #{l.class.name}" }
         views.push(l)
       end
@@ -460,6 +463,7 @@ class View < RPCQooxdooService
         sub_tabs_only = true
       end
     end
+
     if not sub_tabs_only
       dputs(3) { "Views before: #{views.each { |v| v.name }}" }
       views.delete_if { |l|
@@ -477,6 +481,7 @@ class View < RPCQooxdooService
       }
       dputs(3) { "Views after: #{views.each { |v| v.name }}" }
     end
+
     session.s_data._sub_tabs_only = sub_tabs_only
     self.list_views(views)
   end

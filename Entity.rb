@@ -8,6 +8,8 @@
 require 'Helpers/Value'
 require 'Helpers/StorageType'
 require 'Helpers/StorageHandler'
+require 'helperclasses/timing'
+include HelperClasses
 require 'Storages/CSV.rb'
 require 'Storages/LDAP.rb'
 require 'Storages/SQLite.rb'
@@ -386,6 +388,7 @@ class Entity
     @id = id.to_i
     @proxy = proxy
     @changed = false
+    @cache = {}
   end
 
   def init_instance
@@ -426,6 +429,7 @@ class Entity
   end
 
   def method_missing(cmd, *args)
+    #cmd == :owner ? dputs_func : dputs_unfunc
     dputs(5) { "Entity#method_missing #{cmd} in #{self.class.name}," +
         " with #{args.inspect} and #{args[0].class}" }
     field = cmd.to_s
@@ -437,7 +441,7 @@ class Entity
           return [self.id, self.send($1)]
       end
       dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
-          "#{@proxy.blocks.inspect}" }
+          "#{caller.inspect} - #{@proxy.blocks.inspect}" }
       if field =~ /^_/
         raise 'ValueUnknown'
       else
@@ -456,7 +460,7 @@ class Entity
           self.class.class_eval <<-RUBY
             def #{field}( v )
               data_set( "#{field_set}".to_sym, v )
-              dputs(5){"Leaving =#{field_set}"}
+              @cache.delete :#{field_clean}
             end
           RUBY
           dputs(4) { "Sending #{args[0]} to #{field}" }
@@ -473,9 +477,10 @@ class Entity
 
         if not old_respond_to? field
           self.class.class_eval <<-RUBY
-        def #{field}
-          data_get( "_#{field.sub(/^_/, '')}", false )
-        end
+            def #{field}
+              return @cache[:#{field}] if @cache.has_key? :#{field}
+              @cache._#{field} = data_get( "_#{field.sub(/^_/, '')}", false )
+            end
           RUBY
           send(field)
         else
@@ -522,7 +527,8 @@ class Entity
     @proxy.data[@id]
   end
 
-  def data_get(field, raw = false)
+  def data_get(field, raw = false, dbg = 3)
+    time = Timing.new(dbg)
     ret = [field].flatten.collect { |f_orig|
       f = f_orig.to_s
       (direct = f =~ /^_/) and f.sub!(/^_/, '')
@@ -533,15 +539,18 @@ class Entity
       else
         dputs(4) { "Using proxy #{@proxy.class.name} for #{f}" }
         e = @proxy.get_entry(@id, f)
+        time.probe('getting entry')
         dputs(5) { "e is #{e.inspect} from #{@proxy.data.inspect}" }
         if not raw and e
           v = @proxy.get_value(f)
+          time.probe('getting value')
           if e.class == Fixnum and v and v.dtype == 'entity'
             dputs(5) { "Getting instance for #{v.inspect}" }
             dputs(5) { "Getting instance with #{e.class} - #{e.inspect}" }
             dputs(5) { "Field = #{field}; id = #{@id}" }
             if e > 0 or @proxy.null_allowed
               e = v.eclass.get_data_instance([e].flatten.first)
+              time.probe('getting instance')
             else
               return nil
             end

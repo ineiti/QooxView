@@ -74,18 +74,21 @@ class Permission
     dputs( 4 ){ "@@sessions is #{@@sessions.inspect}" }
     permission = @@sessions[session.to_s]
     if not permission or permission.length == 0
-      permission = "default"
+      permission = 'default'
     end
 
     self.can_view( permission, view )
   end
 
   def self.can_view( permission, view )
+    time = Timing.new(3)
     action = view.to_s.gsub( /^View\./, '' )
     dputs( 4 ){ "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}" }
     if not permission or permission.length == 0
       permission = %w( default )
     end
+    time.probe('preparation')
+
     permission.to_a.each{|p|
       perm_list = self.getViewParent( p )
       dputs( 5 ){ "p is #{p} and perm_list is #{perm_list.inspect}" }
@@ -93,20 +96,23 @@ class Permission
         type, data = pl.split(':')
         dputs( 5 ){ "view = #{type} and data = #{data}" }
         case type
-        when "name"
+        when 'name'
           dputs( 5 ){ "Pushing #{self.getViewParent(data)}" }
           perm_list.push( *self.getViewParent( data ) )
-        when "view"
+        when 'view'
           if data
             dputs( 5 ){ "Searching #{action} - #{data.tab_name} for #{data} - #{action.class}" }
             if action =~ /^#{data}$/ or action =~ /^#{data.tab_name}Tabs$/
               dputs( 3 ){ "#{action} is allowed" }
+              time.probe("Found #{p}")
               return true
             end
           end
         end
       }
     }
+    time.probe('each')
+
     dputs( 3 ){ "#{action} is NOT allowed" }
     return false
   end

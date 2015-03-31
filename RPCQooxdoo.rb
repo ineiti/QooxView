@@ -155,7 +155,8 @@ class RPCQooxdooHandler
     #dp params[0]
     #dp Sessions.search_all_
     #dp web_req
-    show_request_reply = 2
+    time = Timing.new
+    show_request_reply = 3
     session = Sessions.match_by_sid(params[0].shift) || Sessions.create
     dputs(3) { "session is #{session.inspect}" }
 
@@ -196,6 +197,7 @@ class RPCQooxdooHandler
           end
 
           dputs(show_request_reply) { "Final answer is #{answer.inspect}" }
+          time.probe("Answer to #{service}.#{method}")
           return self.answer(answer, id)
         rescue Exception => e
           dputs(0) { "Error while handling #{method} with #{params.inspect}: #{e.message}" }

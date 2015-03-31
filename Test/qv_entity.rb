@@ -3,18 +3,18 @@ require 'benchmark'
 
 class TC_Entity < Test::Unit::TestCase
   def setup
-    dputs(2) { "Deleting everything" }
+    dputs(2) { 'Deleting everything' }
     Entities.delete_all_data
 
-    dputs(2) { "Setting up data" }
-    @admin = Entities.Persons.create(:first_name => "admin", :pass => "super123",
-                                     :address => "cdlf 24", :credit => 10000)
-    Entities.Courses.create(:first_name => "base_1010", :start => "1.10.2010")
-    @base_1011 = Entities.Courses.create(:first_name => "base_1011", :start => "1.11.2010",
+    dputs(2) { 'Setting up data' }
+    @admin = Entities.Persons.create(:first_name => 'admin', :pass => 'super123',
+                                     :address => 'cdlf 24', :credit => 10000)
+    Entities.Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
+    @base_1011 = Entities.Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
                                          :teacher => @admin)
-    @dummies_one = Entities.Dummies.create(:first_name => "one", :phone => "111",
-                                           :no_cache => "123")
-    dputs(2) { "Finished setting up data" }
+    @dummies_one = Entities.Dummies.create(:first_name => 'one', :phone => '111',
+                                           :no_cache => '123')
+    dputs(2) { 'Finished setting up data' }
   end
 
   def teardown
@@ -22,28 +22,28 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_create_with_new_id
     student_id = 2
-    Entities.Persons.create(:person_id => student_id, :first_name => "student")
+    Entities.Persons.create(:person_id => student_id, :first_name => 'student')
     guest_id = Entities.Persons.new_id[:person_id]
-    guest = Entities.Persons.create(:person_id => guest_id, :first_name => "guest",
+    guest = Entities.Persons.create(:person_id => guest_id, :first_name => 'guest',
                                     :credit => 1000)
     assert_equal guest_id, guest.person_id
-    assert_equal "guest", guest.first_name
+    assert_equal 'guest', guest.first_name
     assert_equal 1000, guest.credit
 
     guest = Entities.Persons.match_by_person_id(guest_id)
     student = Entities.Persons.match_by_person_id(student_id)
-    assert_equal "guest", guest.first_name
-    assert_equal "student", student.first_name
+    assert_equal 'guest', guest.first_name
+    assert_equal 'student', student.first_name
   end
 
   def test_create_with_double_id
-    admin = Entities.Persons.match_by_first_name("admin")
-    student = Entities.Persons.create(:person_id => admin.person_id, :first_name => "duplicate")
+    admin = Entities.Persons.match_by_first_name('admin')
+    student = Entities.Persons.create(:person_id => admin.person_id, :first_name => 'duplicate')
     assert_equal nil, student
   end
 
   def test_find_admin
-    admin = Entities.Persons.match_by_first_name("admin")
+    admin = Entities.Persons.match_by_first_name('admin')
     assert_nothing_raised do
       assert_equal 1, admin.person_id
       assert_equal 'super123', admin.pass
@@ -101,35 +101,35 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_cache_data
-    dputs(2) { "testing cache data" }
-    assert_equal "one", @dummies_one.first_name
-    assert_equal "111", @dummies_one.phone
-    assert_equal "no_cache", @dummies_one.no_cache
+    dputs(2) { 'testing cache data' }
+    assert_equal 'one', @dummies_one.first_name
+    assert_equal '111', @dummies_one.phone
+    assert_equal 'no_cache', @dummies_one.no_cache
   end
 
   def test_data_get
-    assert_equal ["admin", "super123"], @admin.data_get(%w( first_name pass ))
+    assert_equal ['admin', 'super123'], @admin.data_get(%w( first_name pass ))
   end
 
   def test_value_entity
     val = Entities.Courses.get_value(:teacher)
-    assert_equal "entity", val.dtype
-    assert_equal "Persons", val.entity_class
+    assert_equal 'entity', val.dtype
+    assert_equal 'Persons', val.entity_class
     assert_equal Entities.Persons, val.eclass
     val_hash = @base_1011.to_hash
     assert_equal [1], val_hash[:teacher]
-    assert_equal "super123", @base_1011.teacher.pass
-    @admin.pass = "super321"
-    assert_equal "super321", @base_1011.teacher.pass
-    @base_1011.teacher.pass = "super111"
-    assert_equal "super111", @base_1011.teacher.pass
-    assert_equal "super111", @admin.pass
+    assert_equal 'super123', @base_1011.teacher.pass
+    @admin.pass = 'super321'
+    assert_equal 'super321', @base_1011.teacher.pass
+    @base_1011.teacher.pass = 'super111'
+    assert_equal 'super111', @base_1011.teacher.pass
+    assert_equal 'super111', @admin.pass
   end
 
   def test_speed_persons
     require 'rubygems'
     require 'perftools'
-    PerfTools::CpuProfiler.start("/tmp/profile") do
+    PerfTools::CpuProfiler.start('/tmp/profile') do
       (1..400).each { |p|
         dputs(1) { "Creating person #{p}" }
         Courses.create(:first_name => "#{p}", :last_name => "#{p}")
@@ -169,22 +169,22 @@ class TC_Entity < Test::Unit::TestCase
     assert_equal({}, Persons.keys)
     Persons.create_key_first_name
 
-    assert_equal({:first_name => {"admin" => 1}}, Persons.keys)
+    assert_equal({:first_name => {'admin' => 1}}, Persons.keys)
   end
 
   def test_match_key
     Persons.create_key_first_name
-    assert_equal("super123", Persons.match_key_first_name("admin").pass)
-    assert_equal nil, Persons.match_key_first_name("foo")
+    assert_equal('super123', Persons.match_key_first_name('admin').pass)
+    assert_equal nil, Persons.match_key_first_name('foo')
 
-    foo = Persons.create(:first_name => "foo", :pass => "bar")
-    assert_equal("bar", Persons.match_key_first_name("foo").pass)
-    assert Persons.match_key_person_id(foo.id), "Failed foo.id"
-    assert Persons.match_key_person_id(foo.id.to_s), "Failed string of foo.id"
+    foo = Persons.create(:first_name => 'foo', :pass => 'bar')
+    assert_equal('bar', Persons.match_key_first_name('foo').pass)
+    assert Persons.match_key_person_id(foo.id), 'Failed foo.id'
+    assert Persons.match_key_person_id(foo.id.to_s), 'Failed string of foo.id'
   end
 
   def test_speed_match
-    dputs(1) { "Creating 1000 entries" }
+    dputs(1) { 'Creating 1000 entries' }
     Persons.save_after_create = false
     (1..1000).each { |i|
       Persons.create(:first_name => "name_#{i}", :pass => i)
@@ -216,7 +216,7 @@ class TC_Entity < Test::Unit::TestCase
     Entities.load_all
     assert_equal @admin, @base_1011.teacher
 
-    course = Courses.create(:first_name => "foo",
+    course = Courses.create(:first_name => 'foo',
                             :students => [@admin])
     course.students = [@admin]
     assert_equal @admin, course.students.first
@@ -224,7 +224,7 @@ class TC_Entity < Test::Unit::TestCase
     Entities.save_all
     Entities.load_all
 
-    course = Courses.find_by_first_name("foo")
+    course = Courses.find_by_first_name('foo')
     assert_equal @admin, course.students.first
   end
 
