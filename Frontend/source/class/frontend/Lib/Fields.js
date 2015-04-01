@@ -459,6 +459,9 @@ qx.Class.define("frontend.Lib.Fields", {
         clearData: function (lists) {
             dbg(5, "clearData");
             var fields = [];
+            if (!this.fields){
+                return;
+            }
             for (var f in this.fields) {
                 // We don't want lists to be cleaned, but date is a special case
                 if (!this.fields[f].removeAll || this.fields[f].getDateFormat) {
