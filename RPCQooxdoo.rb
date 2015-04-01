@@ -156,6 +156,7 @@ class RPCQooxdooHandler
     #dp Sessions.search_all_
     #dp web_req
     show_request_reply = 3
+    time = Timing.new(3)
     session = Sessions.match_by_sid(params[0].shift) || Sessions.create
     dputs(3) { "session is #{session.inspect}" }
 
@@ -180,8 +181,10 @@ class RPCQooxdooHandler
         dputs(3) { "Calling #{method} with #{params.inspect}" }
         begin
           parsed = s.parse_request(method, session, params[0])
+          time.probe("Parsing #{service}.#{method}")
           dputs(4) { "Parsed request is #{parsed.inspect}" }
           answer = s.parse_reply(method, session, parsed)
+          time.probe("Replying #{service}.#{method}")
           dputs(3) { "First answer is #{answer.inspect}" }
 
           if answer.class == Array

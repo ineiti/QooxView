@@ -187,13 +187,18 @@ class Hash
       when /^_.*[^=]$/
         key = s.to_s.sub(/^_{1,2}/, '').to_sym
         dputs(4) { "Searching for #{s.inspect} -> #{key}" }
-        self.has_key? key and return self[key]
-        self.has_key? key.to_s and return self[key.to_s]
-        if s.to_s =~ /^__/
-          return self[key] = {}
-        else
-          return nil
-        end
+        self.class.class_eval <<-RUBY
+          def _#{key}(ret = nil)
+          self.has_key? :#{key} and return self[:#{key}]
+            self.has_key? '#{key}' and return self['#{key}']
+            ret ? (self[:#{key}] = {}) : nil
+          end
+
+          def __#{key}
+            _#{key}(true)
+          end
+        RUBY
+        self.send(s)
       when /^_.*=$/
         key = /^_{1,2}(.*)=$/.match(s.to_s)[1].to_sym
         dputs(4) { "Setting #{s.inspect} -> #{key} to #{args.inspect}" }

@@ -163,4 +163,11 @@ class TC_Helpers < Test::Unit::TestCase
     ms.make_step(session)
     assert_equal 12, session._s_data._value
   end
+
+  def test_hash_accessor
+    a = {}
+    assert_equal nil, a._b
+    a._b = 3
+    assert_equal 3, a._b
+  end
 end
