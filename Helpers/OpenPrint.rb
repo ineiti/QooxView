@@ -52,6 +52,16 @@ class OpenPrint
     end
   end
 
+  def self.replace(doc, fields)
+    fields.each { |old, new|
+      doc.gsub!(old, new.to_s)
+      # For every -TAG- there can be a _TAG_ which is replaced with the
+      # uppercase-version of 'new'
+      old_up = Regexp.new(old.inspect.sub(/^-(.*)-$/, '_\1_'))
+      doc.gsub!(old_up, new.to_s.upcase)
+    }
+    doc
+  end
 
   def make_pdf(fields = [], counter = nil, name = nil)
     dputs(3) { "New print for -#{@file.inspect}-" }
@@ -68,9 +78,7 @@ class OpenPrint
     FileUtils::cp(@file, tmp_file)
     Zip::File.open(tmp_file) { |z|
       doc = z.read('content.xml').force_encoding(Encoding::UTF_8)
-      fields.each { |old, new|
-        doc.gsub!(old, new.to_s)
-      }
+      OpenPrint.replace(doc, fields)
       # Replace dates that need to be calculated with a '_'
       doc.gsub!(/(table:formula=[^<>]*date-value=").*?"/, '\1_\2"')
       z.get_output_stream('content.xml') { |f|
