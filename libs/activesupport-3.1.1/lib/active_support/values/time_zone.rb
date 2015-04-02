@@ -265,7 +265,7 @@ module ActiveSupport
     #
     #   Time.zone.now                 # => Fri, 31 Dec 1999 14:00:00 HST -10:00
     #   Time.zone.parse('22:30:00')   # => Fri, 31 Dec 1999 22:30:00 HST -10:00
-    def parse(str, now=now)
+    def parse(str, now=Time.now)
       date_parts = Date._parse(str)
       return if date_parts.blank?
       time = Time.parse(str, now) rescue DateTime.parse(str)
