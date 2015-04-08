@@ -89,33 +89,11 @@ end
 
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
-if false
-  SQLITE3_OBJ=QOOXVIEW_DIR + '/libs/sqlite3-1.3.8/ext/sqlite3/sqlite3.o'
-
-# Test for compilation of sqlite3
-  if not File.exists? SQLITE3_OBJ
-    puts "We'll have to compile the sqlite3-library, else it probably won't work."
-    print 'Try to compile sqlite3? [Y/n] '
-    if gets.chomp.downcase != 'n'
-      install= "#{ QOOXVIEW_DIR }/Config/install"
-      puts "Path is #{install}"
-      %x[ #{install} ]
-      puts 'Finished'
-      if File.exists? SQLITE3_OBJ
-        print 'Seems to be successful - press <ENTER> to continue '
-        gets
-      else
-        puts 'Compilation failed - if you want to try anyway, enter the following command:'
-        puts "touch #{ SQLITE3_OBJ }"
-        exit
-      end
-    end
-  end
-end
 
 require 'yaml'
 
 # I think the rubygems way is just really not useful, sorry
+# Before you laugh: yes, I'll gonna learn bundler, soon
 Dir[QOOXVIEW_DIR + '/libs/*'].each { |lib|
   library = File.expand_path("#{lib}/lib")
   $: << library
@@ -123,12 +101,13 @@ Dir[QOOXVIEW_DIR + '/libs/*'].each { |lib|
 
 require 'active_record'
 require 'json'
-require 'Helpers/DPuts'
 require 'gettext'
 
-
-include DPuts
-extend DPuts
+# Looking forward to bundler
+$LOAD_PATH.push '../HelperClasses/lib'
+require 'helperclasses/dputs'
+include HelperClasses::DPuts
+extend HelperClasses::DPuts
 if not defined?(DEBUG_LVL)
   # Unknown debug-level for recognition in ConfigBase
   DEBUG_LVL = 0.5
