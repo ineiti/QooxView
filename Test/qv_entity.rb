@@ -7,13 +7,13 @@ class TC_Entity < Test::Unit::TestCase
     Entities.delete_all_data
 
     dputs(2) { 'Setting up data' }
-    @admin = Entities.Persons.create(:first_name => 'admin', :pass => 'super123',
-                                     :address => 'cdlf 24', :credit => 10000)
-    Entities.Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
-    @base_1011 = Entities.Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
-                                         :teacher => @admin)
-    @dummies_one = Entities.Dummies.create(:first_name => 'one', :phone => '111',
-                                           :no_cache => '123')
+    @admin = Persons.create(:first_name => 'admin', :pass => 'super123',
+                            :address => 'cdlf 24', :credit => 10000)
+    Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
+    @base_1011 = Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
+                                :teacher => @admin)
+    @dummies_one = Dummies.create(:first_name => 'one', :phone => '111',
+                                  :no_cache => '123')
     dputs(2) { 'Finished setting up data' }
   end
 
@@ -22,28 +22,28 @@ class TC_Entity < Test::Unit::TestCase
 
   def test_create_with_new_id
     student_id = 2
-    Entities.Persons.create(:person_id => student_id, :first_name => 'student')
-    guest_id = Entities.Persons.new_id[:person_id]
-    guest = Entities.Persons.create(:person_id => guest_id, :first_name => 'guest',
-                                    :credit => 1000)
+    Persons.create(:person_id => student_id, :first_name => 'student')
+    guest_id = Persons.new_id[:person_id]
+    guest = Persons.create(:person_id => guest_id, :first_name => 'guest',
+                           :credit => 1000)
     assert_equal guest_id, guest.person_id
     assert_equal 'guest', guest.first_name
     assert_equal 1000, guest.credit
 
-    guest = Entities.Persons.match_by_person_id(guest_id)
-    student = Entities.Persons.match_by_person_id(student_id)
+    guest = Persons.match_by_person_id(guest_id)
+    student = Persons.match_by_person_id(student_id)
     assert_equal 'guest', guest.first_name
     assert_equal 'student', student.first_name
   end
 
   def test_create_with_double_id
-    admin = Entities.Persons.match_by_first_name('admin')
-    student = Entities.Persons.create(:person_id => admin.person_id, :first_name => 'duplicate')
+    admin = Persons.match_by_first_name('admin')
+    student = Persons.create(:person_id => admin.person_id, :first_name => 'duplicate')
     assert_equal nil, student
   end
 
   def test_find_admin
-    admin = Entities.Persons.match_by_first_name('admin')
+    admin = Persons.match_by_first_name('admin')
     assert_nothing_raised do
       assert_equal 1, admin.person_id
       assert_equal 'super123', admin.pass
@@ -75,29 +75,29 @@ class TC_Entity < Test::Unit::TestCase
   def test_getfields
     assert_equal %w( assistant course_id first_name start end street plz 
       students teacher tel ).sort.to_s,
-                 Entities.Courses.get_field_names.sortk.to_s
+                 Courses.get_field_names.sortk.to_s
   end
 
   def test_list
     assert_equal %w( base_1010 base_1011 ),
-                 Entities.Courses.list_first_name
+                 Courses.list_first_name
   end
 
   def test_value_add_new
     assert_equal %w( address credit first_name l l_a l_c l_d l_s login_name pass password_plain permissions
       person_id session_id value1 value2).sort.to_s,
-                 Entities.Persons.get_field_names.sortk.to_s
+                 Persons.get_field_names.sortk.to_s
 
     assert_equal ['list', :l_a, 'l_a', {:list_type => 'array', :list_values => []}],
-                 Entities.Persons.blocks[:lists][0].to_a
+                 Persons.blocks[:lists][0].to_a
     assert_equal ['list', :l_c, 'l_c', {:list_type => 'choice', :list_values => []}],
-                 Entities.Persons.blocks[:lists][1].to_a
+                 Persons.blocks[:lists][1].to_a
     assert_equal ['list', :l_d, 'l_d', {:list_type => 'drop', :list_values => []}],
-                 Entities.Persons.blocks[:lists][2].to_a
+                 Persons.blocks[:lists][2].to_a
     assert_equal ['list', :l_s, 'l_s', {:list_type => 'single', :list_values => []}],
-                 Entities.Persons.blocks[:lists][3].to_a
+                 Persons.blocks[:lists][3].to_a
     assert_equal ['list', :l, 'l', {:list_values => []}],
-                 Entities.Persons.blocks[:lists][4].to_a
+                 Persons.blocks[:lists][4].to_a
   end
 
   def test_cache_data
@@ -112,7 +112,7 @@ class TC_Entity < Test::Unit::TestCase
   end
 
   def test_value_entity
-    val = Entities.Courses.get_value(:teacher)
+    val = Courses.get_value(:teacher)
     assert_equal 'entity', val.dtype
     assert_equal 'Persons', val.entity_class
     assert_equal Entities.Persons, val.eclass
@@ -159,6 +159,7 @@ class TC_Entity < Test::Unit::TestCase
   def test_missing_value
     old = get_config(false, :DPuts, :silent)
     set_config(true, :DPuts, :silent)
+    @admin.show_error_missing = false
     assert_raise(NoMethodError) { @admin.value3 }
     assert_raise(RuntimeError) { @admin._value3 }
     assert_nothing_raised { @admin._value1 }
@@ -231,5 +232,22 @@ class TC_Entity < Test::Unit::TestCase
   def test_create_equal
     p = Persons.create(:value1 => 10)
     assert_equal 20, p.value2
+  end
+
+  def test_new_id_inc
+    Entities.delete_all_data
+    assert_equal 1, Persons.last_id
+    persons = (1..2).collect { |i| Persons.create(login_name: "test_#{i}") }
+    assert_equal [1, 2], persons.collect { |p| p.person_id }
+    persons.first.delete
+    nperson = Persons.create(login_name: 'test_3')
+    assert_equal 3, nperson.person_id
+
+    Entities.save_all
+    Entities.delete_all_data(true)
+    Entities.load_all
+
+    nperson = Persons.create(login_name: 'test_4')
+    assert_equal 4, nperson.person_id
   end
 end

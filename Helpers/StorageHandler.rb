@@ -369,6 +369,7 @@ module StorageHandler
       @data.merge!(di.load) { |k, o, n| o.merge(n) }
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
+    @last_id = @data.length > 0 ? @data.to_a.last[0] : 1
 
     respond_to?(:loaded) and loaded
   end

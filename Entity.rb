@@ -27,7 +27,7 @@ class Entities < RPCQooxdooService
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id,
                 :storage, :data, :name, :keys,
                 :save_after_create, :values, :changed, :null_allowed,
-                :loading
+                :loading, :last_id
 
   def initialize
     begin
@@ -379,7 +379,7 @@ end
 #
 class Entity
   attr_reader :id
-  attr_accessor :changed
+  attr_accessor :changed, :show_error_missing
 
   def initialize(id, proxy)
     dputs(5) { "Creating entity -#{proxy}- with id #{id}" }
@@ -387,6 +387,7 @@ class Entity
     @proxy = proxy
     @changed = false
     @cache = {}
+    @show_error_missing = true
   end
 
   def init_instance
@@ -438,7 +439,8 @@ class Entity
           dputs(3) { "Returning listp for #{cmd} - #{$1}" }
           return [self.id, self.send($1)]
       end
-      dputs(0) { "ValueUnknown for #{cmd.inspect} in #{self.class.name} - " +
+      @show_error_missing && dputs(0) { "ValueUnknown for #{cmd.inspect} in "+
+          "#{self.class.name} - " +
           "#{caller.inspect} - #{@proxy.blocks.inspect}" }
       if field =~ /^_/
         raise 'ValueUnknown'
