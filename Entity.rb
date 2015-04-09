@@ -326,7 +326,7 @@ class Entities < RPCQooxdooService
 
   def self.save_all()
     #dputs_func
-    dputs(2) { 'Saving everything' }
+    dputs(3) { 'Saving everything' }
     start = Time.now
     @@all.each { |k, v|
       dputs(3) { "Saving #{v.class.name}" }
