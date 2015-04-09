@@ -42,7 +42,7 @@ class Sessions < Entities
     @data.delete_if { |k, v|
       !v._owner || (v._last_seen && Time.now.to_i - v._last_seen.to_i > 86_400)
     }
-    log_msg :Sessions, "Cleaning up: from #{before} to #{@data.length}"
+    dputs(3) { "Cleaning up: from #{before} to #{@data.length}" }
   end
 
 end
