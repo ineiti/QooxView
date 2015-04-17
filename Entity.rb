@@ -79,6 +79,11 @@ class Entities < RPCQooxdooService
       @data = {}
       @name = singular(self.class.name)
       @data_field_id = "#{@name}_id".downcase.to_sym
+      if @@all.keys.find { |k| k.to_s == 'Entities::Static' } &&
+          @name != 'Static'
+        dp "Adding static for #{@name}"
+        @static = Statics.get_hash("Entities.#{@name}")
+      end
 
       # Now call the setup_data to initialize the fields
       value_block :default

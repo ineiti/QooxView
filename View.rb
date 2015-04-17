@@ -109,10 +109,7 @@ class View < RPCQooxdooService
       @values_need = {}
       @functions_reject = []
       @data_class = Entities.service(@name.tab_name.pluralize_simple)
-      @static_ = Statics.get(@name)
-      @static_.data_str.length == 0 and
-          @static_.data_str = {}
-      @static = @static_.data_str
+      @static = Statics.get_hash("View.#{@name}")
 
       if Entities.has_entity?(dc = @name.sub(/^[A-Z][a-z_-]*/, ''))
         dputs(3) { "Setting data-class to #{dc} for #{@name}" }
