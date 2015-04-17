@@ -73,7 +73,11 @@ class ICC < RPCQooxdooPath
       query = CGI.parse(req.query_string)
       log_msg :ICC, "Got query: #{path.inspect} - #{query}"
       ret = ICC.request(path[1], path[2], query)
-      log_msg :ICC, "Returning #{ret}"
+      if ret.to_s.length < 512
+        log_msg :ICC, "Returning #{ret}"
+      else
+        log_msg :ICC, "Returning #{ret._code}: #{ret.to_s.length} bytes"
+      end
       ret
     end
   end
