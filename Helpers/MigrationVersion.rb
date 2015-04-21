@@ -12,7 +12,7 @@ class MigrationVersions < Entities
   end
 end
 
-# This way MigrationVersions is instantiated immediatly, instead of
+# This way MigrationVersions is instantiated immediately, instead of
 # any time later when calling QooxView.init
 RPCQooxdooService.add_new_service( MigrationVersions,
                                    'Entities.MigrationVersions')

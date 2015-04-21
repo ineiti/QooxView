@@ -33,7 +33,7 @@ class Value
     @name = arguments.shift
     @dtype = cmds.shift
     @args = {}
-    @list = ""
+    @list = ''
     @eclass_proxy = nil
     @list_type = nil
 
