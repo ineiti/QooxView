@@ -274,6 +274,12 @@ qx.Class.define("frontend.Views.Ltab", {
                             }
                         }
                         break;
+                    case "table_columns_show":
+                        this.form.fields.set_table_columns_visible(res.data, true);
+                        break;
+                    case "table_columns_hide":
+                        this.form.fields.set_table_columns_visible(res.data, false);
+                        break;
                     case "update_silent":
                         this.updateView(res.data, true)
                         break;

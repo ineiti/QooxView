@@ -744,6 +744,14 @@ class View < RPCQooxdooService
     View.reply(visible ? :unhide : :hide, element)
   end
 
+  def reply_table_columns_visible(visible, element)
+    View.reply_table_columns_visible(visible, element)
+  end
+
+  def self.reply_table_columns_visible(visible, element)
+    View.reply(visible ? :table_columns_show : :table_columns_hide, element)
+  end
+
   def reply_one_two(choice, one, two)
     View.reply_one_two(choice, one, two)
   end

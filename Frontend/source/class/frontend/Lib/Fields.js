@@ -210,10 +210,11 @@ function twoDecimals(x) {
     return x < 10 ? "0" + x : x;
 }
 
-function setValueArrayTable(val) {
+function setValueArrayTable(val, silence) {
     //var val = [[1,2,3],[4,5,6]]
     //alert( "Setting val " + print_a( val ))
     var values = val;
+    var selection = -1;
     if (val && ( val[0] instanceof Array ) &&
         ( val[0][1] instanceof Array )) {
         this.valueIds = []
@@ -222,13 +223,24 @@ function setValueArrayTable(val) {
             values[i] = val[i][1]
         }
     } else {
-        this.valueIds = null
+        dbg(2, 'simple array: ' + print_a(val) + ' -- ' + print_a(this.valueIds))
+        if (this.valueIds && this.valueIds.indexOf(val[0]) >= 0) {
+            selection = this.valueIds.indexOf(val[0]);
+            dbg(2, 'found index ' + selection);
+        } else {
+            this.valueIds = null
+        }
     }
-    //alert( "Setting data to " + print_a( values ) +
-    //  " - valueIds = " + print_a( this.valueIds) )
+    dbg(2, "Setting data to " + print_a(values) +
+    " - valueIds = " + print_a(this.valueIds))
     this.cancelEditing();
-    this.getSelectionModel().resetSelection();
-    this.getTableModel().setData(values)
+    var select = this.getSelectionModel();
+    select.resetSelection();
+    if (selection >= 0) {
+        select.setSelectionInterval(selection, selection);
+    } else {
+        this.getTableModel().setData(values);
+    }
 }
 
 function getValueTable(getall) {
@@ -459,7 +471,7 @@ qx.Class.define("frontend.Lib.Fields", {
         clearData: function (lists) {
             dbg(5, "clearData");
             var fields = [];
-            if (!this.fields){
+            if (!this.fields) {
                 return;
             }
             for (var f in this.fields) {
@@ -500,6 +512,20 @@ qx.Class.define("frontend.Lib.Fields", {
             this.updating = false
         },
 
+        // Allows to hide/unhide columns in a table
+        set_table_columns_visible: function (data, show) {
+            for (var t in data) {
+                dbg(5, "Updating columns of table " + t + " - " + show);
+                var table = this.fields[t];
+                var columns = data[t];
+                for (var c in columns) {
+                    var column = columns[c];
+                    dbg(5, "Updating column " + column);
+                    table.getTableColumnModel().setColumnVisible(column, show)
+                }
+            }
+        },
+
         // Fills data in the fields
         fill: function (data, silence) {
             var old_update = this.updating;
@@ -517,7 +543,7 @@ qx.Class.define("frontend.Lib.Fields", {
                     }
                     else if (field.setValueArray) {
                         dbg(4, "Setting array value of " + data[f] + " to field " + f);
-                        field.setValueArray(data[f]);
+                        field.setValueArray(data[f], silence);
                     }
                     else if (field.setValue) {
                         dbg(4, "Setting normal value of " + data[f] + " to field " + f);
@@ -526,11 +552,13 @@ qx.Class.define("frontend.Lib.Fields", {
                 }
             }
             this.updating = old_update
-        },
+        }
+        ,
 
         fill_silence: function (data) {
             this.fill(data, true)
-        },
+        }
+        ,
 
         addElement: function (element, layout, index) {
             dbg(5, "addElement called with " + [print_a(element), layout, index].join(":"))
@@ -620,8 +648,10 @@ qx.Class.define("frontend.Lib.Fields", {
                     field_element.add(hours);
                     field_element.getValue = getValueFromTo;
                     field_element.setValueStr = setValueFromTo;
-                    field_element.resetSelection = function(){};
-                    field_element.removeAll = function(){};
+                    field_element.resetSelection = function () {
+                    };
+                    field_element.removeAll = function () {
+                    };
                     break;
                 case "hidden":
                     this.fields[name] = new qx.ui.basic.Label(params);
@@ -775,6 +805,28 @@ qx.Class.define("frontend.Lib.Fields", {
                             do_callback = true;
                             listener = "cellClick";
                             break;
+                        case 'click_select':
+                            alert("Implementation not finished:\n" +
+                            "Need to finish fields.table.callback==click_select and\n" +
+                            "adjust fields.setValueArrayTable to call the callback func.");
+                            do_callback = true;
+                            listener = "cellClick";
+                            params.single = true;
+                            /*
+                             ## This is for a callback-function whenever the selection
+                             ## changes
+                             */
+                            table.callOnChange = false;
+                            table.getSelectionModel().addListener('changeSelection',
+                                function (e) {
+                                    if (table.callOnChange) {
+                                        alert('calling')
+                                        this.callback[1].call(this.callback[0], [id, name, type, data, params])
+                                    } else {
+                                        alert('not calling')
+                                    }
+                                })
+                            break;
                         case 'dblClick':
                             do_callback = true;
                             listener = "cellDblclick";
@@ -790,10 +842,13 @@ qx.Class.define("frontend.Lib.Fields", {
                             tableModel.setColumnEditable(col, true);
                             //var tcm = table.getTableColumnModel();
                             //tcm.setCellEditorFactory(col, new qx.ui.table.celleditor.TextField);
-                            table.getSelectionModel().setSelectionMode(
-                                qx.ui.table.selection.Model.SINGLE_SELECTION);
+                            params.single = true
                         }
                         table.is_editable = true
+                    }
+                    if (params.single) {
+                        table.getSelectionModel().setSelectionMode(
+                            qx.ui.table.selection.Model.SINGLE_SELECTION);
                     }
 
                     table.setValueArray = setValueArrayTable;
@@ -836,17 +891,17 @@ qx.Class.define("frontend.Lib.Fields", {
                         }
                     }
                     /*
-                    // Not used for the moment - should be using the callback whenever
-                    // somebody edits the table. But doesn't work reliably - yet
-                    table.addListener('deactivate', function (e) {
-                        if (!table.updating) {
-                            dbg(2, "****** ******* ****** blur")
-                            table.cancelEditing();
-                        } else {
-                            dbg(2, "***** ***** ***** not blurring because updating")
-                        }
-                    });
-                    */
+                     // Not used for the moment - should be using the callback whenever
+                     // somebody edits the table. But doesn't work reliably - yet
+                     table.addListener('deactivate', function (e) {
+                     if (!table.updating) {
+                     dbg(2, "****** ******* ****** blur")
+                     table.cancelEditing();
+                     } else {
+                     dbg(2, "***** ***** ***** not blurring because updating")
+                     }
+                     });
+                     */
                     field_element = table;
                     //params.flexheight = 1;
                     break;
@@ -1072,7 +1127,8 @@ qx.Class.define("frontend.Lib.Fields", {
                 }
             }
             return field_element;
-        },
+        }
+        ,
 
         // Creates the view for the layout-array provided. The
         // array consists of
@@ -1290,7 +1346,8 @@ qx.Class.define("frontend.Lib.Fields", {
             }
             dbg(5, "returning from calcView, string is: " + view_str[0])
             return lyt;
-        },
+        }
+        ,
 
         // Gives focus but tests first
         focus_if_ok: function (field) {
@@ -1298,7 +1355,8 @@ qx.Class.define("frontend.Lib.Fields", {
                 dbg(4, "Focusing on " + field);
                 field.focus();
             }
-        },
+        }
+        ,
 
         focus_table: function (table, col, row) {
             if (table && table.isFocusable()) {
@@ -1323,7 +1381,8 @@ qx.Class.define("frontend.Lib.Fields", {
             } else {
                 dbg(0, "Couldn't focus on table " + table);
             }
-        },
+        }
+        ,
 
         // Put a window into visibility, hiding the background
         window_show: function (name) {
@@ -1343,7 +1402,8 @@ qx.Class.define("frontend.Lib.Fields", {
              this.first_button = win.first_button;
              */
             //this.windows_fade_to( 1 );
-        },
+        }
+        ,
 
         window_fade_to: function (win, target) {
             if (win.created && !win.dontfade && win.isfaded != target) {
@@ -1358,7 +1418,8 @@ qx.Class.define("frontend.Lib.Fields", {
             } else {
                 //alert( "Trying to fade window " + w + " which is not created yet")
             }
-        },
+        }
+        ,
 
         windows_fade_to: function (target) {
             //return;
@@ -1370,7 +1431,8 @@ qx.Class.define("frontend.Lib.Fields", {
             if (this.childLtab && this.childLtab.form && this.childLtab.form.fields) {
                 this.childLtab.form.fields.windows_fade_to(target);
             }
-        },
+        }
+        ,
 
         window_hide: function (name) {
             dbg(2, "Hiding window " + name + " of " + this.windows.length);
@@ -1391,7 +1453,8 @@ qx.Class.define("frontend.Lib.Fields", {
              }
              */
             this.focus_if_ok(this.first_field);
-        },
+        }
+        ,
 
         createHours: function () {
             var selectBox = new qx.ui.form.SelectBox();
@@ -1404,7 +1467,8 @@ qx.Class.define("frontend.Lib.Fields", {
             }
             selectBox.setWidth(null);
             return selectBox;
-        },
+        }
+        ,
 
         createDoW: function () {
             var selectBox = new qx.ui.form.SelectBox();
