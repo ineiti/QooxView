@@ -10,7 +10,7 @@ class Statics < Entities
   end
 
   def get_hash(name)
-    s = Statics.get(@name)
+    s = Statics.get(name)
     s.data_str.length == 0 and
         s.data_str = {}
     s.data_str
