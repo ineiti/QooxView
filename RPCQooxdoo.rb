@@ -370,4 +370,8 @@ class RPCQooxdooPath
     dputs(2) { "A new path -#{subclass} is created for the class: #{subclass} with path /#{name}" }
     RPCQooxdooHandler.add_path(name, subclass)
   end
+
+  def self.sanitize(filename)
+    filename.gsub(/[^0-9A-z._-]/, '')
+  end
 end
