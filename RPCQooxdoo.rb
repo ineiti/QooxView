@@ -372,6 +372,6 @@ class RPCQooxdooPath
   end
 
   def self.sanitize(filename)
-    filename.gsub(/[^0-9A-z._-]/, '')
+    filename.gsub(/[^0-9A-z._\/-]/, '')
   end
 end

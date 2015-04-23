@@ -57,7 +57,7 @@ class OpenPrint
       doc.gsub!(old, new.to_s)
       # For every -TAG- there can be a _TAG_ which is replaced with the
       # uppercase-version of 'new'
-      old_up = Regexp.new(old.inspect.sub(/^-(.*)-$/, '_\1_'))
+      dp old_up = old.inspect.sub(/^.-(.*)-.$/, '_\1_')
       doc.gsub!(old_up, new.to_s.upcase)
     }
     doc
