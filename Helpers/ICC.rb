@@ -7,6 +7,7 @@
 # - put json around everything
 require 'cgi'
 require 'net/http'
+#require 'helperclasses/hashaccessor'
 
 class ICC < RPCQooxdooPath
   @@transfers = {}
@@ -76,7 +77,7 @@ class ICC < RPCQooxdooPath
       if ret.to_s.length < 512
         log_msg :ICC, "Returning #{ret}"
       else
-        log_msg :ICC, "Returning #{ret._code}: #{ret.to_s.length} bytes"
+        log_msg :ICC, "Returning #{JSON.parse(ret)._code}: #{ret.to_s.length} bytes"
       end
       ret
     end

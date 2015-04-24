@@ -1,6 +1,8 @@
 require 'test/unit'
 require 'benchmark'
 
+$bind = Kernel.binding
+
 class TC_Entity < Test::Unit::TestCase
   def setup
     dputs(2) { 'Deleting everything' }
@@ -249,5 +251,21 @@ class TC_Entity < Test::Unit::TestCase
 
     nperson = Persons.create(login_name: 'test_4')
     assert_equal 4, nperson.person_id
+  end
+
+  def test_top_class
+    Kernel.eval("class TestTop < Entity\nend", TOPLEVEL_BINDING)
+    klass = Kernel.eval('TestTop')
+    assert 'TestTop', klass.inspect
+  end
+
+  def test_static
+    Courses.static._test = 1
+    assert_equal(1, Courses.static._test)
+    Entities.save_all
+    Entities.delete_all_data(true)
+    assert_equal(nil, Courses.static._test)
+    Entities.load_all
+    assert_equal(1, Courses.static._test)
   end
 end

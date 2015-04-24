@@ -70,7 +70,7 @@ class TC_Store_CSV < Test::Unit::TestCase
     Entities.delete_all_data(true)
     Entities.load_all
     assert_equal 'admin4', Persons.find_by_pass('super123').first_name
-    assert_equal 5, get_persons_csv.count
+    assert_equal 6, get_persons_csv.count
 
     # Invalidate everything
     get_persons_csv.each { |name|

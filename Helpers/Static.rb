@@ -19,5 +19,5 @@ end
 
 # This way Statics is instantiated immediately, instead of
 # any time later when calling QooxView.init
-RPCQooxdooService.add_new_service( Statics,
-                                   'Entities.Statics')
+RPCQooxdooService.add_new_service(Statics,
+                                  'Entities.Statics')

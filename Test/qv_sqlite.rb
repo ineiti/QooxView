@@ -53,8 +53,8 @@ class TC_SQLite < Test::Unit::TestCase
     Entities.Movements.load
     one = Entities.Movements.match_by_desc('salaire')
     two = Entities.Movements.match_by_desc('pain')
-    assert_equal 300, one.money
-    assert_equal 500, two.money
+    assert_equal 100, one.money
+    assert_equal 200, two.money
 
     @m1.money = 300
     Entities.Movements.save

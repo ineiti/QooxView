@@ -57,7 +57,7 @@ class OpenPrint
       doc.gsub!(old, new.to_s)
       # For every -TAG- there can be a _TAG_ which is replaced with the
       # uppercase-version of 'new'
-      dp old_up = old.inspect.sub(/^.-(.*)-.$/, '_\1_')
+      old_up = old.inspect.sub(/^.-(.*)-.$/, '_\1_')
       doc.gsub!(old_up, new.to_s.upcase)
     }
     doc
@@ -239,7 +239,7 @@ module PrintButton
       p = stat_printer(session, pb)
       dputs(4) { "#{pb}-#{p.inspect}" }
       value = "#{GetText._(pb.to_s)} #{p.data_str}"
-      if session.web_req and ip = session.client_ip
+      if session.web_req && ip = session.client_ip
         #dputs(4) { "#{session.web_req.inspect} - #{ip.inspect}" }
         # We're not looking for CUPS on the localhost, neither on Windows
         if ip =~ /(::1|localhost|127.0.0.1)/ or

@@ -264,6 +264,7 @@ module StorageHandler
   end
 
   def set_entry(id, field, v)
+    #dputs_func
     value = if v.is_a? Entity
               dputs(3) { "Converting #{v} to #{v.id}" }
               v.id
@@ -276,7 +277,7 @@ module StorageHandler
               v
             end
     field = field.to_sym
-    dputs(4) { "Storing #{value} in #{field}" }
+    dputs(4) { "Storing #{value} in #{field} for id #{id} in data #{@data}" }
     @storage.each { |k, di|
       if di.has_field field
         if !@data[id.to_i].has_key?(field) or
@@ -371,11 +372,13 @@ module StorageHandler
     }
     @last_id = @data.length > 0 ? @data.to_a.last[0] : 1
     @keys = {}
+    @static = Statics.get_hash("Entities.#{@name}")
+    @data_instances = {}
 
     respond_to?(:loaded) and loaded
   end
 
-  def save()
+  def save
     return unless @changed
     @storage.each { |k, di|
       dputs(5) { "Saving #{k} at #{di.inspect}" }
@@ -392,6 +395,7 @@ module StorageHandler
     @storage.each { |k, di|
       di.delete_all(local_only)
     }
+    @static = Statics.get_hash("Entities.#{@name}")
     @last_id = 1
   end
 

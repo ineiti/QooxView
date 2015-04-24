@@ -1,4 +1,6 @@
 class Courses < Entities
+  attr_accessor :static
+
   def setup_data
     value_block :first_name
     value_str :first_name
@@ -23,7 +25,4 @@ class Courses < Entities
       Courses.search_all_.each{|c| c.tel = c.tel.to_s + '1'}
     end
   end
-end
-
-class Course < Entity
 end

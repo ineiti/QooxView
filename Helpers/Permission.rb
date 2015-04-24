@@ -32,6 +32,7 @@ class Permission
   end
   
   def self.views( permissions )
+    #dputs_func
     dputs(5){"Permissions: #{permissions.inspect}"}
     dputs(5){"Views: #{@@view.inspect}"}
     [permissions].flatten.collect{|p|

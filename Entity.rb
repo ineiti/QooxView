@@ -34,7 +34,7 @@ class Entities < RPCQooxdooService
       @data_class = eval(singular(self.class.name))
     rescue Exception => e
       # Just in case the data-class is not created yet
-      eval("class #{singular(self.class.name)} < Entity\nend")
+      eval("class #{singular(self.class.name)} < Entity\nend", TOPLEVEL_BINDING)
       @data_class = eval(singular(self.class.name))
     end
     @storage = nil
@@ -79,10 +79,11 @@ class Entities < RPCQooxdooService
       @data = {}
       @name = singular(self.class.name)
       @data_field_id = "#{@name}_id".downcase.to_sym
-      if @@all.keys.find { |k| k.to_s == 'Entities::Static' } &&
+      if @@all.keys.find { |k| k.to_s == 'Static' } &&
           @name != 'Static'
         @static = Statics.get_hash("Entities.#{@name}")
       end
+      dputs(3) { "#{@name}: #{@static.inspect}" }
 
       # Now call the setup_data to initialize the fields
       value_block :default
@@ -357,7 +358,7 @@ class Entities < RPCQooxdooService
   def self.is_setup?(e)
     ret = false
     @@all.keys.each { |k|
-      ret |= k.to_s == "Entities::#{e}"
+      ret |= k.to_s == "#{e}"
     }
     dputs(4) { "ret:#{ret} for #{e} with #{@@all.keys.inspect}" }
     ret
@@ -531,6 +532,7 @@ class Entity
   end
 
   def data_get(field, raw = false, dbg = 3)
+    #dputs_func
     ret = [field].flatten.collect { |f_orig|
       f = f_orig.to_s
       (direct = f =~ /^_/) and f.sub!(/^_/, '')
