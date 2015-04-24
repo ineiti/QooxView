@@ -12,10 +12,14 @@ class ConfigBases < Entities
 
     value_block :narrow
     value_str :locale_force
-    value_int :debug_lvl
     value_str :version_local
     value_str :use_printing
+    value_int :debug_lvl
+    value_list_drop :dputs_showtime, '%w(false min sec)'
+    value_list_drop :dputs_silence, '%w(false true)'
+    value_int :dputs_terminal_width
     value_int :block_size
+    value_int :max_upload_size
 
     @@functions = []
     @@functions_base = {}
@@ -24,6 +28,19 @@ class ConfigBases < Entities
     respond_to? :add_config and add_config
 
     return true
+  end
+
+  def migration_1(c)
+    dp c
+    c._debug_lvl = DEBUG_LVL
+    c._locale_force = 'fr'
+    c._version_local = 'orig'
+    c._welcome_text = 'Welcome to Profeda'
+    # Values for slow, buggy lines. For a good transfer-rate, choose 16x more
+    c._block_size = 4096
+    c._max_upload_size = 65_536
+
+    dputs(3) { "Migrating out: #{c.inspect}" }
   end
 
   def call_changed(action, value, old)

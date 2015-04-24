@@ -120,9 +120,10 @@ class RPCQooxdooService
   end
 
   # Adds a new service of type "subclass" and stores it under "name"
-  def self.add_new_service(subclass, name)
+  def self.add_prime_service(subclass, name)
     dputs(5) { "Add a new service: #{subclass} as #{name}" }
     @@services_hash[name] = subclass.new
+    @@services_hash[name].load(false)
   end
 end
 

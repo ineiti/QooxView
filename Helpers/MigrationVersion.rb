@@ -14,5 +14,5 @@ end
 
 # This way MigrationVersions is instantiated immediately, instead of
 # any time later when calling QooxView.init
-RPCQooxdooService.add_new_service( MigrationVersions,
+RPCQooxdooService.add_prime_service( MigrationVersions,
                                    'Entities.MigrationVersions')

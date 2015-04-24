@@ -362,18 +362,19 @@ module StorageHandler
     @changed and save
   end
 
-  def load
+  def load(has_static = true)
+    #dputs_func
     dputs(2) { "Loading #{self.class.name}" }
     @data = {}
+    @data_instances = {}
+    @keys = {}
     @storage.each { |k, di|
       dputs(5) { "Loading #{k} at #{di.name} with #{di.inspect}" }
       @data.merge!(di.load) { |k, o, n| o.merge(n) }
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
     @last_id = @data.length > 0 ? @data.to_a.last[0] : 1
-    @keys = {}
-    @static = Statics.get_hash("Entities.#{@name}")
-    @data_instances = {}
+    has_static and @static = Statics.get_hash("Entities.#{@name}")
 
     respond_to?(:loaded) and loaded
   end

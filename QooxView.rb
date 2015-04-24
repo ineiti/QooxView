@@ -411,6 +411,7 @@ module QooxView
     # read the configuration
     rpcqooxdoo = RPCQooxdooService.new('Entities.ConfigBase')
     Entities.ConfigBases.load
+    Entities.ConfigBases.migrate
 
     GetText.bindtextdomain($name, :path => 'po')
     if ConfigBase.locale_force
