@@ -8,6 +8,7 @@ class ConfigBases < Entities
   def setup_data
     value_block :wide
     value_list :functions, 'ConfigBases.list_functions'
+    value_str :dputs_logfile
     value_text :welcome_text
 
     value_block :narrow
@@ -15,8 +16,8 @@ class ConfigBases < Entities
     value_str :version_local
     value_str :use_printing
     value_int :debug_lvl
-    value_list_drop :dputs_showtime, '%w(false min sec)'
-    value_list_drop :dputs_silence, '%w(false true)'
+    value_list_drop :dputs_show_time, '%w(false min sec)'
+    value_list_drop :dputs_silent, '%w(false true)'
     value_int :dputs_terminal_width
     value_int :block_size
     value_int :max_upload_size
@@ -31,14 +32,21 @@ class ConfigBases < Entities
   end
 
   def migration_1(c)
-    dp c
-    c._debug_lvl = DEBUG_LVL
+    c._debug_lvl = 2
     c._locale_force = 'fr'
     c._version_local = 'orig'
     c._welcome_text = 'Welcome to Profeda'
     # Values for slow, buggy lines. For a good transfer-rate, choose 16x more
     c._block_size = 4096
     c._max_upload_size = 65_536
+    c.diploma_dir = 'Diplomas'
+    c.exam_dir = 'Exams'
+    c.presence_sheet = 'presence_sheet.ods'
+    c.presence_sheet_small = 'presence_sheet_small.ods'
+    c.dputs_logfile = '/var/log/gestion/events.log'
+    c.dputs_show_time = %w(min)
+    c.dputs_silent = %w(false)
+    c.dputs_terminal_width = 160
 
     dputs(3) { "Migrating out: #{c.inspect}" }
   end
@@ -86,10 +94,13 @@ end
 class ConfigBase < Entity
   def setup_instance
     dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
-    is_loading { setup_defaults }
     if !Object.const_defined? :DEBUG_LVL
       self.debug_lvl = debug_lvl
     end
+    DPuts.silent = dputs_silent == %w(true)
+    DPuts.show_time = (dputs_show_time || %w(min)).first
+    DPuts.terminal_width = (dputs_terminal_width || 160).to_i
+    is_loading { setup_defaults }
   end
 
   def setup_defaults
@@ -141,6 +152,18 @@ class ConfigBase < Entity
     data_set(:_debug_lvl, lvl.to_i)
     Object.const_defined?(:DEBUG_LVL) and Object.send(:remove_const, :DEBUG_LVL)
     Object.const_set(:DEBUG_LVL, lvl.to_i)
+  end
+
+  def dputs_show_time=(t)
+    DPuts.show_time = (self._dputs_show_time = t).first
+  end
+
+  def dputs_silent=(s)
+    DPuts.silent = (self._dputs_silent = s) == %w(true)
+  end
+
+  def dputs_terminal_width=(w)
+    DPuts.terminal_width = (self._dputs_terminal_width = w).to_i
   end
 
   def to_hash
