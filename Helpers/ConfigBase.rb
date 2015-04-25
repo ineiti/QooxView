@@ -32,17 +32,13 @@ class ConfigBases < Entities
   end
 
   def migration_1(c)
-    c._debug_lvl = 2
+    c._debug_lvl = DEBUG_LVL
     c._locale_force = 'fr'
     c._version_local = 'orig'
     c._welcome_text = 'Welcome to Profeda'
     # Values for slow, buggy lines. For a good transfer-rate, choose 16x more
     c._block_size = 4096
     c._max_upload_size = 65_536
-    c.diploma_dir = 'Diplomas'
-    c.exam_dir = 'Exams'
-    c.presence_sheet = 'presence_sheet.ods'
-    c.presence_sheet_small = 'presence_sheet_small.ods'
     c.dputs_logfile = '/var/log/gestion/events.log'
     c.dputs_show_time = %w(min)
     c.dputs_silent = %w(false)

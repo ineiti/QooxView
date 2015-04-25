@@ -21,7 +21,7 @@ class TC_Migration < Test::Unit::TestCase
         end
       }
 
-      RPCQooxdooService.add_new_service( CVSInventories,
+      RPCQooxdooService.add_prime_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
     @pers = Persons.create( :login_name => 'test')
@@ -57,7 +57,7 @@ class TC_Migration < Test::Unit::TestCase
       end
 
       dputs(1){"Adding to RPC"}
-      RPCQooxdooService.add_new_service( CVSInventories,
+      RPCQooxdooService.add_prime_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
 
@@ -75,7 +75,7 @@ class TC_Migration < Test::Unit::TestCase
         inv.iname = inv.typ + "-"
       end
 
-      RPCQooxdooService.add_new_service( CVSInventories,
+      RPCQooxdooService.add_prime_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
     Entities.load_all
@@ -98,7 +98,7 @@ class TC_Migration < Test::Unit::TestCase
         inv._i_name = inv._iname
       end
 
-      RPCQooxdooService.add_new_service( CVSInventories,
+      RPCQooxdooService.add_prime_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
 
@@ -119,7 +119,7 @@ class TC_Migration < Test::Unit::TestCase
         dputs(1){"Is now #{inv.inspect}"}
       end
 
-      RPCQooxdooService.add_new_service( CVSInventories,
+      RPCQooxdooService.add_prime_service( CVSInventories,
         "Entities.CVSInventories" )
       ')
 
