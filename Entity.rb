@@ -297,6 +297,9 @@ class Entities < RPCQooxdooService
     dputs(4) { "#{s}, #{@@services_hash["Entities.#{s}"].class.inspect}" }
     if (ret = @@services_hash["Entities.#{s}"]).class == Class
       dputs(0) { "#{s} is missing" }
+      caller.each{|c|
+        dputs(0){c}
+      }
       exit
     end
     ret
