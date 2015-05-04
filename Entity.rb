@@ -135,7 +135,7 @@ class Entities < RPCQooxdooService
     @blocks[@block_now] = []
   end
 
-  def value_add(cmds, args)
+  def value_add_(cmds, args)
     value = Value.new(cmds, args, @default_type)
     @values.push value
 
@@ -146,6 +146,40 @@ class Entities < RPCQooxdooService
 
     # And add the entry in the DataHandler
     add_value_to_storage(value)
+  end
+
+  def value_add(cmds, *args)
+    value_add_(cmds.to_s.split('_'), args)
+  end
+
+  # Adds a _str_-entry to the current block
+  def value_str(name)
+    value_add(:str, name)
+  end
+
+  # Adds a _int_-entry to the current block
+  def value_int(name)
+    value_add(:int, name)
+  end
+
+  # Adds a _date_-entry to the current block
+  def value_date(name)
+    value_add(:date, name)
+  end
+
+  # Adds a _date_-entry to the current block
+  def value_time(name)
+    value_add(:time, name)
+  end
+
+  # Adds a list which will show as a drop-down
+  def value_list_drop_(name, init)
+    value_add(:list_drop, name, init)
+  end
+
+  # Adds a reference to an entity, per default takes the name as the entity
+  def value_entity(name, entity = name)
+    value_add("entity_#{entity}", name)
   end
 
   # Makes for a small proxy, in that only the needed classes are
@@ -223,7 +257,7 @@ class Entities < RPCQooxdooService
         ret
       when /^value_/
         cmds = cmd_str.split('_')[1..-1]
-        value_add(cmds, args)
+        value_add_(cmds, args)
       else
         dputs(0) { "Error: Method is missing: #{cmd} in Entities" }
         dputs(0) { caller.inspect }
@@ -297,8 +331,8 @@ class Entities < RPCQooxdooService
     dputs(4) { "#{s}, #{@@services_hash["Entities.#{s}"].class.inspect}" }
     if (ret = @@services_hash["Entities.#{s}"]).class == Class
       dputs(0) { "#{s} is missing" }
-      caller.each{|c|
-        dputs(0){c}
+      caller.each { |c|
+        dputs(0) { c }
       }
       exit
     end
