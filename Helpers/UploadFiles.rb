@@ -5,7 +5,7 @@ class UploadFiles < RPCQooxdooPath
   @@files = []
   def self.parse_req( req )
     dputs( 4 ){ "UploadFiles: #{req.inspect}" }
-    path = get_config( '/tmp', :UploadFiles, :path )
+    path = ConfigBase.upload_files
     filename = CGI.unescape( req.header['x-file-name'][0] || "unknown" )
     filename = self.escape_chars( filename )
     dputs(4){"Writing to #{filename.inspect} in #{path.inspect}"}

@@ -87,7 +87,7 @@ class OpenPrint
       z.commit
     }
 
-    if not get_config(false, :OpenPrint, :simulation)
+    if ConfigBase.openprint_simulation == %w(false)
       Docsplit.extract_pdf tmp_file, :output => '/tmp'
       #FileUtils::cp( tmp_file, pdf_file )
       dputs(5) { 'Finished docsplit' }
@@ -160,7 +160,7 @@ module PrintButton
   end
 
   def get_remote_printers(ip)
-    if ip.match(get_config('none', :OpenPrint, :search_remote))
+    if ip.match(ConfigBase.openprint_search)
       dputs(2) { "Getting printers for #{ip}" }
       call_lpstat(ip)
     else
