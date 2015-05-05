@@ -5,6 +5,8 @@ class TC_Print < Test::Unit::TestCase
     dputs(2){ 'Deleting everything'
     }
     Entities.delete_all_data
+    Entities.load_all
+    Entities.ConfigBases.load
   end
 
   def teardown

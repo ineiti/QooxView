@@ -410,9 +410,13 @@ module QooxView
     # We want to load an eventual ConfigBase first, so that other modules can
     # read the configuration
     rpcqooxdoo = RPCQooxdooService.new('Entities.ConfigBase')
-    Entities.ConfigBases.load
-    ConfigBases.singleton
-    Entities.ConfigBases.migrate
+    if true
+      ConfigBases.init
+    else
+      Entities.ConfigBases.load
+      ConfigBases.singleton
+      Entities.ConfigBases.migrate
+    end
     # Everything will be loaded just after, so make sure we have everything done
     # when there is a migration
     Entities.save_all

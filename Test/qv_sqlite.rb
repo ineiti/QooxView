@@ -6,6 +6,7 @@ class TC_SQLite < Test::Unit::TestCase
     Entities.delete_all_data
     @m1 = Entities.Movements.create( :desc => 'salaire', :money => 100 )
     @m2 = Entities.Movements.create( :desc => 'pain', :money => 200 )
+    Entities.save_all
   end
 
   def teardown
@@ -50,24 +51,23 @@ class TC_SQLite < Test::Unit::TestCase
     @m2.money = 500
     assert_equal 300, @m1.money
     assert_equal 500, @m2.money
+    Entities.Movements.delete_all(true)
     Entities.Movements.load
     one = Entities.Movements.match_by_desc('salaire')
     two = Entities.Movements.match_by_desc('pain')
     assert_equal 100, one.money
     assert_equal 200, two.money
 
-    @m1.money = 300
+    one.money = 300
     Entities.Movements.save
-    @m2.money = 500
+    two.money = 500
     Entities.Movements.save
-    assert_equal 300, @m1.money
-    assert_equal 500, @m2.money
+    assert_equal 300, one.money
+    assert_equal 500, two.money
     Entities.Movements.load
     one = Entities.Movements.match_by_desc('salaire')
     two = Entities.Movements.match_by_desc('pain')
     assert_equal 300, one.money
     assert_equal 500, two.money
-    assert_equal 300, @m1.money
-    assert_equal 500, @m2.money
   end
 end

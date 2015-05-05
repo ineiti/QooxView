@@ -47,6 +47,14 @@ class RPCQooxdooService
     get_services(services)
   end
 
+  def needs_covered(a)
+    return true unless @@needs.has_key?(a)
+    @@needs[a].each{|n|
+      return false if @@services_hash[n].class == Class
+    }
+    return true
+  end
+
   def get_services(services = '.*')
     #dputs_func
     do_init = true
@@ -62,10 +70,13 @@ class RPCQooxdooService
             dputs(3) { "Initializing #{k.inspect} with #{v.inspect}" }
             if @@services_hash[k].class == Class
               dputs(5) { "Needs is: #{@@needs.inspect}" }
-              if @@needs.has_key?(k) and
-                  @@services_hash[@@needs[k]].class == Class
+              #if @@needs.has_key?(k) &&
+              #    @@services_hash[@@needs[k]].class == Class
+              if !needs_covered(k)
                 dputs(3) { "Not initializing #{k}, as it needs #{@@needs[k]}" }
-                get_services(@@needs[k])
+                @@needs[k].each{|n|
+                  get_services(/^#{n}$/)
+                }
                 do_init = true
               else
                 dputs(3) { "RPC: making an instance of #{k.inspect} with #{v.inspect}" }
@@ -117,6 +128,10 @@ class RPCQooxdooService
 
   def self.services
     @@services_hash
+  end
+
+  def self.needs
+    @@needs
   end
 
   # Adds a new service of type "subclass" and stores it under "name"

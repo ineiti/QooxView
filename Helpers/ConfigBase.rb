@@ -15,6 +15,8 @@ class ConfigBases < Entities
     value_str :locale_force
     value_str :version_local
     value_str :use_printing
+    value_list_drop :openprint_simul, '%w(true false)'
+    value_str :openprint_search
     value_int :debug_lvl
     value_list_drop :dputs_show_time, '%w(false min sec)'
     value_list_drop :dputs_silent, '%w(false true)'
@@ -43,6 +45,8 @@ class ConfigBases < Entities
     c.dputs_show_time = %w(min)
     c.dputs_silent = %w(false)
     c.dputs_terminal_width = 160
+    c.openprint_simul = %w(false)
+    c.openprint_search = '.*'
 
     dputs(3) { "Migrating out: #{c.inspect}" }
   end
@@ -70,6 +74,9 @@ class ConfigBases < Entities
   end
 
   def init
+    Entities.ConfigBases.load
+    ConfigBases.singleton
+    ConfigBases.migrate
   end
 
   def self.singleton

@@ -185,6 +185,7 @@ class SQLite < StorageType
     }
     dputs(2) { 'Loading all dbs' }
     RPCQooxdooService.entities { |e|
+      e.is_loaded = false
       e.load
     }
   end

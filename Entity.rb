@@ -27,7 +27,7 @@ class Entities < RPCQooxdooService
   attr_accessor :data_class, :data_instances, :blocks, :data_field_id,
                 :storage, :data, :name, :keys,
                 :save_after_create, :values, :changed, :null_allowed,
-                :loading, :last_id
+                :loading, :last_id, :is_loaded
 
   def initialize
     begin
@@ -43,6 +43,7 @@ class Entities < RPCQooxdooService
     @changed = false
     @null_allowed = false
     @loading = false
+    @is_loaded = false
 
     if @data_class != 'Entity'
       @@all[@data_class] = self
@@ -409,9 +410,12 @@ class Entities < RPCQooxdooService
     return false
   end
 
-  def self.needs(e)
-    dputs(2) { "#{self.name} needs #{e}" }
-    @@needs["Entities.#{self.name.to_s}"] = "Entities.#{e.to_s}"
+  def self.needs(entities)
+    dputs(2) { "#{self.name} needs #{entities}" }
+    entities = entities.to_s.to_a unless entities.class == Array
+    @@needs["Entities.#{self.name.to_s}"] = entities.collect{|e|
+      "Entities.#{e}"
+    }
   end
 
 end

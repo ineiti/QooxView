@@ -87,7 +87,7 @@ class OpenPrint
       z.commit
     }
 
-    if ConfigBase.openprint_simulation == %w(false)
+    if ConfigBase.openprint_simul == %w(false)
       Docsplit.extract_pdf tmp_file, :output => '/tmp'
       #FileUtils::cp( tmp_file, pdf_file )
       dputs(5) { 'Finished docsplit' }

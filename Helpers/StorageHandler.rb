@@ -365,7 +365,17 @@ module StorageHandler
 
   def load(has_static = true)
     #dputs_func
-    dputs(2) { "Loading #{self.class.name}" }
+    return if @is_loaded
+    dep = RPCQooxdooService.needs["Entities.#{self.class.name}"]
+    dputs(2) { "Loading #{self.class.name} - #{dep}" }
+    if dep
+      dep.each{|pre|
+        pre_class = RPCQooxdooService.services[pre]
+        pre_class.is_loaded and next
+        dputs(3){"Pre-loading #{pre}"}
+        pre_class.load
+      }
+    end
     @data = {}
     @data_instances = {}
     @keys = {}
@@ -377,6 +387,7 @@ module StorageHandler
     @last_id = @data.length > 0 ? @data.to_a.last[0] : 1
     has_static and @static = Statics.get_hash("Entities.#{@name}")
 
+    @is_loaded = true
     respond_to?(:loaded) and loaded
   end
 
@@ -399,6 +410,7 @@ module StorageHandler
     }
     @static = Statics.get_hash("Entities.#{@name}")
     @last_id = 1
+    @is_loaded = false
   end
 
   def create_key(name)
