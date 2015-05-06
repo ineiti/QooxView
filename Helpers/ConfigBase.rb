@@ -247,18 +247,18 @@ class ConfigBase < Entity
   end
 
   def self.has_function?(func)
-    ConfigBase.get_functions.index(func) != nil
+    ConfigBase.get_functions.index(func.to_sym) != nil
   end
 
   def self.set_functions(func)
-    self.store({:functions => func})
+    self.store({:functions => func.collect{|f| f.to_sym}})
   end
 
   def self.add_function(func)
-    self.store({:functions => self.get_functions.push(func)})
+    self.store({:functions => self.get_functions.push(func.to_sym)})
   end
 
   def self.del_function(func)
-    self.store({:functions => self.get_functions.reject { |f| f == func }})
+    self.store({:functions => self.get_functions.reject { |f| f == func.to_sym }})
   end
 end

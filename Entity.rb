@@ -393,6 +393,12 @@ class Entities < RPCQooxdooService
     }
   end
 
+  def self.reload
+    Entities.save_all
+    Entities.delete_all_data(true)
+    Entities.load_all
+  end
+
   def self.is_setup?(e)
     ret = false
     @@all.keys.each { |k|
