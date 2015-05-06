@@ -90,8 +90,19 @@ class ICC < RPCQooxdooPath
     if en = Object.const_get(entity_name)
       dputs(3) { "Sending #{method} to #{entity_name}" }
       query={}
-      query_json.each_pair { |k, v| query[k] = JSON.parse(v.first) }
+      begin
+        query_json.each_pair { |k, v| query[k] = JSON.parse(v.first) }
+      rescue JSON::ParserError => e
+        dputs(0) { "Error parsing #{query_json}" }
+        dputs(0) { "#{e.inspect}" }
+        dputs(0) { "#{caller.inspect}" }
+        return self.response('Error', log_msg(:ICC, "Object couldn't be parsed"))
+      end
       dputs(3) { "Found query #{query.inspect}" }
+      if query.has_key?('icc_data')
+        query = query._icc_data
+        dputs(3){"Found icc_data in query, is now: #{query.inspect}"}
+      end
       msg = en.send(method, query)
       self.response('OK', binary ? Base64::encode64(msg.force_encoding(Encoding::ASCII_8BIT)) :
                             msg)
@@ -191,15 +202,15 @@ class ICC < RPCQooxdooPath
   end
 
   def self.get(entity_name, method, args: {}, url: ConfigBase.server_uri)
-    args_json = {}
-    args.each_pair { |k, v| args_json[k] = v.to_json }
+    args_json = {icc_data:args.to_json}
+    #args.each_pair { |k, v| args_json[k] = v.to_json }
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
     begin
       ret = JSON::parse(Net::HTTP.get(path))
       method[0] == '_' and ret._msg = Base64::decode64(ret._msg)
       ret
     rescue JSON::ParserError => e
-      {error: e}
+      {code: 'error', msg: "error: #{e}"}
     end
   end
 
