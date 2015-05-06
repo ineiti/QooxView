@@ -203,7 +203,6 @@ class ICC < RPCQooxdooPath
 
   def self.get(entity_name, method, args: {}, url: ConfigBase.server_uri)
     args_json = {icc_data:args.to_json}
-    #args.each_pair { |k, v| args_json[k] = v.to_json }
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
     begin
       ret = JSON::parse(Net::HTTP.get(path))
