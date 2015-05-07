@@ -214,6 +214,8 @@ class ICC < RPCQooxdooPath
       ret
     rescue JSON::ParserError => e
       {code: 'error', msg: "error: #{e}"}
+    rescue SocketError => e
+      {code: 'error', msg: "Error: timeout #{e}"}
     end
   end
 
