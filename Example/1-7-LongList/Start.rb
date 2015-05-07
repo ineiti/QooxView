@@ -1,5 +1,6 @@
-#!/usr/local/bin/ruby -I../..
+#!/usr/bin/env ruby
 
+require_relative '../dependencies'
 require 'QooxView'
 
 DEBUG_LVL=2

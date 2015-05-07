@@ -1,5 +1,6 @@
-#!/usr/bin/ruby -I../..
+#!/usr/bin/env ruby
 
+require_relative '../dependencies'
 require 'QooxView'
 
 class Welcome < View

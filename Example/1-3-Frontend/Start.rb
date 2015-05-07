@@ -1,7 +1,9 @@
-#!/usr/bin/ruby -I../../../QooxView
+#!/usr/bin/env ruby
+
 
 DEBUG_LVL=5
 CONFIG_FILE="config.yaml"
+require_relative '../dependencies'
 require 'QooxView'
 
 class Welcome < View

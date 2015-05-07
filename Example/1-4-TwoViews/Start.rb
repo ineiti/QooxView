@@ -1,7 +1,9 @@
-#!/usr/local/bin/ruby -I../.. -I.
+#!/usr/bin/env ruby
 
 # Show everything
 DEBUG_LVL=5
+
+require_relative '../dependencies'
 require 'QooxView'
 
 # Don't ask for a login (default action of Welcome-View)
