@@ -101,11 +101,15 @@ class ICC < RPCQooxdooPath
       dputs(3) { "Found query #{query.inspect}" }
       if query.has_key?('icc_data')
         query = query._icc_data
-        dputs(3){"Found icc_data in query, is now: #{query.inspect}"}
+        dputs(3) { "Found icc_data in query, is now: #{query.inspect}" }
       end
       msg = en.send(method, query)
-      self.response('OK', binary ? Base64::encode64(msg.force_encoding(Encoding::ASCII_8BIT)) :
-                            msg)
+      if msg =~ /^Error:/
+        self.response('Error', msg)
+      else
+        self.response('OK', binary ? Base64::encode64(msg.force_encoding(Encoding::ASCII_8BIT)) :
+                              msg)
+      end
     else
       self.response('Error', log_msg(:ICC, "Object #{entity_name} doesn't exist"))
     end
@@ -202,7 +206,7 @@ class ICC < RPCQooxdooPath
   end
 
   def self.get(entity_name, method, args: {}, url: ConfigBase.server_uri)
-    args_json = {icc_data:args.to_json}
+    args_json = {icc_data: args.to_json}
     path = URI.parse("#{url}/#{entity_name}/#{method}?#{URI.encode_www_form(args_json)}")
     begin
       ret = JSON::parse(Net::HTTP.get(path))
