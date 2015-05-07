@@ -10,8 +10,8 @@ require 'QooxView'
 Welcome.nologin
 
 # Import our two views
-require 'Overview'
-require 'Detail'
+require_relative 'Overview'
+require_relative 'Detail'
 
 # Start the webserver and RPC
 QooxView::startWeb
