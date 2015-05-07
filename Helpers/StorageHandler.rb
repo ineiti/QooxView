@@ -131,7 +131,7 @@ module StorageHandler
         }
       end
     }
-    return result
+    return result.uniq
   end
 
   # Like search_by, but only ONE EXACT match
