@@ -3,10 +3,6 @@
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
 
-require 'yaml'
-require 'active_record'
-require 'json'
-require 'gettext'
 require 'helperclasses/dputs'
 include HelperClasses::DPuts
 extend HelperClasses::DPuts
@@ -15,7 +11,10 @@ if not defined?(DEBUG_LVL)
   DEBUG_LVL = 0.5
 end
 
-
+require 'yaml'
+require 'active_record'
+require 'json'
+require 'gettext'
 require 'qooxview/rpcqooxdoo'
 require 'qooxview/entity'
 require 'qooxview/view'
@@ -162,7 +161,7 @@ module QooxView
 
     # And start the webrick-server
     # First check whether QooxDoo is running in source- or buid-mode
-    dir_html = File.exist?(QOOXVIEW_DIR + '/Frontend/build/script/frontend.js') ?
+    dir_html = File.exist?(QOOXVIEW_DIR + '/frontend/build/script/frontend.js') ?
         'build' : 'source'
     dputs(2) { "Directory for Frontend is: #{dir_html}" }
 
@@ -170,7 +169,7 @@ module QooxView
     if cmd = get_config(false, :startupCmd)
       %x[ #{cmd} ]
     end
-    RPCQooxdooHandler.webrick(port, QOOXVIEW_DIR + "/Frontend/#{dir_html}/",
+    RPCQooxdooHandler.webrick(port, QOOXVIEW_DIR + "/frontend/#{dir_html}/",
                               duration)
   end
 end
