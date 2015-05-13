@@ -22,9 +22,6 @@ There are three main groups of methods:
 
 # TODO: transform all show_* to be used like the value_* from Entities
 
-require 'Helpers/vtlist_pane.rb'
-
-
 class Object
   def deep_clone
     if instance_variable_defined? :@deep_cloning and @deep_cloning

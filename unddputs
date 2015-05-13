@@ -1,3 +1,0 @@
-#!/bin/bash
-
-find . -name "*rb" | grep -v DPuts.rb | grep -v libs | xargs perl -pi -e "s/ddputs/dputs/"

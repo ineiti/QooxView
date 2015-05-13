@@ -5,7 +5,7 @@
 # multiple viewers can display the same part of an Entity without having
 # to copy code all over.
 
-require 'qoodview/value'
+require 'qooxview/value'
 require 'qooxview/storage_type'
 require 'qooxview/storage_handler'
 Dir.glob(__dir__+'/storages/*').each { |f|
