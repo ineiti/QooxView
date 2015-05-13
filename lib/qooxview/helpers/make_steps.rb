@@ -1,4 +1,4 @@
-require 'helperclasses/system'
+require 'helper_classes/system'
 
 class MakeSteps
   attr_accessor :step, :status, :data, :auto_update

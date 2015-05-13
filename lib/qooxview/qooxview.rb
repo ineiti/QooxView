@@ -3,7 +3,7 @@
 #QOOXVIEW_DIR=%x[ echo $PWD/#{File.dirname(__FILE__)}].chomp
 QOOXVIEW_DIR=File.dirname(__FILE__)
 
-require 'helperclasses/dputs'
+require 'helper_classes/dputs'
 include HelperClasses::DPuts
 extend HelperClasses::DPuts
 if not defined?(DEBUG_LVL)

@@ -7,7 +7,7 @@
 # - put json around everything
 require 'cgi'
 require 'net/http'
-#require 'helperclasses/hashaccessor'
+#require 'helper_classes/hashaccessor'
 
 class ICC < RPCQooxdooPath
   @@transfers = {}

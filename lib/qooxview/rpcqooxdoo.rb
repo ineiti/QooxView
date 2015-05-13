@@ -31,7 +31,7 @@ Or you leave it all to Webrick by calling
 =end
 
 require 'webrick'
-require 'helperclasses/timing'
+require 'helper_classes/timing'
 include HelperClasses
 
 include WEBrick
