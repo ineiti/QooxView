@@ -1,4 +1,4 @@
-require 'Helpers/ConfigBase'
+require 'qooxview/helpers/config_base'
 
 class ConfigBases < Entities
   def add_config

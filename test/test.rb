@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 #!/usr/local/bin/ruby -I.. -I.
 
-$LOAD_PATH.push '.', '..', '../../HelperClasses/lib'
+require 'bundler/setup'
+$LOAD_PATH.push '.'
 
 require 'test/unit'
 #require 'test/unit/testsuite'
