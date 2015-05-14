@@ -25,7 +25,6 @@ PATH
       net-ldap (= 0.5.1)
       parseconfig (= 0.5.2)
       pdf-core (= 0.5.1)
-      perftools.rb (= 2.0.1)
       prawn (= 2.0.1)
       rqrcode (= 0.4.2)
       rqrcode-with-patches (= 0.5.4)
@@ -85,5 +84,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.7)
   helper_classes!
+  perftools.rb (= 2.0.1)
   qooxview!
   rake (~> 10.0)
