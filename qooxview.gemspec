@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/ineiti/qooxview'
   spec.license       = 'GPLv3'
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = `if [ -d '.git' ]; then git ls-files -z; fi`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
