@@ -9,6 +9,7 @@ class ConfigBases < Entities
     value_block :wide
     value_list :functions, 'ConfigBases.list_functions'
     value_str :dputs_logfile
+    value_str :dputs_logall
     value_text :welcome_text
 
     value_block :narrow
@@ -41,6 +42,7 @@ class ConfigBases < Entities
     # Values for slow, buggy lines. For a good transfer-rate, choose 16x more
     c._block_size = 4096
     c._max_upload_size = 65_536
+    c.dputs_logall = '/var/log/gestion/gestion.log'
     c.dputs_logfile = '/var/log/gestion/events.log'
     c.dputs_show_time = %w(min)
     c.dputs_silent = %w(false)
@@ -96,17 +98,26 @@ end
 
 class ConfigBase < Entity
   def setup_instance
-    dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
+    ddputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
     if !Object.const_defined? :DEBUG_LVL
       self.debug_lvl = debug_lvl
     end
-    DPuts.silent = dputs_silent == %w(true)
-    DPuts.show_time = (dputs_show_time || %w(min)).first
-    DPuts.terminal_width = (dputs_terminal_width || 160).to_i
     is_loading { setup_defaults }
   end
 
   def setup_defaults
+    puts "Setting up defaults"
+    DPuts.logall_file = dputs_logall
+    DPuts.log_file = dputs_logfile
+    DPuts.silent = dputs_silent == %w(true)
+    DPuts.show_time = (dputs_show_time || %w(min)).first
+    DPuts.terminal_width = (dputs_terminal_width || 160).to_i
+
+    send_config
+  end
+
+  # This can be used in an overriden ConfigBase-class to send individual configs
+  def send_config
   end
 
   def is_loading
