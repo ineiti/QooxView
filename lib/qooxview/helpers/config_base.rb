@@ -106,7 +106,6 @@ class ConfigBase < Entity
   end
 
   def setup_defaults
-    puts "Setting up defaults"
     DPuts.logall_file = dputs_logall
     DPuts.log_file = dputs_logfile
     DPuts.silent = dputs_silent == %w(true)

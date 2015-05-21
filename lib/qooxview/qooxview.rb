@@ -89,7 +89,8 @@ module QooxView
 
   def self.init(dir_entities = nil, dir_views = nil)
     #dputs_func
-    if not (Module.constants.index('Test') or Module.constants.index(:test))
+    # If we're in test-mode, don't interpret arguments
+    if !Module.constants.index(:Test)
       dputs(2) { 'Doing options' }
       self.do_opts(dir_entities, dir_views)
     end
