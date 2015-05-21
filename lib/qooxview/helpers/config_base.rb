@@ -98,7 +98,7 @@ end
 
 class ConfigBase < Entity
   def setup_instance
-    ddputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
+    dputs(4) { "Setting up ConfigBase with debug_lvl = #{debug_lvl}" }
     if !Object.const_defined? :DEBUG_LVL
       self.debug_lvl = debug_lvl
     end

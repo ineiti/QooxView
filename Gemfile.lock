@@ -87,6 +87,3 @@ DEPENDENCIES
   perftools.rb (= 2.0.1)
   qooxview!
   rake (~> 10.0)
-
-BUNDLED WITH
-   1.10.0.rc
