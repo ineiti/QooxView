@@ -5,6 +5,7 @@ class LDAP < StorageType
   attr_accessor :data_ldap_base, :data_ldap_users
 
   def self.get_config_file(first, second, config)
+    #dputs_func
     file = get_config(first, :LDAPConfig, config)
     if !File.exists?(file)
       file = second
@@ -20,6 +21,7 @@ class LDAP < StorageType
   # Load the configuration file and set up different variables
   # for LDAP. This has to be loaded just once
   def configure(config)
+    #dputs_func
     dputs(2) { "Configuring LDAP: #{config.inspect}" }
     if conf = get_config(nil, :LDAPConfig, :array)
       @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users,
@@ -60,6 +62,7 @@ class LDAP < StorageType
   end
 
   def load
+    #dputs_func
     data = {}
     # Read in the entries from the LDAP-directory
     dputs(3) { 'Reading LDAP-entries' }
