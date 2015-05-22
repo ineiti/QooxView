@@ -285,7 +285,7 @@ module StorageHandler
           val = di.set_entry(id, field, value)
           dputs(4) { "#{id} - #{field} - #{value.inspect}" }
           @data[id.to_i][field] = val
-        elsif DEBUG_LVL >= 3
+        elsif DEBUG_LVL >= 4
           log_msg 'StorageHandler', 'Trying to overwrite with same value in ' +
                                       "#{self.class.name}-#{field}-#{value.to_s}\n" +
                                       caller.inspect

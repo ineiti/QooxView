@@ -67,7 +67,7 @@ class RPCQooxdooService
       %w(Entities View).each { |e|
         @@services_hash.sort.each { |k, v|
           if k =~ /^#{e}/ and k =~ /#{services}/
-            dputs(3) { "Initializing #{k.inspect} with #{v.inspect}" }
+            dputs(3) { "Initializing #{k.class.name} with #{v.class.name}" }
             if @@services_hash[k].class == Class
               dputs(5) { "Needs is: #{@@needs.inspect}" }
               #if @@needs.has_key?(k) &&

@@ -491,8 +491,7 @@ class Entity
           return [self.id, self.send($1)]
       end
       @show_error_missing && dputs(0) { "ValueUnknown for #{cmd.inspect} in "+
-          "#{self.class.name} - " +
-          "#{caller.inspect} - #{@proxy.blocks.inspect}" }
+          "#{self.class.name} - #{caller.inspect}" }
       if field =~ /^_/
         raise 'ValueUnknown'
       else
