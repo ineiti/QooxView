@@ -374,7 +374,7 @@ class Entities < RPCQooxdooService
       dputs(3) { "Saving #{v.class.name}" }
       v.save()
     }
-    dputs(2) { "Time for saving everything: #{Time.now - start}" }
+    dputs(3) { "Time for saving everything: #{Time.now - start}" }
   end
 
   def self.load_all
