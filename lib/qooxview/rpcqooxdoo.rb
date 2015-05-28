@@ -49,7 +49,7 @@ class RPCQooxdooService
 
   def needs_covered(a)
     return true unless @@needs.has_key?(a)
-    @@needs[a].each{|n|
+    @@needs[a].each { |n|
       return false if @@services_hash[n].class == Class
     }
     return true
@@ -74,7 +74,7 @@ class RPCQooxdooService
               #    @@services_hash[@@needs[k]].class == Class
               if !needs_covered(k)
                 dputs(3) { "Not initializing #{k}, as it needs #{@@needs[k]}" }
-                @@needs[k].each{|n|
+                @@needs[k].each { |n|
                   get_services(/^#{n}$/)
                 }
                 do_init = true
@@ -197,7 +197,7 @@ class RPCQooxdooHandler
       method = "rpc_#{method}"
       if s.respond_to?(method)
         dputs(3) { "Calling #{method} with #{params.inspect}" }
-        begin
+        System.rescue_all("while handling #{method} with #{params.inspect}") do
           parsed = s.parse_request(method, session, params[0])
           time.probe("Parsing #{service}.#{method}")
           dputs(4) { "Parsed request is #{parsed.inspect}" }
@@ -218,13 +218,8 @@ class RPCQooxdooHandler
 
           dputs(show_request_reply) { "Final answer is #{answer.inspect}" }
           return self.answer(answer, id)
-        rescue Exception => e
-          dputs(0) { "Error while handling #{method} with #{params.inspect}: #{e.message}" }
-          dputs(0) { "#{e.inspect}" }
-          dputs(0) { "#{e.to_s}" }
-          puts e.backtrace
-          return self.error(2, 2, 'Error in handling method', id)
         end
+        return self.error(2, 2, 'Error in handling method', id)
       else
         return self.error(2, 2, "No such method #{method} for #{s.class.name}", id)
       end
@@ -318,7 +313,7 @@ class RPCQooxdooHandler
 
         status = HTTPStatus::OK
         res['content-type'] = 'text/html'
-        begin
+        System.rescue_all("while handling #{cl.name} with #{req.inspect}") {
           if cl.respond_to? :parse_req_res
             res.body = cl.parse_req_res(req, res).to_s
           elsif cl.respond_to? :parse_req
@@ -326,13 +321,7 @@ class RPCQooxdooHandler
           else
             res.body = cl.parse(req.request_method, req.path, req.query).to_s
           end
-        rescue Exception => e
-          dputs(0) { "Error while handling #{cl.name} with #{req.inspect}: #{e.message}" }
-          dputs(0) { "#{e.inspect}" }
-          dputs(0) { "#{e.to_s}" }
-          puts e.backtrace
-          res.body = 'Error in handling method'
-        end
+        } or res.body = 'Error in handling method'
         res.body.force_encoding(Encoding::ASCII_8BIT)
         res['content-length'] = res.body.length
         res['status'] = status
