@@ -97,10 +97,11 @@ class Value
   end
 
   def to_a(session = nil)
+    #dputs_func
     fe_type, fe_name, args = @dtype, @name, @args.dup
     case @dtype.to_s
       when 'list', 'select'
-        dputs(3) { "List is #{@list}" }
+        dputs(3) { "List for #{@name} is #{@list}" }
         @list.size > 0 and args.merge! :list_values => eval(@list).to_a
       when /entity/
         dputs(3) { "Converting -#{@name}- to array" }
