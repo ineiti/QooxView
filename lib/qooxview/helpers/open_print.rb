@@ -215,7 +215,8 @@ module PrintButton
     if pn != 'PDF'
       if get_server_printers.index(pn)
         cmd = "lp -o media=a4 -o fitplot -d #{pn.sub(/^server /, '')}"
-      elsif get_remote_printers(remote).index(pn)
+      elsif !(dp(session.web_req.header['user_agent']) =~ /Windows/) &&
+          get_remote_printers(remote).index(pn)
         cmd = "lp -o media=a4 -o fitplot -h #{remote}:631 -d #{pn}"
       end
     end
@@ -240,12 +241,12 @@ module PrintButton
       dputs(4) { "#{pb}-#{p.inspect}" }
       value = "#{GetText._(pb.to_s)} #{p.data_str}"
       if session.web_req && ip = session.client_ip
-        #dputs(4) { "#{session.web_req.inspect} - #{ip.inspect}" }
-        # We're not looking for CUPS on the localhost, neither on Windows
-        if ip =~ /(::1|localhost|127.0.0.1)/ or
-            session.web_req.header['user_agent'] =~ /Windows/
-          dputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user_agent']}" }
-        else
+        # We're not looking for CUPS on the localhost, only on Macintosh and
+        # non-android Linuxes
+        ua = session.web_req.header['user-agent'].first
+        if ip =~ /(::1|localhost|127.0.0.1)/
+          ddputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user-agent']}" }
+        elsif ua =~ /(Macintosh|Linux)/ && !(ua =~ /Android/)
           value = [value] + get_server_printers + get_remote_printers(ip)
         end
       end
