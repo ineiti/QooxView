@@ -20,8 +20,8 @@ class Array
     self.replace(to_sym())
   end
 
-  def to_frontend
-    collect { |a| a.to_frontend }.sort { |a, b| a[1]<=>b[1] }
+  def to_frontend(arg = nil)
+    collect { |a| a.to_frontend(arg) }.sort { |a, b| a[1]<=>b[1] }
   end
 
   def to_s
@@ -30,7 +30,7 @@ class Array
 end
 
 class Object
-  def to_frontend
+  def to_frontend(_ = nil)
     to_s
   end
 end
