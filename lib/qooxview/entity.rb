@@ -55,25 +55,6 @@ class Entities < RPCQooxdooService
       @default_type = :CSV
       @keys = {}
 
-      # Check for config of this special class
-      #      dputs( 2 ){ "Class is: #{self.class.name.to_sym.inspect}" }
-      if @config = get_config(nil, :Entities, self.class.name)
-        #@config = $config[:Entities][self.class.name.to_sym]
-        dputs(3) { "Writing config #{@config.inspect} for #{self.class.name}" }
-        @config.each { |k, v|
-          dputs(3) { "Setting #{k} = #{v}" }
-          case v
-            when /true|false/
-              instance_variable_set("@#{k.to_s}", eval(v))
-            else
-              instance_variable_set("@#{k.to_s}", v)
-          end
-          self.class.send(:attr_reader, k)
-        }
-      else
-        @config = nil
-      end
-
       # Stuff for the StorageHandler
       @storage = {}
       @data = {}
@@ -418,7 +399,7 @@ class Entities < RPCQooxdooService
   def self.needs(entities)
     dputs(2) { "#{self.name} needs #{entities}" }
     entities = entities.to_s.to_a unless entities.class == Array
-    @@needs["Entities.#{self.name.to_s}"] = entities.collect{|e|
+    @@needs["Entities.#{self.name.to_s}"] = entities.collect { |e|
       "Entities.#{e}"
     }
   end

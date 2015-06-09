@@ -125,22 +125,10 @@ class View < RPCQooxdooService
         layout
       end
 
-      # Check for config of this special class
-      dputs(5) { "config is #{$config.inspect}" }
-      if get_config(false, :Views, self.class.name)
-        @config = $config[:Views][self.class.name.to_sym]
-        dputs(3) { "Writing config #{@config.inspect} for #{self.class.name}" }
-        @config.each { |k, v|
-          begin
-            instance_variable_set("@#{k.to_s}", eval(v))
-          rescue Exception => e
-            instance_variable_set("@#{k.to_s}", v)
-          end
-          self.class.send(:attr_reader, k)
-          dputs(3) { "Setting #{k} = #{v}}" }
-        }
-      else
-        @config = nil
+      # For debugging purposes, we allow re-ordering of views in config.yaml
+      if o = get_config(nil, :Views, self.class.name, :order)
+        dputs(3){"Overwriting order of #{self.class.name} with #{o}"}
+        @order = o.to_i
       end
 
       # Clean up eventual left-overs from a simple (or very complicated) layout
