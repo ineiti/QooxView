@@ -246,7 +246,7 @@ module PrintButton
         ua = session.web_req.header['user-agent']
         ua &&= ua.first
         if ip =~ /(::1|localhost|127.0.0.1)/
-          ddputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user-agent']}" }
+          dputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user-agent']}" }
         elsif ua =~ /(Macintosh|Linux)/ && !(ua =~ /Android/)
           value = [value] + get_server_printers + get_remote_printers(ip)
         end
