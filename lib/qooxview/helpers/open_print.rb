@@ -243,7 +243,8 @@ module PrintButton
       if session.web_req && ip = session.client_ip
         # We're not looking for CUPS on the localhost, only on Macintosh and
         # non-android Linuxes
-        ua = session.web_req.header['user-agent'].first
+        ua = session.web_req.header['user-agent']
+        ua &&= ua.first
         if ip =~ /(::1|localhost|127.0.0.1)/
           ddputs(3) { "Not looking for cups on #{ip} - #{session.web_req.header['user-agent']}" }
         elsif ua =~ /(Macintosh|Linux)/ && !(ua =~ /Android/)
