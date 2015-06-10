@@ -91,8 +91,7 @@ class TC_View < Test::Unit::TestCase
   end
 
   def test_config
-    assert_equal true, View.Welcome.need_pass
-    assert_equal false, View.Welcome.hide_pass
+    assert_equal 2, View.Welcome.order
   end
 
   def test_layout

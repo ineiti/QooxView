@@ -4,12 +4,7 @@ StorageType:
 
 Views:
  Welcome:
-  need_pass: true
-  hide_pass: false
-
-Entities:
-  LogActions:
-    logging: false
+  order: 2
 
 StorageType:
   STdummy1:
