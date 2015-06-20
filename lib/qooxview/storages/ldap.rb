@@ -1,5 +1,5 @@
 require 'net/ldap'
-require 'parseconfig'
+require 'iniparse'
 
 class LDAP < StorageType
   attr_accessor :data_ldap_base, :data_ldap_users
@@ -29,11 +29,11 @@ class LDAP < StorageType
     else
       file_conf = LDAP.get_config_file('ldapscripts.conf',
                                        '/etc/ldapscripts/ldapscripts.conf', :ldapscripts)
-      ldap_config = ParseConfig.new(file_conf)
+      ldap_config = IniParse.parse(File.read(file_conf))
       dputs(2) { "Configuration options are #{ldap_config.get_params.inspect}" }
       @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users =
-          ldap_config.params['SERVER'], ldap_config.params['SUFFIX'], ldap_config.params['BINDDN'],
-              ldap_config.params['USUFFIX']
+          ldap_config['SERVER'], ldap_config['SUFFIX'], ldap_config['BINDDN'],
+              ldap_config['USUFFIX']
 
       file_pass = LDAP.get_config_file('ldap.secret', '/etc/ldap.secret',
                                        :ldapsecret)
