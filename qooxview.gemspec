@@ -5,7 +5,7 @@ require 'qooxview/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'qooxview'
-  spec.version       = Qooxview::VERSION
+  spec.version       = '1.9.10'
   spec.authors       = ['Linus Gasser']
   spec.email         = ['ineiti@linusetviviane.ch']
   spec.summary       = %q{Implements a ruby-backend for QooxDoo.org}
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'helper_classes', '0.3.5'
   spec.add_dependency 'activemodel', '3.1.1'
   spec.add_dependency 'activerecord', '3.1.1'
   spec.add_dependency 'sqlite3', '1.3.10'
@@ -39,7 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'text', '1.2.3'
   spec.add_dependency 'docsplit', '0.7.6'
   spec.add_dependency 'rqrcode-with-patches', '0.5.4'
-  spec.add_dependency 'helper_classes', '0.3.2'
   spec.add_development_dependency 'perftools.rb', '2.0.1'
   spec.add_development_dependency 'bundler', '~> 1.9'
   spec.add_development_dependency 'rake', '~> 10.0'
