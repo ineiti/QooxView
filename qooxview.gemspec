@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'locale', '2.0.8'
   spec.add_dependency 'multi_json', '1.0.3'
   spec.add_dependency 'net-ldap', '0.5.1'
-  spec.add_dependency 'parseconfig', '0.5.2'
+  spec.add_dependency 'iniparse', '1.4.0'
   spec.add_dependency 'rqrcode', '0.4.2'
   spec.add_dependency 'rubyzip', '1.1.7'
   spec.add_dependency 'serialport', '1.3.1'
