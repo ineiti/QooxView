@@ -25,7 +25,7 @@ PATH
       text (= 1.2.3)
 
 PATH
-  remote: vendor/cache/HelperClasses
+  remote: ../HelperClasses
   specs:
     helper_classes (0.3.2)
 
