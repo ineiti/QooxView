@@ -14,7 +14,6 @@ class ConfigBases < Entities
 
     value_block :narrow
     value_str :locale_force
-    value_str :version_local
     value_str :use_printing
     value_list_drop :openprint_simul, '%w(true false)'
     value_str :openprint_search
@@ -37,7 +36,6 @@ class ConfigBases < Entities
   def migration_1(c)
     c._debug_lvl = DEBUG_LVL
     c._locale_force = 'fr'
-    c._version_local = 'orig'
     c._welcome_text = 'Welcome to Profeda'
     # Values for slow, buggy lines. For a good transfer-rate, choose 16x more
     c._block_size = 4096
