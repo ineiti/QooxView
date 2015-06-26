@@ -18,6 +18,11 @@ class LDAP < StorageType
     file
   end
 
+
+  def get_param(lc, param)
+    lc['__anonymous__'][param].delete('"\'')
+  end
+
   # Load the configuration file and set up different variables
   # for LDAP. This has to be loaded just once
   def configure(config)
@@ -30,10 +35,10 @@ class LDAP < StorageType
       file_conf = LDAP.get_config_file('ldapscripts.conf',
                                        '/etc/ldapscripts/ldapscripts.conf', :ldapscripts)
       ldap_config = IniParse.parse(File.read(file_conf))
-      dputs(2) { "Configuration options are #{ldap_config.get_params.inspect}" }
+      dputs(3) { "Configuration options are #{ldap_config.to_hash.inspect}" }
       @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users =
-          ldap_config['SERVER'], ldap_config['SUFFIX'], ldap_config['BINDDN'],
-              ldap_config['USUFFIX']
+          get_param(ldap_config, 'SERVER'), get_param(ldap_config, 'SUFFIX'),
+              get_param(ldap_config, 'BINDDN'), get_param(ldap_config, 'USUFFIX')
 
       file_pass = LDAP.get_config_file('ldap.secret', '/etc/ldap.secret',
                                        :ldapsecret)

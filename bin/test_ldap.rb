@@ -1,18 +1,27 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+Encoding.default_external = Encoding::UTF_8
+
 require 'bundler/setup'
 require 'iniparse'
-require 'helperclasses'
+require 'helper_classes'
+require 'net/ldap'
 
 include HelperClasses::DPuts
 
-DEBUG_LVL=3
+DEBUG_LVL=4
 
-dputs(2) { "Configuring LDAP: #{config.inspect}" }
+def get_param(lc, param)
+  lc['__anonymous__'][param].delete('"\'')
+end
+
 file_conf = '/etc/ldapscripts/ldapscripts.conf'
 ldap_config = IniParse.parse(File.read(file_conf))
-dputs(2) { "Configuration options are #{ldap_config.get_params.inspect}" }
+dputs(2) { "Configuration options are #{ldap_config.to_hash.inspect}" }
 @data_ldap_host, @data_ldap_base, @data_ldap_root, @data_ldap_users =
-    ldap_config['SERVER'], ldap_config['SUFFIX'], ldap_config['BINDDN'],
-        ldap_config['USUFFIX']
+    get_param(ldap_config, 'SERVER'), get_param(ldap_config, 'SUFFIX'),
+        get_param(ldap_config, 'BINDDN'), get_param(ldap_config, 'USUFFIX')
 
 file_pass = '/etc/ldap.secret'
 @data_ldap_pass = `cat #{ file_pass }`
@@ -29,7 +38,7 @@ file_pass = '/etc/ldap.secret'
 # Read in the entries from the LDAP-directory
 dputs(3) { 'Reading LDAP-entries' }
 filter = Net::LDAP::Filter.eq('cn', '*')
-@field_id_ldap = @fields[@data_field_id][:ldap_name].to_sym
+@field_id_ldap = :uid
 
 dputs(3) { "Going to read #{@data_ldap_base}" }
 @data_ldap.search(:base => @data_ldap_base, :filter => filter) do |entry|
