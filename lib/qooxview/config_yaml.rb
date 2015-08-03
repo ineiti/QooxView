@@ -1,8 +1,46 @@
 $config = {} if not defined? $config
-if defined?(CONFIG_FILE) and FileTest.exist?(CONFIG_FILE)
-  File.open(CONFIG_FILE) { |f| $config = YAML::load(f).to_sym }
-end
 $name = $0.match(/.*?([^\/]*).rb/)[1]
+
+# Searches for name in every directory from 'dir' towards the root and
+# returns the found filename.
+# If nothing is found, it returns nil
+# If 'dir' is nil, the directory of the running script is taken
+def search_up(name, dir = nil)
+  dir ||= File.realdirpath(File.dirname($0))
+  return File.join(dir, name) if File.exists?(File.join(dir, name))
+  return nil if File.realdirpath(dir) == '/'
+  search_up(name, File.realdirpath(File.join(dir, '..')))
+end
+
+def load_config(path=nil)
+  #dputs_func
+  if conf = search_up("#{$name.downcase}.conf", path)
+    dputs(3) { "Found configuration-file #{conf}" }
+    IO.readlines(conf).each { |l|
+      dputs(4) { "Reading line #{l}" }
+      next if l =~ /(^#|^\s*$)/
+      name, value =
+          case l
+            when /^\s*(.*?)="(.*?)".*$/
+              [$1, $2]
+            when /^\s*(.*?)=([^\s#]*)/
+              [$1, $2]
+            else
+              [nil, nil]
+          end
+      if name && value
+        dputs(3) { "Writing configuration _#{$1}_ = _#{$2}_" }
+        $config[$1.to_sym] = $2
+      end
+    }
+  end
+  if defined?(CONFIG_FILE)
+    file = path ? File.join(path, CONFIG_FILE) : CONFIG_FILE
+    if FileTest.exist?(file)
+      File.open(file) { |f| $config.merge!(YAML::load(f).to_sym) }
+    end
+  end
+end
 
 def get_config(default, *path)
   get_config_rec(path, default)

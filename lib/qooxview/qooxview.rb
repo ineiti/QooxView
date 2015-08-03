@@ -87,6 +87,18 @@ module QooxView
     }
   end
 
+  def self.load_dirs( *dirs )
+    dirs.each{|dir|
+      if dir
+        dputs(2) { "Initializing directory #{dir}" }
+        Dir[File.join(dir, '**', '*.rb')].each { |f|
+          dputs(3) { "Requiring file #{f}" }
+          require(f)
+        }
+      end
+    }
+  end
+
   def self.init(dir_entities = nil, dir_views = nil)
     #dputs_func
     # If we're in test-mode, don't interpret arguments
@@ -98,15 +110,7 @@ module QooxView
     # Include all modules in the dir_entities and dir_views
     # directories
     dputs(2) { "Starting init with entities:views = #{[dir_entities, dir_views].join(':')}" }
-    [dir_entities, dir_views].each { |d|
-      if d
-        dputs(2) { "Initializing directory #{d}" }
-        Dir[d+'/**/*.rb'].each { |f|
-          dputs(3) { "Requiring file #{f}" }
-          require(f)
-        }
-      end
-    }
+    QooxView.load_dirs( dir_entities, dir_views )
 
     if not Permission.list.index('default')
       Permission.add('default', '.*')

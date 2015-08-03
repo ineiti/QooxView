@@ -267,6 +267,7 @@ class View < RPCQooxdooService
   end
 
   def show_in_field(a, args={}) # :nodoc:
+    return unless a
     if not @actual.last =~ /^fields/
       do_container_start(%w( group fields ))
     end
