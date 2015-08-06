@@ -198,7 +198,8 @@ module PrintButton
   end
 
   def stat_printer(session, button)
-    stat_name = "#{self.name}:#{button}:#{session.owner.login_name}"
+    user = session.owner ? session.owner.login_name : 'anonymous'
+    stat_name = "#{self.name}:#{button}:#{user}"
     stat = Statics.get(stat_name)
     dputs(3) { "Getting printer #{stat_name} == #{stat.data_str}" }
     if stat.data_str == ''

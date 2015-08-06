@@ -2,14 +2,14 @@ class CSV < StorageType
 
   def configure(config)
     dputs(3) { "Configuring CSV with #{@name}" }
-    @csv_dir = 'data/'
+    @csv_dir = File.join($data_dir, 'data')
     @add_only = false
     @backup_count = 5
     super config
-    @csv_backup = "#{@csv_dir}/backup/"
+    @csv_backup = File.join(@csv_dir, 'backup')
     @csv_name = "#{@entity.class.name}.csv"
-    @csv_file = @csv_dir + @csv_name
-    @csv_backup_file = @csv_backup + @csv_name
+    @csv_file = File.join(@csv_dir, @csv_name)
+    @csv_backup_file = File.join(@csv_backup, @csv_name)
     dputs(5) { "data_file is #{@csv_file}" }
 
     @mutex = Mutex.new
@@ -30,6 +30,7 @@ class CSV < StorageType
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save(data)
+    #dputs_func
     @add_only ?
         dputs(5) { "Not saving data for #{@name}" } :
         @mutex.synchronize {
@@ -38,7 +39,7 @@ class CSV < StorageType
             [@csv_dir, @csv_backup].each { |d|
               FileUtils.mkdir_p d unless File.exists? d
             }
-            #dputs(5) { "Data is #{data.inspect}" }
+            dputs(5) { "Data is #{data.inspect}" }
 
             if File.exists? @csv_file
               time = File.mtime(@csv_file).strftime('%Y%m%d_%H%M%S')
@@ -65,7 +66,7 @@ class CSV < StorageType
             dputs(3) { 'Delete oldest file(s)' }
             if (backups = Dir.glob("#{@csv_backup_file}.*").sort).size > @backup_count
               oldfiles = backups.first(backups.size - @backup_count)
-              dputs(3){"Deleting #{oldfiles.inspect}"}
+              dputs(3) { "Deleting #{oldfiles.inspect}" }
               FileUtils.rm oldfiles
             end
           rescue Exception => e

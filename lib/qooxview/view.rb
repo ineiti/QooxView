@@ -408,6 +408,7 @@ class View < RPCQooxdooService
   end
 
   def self.list(session, tabs = nil) # :nodoc:
+    #dputs_func
     if not session
       dputs(2) { 'No session given, returning empty' }
       return {:views => []}
@@ -549,6 +550,7 @@ class View < RPCQooxdooService
 
   # Updates the layout of the form, especially the lists
   def rpc_update_view(session, args = nil)
+    #dputs_func
     #    reply( 'empty', '*' ) +
     #    reply( 'update', layout_recurse( @layout ))
     ret = []

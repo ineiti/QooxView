@@ -54,7 +54,7 @@ CONF5="hi there" # comment
 CONF6="hi #there" # comment
 ')
     $name = 'qooxview'
-    load_config('/tmp')
+    load_config_global('/tmp')
     assert_equal 'hi', $config[:CONF1]
     assert_equal nil, $config[:CONF2]
     assert_equal 'hi_there', $config[:CONF3]

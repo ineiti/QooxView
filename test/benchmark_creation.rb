@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -I.. -I.
 DEBUG_LVL = 0
-CONFIG_FILE='config.yaml'
+$config_file='config.yaml'
 require 'QooxView'
 require 'st_dummy'
 

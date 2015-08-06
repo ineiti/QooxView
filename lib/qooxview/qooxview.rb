@@ -32,6 +32,11 @@ Dir.glob(__dir__+'/helpers/*').each { |f|
 $qooxview_cmds = []
 
 module QooxView
+  # Reads options from the command-line:
+  # * -h[elp] shows the help screen
+  # * -(t|i18n) scans for translation-variables and writes .po
+  # * -p[o] converts .po to .mo
+  # * -a[rchive] call Accounts.archive (should be moved to Africompta)
   def self.do_opts(dir_entities, dir_views)
     opts = GetoptLong.new(
         ['--help', '-h', GetoptLong::NO_ARGUMENT],
@@ -87,8 +92,11 @@ module QooxView
     }
   end
 
+  # require all files in the directories
+  # _dirs_ - one or more arguments to scan for .rb-files
   def self.load_dirs( *dirs )
-    dirs.each{|dir|
+    #dputs_func
+    dirs.flatten.each{|dir|
       if dir
         dputs(2) { "Initializing directory #{dir}" }
         Dir[File.join(dir, '**', '*.rb')].each { |f|
@@ -99,6 +107,8 @@ module QooxView
     }
   end
 
+  # Read in all entities and vies, load data of entities, but don't start
+  # web-server yet
   def self.init(dir_entities = nil, dir_views = nil)
     #dputs_func
     # If we're in test-mode, don't interpret arguments

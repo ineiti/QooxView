@@ -1,5 +1,5 @@
-$config = {} if not defined? $config
-$name = $0.match(/.*?([^\/]*).rb/)[1]
+$config ||= {}
+$name = $0.match(/.*?([^\/]*?)(.rb)*$/)[1]
 
 # Searches for name in every directory from 'dir' towards the root and
 # returns the found filename.
@@ -7,12 +7,13 @@ $name = $0.match(/.*?([^\/]*).rb/)[1]
 # If 'dir' is nil, the directory of the running script is taken
 def search_up(name, dir = nil)
   dir ||= File.realdirpath(File.dirname($0))
+  dputs(3){"Directory is #{dir}, searching #{name}"}
   return File.join(dir, name) if File.exists?(File.join(dir, name))
   return nil if File.realdirpath(dir) == '/'
   search_up(name, File.realdirpath(File.join(dir, '..')))
 end
 
-def load_config(path=nil)
+def load_config_global(path=nil)
   #dputs_func
   if conf = search_up("#{$name.downcase}.conf", path)
     dputs(3) { "Found configuration-file #{conf}" }
@@ -34,8 +35,18 @@ def load_config(path=nil)
       end
     }
   end
-  if defined?(CONFIG_FILE)
-    file = path ? File.join(path, CONFIG_FILE) : CONFIG_FILE
+  unless defined?($data_dir)
+    $data_dir = $config[:DATA_DIR] || "/var/lib/#{$name.downcase}"
+    FileUtils.mkdir_p($data_dir)
+  end
+  unless defined?($config_file)
+    $config_file = File.join($data_dir, 'config.yaml')
+  end
+end
+
+def load_config_yaml(path = nil)
+  if defined?($config_file)
+    file = path ? File.join(path, $config_file) : $config_file
     if FileTest.exist?(file)
       File.open(file) { |f| $config.merge!(YAML::load(f).to_sym) }
     end
@@ -77,4 +88,5 @@ def set_config(value, *path)
   end
 end
 
-defined?(CONFIG_FILE) and dputs(2) { "config is #{$config.inspect} - file is #{CONFIG_FILE}" }
+load_config_global
+load_config_yaml

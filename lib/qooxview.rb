@@ -39,10 +39,10 @@ show_info :welcome, "hello world"
 show_button :welt, :world
 end
 def rpc_button_welt( session, args* )
-reply( 'update', { :welcome => "Hallo Welt" } )
+reply( :update, welcome: "Hallo Welt" )
 end
 def rpc_button_world( session, args* )
-reply( 'update', { :welcome => "Hello world" } )
+reply( :update, welcome: "Hello world" )
 end
 end
 
@@ -75,7 +75,15 @@ of both:
 
 === Configuration-file
 
-A simple YAML-configuration style is supported by default.
+There are two configuration-files:
+- $name.conf - which holds general configurations like data-directory
+  - bash-style configuration, as it is also used by scripts
+  - this file is searched upwards from the $name.rb, then in /etc, if not found.
+   Deafault values used when not found:
+    - DATA_DIR=/var/lib/$name
+- config.yaml - application-specific configuration that is not used by scripts
+  - this file is searched in the DATA_DIR
+  - if not present, will be copied into DATA_DIR
 
 =end
 
