@@ -34,7 +34,7 @@ class SQLite < StorageType
 
   # Allows for debugging when wanting to load another db
   def close_db
-    dputs(4){"Closing db #{@name_file}"}
+    dputs(4) { "Closing db #{@name_file}" }
     ActiveRecord::Base.remove_connection
   end
 
@@ -42,7 +42,7 @@ class SQLite < StorageType
     @mutex_es.synchronize {
       dputs(4) { "Opening connection to #{@name_file}" }
       ActiveRecord::Base.establish_connection(
-          :adapter => 'sqlite3', :database => "data/#{@name_file}")
+          :adapter => 'sqlite3', :database => File.join($data_dir, 'data', @name_file))
 
       dputs(4) { 'Initializing tables' }
       init_table
