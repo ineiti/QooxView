@@ -40,7 +40,7 @@ class SQLite < StorageType
 
   def open_db
     @mutex_es.synchronize {
-      dputs(4) { "Opening connection to #{@name_file}" }
+      dputs(4) { "Opening connection to #{@name_file} - #{$data_dir}" }
       ActiveRecord::Base.establish_connection(
           :adapter => 'sqlite3', :database => File.join($data_dir, 'data', @name_file))
 
