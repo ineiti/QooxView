@@ -18,7 +18,9 @@ class SQLite < StorageType
     @db_table = "#{name_base}_#{@name.downcase}s"
     @db_class_name = "#{name_base.capitalize}_#{@name.downcase}"
     @db_class = nil
-    %x[ mkdir -p data ]
+    @sqlite_dir = File.join($data_dir, get_config('data',
+                                                  :StorageType, :data_dir))
+    FileUtils.mkdir_p(@sqlite_dir)
     @name_file = name_file
     #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
@@ -40,8 +42,6 @@ class SQLite < StorageType
 
   def open_db
     @mutex_es.synchronize {
-      @sqlite_dir = File.join($data_dir, get_config('data',
-                                                    :StorageType, :data_dir))
       dputs(4) { "Opening connection to #{@name_file} - #{@sqlite_dir}" }
       ActiveRecord::Base.establish_connection(
           :adapter => 'sqlite3', :database => File.join(@sqlite_dir, @name_file))
