@@ -2,7 +2,7 @@ class CSV < StorageType
 
   def configure(config)
     dputs(3) { "Configuring CSV with #{@name}" }
-    @csv_dir = File.join($data_dir, 'data')
+    @csv_dir = File.join($data_dir, get_config('data', :StorageType, :data_dir))
     @add_only = false
     @backup_count = 5
     super config
