@@ -6,7 +6,7 @@ $LOAD_PATH.push '.'
 
 require 'test/unit'
 #require 'test/unit/testsuite'
-DEBUG_LVL = 0
+DEBUG_LVL = 1
 $config_file='config.yaml'
 require 'QooxView'
 require 'st_dummy'

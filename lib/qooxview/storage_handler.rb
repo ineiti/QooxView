@@ -332,10 +332,6 @@ module StorageHandler
 
   def migrate
     #dputs_func
-    if @dont_migrate
-      dputs(3){"Don't migrate - just initialized"}
-      return
-    end
     if not mv = MigrationVersions.match_by(:class_name, @name)
       dputs(2) { "#{@name.inspect} has no migration yet" }
       mv = Entities.MigrationVersions.create(:class_name => @name,
@@ -345,24 +341,28 @@ module StorageHandler
     dputs(3) { "Checking for migration_#{version} of #{@name}" }
     while self.respond_to?(vers_str = "migration_#{version}".to_sym) ||
         self.respond_to?(vers_str = "migration_#{version}_raw".to_sym)
-      log_msg :Migration, "Migrating #{@name} to version #{version}, calling #{vers_str}"
-      dputs(4) { "Working on #{data.inspect}" }
-      @data.each { |k, v|
-        if vers_str.to_s =~ /_raw$/
-          dputs(4) { "Sending raw data of #{v.inspect}" }
-          send vers_str, v
-          dputs(4) { "raw data is now #{v.inspect}" }
-          #@data[k] = v
-        else
-          inst = get_data_instance(k)
-          dputs(4) { "Sending #{inst.inspect}" }
-          send vers_str, inst
-        end
-      }
-      dputs(5) { "Data is now #{@data.inspect}" }
+      if @dont_migrate
+        log_msg :Migration, "Just counting migrations for #{name}: #{version}"
+      else
+        log_msg :Migration, "Migrating #{@name} to version #{version}, calling #{vers_str}"
+        dputs(4) { "Working on #{data.inspect}" }
+        @data.each { |k, v|
+          if vers_str.to_s =~ /_raw$/
+            dputs(4) { "Sending raw data of #{v.inspect}" }
+            send vers_str, v
+            dputs(4) { "raw data is now #{v.inspect}" }
+            #@data[k] = v
+          else
+            inst = get_data_instance(k)
+            dputs(4) { "Sending #{inst.inspect}" }
+            send vers_str, inst
+          end
+        }
+        dputs(5) { "Data is now #{@data.inspect}" }
+        @changed = true
+      end
       mv.version = version
       version += 1
-      @changed = true
     end
     @changed and save
   end
@@ -373,10 +373,10 @@ module StorageHandler
     dep = RPCQooxdooService.needs["Entities.#{self.class.name}"]
     dputs(2) { "Loading #{self.class.name} - #{dep}" }
     if dep
-      dep.each{|pre|
+      dep.each { |pre|
         pre_class = RPCQooxdooService.services[pre]
         pre_class.is_loaded and next
-        dputs(3){"Pre-loading #{pre}"}
+        dputs(3) { "Pre-loading #{pre}" }
         pre_class.load
       }
     end
@@ -389,7 +389,7 @@ module StorageHandler
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
     if @data.length == 0 && respond_to?(:init)
-      dputs(1){"Calling init for #{self.name}"}
+      dputs(1) { "Calling init for #{self.name}" }
       init
       @dont_migrate = true
     end

@@ -276,11 +276,13 @@ class TC_Entity < Test::Unit::TestCase
     its = InitTests.search_all
     assert_equal 1, its.count
     assert_equal 'howdy', its.first.text
+    assert_equal 1, MigrationVersions.find_by_class_name('InitTest').version
 
     Entities.delete_all_data
     assert_equal 0, InitTests.search_all.count
-    InitTests.class_eval{ undef :init }
+    InitTests.class_eval { undef :init }
     Entities.load_all
     assert_equal 0, InitTests.search_all.count
+    assert_equal 1, MigrationVersions.find_by_class_name('InitTest').version
   end
 end

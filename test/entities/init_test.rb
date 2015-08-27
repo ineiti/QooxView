@@ -7,7 +7,7 @@ class InitTests < Entities
     InitTests.create(text: 'howdy')
   end
 
-  def migrate_1(it)
+  def migration_1(it)
     it.text = 'there'
   end
 end
