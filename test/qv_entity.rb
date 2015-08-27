@@ -268,4 +268,19 @@ class TC_Entity < Test::Unit::TestCase
     Entities.load_all
     assert_equal(1, Courses.static._test)
   end
+
+  def test_init
+    Entities.delete_all_data
+    assert_equal 0, InitTests.search_all.count
+    Entities.load_all
+    its = InitTests.search_all
+    assert_equal 1, its.count
+    assert_equal 'howdy', its.first.text
+
+    Entities.delete_all_data
+    assert_equal 0, InitTests.search_all.count
+    InitTests.class_eval{ undef :init }
+    Entities.load_all
+    assert_equal 0, InitTests.search_all.count
+  end
 end

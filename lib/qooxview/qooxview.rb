@@ -131,7 +131,7 @@ module QooxView
     # read the configuration
     rpcqooxdoo = RPCQooxdooService.new('Entities.ConfigBase')
     if true
-      ConfigBases.init
+      ConfigBases.init_load
     else
       Entities.ConfigBases.load
       ConfigBases.singleton

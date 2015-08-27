@@ -43,6 +43,7 @@ class Entities < RPCQooxdooService
     @null_allowed = false
     @loading = false
     @is_loaded = false
+    @dont_migrate = false
 
     if @data_class != 'Entity'
       @@all[@data_class] = self
@@ -344,7 +345,7 @@ class Entities < RPCQooxdooService
       dputs(2) { "Erasing data of #{k}" }
       v.delete_all(local_only)
     }
-    ConfigBases.init
+    ConfigBases.init_load
   end
 
   def self.save_all()
