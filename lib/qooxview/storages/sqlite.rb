@@ -188,7 +188,14 @@ class SQLite < StorageType
     dputs(2) { 'Loading all dbs' }
     RPCQooxdooService.entities { |e|
       e.is_loaded = false
-      e.load
+    }
+    RPCQooxdooService.entities { |e|
+      unless e.is_loaded
+        e.loading = true
+        e.load
+        e.loading = false
+        u = Users.match_by_name('local')
+      end
     }
   end
 

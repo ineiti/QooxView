@@ -332,6 +332,10 @@ module StorageHandler
 
   def migrate
     #dputs_func
+    if @dont_migrate
+      dputs(3){"Don't migrate - just initialized"}
+      return
+    end
     if not mv = MigrationVersions.match_by(:class_name, @name)
       dputs(2) { "#{@name.inspect} has no migration yet" }
       mv = Entities.MigrationVersions.create(:class_name => @name,
@@ -384,6 +388,11 @@ module StorageHandler
       @data.merge!(di.load) { |k, o, n| o.merge(n) }
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
+    if @data.length == 0 && respond_to?(:init)
+      dputs(1){"Calling init for #{self.name}"}
+      init
+      @dont_migrate = true
+    end
     @last_id = @data.length > 0 ? @data.to_a.last[0] : 1
     has_static and @static = Statics.get_hash("Entities.#{@name}")
 
@@ -411,6 +420,7 @@ module StorageHandler
     @static = Statics.get_hash("Entities.#{@name}")
     @last_id = 1
     @is_loaded = false
+    @dont_migrate = false
   end
 
   def create_key(name)
