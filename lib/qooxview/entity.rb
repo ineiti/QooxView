@@ -377,6 +377,8 @@ class Entities < RPCQooxdooService
   def self.reload
     Entities.save_all
     Entities.delete_all_data(true)
+    SQLite.dbs_close_all
+    SQLite.dbs_open_load_migrate
     Entities.load_all
   end
 

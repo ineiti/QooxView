@@ -11,7 +11,7 @@ require 'logger'
 
 
 class SQLite < StorageType
-  attr :db_class
+  attr :db_class, :db_file
 
   def configure(config, name_base = 'stsql', name_file = 'sql.db')
     dputs(2) { "Configuring SQLite with #{@name}" }
@@ -22,6 +22,7 @@ class SQLite < StorageType
                                                   :StorageType, :data_dir))
     FileUtils.mkdir_p(@sqlite_dir)
     @name_file = name_file
+    @db_file = File.join(@sqlite_dir, @name_file)
     #    ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
     #ActiveRecord::Base.logger = Logger.new(STDERR)
@@ -44,7 +45,7 @@ class SQLite < StorageType
     @mutex_es.synchronize {
       dputs(4) { "Opening connection to #{@name_file} - #{@sqlite_dir}" }
       ActiveRecord::Base.establish_connection(
-          :adapter => 'sqlite3', :database => File.join(@sqlite_dir, @name_file))
+          :adapter => 'sqlite3', :database => @db_file)
 
       dputs(4) { 'Initializing tables' }
       init_table
@@ -127,6 +128,8 @@ class SQLite < StorageType
               add_column(db_table, f, :boolean)
             when /float/
               add_column(db_table, f, :float)
+            when /date/
+              add_column(db_table, f, :date)
             else
               add_column(db_table, f, :string)
           end
