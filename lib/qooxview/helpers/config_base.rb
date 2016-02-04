@@ -74,7 +74,7 @@ class ConfigBases < Entities
   end
 
   def init_load
-    Entities.ConfigBases.load
+    ConfigBases.load
     ConfigBases.singleton
     ConfigBases.migrate
   end

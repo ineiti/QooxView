@@ -85,6 +85,11 @@ class Entities < RPCQooxdooService
     end
   end
 
+  # Overwrites ActiveSupport load, which is not needed
+  def self.load(has_static = true)
+    Entities.method_missing(self.name).load(has_static)
+  end
+
   # Here comes the definition of the data used in that Entity. If the
   # return-value is true, the data is loaded automatically
   def setup_data
