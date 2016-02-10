@@ -134,6 +134,35 @@ module StorageHandler
     return result.uniq
   end
 
+  # Similar to search_by, but searches multiple instances that contain all elements
+  # of 'values'
+  def search_by_all(field, values)
+    #dputs_func
+    result = []
+    field = field.to_sym
+    @data.each_key { |k|
+      #dputs( 5 ){ "Searching :#{value}: in #{field} of #{k} which is :#{@data[k][field.to_sym]}:" }
+      if @data[k]
+        found_data = true
+        values.each { |value|
+          found = false
+          [@data[k][field]].flatten.each { |d|
+            dputs(4) { "Searching for #{value.inspect} in #{k}: #{d.inspect}" }
+            if d.to_s =~ /#{value.to_s}/i
+              found = true
+            end
+          }
+          found_data &= found
+        }
+        if found_data
+          dputs(4) { "Found data-entry #{k}: #{@data[k].inspect}" }
+          result.push get_data_instance(k)
+        end
+      end
+    }
+    return result.uniq
+  end
+
   # Like search_by, but only ONE EXACT match
   def match_by(field, value)
     field = field.to_sym
