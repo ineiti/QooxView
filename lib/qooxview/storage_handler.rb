@@ -199,7 +199,9 @@ module StorageHandler
         r.has_key? k and r[k].to_s =~ /#{filter[k].to_s}/i
       }
     }
-    res
+    res.map{|r|
+      get_data_instance(r[@data_field_id])
+    }
   end
 
   def new_id
