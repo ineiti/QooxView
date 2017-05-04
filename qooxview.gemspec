@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'gettext', '3.0.0'
   spec.add_dependency 'i18n', '0.6.0'
   spec.add_dependency 'iconv', '1.0.3'
-  spec.add_dependency 'json', '1.8.2'
+  spec.add_dependency 'json', '2.1.0'
   spec.add_dependency 'locale', '2.0.8'
   spec.add_dependency 'multi_json', '1.0.3'
   spec.add_dependency 'net-ldap', '0.5.1'
