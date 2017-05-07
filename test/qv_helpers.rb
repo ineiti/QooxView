@@ -102,7 +102,7 @@ class TC_Helpers < Test::Unit::TestCase
     Accounts.create(:name => 'test')
   end
 
-  def test_speed_sqlite
+  def tes_speed_sqlite
     dputs(1) { 'Benchmark' }
     (0..4).each { |b|
       dputs(1) { Benchmark.measure("Accounts #{(b*50).to_s.rjust(3)}") {

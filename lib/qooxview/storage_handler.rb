@@ -111,7 +111,7 @@ module StorageHandler
   # Searching of misuse in search_all - found and accepted misuses can take
   # search_all_
   def search_all
-    log_msg :StorageHandler, "Search_all for #{self.name} in #{caller.inspect}"
+    # log_msg :StorageHandler, "Search_all for #{self.name} in #{caller.inspect}"
     search_all_
   end
 
@@ -375,7 +375,7 @@ module StorageHandler
       if @dont_migrate
         log_msg :Migration, "Just counting migrations for #{name}: #{version}"
       else
-        log_msg :Migration, "Migrating #{@name} to version #{version}, calling #{vers_str}"
+        # log_msg :Migration, "Migrating #{@name} to version #{version}, calling #{vers_str}"
         dputs(4) { "Working on #{data.inspect}" }
         @data.each { |k, v|
           if vers_str.to_s =~ /_raw$/

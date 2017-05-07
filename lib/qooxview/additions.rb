@@ -136,19 +136,7 @@ class Date
   end
 end
 
-class Fixnum
-  def separator(sep = ' ')
-    self.to_s.tap do |s|
-      :go while s.gsub!(/^([^.]*)(\d)(?=(\d{3})+)/, "\\1\\2#{sep}")
-    end
-  end
-
-  def to_MB(label = 'MB')
-    "#{(self / 1_000_000).separator} #{label}"
-  end
-end
-
-class Bignum
+class Integer
   def separator(sep = ' ')
     self.to_s.tap do |s|
       :go while s.gsub!(/^([^.]*)(\d)(?=(\d{3})+)/, "\\1\\2#{sep}")

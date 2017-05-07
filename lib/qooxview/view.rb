@@ -27,6 +27,9 @@ class Object
     if instance_variable_defined? :@deep_cloning and @deep_cloning
       return @deep_cloning_obj
     end
+    if clone == nil || clone.class == Symbol || clone.class == FalseClass
+      return clone
+    end
     @deep_cloning_obj = clone
     @deep_cloning_obj.instance_variables.each do |var|
       val = @deep_cloning_obj.instance_variable_get(var)

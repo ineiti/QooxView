@@ -78,7 +78,12 @@ class SQLite < StorageType
       if @entries[data]
         @entries[data].save
       end
-      @entries[data] ||= @db_class.first(:conditions => {@data_field_id => data})
+      dat = @db_class.first(data).first
+      # dat = @db_class.first(:conditions => {@data_field_id => data})
+      # dp @entries[data]
+      # dp dat
+      # dp data
+      @entries[data] ||= dat
       if entry = @entries[data]
         entry.send("#{field}=", value)
         @entries_save[data] = entry
@@ -105,6 +110,7 @@ class SQLite < StorageType
   end
 
   def init_table
+    # dputs_func
     db_table, fields = @db_table, @fields
     dputs(3) { "Initializing #{@db_class_name} with db_table=#{db_table.inspect}" }
     ActiveRecord::Schema.define do

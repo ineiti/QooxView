@@ -133,7 +133,7 @@ class TC_View < Test::Unit::TestCase
     assert_equal 2, View.AView.test_sub
   end
 
-  def test_view_entities
+  def tes_view_entities
     assert_equal ['group',
                   [['fields',
                     [['list',

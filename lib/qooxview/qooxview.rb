@@ -12,7 +12,6 @@ if not defined?(DEBUG_LVL)
 end
 
 require 'yaml'
-require 'active_record'
 require 'json'
 require 'gettext'
 require 'qooxview/rpcqooxdoo'

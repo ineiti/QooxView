@@ -170,7 +170,8 @@ class RPCQooxdooHandler
 
   # Replies to a request
   def self.request(id, service, method, params, web_req = nil)
-    #dp params[0]
+    # dputs_func
+    # dp params[0]
     #dp Sessions.search_all_
     #dp web_req
     show_request_reply = 3
@@ -231,8 +232,6 @@ class RPCQooxdooHandler
   # Parsing of an incoming RPC-request - returns a string to be sent
   # to the client
   def self.parse(data, web_req = nil)
-    answer = nil
-
     # Prepare all variables
     if not data
       answer = self.error(2, 0, "Didn't receive request", -1)
@@ -242,7 +241,7 @@ class RPCQooxdooHandler
     end
 
     # And put it in a nice qx-compatible reply
-    dputs(3) { "Answer is #{answer}" }
+    dputs(3) { "Answer is: #{answer}" }
     return answer
   end
 
@@ -250,13 +249,15 @@ class RPCQooxdooHandler
   def self.parse_query(q)
     request = JSON.parse(q.body)
     dputs(4) { "JSON of body is #{request.inspect}" }
-    self.parse(request, q).to_json
+    reply = self.parse(request, q).to_json
+    # dp "Reply is: #{reply.encoding} - #{reply.size} - #{reply.bytesize} - #{reply}"
+    return reply.force_encoding(Encoding::ASCII_8BIT)
   end
 
   def self.parse_query_xdomain(q)
     stid = q.query['_ScriptTransport_id']
     answer = self.parse(JSON.parse(q.query['_ScriptTransport_data']), q)
-
+    dp "Answer is: #{answer} - #{answer.to_json}"
     return "qx.io.remote.transport.Script._requestFinished('#{stid}', " +
         "#{answer.to_json} );"
   end

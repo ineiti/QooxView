@@ -173,7 +173,7 @@ class Entities < RPCQooxdooService
   # instantiated - useful for stuff like long LDAP-lists...
   def get_data_instance(k)
     return nil if !k
-    if k.class != Fixnum
+    if k.class != Integer
       dputs(0) { 'This is very bad' }
       dputs(0) { "value k is #{k.inspect}" }
       dputs(0) { "caller-stack is #{caller}" }
@@ -582,7 +582,7 @@ class Entity
         if not raw and e
           v = @proxy.get_value(f)
 
-          if e.class == Fixnum and v and v.dtype == 'entity'
+          if e.class == Integer and v and v.dtype == 'entity'
             dputs(5) { "Getting instance for #{v.inspect}" }
             dputs(5) { "Getting instance with #{e.class} - #{e.inspect}" }
             dputs(5) { "Field = #{field}; id = #{@id}" }
