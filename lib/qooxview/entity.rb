@@ -175,7 +175,7 @@ class Entities < RPCQooxdooService
     return nil if !k
     if k.class != Integer
       dputs(0) { 'This is very bad' }
-      dputs(0) { "value k is #{k.inspect}" }
+      dputs(0) { "value k is #{k.inspect} - #{k.class}" }
       dputs(0) { "caller-stack is #{caller}" }
       raise 'WrongIndex'
     end
