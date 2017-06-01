@@ -6,7 +6,7 @@ PATH
 PATH
   remote: .
   specs:
-    qooxview (1.9.10)
+    qooxview (1.9.11)
       activemodel (= 5.1.0)
       activerecord (= 5.1.0)
       activesupport (= 5.1.0)
@@ -56,7 +56,7 @@ GEM
     iniparse (1.4.0)
     json (2.1.0)
     locale (2.0.8)
-    minitest (5.10.1)
+    minitest (5.10.2)
     multi_json (1.0.3)
     net-ldap (0.16.0)
     power_assert (1.0.2)

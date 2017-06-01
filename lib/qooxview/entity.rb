@@ -252,12 +252,12 @@ class Entities < RPCQooxdooService
     end
   end
 
-  def respond_to?(cmd)
+  def respond_to?(cmd, all = false)
     dputs(5) { cmd.inspect }
     if cmd =~ /^(match_by_|search_by_|list_|listp_|value_)/
       return true
     end
-    super cmd
+    super cmd, all
   end
 
   def whoami
@@ -453,7 +453,7 @@ class Entity
 
   alias_method :old_respond_to?, :respond_to?
 
-  def respond_to?(cmd)
+  def respond_to?(cmd, all = false)
     field = cmd.to_s
     if field == 'to_ary'
       dputs(4) { 'not responding to_ary' }
@@ -463,7 +463,7 @@ class Entity
       when /=$/
         return true
       else
-        return (@proxy.get_value(cmd) or super)
+        return (@proxy.get_value(cmd) or super(cmd, all))
     end
   end
 

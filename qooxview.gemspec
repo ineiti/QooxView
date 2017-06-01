@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'qooxview'
-  spec.version       = '1.9.10'
+  spec.version       = '1.9.11'
   spec.authors       = ['Linus Gasser']
   spec.email         = ['ineiti@linusetviviane.ch']
   spec.summary       = %q{Implements a ruby-backend for QooxDoo.org}
