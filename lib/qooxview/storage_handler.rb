@@ -217,6 +217,7 @@ module StorageHandler
   end
 
   def create(args, allow_double = false)
+    # dputs_func
     oldload = @loading
     @loading = true
     if args.class != Hash
@@ -292,6 +293,9 @@ module StorageHandler
     dputs(3) { "Deleting id #{id}" }
     @data.delete(id)
     @data_instances.delete(id)
+    @storage.each{|k, di|
+      di.delete id
+    }
   end
 
   def set_entry(id, field, v)

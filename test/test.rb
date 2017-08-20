@@ -23,7 +23,7 @@ QooxView.init('entities', 'views')
 
 tests = Dir.glob('qv_*.rb')
 #tests = %w( permission )
-#tests = %w( entity )
+tests = %w( sqlite )
 #tests = %w( configbase )
 
 tests.each { |t|

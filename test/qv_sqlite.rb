@@ -70,4 +70,17 @@ class TC_SQLite < Test::Unit::TestCase
     assert_equal 300, one.money
     assert_equal 500, two.money
   end
+
+  def test_rm_add
+    dp 'deleting'
+    assert_not_equal nil, Entities.Movements.find_by_desc('pain')
+    @m2.delete
+    assert_equal nil, Entities.Movements.find_by_desc('pain')
+    Entities.delete_all_data(true)
+    Entities.load_all
+    assert_equal nil, Entities.Movements.find_by_desc('pain')
+    dp 'recreating'
+    @m2 = Entities.Movements.create( :desc => 'mappa', :money => 250 )
+    assert_equal 250, @m2.money
+  end
 end

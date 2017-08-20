@@ -102,6 +102,9 @@ class StorageType
   # If a double-entry has been detected after creation
   def data_double( data )  
   end
+
+  def delete(id)
+  end
   
   def self.new_st( st, entity, config = {} )
     if StorageType.has? st

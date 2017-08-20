@@ -23,9 +23,9 @@ class SQLite < StorageType
     FileUtils.mkdir_p(@sqlite_dir)
     @name_file = name_file
     @db_file = File.join(@sqlite_dir, @name_file)
-    #    ActiveRecord::Base.logger = Logger.new('debug.log')
+    # ActiveRecord::Base.logger = Logger.new('debug.log')
     ActiveRecord::Migration.verbose = false
-    #ActiveRecord::Base.logger = Logger.new(STDERR)
+    # ActiveRecord::Base.logger = Logger.new(STDERR)
 
     @mutex_es = Mutex.new
 
@@ -98,6 +98,7 @@ class SQLite < StorageType
   # Each new entry is directly stored, helping somewhat if the program or the
   # computer crashes
   def data_create(data)
+    # dputs_func
     dputs(5) { "Creating early data #{data.inspect} with #{data.class}" }
     dputs(5) { "hello for #{data.inspect}" }
     dputs(5) { "db_class is #{@db_class.inspect}" }
@@ -167,6 +168,17 @@ class SQLite < StorageType
         end
       end
       init_table
+    end
+  end
+
+  def delete(id)
+    entry = @db_class.find_by(id: id)
+    if entry != nil
+      entry.destroy
+      @entries[id].delete
+      if e = @entries_save[id]
+        e.delete
+      end
     end
   end
 
