@@ -7,12 +7,12 @@ class TC_Store_CSV < Test::Unit::TestCase
 
     dputs(2) { 'Setting up data' }
     @admin = Persons.create(:first_name => 'admin', :pass => 'super123',
-                                     :address => 'cdlf 24', :credit => 10000)
+                            :address => 'cdlf 24', :credit => 10000)
     Courses.create(:first_name => 'base_1010', :start => '1.10.2010')
     @base_1011 = Courses.create(:first_name => 'base_1011', :start => '1.11.2010',
-                                         :teacher => @admin)
+                                :teacher => @admin)
     @dummies_one = Dummies.create(:first_name => 'one', :phone => '111',
-                                           :no_cache => '123')
+                                  :no_cache => '123')
     dputs(2) { 'Finished setting up data' }
   end
 
@@ -43,8 +43,8 @@ class TC_Store_CSV < Test::Unit::TestCase
 
   def test_backup_count
     (0..5).each { |i|
-      assert( get_persons_csv.size == i,
-              "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
+      assert(get_persons_csv.size == i,
+             "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
       @admin.first_name = "admin#{i}"
       Entities.save_all
     }
@@ -53,8 +53,8 @@ class TC_Store_CSV < Test::Unit::TestCase
 
   def test_dirty_data
     (0..5).each { |i|
-      assert( get_persons_csv.size == i,
-              "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
+      assert(get_persons_csv.size == i,
+             "We don't have #{i} files, but #{get_persons_csv.size}: #{get_persons_csv.inspect}")
       @admin.first_name = "admin#{i}"
       Entities.save_all
     }
@@ -82,5 +82,19 @@ class TC_Store_CSV < Test::Unit::TestCase
     Entities.delete_all_data(true)
     Entities.load_all
     assert_equal 1, get_persons_csv.count, get_persons_csv
+  end
+
+  def test_empty_file
+    assert_equal 1, Persons.search_all_.length
+    Entities.save_all
+
+    dputs(2) { 'deleting admin' }
+    @admin.delete
+    assert_equal 0, Persons.search_all_.length
+    Entities.save_all
+
+    dputs(2) { 'loading everything again' }
+    Entities.load_all
+    assert_equal 0, Persons.search_all_.length
   end
 end

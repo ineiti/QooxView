@@ -30,7 +30,7 @@ class CSV < StorageType
   # Saves the data stored, optionally takes an index to say
   # which data needs to be saved
   def save(data)
-    #dputs_func
+    # dputs_func
     @add_only ?
         dputs(5) { "Not saving data for #{@name}" } :
         @mutex.synchronize {
@@ -54,12 +54,16 @@ class CSV < StorageType
 
             tmpfile = "#{@csv_file}_tmp"
             File.open(tmpfile, 'w') { |f|
-              data_each(data) { |d|
-                write_line(f, d)
-                if di = @entity.data_instances[d[@data_field_id]]
-                  di.changed = false
-                end
-              }
+              if data.length == 0
+                f << '{}'
+              else
+                data_each(data) { |d|
+                  write_line(f, d)
+                  if di = @entity.data_instances[d[@data_field_id]]
+                    di.changed = false
+                  end
+                }
+              end
             }
             FileUtils.mv tmpfile, @csv_file
             #%x[ sync ]
@@ -115,6 +119,7 @@ class CSV < StorageType
   # loads the data
   def load
     # Go and fetch eventual existing data from the file
+    # dputs_func
     dputs(3) { "Starting to load #{@csv_file}" }
     @mutex.synchronize {
       cleanup if Dir.glob("#{@csv_file}*").size > 1
@@ -125,6 +130,7 @@ class CSV < StorageType
           data = {}
           File.open(file, 'r').readlines().each { |l|
             dputs(5) { "Reading line #{l}" }
+            l == '{}' and next
             # Convert the keys in the lines back to Symbols
             data_parse = JSON.parse(l)
             data_csv = {}

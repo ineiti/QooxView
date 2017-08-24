@@ -296,6 +296,7 @@ module StorageHandler
     @storage.each{|k, di|
       di.delete id
     }
+    @changed = true
   end
 
   def set_entry(id, field, v)
