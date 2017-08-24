@@ -82,6 +82,7 @@ class Permission
   end
 
   def self.can_view( permission, view )
+    # dputs_func
     action = view.to_s.gsub( /^View\./, '' )
     dputs( 4 ){ "Does #{permission.inspect} allow to do #{action} knowing #{@@view.inspect} and #{@@parent.inspect}" }
     if not permission or permission.length == 0
@@ -89,7 +90,7 @@ class Permission
     end
 
     permission.to_a.each{|p|
-      perm_list = self.getViewParent( p )
+      perm_list = self.getViewParent( p.to_s )
       dputs( 5 ){ "p is #{p} and perm_list is #{perm_list.inspect}" }
       perm_list.each{|pl|
         type, data = pl.split(':')
