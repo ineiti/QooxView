@@ -36,7 +36,7 @@ class Object
       begin
         @deep_cloning = true
         val = val.deep_clone
-      rescue TypeError
+      rescue TypeError, RuntimeError
         next
       ensure
         @deep_cloning = false
@@ -596,7 +596,7 @@ class View < RPCQooxdooService
     ret = []
     args.keys.each { |a|
       if l = layout_find(a)
-        dputs(3) { "found layout for #{a}" }
+        dputs(3) { "found layout #{l} for #{a}" }
         ret += reply(:update, a => args[a])
       end
     }
@@ -824,7 +824,7 @@ class View < RPCQooxdooService
   end
 
   # Gets the request and converts the ids of the Entites back to
-  # the objects they once were - which makes life much more easy... 
+  # the objects they once were - which makes life much more easy...
   def parse_request(method, session, params)
     #dputs_func
     dputs(3) { "Parsing #{params.inspect}" }
