@@ -66,6 +66,7 @@ class SQLite < StorageType
     @mutex_es.synchronize {
       dputs(3) { "Saving #{@entries_save.count} entries in #{@db_class}" }
       @entries_save.each_value { |v|
+        dputs(4){"Saving #{db_class} #{v.inspect} - #{v.id}"}
         v.save
       }
       @entries_save = {}
@@ -74,11 +75,12 @@ class SQLite < StorageType
 
   def set_entry(data, field, value)
     @mutex_es.synchronize {
+      # dp "#{db_class} #{data.inspect} #{field} #{value}"
       dputs(5) { "Searching id #{data.inspect}" }
       if @entries[data]
         @entries[data].save
       end
-      dat = @db_class.first(data).first
+      dat = @db_class.find(data)
       # dat = @db_class.first(:conditions => {@data_field_id => data})
       # dp @entries[data]
       # dp dat
@@ -216,6 +218,7 @@ class SQLite < StorageType
         e.load
         e.loading = false
         u = Users.match_by_name('local')
+        dputs(2){"User is #{u}"}
       end
     }
   end

@@ -31,7 +31,7 @@ class Entities < RPCQooxdooService
   def initialize
     begin
       @data_class = eval(singular(self.class.name))
-    rescue Exception => e
+    rescue Exception
       # Just in case the data-class is not created yet
       eval("class #{singular(self.class.name)} < Entity\nend", TOPLEVEL_BINDING)
       @data_class = eval(singular(self.class.name))

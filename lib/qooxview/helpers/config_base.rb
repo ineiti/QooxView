@@ -150,7 +150,7 @@ class ConfigBase < Entity
   end
 
   def save_block_to_object(block, obj)
-    dputs(3) { "Pushing block #{block} to object #{obj.name}" }
+    dputs(3) { "Pushing block #{block} to object #{obj}" }
     ConfigBases.get_block_fields(block).each { |f|
       value = data_get(f)
       dputs(3) { "Setting #{f} in #{block} to #{value}" }

@@ -264,7 +264,7 @@ module StorageHandler
   end
 
   def save_data(d)
-    #dputs_func
+    # dputs_func
     dputs(5) { "Saving #{d.inspect}" }
     d.to_sym!
     if d.has_key? @data_field_id
@@ -421,7 +421,7 @@ module StorageHandler
     @keys = {}
     @storage.each { |k, di|
       dputs(5) { "Loading #{k} at #{di.name} with #{di.inspect}" }
-      @data.merge!(di.load) { |k, o, n| o.merge(n) }
+      @data.merge!(di.load) { |_, o, n| o.merge(n) }
       dputs(5) { "Loaded #{@data.inspect} for #{self.name}" }
     }
     if @data.length == 0 && respond_to?(:init)

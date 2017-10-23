@@ -21,7 +21,8 @@ class Array
   end
 
   def to_frontend(arg = nil)
-    collect { |a| a.to_frontend(arg) }.sort { |a, b| a[1]<=>b[1] }
+    collect { |a| a.to_frontend(arg) }.compact.reject{|e| e[1] == nil}.
+      sort { |a, b| a[1]<=>b[1] }
   end
 
   def to_s
