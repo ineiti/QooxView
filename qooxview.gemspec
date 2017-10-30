@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'qooxview'
-  spec.version       = '1.9.11'
+  spec.version = '1.9.13-11'
   spec.authors       = ['Linus Gasser']
-  spec.email         = ['ineiti@linusetviviane.ch']
+  spec.email = 'ineiti.blue'
   spec.summary       = %q{Implements a ruby-backend for QooxDoo.org}
   spec.description   = %q{This is a very simple framework to create small
   frontends in a webserver}
   spec.homepage      = 'https://github.com/ineiti/qooxview'
-  spec.license       = 'GPLv3'
+  spec.license = 'GPL-3.0'
 
   spec.files         = `if [ -d '.git' ]; then git ls-files -z; fi`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
