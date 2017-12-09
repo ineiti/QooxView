@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'qooxview'
-  spec.version = '1.9.13-11'
+  spec.version = '1.9.1312'
   spec.authors       = ['Linus Gasser']
   spec.email = 'ineiti.blue'
   spec.summary       = %q{Implements a ruby-backend for QooxDoo.org}
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'helper_classes', '0.3.5'
+  spec.add_dependency 'helper_classes', '0.4.0'
   spec.add_dependency 'activemodel', '5.1.0'
   spec.add_dependency 'activerecord', '5.1.0'
   spec.add_dependency 'sqlite3', '1.3.10'
