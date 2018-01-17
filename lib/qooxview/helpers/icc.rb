@@ -213,9 +213,9 @@ class ICC < RPCQooxdooPath
       method[0] == '_' and ret._msg = Base64::decode64(ret._msg)
       ret
     rescue JSON::ParserError => e
-      {code: 'error', msg: "error: #{e}"}
+      {code: 'Error', msg: "Error: parsing error #{e}"}
     rescue SocketError => e
-      {code: 'error', msg: "Error: timeout #{e}"}
+      {code: 'Error', msg: "Error: timeout #{e}"}
     end
   end
 
